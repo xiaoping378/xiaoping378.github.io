@@ -23,6 +23,15 @@
   ```
   sudo docker daemon -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock
   ```
+  亦可修改配置，使之永久生效
+  ```
+mkdir /etc/systemd/system/docker.service.d
+cat <<EOF >>/etc/systemd/system/docker.service.d/docker.conf
+[Service]
+    ExecStart=
+    ExecStart=/usr/bin/docker daemon -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --dns 180.76.76.76  --insecure-registry registry.cecf.com -g /home/Docker/docker
+EOF
+  ```
 
 3. 启动discovery后台
 
