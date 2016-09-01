@@ -1,4 +1,4 @@
-### 构建生产环境级的docker Swarm集群
+### 构建生产环境级的docker Swarm集群 2
 
 此文档适用于不低于1.12版本的docker，因为swarm已内置于docker-engine里。
 
@@ -127,9 +127,9 @@ EOF
   [root@manager0 ~]# docker node ls
   ID                           HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS
   0tr5fu8ebi27cp2ot210t67fx    manager1  Ready   Active        Reachable
-  46irkik4idjk8rjy7pqjb84x0    node1     Ready   Active        
-  79hlu1m7x9p4cc4npa4xjuax3    node0     Ready   Active        
-  9535h8ow82s8mzuw5kud2mwl3    consul0   Ready   Active        
+  46irkik4idjk8rjy7pqjb84x0    node1     Ready   Active
+  79hlu1m7x9p4cc4npa4xjuax3    node0     Ready   Active
+  9535h8ow82s8mzuw5kud2mwl3    consul0   Ready   Active
   e5eqi0lue90uidzsfddeqwfl8 *  manager0  Ready   Active        Leader
   ```
 
