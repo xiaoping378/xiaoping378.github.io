@@ -1,6 +1,7 @@
 #配置harbor默认https访问
 
-因为使用自签证书，所有需要把中间的生成的ca.crt拷贝到需要pull/push的node上(赖的翻译了，很详细的文档)
+因为使用自签证书（reg.300.cn），所以需要把中间过程生成的ca.crt拷贝到需要pull/push的node上 (懒的翻译了，很详细的文档，已验证OK)
+
 Because Harbor does not ship with any certificates, it uses HTTP by default to serve registry requests. This makes it relatively simple to configure. However, it is highly recommended that security be enabled for any production environment. Harbor has an Nginx instance as a reverse proxy for all services, you can configure Nginx to enable https.
 
 ##Getting a certificate
