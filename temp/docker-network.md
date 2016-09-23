@@ -63,3 +63,5 @@ none网络模式下的容器里是缺少网络接口的，例如eth0等，但会
 这也是我们线上正在在用的网络模式。
 
 bridge模式主要利用了iptables的Masquerading和DNAT功能。
+
+未完。。。

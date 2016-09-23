@@ -52,3 +52,13 @@ EOF
 
   * 目前docker与firewalld存在兼容性问题
   * 先选择关闭firewalld吧
+
+
+* **安装ntp**
+
+  ```
+  yum install -y ntp
+  systemctl start ntpd
+  systemctl enable ntpd
+  ntpdate -u cn.pool.ntp.org
+  ```
