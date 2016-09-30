@@ -6,6 +6,8 @@
 简单说下heapster以及我为什么不选用heapster的原因
 * heapster主要负责两件事
 
+...未完
+
 ### 下文基于开源项[Kubernetes-prometheus](https://github.com/xiaoping378/kubernetes-prometheus)来说的
 [Prometheus](https://prometheus.io/) is an open-source monitoring solution that includes the gathering of metrics, their storage in an internal time series database as well as querying and alerting based on that data.
 
