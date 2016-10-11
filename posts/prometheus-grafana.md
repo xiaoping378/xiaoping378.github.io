@@ -85,7 +85,7 @@ Prometheus集成了数据采集，存储，异常告警多项功能，是一款�
 
 #### 架构图：
 
-![架构图](/assets/prometheus-architecture.svg)
+![架构图](/assets/prometheus-architecture.png)
 
 Promethues直接或通过短期Jobs的中介网关拉取收集指标。 它在本地存储所有抓取的数据样本，并对数据进行规则匹配检测，这样可以基于现有数据创建新的时间系列指标或生成警报。
 PromDash或其他API使用者对收集的数据进行可视化。
