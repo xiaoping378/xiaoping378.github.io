@@ -199,10 +199,10 @@ You can check it out to see how your Prometheus is doing.
 
 ![Grafana Datasource Dashboard](/assets/grafana_prometheus_stats.png)
 
-Last, but not least we can import a sample [Kubernetes cluster monitoring dashboard](https://grafana.net/dashboards/162), to get a first overview over our cluster metrics.
+Last, but not least we can import a sample [Kubernetes cluster monitoring dashboard](https://grafana.net/dashboards/597), to get a first overview over our cluster metrics.
 
 -  `Grafana UI / Dashboards / Import`
-	- `Grafana.net Dashboard`: `https://grafana.net/dashboards/162`
+	- `Grafana.net Dashboard`: `https://grafana.net/dashboards/597`
 	- `Load`
 	- `Prometheus`: `prometheus`
 	- `Save & Open`
