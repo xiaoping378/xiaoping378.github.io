@@ -36,7 +36,7 @@ sudo mkdir /etc/systemd/system/docker.service.d
 sudo cat <<EOF >>/etc/systemd/system/docker.service.d/docker.conf
 [Service]
     ExecStart=
-    ExecStart=/usr/bin/docker daemon -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --dns 180.76.76.76  --insecure-registry registry.cecf.com -g /home/Docker/docker
+    ExecStart=/usr/bin/docker daemon -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --dns 180.76.76.76  --insecure-registry registry.cecf.com -g /home/Docker/docker -s overlay --selinux-enabled=false
 EOF
   ```
 
