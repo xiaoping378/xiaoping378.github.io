@@ -7,6 +7,24 @@
   sudo systemctl restart sshd
   ```
 
+* **添加本地dvd源**
+
+  ```
+mkdir -p /media/dvd && mount -t auto /dev/cdrom /media/dvd
+
+cat <<EOF >>/etc/yum.repos.d/CentOS-Base.repo
+[c7-dvd]
+name=Centos-7
+baseurl=file:///media/dvd
+enabled=1
+gpgcheck=1
+gpgkey=file:///media/dvd/RPM-GPG-KEY-CentOS-7
+EOF
+
+yum clean all
+  ```
+
+
 * **安装docker**
 
   添加yum源
