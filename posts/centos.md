@@ -12,7 +12,7 @@
   ```
 mkdir -p /media/dvd && mount -t auto /dev/cdrom /media/dvd
 
-cat <<EOF >>/etc/yum.repos.d/CentOS-Base.repo
+cat <<EOF >/etc/yum.repos.d/CentOS-Base.repo
 [c7-dvd]
 name=Centos-7
 baseurl=file:///media/dvd
