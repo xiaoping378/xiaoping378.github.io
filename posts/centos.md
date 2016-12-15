@@ -46,7 +46,7 @@ EOF
   或者下载离线rpm包（供网络环境差的环境使用）
   ```
   sudo yum install docker-engine --downloadonly --downloaddir=./
-  sudo rpm -ivh ./*.rpm
+  sudo yum localinstall ./*.rpm
   ```
   修改必要的docker daemon配置参数
   ```
