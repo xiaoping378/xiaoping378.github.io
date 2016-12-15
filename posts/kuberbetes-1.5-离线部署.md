@@ -38,7 +38,7 @@ curl -L http://192.168.56.1:8000/k8s-deploy.sh |  bash -s join --token=ce8967.f6
 
 ##总结
 
-整个脚本实现比较简单， 坑都在脚本里解决了。
+整个脚本实现比较简单， 坑都在脚本里解决了。脚本打包在百度云上了，单独文件在[这里](https://gist.github.com/xiaoping378/3a129aa6c81eaecae199a50236ad8bf7)
 
 就一个master-up和node-up， 基本一个函数只做一件事，很清晰，可以自己查看具体过程。
 
