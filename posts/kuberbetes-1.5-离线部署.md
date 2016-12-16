@@ -4,10 +4,10 @@
 
 基于Centos7-1511-minimal,  非此版本脚本应该会运行出错，自行修改吧
 
-本离线安装所有的依赖都打包放到了[百度云](https://pan.baidu.com/s/1mh9wuCC)
+本离线安装所有的依赖都打包放到了[百度网盘](https://pan.baidu.com/s/1i5jusip)
 
 
-##第一步
+## 第一步
 基本思路是，在k8s-deploy目录下，临时启个http server， node节点上会从此拉取所依赖镜像和rpms
 
 ```
@@ -18,7 +18,7 @@ Serving HTTP on 0.0.0.0 port 8000 ...
 
 windows上可以用hfs临时启个http server， 自行百度如何使用
 
-##master侧
+## master侧
 
 运行以下命令，初始化master
 
@@ -28,17 +28,17 @@ windows上可以用hfs临时启个http server， 自行百度如何使用
 curl -L http://192.168.56.1:8000/k8s-deploy.sh | bash -s master
 ```
 
-##minion侧
+## minion侧
 
 视自己的情况而定
 
 ```
-curl -L http://192.168.56.1:8000/k8s-deploy.sh |  bash -s join --token=ce8967.f6c0787bcf8b30c5 192.168.31.21
+curl -L http://192.168.56.1:8000/k8s-deploy.sh |  bash -s join --token=6669b1.81f129bc847154f9 192.168.56.100
 ```
 
-##总结
+## 总结
 
-整个脚本实现比较简单， 坑都在脚本里解决了。脚本打包在百度云上了，单独文件在[这里](https://gist.github.com/xiaoping378/3a129aa6c81eaecae199a50236ad8bf7)
+整个脚本实现比较简单， 坑都在脚本里解决了。脚本文件在[这里](https://gist.github.com/xiaoping378/3a129aa6c81eaecae199a50236ad8bf7)
 
 就一个master-up和node-up， 基本一个函数只做一件事，很清晰，可以自己查看具体过程。
 
@@ -48,6 +48,4 @@ curl -L http://192.168.56.1:8000/k8s-deploy.sh |  bash -s join --token=ce8967.f6
 具体可以看这里
 https://github.com/containernetworking/cni/blob/master/Documentation/flannel.md
 
-目前flannel针对CNI模式还有bug， 我在脚本里手动规避了, 现阶段不建议1.5上使用flannel，当然如果你不用CNI话，还可以继续以前的方式。
-
-
+master侧如果是单核的话，会因资源不足， dns安装失败。
