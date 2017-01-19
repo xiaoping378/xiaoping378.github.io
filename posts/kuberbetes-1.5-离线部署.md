@@ -6,6 +6,7 @@
 
 本离线安装所有的依赖都打包放到了[百度网盘](https://pan.baidu.com/s/1i5jusip)
 
+为了便于维护，已建立独立项目[k8s-deploy](https://github.com/xiaoping378/k8s-deploy)
 
 ## 第一步
 基本思路是，在k8s-deploy目录下，临时启个http server， node节点上会从此拉取所依赖镜像和rpms
