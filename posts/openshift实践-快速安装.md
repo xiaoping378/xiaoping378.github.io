@@ -87,13 +87,24 @@ docker负责应用的隔离打包，k8s提供集群管理和容器的编排服�
   ``source <(oc completion bash)``
 
   * 默认监控占用的资源太大了，可以如下降低资源占用，当然也可以web操作限制资源利用率
-  ```
-  oc env rc hawkular-cassandra-1 MAX_HEAP_SIZE=1024M -n openshift-infra
-  oc delete pod hawkular-cassandra-1-df23x -n openshift-infra
-  ```
-  因为是rc，所以直接杀掉没关系，要不env不生效
+    ```
+    oc env rc hawkular-cassandra-1 MAX_HEAP_SIZE=1024M -n openshift-infra
+    oc delete pod hawkular-cassandra-1-df23x -n openshift-infra
+    ```
+    因为是rc，所以直接杀掉没关系，要不env不生效
 
-推荐此人[blog](http://guifreelife.com/)，有几篇干货
+  * 自己编译离线文档
+    ```
+    # 下载源文件
+    git clone --depth=1 https://github.com/openshift/openshift-docs.git
+    # 编译
+    cd openshift-docs && asciibinder build
+    # 结果会存放在 _preview下，
+    cd _preview && python -m SimpleHTTPServer
+    #打开浏览器访问127.0.0.1:8000
+    ```
+
+    推荐此人[blog](http://guifreelife.com/)，有几篇干货
 
 
 3.后面会重点说下权限/资源管理和整个app开发的流程
