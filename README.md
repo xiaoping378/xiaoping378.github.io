@@ -8,4 +8,6 @@
 * [github正确的协作方式](/posts/github-dev.md)
 * [k8s的监控方案-prometheus&grafnana](/posts/kuerbernetes的监控方案.md)
 
-所有blog详见[posts](/posts)目录 ...
+所有的blog详见[posts](/posts)目录 ...
+
+有任何想讨论的问题，欢迎建立issue来探讨

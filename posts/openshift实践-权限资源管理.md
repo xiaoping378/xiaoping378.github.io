@@ -3,11 +3,16 @@
 重点介绍 project，limitRange，resourceQuta和 user, group, rule，role，policy，policybinding的关系,
 我刚接触时，这几个概念老搞不太清楚，这里梳理下
 
-### 资源管理说明
+## 资源管理说明
 
-``ResourceQuota``是面向project（namespace）层面的，如果想基于租户做限制，可以逻辑上，把一个project当做一个租户， 然后用后面的权限设置架构起整个业务栈
+可以对计算资源的大小和对象类型的数量来进行配额限制。
 
-可以对计算资源的大小和对象类型的数量来进行配额限制
+``ResourceQuota``是面向project（namespace）层面的，只有集群管理员可以基于namespace设置。
+
+``limtRange``是面向pod和container级别的，openshift额外还可以限制 image， imageStream和pvc，
+也是只有集群管理源才可以基于project设置，而开发人员只能基于pod（container）设置cpu和内存的requests/limits。
+
+### ResourceQuota
 
 看看具体可以管理哪些资源，期待网络相关的也加进来.简单来讲，可以基于project来限制可消耗的内存大小和可创建的pods数量
 
@@ -44,7 +49,7 @@ const (
 	ResourceLimitsMemory ResourceName = "limits.memory"
 )
 ```
-openshift额外还支持images相关的限制策略
+openshift额外支持的images相关的限制策略
 
 ```go
 // ResourceImageStreams represents a number of image streams in a project.
@@ -100,9 +105,9 @@ spec:
   - NotTerminating
 ```
 
-上面的意思即是， 限制长期运行的pod最能只能创建4个，且公用2c和4G内存
+上面的意思即是， 限制长期运行的pod最多只能创建4个，且共用2c和4G内存
 
-如果不指定scopes的话，是描述的所有的限制之和；
+如果不指定scopes的话，是描述的所有scopes的限制；
 
 > 本文参考[这里](https://docs.openshift.org/latest/admin_guide/quota.html)
 
@@ -120,7 +125,53 @@ spec:
 
   在实际使用中，在kubernetes集群中会同时存在两种类型的应用，一种是长期运行的应用，比如网站这种web应用，还有一种就是短暂运行的应用，比如编译网站的这种应用。通过资源配额管理，可以同时对这两种不同类型的应用设置资源使用上限，来控制不同应用的资源使用。
 
+### LimitRange
 
-### 权限管理说明
+``limtRange``是面向pod和container级别的，为什么只能集群管理员才可设置呢，因为这个的提出是为了防止有些应用忘记加资源边界的限定，而占用过多的资源，那么有了limitRange就给它来个默认限制。
+
+```yaml
+apiVersion: "v1"
+kind: "LimitRange"
+metadata:
+  name: "core-resource-limits"
+spec:
+  limits:
+    - type: "Pod"
+      max:
+        cpu: "2"
+        memory: "1Gi"
+      min:
+        cpu: "200m"
+        memory: "6Mi"
+    - type: "Container"
+      max:
+        cpu: "2"
+        memory: "1Gi"
+      min:
+        cpu: "100m"
+        memory: "4Mi"
+      default:
+        cpu: "300m"
+        memory: "200Mi"
+      defaultRequest:
+        cpu: "200m"
+        memory: "100Mi"
+      maxLimitRequestRatio:
+        cpu: "10"
+    - type: "openshift.io/Image"
+      max:
+        storage: "1Gi"
+    - type: "openshift.io/ImageStream"
+      max:
+        openshift.io/image-tags: "10"
+        openshift.io/images: "12"
+```
+
+
+如上使用oc create后，会看到我们对某namespace下的pod和container做了默认的资源设置，
+
+![limitRange](/assets/limitRange.png)
+
+## 权限管理说明
 
 未完，待续。。。
