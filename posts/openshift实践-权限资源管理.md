@@ -7,7 +7,7 @@
 
 可以对计算资源的大小和对象类型的数量来进行配额限制。
 
-``ResourceQuota``是面向project（namespace）层面的，只有集群管理员可以基于namespace设置。
+``ResourceQuota``是面向project（namespace的基础上加了些注解）层面的，只有集群管理员可以基于namespace设置。
 
 ``limtRange``是面向pod和container级别的，openshift额外还可以限制 image， imageStream和pvc，
 也是只有集群管理源才可以基于project设置，而开发人员只能基于pod（container）设置cpu和内存的requests/limits。
@@ -105,7 +105,7 @@ spec:
   - NotTerminating
 ```
 
-上面的意思即是， 限制长期运行的pod最多只能创建4个，且共用2c和4G内存
+上面的意思即是， 限制长期运行的pod最多只能创建4个，且共用4c和2G内存
 
 如果不指定scopes的话，是描述的所有scopes的限制；
 
@@ -174,4 +174,80 @@ spec:
 
 ## 权限管理说明
 
-未完，待续。。。
+这里不涉及到认证登录的介绍，openshfit支持很多认证方式，比如AllowAll，CA认证, HTPasswd, KeyStone, LDAP, Oauth等，这里为了简化，用默认的AllowAll来做权限控制的说明
+
+权限管理，即访问API资源之前，必须要经过的访问策略校验，主要分为5种： AlwaysDeny、AlwaysAllow（默认）、ABAC、RBAC、Webhook
+
+主要说明user, group, rule，role，policy，policybinding之间的关系，以及提出这些概念，各自是为了解决什么问题
+
+* user和group
+
+说到user其实就是一个用户账号(userAccount)，用它来和k8s集群做交互（登录，kubectl等）， 但还有一个容易混淆的概念就是sercieAccount，有了userAccount为什么还又来个serviceAccount的设计， 这两者有什么区别 ？ 以下是kubernetes官方对两者的解释
+
+>user account是为人类设计的，而service account则是为跑在pod里的进程用的，运行在pod里的进程需要调用Kubernetes API以及非Kubernetes API的其它服务（如image repository/被mount到pod上的NFS volumes中的file等）;
+
+>user account是global的，即跨namespace使用；而service account是namespaced内的，即仅在所属的namespace下使用;
+
+>user account可能会涉及到很多权限设定和商业逻辑在里面，而后者是更轻量级的，是集群用户针对某namespace内的服务使用的，一般遵循最小特权原则，如监控服务需要访问APIsever等;
+
+>useraccount需要借助第三方实现，后者系统都会默认在namesspace里创建default，亦可自定义
+
+两者大部分流程是一致的，都是要先认证通过再校验权限，然后才是action， 实际上一般是由userAccount来控制serviceAccount来完成特定的任务，
+比如一个用户A自建了服务1和服务2， 但只想把服务2开发给用户B，这样的serviceAccount就可以排上用场了,
+又或者我有几个服务，有了serviceAccount就可以来限制用户的访问权限（list, watch, update, delete）了.
+
+
+说到group就是方便对user的权限批量操作而设计；
+
+用户可以被分配到一个或多个组，每个组代表一组特定的用户。组在同时向多个用户管理权限时非常有用。
+
+* rule和role
+
+rule是规则， 是对一组对象上被允许的动作（get, list, create, update, delete, deletecollection 和 watch）描述，可操作对象主要是 container，images，pod，servcie， project， user， build， imagestream， dc， route， templeate。
+
+role 就是规则的集合，俗称角色， 不同对象上的不同动作，可以任意组成各种角色，系统默认的有 ``admin basic-user cluster-admin  cluster-admin edit self-provisioner view``；
+
+policy，是策略, 保存特定namespace的所有角色roles的对象。 每个命名空间最多只有一个Policy策略。
+
+rolebinding， 就是把user或者group与角色role进行关联，注意. user和group可以被关联到多个roles
+
+pollicybing, 就是就是多个rolebindings的描述；
+
+这样看，policy的概念提出有点儿扯淡了，感觉没什么用，其实不然，policy的提出主要是为了区分cluster-policy和local-policy的。
+
+cluster policy是适用于所有namespace的角色和绑定；
+local policy则是试用于具体的某个namespace的；
+
+以上可以通过``oc describe clusterPolicy default``来看查看所有详细的信息；
+
+小节：
+
+可以通过``oc policy can-i --list``查看自己可以干些什么，
+还可以通过``oc policy who-can get pod``查看谁能get pod之类的
+
+```shell
+➜  openshift-docs git:(master) ✗ oc policy who-can get pod
+Namespace: myproject
+Verb:      get
+Resource:  pods
+
+Users:  developer
+        system:admin
+        system:serviceaccount:default:pvinstaller
+        system:serviceaccount:myproject:deployer
+        system:serviceaccount:openshift-infra:build-controller
+        system:serviceaccount:openshift-infra:deployment-controller
+        system:serviceaccount:openshift-infra:deploymentconfig-controller
+        system:serviceaccount:openshift-infra:endpoint-controller
+        system:serviceaccount:openshift-infra:namespace-controller
+        system:serviceaccount:openshift-infra:pet-set-controller
+        system:serviceaccount:openshift-infra:pv-binder-controller
+        system:serviceaccount:openshift-infra:pv-recycler-controller
+
+Groups: system:cluster-admins
+        system:cluster-readers
+        system:masters
+        system:nodes
+```
+
+## 下文介绍实战，结合实际场景，如何设置权限，即整个开发管理流程实践说明
