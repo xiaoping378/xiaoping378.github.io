@@ -8,7 +8,7 @@ docker负责应用的隔离打包，k8s提供集群管理和容器的编排服�
 * 多租户管理, 支持LDAP和Oauth
 * 集成监控日志于web console
 
-先说下自接触到openshift项目就遇到的一个困惑，就是openshift origin/online/ocp之间的关系： ```orgin相当于Fedora， 其他的相当于RHEL```
+先说下自接触到openshift项目就遇到的一个困惑，就是openshift origin/enterprise /online/dedicated/ocp之间的关系： ```orgin相当于Fedora， 其他的相当于RHEL```
 
 接下来谈下我用自己的笔记本实践的过程与感受：
 

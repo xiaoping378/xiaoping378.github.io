@@ -222,8 +222,9 @@ local policy则是试用于具体的某个namespace的；
 
 小节：
 
-可以通过``oc policy can-i --list``查看自己可以干些什么，
-还可以通过``oc policy who-can get pod``查看谁能get pod之类的
+可以通过``oc policy can-i --list``查看自己可以干些什么
+
+还可以通过``oc policy who-can <动作> <资源对象>``， 比如说查看谁能get pod之类的，就是``oc policy who-can get pod``
 
 ```shell
 ➜  openshift-docs git:(master) ✗ oc policy who-can get pod
@@ -248,6 +249,17 @@ Groups: system:cluster-admins
         system:cluster-readers
         system:masters
         system:nodes
+```
+
+如果openshift自带的角色不能满足的话，还可以自定义角色role
+```shell
+$ oc get clusterrole view -o yaml > clusterrole_view.yaml
+$ cp clusterrole_view.yaml localrole_exampleview.yaml
+$ vim localrole_exampleview.yaml
+# 1. Update kind: ClusterRole to kind: Role
+# 2. Update name: view to name: exampleview
+# 3. Remove resourceVersion, selfLink, uid, and creationTimestamp
+$ oc create -f path/to/localrole_exampleview.yaml -n <project_you_want_to_add_the_local_role_exampleview_to>
 ```
 
 ## 下文介绍实战，结合实际场景，如何设置权限，即整个开发管理流程实践说明
