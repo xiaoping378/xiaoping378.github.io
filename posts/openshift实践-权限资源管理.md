@@ -10,7 +10,7 @@
 ``ResourceQuota``是面向project（namespace的基础上加了些注解）层面的，只有集群管理员可以基于namespace设置。
 
 ``limtRange``是面向pod和container级别的，openshift额外还可以限制 image， imageStream和pvc，
-也是只有集群管理源才可以基于project设置，而开发人员只能基于pod（container）设置cpu和内存的requests/limits。
+也是只有集群管理员才可以基于project设置，而开发人员只能基于pod（container）设置cpu和内存的requests/limits。
 
 ### ResourceQuota
 
