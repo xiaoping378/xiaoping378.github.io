@@ -80,3 +80,9 @@ EOF
   systemctl enable ntpd
   ntpdate -u cn.pool.ntp.org
   ```
+
+* **必要组件**
+
+```
+yum install net-tools bind-utils tcpdump lsof
+```
