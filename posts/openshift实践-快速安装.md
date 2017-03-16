@@ -89,7 +89,9 @@ docker负责应用的隔离打包，k8s提供集群管理和容器的编排服�
   * 默认监控占用的资源太大了，可以如下降低资源占用，当然也可以web操作限制资源利用率
     ```
     oc env rc hawkular-cassandra-1 MAX_HEAP_SIZE=1024M -n openshift-infra
-    oc delete pod hawkular-cassandra-1-df23x -n openshift-infra
+    #重建下变量才会生效
+    oc scale rc hawkular-cassandra-1 --replicas 0 -n openshift-infra
+    oc scale rc hawkular-cassandra-1 --replicas 1 -n openshift-infra
     ```
     因为是rc，所以直接杀掉没关系，要不env不生效
 
