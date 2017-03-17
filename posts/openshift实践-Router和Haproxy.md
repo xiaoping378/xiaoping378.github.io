@@ -108,6 +108,7 @@ lb负责master间的负载均衡，其实负载没那么大，更多得是用来
             system:serviceaccount:default:router
 
   - 部署1个router， 选择具有标签``router=true``的节点
+  
         # 对节点设置标签
         oc label 192.168.56.110 router=true
         # 部署并指定serviceaccount
