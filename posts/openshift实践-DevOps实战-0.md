@@ -71,7 +71,8 @@
 
       OK，现在本地项目有了，接下来进入正题
 
-    - 在openshift部署此nodejs应用
+ - 在openshift部署此nodejs应用
+          
           #创建nodejs项目
           oc new-project web
 
@@ -82,8 +83,7 @@
           #部署此项目，并启用国内npm源和对应的git仓
           oc new-app nodejs-mongo-persistent --name=nodejs-ex -p NPM_MIRROR=https://registry.npm.taobao.org -p SOURCE_REPOSITORY_URL=http://gogs-ci.192.168.31.49.xip.io/developer/nodejs-ex.git
 
-        默认此模板会从指定的URL地址拉取代码，并根据指定配置，编译策略采取Source方式，基于istag nodejs:4镜像编译出来nodejs-mongo-persistent:latest:latest镜像，
-        编译出来的镜像又会自动触发部署。
+    默认此模板会从指定的URL地址拉取代码，并根据指定配置，编译策略采取Source方式，基于istag nodejs:4镜像编译出来nodejs-mongo-persistent:latest:latest镜像，编译出来的镜像又会自动触发部署。
 
 
 - 测试最基本的DevOps
