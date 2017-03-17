@@ -8,6 +8,7 @@
       oc cluster up --version=v1.5.0-rc.0 --metrics --use-existing-config=true
 
     默认负责监控的pods占用资源太大了，可以这样限制下，或者cluster up时不加 ``--metrics``
+    
       oc login -u system:admin
       oc env rc hawkular-cassandra-1 MAX_HEAP_SIZE=1024M -n openshift-infra
 
