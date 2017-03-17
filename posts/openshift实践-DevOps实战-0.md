@@ -8,7 +8,7 @@
       oc cluster up --version=v1.5.0-rc.0 --metrics --use-existing-config=true
 
     默认负责监控的pods占用资源太大了，可以这样限制下，或者cluster up时不加 ``--metrics``
-    
+
       oc login -u system:admin
       oc env rc hawkular-cassandra-1 MAX_HEAP_SIZE=1024M -n openshift-infra
 
@@ -18,7 +18,7 @@
 
 - 建立本地Git仓
 
-  默认官方给出的例子基本都需要和Github结合，实在不好本地实战演示，所以本地来一个``gogs``。
+  默认官方给出的例子基本都需要和Github结合，实在不好本地实战演示，所以本地要来一个``gogs``代码仓。
 
       oc login -u devloper
       oc new-project ci
@@ -32,27 +32,27 @@
 
   上面的HOSTNAME，注意要换成自己宿主机的IPv4地址，默认创建的其他服务的路由都是这个形式的，
 
-  有个有意思的地方，为什么默认路由会是这中 ``name+IP+xip.io`` 的形式呢，奥秘在 http://xip.io 的公共服务上。
-  它其实是个特殊的域DNS server，有人查询域名``gogs-ci.192.168.31.49.xip.io``时 ，它就会返回192.168.31.49的地址回来，
-  而这个地址恰好是我们Router的地址，这样子Router会根据route的定义负责负载到对应的POD上。自己试验下就知道怎么回事了。
+  有个有意思的地方，为什么默认路由会是这种 ``name+IP+xip.io`` 形式呢，奥秘在 http://xip.io 的公共服务上。
+  这其实是个特殊的域DNS server，比如我们查询域名``gogs-ci.192.168.31.49.xip.io``时 ，会返回192.168.31.49的地址回来，
+  而这个地址恰好是我们Router的地址，这样子Router会根据route的配置负责负载到对应的POD上。自己试验下就知道怎么回事了。
 
       dig http://gogs-ci.192.168.31.49.xip.io +short
 
-  只做功能性演示，先不考虑https加密安全访问，创建完后，访问``http://gogs-ci.192.168.31.49.xip.io``
+  只做功能性演示，先不考虑https加密安全访问，创建完后，访问gogs服务 ``http://gogs-ci.192.168.31.49.xip.io``
 
   ![gogs](/assets/openshift-gogs.png)
 
-  这个项目，第一个注册用户即为管理员，比如我现在注册一个叫``developer``的用户。
+  这个项目，第一个注册用户即为管理员，比如我现在去页面注册一个叫``developer``的用户。
 
 - 找个项目来实战吧
 
     - 克隆远程项目，并设置
-    
+
           git clone https://github.com/xiaoping378/nodejs-ex.git && cd nodejs-ex
           git remote add gogs http://gogs-ci.192.168.31.49.xip.io/developer/nodejs-ex.git
 
     - 通过web页面，在gogs上创建一个``nodejs-ex``仓库, 并如下push刚才克隆的项目
-    
+
           $ git push gogs master
 
           Username for 'http://gogs-ci.192.168.31.49.xip.io': developer
@@ -69,11 +69,11 @@
 
       ![gogs](/assets/gogs-create-push.png)
 
-      OK，现在本地项目有了，接下来进入正题
+      OK，现在本地项目就有了，接下来进入正题
 
  - 在openshift部署此nodejs应用
-          
-          #创建nodejs项目
+
+          #创建web namespace
           oc new-project web
 
           #先拉取依赖镜像
@@ -83,16 +83,15 @@
           #部署此项目，并启用国内npm源和对应的git仓
           oc new-app nodejs-mongo-persistent --name=nodejs-ex -p NPM_MIRROR=https://registry.npm.taobao.org -p SOURCE_REPOSITORY_URL=http://gogs-ci.192.168.31.49.xip.io/developer/nodejs-ex.git
 
-    默认此模板会从指定的URL地址拉取代码，并根据指定配置，编译策略采取Source方式，基于istag nodejs:4镜像编译出来nodejs-mongo-persistent:latest:latest镜像，编译出来的镜像又会自动触发部署。
+    默认此模板会从指定的URL地址拉取代码，并根据预先的配置，采取``Source``编译策略，基于istag nodejs:4镜像编译出nodejs-mongo-persistent:latest镜像，编译出来的镜像又会自动触发部署。
 
+- 最基本的DevOps能力
 
-- 测试最基本的DevOps
-
-  即push代码触发自动编译和滚动部署
+  即push代码通过webhook触发自动编译，继而滚动部署
 
   要实现这个目标前，需要先把webhook填写到gogs里。
 
-  在openshift界面上复制webhook地址，
+  在openshift界面上复制webhook地址
 
   ![find_webhook](/assets/openshift-github-webhook.png)
 
@@ -100,8 +99,7 @@
 
   ![add_webhook](/assets/openshift-gogs-webhook.png)
 
-
-  这样我们随意修改些，然后推送代码，就会自动出发编译部署
+  这里我们随意修改些，然后推送代码，就会自动触发编译并滚动升级
 
       ➜  nodejs-ex git:(master) vim views/index.html        
       ➜  nodejs-ex git:(master) ✗ git add .
@@ -119,15 +117,17 @@
       To http://gogs-ci.192.168.31.49.xip.io/developer/nodejs-ex.git
       c3592e6..082f05e  master -> master
 
+  编译成功后，会产生新镜像，继而触发滚动升级的截图
+
   ![auto-deploy](/assets/push-build-deploy.png)
 
-  现实中，如果没有很好的自动化测试的话，我们肯定不会这样操作的，除非想被开掉了。
+  现实中，如果项目没有很好的自动化测试的话，我们肯定不会这样操作的，除非想被开掉了。
 
-  可以去掉webhook自动构建，采用手动触发build，界面操作的话，去build界面，点击``Start Build``，命令行如下
+  其实可以简单的去掉webhook，采用手动触发build： 界面操作的话，去build界面点击``Start Build``，命令行的话如下
 
       oc start-build nodejs-mongo-persistent
 
-  如果想回滚以前的部署版本的话，也有对应的界面和命令
+  另外，如果发现新版本的应用有重大缺陷，想回滚以前的部署版本，也有对应的界面和命令
 
       oc rollback nodejs-mongo-persistent --to-version=3
 
@@ -137,11 +137,11 @@
 
   目前可以根据CPU使用率来进行弹性伸缩
 
-  有人问能不能基本mem进行弹性呢，其实这个是没有意义的，一般应用都会自行缓存，内存基本只增不长， 所以cpu能很好的实时反应业务量的负载。
+  有人问能不能基本mem进行弹性呢，其实这个是没什么意义的，一般应用都会自行缓存，内存基本只增不长， 所以cpu才能很好的实时反应业务的负载。
 
-  弹性伸缩前，要确保应用先行设置了cpu request，设置 cpu request
+  弹性伸缩前，要确保应用先行设置了cpu request，这点还没明白原因，为什么要这样，按理说，heapster一直会采集pod的资源使用情况的，HPA周期拿数据和设置的阈值对比就完了。
 
-  部署的菜单栏
+  这里是部署界面的菜单栏，可以手动加上cpu request
 
   ![dc-menu](/assets/openshift-dc-menu.png)
 
@@ -149,32 +149,31 @@
 
   ![cpu-request](/assets/openshift-cpu-request.png)
 
-  也可以通过命令行开启，弹性伸缩特性
+  然后开启弹性伸缩特性，这里就不截图了，展示下命令行，我们设置成： 当cpu使用率达到80%时，就弹，最大可以弹出3个实例
 
       oc autoscale dc/nodejs-mongo-persistent --max=3 --cpu-percent=80
 
-  OK，之后我们通过ab工具简单做个压力模拟，因为环境是我的笔记本上，所以模拟发送100万个连接，并发100吧
+  OK，之后我们通过ab工具简单做个压力模拟，因为环境在我的笔记本上，所以只模拟发送100万个连接，并发100的量
 
       ab -n 1000000 -c 100 http://nodejs-mongo-persistent-web.192.168.31.49.xip.io/
 
-  后台每1分钟采集一次数据，过不了一会儿，就会看到nodejs实例自动扩展到了3个，
+  后台每1分钟采集一次cpu使用率，过不了一会儿，就会看到nodejs实例自动扩展到了
 
   ![autoscale-0](/assets/openshift-autoscale-0.png)
 
-  当业务量降下来时，还可以自动减少实例，是根据平均CPU使用率来操作的。
+  当业务量降下来时，会自动减少实例，是根据平均CPU使用率来操作的。
 
   ![autoscale-1](/assets/openshift-autoscale-1.png)
 
-
 - 蓝绿部署
 
-  这个也是API级别的支持，不描述具体操作细节了，原理还是以前的，从负载均衡层面入手。 实现新旧版本同时存在，
-  当面并不是所有业务都适合蓝绿部署的，要看后台数据是否允许，多个新旧版本同时产生读写数据
+  这个也是API级别的支持，不描述具体操作细节了，原理还是以前的，从负载均衡层面入手。 实现新旧版本同时存在。
+  并不是所有业务都适合蓝绿部署的，要看后台数据是否允许，新旧版本同时发生读写数据
 
-  在openshift里具体就是在Route层面添加同一应用的多个版本的service，并设置分流权重
+  在openshift里实现蓝绿部署的，就太简单了。具体就是在Route层面添加同一应用的多个版本的service，并设置分流权重
   截图如下
 
-  界面设置
+  界面设置，只是为了展示功能，我随便添加了个service
 
   ![bluegreen-0](/assets/openshift-blue-green-0.png)
 
@@ -186,6 +185,6 @@
 
 ### 总结
 
-Openshift 平台本身在API层面实现了DevOps，所以基于它很容易做到DevOps as an service， 上面的演示可能若现实世界不太一样，
+Openshift平台本身在API层面实现了DevOps，所以基于它很容易做到DevOps as an service， 上面的演示可能与现实世界不太一样，
 
-比如真实情况需要，测试，预发布，线上环境，下次再分享，openshift基于jenkins pipeline如果实现更真实场景的需求。
+比如真实情况是有，测试，预发布，线上环境的，下次再分享: openshift基于jenkins pipeline如果实现更真实场景的需求。
