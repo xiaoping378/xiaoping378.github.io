@@ -47,10 +47,12 @@
 - 找个项目来实战吧
 
     - 克隆远程项目，并设置
+    
           git clone https://github.com/xiaoping378/nodejs-ex.git && cd nodejs-ex
           git remote add gogs http://gogs-ci.192.168.31.49.xip.io/developer/nodejs-ex.git
 
     - 通过web页面，在gogs上创建一个``nodejs-ex``仓库, 并如下push刚才克隆的项目
+    
           $ git push gogs master
 
           Username for 'http://gogs-ci.192.168.31.49.xip.io': developer
@@ -117,7 +119,7 @@
       To http://gogs-ci.192.168.31.49.xip.io/developer/nodejs-ex.git
       c3592e6..082f05e  master -> master
 
-      ![auto-deploy](/assets/push-build-deploy.png)
+  ![auto-deploy](/assets/push-build-deploy.png)
 
   现实中，如果没有很好的自动化测试的话，我们肯定不会这样操作的，除非想被开掉了。
 
@@ -129,7 +131,7 @@
 
       oc rollback nodejs-mongo-persistent --to-version=3
 
-      ![rollBack](/assets/openshift-roll-back.png)
+  ![rollBack](/assets/openshift-roll-back.png)
 
 - 弹性伸缩
 
