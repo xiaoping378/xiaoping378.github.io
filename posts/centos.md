@@ -10,18 +10,18 @@
 * **添加本地dvd源**
 
   ```
-mkdir -p /media/dvd && mount -t auto /dev/cdrom /media/dvd
+  mkdir -p /media/dvd && mount -t auto /dev/cdrom /media/dvd
 
-cat <<EOF >/etc/yum.repos.d/CentOS-Base.repo
-[c7-dvd]
-name=Centos-7
-baseurl=file:///media/dvd
-enabled=1
-gpgcheck=1
-gpgkey=file:///media/dvd/RPM-GPG-KEY-CentOS-7
-EOF
+  cat <<EOF >/etc/yum.repos.d/CentOS-Base.repo
+  [c7-dvd]
+  name=Centos-7
+  baseurl=file:///media/dvd
+  enabled=1
+  gpgcheck=1
+  gpgkey=file:///media/dvd/RPM-GPG-KEY-CentOS-7
+  EOF
 
-yum clean all
+  yum clean all
   ```
 
 
@@ -29,15 +29,16 @@ yum clean all
 
   添加yum源
   ```
-sudo tee /etc/yum.repos.d/docker.repo <<-'EOF'
-[dockerrepo]
-name=Docker Repository
-baseurl=https://yum.dockerproject.org/repo/main/centos/7/
-enabled=1
-gpgcheck=1
-gpgkey=https://yum.dockerproject.org/gpg
-EOF
+  sudo tee /etc/yum.repos.d/docker.repo <<-'EOF'
+  [dockerrepo]
+  name=Docker Repository
+  baseurl=https://yum.dockerproject.org/repo/main/centos/7/
+  enabled=1
+  gpgcheck=1
+  gpgkey=https://yum.dockerproject.org/gpg
+  EOF
   ```
+  
   安装docker-engine
   ```
   sudo yum install docker-engine
@@ -48,14 +49,15 @@ EOF
   sudo yum install docker-engine --downloadonly --downloaddir=./
   sudo yum localinstall ./*.rpm
   ```
+  
   修改必要的docker daemon配置参数
   ```
-sudo mkdir /etc/systemd/system/docker.service.d
-sudo cat <<EOF >>/etc/systemd/system/docker.service.d/docker.conf
-[Service]
-    ExecStart=
-    ExecStart=/usr/bin/docker daemon -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --dns 180.76.76.76  --insecure-registry registry.cecf.com -g /home/Docker/docker -s overlay --selinux-enabled=false
-EOF
+  sudo mkdir /etc/systemd/system/docker.service.d
+  sudo cat <<EOF >>/etc/systemd/system/docker.service.d/docker.conf
+  [Service]
+      ExecStart=
+      ExecStart=/usr/bin/docker daemon -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --dns 180.76.76.76  --insecure-registry registry.cecf.com -g /home/Docker/docker -s overlay --selinux-enabled=false
+  EOF
   ```
 
   启动docker
@@ -83,6 +85,6 @@ EOF
 
 * **必要组件**
 
-```
-yum install net-tools bind-utils tcpdump lsof
-```
+  ```
+  yum install net-tools bind-utils tcpdump lsof
+  ```
