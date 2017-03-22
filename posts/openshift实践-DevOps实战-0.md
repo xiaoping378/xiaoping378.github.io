@@ -157,7 +157,7 @@
 
       ab -n 1000000 -c 100 http://nodejs-mongo-persistent-web.192.168.31.49.xip.io/
 
-  后台每1分钟采集一次cpu使用率，过不了一会儿，就会看到nodejs实例自动扩展到了
+  后台每1分钟采集一次cpu使用率，过不了一会儿，就会看到nodejs实例自动扩展了
 
   ![autoscale-0](/assets/openshift-autoscale-0.png)
 
