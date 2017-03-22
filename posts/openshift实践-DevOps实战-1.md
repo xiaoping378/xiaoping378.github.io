@@ -36,7 +36,7 @@
 
   - 指定项目要运行那些节点，则是利用了注解-annotations， 即在原有的project结构上设置了注解，这样openshift在相应的项目里创建任何pod时，都对会自动注入node-selector
 
-  - 另外需要注意的，默认项目的管理员（developer）是没有权限读取node标签信息的，以前写过[权限管理相关blog](./openshift-实践-权限资源管理.md)，集群管理员可以授权node访问权限，即使如此developer还是不能改写项目级别的标签的，举个例子: developer在开发环境的pod上指定了``--node-selector='web-dev=false'``， 最终这个pod的node-selector会是`'web-dev=true, web-dev=flase'`, 导致最终不会被调度到任何节点上。
+  - 另外需要注意的，默认项目的管理员（developer）是没有权限读取node标签信息的，以前写过[权限管理相关blog](./openshift实践-权限资源管理.md)，集群管理员可以授权node访问权限，即使如此developer还是不能改写项目级别的标签的，举个例子: developer在开发环境的pod上指定了``--node-selector='web-dev=false'``， 最终这个pod的node-selector会是`'web-dev=true, web-dev=flase'`, 导致最终不会被调度到任何节点上。
 
   - 上面分别授权了3个用户，这里是不关心这些用户是否真实存在的，只是一个RABC的描述，因为是`oc cluster up`起来的环境，默认使用`anypassword`的身份认证，所以登录时，任意用户名和密码都是可以登录OK的。
 
@@ -44,7 +44,9 @@
 
 ### 初始化web-dev, web-test, web-prod环境
 
-  按照上篇`DevOps实战-0`里的方式，初始化我们的开发环境, 进入源码`nodejs-ex`目录
+  按照上篇`DevOps实战-0`里的方式
+
+  初始化我们的开发环境, 进入源码`nodejs-ex`目录
 
   ```
   oc new-app -f openshift/template/nodejs-mongo-persistent.json --name=nodejs-ex \
