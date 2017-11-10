@@ -100,7 +100,7 @@ $ npm isntall
 $ PORT=4000 node app
 ```
 
-这样前端APP就运行起来了，接下来利用测试脚本`testAPIs.sh`测试下我们的CC,运行前，还需要修改下脚本里的peer地址，修改的文件在[这里](https://gist.github.com/xiaoping378/dbfd8801b7b125b0d7add7fce7d4e854)
+这样前端APP就运行起来了，接下来利用测试脚本`testAPIs.sh`测试下我们的CC,运行前，还需要修改下脚本里的peer地址，修改后的文件在[这里](https://gist.github.com/xiaoping378/dbfd8801b7b125b0d7add7fce7d4e854)
 
 运行脚本：
 

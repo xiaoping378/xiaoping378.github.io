@@ -2,7 +2,8 @@
 
  Just record my life.
 
-做技术的人都需要的工具，你懂的 [戳这里](http://my.yizhihongxing.com/aff.php?aff=3000)
+做技术的人都需要的工具，你懂的 [戳这里](http://client.yizhihongxing.hk/aff.php?aff=3000
+)
 
 * [centos系统各种记录](/posts/centos.md)
 * [百宝箱脚本](/posts/百宝箱脚本.md)
