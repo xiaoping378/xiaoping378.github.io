@@ -13,7 +13,13 @@
 * [openshift实践-DevOps实战-0](/posts/openshift实践-DevOps实战-0.md)
 * [openshift实践-DevOps实战-1](/posts/openshift实践-DevOps实战-1.md)
 * [openshift实践-性能优化指南](/posts/openshift实践-性能优化指南.md)
+* [Golang项目里的BDD测试](/posts/golang-bdd.md)
+* [vscode打开java idea项目](/posts/java-in-vscode.md)
 
 所有的blog详见[posts](/posts)目录 ...
 
 有任何想讨论的问题，欢迎建立issue来探讨
+
+微信入群讨论技术，请注明 ``区块链`` 、``Docker`` 或者 ``Golang``
+
+![wechat](/assets/wechat.jpg)
