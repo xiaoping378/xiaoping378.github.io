@@ -3,7 +3,8 @@
 个人经验记录：
 
 1. install deps
-    ![](2019-02-27-21-21-44.png)
+
+    ![](/assets/2019-02-27-21-21-44.png)
 
 2. clean workspace 
 
