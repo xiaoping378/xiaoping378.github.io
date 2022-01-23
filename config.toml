@@ -1,4 +1,4 @@
-# 根目录的路径
+# 站点的访问地址，本地预览时(hugo server)可忽悠
 baseURL = "https://xiaoping378.github.io"
 
 # 站点title,会被多语言里的设置覆盖
