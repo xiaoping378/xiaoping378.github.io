@@ -1,11 +1,12 @@
 
 ---
-title: "The second blog post"
-linkTitle: "Second blog post"
-date: 2018-10-06
+title: "暂未启用此博客版面"
+linkTitle: "暂未启用此博客版面"
+date: 2022-01-23
 description: >
-  A short lead description about this content page. Text here can also be **bold** or _italic_ and can even be split over multiple paragraphs.
+  尚未启用博客稿件，留做后用...
 ---
+
 
 Text can be **bold**, _italic_, or ~~strikethrough~~. [Links](https://github.com) should be blue with no underlines (unless hovered over).
 

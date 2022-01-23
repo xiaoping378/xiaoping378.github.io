@@ -1,4 +1,5 @@
 ---
+tags: ["hugo"]
 title: "站点搭建方法"
 linkTitle: "站点搭建方法"
 weight: 1

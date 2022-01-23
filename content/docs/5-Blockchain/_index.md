@@ -9,9 +9,8 @@ description: >
 ---
 
 {{% pageinfo %}}
-This is a placeholder page that shows you how to use this template site.
+存放些曾经在区块链界战斗过的痕迹。
 {{% /pageinfo %}}
 
-Do you have any example **applications** or **code** for your users in your repo or elsewhere? Link to your examples here.
 
 

@@ -1,5 +1,5 @@
 # 根目录的路径
-baseURL = "https://xiaoping378.github.io/blog"
+baseURL = "https://xiaoping378.github.io"
 
 # 站点title,会被多语言里的设置覆盖
 # title = "小平栈"
@@ -71,7 +71,8 @@ anchor = "smart"
 [languages.zh-cn]
 title = "现代技能栈"
 description = "小平-所思所为"
-languageName ="中文"
+languageName = "中文"
+
 # 用于多语言排序，越小越靠上。
 weight = 1
 
@@ -135,9 +136,9 @@ version = "0.0"
 # url_latest_version = "https://example.com"
 
 # 方便用户反馈，提交技术文章问题的仓库地址
-github_repo = "https://github.com/xiaoping378/blog"
+github_repo = "https://github.com/xiaoping378/xiaoping378.github.io"
 # 技术站点背后的项目issue地址
-# github_project_repo = "https://github.com/xiaoping378/blog"
+# github_project_repo = "https://github.com/xiaoping378/xiaoping378.github.io"
 
 # 以下三个是设置远程文档位置的，目前用不上，这里hack一下，不然“编辑此页”的功能会去链接到content/zh-cn下
 # Specify a value here if your content directory is not in your repo's root directory
@@ -207,7 +208,7 @@ enable = false
 # Developer relevant links. These will show up on right side of footer and in the community page if you have one.
 [[params.links.developer]]
   name = "GitHub"
-  url = "https://github.com/xiaoping378/blog"
+  url = "https://github.com/xiaoping378/xiaoping378.github.io"
   icon = "fab fa-github"
   desc = "文集开源地址!"
 [[params.links.developer]]
