@@ -1,0 +1,222 @@
+# 根目录的路径
+baseURL = "https://xiaoping378.github.io/blog"
+
+# 站点title,会被多语言里的设置覆盖
+# title = "小平栈"
+
+# 是否生成robots文件
+enableRobotsTXT = true
+
+# 主题选择，支持组合，优先级从左到右.
+theme = ["docsy"]
+
+# 页面上提供类似"最后修改"的信息
+enableGitInfo = true
+
+# 国际化相关设置
+# 默认语言的的站点内容路径
+contentDir = "content"
+# 默认语言
+defaultContentLanguage = "zh-cn"
+
+# 国际化翻译中，如果有缺失是否用占位符显示
+enableMissingTranslationPlaceholders = true
+
+# 注释后，可以开启标签分类功能
+# disableKinds = ["taxonomy", "taxonomyTerm"]
+
+[params.taxonomy]
+# set taxonomyCloud = [] to hide taxonomy clouds
+taxonomyCloud = ["tags"] 
+# If used, must have same lang as taxonomyCloud
+taxonomyCloudTitle = ["标签"] 
+# set taxonomyPageHeader = [] to hide taxonomies on the page headers
+taxonomyPageHeader = ["tags"] 
+
+
+# 代码块高亮配置
+pygmentsCodeFences = true
+pygmentsUseClasses = false
+# Use the new Chroma Go highlighter in Hugo.
+pygmentsUseClassic = false
+#pygmentsOptions = "linenos=table"
+# See https://help.farbox.com/pygments.html
+pygmentsStyle = "emacs"
+
+# 配置blog编译产物的路径.
+[permalinks]
+blog = "/:section/:year/:month/:day/:slug/"
+
+# markdown渲染引擎配置: https://github.com/russross/blackfriday
+# [blackfriday]
+# plainIDAnchors = true
+# hrefTargetBlank = true
+# angledQuotes = false
+# latexDashes = true
+
+# 图片引擎处理: https://github.com/disintegration/imaging
+[imaging]
+resampleFilter = "CatmullRom"
+quality = 75
+anchor = "smart"
+
+# [services]
+# [services.googleAnalytics]
+# # Comment out the next line to disable GA tracking. Also disables the feature described in [params.ui.feedback].
+# id = "UA-00000000-0"
+
+# Language configuration
+
+[languages]
+[languages.zh-cn]
+title = "现代技能栈"
+description = "小平-所思所为"
+languageName ="中文"
+# 用于多语言排序，越小越靠上。
+weight = 1
+
+# markdown的解析设置，抄的k8s 文档设置...
+[markup]
+  [markup.goldmark]
+   [markup.goldmark.extensions]
+     definitionList = true
+     table = true
+     typographer = false
+   [markup.goldmark.parser]
+     attribute = true
+     autoHeadingID = true
+     autoHeadingIDType = "blackfriday"
+   [markup.goldmark.renderer]
+     unsafe = true
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = false
+    hl_Lines = ""
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = true
+    style = "emacs"
+    tabWidth = 4
+  [markup.tableOfContents]
+    endLevel = 3
+    ordered = false
+    startLevel = 2
+
+# Everything below this are Site Params
+
+# Comment out if you don't want the "print entire section" link enabled.
+[outputs]
+section = ["HTML", "print", "RSS"]
+
+[params]
+copyright = "xiaoping378"
+privacy_policy = "#"
+
+# First one is picked as the Twitter card image if not set on page.
+# images = ["images/project-illustration.png"]
+
+# Menu title if your navbar has a versions selector to access old versions of your site.
+# This menu appears only if you have at least one [params.versions] set.
+version_menu = "Releases"
+
+# Flag used in the "version-banner" partial to decide whether to display a 
+# banner on every page indicating that this is an archived version of the docs.
+# Set this flag to "true" if you want to display the banner.
+archived_version = false
+
+# The version number for the version of the docs represented in this doc set.
+# Used in the "version-banner" partial to display a version number for the 
+# current doc set.
+version = "0.0"
+
+# A link to latest version of the docs. Used in the "version-banner" partial to
+# point people to the main doc site.
+# url_latest_version = "https://example.com"
+
+# 方便用户反馈，提交技术文章问题的仓库地址
+github_repo = "https://github.com/xiaoping378/blog"
+# 技术站点背后的项目issue地址
+# github_project_repo = "https://github.com/xiaoping378/blog"
+
+# 以下三个是设置远程文档位置的，目前用不上，这里hack一下，不然“编辑此页”的功能会去链接到content/zh-cn下
+# Specify a value here if your content directory is not in your repo's root directory
+github_subdir = "/"
+
+# Uncomment this if you have a newer GitHub repo with "main" as the default branch,
+# or specify a new value if you want to reference another branch in your GitHub links
+# github_branch= "main"
+
+# 支持三种搜索，三选一，禁用google搜索，需要注释掉此处
+# gcs_engine_id = "d72aa9b2712488cc3"
+
+# Enable Algolia DocSearch
+algolia_docsearch = false
+
+# Enable Lunr.js offline search
+offlineSearch = false
+
+# 默认使用的Chroma代码高亮方案，可换成prism方案。
+prism_syntax_highlighting = false
+
+# User interface configuration
+[params.ui]
+#  是否禁用面包屑导航.
+breadcrumb_disable = false
+# 是否禁用底部About链接
+footer_about_disable = true
+# 是否展示项目logo，位置必须放置在 assets/icons/logo.svg
+navbar_logo = true
+# 在首页，上下滑动页面，顶部导航是否禁用半透明
+navbar_translucent_over_cover_disable = false
+# 左侧章节树形目录默认是否处于折叠状态
+sidebar_menu_compact = true
+# 左侧章节树形目录上是否不显示搜索框，前提是需要开启搜索功能
+sidebar_search_disable = false
+
+# 关闭了google分析，下面功能不会启用
+[params.ui.feedback]
+enable = true
+# The responses that the user sees after clicking "yes" (the page was helpful) or "no" (the page was not helpful).
+yes = 'Glad to hear it! Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.'
+no = 'Sorry to hear that. Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.'
+
+# 在文章上面显示“阅读时长：x分钟”
+[params.ui.readingtime]
+enable = false
+
+
+# 社区community版面要用到的参数
+[params.links]
+# End user relevant links. These will show up on left side of footer and in the community page if you have one.
+[[params.links.user]]
+  name = "个人邮箱 xiaoping378@163.com"
+  url = "mailto:xiaoping378@163.com"
+  icon = "fa fa-envelope"
+  desc = "欢迎邮件交流"
+[[params.links.user]]
+  name ="微博"
+  url = "https://weibo.com/xiaoping378"
+  icon = "fab fa-weibo"
+  desc = "个人微博，基本不用"
+[[params.links.user]]
+  name = "知乎"
+  url = "https://www.zhihu.com/people/xiaoping378"
+  icon = "fab fa-zhihu"
+  desc = "知乎专栏"
+# Developer relevant links. These will show up on right side of footer and in the community page if you have one.
+[[params.links.developer]]
+  name = "GitHub"
+  url = "https://github.com/xiaoping378/blog"
+  icon = "fab fa-github"
+  desc = "文集开源地址!"
+[[params.links.developer]]
+  name = "Slack"
+  url = "https://example.org/slack"
+  icon = "fab fa-slack"
+  desc = "未开通"
+[[params.links.developer]]
+  name = "Developer mailing list"
+  url = "https://example.org/mail"
+  icon = "fa fa-envelope"
+  desc = "未开通"

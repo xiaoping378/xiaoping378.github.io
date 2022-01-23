@@ -1,25 +1,29 @@
-# xxp's blog
+# xxp's 现代技术栈
 
  Just record my life.
 
-做技术的人都需要的工具，你懂的 [戳这里](http://client.yizhihongxing.hk/aff.php?aff=3000
-)
+在线预览地址 [xiaoping378.github.io/blog](https://xiaoping378.github.io/blog)
 
-* [centos系统各种记录](/posts/centos.md)
-* [百宝箱脚本](/posts/百宝箱脚本.md)
-* [github正确的协作方式](/posts/github-dev.md)
-* [k8s的监控方案](/posts/kuerbernetes的监控方案.md)
-* [监控之我见](/posts/监控之我见.md)
-* [openshift实践-DevOps实战-0](/posts/openshift实践-DevOps实战-0.md)
-* [openshift实践-DevOps实战-1](/posts/openshift实践-DevOps实战-1.md)
-* [openshift实践-性能优化指南](/posts/openshift实践-性能优化指南.md)
-* [Golang项目里的BDD测试](/posts/golang-bdd.md)
-* [vscode打开java idea项目](/posts/java-in-vscode.md)
-
-所有的blog详见[posts](/posts)目录 ...
+所有的文章详见[content](/content)目录 ...
 
 有任何想讨论的问题，欢迎建立issue来探讨
 
-微信入群讨论技术，请注明 ``区块链`` 、``Docker`` 或者 ``Golang``
+## 本地离线预览
 
-![wechat](/assets/wechat.jpg)
+- 下载到本地
+```bash
+git clone https://github.com/xiaoping378/blog
+# 主题依赖
+git submodule update --init --recursive
+```
+
+- 准备工具
+
+本站使用hugo的Docsy主题搭建，需要下载[hugo-ext](https://github.com/gohugoio/hugo/releases/download/v0.91.2/hugo_extended_0.91.2_Windows-64bit.zip)版本。自行添加到PATH环境。
+
+```bash
+cd blog && hugo server
+```
+
+访问本地可以[预览](http://localhost:1313/blog/)本站
+
