@@ -1,9 +1,154 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>现代技能栈 – 云计算</title><link>https://xiaoping378.github.io/blog/docs/4-cloud/</link><description>Recent content in 云计算 on 现代技能栈</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://xiaoping378.github.io/blog/docs/4-cloud/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Openshift</title><link>https://xiaoping378.github.io/blog/docs/4-cloud/openshift/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/blog/docs/4-cloud/openshift/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>现代技能栈 – 云计算</title><link>https://xiaoping378.github.io/docs/4-cloud/</link><description>Recent content in 云计算 on 现代技能栈</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://xiaoping378.github.io/docs/4-cloud/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: 容器篇</title><link>https://xiaoping378.github.io/docs/4-cloud/containers/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/containers/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
-&lt;p>This is a placeholder page that shows you how to use this template site.&lt;/p>
+&lt;p>容器基础界还在不断向前发展，持续更新认知。&lt;/p>
 &lt;/div>
-&lt;p>自15年开始接触容器，当时容器就是Docker，Docker就是容器，当然现在docker仍是主流的容器runtime方案，随着k8s的规模落地，生态也在潜移默化的变化着，此篇会把以前编写的一些文章挪移到此处，顺便开启新的认知。&lt;/p></description></item><item><title>Docs: 容器篇</title><link>https://xiaoping378.github.io/blog/docs/4-cloud/containers/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/blog/docs/4-cloud/containers/</guid><description>
+&lt;p>自15年开始接触容器，当时容器就是Docker，Docker就是容器，当然现在docker仍是主流的容器runtime方案，随着k8s的规模落地，生态也在潜移默化的变化着，此篇会把以前编写的一些文章挪移到此处，顺便开启新的认知。&lt;/p></description></item><item><title>Docs: Kubernetes</title><link>https://xiaoping378.github.io/docs/4-cloud/k8s/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/k8s/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
-&lt;p>This is a placeholder page that shows you how to use this template site.&lt;/p>
-&lt;/div>
-&lt;p>自15年开始接触容器，当时容器就是Docker，Docker就是容器，当然现在docker仍是主流的容器runtime方案，随着k8s的规模落地，生态也在潜移默化的变化着，此篇会把以前编写的一些文章挪移到此处，顺便开启新的认知。&lt;/p></description></item></channel></rss>
+&lt;p>主要介绍k8s的核心功能和周边生态&lt;/p>
+&lt;/div></description></item><item><title>Docs: Openshift</title><link>https://xiaoping378.github.io/docs/4-cloud/openshift/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/openshift/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>主要记录介绍以前个人的Openshfit实践总结。&lt;/p>
+&lt;/div></description></item><item><title>Docs: 混合云网络SDN</title><link>https://xiaoping378.github.io/docs/4-cloud/%E6%B7%B7%E5%90%88%E4%BA%91sdn%E9%80%89%E5%9E%8B/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/%E6%B7%B7%E5%90%88%E4%BA%91sdn%E9%80%89%E5%9E%8B/</guid><description>
+&lt;ul>
+&lt;li>TODO.&lt;/li>
+&lt;/ul>
+&lt;h3 id="为什么需要sdn">为什么需要SDN&lt;/h3>
+&lt;ul>
+&lt;li>网络可编程&lt;/li>
+&lt;li>VPC（Virtual Private Cloud）&lt;/li>
+&lt;/ul>
+&lt;h3 id="现有sdn方案">现有SDN方案&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>硬件方案（软件定义，硬件实现）&lt;/p>
+&lt;ul>
+&lt;li>主流网络设备厂商有各自实现&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>软件方案（NFV）&lt;/p>
+&lt;ul>
+&lt;li>VMWare NSX, Juniper OpenContrail, OpenStack DVR...&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="业务需求">业务需求&lt;/h3>
+&lt;ul>
+&lt;li>用户网络隔离 - 多租户&lt;/li>
+&lt;li>保证中等流量规模的高性能低延迟&lt;/li>
+&lt;li>适应复杂异构的基础架构（混合云-- kubernetes，虚机，裸机）&lt;/li>
+&lt;li>端点迁移，IP不变&lt;/li>
+&lt;li>负载均衡（L2/L3）&lt;/li>
+&lt;li>端到端流量精细ACL&lt;/li>
+&lt;li>可API控制&lt;/li>
+&lt;li>运维监控（包，字节流）&lt;/li>
+&lt;/ul>
+&lt;h3 id="方案选型">方案选型&lt;/h3>
+&lt;ul>
+&lt;li>成本&lt;/li>
+&lt;li>设备依赖&lt;/li>
+&lt;/ul>
+&lt;h3 id="开源方案">开源方案&lt;/h3>
+&lt;p>各开源SDN方案对比：&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>flannel vxlan:
+不具备网络隔离功能。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>OpenShift SDN:&lt;/p>
+&lt;p>基于vxlan利用ovs-multienant可实现基于项目的网络隔离，和flannel vxlan相比，其使用的ovs-subnet插件，数据流场景大体一致，容器向外网发包也使用的NAT。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Calico:&lt;/p>
+&lt;p>支持混合云，安全加密，
+纯3层的路由实现保证了性能和低延迟
+支持了网络隔离和ACL
+但存在目前只支持TCP、UDP、ICMP、ICMPv6协议，四层协议不支持。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>OpenStack Neutron&lt;/p>
+&lt;p>支持网络隔离
+性能和低延迟 -- 需要优化
+支持多租户
+基于ML2支持混合云方案 -- kubernetes的支持需要第三方的kubestack项目
+虚机迁移，IP可不变，容器迁移，IP不变 -- 需要开发
+支持负载均衡LBaaS
+支持精细级的ACL
+API ?
+可运维监控基本数据&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>OpenContrail&lt;/p>
+&lt;p>&lt;strong>完全满足我们的网络需求&lt;/strong>, 值得深入研究&lt;/p>
+&lt;p>Juniper开源的SDN &amp;amp; NFV方案&lt;/p>
+&lt;p>已经集成支持OpenStack, VMware, Docker 和 Kubernetes.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="各大厂商公开资料">各大厂商公开资料&lt;/h3>
+&lt;ul>
+&lt;li>网易蜂巢： VxLAN, 基于Openstack Neutron&lt;/li>
+&lt;li>待补充...&lt;/li>
+&lt;/ul></description></item><item><title>Docs: Vagrant实践整理</title><link>https://xiaoping378.github.io/docs/4-cloud/vagrant%E7%9A%84%E4%BD%BF%E7%94%A8/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/vagrant%E7%9A%84%E4%BD%BF%E7%94%A8/</guid><description>
+&lt;p>很早就听说vagrant的大名，是个创建和管理虚机环境的工具，但一直没有机会实践下，近日我的VirtuablBox让我搞砸了，决定试用下，便于快速搭建各种环境。&lt;/p>
+&lt;h2 id="安装vagrant">安装vagrant&lt;/h2>
+&lt;p>图省事儿的话，直接&lt;code>sudo apt install vagrant&lt;/code>就可以安装，不过版本有点儿低，是1.8.1。&lt;/p>
+&lt;p>通过官方&lt;a href="https://www.vagrantup.com/downloads.html">下载地址&lt;/a>, 可直接下载最新的安装包。我这里安装的是1.9.4&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ ~ vagrant -v
+Vagrant 1.9.4
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="常用命令">常用命令&lt;/h2>
+&lt;p>一个打包好的操作系统在Vagrant中称为Box，即Box是一个打包好的操作系统环境，网上有很多打包好的环境，官方也有下载各种Boxes的&lt;a href="https://atlas.hashicorp.com/boxes/search">地址&lt;/a>&lt;/p>
+&lt;p>一般使用流程如下：&lt;/p>
+&lt;ul>
+&lt;li>vagrant box add 添加box的操作&lt;/li>
+&lt;li>vagrant init 初始化box的操作&lt;/li>
+&lt;li>vagrant up 启动虚拟机的操作&lt;/li>
+&lt;li>vagrant ssh 登录虚拟机的操作&lt;/li>
+&lt;/ul>
+&lt;p>额外还有些常用的命令&lt;/p>
+&lt;ul>
+&lt;li>vagrant box list 显示当前已经添加的box列表&lt;/li>
+&lt;li>vagrant box remove 删除相应的box&lt;/li>
+&lt;li>vagrant halt -f 冷关机（切断电源）&lt;/li>
+&lt;li>vagrant suspend 挂起当前的虚拟机&lt;/li>
+&lt;/ul>
+&lt;h2 id="实践">实践&lt;/h2>
+&lt;p>目前vagrant 1.9.4支持适配VirtualBox, VMware，Hyper-V, 和 Docker，本文使用的是VirtualBox。&lt;/p>
+&lt;p>需要你本机已经&lt;a href="https://www.virtualbox.org/wiki/Downloads">安装virtuablbox&lt;/a>环境&lt;/p>
+&lt;p>一般只要如下初始化，就会有个最新的centos-7虚机环境&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ vagrant init centos/7
+A &lt;span style="color:#b44">`&lt;/span>Vagrantfile&lt;span style="color:#b44">`&lt;/span> has been placed in this directory. You are now
+ready to &lt;span style="color:#b44">`&lt;/span>vagrant up&lt;span style="color:#b44">`&lt;/span> your first virtual environment! Please &lt;span style="color:#a2f">read&lt;/span>
+the comments in the Vagrantfile as well as documentation on
+&lt;span style="color:#b44">`&lt;/span>vagrantup.com&lt;span style="color:#b44">`&lt;/span> &lt;span style="color:#a2f;font-weight:bold">for&lt;/span> more information on using Vagrant.
+➜ ls
+Vagrantfile
+➜ vagrant up --provider virtualbox
+Bringing machine &lt;span style="color:#b44">&amp;#39;default&amp;#39;&lt;/span> up with &lt;span style="color:#b44">&amp;#39;virtualbox&amp;#39;&lt;/span> provider...
+&lt;span style="color:#666">==&lt;/span>&amp;gt; default: Box &lt;span style="color:#b44">&amp;#39;centos/7&amp;#39;&lt;/span> could not be found. Attempting to find and install...
+default: Box Provider: virtualbox
+default: Box Version: &amp;gt;&lt;span style="color:#666">=&lt;/span> &lt;span style="color:#b8860b">0&lt;/span>
+&lt;span style="color:#666">==&lt;/span>&amp;gt; default: Loading metadata &lt;span style="color:#a2f;font-weight:bold">for&lt;/span> box &lt;span style="color:#b44">&amp;#39;centos/7&amp;#39;&lt;/span>
+default: URL: https://atlas.hashicorp.com/centos/7
+&lt;span style="color:#666">==&lt;/span>&amp;gt; default: Adding box &lt;span style="color:#b44">&amp;#39;centos/7&amp;#39;&lt;/span> &lt;span style="color:#666">(&lt;/span>v1704.01&lt;span style="color:#666">)&lt;/span> &lt;span style="color:#a2f;font-weight:bold">for&lt;/span> provider: virtualbox
+default: Downloading: https://atlas.hashicorp.com/centos/boxes/7/versions/1704.01/providers/virtualbox.box
+default: Progress: 2% &lt;span style="color:#666">(&lt;/span>Rate: 94086/s, Estimated &lt;span style="color:#a2f">time&lt;/span> remaining: 1:52:14&lt;span style="color:#666">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>但如上需要依赖外网, 国内环境一般会下载失败，我这里介绍一种通过本地iso创建Box的方法，然后通过本地Box启动虚机环境。&lt;/p>
+&lt;p>这个iso转box的方法需要&lt;code>Packer&lt;/code>工具，此工具同样和vagrant都是&lt;code>HashiCorp&lt;/code>公司出品的，目前国外很火的工具，
+支持创建各式各样的镜像，包括各种国内外主流的公有云, openstack的镜像，甚至docker镜像都是可以OK的。&lt;/p>
+&lt;h3 id="参考">参考&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/astaxie/go-best-practice/blob/master/ebook/zh/01.2.md">https://github.com/astaxie/go-best-practice/blob/master/ebook/zh/01.2.md&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: KVM和Libvirt的实践整理</title><link>https://xiaoping378.github.io/docs/4-cloud/kvm-virsh%E5%AE%9E%E8%B7%B5%E6%95%B4%E7%90%86/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/kvm-virsh%E5%AE%9E%E8%B7%B5%E6%95%B4%E7%90%86/</guid><description>
+&lt;h2 id="介绍">介绍&lt;/h2>
+&lt;p>此前一直用Virtualbox操作虚机的东西，对于个人搭建环境还是显的有些笨重，不能实现Iac的目标，故尝试了Vagrant和Libvirt，综合考虑我选择libvirt继续深入下去，也是希望以后有机会可以深入搞下openstack的nova组件。&lt;/p>
+&lt;h2 id="安装必要依赖">安装必要依赖&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">sudo apt install bridge-utils qemu-kvm virtinst -y
+&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>qemu-kvm: 这个负责hypervisor层和仿真器（可以模拟x86, arm体系）.&lt;/li>
+&lt;li>virtinst: 安装和管理虚机的命令行工具&lt;/li>
+&lt;li>bridge-utils： 创建和管理bridge网络&lt;/li>
+&lt;/ul>
+&lt;p>安装完输入&lt;code>kvm-ok&lt;/code>查看是否安装OK，另外还&lt;code>需要重启&lt;/code>以使kvm和libvirt daemon启动。&lt;/p>
+&lt;h2 id="配置网络">配置网络&lt;/h2>
+&lt;p>未完。。。&lt;/p></description></item></channel></rss>

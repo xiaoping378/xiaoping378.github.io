@@ -1,1 +1,73 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>现代技能栈 – 容器篇</title><link>https://xiaoping378.github.io/blog/docs/4-cloud/containers/</link><description>Recent content in 容器篇 on 现代技能栈</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://xiaoping378.github.io/blog/docs/4-cloud/containers/index.xml" rel="self" type="application/rss+xml"/></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>现代技能栈 – 容器篇</title><link>https://xiaoping378.github.io/docs/4-cloud/containers/</link><description>Recent content in 容器篇 on 现代技能栈</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://xiaoping378.github.io/docs/4-cloud/containers/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: 百宝箱脚本</title><link>https://xiaoping378.github.io/docs/4-cloud/containers/%E7%99%BE%E5%AE%9D%E7%AE%B1%E8%84%9A%E6%9C%AC/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/containers/%E7%99%BE%E5%AE%9D%E7%AE%B1%E8%84%9A%E6%9C%AC/</guid><description>
+&lt;ul>
+&lt;li>备份所有docker镜像&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">mkdir -p images &lt;span style="color:#666">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#a2f">cd&lt;/span> images
+&lt;span style="color:#a2f;font-weight:bold">for&lt;/span> image in &lt;span style="color:#b44">`&lt;/span>docker images | grep -v REPOSITORY | awk &lt;span style="color:#b44">&amp;#39;{print $1&amp;#34;:&amp;#34;$2}&amp;#39;&lt;/span>&lt;span style="color:#b44">`&lt;/span>; &lt;span style="color:#a2f;font-weight:bold">do&lt;/span>
+&lt;span style="color:#a2f">echo&lt;/span> &lt;span style="color:#b44">&amp;#34;saving the image of &lt;/span>&lt;span style="color:#b68;font-weight:bold">${&lt;/span>&lt;span style="color:#b8860b">image&lt;/span>&lt;span style="color:#b68;font-weight:bold">}&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>
+docker save &lt;span style="color:#b68;font-weight:bold">${&lt;/span>&lt;span style="color:#b8860b">image&lt;/span>&lt;span style="color:#b68;font-weight:bold">}&lt;/span> &amp;gt; &lt;span style="color:#b68;font-weight:bold">${&lt;/span>&lt;span style="color:#b8860b">image&lt;/span>////-&lt;span style="color:#b68;font-weight:bold">}&lt;/span>.tar
+&lt;span style="color:#a2f">echo&lt;/span> -e &lt;span style="color:#b44">&amp;#34;finished saving the image of \033[32m &lt;/span>&lt;span style="color:#b68;font-weight:bold">${&lt;/span>&lt;span style="color:#b8860b">image&lt;/span>&lt;span style="color:#b68;font-weight:bold">}&lt;/span>&lt;span style="color:#b44"> \033[0m&amp;#34;&lt;/span>
+&lt;span style="color:#a2f;font-weight:bold">done&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>批量加载本地tar镜像&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#a2f;font-weight:bold">for&lt;/span> image in &lt;span style="color:#b44">`&lt;/span>ls *.tar&lt;span style="color:#b44">`&lt;/span>; &lt;span style="color:#a2f;font-weight:bold">do&lt;/span>
+&lt;span style="color:#a2f">echo&lt;/span> &lt;span style="color:#b44">&amp;#34;loading the image of &lt;/span>&lt;span style="color:#b68;font-weight:bold">${&lt;/span>&lt;span style="color:#b8860b">image&lt;/span>&lt;span style="color:#b68;font-weight:bold">}&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>
+docker load &amp;lt; &lt;span style="color:#b68;font-weight:bold">${&lt;/span>&lt;span style="color:#b8860b">image&lt;/span>&lt;span style="color:#b68;font-weight:bold">}&lt;/span>
+&lt;span style="color:#a2f">echo&lt;/span> -e &lt;span style="color:#b44">&amp;#34;finished loading the image of \033[32m &lt;/span>&lt;span style="color:#b68;font-weight:bold">${&lt;/span>&lt;span style="color:#b8860b">image&lt;/span>&lt;span style="color:#b68;font-weight:bold">}&lt;/span>&lt;span style="color:#b44"> \033[0m&amp;#34;&lt;/span>
+&lt;span style="color:#a2f;font-weight:bold">done&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>批量杀死僵尸进程&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">ps -A -o stat,ppid,pid,cmd | grep -e &lt;span style="color:#b44">&amp;#39;^[Zz]&amp;#39;&lt;/span> | awk &lt;span style="color:#b44">&amp;#39;{print $2}&amp;#39;&lt;/span> | xargs &lt;span style="color:#a2f">kill&lt;/span> -9
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: docker网络</title><link>https://xiaoping378.github.io/docs/4-cloud/containers/docker-network/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/containers/docker-network/</guid><description>
+&lt;p>自去年就开始推动公司业务使用docker了， 至今也一年多了，但对docker网络的认知一直一知半解。。。&lt;/p>
+&lt;p>主要是太忙，加上线上业务也没出过关于网络吞吐性能方面的问题，就没太大动力去搞明白， 现在闲下来了，搞之！&lt;/p>
+&lt;h3 id="环境声明">环境声明&lt;/h3>
+&lt;ul>
+&lt;li>以下内容只针对OS: Ubuntu16.04 docker: 1.10.3的环境， 写本文时docker最新的release版本是1.11.2，还有什么CoreOS，Unikernel 之类的（表示都没玩过）。&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>docker更新迭代速度太快了，公司业务只用到基本功能，所以没动力跟进它的更新了
+各种新时代下的产物频出啊， CoreOS为linux的发行版， 没需求，好遗憾.&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="docker的网络模式">docker的网络模式&lt;/h3>
+&lt;p>一开始安装完docker， 它就会默认创建3个网络， 使用__docker network ls__查看&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ blog git:&lt;span style="color:#666">(&lt;/span>master&lt;span style="color:#666">)&lt;/span> docker network ls
+NETWORK ID NAME DRIVER
+46416a43fbc6 bridge bridge
+45398901e9f0 none null
+9440a8140e68 host host
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>当启动一个容器时， 默认使用bridge模式， 可以通过 --net 指定其它模式。&lt;/p>
+&lt;p>下面先简要说明下各自的概念&lt;/p>
+&lt;ul>
+&lt;li>bridge 模式&lt;/li>
+&lt;/ul>
+&lt;p>容器间之所以能通信，就靠宿主机上的docker0了， docker0就是bridge模式下默认创建的虚拟设备名称&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ blog git:&lt;span style="color:#666">(&lt;/span>master&lt;span style="color:#666">)&lt;/span> ✗ ifconfig docker0
+docker0 Link encap:Ethernet HWaddr 02:42:49:56:7c:3b
+inet addr:172.17.0.1 Bcast:0.0.0.0 Mask:255.255.0.0
+inet6 addr: fe80::42:49ff:fe56:7c3b/64 Scope:Link
+UP BROADCAST RUNNING MULTICAST MTU:1500 Metric:1
+RX packets:78103 errors:0 dropped:0 overruns:0 frame:0
+TX packets:47578 errors:0 dropped:0 overruns:0 carrier:0
+collisions:0 txqueuelen:0
+RX bytes:17485434 &lt;span style="color:#666">(&lt;/span>17.4 MB&lt;span style="color:#666">)&lt;/span> TX bytes:82163889 &lt;span style="color:#666">(&lt;/span>82.1 MB&lt;span style="color:#666">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>ifocnfig可以看到很多信息， mac地址，IP等这些也可以通过参数指定成别的。&lt;/p>
+&lt;ul>
+&lt;li>none模式&lt;/li>
+&lt;/ul>
+&lt;p>none网络模式下的容器里是缺少网络接口的，例如eth0等，但会有一个lo设备。&lt;/p>
+&lt;p>没用过也没见过这样的业务场景， 不做过多说明&lt;/p>
+&lt;ul>
+&lt;li>host模式&lt;/li>
+&lt;/ul>
+&lt;p>容器直接操作宿主机的网络栈， 无疑是性能最好的网络模式， 可以认为是无带宽损耗的。&lt;/p>
+&lt;h3 id="细说bridge模式">细说bridge模式&lt;/h3>
+&lt;p>这也是我们线上正在在用的网络模式。&lt;/p>
+&lt;p>bridge模式主要利用了iptables的Masquerading和DNAT功能。&lt;/p>
+&lt;p>未完。。。&lt;/p></description></item><item><title>Docs: Swarm篇</title><link>https://xiaoping378.github.io/docs/4-cloud/containers/swarm/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/containers/swarm/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>Docker内置容器编排方案&lt;/p>
+&lt;/div>
+&lt;p>当年的swarm、k8s、mesos三大系统竞争之激烈，现在都归于k8s了。&lt;/p></description></item></channel></rss>

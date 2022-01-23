@@ -1,0 +1,27 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>现代技能栈 – hugo</title><link>https://xiaoping378.github.io/tags/hugo/</link><description>Recent content in hugo on 现代技能栈</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://xiaoping378.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: 站点搭建方法</title><link>https://xiaoping378.github.io/docs/1-site/create_site/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/1-site/create_site/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>主要涉及到hugo和docsy主题的介绍。&lt;/p>
+&lt;/div>
+&lt;h2 id="待编写">待编写&lt;/h2>
+&lt;p>...&lt;/p></description></item><item><title>Docs: 自动托管markdown</title><link>https://xiaoping378.github.io/docs/1-site/actions_pages/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/1-site/actions_pages/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>利用github actions和pages实现自动更新托管内容。&lt;/p>
+&lt;/div>
+&lt;h2 id="项目仓库的名字由来">项目仓库的名字由来&lt;/h2>
+&lt;p>本源码仓之所以起如此长的名字，完全是因为github pages的不成熟，不然会带个小尾巴：&lt;/p>
+&lt;p>如果叫 &lt;em>blog&lt;/em>, github的托管页面的访问地址会是 &lt;em>xiaoping378.github.io/blog&lt;/em>，这也没什么，但会和hugo的&lt;a href="https://xiaoping378.github.io/docs/1-site/add_content/#%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98">static机制&lt;/a>出现冲突。&lt;/p></description></item><item><title>Docs: 编写文章注意项</title><link>https://xiaoping378.github.io/docs/1-site/add_content/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/1-site/add_content/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>本章节主要描述日常编写文章的注意事项和docsy主题内的使用技巧。&lt;/p>
+&lt;/div>
+&lt;h2 id="编写markdown">编写markdown&lt;/h2>
+&lt;h3 id="图片路径问题">图片路径问题&lt;/h3>
+&lt;p>日常md文件里可以写成&lt;code>![](/image.png)&lt;/code> ，图片实际要存放到&lt;code>static&lt;/code>路径下，hugo会自动渲染到站点的根路径&lt;code>/&lt;/code>上。&lt;/p>
+&lt;p>这样的话，编辑器编写md就无法预览了，可以使用一个临时目录，把图片和md文件放到同一目录，编写完毕后，再把图片和md文件放置上述合适位置。&lt;/p>
+&lt;h3 id="日常编写注意事项">日常编写注意事项&lt;/h3>
+&lt;h4 id="md文件中相互引用内容的路径要记得对应到站点html的路径上">md文件中相互引用内容的路径要记得对应到站点html的路径上&lt;/h4>
+&lt;p>比如此处引用&lt;code>自动托管markdown&lt;/code>文章，按照md习惯写,虽然编辑器上可以正常打开，但hugo渲染后的页面是不行的。&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>[引用](./actions_pages.md)&lt;/code> 需要改成 &lt;code>[引用](../actions_pages)&lt;/code>&lt;/li>
+&lt;li>&lt;code>[引用](/content/docs/1-site/actions_pages.md)&lt;/code> 需要改成 &lt;code>[引用](/docs/1-site/actions_pages)&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>知道有这些差异就可以了。日常编写，建议本机启用&lt;code>hugo server&lt;/code>实时预览，&lt;/p></description></item></channel></rss>

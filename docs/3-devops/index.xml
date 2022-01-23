@@ -1,527 +1,577 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>现代技能栈 – Dev|Ops</title><link>https://xiaoping378.github.io/blog/docs/3-devops/</link><description>Recent content in Dev|Ops on 现代技能栈</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Wed, 04 Jan 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://xiaoping378.github.io/blog/docs/3-devops/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Multi-Bear Domicile Setup</title><link>https://xiaoping378.github.io/blog/docs/3-devops/multi-bear/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/blog/docs/3-devops/multi-bear/</guid><description>
-&lt;div class="pageinfo pageinfo-primary">
-&lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
-&lt;/div>
-&lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://gohugo.io">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
-&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p>
-&lt;p>90's four loko seitan photo booth gochujang freegan tumeric listicle fam ugh humblebrag. Bespoke leggings gastropub, biodiesel brunch pug fashion axe meh swag art party neutra deep v chia. Enamel pin fanny pack knausgaard tofu, artisan cronut hammock meditation occupy master cleanse chartreuse lumbersexual. Kombucha kogi viral truffaut synth distillery single-origin coffee ugh slow-carb marfa selfies. Pitchfork schlitz semiotics fanny pack, ugh artisan vegan vaporware hexagon. Polaroid fixie post-ironic venmo wolf ramps &lt;strong>kale chips&lt;/strong>.&lt;/p>
-&lt;blockquote>
-&lt;p>There should be no margin above this first sentence.&lt;/p>
-&lt;p>Blockquotes should be a lighter gray with a border along the left side in the secondary color.&lt;/p>
-&lt;p>There should be no margin below this final sentence.&lt;/p>
-&lt;/blockquote>
-&lt;h2 id="first-header-2">First Header 2&lt;/h2>
-&lt;p>This is a normal paragraph following a header. Knausgaard kale chips snackwave microdosing cronut copper mug swag synth bitters letterpress glossier &lt;strong>craft beer&lt;/strong>. Mumblecore bushwick authentic gochujang vegan chambray meditation jean shorts irony. Viral farm-to-table kale chips, pork belly palo santo distillery activated charcoal aesthetic jianbing air plant woke lomo VHS organic. Tattooed locavore succulents heirloom, small batch sriracha echo park DIY af. Shaman you probably haven't heard of them copper mug, crucifix green juice vape &lt;em>single-origin coffee&lt;/em> brunch actually. Mustache etsy vexillologist raclette authentic fam. Tousled beard humblebrag asymmetrical. I love turkey, I love my job, I love my friends, I love Chardonnay!&lt;/p>
-&lt;p>Deae legum paulatimque terra, non vos mutata tacet: dic. Vocant docuique me plumas fila quin afuerunt copia haec o neque.&lt;/p>
-&lt;p>On big screens, paragraphs and headings should not take up the full container width, but we want tables, code blocks and similar to take the full width.&lt;/p>
-&lt;p>Scenester tumeric pickled, authentic crucifix post-ironic fam freegan VHS pork belly 8-bit yuccie PBR&amp;amp;B. &lt;strong>I love this life we live in&lt;/strong>.&lt;/p>
-&lt;h2 id="second-header-2">Second Header 2&lt;/h2>
-&lt;blockquote>
-&lt;p>This is a blockquote following a header. Bacon ipsum dolor sit amet t-bone doner shank drumstick, pork belly porchetta chuck sausage brisket ham hock rump pig. Chuck kielbasa leberkas, pork bresaola ham hock filet mignon cow shoulder short ribs biltong.&lt;/p>
-&lt;/blockquote>
-&lt;h3 id="header-3">Header 3&lt;/h3>
-&lt;pre tabindex="0">&lt;code>This is a code block following a header.
-&lt;/code>&lt;/pre>&lt;p>Next level leggings before they sold out, PBR&amp;amp;B church-key shaman echo park. Kale chips occupy godard whatever pop-up freegan pork belly selfies. Gastropub Belinda subway tile woke post-ironic seitan. Shabby chic man bun semiotics vape, chia messenger bag plaid cardigan.&lt;/p>
-&lt;h4 id="header-4">Header 4&lt;/h4>
-&lt;ul>
-&lt;li>This is an unordered list following a header.&lt;/li>
-&lt;li>This is an unordered list following a header.&lt;/li>
-&lt;li>This is an unordered list following a header.&lt;/li>
-&lt;/ul>
-&lt;h5 id="header-5">Header 5&lt;/h5>
-&lt;ol>
-&lt;li>This is an ordered list following a header.&lt;/li>
-&lt;li>This is an ordered list following a header.&lt;/li>
-&lt;li>This is an ordered list following a header.&lt;/li>
-&lt;/ol>
-&lt;h6 id="header-6">Header 6&lt;/h6>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>What&lt;/th>
-&lt;th>Follows&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>A table&lt;/td>
-&lt;td>A header&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>A table&lt;/td>
-&lt;td>A header&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>A table&lt;/td>
-&lt;td>A header&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>现代技能栈 – Dev|Ops</title><link>https://xiaoping378.github.io/docs/3-devops/</link><description>Recent content in Dev|Ops on 现代技能栈</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Wed, 04 Jan 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://xiaoping378.github.io/docs/3-devops/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: 机器学习的语言之争</title><link>https://xiaoping378.github.io/docs/3-devops/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%AF%AD%E8%A8%80%E4%B9%8B%E4%BA%89-python/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/3-devops/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%AF%AD%E8%A8%80%E4%B9%8B%E4%BA%89-python/</guid><description>
+&lt;p>原文：&lt;a href="http://sebastianraschka.com/blog/2015/why-python.html">Python, Machine Learning, and Language Wars - A Highly Subjective Point of View&lt;/a>&lt;/p>
 &lt;hr>
-&lt;p>There's a horizontal rule above and below this.&lt;/p>
-&lt;hr>
-&lt;p>Here is an unordered list:&lt;/p>
+&lt;p>噢，天呀，那些主观有针对性的，自以为标题党的文章的另一个？是哒！为什么我还要不厌其烦的写下来呢？嗯，这里是来自于我的前教授的最琐碎但又改变生活的洞察和世俗的智慧之一，它已经成为了我的口头禅了：“如果你必须做这个任务超过三次以上，那么只要写一个脚本，然后对其自动化。”&lt;/p>
+&lt;p>现在，你或许已经开始琢磨这个博客了。我已经超过半年没写什么东西了！好吧，&lt;a href="https://twitter.com/rasbt">沉迷在社交网络平台&lt;/a>除外，那不是真的：我写了&lt;a href="https://github.com/rasbt/python-machine-learning-book">一些东西&lt;/a> —— 准确来说，约400页。最近，对我来说，这真的已经是一次旅程了。而对于经常被问道的问题“为什么你选择Python来进行机器学习？”，我猜，是时候来写_我的脚本_了。&lt;/p>
+&lt;p>在下面的段落中，我真的不打算告诉你为什么_你_或者其他人应该使用Python。老实说，我真心讨厌那类问题：“哪个&lt;em>最好？”（这里，用“编程语言、文本编辑器、IDE、操作系统、计算机制造商”替换掉&lt;/em>）。这实在是扯淡。虽然有时它挺有意思的，但是我建议你节省下关于这个问题的时间，用来在下班后跟朋友或者同事偶尔喝喝啤酒或咖啡。&lt;/p>
+&lt;h4 id="目录">目录&lt;/h4>
+&lt;!-- MarkdownTOC -->
 &lt;ul>
-&lt;li>Liverpool F.C.&lt;/li>
-&lt;li>Chelsea F.C.&lt;/li>
-&lt;li>Manchester United F.C.&lt;/li>
-&lt;/ul>
-&lt;p>And an ordered list:&lt;/p>
-&lt;ol>
-&lt;li>Michael Brecker&lt;/li>
-&lt;li>Seamus Blake&lt;/li>
-&lt;li>Branford Marsalis&lt;/li>
-&lt;/ol>
-&lt;p>And an unordered task list:&lt;/p>
+&lt;li>&lt;a href="#%E5%AF%B9%E4%BA%8E%E4%B8%80%E4%B8%AA%E5%A4%8D%E6%9D%82%E9%97%AE%E9%A2%98%E7%9A%84%E7%AE%80%E7%9F%AD%E5%9B%9E%E7%AD%94">对于一个复杂问题的简短回答&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E6%88%91%E6%9C%80%E5%96%9C%E6%AC%A2%E7%9A%84python%E5%B7%A5%E5%85%B7%E6%98%AF%E4%BB%80%E4%B9%88">我最喜欢的Python工具是什么？&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E6%88%91%E5%AF%B9matlab%E6%98%AF%E6%80%8E%E4%B9%88%E7%9C%8B%E7%9A%84">我对MATLAB是怎么看的？&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#julia%E7%9C%9F%E6%A3%92%E7%90%86%E8%AE%BA%E4%B8%8A">Julia真棒……理论上！&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#r%E5%AE%9E%E5%9C%A8%E6%B2%A1%E5%95%A5%E9%94%99">R实在没啥错&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#perl%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88">Perl发生了什么？&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E5%85%B6%E4%BB%96%E8%A7%82%E7%82%B9">其他观点&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#python%E6%98%AF%E4%B8%80%E4%B8%AA%E6%AD%A3%E5%9C%A8%E6%AD%BB%E6%8E%89%E7%9A%84%E8%AF%AD%E8%A8%80%E5%90%97">Python是一个正在死掉的语言吗？&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E6%80%BB%E7%BB%93">总结&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E5%8F%8D%E9%A6%88%E5%92%8C%E8%A7%82%E7%82%B9">反馈和观点&lt;/a>
 &lt;ul>
-&lt;li>&lt;input checked="" disabled="" type="checkbox"> Create a Hugo theme&lt;/li>
-&lt;li>&lt;input checked="" disabled="" type="checkbox"> Add task lists to it&lt;/li>
-&lt;li>&lt;input disabled="" type="checkbox"> Take a vacation&lt;/li>
-&lt;/ul>
-&lt;p>And a &amp;quot;mixed&amp;quot; task list:&lt;/p>
-&lt;ul>
-&lt;li>&lt;input disabled="" type="checkbox"> Pack bags&lt;/li>
-&lt;li>?&lt;/li>
-&lt;li>&lt;input disabled="" type="checkbox"> Travel!&lt;/li>
-&lt;/ul>
-&lt;p>And a nested list:&lt;/p>
-&lt;ul>
-&lt;li>Jackson 5
-&lt;ul>
-&lt;li>Michael&lt;/li>
-&lt;li>Tito&lt;/li>
-&lt;li>Jackie&lt;/li>
-&lt;li>Marlon&lt;/li>
-&lt;li>Jermaine&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>TMNT
-&lt;ul>
-&lt;li>Leonardo&lt;/li>
-&lt;li>Michelangelo&lt;/li>
-&lt;li>Donatello&lt;/li>
-&lt;li>Raphael&lt;/li>
+&lt;li>&lt;a href="#python">Python&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#perl">Perl&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#r">R&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#matlaboctave">MATLAB/Octave&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#julia">Julia&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80-%E6%88%91%E5%BF%98%E8%AE%B0%E6%8F%90%E7%9A%84%E9%82%A3%E4%BA%9B">其他语言 (我忘记提的那些)&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
-&lt;p>Definition lists can be used with Markdown syntax. Definition headers are bold.&lt;/p>
-&lt;dl>
-&lt;dt>Name&lt;/dt>
-&lt;dd>Godzilla&lt;/dd>
-&lt;dt>Born&lt;/dt>
-&lt;dd>1952&lt;/dd>
-&lt;dt>Birthplace&lt;/dt>
-&lt;dd>Japan&lt;/dd>
-&lt;dt>Color&lt;/dt>
-&lt;dd>Green&lt;/dd>
-&lt;/dl>
-&lt;hr>
-&lt;p>Tables should have bold headings and alternating shaded rows.&lt;/p>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Artist&lt;/th>
-&lt;th>Album&lt;/th>
-&lt;th>Year&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>Michael Jackson&lt;/td>
-&lt;td>Thriller&lt;/td>
-&lt;td>1982&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Prince&lt;/td>
-&lt;td>Purple Rain&lt;/td>
-&lt;td>1984&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Beastie Boys&lt;/td>
-&lt;td>License to Ill&lt;/td>
-&lt;td>1986&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;p>If a table is too wide, it should scroll horizontally.&lt;/p>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Artist&lt;/th>
-&lt;th>Album&lt;/th>
-&lt;th>Year&lt;/th>
-&lt;th>Label&lt;/th>
-&lt;th>Awards&lt;/th>
-&lt;th>Songs&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>Michael Jackson&lt;/td>
-&lt;td>Thriller&lt;/td>
-&lt;td>1982&lt;/td>
-&lt;td>Epic Records&lt;/td>
-&lt;td>Grammy Award for Album of the Year, American Music Award for Favorite Pop/Rock Album, American Music Award for Favorite Soul/R&amp;amp;B Album, Brit Award for Best Selling Album, Grammy Award for Best Engineered Album, Non-Classical&lt;/td>
-&lt;td>Wanna Be Startin' Somethin', Baby Be Mine, The Girl Is Mine, Thriller, Beat It, Billie Jean, Human Nature, P.Y.T. (Pretty Young Thing), The Lady in My Life&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Prince&lt;/td>
-&lt;td>Purple Rain&lt;/td>
-&lt;td>1984&lt;/td>
-&lt;td>Warner Brothers Records&lt;/td>
-&lt;td>Grammy Award for Best Score Soundtrack for Visual Media, American Music Award for Favorite Pop/Rock Album, American Music Award for Favorite Soul/R&amp;amp;B Album, Brit Award for Best Soundtrack/Cast Recording, Grammy Award for Best Rock Performance by a Duo or Group with Vocal&lt;/td>
-&lt;td>Let's Go Crazy, Take Me With U, The Beautiful Ones, Computer Blue, Darling Nikki, When Doves Cry, I Would Die 4 U, Baby I'm a Star, Purple Rain&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Beastie Boys&lt;/td>
-&lt;td>License to Ill&lt;/td>
-&lt;td>1986&lt;/td>
-&lt;td>Mercury Records&lt;/td>
-&lt;td>noawardsbutthistablecelliswide&lt;/td>
-&lt;td>Rhymin &amp;amp; Stealin, The New Style, She's Crafty, Posse in Effect, Slow Ride, Girls, (You Gotta) Fight for Your Right, No Sleep Till Brooklyn, Paul Revere, Hold It Now, Hit It, Brass Monkey, Slow and Low, Time to Get Ill&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;hr>
-&lt;p>Code snippets like &lt;code>var foo = &amp;quot;bar&amp;quot;;&lt;/code> can be shown inline.&lt;/p>
-&lt;p>Also, &lt;code>this should vertically align&lt;/code> &lt;del>&lt;code>with this&lt;/code>&lt;/del> &lt;del>and this&lt;/del>.&lt;/p>
-&lt;p>Code can also be shown in a block element.&lt;/p>
-&lt;pre tabindex="0">&lt;code>foo := &amp;quot;bar&amp;quot;;
-bar := &amp;quot;foo&amp;quot;;
-&lt;/code>&lt;/pre>&lt;p>Code can also use syntax highlighting.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-go" data-lang="go">&lt;span style="color:#a2f;font-weight:bold">func&lt;/span> &lt;span style="color:#00a000">main&lt;/span>() {
-input &lt;span style="color:#666">:=&lt;/span> &lt;span style="color:#b44">`var foo = &amp;#34;bar&amp;#34;;`&lt;/span>
-lexer &lt;span style="color:#666">:=&lt;/span> lexers.&lt;span style="color:#00a000">Get&lt;/span>(&lt;span style="color:#b44">&amp;#34;javascript&amp;#34;&lt;/span>)
-iterator, _ &lt;span style="color:#666">:=&lt;/span> lexer.&lt;span style="color:#00a000">Tokenise&lt;/span>(&lt;span style="color:#a2f;font-weight:bold">nil&lt;/span>, input)
-style &lt;span style="color:#666">:=&lt;/span> styles.&lt;span style="color:#00a000">Get&lt;/span>(&lt;span style="color:#b44">&amp;#34;github&amp;#34;&lt;/span>)
-formatter &lt;span style="color:#666">:=&lt;/span> html.&lt;span style="color:#00a000">New&lt;/span>(html.&lt;span style="color:#00a000">WithLineNumbers&lt;/span>())
-&lt;span style="color:#a2f;font-weight:bold">var&lt;/span> buff bytes.Buffer
-formatter.&lt;span style="color:#00a000">Format&lt;/span>(&lt;span style="color:#666">&amp;amp;&lt;/span>buff, style, iterator)
-fmt.&lt;span style="color:#00a000">Println&lt;/span>(buff.&lt;span style="color:#00a000">String&lt;/span>())
+&lt;!-- /MarkdownTOC -->
+&lt;h2 id="对于一个复杂问题的简短回答">对于一个复杂问题的简短回答&lt;/h2>
+&lt;p>或许我应该从一个简短的回答开始。欢迎你停止阅读这段后面的文章，因为它真的解决掉这个问题了。我是一个科学家，我喜欢完成我的工作。我喜欢有一个环境，在那里我可以快速原型，并记下我的模型和想法。我需要解决非常特殊的问题。我分析给定的数据集以得出结论。这对我来说是最重要的：我怎样才能最多产的完成我的工作呢？“多产”这里意味着什么？好吧，我通常只进行一次分析 (不同的想法测试和调试除外); 我不需要重复地24/7地运行一段特定的代码，我并不是在为最终用户开发软件应用或web应用。当我_量化y_ “多产”时，我从字面上评估(1) 把想法以代码的形式写下来所花费的时间，(2) 调试的时间和 (3) 执行的时间之和。对我来说，“最多产”意味着“获得结果需要花费多少时间？” 现在，这么多年来，我发现，Python就是为我而生的。并非总是如此，但很多时候是这样。正如生活中的其他东西一样，Python并不是“银弹”，它并非总是每一个问题的“最佳”解决方案。然而，如果你跨常见和不那么常见的问题任务来比较编程语言的话，它已经非常接近（最佳解决方案）了；Python可能是最通用，最有能力的全才。&lt;/p>
+&lt;p>&lt;img src="http://sebastianraschka.com/images/blog/2015/why-python/the_general_problem.png" alt="">&lt;/p>
+&lt;p>(来源: &lt;a href="https://xkcd.com/974/">https://xkcd.com/974/&lt;/a>)&lt;/p>
+&lt;p>请记住：“过早的优化是一切罪恶的根源” (Donald Knuth)。如果你是那种想要从机器学习和数据科学划分中中优化下一个颠覆性高频交易模型的软件工程团队中的一员，那么Python可能不适合你 (但或许它是数据科学团队的语言选择，所以学习如何读懂它仍然有用)。因此，我的一个小小的忠告是，当你选择一门语言时，评估你每天的问题任务和需求。“如果你只有一把锤子，那么一切开始看起来都像一个钉子” – 你聪明得不会掉入这个陷阱！然而，记住，有一个平衡点。在有些场景下，即使螺丝刀可能是“更漂亮的”解决方法，锤子可能还是最好的选择。再次，这归结为生产力。&lt;/p>
+&lt;p>&lt;strong>让我从个人经历中挑个例子来说说。&lt;/strong> 关于一个非常问题相关的假设，我需要开发一堆新颖的算法来“筛选”1千5百万个小的化合物。我完全是一个计算型人，但我和进行非计算性实验（我们称它们为“湿实验室”实验）的生物学家一起合作。目标是缩小它到一个包含100个潜在化合物的列表，这样他们可以在实验室里测试它们。提醒是，他们需要快速获得结果，因为他们仅有有限的实际来做实验。相信我，时间真的是“有限的”：在必须收集结果之前，我们刚让我们的补助金申请受理和研究得到资助 (我们的合作者对某种特定的只知春季产卵的幼虫做实验)。因此，我开始想“我要怎样尽可能快的把结果给他们？” 嗯，我懂C++和FORTRAN，如果我在各个语言中实现那些算法，那么与Python实现相比，执行“筛选”运行也许会更快些。这更多是一种有根据的猜测，我真的不知道实质上是否会更快。但有一件事我可以肯定：如果我开始用Python写代码，那么我可以让它在几天内运行 – 或许让对应的C++版本能够跑起来需要花一周的时间。以后，我会操心一个更有效的实现。在那一刻，重要的是，把那些结果拿给我的合作者 – “过早的优化是一切罪恶的根源。” 边注：相同的思路运用到数据存储解决方案。这里，我只是使用SQLite。CSV没有多大意义，因为我必须重复地注释和检索某些分子。我当然不想每次想要查看一个分子或者操作它的时候，都要全过程扫描或重写一个CSV – 在处理内存容量预留的问题。也许用MySQL会更好，但是出于上面提到的原因，我想快速地完成这项工作，并建立一个额外的SQL服务器……没时间做它了，用SQLite来完成这项工作挺好的。&lt;/p>
+&lt;p>&lt;img src="http://sebastianraschka.com/images/blog/2015/why-python/automation.png" alt="">&lt;/p>
+&lt;p>(来源: &lt;a href="https://xkcd.com/1319/">https://xkcd.com/1319/&lt;/a>)&lt;/p>
+&lt;p>结论：**选择满足_你的_需求的那个语言！**不过，这里有一个小小的告诫！初学者在学习一门语言之前怎么能知道它的优势和缺点，程序员应该怎么知道这门语言对她来说会是有用的呢？这就是我会做的事：只要在谷歌和&lt;a href="https://github.com">GitHub&lt;/a>上搜索那些与你最常见的问题任务有关的特别的应用和解决方法。你不需要阅读和了解代码。只需要看看最终产品，另外，不要犹豫问别人。不要只是询问一般“最好的”编程语言，而是具体点，描述你的目标以及为什么你想要学习如何编程。如果你想为MacOS X开发应用，那么你可能会想要看看Objective C和Swift，如果你想在Android上开发，那么你可能会对Java更感兴趣，以此类推。&lt;/p>
+&lt;h2 id="我最喜欢的python工具是什么">我最喜欢的Python工具是什么？&lt;/h2>
+&lt;p>如果你感兴趣，那些是我最喜欢并且最常使用的Python“工具”，每天，我都会使用它们中的大部分。&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="http://www.numpy.org">NumPy&lt;/a>: 我处理线性代数阵列结构和量化公式最喜欢的库；由&lt;a href="http://scipy2015.scipy.org/ehome/index.php?eventid=115969&amp;amp;">SciPy&lt;/a>增强。&lt;/li>
+&lt;li>&lt;a href="https://theano.readthedocs.org/en/latest/">Theano&lt;/a>: 为机器学习算法减负，并将计算分布到我的GPU内核中。&lt;/li>
+&lt;li>&lt;a href="http://scikit-learn.org/stable/">scikit-learn&lt;/a>: 用于每日、更基本的机器学习任务的最方便的API。&lt;/li>
+&lt;li>&lt;a href="http://matplotlib.org">matplotlib&lt;/a>: 当涉及到画图时，这是我所选择的库。有时，我还使用&lt;a href="http://stanford.edu/~mwaskom/software/seaborn/index.html">seaborn&lt;/a>来绘制特殊的图，例如，热图超级棒！&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="http://sebastianraschka.com/images/blog/2015/why-python/heatmap.png" alt="">&lt;/p>
+&lt;p>(来源: &lt;a href="http://stanford.edu/~mwaskom/software/seaborn/examples/structured_heatmap.html">http://stanford.edu/~mwaskom/software/seaborn/examples/structured_heatmap.html&lt;/a>)&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="http://flask.pocoo.org">Flask (Django)&lt;/a>: 难得，我想要将一个想法转换成一个web应用。这里，Flask非常方便！&lt;/li>
+&lt;li>&lt;a href="http://www.sympy.org/en/index.html">SymPy&lt;/a>: 对于符号数学，对我来说，它取代了WolframAlpha。&lt;/li>
+&lt;li>&lt;a href="http://pandas.pydata.org">pandas&lt;/a>: 处理相当小的数据集，大多数来自于CSV文件。&lt;/li>
+&lt;li>&lt;a href="https://docs.python.org/2/library/sqlite3.html">sqlite3&lt;/a>:注释和查询“中型”数据集。&lt;/li>
+&lt;li>&lt;a href="http://ipython.org">IPython notebooks&lt;/a>: 我还能说什么呢？我90%的研究发生在IPython notebooks。它只是一个让所有的东西都放在一个地方的好环境：想法、代码、注释、LaTeX方程、插图、图表、输出……&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="http://sebastianraschka.com/images/blog/2015/why-python/ipython_notebook.png" alt="">&lt;/p>
+&lt;p>注意，IPython项目最近演变成了&lt;a href="https://jupyter.org">Jupyter项目&lt;/a>。现在，你不止可以使用Jupyter notebook环境到Python上，还可以是R, Julia, 等等。&lt;/p>
+&lt;h2 id="我对matlab是怎么看的">我对MATLAB是怎么看的？&lt;/h2>
+&lt;p>几年前，我想当常用MATLAB (/Octave)；大多数的计算机科学数据科学课都是用MATLAB。我真的觉得这对于原型真的一点儿都不是一个糟糕的环境！由于它的设计充分考虑了线性代数 (用于MATrix LABoratory的MATLAB)，当涉及到实现机器学习算法时，比之Python/NumPy，MATLAB让人感觉更多点“自然” —— 好啦，为了公平起见，&lt;a href="https://www.cs.utexas.edu/users/EWD/transcriptions/EWD08xx/EWD831.html">1-indexed&lt;/a>编程语言对我们程序员来说，可能看起来有点奇怪。但是，记住，MATLAB带有一个大的价格标签，我认为它真正慢慢地淡出学术界以及工业界。此外，毕竟，我是开源粉 ;)。另外，与其他“生产性”的语言相比，它的性能也并不是那么的引人注目。看看下面的标准：&lt;/p>
+&lt;p>&lt;img src="http://sebastianraschka.com/images/blog/2015/why-python/julia_benchmark.png" alt="">&lt;/p>
+&lt;p>(相对于C的基准次数 —— 越小越好，C的性能 = 1.0; 来源: &lt;a href="http://julialang.org/benchmarks/">http://julialang.org/benchmarks/&lt;/a>)&lt;/p>
+&lt;p>然而，我们不应忘记，对于Python，也有这样整洁的Theano库。在2010年，Theano的开发者报道，当代码运行在CPU时，它比NumPy快1.8倍，而如果Theano针对GPU，那么它甚至比NumPy快11倍 (J. Bergstra, O. Breuleux, F. Bastien, P. Lamblin, R. Pascanu, G. Desjardins, J. Turian, D. Warde-Farley, 和Y. Bengio. Theano: Python中的的一个CPU和GPU运算编译器。在Proc. 9th Python in Science Conf, 第1–7页，2010年。)。现在，记住，这个Theano基准是来自2010年，而多年来，Theano得到了显著的改善，现代显卡的功能也是。&lt;/p>
+&lt;blockquote>
+&lt;p>我了解到，很多希腊人相信毕达哥拉斯所说的，所有的东西都是从数字生成的。这个断言带来了一个难题：不存在的东西怎么可以甚至设想生成？- Theano of Croton (哲学家，公元前6世纪)&lt;/p>
+&lt;/blockquote>
+&lt;p>PS: 如果你不喜欢NumPy的&lt;code>dot&lt;/code>方法，那么敬请期待即将到来的&lt;a href="https://docs.python.org/3.6/whatsnew/3.5.html">Python 3.5&lt;/a> – 对于矩阵乘法，我们将获得一个中缀&lt;a href="http://legacy.python.org/dev/peps/pep-0465/">运算符&lt;/a>，耶！&lt;/p>
+&lt;p>“手动的”矩阵矩阵乘法 (我的意思是，无需NumPy的帮助，而BLAS或者LAPACK看起来繁琐且非常低效)。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-python" data-lang="python">
+[[&lt;span style="color:#666">1&lt;/span>, &lt;span style="color:#666">2&lt;/span>], [[&lt;span style="color:#666">5&lt;/span>, &lt;span style="color:#666">6&lt;/span>], [[&lt;span style="color:#666">1&lt;/span> &lt;span style="color:#666">*&lt;/span> &lt;span style="color:#666">5&lt;/span> &lt;span style="color:#666">+&lt;/span> &lt;span style="color:#666">2&lt;/span> &lt;span style="color:#666">*&lt;/span> &lt;span style="color:#666">7&lt;/span>, &lt;span style="color:#666">1&lt;/span> &lt;span style="color:#666">*&lt;/span> &lt;span style="color:#666">6&lt;/span> &lt;span style="color:#666">+&lt;/span> &lt;span style="color:#666">2&lt;/span> &lt;span style="color:#666">*&lt;/span> &lt;span style="color:#666">8&lt;/span>],
+[&lt;span style="color:#666">3&lt;/span>, &lt;span style="color:#666">4&lt;/span>]] x [&lt;span style="color:#666">7&lt;/span>, &lt;span style="color:#666">8&lt;/span>]] &lt;span style="color:#666">=&lt;/span> [&lt;span style="color:#666">3&lt;/span> &lt;span style="color:#666">*&lt;/span> &lt;span style="color:#666">5&lt;/span> &lt;span style="color:#666">+&lt;/span> &lt;span style="color:#666">4&lt;/span> &lt;span style="color:#666">*&lt;/span> &lt;span style="color:#666">7&lt;/span>, &lt;span style="color:#666">3&lt;/span> &lt;span style="color:#666">*&lt;/span> &lt;span style="color:#666">6&lt;/span> &lt;span style="color:#666">+&lt;/span> &lt;span style="color:#666">4&lt;/span> &lt;span style="color:#666">*&lt;/span> &lt;span style="color:#666">8&lt;/span>]]
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果我们有线性代数和经过优化的库来处理它，谁还会想使用嵌套的for循环来实现这个表达式！？&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-python" data-lang="python">
+&lt;span style="color:#666">&amp;gt;&amp;gt;&amp;gt;&lt;/span> X &lt;span style="color:#666">=&lt;/span> numpy&lt;span style="color:#666">.&lt;/span>array()
+&lt;span style="color:#666">&amp;gt;&amp;gt;&amp;gt;&lt;/span> W &lt;span style="color:#666">=&lt;/span> numpy&lt;span style="color:#666">.&lt;/span>array()
+&lt;span style="color:#666">&amp;gt;&amp;gt;&amp;gt;&lt;/span> X&lt;span style="color:#666">.&lt;/span>dot(W)
+[[&lt;span style="color:#666">19&lt;/span>, &lt;span style="color:#666">22&lt;/span>],
+[&lt;span style="color:#666">43&lt;/span>, &lt;span style="color:#666">50&lt;/span>]]
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>现在，如果这个&lt;code>dot&lt;/code>产品对你来说并无吸引力，那么这是它将会在Python 3.5中的样子：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-python" data-lang="python">
+&lt;span style="color:#666">&amp;gt;&amp;gt;&amp;gt;&lt;/span> X &lt;span style="color:#666">@&lt;/span> W
+[[&lt;span style="color:#666">19&lt;/span>, &lt;span style="color:#666">22&lt;/span>],
+[&lt;span style="color:#666">43&lt;/span>, &lt;span style="color:#666">50&lt;/span>]]
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>老实说，我不得不承认，我并不一定是“@”符号作为矩阵操作符的一个大粉丝。然而，我真的长时间苦苦想了这个问题，没法找到更好的“未使用的”符号了。如果你有更好的想法，请让我知道，我真的很好奇！&lt;/p>
+&lt;h2 id="julia真棒-理论上">Julia真棒……理论上！&lt;/h2>
+&lt;p>我认为Julia是一个伟大的语言，并且我会将其推荐给那些开始编程和机器学习的人。虽然，我不确定是否真的应该这样做。为什么呢？要把自己交给这个编程语言，是有点悲伤矛盾的。使用Julia，我们无法肯定在接下来的几年内，它是否会变得够“流行”。等等，“流行性”跟一门编程语言有多棒多有用有啥关系？让我告诉你。窘境是，最有用的语言不一定是设计良好的，但一定是流行的。为什么？&lt;/p>
+&lt;ol>
+&lt;li>已经有大量的（大多数是免费的）库以供你使用，这样一来，你可以对你的时间尽其所用，而无需重新发明轮子。&lt;/li>
+&lt;li>在线查找帮助、教程和样例容易得多。&lt;/li>
+&lt;li>更频繁的语言改善、更新和补丁，会让它“甚至更好”。&lt;/li>
+&lt;li>对协作更友好，并且在团队中工作更简单。&lt;/li>
+&lt;li>更多的人会从你的代码中受益 (例如，如果你决定将其分享到GitHub上)。&lt;/li>
+&lt;/ol>
+&lt;p>就个人而言，我爱Julia本身。它完美的匹配了我的个人兴趣。虽然，我使用Python；主要是因为已经有了那么多超级棒的东西在那里了，这使得它格外得心应手。Python社区一切安好，而我相信在（至少）下一个5到10年内，它还会存在并蓬勃发展。但是对于Julia，我并没那么肯定。我喜欢设计，我觉得这很棒。尽管如此，如果它并不流行，那么我无法分辨它是“面向未来的”。如果在几年内发展停止了呢？我会对那些在这点上将“死”的东西进行投资。然而，如果每个人都这样想，那么新语言就永远没戏了。&lt;/p>
+&lt;h2 id="r实在没啥错">R实在没啥错&lt;/h2>
+&lt;p>嗯，我猜我曾经是一个R人，这并不是什么大秘密。甚至我还写过一本关于它的书 (好吧，准确来讲，实际上是关于&lt;a href="http://www.amazon.com/Instant-Heat-Maps-R-How-/dp/1782165649/ref=sr_1_1?ie=UTF8&amp;amp;qid=1372160113&amp;amp;sr=8-1&amp;amp;keywords=instant+heat+maps+in+r+how-to">R中的热图(Heat maps in R)&lt;/a>。注意，这是在几年前，在&lt;code>ggplot2&lt;/code>是个事之前。没有真正令人信服的理由让你去看看 —— 我指的是这本书。不过，如果你无法抗拒要看看的话，这是免费的、5分钟就可读完的&lt;a href="http://sebastianraschka.com/Articles/heatmaps_in_r.html">简短版本&lt;/a>)。我同意，有点扯远了。所以，回到讨论：R怎么了？我觉得它完全没有不好的地方。我的意思是，毕竟，对于“数据科学”，R是非常强大的，并且完全可以胜任且“大众化”的语言！不久前，甚至微软也开始非常非常感兴趣：&lt;a href="http://www.cio.com/article/2906456/data-analytics/microsoft-closes-acquisition-of-r-software-and-services-provider.html">Microsoft收购Revolution Analytics，一家用于统计计算和预测分析的开源R编程语言服务商业提供商&lt;/a>。&lt;/p>
+&lt;p>所以，我可以如何总结下对于R的感受呢？我不大确定这句话出自何处 —— 我在前段时间从某处某人那里看到的 —— 但它很好的解释了R和Python之间的区别：“R是统计学家为了自己开发的一门编程语言；而Python是计算机科学家开发的，程序员可以用它来应用统计技术。”该消息的部分是，R和Python都同样能够用于“数据科学”任务，然而，Python语法对我来说，只是感觉更自然 —— 这是个人品味问题。&lt;/p>
+&lt;p>我只想提出，Theano和在GPU上计算是Python的一个大增益，但我看到R也完全可以：&lt;a href="http://blog.revolutionanalytics.com/2015/01/parallel-programming-with-gpus-and-r.html">GPU和R上的并行编程&lt;/a>。我知道接下来你想问什么：“好吧，那么要是把我当模型编程一个漂亮_闪亮_的web应用又如何？我打赌，这是你没法在R中做的事！” 抱歉，但是你输了；看看&lt;a href="http://www.rstudio.com/shiny/">Shiny by RStudio，一个R语言的web应用框架&lt;/a>。你明白我的意思吗？这里没有赢家。可能永远都不会有。&lt;/p>
+&lt;p>把我最喜欢的Python引述中的一个从其原有语境中拿出来：“这里，我们都是大人” —— 不要在把我们的时间浪费在语言之争上了。选择那个“适合”你的语言。当涉及到就业市场上的观点：这里也没有对错。我不认为要聘请你为“数据科学家”的公司真的会计较你最喜欢的工具箱 —— 毕竟，编程语言只是“工具”。而最重要的技能是像“数据科学家”一样思考，问正确的问题，能够解决问题。难的是数学和机器学习理论，新的编程语言是可以很容易学到的。试想一下，你学会了如何挥舞锤子来把钉子敲进去，而从不同的制造商那里挑一把锤子能有多难？但如果你仍然感兴趣，例如看看TIOBE Index，_一个_编程语言流行性的估量：&lt;/p>
+&lt;p>&lt;img src="http://sebastianraschka.com/images/blog/2015/why-python/tiobe.png" alt="">&lt;/p>
+&lt;p>(来源: &lt;a href="http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html">http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html&lt;/a>)&lt;/p>
+&lt;p>但是，如果我们看看来自Spectrum IEEE的&lt;a href="http://spectrum.ieee.org/computing/software/the-2015-top-ten-programming-languages">2015年十大编程语言&lt;/a>，那么会发现，R语言正在快速攀升(左列：2015，右列：2014）。&lt;/p>
+&lt;p>&lt;img src="http://sebastianraschka.com/images/blog/2015/why-python/spectrum.jpg" alt="">&lt;/p>
+&lt;p>(来源: &lt;a href="http://spectrum.ieee.org/computing/software/the%E2%80%932015-top-ten-programming-languages">http://spectrum.ieee.org/computing/software/the-2015-top-ten-programming-languages&lt;/a>)&lt;/p>
+&lt;p>我想你了解了。Python和R，不再有什么真正打的区别了。此外，当你在选择使用哪个语言的时候，你不应该担心工作计划。&lt;/p>
+&lt;h2 id="perl发生了什么">Perl发生了什么？&lt;/h2>
+&lt;p>Perl是在我早起职业生涯中选取的第一门语言(当然，除了高中时使用的Basic, Pascal, 和Delphi)。在我还是德国的一个大学生的时候，我上了一门Perl编程课。那时，我真心喜欢它，但是，嘿，在这点上，我确实没有什么好对其进行比较的。就个人而言，我只知道少数几个积极使用Perl为每天写脚本。虽然，我认为在生物信息学领域这仍然相当普遍!? 不管怎么说，让我们保持这部分简短，让它安息：“&lt;a href="http://archive.oreilly.com/pub/post/perl_is_dead_long_live_perl.html">“Perl死了。Perl万岁。”&lt;/a>&lt;/p>
+&lt;h2 id="其他观点">其他观点&lt;/h2>
+&lt;p>还有许多其他语言可以用于机器学习，例如，&lt;a href="https://www.ruby-lang.org">Ruby&lt;/a> (&lt;a href="http://www.amazon.com/Thoughtful-Machine-Learning-Test-Driven-Approach/dp/1449374069/ref=sr_1_1?ie=UTF8&amp;amp;qid=1440407371&amp;amp;sr=8-1&amp;amp;keywords=machine+learning+ruby">Thoughtful Machine Learning: A Test-Driven Approach&lt;/a>), &lt;a href="https://www.java.com/en/">Java&lt;/a> (&lt;a href="http://java-ml.sourceforge.net">Java-ML&lt;/a>), &lt;a href="http://www.scala-lang.org">Scala&lt;/a>(&lt;a href="https://github.com/scalanlp/breeze">Breeze&lt;/a>), &lt;a href="http://www.lua.org">Lua&lt;/a>(&lt;a href="http://torch.ch">Torch&lt;/a>), 等等。然而，除了我多年前参与的一个Java类，或者&lt;a href="https://spark.apache.org/docs/0.9.0/python-programming-guide.html">PySpark&lt;/a>, 这一用于Spark的Python API，它是用Scala写的，我真的没有使用那些语言的丰富经验，因此不知道该说些什么好。&lt;/p>
+&lt;h2 id="python是一个正在死掉的语言吗">Python是一个正在死掉的语言吗？&lt;/h2>
+&lt;p>这是一个合法的问题，最近它在Quora出现了，如果你想听听关于这个的一些其他不错的观点，那么看看这个&lt;a href="http://www.quora.com/Is-it-true-that-Python-is-a-dying-language">问题支线&lt;/a>。不过，如果你想听听我的观点，我会说，不，它不是。为什么？好吧，Python是一门“相当”古老的语言 —— 它的第一个版本是在90年代初的某个时候 (我们可以从1991年开始算起)，它像每一个编程语言一样，不得不做出某些选择和妥协。每一个编程语言都有它自己的怪癖，而更现代的语言趋向于从过去的错误中学习，这是件好事 (顺便说一下，R是在Python之后不久发布的：1995)。 Python远不“完美”，而像其他每个语言一样，它有自己的缺点。作为一个核心Python用户，我必须提一下，GIL (Global Interpreter Lock，全局解释锁)是让我最苦恼的东西 —— 但是请注意，有一个多进程和多线程模块，因此它实际上并非是一种限制，而是某些上下文中的小小“不便”。&lt;/p>
+&lt;p>对于一个编程语言“多棒”并无可以量化的度量，它真正取决于你在找寻什么。你想要问的问题是：“我想要实现什么，哪一个是实现它的最好的工具” —— “如果你只有一把锤子，那么一切开始看起来都像一个钉子。”再次说到锤子和钉子，Python是非常灵活的，我每天大部分的研究都是通过Python，使用强大的scikit-learn机器学习库 —— 用于数据改写的pandas，用户可视化的matplotlib/seaborn，以及用以跟踪所有这些东西的IPython notebooks —— 来完成的。&lt;/p>
+&lt;h2 id="总结">总结&lt;/h2>
+&lt;p>好啦，这是对于一个看似很简单的问题的一个相当长的答案。相信我，我可以花几小时或几天继续写下去。但为嘛要把事情搞复杂呢？让我们总结一下：&lt;/p>
+&lt;p>&lt;img src="http://sebastianraschka.com/images/blog/2015/why-python/python.png" alt="">&lt;/p>
+&lt;p>(来源: &lt;a href="https://xkcd.com/353/">https://xkcd.com/353/&lt;/a>)&lt;/p>
+&lt;h2 id="反馈和观点">反馈和观点&lt;/h2>
+&lt;p>我想要跟你分享关于这篇文章的很多很好的意见。记住，“一句忠告”有所偏颇是自然的；你或许发现了额，我的偏见是非常喜欢Python —— 抱歉啦，但这就是我！我相信，听取其他人的想法也是非常有用的！特别是当你是“数据科学”、机器学习和编程领域的新手的时候。话虽如此，请继续，看看下面的那些带干货的评论！&lt;/p>
+&lt;h3 id="python">Python&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://news.ycombinator.com/item?id=10113413">hackernews&lt;/a>上的rm999:&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>为了把我的数据管道（从数据源一直到生产模型和前端/可视化）弄到一块，大概一年前，我从大多使用R切换到大多使用Python。这对我能够做的事或者我当生产力并无实际影响，除了我在使用任何语言的前几年中需要对其进行额外的谷歌。我选择Python的主要原因是单纯的实用：这是一个我团队之外的人会尊重和使用的语言。这使得我更容易以许多不同的方法进行协作：与其他团队共享工具，转移代码的所有权，在我需要的时候获得帮助，等等等等。在一些公司，数据科学有“设计一些东西，然后将其抛出墙外让其他人处理”这种美誉。根据我的经验，R只是加深了这种美誉。这太糟糕了，它真的能把它所做的事情做得很好。&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>&lt;a href="https://news.ycombinator.com/item?id=10113413">hackernews&lt;/a>上的DrNuke:&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>我喜欢文章中的黑客方法：工具仅仅是做一些有价值的事情的工具，而不是目标本身。如今，因为数据科学爆炸以及快速与非专业人员进行交互的需要，所以，Python生态是正确的时候的正确的工具。&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>&lt;a href="https://news.ycombinator.com/item?id=10113413">hackernews&lt;/a>上的zzleeper:&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>非常有意思的文章。我觉得很多数值Pythonistas都处在相同的境地：他们容忍大多数语言，但发现R的语法有点不自然，当试图超越纯矩阵的东西时Matlab有所不足，并都在观望Julia是否会崛起 (在我看来，似乎是会的)&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>&lt;a href="https://www.reddit.com/r/MachineLearning/comments/3ibx9j/python_machine_learning_and_language_wars_a/">reddit&lt;/a>上的JanneJM:&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>关键是有足够高品质的库。我知道的许多人，包括我，并不是真的对Python很感兴趣。我们使用Numpy, Scipy, Matplotlib, Pandas等等等等。Python只是来凑凑热闹。要是这些库出现在Ruby / Perl / Lua，那么它们就是我们今天会使用的语言。&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="perl">Perl&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://news.ycombinator.com/item?id=10113413">hackernews&lt;/a>上的leni536：&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>“然而，我认为Perl在生物信息学领域还是相当常见的！？”这是事实 —— 许多生物信息学每天的任务都或多或少有纯文本分析[1]，而Perl在解析文本和快速使用正则表达式方面有过人之处。“我”这一代的生物信息学家(20–30)使用Python进行数据清理和分析，有时是因为绘图更好，语言更容易上手，它在高校中较为普遍，或者其他原因 —— 比我这一代年长的人们通常使用P&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="r">R&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://news.ycombinator.com/item?id=10113413">hackernews&lt;/a>上的geomark：&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>我刚完成了Coursera数据科学之路，这让我从一个完全的R新手变得至少有点精通了。之前我用Python来进行相当多的web编程，起初，除了它统计编程的能力，我并不喜欢R。但最近，我发现了一些不错的R包，它们能让那些我通常会用Python做的事情用R来做变得愉悦。就像我最近发现的用于爬取网页的rvest包。用R进行数据可视化似乎优得多，除非我想念Python中的某些东西（极有可能）。并且提供一个漂亮的统计数据应用是很容易用shiny或者RStudio Presenter做到的。但R真的没法扩展到一个大型生产应用，不是吗？因此，我觉得我需要同时用Python 和R。新增：这是一个不错的列表。谢谢。另外，在文章中，他说Python语法感觉更自然，这也是我所觉得的。但后来我开始使用R中诸如magrittr和dplyr这种包，它们给你像管道一样不错的东西，因此那种感觉开始消退了。&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>&lt;a href="https://news.ycombinator.com/item?id=10113413">hackernews&lt;/a>上的Adam_O&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>从一个学生的角度来看，大多数不错的在线分析/数据分析/统计课程都使用R，从医在学习材料的时候，很难摆脱它。一旦你获取了基础概念，那么转到Python应该不难。虽然，我想大多数的人仍然更喜欢用ggplot2进行可视化。每当我使用R的时候，我觉得自己像是一个统计学家，我可以感觉到从这门语言从散发出来的“冷严谨”。但最后，我觉得同时使用这两门语言是有利的。&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="matlab-octave">MATLAB/Octave&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://news.ycombinator.com/item?id=10113413">hackernews&lt;/a>上的sampo&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>Andrew Ng在Coursera的机器学习课上说，根据他的经验，用Octave/Matlab完成课程作业的学生比用Python完成的快。但是是的，课程的关键是实现和玩转小数值算法，而该博客是关于那些主要调用Python中已有的机器学习库的人。&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>&lt;a href="https://news.ycombinator.com/item?id=10113413">hackernews&lt;/a>上的misiti3780&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>Octave/Matlab是“不错”，但是尝试将其集成到一个生产web应用上还需要点好运气。既然你无法真正做到这点 —— 那么避免使用它们，除非你对实现相同的算法两次并无意见。Matlab license还要花钱买，而工具箱还需要花额外的钱。R是有用的，因为长时间以来它一直有很多资源，并且统计信息社区大部分都在使用它。它还有许多尚未移植到其他语言的有用的库 (ggmap!!!)。但你仍然还是要面对相同的问题，也就是说你没法将R集成到生产WEB应用上。我非常确定，Hadoop之流不支持R, Octave, 或者Matlab。&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>&lt;a href="https://news.ycombinator.com/item?id=10113413">hackernews&lt;/a>上的thanatropism&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>这里少了一件事：Matlab的语法其实是非常接近现代Fortran的。我至少通过添加类型/常规的冗余/修改do-loops语法/等等重写Matlab代码，从而写了两次Fortran代码(用于蒙特卡罗模拟；不同的上下文)。&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="julia">Julia&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://news.ycombinator.com/item?id=10113413">hackernews&lt;/a>上的Lofkin:&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>就个人而言，我尝试转到Julia，但速度缓慢的高阶函数，核心数据基础设施的高流失率，以及没有Pymc 3，这些都让我在pydata待了更长一点。我已经拴在numba上了。&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>&lt;a href="https://news.ycombinator.com/item?id=10113413">hackernews&lt;/a>上的Buttons 840:&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>我专业使用Python 8年了，这是我最喜欢的语言。我有点常使用numpy和scikit-learn。这么说，最近，我真的很享受学习Julia的过程。它简单易学，并且确实表现良好（读：很快）。事实上，我认为学习Julia将会和学习一些诸如numba一样有用，并且提供相似的（有人说会略胜一筹）性能。&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>&lt;a href="https://news.ycombinator.com/item?id=10113413">hackernews&lt;/a>上的idunning:&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>作为那种在日常工作（及编外项目）中几乎完全使用Julia的人中的一员，我认为作者对Julia的大部分想法都是正确的。我认为这个语言很棒，使用它让我的生活更美好。在我看来有一些包实际上比它们在其他语言中的等价物更好。另一方面，我对那些不完美的事物拥有更高的容忍度，我能自己理出头绪（幸运的是有时间这样做），并且如果不存在的话（在每一点上），我愿意为它编码。当然，对大多数的人来说，并不是这样的，但没关系。作者不愿意冒着Julia将会不“存在”的风险，这很公平。它肯定尚未完成，但它正在完成的路上。虽然，我有信心，它会存活下来（并且繁荣发展），并且继续增长不充实的社区。我有一种感觉，在一两年左右，最终，作者将找到他到Julia王国之路。&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>&lt;a href="https://www.reddit.com/r/Python/comments/3i8crj/python_machine_learning_and_language_wars_a/">reddit&lt;/a>上的niksko:&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>我同意Julia主题。它潜力巨大，并且它基本上是专门为这些类型的应用准备的，但现在还没有社区和支持。我花了一个学期进行计算进化动力学领域的一个小的研究项目，而最繁琐最困难的部分是让Julia绘制我所想要的图。另外，那个时候，它还没有支持文档字符串 :/。它速度快，炫，但不够成熟。&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>&lt;a href="https://www.reddit.com/r/MachineLearning/comments/3ibx9j/python_machine_learning_and_language_wars_a/">reddit&lt;/a>上的KG7ULQ:&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>在我学习Coursera上的Ng ML课程后，我看了看，似乎要做的事情就是使用Python……但必须学习几个大库，包括你提到的那些。然后我看到了Julia，觉得我还不如学习它，因为它已经内置了所有的线性代数和SIMD相关的东西，并且性能更好。它的确看起来像是ML的“最佳”语言。&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="其他语言-我忘记提的那些">其他语言 (我忘记提的那些)&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://news.ycombinator.com/item?id=10113413">hackernews&lt;/a>上的leni536:&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>C++并没有做错什么。对于线性代数，我使用armadillo库，它是LAPACK和BLAS一个非常棒的封装 (并且也快！)。出于某些原因，科学家有点怕C++。由于某些原因，你“不得不”在一个“更容易的”语言中进行原型。当然，你你能把C++当成计算器而不是解释语言，但我看到人们卡在原型语言的计算上，最终并没有把它带到一个更快的平台上。要点是：C++对于科学计算并不难。&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>&lt;a href="https://www.reddit.com/r/Python/comments/3i8crj/python_machine_learning_and_language_wars_a/">reddit&lt;/a>上的leni536:&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>对我来说，如果有什么会替换掉Python，那么Scala应该是最可能的候选者。我认为，函数式语言很好的适用于数学工作，并且它在JVM上，因此原型可以变成生产代码，而不需太多开销就可以“到处”运行。Spark是Scala的杀手级应用。现在，我可以从原型到在任意大的数据集之上运行，并且之间不会有太多的障碍。&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>&lt;a href="https://www.reddit.com/r/Python/comments/3i8crj/python_machine_learning_and_language_wars_a/">reddit&lt;/a>上的rpcope1:&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>[Scala]在编译的时候可能是慢，但它比CPython更安全，并且快得多（除了使用非字节码的代码和调用C/Fortran库之外），并且还有一些我现在在Python中及其想念的概念，例如，Option[T]，隐式修改器，不废柴的map/reduce/filter，不废柴的lambda，等等。&lt;/p>
+&lt;/blockquote></description></item><item><title>Docs: 监控之我见</title><link>https://xiaoping378.github.io/docs/3-devops/%E7%9B%91%E6%8E%A7%E4%B9%8B%E6%88%91%E8%A7%81/</link><pubDate>Wed, 04 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/3-devops/%E7%9B%91%E6%8E%A7%E4%B9%8B%E6%88%91%E8%A7%81/</guid><description>
+&lt;!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+&lt;ul>
+&lt;li>&lt;a href="#%E6%A6%82%E8%BF%B0">概述&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E7%9B%91%E6%8E%A7%E7%9B%AE%E6%A0%87">监控目标&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E7%9B%91%E6%8E%A7%E6%96%B9%E6%B3%95">监控方法&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E7%9B%91%E6%8E%A7%E6%A0%B8%E5%BF%83">监控核心&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E7%9B%91%E6%8E%A7%E6%B5%81%E7%A8%8B">监控流程&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E7%9B%91%E6%8E%A7%E6%8C%87%E6%A0%87">监控指标&lt;/a>
+&lt;ul>
+&lt;li>&lt;a href="#%E7%A1%AC%E4%BB%B6%E7%9B%91%E6%8E%A7">硬件监控&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E7%B3%BB%E7%BB%9F%E7%9B%91%E6%8E%A7">系统监控&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E5%BA%94%E7%94%A8%E7%9B%91%E6%8E%A7">应用监控&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E7%BD%91%E7%BB%9C%E7%9B%91%E6%8E%A7">网络监控&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90">流量分析&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E6%97%A5%E5%BF%97%E7%9B%91%E6%8E%A7">日志监控&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E5%AE%89%E5%85%A8%E7%9B%91%E6%8E%A7">安全监控&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#api%E7%9B%91%E6%8E%A7">API监控&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7">性能监控&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E4%B8%9A%E5%8A%A1%E7%9B%91%E6%8E%A7">业务监控&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;a href="#%E7%9B%91%E6%8E%A7%E6%8A%A5%E8%AD%A6">监控报警&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E6%8A%A5%E8%AD%A6%E5%A4%84%E7%90%86">报警处理&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E6%80%BB%E7%BB%93">总结&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;!-- /TOC -->
+&lt;h2 id="概述">概述&lt;/h2>
+&lt;p>监控是整个运维乃至整个产品生命周期中非常重要的一环，可以事前及时预警发现故障，事后提供详实的数据用于追查定位问题。&lt;/p>
+&lt;p>目前业界存在各种开源监控产品，如Zabbix，ELK体系，Prometheus等等，各有自身的适用场景，所以选择基于一款开源的的监控系统会是事半功倍的事情。&lt;/p>
+&lt;h2 id="监控目标">监控目标&lt;/h2>
+&lt;p>站在公司各业务角度考虑，整理如下四点目标：&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.github.io/%E7%9B%91%E6%8E%A7%E7%9B%AE%E6%A0%87.jpeg" alt="">&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>对系统不间断实时监控&lt;/strong>: 实际上是对系统不间断的实时监控(这就是监控)&lt;/li>
+&lt;li>&lt;strong>实时反馈系统当前状态&lt;/strong>: 我们监控某个硬件、某个系统，某个进程服务,都是需要能实时看到当前系统的状态，是正常、异常、或者故障&lt;/li>
+&lt;li>&lt;strong>保证服务可靠性安全性&lt;/strong>：我们监控的目的就是要保证系统、服务、业务正常运行&lt;/li>
+&lt;li>&lt;strong>保证业务持续稳定运行&lt;/strong>：如果我们的监控做得很完善，即使出现故障，能第一时间接收到故障报警，在第一时间处理解决，从而保证业务持续性的稳定运行；&lt;/li>
+&lt;/ul>
+&lt;h2 id="监控方法">监控方法&lt;/h2>
+&lt;p>既然我们了解到了监控的重要性、以及监控的目的，那么下面我们需要了解下监控有哪些方法。&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.github.io/%E7%9B%91%E6%8E%A7%E6%96%B9%E6%B3%95.jpeg" alt="">&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>了解监控对象&lt;/strong>：我们要监控的对象你是否了解呢？比如 CPU 到底是如何工作的？&lt;/li>
+&lt;li>&lt;strong>性能基准指标&lt;/strong>：我们要监控这个东西的什么属性？比如 CPU 的使用率、负载、用户态、内核态、上下文切换。&lt;/li>
+&lt;li>&lt;strong>报警阈值定义&lt;/strong>：怎么样才算是故障，要报警呢？比如 CPU 的负载到底多少算高，用户态、内核态分别跑多少算高？&lt;/li>
+&lt;li>&lt;strong>故障处理流程&lt;/strong>：收到了故障报警，我们怎么处理呢？有什么更高效的处理流程吗？&lt;/li>
+&lt;/ul>
+&lt;h2 id="监控核心">监控核心&lt;/h2>
+&lt;p>我们了解了监控的方法、监控对象、性能指标、报警阈值定义、以及故障处理流程几步骤，当然我们更需要知道监控的核心是什么？&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.github.io/%E7%9B%91%E6%8E%A7%E6%A0%B8%E5%BF%83.png" alt="">&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>发现问题&lt;/strong>：当系统发生故障报警，我们会收到故障报警的信息 ；&lt;/li>
+&lt;li>&lt;strong>定位问题&lt;/strong>：故障邮件一般都会写某某主机故障、具体故障的内容，我们需要对报警内容进行分析，比如一台服务器连不上：我们就需要考虑是网络问题、还是负载太高导致长时间无法连接，又或者某开发触发了防火墙禁止的相关策略等等，我们就需要去分析故障具体原因；&lt;/li>
+&lt;li>&lt;strong>解决问题&lt;/strong>：当然我们了解到故障的原因后，就需要通过故障解决的优先级去解决该故障；&lt;/li>
+&lt;li>&lt;strong>总结问题&lt;/strong>：当我们解决完重大故障后，需要对故障原因以及防范进行总结归纳，避免以后重复出现；&lt;/li>
+&lt;/ul>
+&lt;h2 id="监控流程">监控流程&lt;/h2>
+&lt;p>基于 Zabbix 来构建整个监控体系生态圈&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.github.io/%E7%9B%91%E6%8E%A7%E6%B5%81%E7%A8%8B.png" alt="">&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>数据采集&lt;/strong>：Zabbix 通过 SNMP、Agent、ICMP、SSH、IPMI 等对系统进行数据采集；&lt;/li>
+&lt;li>&lt;strong>数据存储&lt;/strong>：Zabbix 存储在 MySQL 上，也可以存储在其他数据库服务；&lt;/li>
+&lt;li>&lt;strong>数据分析&lt;/strong>：当我们事后需要复盘分析故障时，Zabbix 能给我们提供图形以及时间等相关信息，方面我们确定故障所在；&lt;/li>
+&lt;li>&lt;strong>数据展示&lt;/strong>：web 界面展示、(移动 APP、java_php 开发一个 web 界面也可以) ；&lt;/li>
+&lt;li>&lt;strong>监控报警&lt;/strong>：电话报警、邮件报警、微信报警、短信报警、报警升级机制等（无论什么报警都可以）；&lt;/li>
+&lt;li>&lt;strong>报警处理&lt;/strong>：当接收到报警，我们需要根据故障的级别进行处理，比如:重要紧急、重要不紧急等。根据故障的级别，配合相关的人员进行快速处理；&lt;/li>
+&lt;/ul>
+&lt;h2 id="监控指标">监控指标&lt;/h2>
+&lt;p>具体要监控些什么东西？那么我在这里进行了分类整理:&lt;/p>
+&lt;h3 id="硬件监控">硬件监控&lt;/h3>
+&lt;p>早期我们通过机房巡检的方式，查看硬件设备灯光闪烁情况判断是否故障，这样非常浪费人力，并且是重复性无技术含量的工作，大家懂得。&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.github.io/%E7%A1%AC%E4%BB%B6%E7%9B%91%E6%8E%A7.jpeg" alt="">&lt;/p>
+&lt;p>当然我们现在可以通过IPMI对硬件详细情况进行监控，并对 CPU、内存、磁盘、温度、风扇、电压等设置报警阈值(自行对监控报警内容编写合理的报警范围)&lt;/p>
+&lt;h3 id="系统监控">系统监控&lt;/h3>
+&lt;p>基本全是 Linux 服务器，那么我们肯定要监控系统资源的使用情况，系统监控是监控体系的基础。&lt;/p>
+&lt;p>**监控主要对象: **&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.github.io/%E7%9B%91%E6%8E%A7%E5%AF%B9%E8%B1%A1.jpeg" alt="">&lt;/p>
+&lt;p>CPU 有几个重要的概念：&lt;code>上下文切换、运行队列和使用率&lt;/code>。
+这也是我们 CPU 监控的几个重点指标。
+通常情况，每个处理器的运行队列不要高于3，CPU 利用率中“用户态/内核态”比例维持在70/30，空闲状态维持在50%，上下文切换
+要根据系统繁忙程度来综合考量。&lt;/p>
+&lt;p>针对 CPU 常用的工具有：htop、top、vmstat、mpstat、dstat、glances&lt;/p>
+&lt;p>Zabbix 提供系统监控模板：&lt;code>Zabbix Agent Interface&lt;/code>&lt;/p>
+&lt;p>cpu整体状态
+&lt;img src="https://xiaoping378.github.io/cpu%E6%95%B4%E4%BD%93%E7%8A%B6%E6%80%81.jpeg" alt="">&lt;/p>
+&lt;p>cpu上下文切换
+&lt;img src="https://xiaoping378.github.io/cpu%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2.jpeg" alt="">&lt;/p>
+&lt;p>硬盘读写吞吐
+&lt;img src="https://xiaoping378.github.io/%E7%A1%AC%E7%9B%98%E8%AF%BB%E5%86%99%E5%90%9E%E5%90%90.jpeg" alt="">&lt;/p>
+&lt;p>其它的系统监控还有运行的进程端口、进程数、登陆用户、Open File 等（详细查看 zabbix 自带 OS Linux 模板）&lt;/p>
+&lt;h3 id="应用监控">应用监控&lt;/h3>
+&lt;p>把硬件监控和系统监控研究明白后，我们进一步操作是需要登陆到服务器上查看服务器运行了哪些服务，都需要监控起来。
+应用服务监控也是监控体系中比较重要的内容，例如：LVS、Haproxy、Docker、Nginx、PHP、Memcached、Redis、MySQL、Rabbitmq 等等，相关的服务都需要使用zabbix监控起来。&lt;/p>
+&lt;p>PHP-FPM状态
+&lt;img src="https://xiaoping378.github.io/PHP-FPM_status.jpeg" alt="">&lt;/p>
+&lt;p>redis状态
+&lt;img src="https://xiaoping378.github.io/redis_status.jpeg" alt="">&lt;/p>
+&lt;p>Zabbix 提供应用服务监控：Zabbix Agent UserParameter
+Zabbix 提供的Java监控：Zabbix JMX Interface
+percona 提供 MySQL 数据库监控：percona-monitoring-plulgins&lt;/p>
+&lt;h3 id="网络监控">网络监控&lt;/h3>
+&lt;p>网络监控是我们构建监控平台时必须要考虑的，尤其是针对有多个机房的场景，各个机房之间的网络状态，机房和全国各地的网络状态都是我们需要重点关注的对象。&lt;/p>
+&lt;p>需要借助于网络监控工具 Smokeping监控机房链路。&lt;/p>
+&lt;p>Smokeping 是 rrdtool 的作者 Tobi Oetiker 的作品，是用 Perl 写的，主要是监视网络性能，www 服务器性能，dns 查询性能等，使用 rrdtool 绘图，而且支持分布式，直接从多个 agent 进行数据的汇总。&lt;/p>
+&lt;p>CDN监控。。。对接第三方接口
+&lt;img src="https://xiaoping378.github.io/cdn%E7%9B%91%E6%8E%A7.jpeg" alt="">&lt;/p>
+&lt;h3 id="流量分析">流量分析&lt;/h3>
+&lt;p>网站流量分析对于运维人员来说，更是一门必须掌握的知识了。比如对于300.cn站点来说：&lt;/p>
+&lt;p>通过对网站来源的统计和分析，可以了解我们在某个网站上的广告投入有没有收到预期的效果。
+可以区分不同地区的访问人数、甚至产品交易额等。
+百度统计、google 分析、站长工具等等，只需要在页面嵌入一个js即可，但是，数据始终是在对方手中，个性化定制不方便，推荐使用google的piwik开源网站访问统计系统。&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.github.io/piwik%E7%BD%91%E7%AB%99%E7%BB%9F%E8%AE%A1.png" alt="">&lt;/p>
+&lt;h3 id="日志监控">日志监控&lt;/h3>
+&lt;p>通常情况下，随着系统的运行，操作系统会产生系统日志，应用程序会产生应用程序的访问日志、错误日志、运行日志、网络日志，我们可以使用 ELK 来进行日志监控。&lt;/p>
+&lt;p>对于日志监控来说，最见的需求就是收集、存储、查询、展示。&lt;/p>
+&lt;p>开源社区正好有相对应的开源项目： logstash（收集） + elasticsearch（存储+搜索） + kibana（展示）
+我们将这三个组合起来的技术称之为 ELK Stack，所以说 ELK Stack 指的是 Elasticsearch、Logstash、Kibana 技术栈的结合。&lt;/p>
+&lt;p>如果收集了日志信息，那么如果部署更新有异常出现，可以立即在 kibana 上看到。&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.github.io/kibana-log.png" alt="">&lt;/p>
+&lt;p>当然也可以通过Zabbix过滤错误日志来进行告警。&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.github.io/zabbix-log.jpeg" alt="">&lt;/p>
+&lt;h3 id="安全监控">安全监控&lt;/h3>
+&lt;p>虽然Linux开源的安全产品不少，比如四层 iptables，七层WEB防护 Nginx+lua 实现 WAF，最后将相关的日志都收至 ELK Stack，通过图形化进行不同的攻击类型展示。但是始终是一件比较耗费时间的事情，并且个人认为效果并不是很好。&lt;/p>
+&lt;h3 id="api监控">API监控&lt;/h3>
+&lt;p>由于微服务架构的推行， API 变得越来越重要，很显然我们也需要这样的数据来分辨我们提供的 API 是否能够正常运作。&lt;/p>
+&lt;p>监控 API 接口 GET、POST、PUT、DELETE、HEAD、OPTIONS 的请求， 可用性、正确性、响应时间为三大重性能指标&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.github.io/api-monitor.jpeg" alt="">&lt;/p>
+&lt;h3 id="性能监控">性能监控&lt;/h3>
+&lt;p>全面监控网页性能，DNS 响应时间、HTTP 建立连接时间、页面性能指数、响应时间、可用率、元素大小等&lt;/p>
+&lt;p>Zabbix 提供 URL监控：Zabbix Web 监控&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.github.io/%E7%9B%91%E6%8E%A7download-speed.jpeg" alt="">&lt;/p>
+&lt;h3 id="业务监控">业务监控&lt;/h3>
+&lt;p>没有业务指标监控的监控平台，不是一个完善的监控平台，通常在我们的监控系统中，必须将我们重要的业务指标进行监控，并设置阈值进行告警通知。&lt;/p>
+&lt;p>例如一个产品集群：&lt;/p>
+&lt;ul>
+&lt;li>每天产生多少订单；&lt;/li>
+&lt;li>每天注册多少用户；&lt;/li>
+&lt;li>每天有多少活跃用户；&lt;/li>
+&lt;li>每天有多少推广活动；&lt;/li>
+&lt;li>推广活动引入多少用户；&lt;/li>
+&lt;li>推广活动引入多少流量；&lt;/li>
+&lt;li>推广活动引入多少利润；&lt;/li>
+&lt;/ul>
+&lt;p>等等 重要指标都可以加到 Zabbix 上，然后通过 screen 展示。&lt;/p>
+&lt;h2 id="监控报警">监控报警&lt;/h2>
+&lt;p>故障报警通知的方式有很多种，当然我们最常用的还是短信，邮件&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.github.io/%E7%9B%91%E6%8E%A7%E6%8A%A5%E8%AD%A6.png" alt="">&lt;/p>
+&lt;h2 id="报警处理">报警处理&lt;/h2>
+&lt;p>一般报警后我们故障如何处理，首先，我们可以通过告警升级机制先自动处理，比如 Nginx 服务 down 了，可以设置告警升级自动启动 Nginx。&lt;/p>
+&lt;p>但是如果一般业务出现了严重故障，我们通常根据故障的级别，故障的业务，来指派不同的运维人员进行处理。
+当然不同业务形态、不同架构、不同服务可能采用的方式都不同，这个没有一个固定的模式套用。&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.github.io/%E6%8A%A5%E8%AD%A6%E5%A4%84%E7%90%86.png" alt="">&lt;/p>
+&lt;h2 id="总结">总结&lt;/h2>
+&lt;ol>
+&lt;li>监控是一个长期持续的项目, 需要特定的1-2人跟踪改进;&lt;/li>
+&lt;li>监控使用方是业务和运维;&lt;/li>
+&lt;li>业务方应提供监控项获取方法;&lt;/li>
+&lt;li>如果有投诉，先找监控项目组，没有做到“事先”发现问题，监控项目组应该承担其责任;&lt;/li>
+&lt;li>对外提供api，供业务方使用&lt;/li>
+&lt;/ol></description></item><item><title>Docs: Github开源项目的正确贡献姿势</title><link>https://xiaoping378.github.io/docs/3-devops/github-dev/</link><pubDate>Wed, 04 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/3-devops/github-dev/</guid><description>
+&lt;p>常见的开源项目贡献指导里都是差不多的样子：&lt;/p>
+&lt;pre>&lt;code>* 要先fork
+* 然后change something
+* 再然后fetch，rebase
+* push origin， 最后发起pull request
+&lt;/code>&lt;/pre>
+&lt;p>具体到不同的项目，可能会要求更多的细节步骤,但大体如上。&lt;/p>
+&lt;p>这些都没错，但实际操作起来，和习惯不符。因为我一般是先clone一个项目，然后使用中发现有问题，会尝试去修改，fix OK的话，才会想着去贡献代码
+可事情到了这一步，再按照一开始的方式操作，会平白无辜耗费很多时间，还涉及到已经修改完代码如何同步过去的问题。
+以下是我个人总结的一套方法，屡试不爽乎。&lt;/p>
+&lt;p>这里我以k8s项目的贡献经历来举例，以备不时之需。git这个东西，不常用，会忘记的，即使你已经理解原理了。。。&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>首先clone K8s的项目代码。&lt;/p>
+&lt;pre tabindex="0">&lt;code>git clone https://github.com/kubernetes/kubernetes.git
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>
+&lt;p>然后自行编译 &lt;strong>make&lt;/strong>, 使用中发现一些问题&lt;/p>
+&lt;p>就会去github的issue里找找看。。。竟然没人提这个问题，问问同事或同行，人家表示没碰到过你的问题，
+好吧，自己尝试去修改... 不断编译 ... 测试... 最终OK了，我要贡献代码！！！
+完啦，没有按照最佳习惯来，改动前忘记新建分支了。。。（这个习惯很重要，可以省掉很多麻烦）
+只能如此操作了，可以来个大挪移到新建分支上&lt;/p>
+&lt;pre tabindex="0">&lt;code>git stash
+git checkout -b fix_something
+git stash apply
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>
+&lt;p>此时去github上fork下原项目，拿到fork后的项目地址，再来个偷天换日。&lt;/p>
+&lt;pre tabindex="0">&lt;code>git remote rename origin upstream
+git remote add origin git@github.com:xiaoping378/kubernetes.git
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>
+&lt;p>再然后就可以按一开始介绍的，fetch, rebase, push origin, 发起PR了。&lt;/p>
+&lt;pre tabindex="0">&lt;code>git fetch upstream
+git rebase upstream/master
+# 有冲突就git mergetool
+git push origin fix_something
+# 然后去github页面发起pull request即可。
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>
+&lt;p>注意事项
+值的注意的是，以后在master分支上&lt;strong>git pull&lt;/strong>，就是从upstream/master那里拉取的，和一般情况不一样的地方。
+这样会少了烦人的merge msg（-ff可以解决）， 还可以用简单的pull来同步上游代码。
+更可以意淫自己是原项目的核心开发人员了。。。
+以后本地同步fork的项目到上游的最新状态，这样操作：&lt;/p>
+&lt;pre tabindex="0">&lt;code>git checkout master
+git pull
+git push origin master
+&lt;/code>&lt;/pre>&lt;p>其实github上那个fork的项目，只是用来提PR的，这样可以在原项目的分支上任意玩耍了。当然你也可以用来备份一些比较大的feature&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>最后记录下个人的git global配置&lt;/p>
+&lt;pre tabindex="0">&lt;code># cat ~/.gitconfig
+[user]
+email = xiaoping378@163.com
+name = xiaoping378
+[merge]
+tool = meld
+[push]
+default = simple
+[core]
+quotepath = false
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: Golang开发-glog日志库</title><link>https://xiaoping378.github.io/docs/3-devops/golang%E5%BC%80%E5%8F%91-%E6%97%A5%E5%BF%97%E7%AF%87/</link><pubDate>Wed, 04 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/3-devops/golang%E5%BC%80%E5%8F%91-%E6%97%A5%E5%BF%97%E7%AF%87/</guid><description>
+&lt;p>基于Golang 1.7.5版本&lt;/p>
+&lt;p>软件项目里的日志输出是很重要的环节，可以用于日后BI分析，或者线上调试（万能调试大法printf）等等。&lt;/p>
+&lt;blockquote>
+&lt;p>对于当年刚入软件行业时，自己的printf(&amp;quot;11111\n&amp;quot;)的做法，记忆犹新呀，调试完再删掉自己胡乱加的打印语句，偶尔还有漏删的情况，就commit，push上去了。&lt;/p>
+&lt;/blockquote>
+&lt;p>golang语言里有个&lt;code>golang/glog&lt;/code>包，是类似google内部&lt;a href="https://github.com/google/glog">glog&lt;/a>的开源实现，其可以做到无侵入式调试程序，主要是通过启动时命令行传参来控制打印级别。&lt;/p>
+&lt;p>有以下特性，&lt;/p>
+&lt;ul>
+&lt;li>有四个级别的打印 Info, Warning, Error, Fatal，级别越来越高，分别都支持格式化输出Infof, Warningf, Errorf, Fatalf&lt;/li>
+&lt;li>支持 -v传参，指定打印级别&lt;/li>
+&lt;li>支持 -vmodule=file=2， 指定特殊文件开启打印，避免日志输出过多。&lt;/li>
+&lt;li>支持 -log_dir=&amp;quot;&amp;quot;, 指定日志输出目录， 默认会按级别输出/tmp目录下， 高级别的会记录到低级别里日志文件里&lt;/li>
+&lt;/ul>
+&lt;p>下面举个简单的例子&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-go" data-lang="go">&lt;span style="color:#080;font-style:italic">//file name: glog.go
+&lt;/span>&lt;span style="color:#080;font-style:italic">&lt;/span>&lt;span style="color:#a2f;font-weight:bold">package&lt;/span> main
+&lt;span style="color:#a2f;font-weight:bold">import&lt;/span> (
+&lt;span style="color:#b44">&amp;#34;flag&amp;#34;&lt;/span>
+&lt;span style="color:#b44">&amp;#34;github.com/golang/glog&amp;#34;&lt;/span>
+)
+&lt;span style="color:#a2f;font-weight:bold">func&lt;/span> &lt;span style="color:#00a000">main&lt;/span>() {
+flag.&lt;span style="color:#00a000">Parse&lt;/span>()
+&lt;span style="color:#080;font-style:italic">//flag.Set(&amp;#34;logtostderr&amp;#34;, &amp;#34;true&amp;#34;)
+&lt;/span>&lt;span style="color:#080;font-style:italic">&lt;/span> &lt;span style="color:#a2f;font-weight:bold">defer&lt;/span> glog.&lt;span style="color:#00a000">Flush&lt;/span>()
+glog.&lt;span style="color:#00a000">Info&lt;/span>(&lt;span style="color:#b44">&amp;#34;这里是Info级别的日志&amp;#34;&lt;/span>)
+glog.&lt;span style="color:#00a000">Warning&lt;/span>(&lt;span style="color:#b44">&amp;#34;这里是Warning级别的日志&amp;#34;&lt;/span>)
+glog.&lt;span style="color:#00a000">Errorf&lt;/span>(&lt;span style="color:#b44">&amp;#34;这里是Error级别的日志: %s&amp;#34;&lt;/span>, &lt;span style="color:#b44">&amp;#34;error&amp;#34;&lt;/span>)
+glog.&lt;span style="color:#00a000">V&lt;/span>(&lt;span style="color:#666">3&lt;/span>).&lt;span style="color:#00a000">Infoln&lt;/span>(&lt;span style="color:#b44">&amp;#34;级别3的日志&amp;#34;&lt;/span>)
 }
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
-&lt;/code>&lt;/pre>&lt;p>Inline code inside table cells should still be distinguishable.&lt;/p>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Language&lt;/th>
-&lt;th>Code&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>Javascript&lt;/td>
-&lt;td>&lt;code>var foo = &amp;quot;bar&amp;quot;;&lt;/code>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Ruby&lt;/td>
-&lt;td>&lt;code>foo = &amp;quot;bar&amp;quot;{&lt;/code>&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;hr>
-&lt;p>Small images should be shown at their actual size.&lt;/p>
-&lt;p>&lt;img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Picea_abies_shoot_with_buds%2C_Sogndal%2C_Norway.jpg/240px-Picea_abies_shoot_with_buds%2C_Sogndal%2C_Norway.jpg" alt="">&lt;/p>
-&lt;p>Large images should always scale down and fit in the content container.&lt;/p>
-&lt;p>&lt;img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Picea_abies_shoot_with_buds%2C_Sogndal%2C_Norway.jpg/1024px-Picea_abies_shoot_with_buds%2C_Sogndal%2C_Norway.jpg" alt="">&lt;/p>
-&lt;p>&lt;em>The photo above of the Spruce Picea abies shoot with foliage buds: Bjørn Erik Pedersen, CC-BY-SA.&lt;/em>&lt;/p>
-&lt;h2 id="components">Components&lt;/h2>
-&lt;h3 id="alerts">Alerts&lt;/h3>
-&lt;p>
-&lt;div class="alert alert-primary" role="alert">
-This is an alert.
-&lt;/div>
-&lt;div class="alert alert-primary" role="alert">
-&lt;h4 class="alert-heading">Note&lt;/h4>
-This is an alert with a title.
-&lt;/div>
-&lt;div class="alert alert-primary" role="alert">
-&lt;h4 class="alert-heading">Note&lt;/h4>
-This is an alert with a title and &lt;strong>Markdown&lt;/strong>.
-&lt;/div>
-&lt;div class="alert alert-success" role="alert">
-This is a successful alert.
-&lt;/div>
-&lt;div class="alert alert-warning" role="alert">
-This is a warning.
-&lt;/div>
-&lt;div class="alert alert-warning" role="alert">
-&lt;h4 class="alert-heading">Warning&lt;/h4>
-This is a warning with a title.
-&lt;/div>
-&lt;/p>
-&lt;h2 id="another-heading">Another Heading&lt;/h2>
-&lt;p>Add some sections here to see how the ToC looks like. Bacon ipsum dolor sit amet t-bone doner shank drumstick, pork belly porchetta chuck sausage brisket ham hock rump pig. Chuck kielbasa leberkas, pork bresaola ham hock filet mignon cow shoulder short ribs biltong.&lt;/p>
-&lt;h3 id="this-document">This Document&lt;/h3>
-&lt;p>Inguina genus: Anaphen post: lingua violente voce suae meus aetate diversi. Orbis unam nec flammaeque status deam Silenum erat et a ferrea. Excitus rigidum ait: vestro et Herculis convicia: nitidae deseruit coniuge Proteaque adiciam &lt;em>eripitur&lt;/em>? Sitim noceat signa &lt;em>probat quidem&lt;/em>. Sua longis &lt;em>fugatis&lt;/em> quidem genae.&lt;/p>
-&lt;h3 id="pixel-count">Pixel Count&lt;/h3>
-&lt;p>Tilde photo booth wayfarers cliche lomo intelligentsia man braid kombucha vaporware farm-to-table mixtape portland. PBR&amp;amp;B pickled cornhole ugh try-hard ethical subway tile. Fixie paleo intelligentsia pabst. Ennui waistcoat vinyl gochujang. Poutine salvia authentic affogato, chambray lumbersexual shabby chic.&lt;/p>
-&lt;h3 id="contact-info">Contact Info&lt;/h3>
-&lt;p>Plaid hell of cred microdosing, succulents tilde pour-over. Offal shabby chic 3 wolf moon blue bottle raw denim normcore poutine pork belly.&lt;/p>
-&lt;h3 id="external-links">External Links&lt;/h3>
-&lt;p>Stumptown PBR&amp;amp;B keytar plaid street art, forage XOXO pitchfork selvage affogato green juice listicle pickled everyday carry hashtag. Organic sustainable letterpress sartorial scenester intelligentsia swag bushwick. Put a bird on it stumptown neutra locavore. IPhone typewriter messenger bag narwhal. Ennui cold-pressed seitan flannel keytar, single-origin coffee adaptogen occupy yuccie williamsburg chillwave shoreditch forage waistcoat.&lt;/p>
-&lt;pre tabindex="0">&lt;code>This is the final element on the page and there should be no margin below this.
-&lt;/code>&lt;/pre></description></item><item><title>Docs: Another Tutorial</title><link>https://xiaoping378.github.io/blog/docs/3-devops/tutorial2/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/blog/docs/3-devops/tutorial2/</guid><description>
-&lt;div class="pageinfo pageinfo-primary">
-&lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
-&lt;/div>
-&lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://gohugo.io">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
-&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p>
-&lt;p>90's four loko seitan photo booth gochujang freegan tumeric listicle fam ugh humblebrag. Bespoke leggings gastropub, biodiesel brunch pug fashion axe meh swag art party neutra deep v chia. Enamel pin fanny pack knausgaard tofu, artisan cronut hammock meditation occupy master cleanse chartreuse lumbersexual. Kombucha kogi viral truffaut synth distillery single-origin coffee ugh slow-carb marfa selfies. Pitchfork schlitz semiotics fanny pack, ugh artisan vegan vaporware hexagon. Polaroid fixie post-ironic venmo wolf ramps &lt;strong>kale chips&lt;/strong>.&lt;/p>
-&lt;blockquote>
-&lt;p>There should be no margin above this first sentence.&lt;/p>
-&lt;p>Blockquotes should be a lighter gray with a border along the left side in the secondary color.&lt;/p>
-&lt;p>There should be no margin below this final sentence.&lt;/p>
-&lt;/blockquote>
-&lt;h2 id="first-header-2">First Header 2&lt;/h2>
-&lt;p>This is a normal paragraph following a header. Knausgaard kale chips snackwave microdosing cronut copper mug swag synth bitters letterpress glossier &lt;strong>craft beer&lt;/strong>. Mumblecore bushwick authentic gochujang vegan chambray meditation jean shorts irony. Viral farm-to-table kale chips, pork belly palo santo distillery activated charcoal aesthetic jianbing air plant woke lomo VHS organic. Tattooed locavore succulents heirloom, small batch sriracha echo park DIY af. Shaman you probably haven't heard of them copper mug, crucifix green juice vape &lt;em>single-origin coffee&lt;/em> brunch actually. Mustache etsy vexillologist raclette authentic fam. Tousled beard humblebrag asymmetrical. I love turkey, I love my job, I love my friends, I love Chardonnay!&lt;/p>
-&lt;p>Deae legum paulatimque terra, non vos mutata tacet: dic. Vocant docuique me plumas fila quin afuerunt copia haec o neque.&lt;/p>
-&lt;p>On big screens, paragraphs and headings should not take up the full container width, but we want tables, code blocks and similar to take the full width.&lt;/p>
-&lt;p>Scenester tumeric pickled, authentic crucifix post-ironic fam freegan VHS pork belly 8-bit yuccie PBR&amp;amp;B. &lt;strong>I love this life we live in&lt;/strong>.&lt;/p>
-&lt;h2 id="second-header-2">Second Header 2&lt;/h2>
-&lt;blockquote>
-&lt;p>This is a blockquote following a header. Bacon ipsum dolor sit amet t-bone doner shank drumstick, pork belly porchetta chuck sausage brisket ham hock rump pig. Chuck kielbasa leberkas, pork bresaola ham hock filet mignon cow shoulder short ribs biltong.&lt;/p>
-&lt;/blockquote>
-&lt;h3 id="header-3">Header 3&lt;/h3>
-&lt;pre tabindex="0">&lt;code>This is a code block following a header.
-&lt;/code>&lt;/pre>&lt;p>Next level leggings before they sold out, PBR&amp;amp;B church-key shaman echo park. Kale chips occupy godard whatever pop-up freegan pork belly selfies. Gastropub Belinda subway tile woke post-ironic seitan. Shabby chic man bun semiotics vape, chia messenger bag plaid cardigan.&lt;/p>
-&lt;h4 id="header-4">Header 4&lt;/h4>
-&lt;ul>
-&lt;li>This is an unordered list following a header.&lt;/li>
-&lt;li>This is an unordered list following a header.&lt;/li>
-&lt;li>This is an unordered list following a header.&lt;/li>
-&lt;/ul>
-&lt;h5 id="header-5">Header 5&lt;/h5>
-&lt;ol>
-&lt;li>This is an ordered list following a header.&lt;/li>
-&lt;li>This is an ordered list following a header.&lt;/li>
-&lt;li>This is an ordered list following a header.&lt;/li>
-&lt;/ol>
-&lt;h6 id="header-6">Header 6&lt;/h6>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>What&lt;/th>
-&lt;th>Follows&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>A table&lt;/td>
-&lt;td>A header&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>A table&lt;/td>
-&lt;td>A header&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>A table&lt;/td>
-&lt;td>A header&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;hr>
-&lt;p>There's a horizontal rule above and below this.&lt;/p>
-&lt;hr>
-&lt;p>Here is an unordered list:&lt;/p>
-&lt;ul>
-&lt;li>Liverpool F.C.&lt;/li>
-&lt;li>Chelsea F.C.&lt;/li>
-&lt;li>Manchester United F.C.&lt;/li>
-&lt;/ul>
-&lt;p>And an ordered list:&lt;/p>
-&lt;ol>
-&lt;li>Michael Brecker&lt;/li>
-&lt;li>Seamus Blake&lt;/li>
-&lt;li>Branford Marsalis&lt;/li>
-&lt;/ol>
-&lt;p>And an unordered task list:&lt;/p>
-&lt;ul>
-&lt;li>&lt;input checked="" disabled="" type="checkbox"> Create a Hugo theme&lt;/li>
-&lt;li>&lt;input checked="" disabled="" type="checkbox"> Add task lists to it&lt;/li>
-&lt;li>&lt;input disabled="" type="checkbox"> Take a vacation&lt;/li>
-&lt;/ul>
-&lt;p>And a &amp;quot;mixed&amp;quot; task list:&lt;/p>
-&lt;ul>
-&lt;li>&lt;input disabled="" type="checkbox"> Pack bags&lt;/li>
-&lt;li>?&lt;/li>
-&lt;li>&lt;input disabled="" type="checkbox"> Travel!&lt;/li>
-&lt;/ul>
-&lt;p>And a nested list:&lt;/p>
-&lt;ul>
-&lt;li>Jackson 5
-&lt;ul>
-&lt;li>Michael&lt;/li>
-&lt;li>Tito&lt;/li>
-&lt;li>Jackie&lt;/li>
-&lt;li>Marlon&lt;/li>
-&lt;li>Jermaine&lt;/li>
-&lt;/ul>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>代码如上运行，你需要执行&lt;code>go get github.com/golang/glog&lt;/code>下载依赖包， 然后运行&lt;/p>
+&lt;pre tabindex="0">&lt;code>➜ go run glog.go -v 3
+E0408 09:35:38.703186 8663 glog.go:15] This is a Error log error
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>
+&lt;p>Error级别的会输出到标准输出，并记录到文件，&lt;/p>
 &lt;/li>
-&lt;li>TMNT
-&lt;ul>
-&lt;li>Leonardo&lt;/li>
-&lt;li>Michelangelo&lt;/li>
-&lt;li>Donatello&lt;/li>
-&lt;li>Raphael&lt;/li>
-&lt;/ul>
+&lt;li>
+&lt;p>日志默认输出到/tmp目录， 每次执行都会记录新的文件，日志文件如下样式命名， glog是文件名，air13是主机名，xxp是用户名&lt;/p>
+&lt;pre tabindex="0">&lt;code> ➜ ls /tmp/glog.* -l
+-rw-rw-r-- 1 xxp xxp 260 4月 8 10:11 /tmp/glog.air13.xxp.log.ERROR.20170408-101153.12771
+-rw-rw-r-- 1 xxp xxp 405 4月 8 10:11 /tmp/glog.air13.xxp.log.INFO.20170408-101153.12771
+-rw-rw-r-- 1 xxp xxp 334 4月 8 10:11 /tmp/glog.air13.xxp.log.WARNING.20170408-101153.12771
+lrwxrwxrwx 1 xxp xxp 46 4月 8 10:11 /tmp/glog.ERROR -&amp;gt; glog.air13.xxp.log.ERROR.20170408-101153.12771
+lrwxrwxrwx 1 xxp xxp 45 4月 8 10:11 /tmp/glog.INFO -&amp;gt; glog.air13.xxp.log.INFO.20170408-101153.12771
+lrwxrwxrwx 1 xxp xxp 48 4月 8 10:11 /tmp/glog.WARNING -&amp;gt; glog.air13.xxp.log.WARNING.20170408-101153.12771
+&lt;/code>&lt;/pre>&lt;p>``&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>-v 3&lt;/code> 指定运行时的记录的日志级别，因为3&amp;gt;=3, 这样&lt;code>V(3).Infoln&lt;/code>会输出， 如果是传入 &lt;code>-v 2&lt;/code>, 则不会&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code> go run glog.go -v 2 -logtostderr=true&lt;/code>， 则会关闭记录文件，输出到标准输出。
+当然可以在程序里加上 &lt;code>flag.Set(&amp;quot;logtostderr&amp;quot;, &amp;quot;true&amp;quot;)&lt;/code>来关闭记录文件。&lt;/p>
 &lt;/li>
 &lt;/ul>
-&lt;p>Definition lists can be used with Markdown syntax. Definition headers are bold.&lt;/p>
-&lt;dl>
-&lt;dt>Name&lt;/dt>
-&lt;dd>Godzilla&lt;/dd>
-&lt;dt>Born&lt;/dt>
-&lt;dd>1952&lt;/dd>
-&lt;dt>Birthplace&lt;/dt>
-&lt;dd>Japan&lt;/dd>
-&lt;dt>Color&lt;/dt>
-&lt;dd>Green&lt;/dd>
-&lt;/dl>
-&lt;hr>
-&lt;p>Tables should have bold headings and alternating shaded rows.&lt;/p>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Artist&lt;/th>
-&lt;th>Album&lt;/th>
-&lt;th>Year&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>Michael Jackson&lt;/td>
-&lt;td>Thriller&lt;/td>
-&lt;td>1982&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Prince&lt;/td>
-&lt;td>Purple Rain&lt;/td>
-&lt;td>1984&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Beastie Boys&lt;/td>
-&lt;td>License to Ill&lt;/td>
-&lt;td>1986&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;p>If a table is too wide, it should scroll horizontally.&lt;/p>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Artist&lt;/th>
-&lt;th>Album&lt;/th>
-&lt;th>Year&lt;/th>
-&lt;th>Label&lt;/th>
-&lt;th>Awards&lt;/th>
-&lt;th>Songs&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>Michael Jackson&lt;/td>
-&lt;td>Thriller&lt;/td>
-&lt;td>1982&lt;/td>
-&lt;td>Epic Records&lt;/td>
-&lt;td>Grammy Award for Album of the Year, American Music Award for Favorite Pop/Rock Album, American Music Award for Favorite Soul/R&amp;amp;B Album, Brit Award for Best Selling Album, Grammy Award for Best Engineered Album, Non-Classical&lt;/td>
-&lt;td>Wanna Be Startin' Somethin', Baby Be Mine, The Girl Is Mine, Thriller, Beat It, Billie Jean, Human Nature, P.Y.T. (Pretty Young Thing), The Lady in My Life&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Prince&lt;/td>
-&lt;td>Purple Rain&lt;/td>
-&lt;td>1984&lt;/td>
-&lt;td>Warner Brothers Records&lt;/td>
-&lt;td>Grammy Award for Best Score Soundtrack for Visual Media, American Music Award for Favorite Pop/Rock Album, American Music Award for Favorite Soul/R&amp;amp;B Album, Brit Award for Best Soundtrack/Cast Recording, Grammy Award for Best Rock Performance by a Duo or Group with Vocal&lt;/td>
-&lt;td>Let's Go Crazy, Take Me With U, The Beautiful Ones, Computer Blue, Darling Nikki, When Doves Cry, I Would Die 4 U, Baby I'm a Star, Purple Rain&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Beastie Boys&lt;/td>
-&lt;td>License to Ill&lt;/td>
-&lt;td>1986&lt;/td>
-&lt;td>Mercury Records&lt;/td>
-&lt;td>noawardsbutthistablecelliswide&lt;/td>
-&lt;td>Rhymin &amp;amp; Stealin, The New Style, She's Crafty, Posse in Effect, Slow Ride, Girls, (You Gotta) Fight for Your Right, No Sleep Till Brooklyn, Paul Revere, Hold It Now, Hit It, Brass Monkey, Slow and Low, Time to Get Ill&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;hr>
-&lt;p>Code snippets like &lt;code>var foo = &amp;quot;bar&amp;quot;;&lt;/code> can be shown inline.&lt;/p>
-&lt;p>Also, &lt;code>this should vertically align&lt;/code> &lt;del>&lt;code>with this&lt;/code>&lt;/del> &lt;del>and this&lt;/del>.&lt;/p>
-&lt;p>Code can also be shown in a block element.&lt;/p>
-&lt;pre tabindex="0">&lt;code>foo := &amp;quot;bar&amp;quot;;
-bar := &amp;quot;foo&amp;quot;;
-&lt;/code>&lt;/pre>&lt;p>Code can also use syntax highlighting.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-go" data-lang="go">&lt;span style="color:#a2f;font-weight:bold">func&lt;/span> &lt;span style="color:#00a000">main&lt;/span>() {
-input &lt;span style="color:#666">:=&lt;/span> &lt;span style="color:#b44">`var foo = &amp;#34;bar&amp;#34;;`&lt;/span>
-lexer &lt;span style="color:#666">:=&lt;/span> lexers.&lt;span style="color:#00a000">Get&lt;/span>(&lt;span style="color:#b44">&amp;#34;javascript&amp;#34;&lt;/span>)
-iterator, _ &lt;span style="color:#666">:=&lt;/span> lexer.&lt;span style="color:#00a000">Tokenise&lt;/span>(&lt;span style="color:#a2f;font-weight:bold">nil&lt;/span>, input)
-style &lt;span style="color:#666">:=&lt;/span> styles.&lt;span style="color:#00a000">Get&lt;/span>(&lt;span style="color:#b44">&amp;#34;github&amp;#34;&lt;/span>)
-formatter &lt;span style="color:#666">:=&lt;/span> html.&lt;span style="color:#00a000">New&lt;/span>(html.&lt;span style="color:#00a000">WithLineNumbers&lt;/span>())
-&lt;span style="color:#a2f;font-weight:bold">var&lt;/span> buff bytes.Buffer
-formatter.&lt;span style="color:#00a000">Format&lt;/span>(&lt;span style="color:#666">&amp;amp;&lt;/span>buff, style, iterator)
-fmt.&lt;span style="color:#00a000">Println&lt;/span>(buff.&lt;span style="color:#00a000">String&lt;/span>())
+&lt;p>总之，glog包对日志的控制非常实用和灵活，大型Golang项目必备包之一。&lt;/p></description></item><item><title>Docs: VSCode-开发已有的java项目</title><link>https://xiaoping378.github.io/docs/3-devops/java-in-vscode/</link><pubDate>Wed, 04 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/3-devops/java-in-vscode/</guid><description>
+&lt;p>个人经验记录：&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>install deps&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.github.io/vscode-java.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>clean workspace&lt;/p>
+&lt;p>代开设置 Ctrl+Shift+P, 输入 &lt;code>clean java workspace&lt;/code> and restart&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>support lombok&lt;/p>
+&lt;p>java代码出了名的冗长，lombok可以优雅解决此类问题，如果项目依赖了lombok， vsocde打开java项目就会显示各种&lt;code>cannot be resloved&lt;/code>错误,&lt;/p>
+&lt;p>下面是我个人的配置,其中&lt;code>java.jdt.ls.vmargs&lt;/code>的配置（看个人项目maven依赖和安装路径了），会消除错误，并可以支持跳转：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
+&lt;span style="color:#008000;font-weight:bold">&amp;#34;window.menuBarVisibility&amp;#34;&lt;/span>: &lt;span style="color:#b44">&amp;#34;toggle&amp;#34;&lt;/span>,
+&lt;span style="color:#008000;font-weight:bold">&amp;#34;window.zoomLevel&amp;#34;&lt;/span>: &lt;span style="color:#666">1&lt;/span>,
+&lt;span style="color:#008000;font-weight:bold">&amp;#34;explorer.confirmDelete&amp;#34;&lt;/span>: &lt;span style="color:#a2f;font-weight:bold">false&lt;/span>,
+&lt;span style="color:#008000;font-weight:bold">&amp;#34;workbench.colorTheme&amp;#34;&lt;/span>: &lt;span style="color:#b44">&amp;#34;Solarized Dark&amp;#34;&lt;/span>,
+&lt;span style="color:#008000;font-weight:bold">&amp;#34;files.associations&amp;#34;&lt;/span>: {
+&lt;span style="color:#008000;font-weight:bold">&amp;#34;default&amp;#34;&lt;/span>: &lt;span style="color:#b44">&amp;#34;toml&amp;#34;&lt;/span>
+},
+&lt;span style="color:#008000;font-weight:bold">&amp;#34;editor.fontLigatures&amp;#34;&lt;/span>: &lt;span style="color:#a2f;font-weight:bold">true&lt;/span>,
+&lt;span style="color:#008000;font-weight:bold">&amp;#34;java.configuration.checkProjectSettingsExclusions&amp;#34;&lt;/span>: &lt;span style="color:#a2f;font-weight:bold">false&lt;/span>,
+&lt;span style="color:#008000;font-weight:bold">&amp;#34;go.autocompleteUnimportedPackages&amp;#34;&lt;/span>: &lt;span style="color:#a2f;font-weight:bold">true&lt;/span>,
+&lt;span style="color:#008000;font-weight:bold">&amp;#34;java.jdt.ls.vmargs&amp;#34;&lt;/span>:&lt;span style="color:#b44">&amp;#34;-javaagent:/home/xxp/.m2/repository/./org/projectlombok/lombok/1.16.20/lombok-1.16.20.jar -Xbootclasspath/a:/home/xxp/.m2/repository/./org/projectlombok/lombok/1.16.20/lombok-1.16.20.jar&amp;#34;&lt;/span>
 }
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
-&lt;/code>&lt;/pre>&lt;p>Inline code inside table cells should still be distinguishable.&lt;/p>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Language&lt;/th>
-&lt;th>Code&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>Javascript&lt;/td>
-&lt;td>&lt;code>var foo = &amp;quot;bar&amp;quot;;&lt;/code>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Ruby&lt;/td>
-&lt;td>&lt;code>foo = &amp;quot;bar&amp;quot;{&lt;/code>&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;hr>
-&lt;p>Small images should be shown at their actual size.&lt;/p>
-&lt;p>&lt;img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Picea_abies_shoot_with_buds%2C_Sogndal%2C_Norway.jpg/240px-Picea_abies_shoot_with_buds%2C_Sogndal%2C_Norway.jpg" alt="">&lt;/p>
-&lt;p>Large images should always scale down and fit in the content container.&lt;/p>
-&lt;p>&lt;img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Picea_abies_shoot_with_buds%2C_Sogndal%2C_Norway.jpg/1024px-Picea_abies_shoot_with_buds%2C_Sogndal%2C_Norway.jpg" alt="">&lt;/p>
-&lt;p>&lt;em>The photo above of the Spruce Picea abies shoot with foliage buds: Bjørn Erik Pedersen, CC-BY-SA.&lt;/em>&lt;/p>
-&lt;h2 id="components">Components&lt;/h2>
-&lt;h3 id="alerts">Alerts&lt;/h3>
-&lt;p>
-&lt;div class="alert alert-primary" role="alert">
-This is an alert.
-&lt;/div>
-&lt;div class="alert alert-primary" role="alert">
-&lt;h4 class="alert-heading">Note&lt;/h4>
-This is an alert with a title.
-&lt;/div>
-&lt;div class="alert alert-primary" role="alert">
-&lt;h4 class="alert-heading">Note&lt;/h4>
-This is an alert with a title and &lt;strong>Markdown&lt;/strong>.
-&lt;/div>
-&lt;div class="alert alert-success" role="alert">
-This is a successful alert.
-&lt;/div>
-&lt;div class="alert alert-warning" role="alert">
-This is a warning.
-&lt;/div>
-&lt;div class="alert alert-warning" role="alert">
-&lt;h4 class="alert-heading">Warning&lt;/h4>
-This is a warning with a title.
-&lt;/div>
-&lt;/p>
-&lt;h2 id="another-heading">Another Heading&lt;/h2>
-&lt;p>Add some sections here to see how the ToC looks like. Bacon ipsum dolor sit amet t-bone doner shank drumstick, pork belly porchetta chuck sausage brisket ham hock rump pig. Chuck kielbasa leberkas, pork bresaola ham hock filet mignon cow shoulder short ribs biltong.&lt;/p>
-&lt;h3 id="this-document">This Document&lt;/h3>
-&lt;p>Inguina genus: Anaphen post: lingua violente voce suae meus aetate diversi. Orbis unam nec flammaeque status deam Silenum erat et a ferrea. Excitus rigidum ait: vestro et Herculis convicia: nitidae deseruit coniuge Proteaque adiciam &lt;em>eripitur&lt;/em>? Sitim noceat signa &lt;em>probat quidem&lt;/em>. Sua longis &lt;em>fugatis&lt;/em> quidem genae.&lt;/p>
-&lt;h3 id="pixel-count">Pixel Count&lt;/h3>
-&lt;p>Tilde photo booth wayfarers cliche lomo intelligentsia man braid kombucha vaporware farm-to-table mixtape portland. PBR&amp;amp;B pickled cornhole ugh try-hard ethical subway tile. Fixie paleo intelligentsia pabst. Ennui waistcoat vinyl gochujang. Poutine salvia authentic affogato, chambray lumbersexual shabby chic.&lt;/p>
-&lt;h3 id="contact-info">Contact Info&lt;/h3>
-&lt;p>Plaid hell of cred microdosing, succulents tilde pour-over. Offal shabby chic 3 wolf moon blue bottle raw denim normcore poutine pork belly.&lt;/p>
-&lt;h3 id="external-links">External Links&lt;/h3>
-&lt;p>Stumptown PBR&amp;amp;B keytar plaid street art, forage XOXO pitchfork selvage affogato green juice listicle pickled everyday carry hashtag. Organic sustainable letterpress sartorial scenester intelligentsia swag bushwick. Put a bird on it stumptown neutra locavore. IPhone typewriter messenger bag narwhal. Ennui cold-pressed seitan flannel keytar, single-origin coffee adaptogen occupy yuccie williamsburg chillwave shoreditch forage waistcoat.&lt;/p>
-&lt;pre tabindex="0">&lt;code>This is the final element on the page and there should be no margin below this.
-&lt;/code>&lt;/pre></description></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;p>参考链接&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/redhat-developer/vscode-java/wiki/Lombok-support">https://github.com/redhat-developer/vscode-java/wiki/Lombok-support&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://code.visualstudio.com/docs/languages/java">https://code.visualstudio.com/docs/languages/java&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/redhat-developer/vscode-java/wiki/Troubleshooting">https://github.com/redhat-developer/vscode-java/wiki/Troubleshooting&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: MongoDB之初见</title><link>https://xiaoping378.github.io/docs/3-devops/mogodb-0/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/3-devops/mogodb-0/</guid><description>
+&lt;ol>
+&lt;li>手动启动&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#080;font-style:italic"># 下载二进制&lt;/span>
+wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.4.9.tgz
+tar -zxvf mongodb-linux-x86_64-3.4.9.tgz
+ln -s &lt;span style="color:#b8860b">$PWD&lt;/span>/mongodb-linux-x86_64-3.4.9/bin/* /home/xxp/Software/bin
+&lt;span style="color:#080;font-style:italic"># 创建数据存储目录 &lt;/span>
+mkdir mongodb
+sudo chown -R &lt;span style="color:#b8860b">$USER&lt;/span> ./mongodb
+mongod -dbpath&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#b8860b">$PWD&lt;/span>/mongodb
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>默认监听27017， 根据情况选择关闭warning。&lt;/p>
+&lt;ol start="2">
+&lt;li>推荐调试方法&lt;/li>
+&lt;/ol>
+&lt;p>默认可以使用&lt;code>mongo&lt;/code>进入shell交互模式，
+亦可使用图形管理界面，推荐&lt;code>robo3T&lt;/code>, 目前1.1.1版本在ubuntu桌面上有crash问题，需要如下操作：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">curl -O https://download.robomongo.org/1.1.1/linux/robo3t-1.1.1-linux-x86_64-c93c6b0.tar.gz
+tar zxvf robo3t-1.1.1-linux-x86_64-c93c6b0.tar.gz
+mkdir ~/robo-backup
+mv robo3t-1.1.1-linux-x86_64-c93c6b0/lib/libstdc++* ~/robo-backup/
+robo3t-1.1.1-linux-x86_64-c93c6b0/bin/robo3t
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://xiaoping378.github.io/robo3t.png" alt="">&lt;/p>
+&lt;ol>
+&lt;li>基本使用&lt;/li>
+&lt;/ol>
+&lt;p>shell里敲mongo进入交互界面，&lt;/p>
+&lt;p>手续推荐查看&lt;a href="http://www.mongoing.com/docs/reference/sql-comparison.html">mongodb中文文档&lt;/a>&lt;/p></description></item><item><title>Docs: Openldap之拨云见日</title><link>https://xiaoping378.github.io/docs/3-devops/openldap%E4%B9%8B%E6%8B%A8%E4%BA%91%E5%8E%BB%E6%97%A5/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/3-devops/openldap%E4%B9%8B%E6%8B%A8%E4%BA%91%E5%8E%BB%E6%97%A5/</guid><description>
+&lt;p>很早就听说LDAP/AD之流的企业级概念，认为是做统一用户认证的，具体怎么使用对接，一直有点儿糊涂，今天决定搞明白这些，并深入实践下openldap。&lt;/p>
+&lt;p>未完...TODO&lt;/p></description></item></channel></rss>
