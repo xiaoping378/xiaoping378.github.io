@@ -184,12 +184,318 @@
 </div>
 <div class=td-content>
 <h1 id=pg-7da332af27a085cd90d962e4624eef75>1.1 - 站点搭建方法</h1>
-<div class=lead>介绍本站点搭建方法.</div>
+<div class=lead>介绍本站点搭建的方法.</div>
 <div class="pageinfo pageinfo-primary">
-<p>主要涉及到hugo和docsy主题的介绍。</p>
+<p>主要涉及到hugo和docsy主题的使用。</p>
 </div>
-<h2 id=待编写>待编写</h2>
-<p>...</p>
+<h2 id=hugo介绍>hugo介绍</h2>
+<p>hugo是spf13的开源作品，目前任职于google，对他最早的印象是使用他的vim-spf13配置，后来又接触到他的cobra、plfag、viper... 为golang的生态完善做了很大贡献，致敬!</p>
+<p>书归正传，hugo是基于golang开发的世界上最快的网站构建框架，本文介绍如何基于它构建技术类文档库，也可作为内部wiki或开源书籍使用。之所以没选择gitbook，发现CLI版本已于2018年停止维护了。</p>
+<h2 id=准备环境>准备环境</h2>
+<p>安装git和hugo</p>
+<ul>
+<li>
+<p>具体过程此处不表。注意是安装hugo_extended的版本。</p>
+</li>
+<li>
+<p>如果要编译成html，部署到webserver上，还需要安装nodejs 12+。</p>
+</li>
+</ul>
+<h2 id=主题选择>主题选择</h2>
+<p>选用Docsy主题，出自google的开源主题，很多流行项目使用此主题作为官方站点，有k8s、kubeflow、grpc、knative、Selenium等，详见此。主要功能包含：</p>
+<ul>
+<li>支持树形目录</li>
+<li>国际化</li>
+<li>搜索功能</li>
+<li>移动端自适应适配</li>
+<li>标签分类</li>
+<li>全站打印</li>
+<li>文档版本化</li>
+<li>用户反馈等</li>
+</ul>
+<p>官方提供了快速上手的脚手架，具体操作如下：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git clone https://github.com/google/docsy-example.git
+</code></pre></div><p>脚手架初始化</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#a2f>cd</span> docsy-example <span style=color:#666>&amp;&amp;</span> git submodule update --init --recursive
+</code></pre></div><p>本地启动，默认可通过<code>localhost:1313</code>访问，官方提供了在线的<a href=https://example.docsy.dev/>预览地址</a>。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>hugo server
+</code></pre></div><p>​</p>
+<h2 id=目录结构说明>目录结构说明</h2>
+<p>默认脚手架目录结构如下，只关注<code>config.toml</code>文件和<code>content</code>目录，就可以满足日常使用。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>➜  docsy-example git:<span style=color:#666>(</span>master<span style=color:#666>)</span>  tree -L <span style=color:#666>1</span>
+.
+├── assets <span style=color:#080;font-style:italic># 静态资源</span>
+├── config.toml <span style=color:#080;font-style:italic># 站点的配置文件：主题选择、名称、链接、页面分析、markdown解析引擎...</span>
+├── content <span style=color:#080;font-style:italic># 站点内容：顶层导航，左侧树形章节</span>
+├── CONTRIBUTING.md
+├── deploy.sh
+├── docker-compose.yaml
+├── Dockerfile
+├── layouts <span style=color:#080;font-style:italic># 可覆盖主题的默认布局，添加自定义页面布局</span>
+├── LICENSE
+├── netlify.toml
+├── package.json
+├── README.md
+├── resources
+└── themes <span style=color:#080;font-style:italic># Docsy主题的目录，hugo推荐的存放路径</span>
+</code></pre></div><h2 id=重点说明>重点说明</h2>
+<ul>
+<li>
+<p>修改主题的页面布局</p>
+<ul>
+<li>大部分内容可以通过修改根目录的config.toml的文件来实现</li>
+<li>不能通过上条实现的，也不建议直接修改themes目录下的内容，copy到在根目录同样的相对路径上再修改，会覆盖默认主题相关的实现。</li>
+</ul>
+</li>
+<li>
+<p>docsy主题默认提供了3种版面布局, 分别在content目录下，写markdown文件，不同目录按照各自类型风格渲染。</p>
+<ul>
+<li>docs技术文档类的布局</li>
+<li>blog博客类的布局</li>
+<li>community社区相关介绍的布局</li>
+</ul>
+</li>
+<li>
+<p>docs的目录章节可以任意分级，目录下的_index.md或者_index.html为该章、节的首页描述。</p>
+</li>
+<li>
+<p>根目录运行如下命令可编译最终html，可能会提示<code>POSTCSS</code>编译失败，需要根目录运行<code>npm install</code>安装依赖。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>rm -rf public/ <span style=color:#666>&amp;&amp;</span> <span style=color:#b8860b>HUGO_ENV</span><span style=color:#666>=</span><span style=color:#b44>&#34;production&#34;</span> hugo --gc <span style=color:#666>||</span> <span style=color:#a2f>exit</span> <span style=color:#666>1</span>
+</code></pre></div></li>
+<li>
+<p>站点内搜索功能依赖编译后的json文件，需要上一步才能使用。</p>
+</li>
+<li>
+<p>关于config.toml配置的解读（最新注释说明，可查看本站的<a href=https://github.com/xiaoping378/xiaoping378.github.io/blob/master/config.toml>原件</a>）。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-toml data-lang=toml><span style=color:#080;font-style:italic># 站点的访问地址，本地预览时(hugo server)可忽悠</span>
+baseURL = <span style=color:#b44>&#34;https://xiaoping378.github.io&#34;</span>
+
+<span style=color:#080;font-style:italic># 站点title,会被多语言里的设置覆盖</span>
+<span style=color:#080;font-style:italic># title = &#34;小平栈&#34;</span>
+
+<span style=color:#080;font-style:italic># 是否生成robots文件</span>
+enableRobotsTXT = <span style=color:#a2f;font-weight:700>true</span>
+
+<span style=color:#080;font-style:italic># 主题选择，支持组合，优先级从左到右.</span>
+theme = [<span style=color:#b44>&#34;docsy&#34;</span>]
+
+<span style=color:#080;font-style:italic># 页面上提供类似&#34;最后修改&#34;的信息</span>
+enableGitInfo = <span style=color:#a2f;font-weight:700>true</span>
+
+<span style=color:#080;font-style:italic># 国际化相关设置</span>
+<span style=color:#080;font-style:italic># 默认语言的的站点内容路径</span>
+contentDir = <span style=color:#b44>&#34;content&#34;</span>
+<span style=color:#080;font-style:italic># 默认语言</span>
+defaultContentLanguage = <span style=color:#b44>&#34;zh-cn&#34;</span>
+
+<span style=color:#080;font-style:italic># 国际化翻译中，如果有缺失是否用占位符显示</span>
+enableMissingTranslationPlaceholders = <span style=color:#a2f;font-weight:700>true</span>
+
+<span style=color:#080;font-style:italic># 注释后，可以开启标签分类功能</span>
+<span style=color:#080;font-style:italic># disableKinds = [&#34;taxonomy&#34;, &#34;taxonomyTerm&#34;]</span>
+
+[params.taxonomy]
+<span style=color:#080;font-style:italic># set taxonomyCloud = [] to hide taxonomy clouds</span>
+taxonomyCloud = [<span style=color:#b44>&#34;tags&#34;</span>] 
+<span style=color:#080;font-style:italic># If used, must have same lang as taxonomyCloud</span>
+taxonomyCloudTitle = [<span style=color:#b44>&#34;标签&#34;</span>] 
+<span style=color:#080;font-style:italic># set taxonomyPageHeader = [] to hide taxonomies on the page headers</span>
+taxonomyPageHeader = [<span style=color:#b44>&#34;tags&#34;</span>] 
+
+
+<span style=color:#080;font-style:italic># 代码块高亮配置</span>
+pygmentsCodeFences = <span style=color:#a2f;font-weight:700>true</span>
+pygmentsUseClasses = <span style=color:#a2f;font-weight:700>false</span>
+<span style=color:#080;font-style:italic># Use the new Chroma Go highlighter in Hugo.</span>
+pygmentsUseClassic = <span style=color:#a2f;font-weight:700>false</span>
+<span style=color:#080;font-style:italic>#pygmentsOptions = &#34;linenos=table&#34;</span>
+<span style=color:#080;font-style:italic># See https://help.farbox.com/pygments.html</span>
+pygmentsStyle = <span style=color:#b44>&#34;emacs&#34;</span>
+
+<span style=color:#080;font-style:italic># 配置blog编译产物的路径.</span>
+[permalinks]
+blog = <span style=color:#b44>&#34;/:section/:year/:month/:day/:slug/&#34;</span>
+
+<span style=color:#080;font-style:italic># markdown渲染引擎配置: https://github.com/russross/blackfriday</span>
+<span style=color:#080;font-style:italic># [blackfriday]</span>
+<span style=color:#080;font-style:italic># plainIDAnchors = true</span>
+<span style=color:#080;font-style:italic># hrefTargetBlank = true</span>
+<span style=color:#080;font-style:italic># angledQuotes = false</span>
+<span style=color:#080;font-style:italic># latexDashes = true</span>
+
+<span style=color:#080;font-style:italic># 图片引擎处理: https://github.com/disintegration/imaging</span>
+[imaging]
+resampleFilter = <span style=color:#b44>&#34;CatmullRom&#34;</span>
+quality = <span style=color:#666>75</span>
+anchor = <span style=color:#b44>&#34;smart&#34;</span>
+
+<span style=color:#080;font-style:italic># [services]</span>
+<span style=color:#080;font-style:italic># [services.googleAnalytics]</span>
+<span style=color:#080;font-style:italic># # Comment out the next line to disable GA tracking. Also disables the feature described in [params.ui.feedback].</span>
+<span style=color:#080;font-style:italic># id = &#34;UA-00000000-0&#34;</span>
+
+<span style=color:#080;font-style:italic># Language configuration</span>
+
+[languages]
+[languages.zh-cn]
+title = <span style=color:#b44>&#34;现代技能栈&#34;</span>
+description = <span style=color:#b44>&#34;小平-所思所为&#34;</span>
+languageName = <span style=color:#b44>&#34;中文&#34;</span>
+
+<span style=color:#080;font-style:italic># 用于多语言排序，越小越靠上。</span>
+weight = <span style=color:#666>1</span>
+
+<span style=color:#080;font-style:italic># markdown的解析设置，抄的k8s 文档设置...</span>
+[markup]
+  [markup.goldmark]
+  [markup.goldmark.extensions]
+    definitionList = <span style=color:#a2f;font-weight:700>true</span>
+    table = <span style=color:#a2f;font-weight:700>true</span>
+    typographer = <span style=color:#a2f;font-weight:700>false</span>
+  [markup.goldmark.parser]
+    attribute = <span style=color:#a2f;font-weight:700>true</span>
+    autoHeadingID = <span style=color:#a2f;font-weight:700>true</span>
+    autoHeadingIDType = <span style=color:#b44>&#34;blackfriday&#34;</span>
+  [markup.goldmark.renderer]
+    unsafe = <span style=color:#a2f;font-weight:700>true</span>
+  [markup.highlight]
+    codeFences = <span style=color:#a2f;font-weight:700>true</span>
+    guessSyntax = <span style=color:#a2f;font-weight:700>false</span>
+    hl_Lines = <span style=color:#b44>&#34;&#34;</span>
+    lineNoStart = <span style=color:#666>1</span>
+    lineNos = <span style=color:#a2f;font-weight:700>false</span>
+    lineNumbersInTable = <span style=color:#a2f;font-weight:700>true</span>
+    noClasses = <span style=color:#a2f;font-weight:700>true</span>
+    style = <span style=color:#b44>&#34;emacs&#34;</span>
+    tabWidth = <span style=color:#666>4</span>
+  [markup.tableOfContents]
+    endLevel = <span style=color:#666>3</span>
+    ordered = <span style=color:#a2f;font-weight:700>false</span>
+    startLevel = <span style=color:#666>2</span>
+
+<span style=color:#080;font-style:italic># Everything below this are Site Params</span>
+
+<span style=color:#080;font-style:italic># Comment out if you don&#39;t want the &#34;print entire section&#34; link enabled.</span>
+[outputs]
+section = [<span style=color:#b44>&#34;HTML&#34;</span>, <span style=color:#b44>&#34;print&#34;</span>, <span style=color:#b44>&#34;RSS&#34;</span>]
+
+[params]
+copyright = <span style=color:#b44>&#34;xiaoping378&#34;</span>
+privacy_policy = <span style=color:#b44>&#34;#&#34;</span>
+
+<span style=color:#080;font-style:italic># First one is picked as the Twitter card image if not set on page.</span>
+<span style=color:#080;font-style:italic># images = [&#34;images/project-illustration.png&#34;]</span>
+
+<span style=color:#080;font-style:italic># Menu title if your navbar has a versions selector to access old versions of your site.</span>
+<span style=color:#080;font-style:italic># This menu appears only if you have at least one [params.versions] set.</span>
+version_menu = <span style=color:#b44>&#34;Releases&#34;</span>
+
+<span style=color:#080;font-style:italic># Flag used in the &#34;version-banner&#34; partial to decide whether to display a </span>
+<span style=color:#080;font-style:italic># banner on every page indicating that this is an archived version of the docs.</span>
+<span style=color:#080;font-style:italic># Set this flag to &#34;true&#34; if you want to display the banner.</span>
+archived_version = <span style=color:#a2f;font-weight:700>false</span>
+
+<span style=color:#080;font-style:italic># The version number for the version of the docs represented in this doc set.</span>
+<span style=color:#080;font-style:italic># Used in the &#34;version-banner&#34; partial to display a version number for the </span>
+<span style=color:#080;font-style:italic># current doc set.</span>
+version = <span style=color:#b44>&#34;0.0&#34;</span>
+
+<span style=color:#080;font-style:italic># A link to latest version of the docs. Used in the &#34;version-banner&#34; partial to</span>
+<span style=color:#080;font-style:italic># point people to the main doc site.</span>
+<span style=color:#080;font-style:italic># url_latest_version = &#34;https://example.com&#34;</span>
+
+<span style=color:#080;font-style:italic># 方便用户反馈，提交技术文章问题的仓库地址</span>
+github_repo = <span style=color:#b44>&#34;https://github.com/xiaoping378/xiaoping378.github.io&#34;</span>
+<span style=color:#080;font-style:italic># 技术站点背后的项目issue地址</span>
+<span style=color:#080;font-style:italic># github_project_repo = &#34;https://github.com/xiaoping378/xiaoping378.github.io&#34;</span>
+
+<span style=color:#080;font-style:italic># 以下三个是设置远程文档位置的，目前用不上，这里hack一下，不然“编辑此页”的功能会去链接到content/zh-cn下</span>
+<span style=color:#080;font-style:italic># Specify a value here if your content directory is not in your repo&#39;s root directory</span>
+github_subdir = <span style=color:#b44>&#34;/&#34;</span>
+
+<span style=color:#080;font-style:italic># Uncomment this if you have a newer GitHub repo with &#34;main&#34; as the default branch,</span>
+<span style=color:#080;font-style:italic># or specify a new value if you want to reference another branch in your GitHub links</span>
+<span style=color:#080;font-style:italic># github_branch= &#34;main&#34;</span>
+
+<span style=color:#080;font-style:italic># 支持三种搜索，三选一，禁用google搜索，需要注释掉此处</span>
+<span style=color:#080;font-style:italic># gcs_engine_id = &#34;d72aa9b2712488cc3&#34;</span>
+
+<span style=color:#080;font-style:italic># Enable Algolia DocSearch</span>
+algolia_docsearch = <span style=color:#a2f;font-weight:700>false</span>
+
+<span style=color:#080;font-style:italic># Enable Lunr.js offline search</span>
+offlineSearch = <span style=color:#a2f;font-weight:700>false</span>
+
+<span style=color:#080;font-style:italic># 默认使用的Chroma代码高亮方案，可换成prism方案。</span>
+prism_syntax_highlighting = <span style=color:#a2f;font-weight:700>false</span>
+
+<span style=color:#080;font-style:italic># User interface configuration</span>
+[params.ui]
+<span style=color:#080;font-style:italic>#  是否禁用面包屑导航.</span>
+breadcrumb_disable = <span style=color:#a2f;font-weight:700>false</span>
+<span style=color:#080;font-style:italic># 是否禁用底部About链接</span>
+footer_about_disable = <span style=color:#a2f;font-weight:700>true</span>
+<span style=color:#080;font-style:italic># 是否展示项目logo，位置必须放置在 assets/icons/logo.svg</span>
+navbar_logo = <span style=color:#a2f;font-weight:700>true</span>
+<span style=color:#080;font-style:italic># 在首页，上下滑动页面，顶部导航是否禁用半透明</span>
+navbar_translucent_over_cover_disable = <span style=color:#a2f;font-weight:700>false</span>
+<span style=color:#080;font-style:italic># 左侧章节树形目录默认是否处于折叠状态</span>
+sidebar_menu_compact = <span style=color:#a2f;font-weight:700>true</span>
+<span style=color:#080;font-style:italic># 左侧章节树形目录上是否不显示搜索框，前提是需要开启搜索功能</span>
+sidebar_search_disable = <span style=color:#a2f;font-weight:700>false</span>
+
+<span style=color:#080;font-style:italic># 关闭了google分析，下面功能不会启用</span>
+[params.ui.feedback]
+enable = <span style=color:#a2f;font-weight:700>true</span>
+<span style=color:#080;font-style:italic># The responses that the user sees after clicking &#34;yes&#34; (the page was helpful) or &#34;no&#34; (the page was not helpful).</span>
+yes = <span style=color:#b44>&#39;Glad to hear it! Please &lt;a href=&#34;https://github.com/USERNAME/REPOSITORY/issues/new&#34;&gt;tell us how we can improve&lt;/a&gt;.&#39;</span>
+no = <span style=color:#b44>&#39;Sorry to hear that. Please &lt;a href=&#34;https://github.com/USERNAME/REPOSITORY/issues/new&#34;&gt;tell us how we can improve&lt;/a&gt;.&#39;</span>
+
+<span style=color:#080;font-style:italic># 在文章上面显示“阅读时长：x分钟”</span>
+[params.ui.readingtime]
+enable = <span style=color:#a2f;font-weight:700>false</span>
+
+
+<span style=color:#080;font-style:italic># 社区community版面要用到的参数</span>
+[params.links]
+<span style=color:#080;font-style:italic># End user relevant links. These will show up on left side of footer and in the community page if you have one.</span>
+[[params.links.user]]
+  name = <span style=color:#b44>&#34;个人邮箱 xiaoping378@163.com&#34;</span>
+  url = <span style=color:#b44>&#34;mailto:xiaoping378@163.com&#34;</span>
+  icon = <span style=color:#b44>&#34;fa fa-envelope&#34;</span>
+  desc = <span style=color:#b44>&#34;欢迎邮件交流&#34;</span>
+[[params.links.user]]
+  name =<span style=color:#b44>&#34;微博&#34;</span>
+  url = <span style=color:#b44>&#34;https://weibo.com/xiaoping378&#34;</span>
+  icon = <span style=color:#b44>&#34;fab fa-weibo&#34;</span>
+  desc = <span style=color:#b44>&#34;个人微博，基本不用&#34;</span>
+[[params.links.user]]
+  name = <span style=color:#b44>&#34;知乎&#34;</span>
+  url = <span style=color:#b44>&#34;https://www.zhihu.com/people/xiaoping378&#34;</span>
+  icon = <span style=color:#b44>&#34;fab fa-zhihu&#34;</span>
+  desc = <span style=color:#b44>&#34;知乎专栏&#34;</span>
+<span style=color:#080;font-style:italic># Developer relevant links. These will show up on right side of footer and in the community page if you have one.</span>
+[[params.links.developer]]
+  name = <span style=color:#b44>&#34;GitHub&#34;</span>
+  url = <span style=color:#b44>&#34;https://github.com/xiaoping378/xiaoping378.github.io&#34;</span>
+  icon = <span style=color:#b44>&#34;fab fa-github&#34;</span>
+  desc = <span style=color:#b44>&#34;文集开源地址!&#34;</span>
+[[params.links.developer]]
+  name = <span style=color:#b44>&#34;Slack&#34;</span>
+  url = <span style=color:#b44>&#34;https://example.org/slack&#34;</span>
+  icon = <span style=color:#b44>&#34;fab fa-slack&#34;</span>
+  desc = <span style=color:#b44>&#34;未开通&#34;</span>
+[[params.links.developer]]
+  name = <span style=color:#b44>&#34;Developer mailing list&#34;</span>
+  url = <span style=color:#b44>&#34;https://example.org/mail&#34;</span>
+  icon = <span style=color:#b44>&#34;fa fa-envelope&#34;</span>
+  desc = <span style=color:#b44>&#34;未开通&#34;</span>
+</code></pre></div></li>
+</ul>
+<h2 id=总结>总结</h2>
+<p>目前还有本站点有些功能还不好用，比如搜索和SEO优化等等，待进一步优化，，，</p>
+<p>如果自己搭建嫌麻烦，可直接Copy本站，编写自己的内容即可，搭建本站时，也遇到了Docsy国际化方面的问题，已提交官方<a href=https://github.com/google/docsy/pull/826>PR</a>修复。</p>
+<p><a href=../actions_pages>下文</a>介绍使用github的actions和pages自动托管站点。</p>
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-19a76bb4dc197415e2432cc478ab88b6>1.2 - 自动托管markdown</h1>
