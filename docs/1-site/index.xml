@@ -1,0 +1,16 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>现代技能栈 – 站点</title><link>https://xiaoping378.github.io/blog/docs/1-site/</link><description>Recent content in 站点 on 现代技能栈</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://xiaoping378.github.io/blog/docs/1-site/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: 站点搭建方法</title><link>https://xiaoping378.github.io/blog/docs/1-site/create_site/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/blog/docs/1-site/create_site/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>主要涉及到hugo和docsy主题的介绍。&lt;/p>
+&lt;/div>
+&lt;h2 id="待编写">待编写&lt;/h2>
+&lt;p>...&lt;/p></description></item><item><title>Docs: 编写文章注意项</title><link>https://xiaoping378.github.io/blog/docs/1-site/add_content/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/blog/docs/1-site/add_content/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>This is a placeholder page that shows you how to use this template site.&lt;/p>
+&lt;/div>
+&lt;h2 id="待编写">待编写&lt;/h2>
+&lt;p>...&lt;/p></description></item><item><title>Docs: 自动托管markdown</title><link>https://xiaoping378.github.io/blog/docs/1-site/actions_pages/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/blog/docs/1-site/actions_pages/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>利用github actions和pages实现自动更新托管内容。&lt;/p>
+&lt;/div>
+&lt;h2 id="待编写">待编写&lt;/h2>
+&lt;p>。。。&lt;/p></description></item></channel></rss>
