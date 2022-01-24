@@ -4,16 +4,7 @@
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=generator content="Hugo 0.91.2">
 <meta name=robots content="index, follow">
-<link rel="shortcut icon" href=/favicons/favicon.ico>
-<link rel=apple-touch-icon href=/favicons/apple-touch-icon-180x180.png sizes=180x180>
-<link rel=icon type=image/png href=/favicons/favicon-16x16.png sizes=16x16>
-<link rel=icon type=image/png href=/favicons/favicon-32x32.png sizes=32x32>
-<link rel=icon type=image/png href=/favicons/android-36x36.png sizes=36x36>
-<link rel=icon type=image/png href=/favicons/android-48x48.png sizes=48x48>
-<link rel=icon type=image/png href=/favicons/android-72x72.png sizes=72x72>
-<link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96>
-<link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
-<link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
+<link rel="shortcut icon" href=favicons/favicon.ico>
 <title>尚未启动 | 现代技能栈</title>
 <meta name=description content="A short lead description about this content page. Text here can also be **bold** or _italic_ and can even be split over multiple paragraphs.
 ">
@@ -36,6 +27,7 @@
 <link rel=preload href=/scss/main.min.704093cd1a56f37fd00dc35c7125fced09d88d60c92d59965b30c8c0eeef1cd5.css as=style>
 <link href=/scss/main.min.704093cd1a56f37fd00dc35c7125fced09d88d60c92d59965b30c8c0eeef1cd5.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.5.1.min.js integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin=anonymous></script>
+<script src=https://unpkg.com/lunr@2.3.8/lunr.min.js integrity=sha384-vRQ9bDyE0Wnu+lMfm57BlYLO0/XauFuKpVsZPs7KEDwYKktWi5+Kz3MP8++DFlRY crossorigin=anonymous></script>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-217913492-1','auto'),ga('send','pageview'))</script>
 <script async src=https://www.google-analytics.com/analytics.js></script>
 </head>
@@ -61,7 +53,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.e796fe1bf1f993a64fda479e7736a3b0.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -71,29 +63,34 @@
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.e796fe1bf1f993a64fda479e7736a3b0.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
-<nav class="collapse td-sidebar-nav" id=td-section-nav>
+<nav class="collapse td-sidebar-nav foldable-nav" id=td-section-nav>
 <ul class="td-sidebar-nav__section pr-md-3 ul-0">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-blog-li>
 <a href=/blog/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-blog><span>博客</span></a>
 <ul class=ul-1>
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-blog-releases-li>
-<a href=/blog/releases/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-blog-releases><span>开源书籍</span></a>
+<input type=checkbox id=m-blog-releases-check checked>
+<label for=m-blog-releases-check><a href=/blog/releases/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-blog-releases><span>开源书籍</span></a></label>
 <ul class="ul-2 foldable">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-blog-2018-01-04-e5-b0-9a-e6-9c-aa-e5-90-af-e5-8a-a8-li>
-<a href=/blog/2018/01/04/%E5%B0%9A%E6%9C%AA%E5%90%AF%E5%8A%A8/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-blog-2018-01-04-e5-b0-9a-e6-9c-aa-e5-90-af-e5-8a-a8><span class=td-sidebar-nav-active-item>尚未启动</span></a>
+<input type=checkbox id=m-blog-2018-01-04-e5-b0-9a-e6-9c-aa-e5-90-af-e5-8a-a8-check checked>
+<label for=m-blog-2018-01-04-e5-b0-9a-e6-9c-aa-e5-90-af-e5-8a-a8-check><a href=/blog/2018/01/04/%E5%B0%9A%E6%9C%AA%E5%90%AF%E5%8A%A8/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-blog-2018-01-04-e5-b0-9a-e6-9c-aa-e5-90-af-e5-8a-a8><span class=td-sidebar-nav-active-item>尚未启动</span></a></label>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-blog-news-li>
-<a href=/blog/news/ title=热点事件解读 class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-blog-news><span>热点解读</span></a>
+<input type=checkbox id=m-blog-news-check>
+<label for=m-blog-news-check><a href=/blog/news/ title=热点事件解读 class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-blog-news><span>热点解读</span></a></label>
 <ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-blog-2022-01-23-e6-9a-82-e6-9c-aa-e5-90-af-e7-94-a8-e6-ad-a4-e5-8d-9a-e5-ae-a2-e7-89-88-e9-9d-a2-li>
-<a href=/blog/2022/01/23/%E6%9A%82%E6%9C%AA%E5%90%AF%E7%94%A8%E6%AD%A4%E5%8D%9A%E5%AE%A2%E7%89%88%E9%9D%A2/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-blog-2022-01-23-e6-9a-82-e6-9c-aa-e5-90-af-e7-94-a8-e6-ad-a4-e5-8d-9a-e5-ae-a2-e7-89-88-e9-9d-a2><span>暂未启用此博客版面</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-blog-2018-10-06-easy-documentation-with-docsy-li>
-<a href=/blog/2018/10/06/easy-documentation-with-docsy/ title="Easy documentation with Docsy" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-blog-2018-10-06-easy-documentation-with-docsy><span>Announcing Docsy</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-blog-2022-01-23-e6-9a-82-e6-9c-aa-e5-90-af-e7-94-a8-e6-ad-a4-e5-8d-9a-e5-ae-a2-e7-89-88-e9-9d-a2-li>
+<input type=checkbox id=m-blog-2022-01-23-e6-9a-82-e6-9c-aa-e5-90-af-e7-94-a8-e6-ad-a4-e5-8d-9a-e5-ae-a2-e7-89-88-e9-9d-a2-check>
+<label for=m-blog-2022-01-23-e6-9a-82-e6-9c-aa-e5-90-af-e7-94-a8-e6-ad-a4-e5-8d-9a-e5-ae-a2-e7-89-88-e9-9d-a2-check><a href=/blog/2022/01/23/%E6%9A%82%E6%9C%AA%E5%90%AF%E7%94%A8%E6%AD%A4%E5%8D%9A%E5%AE%A2%E7%89%88%E9%9D%A2/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-blog-2022-01-23-e6-9a-82-e6-9c-aa-e5-90-af-e7-94-a8-e6-ad-a4-e5-8d-9a-e5-ae-a2-e7-89-88-e9-9d-a2><span>暂未启用此博客版面</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-blog-2018-10-06-easy-documentation-with-docsy-li>
+<input type=checkbox id=m-blog-2018-10-06-easy-documentation-with-docsy-check>
+<label for=m-blog-2018-10-06-easy-documentation-with-docsy-check><a href=/blog/2018/10/06/easy-documentation-with-docsy/ title="Easy documentation with Docsy" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-blog-2018-10-06-easy-documentation-with-docsy><span>Announcing Docsy</span></a></label>
 </li>
 </ul>
 </li>
@@ -496,6 +493,6 @@ This is a warning with a title!
 <script src=https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js integrity=sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN crossorigin=anonymous></script>
 <script src=https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin=anonymous></script>
 <script src=/js/tabpane-persist.js></script>
-<script src=/js/main.min.e2d2fb0fc35222abf4307040b3d9ec070dd6bfb1dd321db7f4bf4d0b2379013b.js integrity="sha256-4tL7D8NSIqv0MHBAs9nsBw3Wv7HdMh239L9NCyN5ATs=" crossorigin=anonymous></script>
+<script src=/js/main.min.8ab8f81ff7e1454d30024cd6f956d4d341c3a97e2a673f988065f2ee4e147922.js integrity="sha256-irj4H/fhRU0wAkzW+VbU00HDqX4qZz+YgGXy7k4UeSI=" crossorigin=anonymous></script>
 </body>
 </html>
