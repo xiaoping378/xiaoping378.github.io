@@ -1,4 +1,42 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>现代技能栈 – 现代技能栈</title><link>https://xiaoping378.github.io/</link><description>Recent content on 现代技能栈</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://xiaoping378.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: 暂未启用此博客版面</title><link>https://xiaoping378.github.io/blog/2022/01/23/%E6%9A%82%E6%9C%AA%E5%90%AF%E7%94%A8%E6%AD%A4%E5%8D%9A%E5%AE%A2%E7%89%88%E9%9D%A2/</link><pubDate>Sun, 23 Jan 2022 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/blog/2022/01/23/%E6%9A%82%E6%9C%AA%E5%90%AF%E7%94%A8%E6%AD%A4%E5%8D%9A%E5%AE%A2%E7%89%88%E9%9D%A2/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>现代技能栈 – 现代技能栈</title><link>https://xiaoping378.github.io/</link><description>Recent content on 现代技能栈</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://xiaoping378.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: 带图片预览的题目</title><link>https://xiaoping378.github.io/blog/2022/01/24/%E5%B8%A6%E5%9B%BE%E7%89%87%E9%A2%84%E8%A7%88%E7%9A%84%E9%A2%98%E7%9B%AE/</link><pubDate>Mon, 24 Jan 2022 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/blog/2022/01/24/%E5%B8%A6%E5%9B%BE%E7%89%87%E9%A2%84%E8%A7%88%E7%9A%84%E9%A2%98%E7%9B%AE/</guid><description>
+&lt;img src="https://xiaoping378.github.io/blog/2022/01/24/%E5%B8%A6%E5%9B%BE%E7%89%87%E9%A2%84%E8%A7%88%E7%9A%84%E9%A2%98%E7%9B%AE/featured-sunset-get_hu69849a7cdb847c2393a7b3a7f6061c86_387442_640x0_resize_catmullrom_3.png" width="640" height="253"/>
+&lt;p>&lt;strong>This is a typical blog post that includes images.&lt;/strong>&lt;/p>
+&lt;p>The front matter specifies the date of the blog post, its title, a short description that will be displayed on the blog landing page, and its author.&lt;/p>
+&lt;h2 id="including-images">Including images&lt;/h2>
+&lt;p>Here's an image (&lt;code>featured-sunset-get.png&lt;/code>) that includes a byline and a caption.&lt;/p>
+&lt;div class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 610px">
+&lt;img class="card-img-top" src="https://xiaoping378.github.io/blog/2022/01/24/%E5%B8%A6%E5%9B%BE%E7%89%87%E9%A2%84%E8%A7%88%E7%9A%84%E9%A2%98%E7%9B%AE/featured-sunset-get_hu69849a7cdb847c2393a7b3a7f6061c86_387442_600x300_fill_catmullrom_smart1_3.png" width="600" height="300">
+&lt;div class="card-body px-0 pt-2 pb-0">
+&lt;p class="card-text">
+图片拉伸效果
+&lt;small class="text-muted">&lt;br/>Pics: xiaoping378 / CC-BY-CA&lt;/small>&lt;/p>
+&lt;/div>
+&lt;/div>
+&lt;div class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 610px">
+&lt;img class="card-img-top" src="https://xiaoping378.github.io/blog/2022/01/24/%E5%B8%A6%E5%9B%BE%E7%89%87%E9%A2%84%E8%A7%88%E7%9A%84%E9%A2%98%E7%9B%AE/index-2022-01-24-18-25-46_hu215f1e1e11830f28cc7acfeb9fd940ed_31259_600x300_fill_catmullrom_smart1_3.png" width="600" height="300">
+&lt;div class="card-body px-0 pt-2 pb-0">
+&lt;p class="card-text">
+图片拉伸效果
+&lt;small class="text-muted">&lt;br/>Pics: xiaoping378 / CC-BY-CA&lt;/small>&lt;/p>
+&lt;/div>
+&lt;/div>
+&lt;p>The front matter of this post specifies properties to be assigned to all image resources:&lt;/p>
+&lt;pre tabindex="0">&lt;code>resources:
+- src: &amp;quot;**.{png,jpg}&amp;quot;
+title: &amp;quot;Image #:counter&amp;quot;
+params:
+byline: &amp;quot;Photo: Riona MacNamara / CC-BY-CA&amp;quot;
+&lt;/code>&lt;/pre>&lt;p>To include the image in a page, specify its details like this:&lt;/p>
+&lt;pre tabindex="0">&lt;code>
+&lt;div class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 610px">
+&lt;img class="card-img-top" src="https://xiaoping378.github.io/blog/2022/01/24/%E5%B8%A6%E5%9B%BE%E7%89%87%E9%A2%84%E8%A7%88%E7%9A%84%E9%A2%98%E7%9B%AE/featured-sunset-get_hu69849a7cdb847c2393a7b3a7f6061c86_387442_600x300_fill_catmullrom_smart1_3.png" width="600" height="300">
+&lt;div class="card-body px-0 pt-2 pb-0">
+&lt;p class="card-text">
+Fetch and scale an image in the upcoming Hugo 0.43.
+&lt;small class="text-muted">&lt;br/>Pics: xiaoping378 / CC-BY-CA&lt;/small>&lt;/p>
+&lt;/div>
+&lt;/div>
+&lt;/code>&lt;/pre>&lt;p>The image will be rendered at the size and byline specified in the front matter.&lt;/p></description></item><item><title>Blog: 暂未启用此博客版面</title><link>https://xiaoping378.github.io/blog/2022/01/24/%E6%9A%82%E6%9C%AA%E5%90%AF%E7%94%A8%E6%AD%A4%E5%8D%9A%E5%AE%A2%E7%89%88%E9%9D%A2/</link><pubDate>Mon, 24 Jan 2022 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/blog/2022/01/24/%E6%9A%82%E6%9C%AA%E5%90%AF%E7%94%A8%E6%AD%A4%E5%8D%9A%E5%AE%A2%E7%89%88%E9%9D%A2/</guid><description>
 &lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://github.com">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
 &lt;p>There should be whitespace between paragraphs. There should be whitespace between paragraphs. There should be whitespace between paragraphs. There should be whitespace between paragraphs.&lt;/p>
 &lt;p>There should be whitespace between paragraphs. There should be whitespace between paragraphs. There should be whitespace between paragraphs. There should be whitespace between paragraphs.&lt;/p>
@@ -262,37 +300,7 @@ This is a warning with a title!
 &lt;h3 id="used-ram">Used RAM&lt;/h3>
 &lt;p>Bacon ipsum dolor sit amet t-bone doner shank drumstick, pork belly porchetta chuck sausage brisket ham hock rump pig. Chuck kielbasa leberkas, pork bresaola ham hock filet mignon cow shoulder short ribs biltong.&lt;/p>
 &lt;pre tabindex="0">&lt;code>This is the final element on the page and there should be no margin below this.
-&lt;/code>&lt;/pre></description></item><item><title>Blog: Easy documentation with Docsy</title><link>https://xiaoping378.github.io/blog/2018/10/06/easy-documentation-with-docsy/</link><pubDate>Sat, 06 Oct 2018 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/blog/2018/10/06/easy-documentation-with-docsy/</guid><description>
-&lt;img src="https://xiaoping378.github.io/blog/2018/10/06/easy-documentation-with-docsy/featured-sunset-get_hu69849a7cdb847c2393a7b3a7f6061c86_387442_640x0_resize_catmullrom_3.png" width="640" height="253"/>
-&lt;p>&lt;strong>This is a typical blog post that includes images.&lt;/strong>&lt;/p>
-&lt;p>The front matter specifies the date of the blog post, its title, a short description that will be displayed on the blog landing page, and its author.&lt;/p>
-&lt;h2 id="including-images">Including images&lt;/h2>
-&lt;p>Here's an image (&lt;code>featured-sunset-get.png&lt;/code>) that includes a byline and a caption.&lt;/p>
-&lt;div class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 610px">
-&lt;img class="card-img-top" src="https://xiaoping378.github.io/blog/2018/10/06/easy-documentation-with-docsy/featured-sunset-get_hu69849a7cdb847c2393a7b3a7f6061c86_387442_600x300_fill_catmullrom_smart1_3.png" width="600" height="300">
-&lt;div class="card-body px-0 pt-2 pb-0">
-&lt;p class="card-text">
-Fetch and scale an image in the upcoming Hugo 0.43.
-&lt;small class="text-muted">&lt;br/>Photo: Riona MacNamara / CC-BY-CA&lt;/small>&lt;/p>
-&lt;/div>
-&lt;/div>
-&lt;p>The front matter of this post specifies properties to be assigned to all image resources:&lt;/p>
-&lt;pre tabindex="0">&lt;code>resources:
-- src: &amp;quot;**.{png,jpg}&amp;quot;
-title: &amp;quot;Image #:counter&amp;quot;
-params:
-byline: &amp;quot;Photo: Riona MacNamara / CC-BY-CA&amp;quot;
-&lt;/code>&lt;/pre>&lt;p>To include the image in a page, specify its details like this:&lt;/p>
-&lt;pre tabindex="0">&lt;code>
-&lt;div class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 610px">
-&lt;img class="card-img-top" src="https://xiaoping378.github.io/blog/2018/10/06/easy-documentation-with-docsy/featured-sunset-get_hu69849a7cdb847c2393a7b3a7f6061c86_387442_600x300_fill_catmullrom_smart1_3.png" width="600" height="300">
-&lt;div class="card-body px-0 pt-2 pb-0">
-&lt;p class="card-text">
-Fetch and scale an image in the upcoming Hugo 0.43.
-&lt;small class="text-muted">&lt;br/>Photo: Riona MacNamara / CC-BY-CA&lt;/small>&lt;/p>
-&lt;/div>
-&lt;/div>
-&lt;/code>&lt;/pre>&lt;p>The image will be rendered at the size and byline specified in the front matter.&lt;/p></description></item><item><title>Blog: 尚未启动</title><link>https://xiaoping378.github.io/blog/2018/01/04/%E5%B0%9A%E6%9C%AA%E5%90%AF%E5%8A%A8/</link><pubDate>Thu, 04 Jan 2018 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/blog/2018/01/04/%E5%B0%9A%E6%9C%AA%E5%90%AF%E5%8A%A8/</guid><description>
+&lt;/code>&lt;/pre></description></item><item><title>Blog: 尚未启动</title><link>https://xiaoping378.github.io/blog/2018/01/04/%E5%B0%9A%E6%9C%AA%E5%90%AF%E5%8A%A8/</link><pubDate>Thu, 04 Jan 2018 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/blog/2018/01/04/%E5%B0%9A%E6%9C%AA%E5%90%AF%E5%8A%A8/</guid><description>
 &lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://github.com">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
 &lt;p>There should be whitespace between paragraphs. There should be whitespace between paragraphs. There should be whitespace between paragraphs. There should be whitespace between paragraphs.&lt;/p>
 &lt;p>There should be whitespace between paragraphs. There should be whitespace between paragraphs. There should be whitespace between paragraphs. There should be whitespace between paragraphs.&lt;/p>
