@@ -70,7 +70,7 @@ id = "UA-217913492-1"
 [languages]
 [languages.zh-cn]
 title = "现代技能栈"
-description = "小平-所思所为"
+description = "现代技能栈、devops、云原生、网络、区块链、RPA、IOT"
 languageName = "中文"
 
 # 用于多语言排序，越小越靠上。
@@ -148,14 +148,16 @@ github_subdir = "/"
 # or specify a new value if you want to reference another branch in your GitHub links
 # github_branch= "main"
 
-# 支持三种搜索，三选一，禁用google搜索，需要注释掉此处
-gcs_engine_id = "5b5cf9c71d78d61df"
+# 支持三种搜索，三选一，禁用google搜索，需要注释掉此处，google默认有个搜索频率限制，不太好用
+# gcs_engine_id = "5b5cf9c71d78d61df"
 
 # Enable Algolia DocSearch
 algolia_docsearch = false
 
 # Enable Lunr.js offline search
-offlineSearch = false
+offlineSearch = true
+offlineSearchSummaryLength = 200
+offlineSearchMaxResults = 10
 
 # 默认使用的Chroma代码高亮方案，可换成prism方案。
 prism_syntax_highlighting = false
@@ -170,14 +172,21 @@ footer_about_disable = true
 navbar_logo = true
 # 在首页，上下滑动页面，顶部导航是否禁用半透明
 navbar_translucent_over_cover_disable = false
-# 左侧章节树形目录默认是否处于折叠状态
-sidebar_menu_compact = true
+
+# # 左侧章节树形目录默认是否处于折叠状态
+# sidebar_menu_compact = true
+# # 2级目录始终可见
+# ul_show = 2
+
+# 左侧导航显示 “可展开”的小三角,开启本项后，上面两个配置不生效。
+sidebar_menu_foldable = true
+
 # 左侧章节树形目录上是否不显示搜索框，前提是需要开启搜索功能
 sidebar_search_disable = false
 
 # 关闭了google分析，下面功能不会启用
 [params.ui.feedback]
-enable = true
+enable = false
 # The responses that the user sees after clicking "yes" (the page was helpful) or "no" (the page was not helpful).
 yes = '感谢反馈!  <a href="https://github.com/xiaoping378/xiaoping378.github.io/issues/new">再接再厉</a>.'
 no = '感谢反馈!  <a href="https://github.com/xiaoping378/xiaoping378.github.io/issues/new">可以告知具体原因么</a>.'
