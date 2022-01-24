@@ -1,6 +1,6 @@
 
 ---
-title: "文档"
+title: "文集"
 linkTitle: "文档"
 weight: 20
 menu:
