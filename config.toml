@@ -60,10 +60,10 @@ resampleFilter = "CatmullRom"
 quality = 75
 anchor = "smart"
 
-# [services]
-# [services.googleAnalytics]
-# # Comment out the next line to disable GA tracking. Also disables the feature described in [params.ui.feedback].
-# id = "UA-00000000-0"
+[services]
+[services.googleAnalytics]
+# 注释可关闭google的网站跟踪，关闭后将无法查看读者统计。 也会关闭文章底部的反馈功能 [params.ui.feedback].
+id = "UA-217913492-1"
 
 # Language configuration
 
@@ -149,7 +149,7 @@ github_subdir = "/"
 # github_branch= "main"
 
 # 支持三种搜索，三选一，禁用google搜索，需要注释掉此处
-# gcs_engine_id = "d72aa9b2712488cc3"
+gcs_engine_id = "5b5cf9c71d78d61df"
 
 # Enable Algolia DocSearch
 algolia_docsearch = false
@@ -179,8 +179,8 @@ sidebar_search_disable = false
 [params.ui.feedback]
 enable = true
 # The responses that the user sees after clicking "yes" (the page was helpful) or "no" (the page was not helpful).
-yes = 'Glad to hear it! Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.'
-no = 'Sorry to hear that. Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.'
+yes = '感谢反馈!  <a href="https://github.com/xiaoping378/xiaoping378.github.io/issues/new">再接再厉</a>.'
+no = '感谢反馈!  <a href="https://github.com/xiaoping378/xiaoping378.github.io/issues/new">可以告知具体原因么</a>.'
 
 # 在文章上面显示“阅读时长：x分钟”
 [params.ui.readingtime]

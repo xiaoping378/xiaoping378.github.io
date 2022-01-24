@@ -3,7 +3,7 @@ title: "混合云网络SDN"
 linkTitle: "混合云网络SDN"
 weight: 3
 description: >
-  SDN网路网络相对成熟，更新认知。 
+  目前云上的SDN网络已相对成熟，本文为初步介绍，未完... 
 ---
 
 * TODO.
