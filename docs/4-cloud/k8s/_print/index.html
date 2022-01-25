@@ -50,7 +50,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.3b065c75d39c47206d165f545bf91fe0.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.d700a1afccbb9849065ad8fcb0b71a36.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -77,6 +77,8 @@
 <li>5: <a href=#pg-b781642b41630a327a3a5151285908a0>k8s的监控方案</a></li>
 <li>6: <a href=#pg-e7d513396d808a4808b498da552726e0>配置harbor默认https访问</a></li>
 <li>7: <a href=#pg-9defb3943138a8ddf6afc76610480f39>DEIS 开源PAAS平台实践</a></li>
+<li>8: <a href=#pg-e3c9486bfc693b58c1c315d2c7cde322>k3s实践-01</a></li>
+<li>9: <a href=#pg-8d71550d3ee2751c7f80b3cef9ae8232>TKEStack all-in-one入坑指南</a></li>
 </ul>
 <div class=content>
 <div class="pageinfo pageinfo-primary">
@@ -888,6 +890,88 @@ Configuration file written to /home/xxp/.deis/client.json
 You are admin at http://deis.192.168.31.49.xip.io
 </code></pre>
 <h3 id=部署第一个应用>部署第一个应用</h3>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-e3c9486bfc693b58c1c315d2c7cde322>8 - k3s实践-01</h1>
+<div class=lead>k3s的安装及基本工作方式解读</div>
+<div class="pageinfo pageinfo-primary">
+<p>本文主要介绍k3s的安装和核心组件解读。</p>
+</div>
+<p>k3s是all-in-one的轻量k8s发行版，把所有k8s组件重新打包一个不到100M的二进制文件了。主要具备显著特点：</p>
+<ul>
+<li>打包成单一二进制</li>
+<li>默认集成了sqlite3来替代etcd，也可以指定其他数据库：etcd3、mysql、postgres。</li>
+<li>默认内置Coredns、Metrics Server、Flannel、Traefik ingress、Local-path-provisioner等</li>
+<li>默认启用了TLS加密通信。</li>
+</ul>
+<h2 id=安装>安装</h2>
+<p>官方提供了一键安装脚本<a href=https://get.k3s.io>install.sh</a> ，执行<code>curl -sfL https://get.k3s.io | sh -</code>可一键安装server端。此命令会从<code>https://update.k3s.io/v1-release/channels/stable</code>取到最新的稳定版安装，可以通过<code>INSTALL_K3S_VERSION</code>环境变量指定版本，本文将以1.19为例。</p>
+<p><strong>启动 k3s server端(master节点).</strong></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sfL https://get.k3s.io | <span style=color:#b8860b>INSTALL_K3S_VERSION</span><span style=color:#666>=</span>v1.19.16+k3s1 sh -
+</code></pre></div><blockquote>
+<p>由于网络原因，可能会失败，自行想办法<a href=https://github.com/k3s-io/k3s/releases/download/v1.19.16+k3s1/k3s>下载</a>下来，放置 <code>/usr/local/bin/k3s</code>，附上执行权限<code>chmod a+x /usr/local/bin/k3s</code>, 然后上面的命令加上<code>INSTALL_K3S_SKIP_DOWNLOAD=true</code>再执行一遍即可。</p>
+</blockquote>
+<p>不出意外，k3s server会被systemd启动，执行命令查看<code>systemctl status k3s</code>或者通过软链的kubectl验证是否启动成功：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>➜  k3s kubectl get no
+NAME            STATUS   ROLES    AGE     VERSION
+gitlab-server   Ready    master   6m43s   v1.19.16+k3s1
+</code></pre></div><p><strong>(Optional)</strong> 启动 k3s agent端 (添加worker节点).</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sfL https://get.k3s.io | <span style=color:#b8860b>K3S_URL</span><span style=color:#666>=</span>https://172.25.11.130:6443 <span style=color:#b8860b>K3S_TOKEN</span><span style=color:#666>=</span>bulabula <span style=color:#b8860b>INSTALL_K3S_VERSION</span><span style=color:#666>=</span>v1.19.16+k3s1 sh -
+</code></pre></div><p><code>K3S_TOKEN</code>内容需要从server端的<code>/var/lib/rancher/k3s/server/node-token</code>文件取出，<code>K3S_URL</code>中的IP是master节点的IP。</p>
+<h2 id=架构>架构</h2>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-8d71550d3ee2751c7f80b3cef9ae8232>9 - TKEStack all-in-one入坑指南</h1>
+<div class=lead>TKEStack的all-in-one安装及基本功能解读</div>
+<div class="pageinfo pageinfo-primary">
+<p>本文主要介绍当前最新版本TkeStack 1.8.1 的allinone安装入坑指南和基本核心功能介绍。</p>
+</div>
+<h2 id=安装实录>安装实录</h2>
+<p>官方推荐至少需要2节点方可安装，配置如下，<strong>硬盘空间</strong>一定要保障。也支持ALL-in-ONE的方式安装，但有BUG。</p>
+<p><img src=/images/TKEStack-allinone-2022-01-25-08-47-30.png alt></p>
+<h2 id=启动init服务>启动init服务</h2>
+<p>启动init服务，即安装tke-installer和registry服务，安装命令行如下：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#b8860b>arch</span><span style=color:#666>=</span>amd64 <span style=color:#b8860b>version</span><span style=color:#666>=</span>v1.8.1 <span style=color:#b62;font-weight:700>\
+</span><span style=color:#b62;font-weight:700></span>    <span style=color:#666>&amp;&amp;</span> wget https://tke-release-1251707795.cos.ap-guangzhou.myqcloud.com/tke-installer-linux-<span style=color:#b8860b>$arch</span>-<span style=color:#b8860b>$version</span>.run<span style=color:#666>{</span>,.sha256<span style=color:#666>}</span> <span style=color:#b62;font-weight:700>\
+</span><span style=color:#b62;font-weight:700></span>    <span style=color:#666>&amp;&amp;</span> sha256sum --check --status tke-installer-linux-<span style=color:#b8860b>$arch</span>-<span style=color:#b8860b>$version</span>.run.sha256 <span style=color:#b62;font-weight:700>\
+</span><span style=color:#b62;font-weight:700></span>    <span style=color:#666>&amp;&amp;</span> chmod +x tke-installer-linux-<span style=color:#b8860b>$arch</span>-<span style=color:#b8860b>$version</span>.run <span style=color:#b62;font-weight:700>\
+</span><span style=color:#b62;font-weight:700></span>    <span style=color:#666>&amp;&amp;</span> ./tke-installer-linux-<span style=color:#b8860b>$arch</span>-<span style=color:#b8860b>$version</span>.run  
+</code></pre></div><p>如上命令执行后，会下载8G左右的安装包，并执行解压后的install.sh脚本，启动3个容器：1个为tke-installer和另2个为registry仓，且为containerd容器，需要使用<code>nerdctl [images | ps]</code>等命令查看相关信息。</p>
+<p>通过查看脚本，上文启动的本地registry的启动命令等效如下：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>nerdctl run --name registry-https -d --net<span style=color:#666>=</span>host --restart<span style=color:#666>=</span>always -p 443:443 <span style=color:#b62;font-weight:700>\ </span> 
+    -v /opt/tke-installer/registry:/var/lib/registry <span style=color:#b62;font-weight:700>\ </span> 
+    -v registry-certs:/certs <span style=color:#b62;font-weight:700>\ </span> 
+    -e <span style=color:#b8860b>REGISTRY_HTTP_ADDR</span><span style=color:#666>=</span>0.0.0.0:443 <span style=color:#b62;font-weight:700>\ </span> 
+    -e <span style=color:#b8860b>REGISTRY_HTTP_TLS_CERTIFICATE</span><span style=color:#666>=</span>/certs/server.crt <span style=color:#b62;font-weight:700>\ </span> 
+    -e <span style=color:#b8860b>REGISTRY_HTTP_TLS_KEY</span><span style=color:#666>=</span>/certs/server.key  <span style=color:#b62;font-weight:700>\ </span> 
+    tkestack/registry-amd64:2.7.1  
+</code></pre></div><p>还有个http 80的registry，这里不贴了，后面的部分坑，就是这里埋下的，预先占用了节点的80和443端口，后面tke的gateway pod会启动失败。</p>
+<h2 id=启动tke集群>启动TKE集群</h2>
+<p>上章节执行完后，会启动tke-installer（一个web操作台），通过访问本地8080端口，可访问界面操作安装global集群。按照官方指引操作就行，此处不表。另外需要说明的是在安装过程中，如果要查看本地容器，不能使用<code>docker ps</code>了，需要使用<code>nerdctl -n k8s.io ps</code>。整个安装过程是使用ansible和kubeadm完成的，kubelet是通过systemd启动的，k8s组件为静态pod。</p>
+<p>因为我是使用的ALL-in-ONE安装，遇到了不少问题，可详见FAQ如何解决。安装成功后会提示如下指引：
+<img src=/images/TKEStack-allinone-2022-01-25-09-10-56.png alt></p>
+<p>默认初始安装后，很多pod是双副本的，我这里仅是验证功能使用，全部改成了单副本。</p>
+<h2 id=faq>FAQ</h2>
+<h3 id=安装过程出现循环等待apiserver启动>安装过程出现循环等待apiserver启动</h3>
+<pre tabindex=0><code class=language-log data-lang=log>2022-01-19 14:43:32.225 error   tke-installer.ClusterProvider.OnCreate.EnsureKubeadmInitPhaseWaitControlPlane   check healthz error {&quot;statusCode&quot;: 0, &quot;error&quot;: &quot;Get \&quot;https://****:6443/healthz?timeout=30s\&quot;: net/http: TLS handshake timeout&quot;}
+</code></pre><p>我这里是因为在installer上制定的master的IP为外网IP（我使用外网IP是有原因的，穷... 后面需要跨云厂商组集群），通过查看kubelet日志提示本机找不到IP，如下使能网卡多IP可通过。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>ip addr add 118.*.*.* dev eth0
+</code></pre></div><h3 id=gateway-pod启动失败>Gateway POD启动失败</h3>
+<p>我这里是因为init节点和gobal master节点，共用了一个，本registry服务占用了80和443端口，需要修改gateway hostNetwork为false，另外可以通过修改svc 为nodePort，还需要修改targetPort，官方现在这里有bug，不知道为指到944*的端口上，我这里设置的30080来访问安装好的集群。</p>
+<h3 id=页面登录错误unregistered-redirect-uri>页面登录错误Unregistered redirect_uri</h3>
+<p>官方没有相关说明，一切都是ALL-in-ONE的原因，我改动了默认集群console的访问端口为30080。。。 通过查看源码发现是每次认证时dex会校验tke-auth-api向它注册过的合法client地址。于是我就修改了tke命名空间下tke-auth-api的相关configmap：</p>
+<p><img src=/images/TKEStack-allinone-2022-01-25-09-47-16.png alt></p>
+<p>重启tke-auth-api后，问题依旧存在，继续源码走查，发现这玩意儿叫init真的只发挥一次作用，改完配置，不会重新读取，细读逻辑发现etcd中不存在这个key，会重新读取写入一次，于是决定删除etcd中的相关key。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>etcdctl --cacert<span style=color:#666>=</span>/etc/kubernetes/pki/etcd/ca.crt --cert<span style=color:#666>=</span>/etc/kubernetes/pki/apiserver-etcd-client.crt --key<span style=color:#666>=</span>/etc/kubernetes/pki/apiserver-etcd-client.key del /tke/auth-api/client/default  --prefix
+</code></pre></div><h3 id=添加节点的过程中failed-无法删除节点重试>添加节点的过程中failed，无法删除节点重试</h3>
+<p>应该是ansible，ssh信息设置完后，如果中间出问题，会陷入无限重试。</p>
+<p><img src=/images/TKEStack-allinone-2022-01-25-09-48-43.png alt></p>
+<p>解决（HACK）问题中...</p>
+<h2 id=小技巧>小技巧</h2>
+<p>如下使用，可以愉快的敲命令了，因为我是用oh-my-zsh的shell主题(没有自动加载kubectl plugin)，kubectl的命令补全使用zsh，可根据实际情况调整。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#a2f>source</span> &lt;<span style=color:#666>(</span>nerdctl completion bash<span style=color:#666>)</span>  
+<span style=color:#a2f>source</span> &lt;<span style=color:#666>(</span>kubectl completion zsh<span style=color:#666>)</span> 
+</code></pre></div>
 </div>
 </main>
 </div>

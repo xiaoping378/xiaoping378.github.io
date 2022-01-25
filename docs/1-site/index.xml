@@ -16,7 +16,7 @@
 &lt;/li>
 &lt;/ul>
 &lt;h2 id="主题选择">主题选择&lt;/h2>
-&lt;p>选用Docsy主题，出自google的开源主题，很多流行项目使用此主题作为官方站点，有k8s、kubeflow、grpc、knative、Selenium等，详见此。主要功能包含：&lt;/p>
+&lt;p>选用Docsy主题，出自google的开源主题，很多流行项目使用此主题作为官方站点，有k8s、kubeflow、grpc、etcd、Selenium等，详见此。主要功能包含：&lt;/p>
 &lt;ul>
 &lt;li>支持树形目录&lt;/li>
 &lt;li>国际化&lt;/li>
@@ -269,7 +269,7 @@ desc = &lt;span style="color:#b44">&amp;#34;未开通&amp;#34;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ul>
 &lt;h2 id="总结">总结&lt;/h2>
-&lt;p>目前还有本站点有些功能还不好用，比如搜索和SEO优化等等，待进一步优化，，，&lt;/p>
+&lt;p>不定期更新此文，待进一步优化，，，&lt;/p>
 &lt;p>如果自己搭建嫌麻烦，可直接Copy本站，编写自己的内容即可，搭建本站时，也遇到了Docsy国际化方面的问题，已提交官方&lt;a href="https://github.com/google/docsy/pull/826">PR&lt;/a>修复。&lt;/p>
 &lt;p>&lt;a href="../actions_pages">下文&lt;/a>介绍使用github的actions和pages自动托管站点。&lt;/p></description></item><item><title>Docs: 自动托管markdown</title><link>https://xiaoping378.github.io/docs/1-site/actions_pages/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/1-site/actions_pages/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
@@ -283,16 +283,33 @@ desc = &lt;span style="color:#b44">&amp;#34;未开通&amp;#34;&lt;/span>
 &lt;/div>
 &lt;h2 id="编写markdown">编写markdown&lt;/h2>
 &lt;h3 id="图片路径问题">图片路径问题&lt;/h3>
-&lt;p>日常md文件里可以写成&lt;code>![](/image.png)&lt;/code> ，图片实际要存放到&lt;code>static&lt;/code>路径下，hugo会自动渲染到站点的根路径&lt;code>/&lt;/code>上。&lt;/p>
-&lt;p>这样的话，编辑器编写md就无法预览了，可以使用一个临时目录，把图片和md文件放到同一目录，编写完毕后，再把图片和md文件放置上述合适位置。&lt;/p>
+&lt;p>习惯md文件中的图片路径写成&lt;code>![](/images/file.png)&lt;/code> ，但hugo中图片实际要存放到&lt;code>/static/images/&lt;/code>路径下，hugo会自动渲染到站点的根路径&lt;code>/&lt;/code>上。&lt;/p>
+&lt;p>这样的话，无法在编辑器中预览md了，有两种玩法如下：&lt;/p>
+&lt;ul>
+&lt;li>可以使用一个临时目录，把图片和md文件放到同一目录，编写完毕后，再把图片和md文件放置上述合适的目录位置上。&lt;/li>
+&lt;li>日常一直启用&lt;code>hugo server&lt;/code>编写文章，放弃编辑器中预览md，后面还会有别的坑....&lt;/li>
+&lt;/ul>
+&lt;p>推荐后者，本人日常使用VSCode编写md，和代码开发同款，这里推荐安装&lt;code>mushan.vscode-paste-image&lt;/code>扩展，再额外如下配置：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json"> &lt;span style="color:#b44">&amp;#34;pasteImage.namePrefix&amp;#34;&lt;/span>&lt;span style="">:&lt;/span> &lt;span style="color:#b44">&amp;#34;${currentFileNameWithoutExt}-&amp;#34;&lt;/span>&lt;span style="">,&lt;/span>
+&lt;span style="color:#b44">&amp;#34;pasteImage.path&amp;#34;&lt;/span>&lt;span style="">:&lt;/span> &lt;span style="color:#b44">&amp;#34;${projectRoot}/static/images/&amp;#34;&lt;/span>&lt;span style="">,&lt;/span>
+&lt;span style="color:#b44">&amp;#34;pasteImage.basePath&amp;#34;&lt;/span>&lt;span style="">:&lt;/span> &lt;span style="color:#b44">&amp;#34;${projectRoot}&amp;#34;&lt;/span>&lt;span style="">,&lt;/span>
+&lt;span style="color:#b44">&amp;#34;pasteImage.insertPattern&amp;#34;&lt;/span>&lt;span style="">:&lt;/span> &lt;span style="color:#b44">&amp;#34;${imageSyntaxPrefix}/images/${imageFileName}${imageSyntaxSuffix}&amp;#34;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>日常编写文章，&lt;code>Alt+A&lt;/code>截图，&lt;code>Ctrl+Alt+A&lt;/code>粘贴到md文件，和hugo的配合，完美...&lt;/p>
+&lt;h3 id="seo优化关注点">SEO优化关注点&lt;/h3>
+&lt;p>日常文章编写，如下部分要精准描述，Google搜索引擎推荐使用&lt;code>description&lt;/code>的meta标签告诉它页面内容的，Docsy主题会自动把红框部分填充到&lt;code>layouts/partials/head.html&lt;/code>中。&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.github.io/images/add_content-2022-01-25-09-38-48.png" alt="">&lt;/p>
+&lt;p>hugo解析编译后，html页面会如下呈现：&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.github.io/images/add_content-2022-01-25-09-37-12.png" alt="">&lt;/p>
 &lt;h3 id="日常编写注意事项">日常编写注意事项&lt;/h3>
 &lt;h4 id="md文件中相互引用内容的路径要记得对应到站点html的路径上">md文件中相互引用内容的路径要记得对应到站点html的路径上&lt;/h4>
-&lt;p>比如此处引用&lt;code>自动托管markdown&lt;/code>文章，按照md习惯写,虽然编辑器上可以正常打开，但hugo渲染后的页面是不行的。&lt;/p>
+&lt;p>比如此处引用&lt;code>自动托管markdown&lt;/code>文章，按照md习惯写,虽然编辑器上可以正常打开，但hugo渲染后的页面是404的。&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>[引用](./actions_pages.md)&lt;/code> 需要改成 &lt;code>[引用](../actions_pages)&lt;/code>&lt;/li>
 &lt;li>&lt;code>[引用](/content/docs/1-site/actions_pages.md)&lt;/code> 需要改成 &lt;code>[引用](/docs/1-site/actions_pages)&lt;/code>&lt;/li>
 &lt;/ul>
-&lt;p>知道有这些差异就可以了。日常编写，建议本机启用&lt;code>hugo server&lt;/code>实时预览，&lt;/p></description></item><item><title>Docs: markdown语法</title><link>https://xiaoping378.github.io/docs/1-site/tutorial2/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/1-site/tutorial2/</guid><description>
+&lt;p>不定时更新注意事项。日常编写，建议本机启用&lt;code>hugo server&lt;/code>实时预览，&lt;/p>
+&lt;h4 id="文章weight的使用">文章weight的使用&lt;/h4>
+&lt;p>文章开头的&lt;code>weight&lt;/code>部分决定了目录中的排序，推荐新开的系列文章，从两位数开始递增，比如&lt;code>30&lt;/code>, 以后老系列有更新的时候，免去批量修改调整排序的麻烦。&lt;/p></description></item><item><title>Docs: markdown语法</title><link>https://xiaoping378.github.io/docs/1-site/tutorial2/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/1-site/tutorial2/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
 &lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
 &lt;/div>
