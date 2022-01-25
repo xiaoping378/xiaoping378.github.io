@@ -2,7 +2,7 @@
 tags: ["容器", "K8S"]
 title: "DEIS 开源PAAS平台实践"
 linkTitle: "DEIS 开源PAAS平台实践"
-weight: 30
+weight: 20
 description: >
   DEIS 开源的PAAS平台实践总结。 
 ---
