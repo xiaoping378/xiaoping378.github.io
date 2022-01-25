@@ -27,7 +27,7 @@ hugo是spf13的开源作品，目前任职于google，对他最早的印象是�
  
 
 ## 主题选择
-选用Docsy主题，出自google的开源主题，很多流行项目使用此主题作为官方站点，有k8s、kubeflow、grpc、knative、Selenium等，详见此。主要功能包含：
+选用Docsy主题，出自google的开源主题，很多流行项目使用此主题作为官方站点，有k8s、kubeflow、grpc、etcd、Selenium等，详见此。主要功能包含：
  - 支持树形目录
  - 国际化
  - 搜索功能
@@ -325,7 +325,7 @@ hugo server
 
 ## 总结
 
-目前还有本站点有些功能还不好用，比如搜索和SEO优化等等，待进一步优化，，，
+不定期更新此文，待进一步优化，，，
 
 如果自己搭建嫌麻烦，可直接Copy本站，编写自己的内容即可，搭建本站时，也遇到了Docsy国际化方面的问题，已提交官方[PR](https://github.com/google/docsy/pull/826)修复。
 
