@@ -574,4 +574,53 @@ robo3t-1.1.1-linux-x86_64-c93c6b0/bin/robo3t
 &lt;p>shell里敲mongo进入交互界面，&lt;/p>
 &lt;p>手续推荐查看&lt;a href="http://www.mongoing.com/docs/reference/sql-comparison.html">mongodb中文文档&lt;/a>&lt;/p></description></item><item><title>Docs: Openldap之拨云见日</title><link>https://xiaoping378.github.io/docs/3-devops/openldap%E4%B9%8B%E6%8B%A8%E4%BA%91%E5%8E%BB%E6%97%A5/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/3-devops/openldap%E4%B9%8B%E6%8B%A8%E4%BA%91%E5%8E%BB%E6%97%A5/</guid><description>
 &lt;p>很早就听说LDAP/AD之流的企业级概念，认为是做统一用户认证的，具体怎么使用对接，一直有点儿糊涂，今天决定搞明白这些，并深入实践下openldap。&lt;/p>
-&lt;p>未完...TODO&lt;/p></description></item></channel></rss>
+&lt;p>未完...TODO&lt;/p></description></item><item><title>Docs: Casbin的权限管理解读</title><link>https://xiaoping378.github.io/docs/3-devops/casbin/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/3-devops/casbin/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>项目一般都要包含权限管理功能，或集成IAM，或自身实现。本文介绍一个强大、高效的开源访问控制框架--Casbin。&lt;/p>
+&lt;/div>
+&lt;h2 id="基本介绍">基本介绍&lt;/h2>
+&lt;p>Casbin的由来，是出自开源作者&lt;code>罗杨&lt;/code>的一篇论文&lt;a href="https://arxiv.org/abs/1903.09756">《PML：一种基于Interpreter的Web服务访问控制策略语言》&lt;/a>，该论文的主要摘要如下：&lt;/p>
+&lt;blockquote>
+&lt;p>为了保护云资源的安全,防止数据泄露和非授权访问,必须对云平台的资源访问实施访问控制.然而,目前主流云平台通常采用自己的安全策略语言和访问控制机制,从而造成两个问题:&lt;/p>
+&lt;ul>
+&lt;li>（1）云用户若要使用多个云平台,则需要学习不同的策略语言,分别编写安全策略;&lt;/li>
+&lt;li>（2）云服务提供商需要自行设计符合自己平台的安全策略语言及访问控制机制,开发成本较高.&lt;/li>
+&lt;/ul>
+&lt;p>对此,提出一种基于元模型的访问控制策略描述语言PML及其实施机制PML-EM. PML支持表达BLP、RBAC、ABAC等访问控制模型.
+PML-EM实现了3个性质:&lt;/p>
+&lt;ul>
+&lt;li>策略语言无关性&lt;/li>
+&lt;li>访问控制模型无关性&lt;/li>
+&lt;li>程序设计语言无关性&lt;/li>
+&lt;/ul>
+&lt;p>从而降低了用户编写策略的成本与云服务提供商开发访问控制机制的成本. 在OpenStack云平台上实现了PML-EM机制.实验结果表明,PML策略支持从其他策略进行自动转换,
+在表达云中多租户场景时具有优势.性能方面,与OpenStack原有策略相比,PML策略的评估开销为4.8%.PML-EM机制的侵入性较小,与云平台原有代码相比增加约0.42%.&lt;/p>
+&lt;/blockquote>
+&lt;p>目前Casbin的权限策略管理支持主流的&lt;strong>ACL、RBAC、ABAC&lt;/strong>、RESTful等模型，实现的编程语言主要有Go、java、Nodejs、PHP、Python、.Net、C++、Rust等。目前Go和Java的实现最为全面。&lt;/p>
+&lt;p>先介绍下主流的访问控制模型：&lt;/p>
+&lt;ul>
+&lt;li>&lt;em>ACL（access control list）&lt;/em>：是一种与访问对象关联的权限列表，在基础设施领域应用非常广泛：
+&lt;ul>
+&lt;li>文件系统：用户（组）对文件或进程等的访问权限控制&lt;/li>
+&lt;li>网络：常见的有防火墙（安全组、路由器、交换机）内的对目的IP和端口的规则控制&lt;/li>
+&lt;li>SQL：库、表的权限管理&lt;/li>
+&lt;li>&lt;a href="../openldap%E4%B9%8B%E6%8B%A8%E4%BA%91%E5%8E%BB%E6%97%A5">LDAP&lt;/a>：层级结构的实体权限管理：网络域权限管理...&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;em>RBAC（role-based access control）&lt;/em>：基于角色的权限控制，围绕角色和权限定义的策略中立的访问控制机制，和组ACL等价，具体表现为在用户和权限之间加了一层角色，先建立具有某种权限的角色，然后用角色和用户绑定，目前多用于业务系统内的权限管理，还支持支持角色权限继承。&lt;/li>
+&lt;li>&lt;em>ABAC（Attribute-based access control）&lt;/em>：基于属性的权限控制，属性可以是用户侧（所属组织、访问IP、访问时间）或资源侧（帖子的评论开关、留言再编辑）的，因为用户或资源的属性是动态的，不像前面两个(需要预先定义好策略，略显死板,,,）被称为是“下一代”的权限模型。&lt;/li>
+&lt;li>&lt;em>Restful&lt;/em>：一种Web API规范，常用GET, POST等动作来实现与后台交互。&lt;/li>
+&lt;/ul>
+&lt;p>和Casbin结合，使用的基本示意图如下：&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.github.io/images/Casbin-%E4%BD%BF%E7%94%A8%E7%A4%BA%E6%84%8F%E5%9B%BE.drawio.png" alt="">&lt;/p>
+&lt;ul>
+&lt;li>1-2为管理人员下发权限策略&lt;/li>
+&lt;li>3-6为用户日常操作资源的简易流程&lt;/li>
+&lt;/ul>
+&lt;h2 id="抽象模型">抽象模型&lt;/h2>
+&lt;p>因为上面提到的，要支持这么多的模型，所以Casbin引入一种抽象的元模型控制- &lt;strong>PERM&lt;/strong>，&lt;/p>
+&lt;p>场景说明：&lt;/p>
+&lt;p>未完待续 TODO...&lt;/p>
+&lt;blockquote>
+&lt;p>我的博客即将同步至腾讯云+社区，邀请大家一同入驻：https://cloud.tencent.com/developer/support-plan?invite_code=3ntkskjrcwow8&lt;/p>
+&lt;/blockquote></description></item></channel></rss>

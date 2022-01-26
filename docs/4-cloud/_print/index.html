@@ -7,19 +7,19 @@
 <link rel=alternate type=application/rss+xml href=https://xiaoping378.github.io/docs/4-cloud/index.xml>
 <meta name=robots content="noindex, nofollow">
 <link rel="shortcut icon" href=/favicons/favicon.ico>
-<title>云计算 | 现代技能栈</title>
-<meta name=description content="云计算界还在不断向前发展，持续更新认知。 
+<title>云原生 | 现代技能栈</title>
+<meta name=description content="云原生界还在不断向前发展，范围不断拓展，覆盖容器、k8s、可观测、安全、service mesh、serverless、中间件等，持续更新认知..
 ">
-<meta property="og:title" content="云计算">
-<meta property="og:description" content="云计算界还在不断向前发展，持续更新认知。 
+<meta property="og:title" content="云原生">
+<meta property="og:description" content="云原生界还在不断向前发展，范围不断拓展，覆盖容器、k8s、可观测、安全、service mesh、serverless、中间件等，持续更新认知..
 ">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://xiaoping378.github.io/docs/4-cloud/"><meta property="og:site_name" content="现代技能栈">
-<meta itemprop=name content="云计算">
-<meta itemprop=description content="云计算界还在不断向前发展，持续更新认知。 
+<meta itemprop=name content="云原生">
+<meta itemprop=description content="云原生界还在不断向前发展，范围不断拓展，覆盖容器、k8s、可观测、安全、service mesh、serverless、中间件等，持续更新认知..
 "><meta name=twitter:card content="summary">
-<meta name=twitter:title content="云计算">
-<meta name=twitter:description content="云计算界还在不断向前发展，持续更新认知。 
+<meta name=twitter:title content="云原生">
+<meta name=twitter:description content="云原生界还在不断向前发展，范围不断拓展，覆盖容器、k8s、可观测、安全、service mesh、serverless、中间件等，持续更新认知..
 ">
 <link rel=preload href=/scss/main.min.8973293e550f2aebcff13ca0acf28013165ed1fa321e6a370fbd3fd2e00c7d33.css as=style>
 <link href=/scss/main.min.8973293e550f2aebcff13ca0acf28013165ed1fa321e6a370fbd3fd2e00c7d33.css rel=stylesheet integrity>
@@ -50,7 +50,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.d700a1afccbb9849065ad8fcb0b71a36.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.a8a89f06036b49411faaa9899bc4cf66.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -67,8 +67,8 @@
 <a href=/docs/4-cloud/>返回本页常规视图</a>.
 </p>
 </div>
-<h1 class=title>云计算</h1>
-<div class=lead>云计算界还在不断向前发展，持续更新认知。</div>
+<h1 class=title>云原生</h1>
+<div class=lead>云原生界还在不断向前发展，范围不断拓展，覆盖容器、k8s、可观测、安全、service mesh、serverless、中间件等，持续更新认知..</div>
 <ul>
 <li>1: <a href=#pg-d902da8df70386ae87ff26d958341b55>容器篇</a></li>
 <ul>
@@ -114,9 +114,9 @@
 </ul>
 <div class=content>
 <div class="pageinfo pageinfo-primary">
-<p>云计算领域，持续深耕中...</p>
+<p>云原生领域，持续深耕中...</p>
 </div>
-<p>自15年开始接触容器，当时容器就是Docker，Docker就是容器，当然现在docker仍是主流的容器runtime方案，随着k8s带起来的云原生生态规模落地和数字化转型的战略倡导，如今也发生了太多变化，此篇会把以前编写的一些文章挪移到此处，顺便开启新的认知。</p>
+<p>自15年开始接触容器，当时容器就是Docker，Docker就是容器，当然现在docker仍是主流的容器runtime方案，但随着k8s带起来的云原生生态规模落地和全球企业数字化转型的战略倡导，如今也发生了太多变化...此篇会把以前编写的一些文章挪移到此处，顺便开启新的认知。</p>
 </div>
 </div>
 <div class=td-content style=page-break-before:always>
@@ -1332,7 +1332,7 @@ You are admin at http://deis.192.168.31.49.xip.io
 <div class="pageinfo pageinfo-primary">
 <p>本文主要介绍k3s的安装和核心组件解读。</p>
 </div>
-<p>k3s是all-in-one的轻量k8s发行版，把所有k8s组件重新打包一个不到100M的二进制文件了。主要具备显著特点：</p>
+<p>k3s是all-in-one的轻量k8s发行版，把所有k8s组件打包成一个不到100M的二进制文件了。具备如下显著特点：</p>
 <ul>
 <li>打包成单一二进制</li>
 <li>默认集成了sqlite3来替代etcd，也可以指定其他数据库：etcd3、mysql、postgres。</li>
@@ -1346,18 +1346,28 @@ You are admin at http://deis.192.168.31.49.xip.io
 </code></pre></div><blockquote>
 <p>由于网络原因，可能会失败，自行想办法<a href=https://github.com/k3s-io/k3s/releases/download/v1.19.16+k3s1/k3s>下载</a>下来，放置 <code>/usr/local/bin/k3s</code>，附上执行权限<code>chmod a+x /usr/local/bin/k3s</code>, 然后上面的命令加上<code>INSTALL_K3S_SKIP_DOWNLOAD=true</code>再执行一遍即可。</p>
 </blockquote>
+<blockquote>
+<p>安装里log里会输出一些重要信息: <code>kubectl、crictl、卸载脚本、systemd service</code></p>
+</blockquote>
 <p>不出意外，k3s server会被systemd启动，执行命令查看<code>systemctl status k3s</code>或者通过软链的kubectl验证是否启动成功：</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>➜  k3s kubectl get no
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>➜  kubectl get no
 NAME            STATUS   ROLES    AGE     VERSION
 gitlab-server   Ready    master   6m43s   v1.19.16+k3s1
 </code></pre></div><p><strong>(Optional)</strong> 启动 k3s agent端 (添加worker节点).</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sfL https://get.k3s.io | <span style=color:#b8860b>K3S_URL</span><span style=color:#666>=</span>https://172.25.11.130:6443 <span style=color:#b8860b>K3S_TOKEN</span><span style=color:#666>=</span>bulabula <span style=color:#b8860b>INSTALL_K3S_VERSION</span><span style=color:#666>=</span>v1.19.16+k3s1 sh -
-</code></pre></div><p><code>K3S_TOKEN</code>内容需要从server端的<code>/var/lib/rancher/k3s/server/node-token</code>文件取出，<code>K3S_URL</code>中的IP是master节点的IP。</p>
-<h2 id=架构>架构</h2>
+</code></pre></div><ul>
+<li><code>K3S_TOKEN</code>内容需要从server端的<code>/var/lib/rancher/k3s/server/node-token</code>文件取出</li>
+<li><code>K3S_URL</code>中的IP是master节点的IP。</li>
+</ul>
+<h2 id=集群访问>集群访问</h2>
+<p>默认kubectl通过localhost访问本地集群，所以上文敲kubectl是没问题的，如果要被外部访问或者纳管的话，可以把kubeconfig文件拷走，默认路径是 <code>/etc/rancher/k3s/k3s.yaml</code>
+。记得修改文件内的server字段，改成外部可访问到的IP。</p>
+<h2 id=架构说明>架构说明</h2>
+<p>TODO.</p>
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-8d71550d3ee2751c7f80b3cef9ae8232>2.9 - TKEStack all-in-one入坑指南</h1>
-<div class=lead>TKEStack的all-in-one安装及基本功能解读</div>
+<div class=lead>TKEStack的all-in-one安装、多租户和多集群管理功能解读</div>
 <div class="pageinfo pageinfo-primary">
 <p>本文主要介绍当前最新版本TkeStack 1.8.1 的allinone安装入坑指南和基本核心功能介绍。</p>
 </div>
@@ -1386,10 +1396,12 @@ gitlab-server   Ready    master   6m43s   v1.19.16+k3s1
 <p>因为我是使用的ALL-in-ONE安装，遇到了不少问题，可详见FAQ如何解决。安装成功后会提示如下指引：
 <img src=/images/TKEStack-allinone-2022-01-25-09-10-56.png alt></p>
 <p>默认初始安装后，很多pod是双副本的，我这里仅是验证功能使用，全部改成了单副本。</p>
+<h2 id=多租户管理>多租户管理</h2>
+<p>tkestack采用Casbin模型作为权限管理，TODO.</p>
 <h2 id=faq>FAQ</h2>
 <h3 id=安装过程出现循环等待apiserver启动>安装过程出现循环等待apiserver启动</h3>
 <pre tabindex=0><code class=language-log data-lang=log>2022-01-19 14:43:32.225 error   tke-installer.ClusterProvider.OnCreate.EnsureKubeadmInitPhaseWaitControlPlane   check healthz error {&quot;statusCode&quot;: 0, &quot;error&quot;: &quot;Get \&quot;https://****:6443/healthz?timeout=30s\&quot;: net/http: TLS handshake timeout&quot;}
-</code></pre><p>我这里是因为在installer上制定的master的IP为外网IP（我使用外网IP是有原因的，穷... 后面需要跨云厂商组集群），通过查看kubelet日志提示本机找不到IP，如下使能网卡多IP可通过。</p>
+</code></pre><p>我这里是因为在installer上指定的master的IP为外网IP（我使用外网IP是有原因的，穷... 后面需要跨云厂商组集群），通过查看kubelet日志提示本机找不到IP，如下开启网卡多IP，可通过。</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>ip addr add 118.*.*.* dev eth0
 </code></pre></div><h3 id=gateway-pod启动失败>Gateway POD启动失败</h3>
 <p>我这里是因为init节点和gobal master节点，共用了一个，本registry服务占用了80和443端口，需要修改gateway hostNetwork为false，另外可以通过修改svc 为nodePort，还需要修改targetPort，官方现在这里有bug，不知道为指到944*的端口上，我这里设置的30080来访问安装好的集群。</p>
@@ -1399,9 +1411,11 @@ gitlab-server   Ready    master   6m43s   v1.19.16+k3s1
 <p>重启tke-auth-api后，问题依旧存在，继续源码走查，发现这玩意儿叫init真的只发挥一次作用，改完配置，不会重新读取，细读逻辑发现etcd中不存在这个key，会重新读取写入一次，于是决定删除etcd中的相关key。</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>etcdctl --cacert<span style=color:#666>=</span>/etc/kubernetes/pki/etcd/ca.crt --cert<span style=color:#666>=</span>/etc/kubernetes/pki/apiserver-etcd-client.crt --key<span style=color:#666>=</span>/etc/kubernetes/pki/apiserver-etcd-client.key del /tke/auth-api/client/default  --prefix
 </code></pre></div><h3 id=添加节点的过程中failed-无法删除节点重试>添加节点的过程中failed，无法删除节点重试</h3>
-<p>应该是ansible，ssh信息设置完后，如果中间出问题，会陷入无限重试。</p>
+<p>ssh信息设置完后，如果中间出问题，会陷入无限重试...</p>
 <p><img src=/images/TKEStack-allinone-2022-01-25-09-48-43.png alt></p>
-<p>解决（HACK）问题中...</p>
+<p>遇事不决，看日志，找不到日志，看源码...</p>
+<p>通过翻找源码，发现是<code>platform</code>相关组件在负责，查看相关日志<code>kubectl -n logs tke-platform-controller-*** --tail 100 -f</code>，定位问题，我这里是以前各种安装的残留信息，导致添加节点初始化失败。删除之... 解决。</p>
+<p>为避免添加节点<code>no clean</code>再次出现问题，建议预先执行下<a href=https://tke-release-1251707795.cos.ap-guangzhou.myqcloud.com/tools/clean.sh>clean.sh</a>脚本。</p>
 <h2 id=小技巧>小技巧</h2>
 <p>如下使用，可以愉快的敲命令了，因为我是用oh-my-zsh的shell主题(没有自动加载kubectl plugin)，kubectl的命令补全使用zsh，可根据实际情况调整。</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#a2f>source</span> &lt;<span style=color:#666>(</span>nerdctl completion bash<span style=color:#666>)</span>  

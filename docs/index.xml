@@ -3900,7 +3900,56 @@ Total execution &lt;span style="color:#a2f">time&lt;/span> : &lt;span style="col
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>本样例修改后的完整地址在&lt;a href="https://github.com/xiaoping378/fabric-samples">这里&lt;/a>&lt;/p>
 &lt;h3 id="总结">总结&lt;/h3>
 &lt;p>目前集群化后网络里的peers ledger和orderer的数据还是存储在容器里，是否要考虑挂载出来，不然容器挂了再启动后，数据是否会乱了，后续研究下。&lt;/p>
-&lt;p>后续还会继续搞下CA，MSP和动态添加节点以及合约迭代升级等问题。&lt;/p></description></item><item><title>Docs: 镜像管理</title><link>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E9%95%9C%E5%83%8F%E7%AE%A1%E7%90%86/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E9%95%9C%E5%83%8F%E7%AE%A1%E7%90%86/</guid><description>
+&lt;p>后续还会继续搞下CA，MSP和动态添加节点以及合约迭代升级等问题。&lt;/p></description></item><item><title>Docs: Casbin的权限管理解读</title><link>https://xiaoping378.github.io/docs/3-devops/casbin/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/3-devops/casbin/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>项目一般都要包含权限管理功能，或集成IAM，或自身实现。本文介绍一个强大、高效的开源访问控制框架--Casbin。&lt;/p>
+&lt;/div>
+&lt;h2 id="基本介绍">基本介绍&lt;/h2>
+&lt;p>Casbin的由来，是出自开源作者&lt;code>罗杨&lt;/code>的一篇论文&lt;a href="https://arxiv.org/abs/1903.09756">《PML：一种基于Interpreter的Web服务访问控制策略语言》&lt;/a>，该论文的主要摘要如下：&lt;/p>
+&lt;blockquote>
+&lt;p>为了保护云资源的安全,防止数据泄露和非授权访问,必须对云平台的资源访问实施访问控制.然而,目前主流云平台通常采用自己的安全策略语言和访问控制机制,从而造成两个问题:&lt;/p>
+&lt;ul>
+&lt;li>（1）云用户若要使用多个云平台,则需要学习不同的策略语言,分别编写安全策略;&lt;/li>
+&lt;li>（2）云服务提供商需要自行设计符合自己平台的安全策略语言及访问控制机制,开发成本较高.&lt;/li>
+&lt;/ul>
+&lt;p>对此,提出一种基于元模型的访问控制策略描述语言PML及其实施机制PML-EM. PML支持表达BLP、RBAC、ABAC等访问控制模型.
+PML-EM实现了3个性质:&lt;/p>
+&lt;ul>
+&lt;li>策略语言无关性&lt;/li>
+&lt;li>访问控制模型无关性&lt;/li>
+&lt;li>程序设计语言无关性&lt;/li>
+&lt;/ul>
+&lt;p>从而降低了用户编写策略的成本与云服务提供商开发访问控制机制的成本. 在OpenStack云平台上实现了PML-EM机制.实验结果表明,PML策略支持从其他策略进行自动转换,
+在表达云中多租户场景时具有优势.性能方面,与OpenStack原有策略相比,PML策略的评估开销为4.8%.PML-EM机制的侵入性较小,与云平台原有代码相比增加约0.42%.&lt;/p>
+&lt;/blockquote>
+&lt;p>目前Casbin的权限策略管理支持主流的&lt;strong>ACL、RBAC、ABAC&lt;/strong>、RESTful等模型，实现的编程语言主要有Go、java、Nodejs、PHP、Python、.Net、C++、Rust等。目前Go和Java的实现最为全面。&lt;/p>
+&lt;p>先介绍下主流的访问控制模型：&lt;/p>
+&lt;ul>
+&lt;li>&lt;em>ACL（access control list）&lt;/em>：是一种与访问对象关联的权限列表，在基础设施领域应用非常广泛：
+&lt;ul>
+&lt;li>文件系统：用户（组）对文件或进程等的访问权限控制&lt;/li>
+&lt;li>网络：常见的有防火墙（安全组、路由器、交换机）内的对目的IP和端口的规则控制&lt;/li>
+&lt;li>SQL：库、表的权限管理&lt;/li>
+&lt;li>&lt;a href="../openldap%E4%B9%8B%E6%8B%A8%E4%BA%91%E5%8E%BB%E6%97%A5">LDAP&lt;/a>：层级结构的实体权限管理：网络域权限管理...&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;em>RBAC（role-based access control）&lt;/em>：基于角色的权限控制，围绕角色和权限定义的策略中立的访问控制机制，和组ACL等价，具体表现为在用户和权限之间加了一层角色，先建立具有某种权限的角色，然后用角色和用户绑定，目前多用于业务系统内的权限管理，还支持支持角色权限继承。&lt;/li>
+&lt;li>&lt;em>ABAC（Attribute-based access control）&lt;/em>：基于属性的权限控制，属性可以是用户侧（所属组织、访问IP、访问时间）或资源侧（帖子的评论开关、留言再编辑）的，因为用户或资源的属性是动态的，不像前面两个(需要预先定义好策略，略显死板,,,）被称为是“下一代”的权限模型。&lt;/li>
+&lt;li>&lt;em>Restful&lt;/em>：一种Web API规范，常用GET, POST等动作来实现与后台交互。&lt;/li>
+&lt;/ul>
+&lt;p>和Casbin结合，使用的基本示意图如下：&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.github.io/images/Casbin-%E4%BD%BF%E7%94%A8%E7%A4%BA%E6%84%8F%E5%9B%BE.drawio.png" alt="">&lt;/p>
+&lt;ul>
+&lt;li>1-2为管理人员下发权限策略&lt;/li>
+&lt;li>3-6为用户日常操作资源的简易流程&lt;/li>
+&lt;/ul>
+&lt;h2 id="抽象模型">抽象模型&lt;/h2>
+&lt;p>因为上面提到的，要支持这么多的模型，所以Casbin引入一种抽象的元模型控制- &lt;strong>PERM&lt;/strong>，&lt;/p>
+&lt;p>场景说明：&lt;/p>
+&lt;p>未完待续 TODO...&lt;/p>
+&lt;blockquote>
+&lt;p>我的博客即将同步至腾讯云+社区，邀请大家一同入驻：https://cloud.tencent.com/developer/support-plan?invite_code=3ntkskjrcwow8&lt;/p>
+&lt;/blockquote></description></item><item><title>Docs: 镜像管理</title><link>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E9%95%9C%E5%83%8F%E7%AE%A1%E7%90%86/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E9%95%9C%E5%83%8F%E7%AE%A1%E7%90%86/</guid><description>
 &lt;p>刚接触docker时，第一个接触到的应该就是镜像了，docker之所以如此火热，个人认为一大部分原因就是这个镜像的提出，极大的促进了DevOps推广和软件复用的能力。&lt;/p>
 &lt;p>而openshift对镜像的管理非常强大，直到写这篇blog，我才真正意识到这点，甚至犹豫是不是要放到开发实战篇后再来写&lt;code>镜像管理&lt;/code>。&lt;/p>
 &lt;p>简要说下openshift里使用镜像的情况：&lt;/p>
@@ -4279,7 +4328,7 @@ You are admin at http://deis.192.168.31.49.xip.io
 &lt;div class="pageinfo pageinfo-primary">
 &lt;p>本文主要介绍k3s的安装和核心组件解读。&lt;/p>
 &lt;/div>
-&lt;p>k3s是all-in-one的轻量k8s发行版，把所有k8s组件重新打包一个不到100M的二进制文件了。主要具备显著特点：&lt;/p>
+&lt;p>k3s是all-in-one的轻量k8s发行版，把所有k8s组件打包成一个不到100M的二进制文件了。具备如下显著特点：&lt;/p>
 &lt;ul>
 &lt;li>打包成单一二进制&lt;/li>
 &lt;li>默认集成了sqlite3来替代etcd，也可以指定其他数据库：etcd3、mysql、postgres。&lt;/li>
@@ -4293,14 +4342,24 @@ You are admin at http://deis.192.168.31.49.xip.io
 &lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
 &lt;p>由于网络原因，可能会失败，自行想办法&lt;a href="https://github.com/k3s-io/k3s/releases/download/v1.19.16+k3s1/k3s">下载&lt;/a>下来，放置 &lt;code>/usr/local/bin/k3s&lt;/code>，附上执行权限&lt;code>chmod a+x /usr/local/bin/k3s&lt;/code>, 然后上面的命令加上&lt;code>INSTALL_K3S_SKIP_DOWNLOAD=true&lt;/code>再执行一遍即可。&lt;/p>
 &lt;/blockquote>
+&lt;blockquote>
+&lt;p>安装里log里会输出一些重要信息: &lt;code>kubectl、crictl、卸载脚本、systemd service&lt;/code>&lt;/p>
+&lt;/blockquote>
 &lt;p>不出意外，k3s server会被systemd启动，执行命令查看&lt;code>systemctl status k3s&lt;/code>或者通过软链的kubectl验证是否启动成功：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ k3s kubectl get no
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ kubectl get no
 NAME STATUS ROLES AGE VERSION
 gitlab-server Ready master 6m43s v1.19.16+k3s1
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>(Optional)&lt;/strong> 启动 k3s agent端 (添加worker节点).&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">curl -sfL https://get.k3s.io | &lt;span style="color:#b8860b">K3S_URL&lt;/span>&lt;span style="color:#666">=&lt;/span>https://172.25.11.130:6443 &lt;span style="color:#b8860b">K3S_TOKEN&lt;/span>&lt;span style="color:#666">=&lt;/span>bulabula &lt;span style="color:#b8860b">INSTALL_K3S_VERSION&lt;/span>&lt;span style="color:#666">=&lt;/span>v1.19.16+k3s1 sh -
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>K3S_TOKEN&lt;/code>内容需要从server端的&lt;code>/var/lib/rancher/k3s/server/node-token&lt;/code>文件取出，&lt;code>K3S_URL&lt;/code>中的IP是master节点的IP。&lt;/p>
-&lt;h2 id="架构">架构&lt;/h2></description></item><item><title>Docs: 性能优化指南</title><link>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97/</guid><description>
+&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>&lt;code>K3S_TOKEN&lt;/code>内容需要从server端的&lt;code>/var/lib/rancher/k3s/server/node-token&lt;/code>文件取出&lt;/li>
+&lt;li>&lt;code>K3S_URL&lt;/code>中的IP是master节点的IP。&lt;/li>
+&lt;/ul>
+&lt;h2 id="集群访问">集群访问&lt;/h2>
+&lt;p>默认kubectl通过localhost访问本地集群，所以上文敲kubectl是没问题的，如果要被外部访问或者纳管的话，可以把kubeconfig文件拷走，默认路径是 &lt;code>/etc/rancher/k3s/k3s.yaml&lt;/code>
+。记得修改文件内的server字段，改成外部可访问到的IP。&lt;/p>
+&lt;h2 id="架构说明">架构说明&lt;/h2>
+&lt;p>TODO.&lt;/p></description></item><item><title>Docs: 性能优化指南</title><link>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97/</guid><description>
 &lt;p>主要参考的官方&lt;a href="https://access.redhat.com/documentation/en-us/openshift_container_platform/3.5/html-single/scaling_and_performance_guide/">链接&lt;/a>， 本文是基于openshift 3.5说的。&lt;/p>
 &lt;h2 id="概览">概览&lt;/h2>
 &lt;p>本指南提供了如何提高OpenShift容器平台的集群性能和生产环境下的最佳实践。 主要包括建立，扩展和调优OpenShift集群的推荐做法。&lt;/p>
@@ -4467,10 +4526,12 @@ tkestack/registry-amd64:2.7.1  
 &lt;p>因为我是使用的ALL-in-ONE安装，遇到了不少问题，可详见FAQ如何解决。安装成功后会提示如下指引：
 &lt;img src="https://xiaoping378.github.io/images/TKEStack-allinone-2022-01-25-09-10-56.png" alt="">&lt;/p>
 &lt;p>默认初始安装后，很多pod是双副本的，我这里仅是验证功能使用，全部改成了单副本。&lt;/p>
+&lt;h2 id="多租户管理">多租户管理&lt;/h2>
+&lt;p>tkestack采用Casbin模型作为权限管理，TODO.&lt;/p>
 &lt;h2 id="faq">FAQ&lt;/h2>
 &lt;h3 id="安装过程出现循环等待apiserver启动">安装过程出现循环等待apiserver启动&lt;/h3>
 &lt;pre tabindex="0">&lt;code class="language-log" data-lang="log">2022-01-19 14:43:32.225 error   tke-installer.ClusterProvider.OnCreate.EnsureKubeadmInitPhaseWaitControlPlane   check healthz error {&amp;quot;statusCode&amp;quot;: 0, &amp;quot;error&amp;quot;: &amp;quot;Get \&amp;quot;https://****:6443/healthz?timeout=30s\&amp;quot;: net/http: TLS handshake timeout&amp;quot;}
-&lt;/code>&lt;/pre>&lt;p>我这里是因为在installer上制定的master的IP为外网IP（我使用外网IP是有原因的，穷... 后面需要跨云厂商组集群），通过查看kubelet日志提示本机找不到IP，如下使能网卡多IP可通过。&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>我这里是因为在installer上指定的master的IP为外网IP（我使用外网IP是有原因的，穷... 后面需要跨云厂商组集群），通过查看kubelet日志提示本机找不到IP，如下开启网卡多IP，可通过。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">ip addr add 118.*.*.* dev eth0
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="gateway-pod启动失败">Gateway POD启动失败&lt;/h3>
 &lt;p>我这里是因为init节点和gobal master节点，共用了一个，本registry服务占用了80和443端口，需要修改gateway hostNetwork为false，另外可以通过修改svc 为nodePort，还需要修改targetPort，官方现在这里有bug，不知道为指到944*的端口上，我这里设置的30080来访问安装好的集群。&lt;/p>
@@ -4480,91 +4541,13 @@ tkestack/registry-amd64:2.7.1  
 &lt;p>重启tke-auth-api后，问题依旧存在，继续源码走查，发现这玩意儿叫init真的只发挥一次作用，改完配置，不会重新读取，细读逻辑发现etcd中不存在这个key，会重新读取写入一次，于是决定删除etcd中的相关key。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">etcdctl --cacert&lt;span style="color:#666">=&lt;/span>/etc/kubernetes/pki/etcd/ca.crt --cert&lt;span style="color:#666">=&lt;/span>/etc/kubernetes/pki/apiserver-etcd-client.crt --key&lt;span style="color:#666">=&lt;/span>/etc/kubernetes/pki/apiserver-etcd-client.key del /tke/auth-api/client/default  --prefix
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="添加节点的过程中failed-无法删除节点重试">添加节点的过程中failed，无法删除节点重试&lt;/h3>
-&lt;p>应该是ansible，ssh信息设置完后，如果中间出问题，会陷入无限重试。&lt;/p>
+&lt;p>ssh信息设置完后，如果中间出问题，会陷入无限重试...&lt;/p>
 &lt;p>&lt;img src="https://xiaoping378.github.io/images/TKEStack-allinone-2022-01-25-09-48-43.png" alt="">&lt;/p>
-&lt;p>解决（HACK）问题中...&lt;/p>
+&lt;p>遇事不决，看日志，找不到日志，看源码...&lt;/p>
+&lt;p>通过翻找源码，发现是&lt;code>platform&lt;/code>相关组件在负责，查看相关日志&lt;code>kubectl -n logs tke-platform-controller-*** --tail 100 -f&lt;/code>，定位问题，我这里是以前各种安装的残留信息，导致添加节点初始化失败。删除之... 解决。&lt;/p>
+&lt;p>为避免添加节点&lt;code>no clean&lt;/code>再次出现问题，建议预先执行下&lt;a href="https://tke-release-1251707795.cos.ap-guangzhou.myqcloud.com/tools/clean.sh">clean.sh&lt;/a>脚本。&lt;/p>
 &lt;h2 id="小技巧">小技巧&lt;/h2>
 &lt;p>如下使用，可以愉快的敲命令了，因为我是用oh-my-zsh的shell主题(没有自动加载kubectl plugin)，kubectl的命令补全使用zsh，可根据实际情况调整。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#a2f">source&lt;/span> &amp;lt;&lt;span style="color:#666">(&lt;/span>nerdctl completion bash&lt;span style="color:#666">)&lt;/span>  
 &lt;span style="color:#a2f">source&lt;/span> &amp;lt;&lt;span style="color:#666">(&lt;/span>kubectl completion zsh&lt;span style="color:#666">)&lt;/span> 
-&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Centos7 配置记录</title><link>https://xiaoping378.github.io/docs/2-infra/linux/centos/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/2-infra/linux/centos/</guid><description>
-&lt;ul>
-&lt;li>&lt;strong>sshd&lt;/strong> 禁用DNS反向解析和GSSAPI认证，以完成快速登陆&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">sudo sed -i &lt;span style="color:#b44">&amp;#39;s/#UseDNS yes/UseDNS no/g&amp;#39;&lt;/span> /etc/ssh/sshd_config
-sudo sed -i &lt;span style="color:#b44">&amp;#39;s/GSSAPIAuthentication yes/GSSAPIAuthentication no/g&amp;#39;&lt;/span> /etc/ssh/sshd_config
-sudo systemctl restart sshd
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>&lt;strong>添加本地dvd源&lt;/strong>&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">mkdir -p /media/dvd &lt;span style="color:#666">&amp;amp;&amp;amp;&lt;/span> mount -t auto /dev/cdrom /media/dvd
-cat &lt;span style="color:#b44">&amp;lt;&amp;lt;EOF &amp;gt;/etc/yum.repos.d/CentOS-Base.repo
-&lt;/span>&lt;span style="color:#b44">[c7-dvd]
-&lt;/span>&lt;span style="color:#b44">name=Centos-7
-&lt;/span>&lt;span style="color:#b44">baseurl=file:///media/dvd
-&lt;/span>&lt;span style="color:#b44">enabled=1
-&lt;/span>&lt;span style="color:#b44">gpgcheck=1
-&lt;/span>&lt;span style="color:#b44">gpgkey=file:///media/dvd/RPM-GPG-KEY-CentOS-7
-&lt;/span>&lt;span style="color:#b44">EOF&lt;/span>
-yum clean all
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>
-&lt;p>&lt;strong>安装docker&lt;/strong>&lt;/p>
-&lt;ol>
-&lt;li>添加yum源&lt;/li>
-&lt;/ol>
-&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">sudo tee /etc/yum.repos.d/docker.repo &lt;span style="color:#b44">&amp;lt;&amp;lt;-&amp;#39;EOF&amp;#39;
-&lt;/span>&lt;span style="color:#b44">[dockerrepo]
-&lt;/span>&lt;span style="color:#b44">name=Docker Repository
-&lt;/span>&lt;span style="color:#b44">baseurl=https://yum.dockerproject.org/repo/main/centos/7/
-&lt;/span>&lt;span style="color:#b44">enabled=1
-&lt;/span>&lt;span style="color:#b44">gpgcheck=1
-&lt;/span>&lt;span style="color:#b44">gpgkey=https://yum.dockerproject.org/gpg
-&lt;/span>&lt;span style="color:#b44">EOF&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
-&lt;li>安装docker-engine&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">sudo yum install -y docker
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者下载离线rpm包（供网络环境差的环境使用）&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash"> sudo yum install docker --downloadonly --downloaddir&lt;span style="color:#666">=&lt;/span>./
-sudo yum localinstall ./*.rpm
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;del>3. 修改必要的docker daemon配置参数&lt;/del> 现在不需要了，主要是devicemapper需要改下&lt;/p>
-&lt;pre tabindex="0">&lt;code>sudo mkdir /etc/systemd/system/docker.service.d
-sudo cat &amp;lt;&amp;lt;EOF &amp;gt;&amp;gt;/etc/systemd/system/docker.service.d/docker.conf
-[Service]
-ExecStart=
-ExecStart=/usr/bin/docker daemon -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --dns 180.76.76.76 --insecure-registry registry.cecf.com -g /home/Docker/docker -s overlay --selinux-enabled=false
-EOF
-&lt;/code>&lt;/pre>&lt;ol start="4">
-&lt;li>启动docker&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash"> sudo systemctl &lt;span style="color:#a2f">enable&lt;/span> docker
-sudo systemctl start docker
-&lt;span style="color:#080;font-style:italic"># 普通用户放进docker组里，快速CLI&lt;/span>
-sudo usermod -aG docker &lt;span style="color:#666">[&lt;/span>your_username&lt;span style="color:#666">]&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>
-&lt;p>&lt;strong>firewalld&lt;/strong>&lt;/p>
-&lt;ul>
-&lt;li>目前docker与firewalld存在兼容性问题&lt;/li>
-&lt;li>先选择关闭firewalld吧&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;strong>安装ntp&lt;/strong>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">yum install -y ntp
-systemctl start ntpd
-systemctl &lt;span style="color:#a2f">enable&lt;/span> ntpd
-ntpdate -u cn.pool.ntp.org
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>
-&lt;p>&lt;strong>必要组件&lt;/strong>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">yum install net-tools bind-utils tcpdump lsof
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>
-&lt;p>&lt;strong>查询本机的外网IP&lt;/strong>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">curl ipinfo.io
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

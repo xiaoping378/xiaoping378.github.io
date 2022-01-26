@@ -53,7 +53,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.d700a1afccbb9849065ad8fcb0b71a36.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.a8a89f06036b49411faaa9899bc4cf66.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -98,8 +98,9 @@
 <li>3.5: <a href=#pg-a9f4bf3f89e3c59df21a53d3b7c87e0d>VSCode-开发已有的java项目</a></li>
 <li>3.6: <a href=#pg-024476416cd1256abdf9950bb55be431>MongoDB之初见</a></li>
 <li>3.7: <a href=#pg-0869f908f4f0eb9cdf146f22565dc728>Openldap之拨云见日</a></li>
+<li>3.8: <a href=#pg-9763571770981514723f9ed615e69ea5>Casbin的权限管理解读</a></li>
 </ul>
-<li>4: <a href=#pg-1737f808bd604b410f639c3e20a801ea>云计算</a></li>
+<li>4: <a href=#pg-1737f808bd604b410f639c3e20a801ea>云原生</a></li>
 <ul>
 <li>4.1: <a href=#pg-d902da8df70386ae87ff26d958341b55>容器篇</a></li>
 <ul>
@@ -1530,12 +1531,65 @@ robo3t-1.1.1-linux-x86_64-c93c6b0/bin/robo3t
 <p>未完...TODO</p>
 </div>
 <div class=td-content style=page-break-before:always>
-<h1 id=pg-1737f808bd604b410f639c3e20a801ea>4 - 云计算</h1>
-<div class=lead>云计算界还在不断向前发展，持续更新认知。</div>
+<h1 id=pg-9763571770981514723f9ed615e69ea5>3.8 - Casbin的权限管理解读</h1>
+<div class=lead>介绍Casbin的权限模型管理的用法。</div>
 <div class="pageinfo pageinfo-primary">
-<p>云计算领域，持续深耕中...</p>
+<p>项目一般都要包含权限管理功能，或集成IAM，或自身实现。本文介绍一个强大、高效的开源访问控制框架--Casbin。</p>
 </div>
-<p>自15年开始接触容器，当时容器就是Docker，Docker就是容器，当然现在docker仍是主流的容器runtime方案，随着k8s带起来的云原生生态规模落地和数字化转型的战略倡导，如今也发生了太多变化，此篇会把以前编写的一些文章挪移到此处，顺便开启新的认知。</p>
+<h2 id=基本介绍>基本介绍</h2>
+<p>Casbin的由来，是出自开源作者<code>罗杨</code>的一篇论文<a href=https://arxiv.org/abs/1903.09756>《PML：一种基于Interpreter的Web服务访问控制策略语言》</a>，该论文的主要摘要如下：</p>
+<blockquote>
+<p>为了保护云资源的安全,防止数据泄露和非授权访问,必须对云平台的资源访问实施访问控制.然而,目前主流云平台通常采用自己的安全策略语言和访问控制机制,从而造成两个问题:</p>
+<ul>
+<li>（1）云用户若要使用多个云平台,则需要学习不同的策略语言,分别编写安全策略;</li>
+<li>（2）云服务提供商需要自行设计符合自己平台的安全策略语言及访问控制机制,开发成本较高.</li>
+</ul>
+<p>对此,提出一种基于元模型的访问控制策略描述语言PML及其实施机制PML-EM. PML支持表达BLP、RBAC、ABAC等访问控制模型.
+PML-EM实现了3个性质:</p>
+<ul>
+<li>策略语言无关性</li>
+<li>访问控制模型无关性</li>
+<li>程序设计语言无关性</li>
+</ul>
+<p>从而降低了用户编写策略的成本与云服务提供商开发访问控制机制的成本. 在OpenStack云平台上实现了PML-EM机制.实验结果表明,PML策略支持从其他策略进行自动转换,
+在表达云中多租户场景时具有优势.性能方面,与OpenStack原有策略相比,PML策略的评估开销为4.8%.PML-EM机制的侵入性较小,与云平台原有代码相比增加约0.42%.</p>
+</blockquote>
+<p>目前Casbin的权限策略管理支持主流的<strong>ACL、RBAC、ABAC</strong>、RESTful等模型，实现的编程语言主要有Go、java、Nodejs、PHP、Python、.Net、C++、Rust等。目前Go和Java的实现最为全面。</p>
+<p>先介绍下主流的访问控制模型：</p>
+<ul>
+<li><em>ACL（access control list）</em>：是一种与访问对象关联的权限列表，在基础设施领域应用非常广泛：
+<ul>
+<li>文件系统：用户（组）对文件或进程等的访问权限控制</li>
+<li>网络：常见的有防火墙（安全组、路由器、交换机）内的对目的IP和端口的规则控制</li>
+<li>SQL：库、表的权限管理</li>
+<li><a href=../openldap%E4%B9%8B%E6%8B%A8%E4%BA%91%E5%8E%BB%E6%97%A5>LDAP</a>：层级结构的实体权限管理：网络域权限管理...</li>
+</ul>
+</li>
+<li><em>RBAC（role-based access control）</em>：基于角色的权限控制，围绕角色和权限定义的策略中立的访问控制机制，和组ACL等价，具体表现为在用户和权限之间加了一层角色，先建立具有某种权限的角色，然后用角色和用户绑定，目前多用于业务系统内的权限管理，还支持支持角色权限继承。</li>
+<li><em>ABAC（Attribute-based access control）</em>：基于属性的权限控制，属性可以是用户侧（所属组织、访问IP、访问时间）或资源侧（帖子的评论开关、留言再编辑）的，因为用户或资源的属性是动态的，不像前面两个(需要预先定义好策略，略显死板,,,）被称为是“下一代”的权限模型。</li>
+<li><em>Restful</em>：一种Web API规范，常用GET, POST等动作来实现与后台交互。</li>
+</ul>
+<p>和Casbin结合，使用的基本示意图如下：</p>
+<p><img src=/images/Casbin-%E4%BD%BF%E7%94%A8%E7%A4%BA%E6%84%8F%E5%9B%BE.drawio.png alt></p>
+<ul>
+<li>1-2为管理人员下发权限策略</li>
+<li>3-6为用户日常操作资源的简易流程</li>
+</ul>
+<h2 id=抽象模型>抽象模型</h2>
+<p>因为上面提到的，要支持这么多的模型，所以Casbin引入一种抽象的元模型控制- <strong>PERM</strong>，</p>
+<p>场景说明：</p>
+<p>未完待续 TODO...</p>
+<blockquote>
+<p>我的博客即将同步至腾讯云+社区，邀请大家一同入驻：https://cloud.tencent.com/developer/support-plan?invite_code=3ntkskjrcwow8</p>
+</blockquote>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-1737f808bd604b410f639c3e20a801ea>4 - 云原生</h1>
+<div class=lead>云原生界还在不断向前发展，范围不断拓展，覆盖容器、k8s、可观测、安全、service mesh、serverless、中间件等，持续更新认知..</div>
+<div class="pageinfo pageinfo-primary">
+<p>云原生领域，持续深耕中...</p>
+</div>
+<p>自15年开始接触容器，当时容器就是Docker，Docker就是容器，当然现在docker仍是主流的容器runtime方案，但随着k8s带起来的云原生生态规模落地和全球企业数字化转型的战略倡导，如今也发生了太多变化...此篇会把以前编写的一些文章挪移到此处，顺便开启新的认知。</p>
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-d902da8df70386ae87ff26d958341b55>4.1 - 容器篇</h1>
@@ -2750,7 +2804,7 @@ You are admin at http://deis.192.168.31.49.xip.io
 <div class="pageinfo pageinfo-primary">
 <p>本文主要介绍k3s的安装和核心组件解读。</p>
 </div>
-<p>k3s是all-in-one的轻量k8s发行版，把所有k8s组件重新打包一个不到100M的二进制文件了。主要具备显著特点：</p>
+<p>k3s是all-in-one的轻量k8s发行版，把所有k8s组件打包成一个不到100M的二进制文件了。具备如下显著特点：</p>
 <ul>
 <li>打包成单一二进制</li>
 <li>默认集成了sqlite3来替代etcd，也可以指定其他数据库：etcd3、mysql、postgres。</li>
@@ -2764,18 +2818,28 @@ You are admin at http://deis.192.168.31.49.xip.io
 </code></pre></div><blockquote>
 <p>由于网络原因，可能会失败，自行想办法<a href=https://github.com/k3s-io/k3s/releases/download/v1.19.16+k3s1/k3s>下载</a>下来，放置 <code>/usr/local/bin/k3s</code>，附上执行权限<code>chmod a+x /usr/local/bin/k3s</code>, 然后上面的命令加上<code>INSTALL_K3S_SKIP_DOWNLOAD=true</code>再执行一遍即可。</p>
 </blockquote>
+<blockquote>
+<p>安装里log里会输出一些重要信息: <code>kubectl、crictl、卸载脚本、systemd service</code></p>
+</blockquote>
 <p>不出意外，k3s server会被systemd启动，执行命令查看<code>systemctl status k3s</code>或者通过软链的kubectl验证是否启动成功：</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>➜  k3s kubectl get no
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>➜  kubectl get no
 NAME            STATUS   ROLES    AGE     VERSION
 gitlab-server   Ready    master   6m43s   v1.19.16+k3s1
 </code></pre></div><p><strong>(Optional)</strong> 启动 k3s agent端 (添加worker节点).</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sfL https://get.k3s.io | <span style=color:#b8860b>K3S_URL</span><span style=color:#666>=</span>https://172.25.11.130:6443 <span style=color:#b8860b>K3S_TOKEN</span><span style=color:#666>=</span>bulabula <span style=color:#b8860b>INSTALL_K3S_VERSION</span><span style=color:#666>=</span>v1.19.16+k3s1 sh -
-</code></pre></div><p><code>K3S_TOKEN</code>内容需要从server端的<code>/var/lib/rancher/k3s/server/node-token</code>文件取出，<code>K3S_URL</code>中的IP是master节点的IP。</p>
-<h2 id=架构>架构</h2>
+</code></pre></div><ul>
+<li><code>K3S_TOKEN</code>内容需要从server端的<code>/var/lib/rancher/k3s/server/node-token</code>文件取出</li>
+<li><code>K3S_URL</code>中的IP是master节点的IP。</li>
+</ul>
+<h2 id=集群访问>集群访问</h2>
+<p>默认kubectl通过localhost访问本地集群，所以上文敲kubectl是没问题的，如果要被外部访问或者纳管的话，可以把kubeconfig文件拷走，默认路径是 <code>/etc/rancher/k3s/k3s.yaml</code>
+。记得修改文件内的server字段，改成外部可访问到的IP。</p>
+<h2 id=架构说明>架构说明</h2>
+<p>TODO.</p>
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-8d71550d3ee2751c7f80b3cef9ae8232>4.2.9 - TKEStack all-in-one入坑指南</h1>
-<div class=lead>TKEStack的all-in-one安装及基本功能解读</div>
+<div class=lead>TKEStack的all-in-one安装、多租户和多集群管理功能解读</div>
 <div class="pageinfo pageinfo-primary">
 <p>本文主要介绍当前最新版本TkeStack 1.8.1 的allinone安装入坑指南和基本核心功能介绍。</p>
 </div>
@@ -2804,10 +2868,12 @@ gitlab-server   Ready    master   6m43s   v1.19.16+k3s1
 <p>因为我是使用的ALL-in-ONE安装，遇到了不少问题，可详见FAQ如何解决。安装成功后会提示如下指引：
 <img src=/images/TKEStack-allinone-2022-01-25-09-10-56.png alt></p>
 <p>默认初始安装后，很多pod是双副本的，我这里仅是验证功能使用，全部改成了单副本。</p>
+<h2 id=多租户管理>多租户管理</h2>
+<p>tkestack采用Casbin模型作为权限管理，TODO.</p>
 <h2 id=faq>FAQ</h2>
 <h3 id=安装过程出现循环等待apiserver启动>安装过程出现循环等待apiserver启动</h3>
 <pre tabindex=0><code class=language-log data-lang=log>2022-01-19 14:43:32.225 error   tke-installer.ClusterProvider.OnCreate.EnsureKubeadmInitPhaseWaitControlPlane   check healthz error {&quot;statusCode&quot;: 0, &quot;error&quot;: &quot;Get \&quot;https://****:6443/healthz?timeout=30s\&quot;: net/http: TLS handshake timeout&quot;}
-</code></pre><p>我这里是因为在installer上制定的master的IP为外网IP（我使用外网IP是有原因的，穷... 后面需要跨云厂商组集群），通过查看kubelet日志提示本机找不到IP，如下使能网卡多IP可通过。</p>
+</code></pre><p>我这里是因为在installer上指定的master的IP为外网IP（我使用外网IP是有原因的，穷... 后面需要跨云厂商组集群），通过查看kubelet日志提示本机找不到IP，如下开启网卡多IP，可通过。</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>ip addr add 118.*.*.* dev eth0
 </code></pre></div><h3 id=gateway-pod启动失败>Gateway POD启动失败</h3>
 <p>我这里是因为init节点和gobal master节点，共用了一个，本registry服务占用了80和443端口，需要修改gateway hostNetwork为false，另外可以通过修改svc 为nodePort，还需要修改targetPort，官方现在这里有bug，不知道为指到944*的端口上，我这里设置的30080来访问安装好的集群。</p>
@@ -2817,9 +2883,11 @@ gitlab-server   Ready    master   6m43s   v1.19.16+k3s1
 <p>重启tke-auth-api后，问题依旧存在，继续源码走查，发现这玩意儿叫init真的只发挥一次作用，改完配置，不会重新读取，细读逻辑发现etcd中不存在这个key，会重新读取写入一次，于是决定删除etcd中的相关key。</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>etcdctl --cacert<span style=color:#666>=</span>/etc/kubernetes/pki/etcd/ca.crt --cert<span style=color:#666>=</span>/etc/kubernetes/pki/apiserver-etcd-client.crt --key<span style=color:#666>=</span>/etc/kubernetes/pki/apiserver-etcd-client.key del /tke/auth-api/client/default  --prefix
 </code></pre></div><h3 id=添加节点的过程中failed-无法删除节点重试>添加节点的过程中failed，无法删除节点重试</h3>
-<p>应该是ansible，ssh信息设置完后，如果中间出问题，会陷入无限重试。</p>
+<p>ssh信息设置完后，如果中间出问题，会陷入无限重试...</p>
 <p><img src=/images/TKEStack-allinone-2022-01-25-09-48-43.png alt></p>
-<p>解决（HACK）问题中...</p>
+<p>遇事不决，看日志，找不到日志，看源码...</p>
+<p>通过翻找源码，发现是<code>platform</code>相关组件在负责，查看相关日志<code>kubectl -n logs tke-platform-controller-*** --tail 100 -f</code>，定位问题，我这里是以前各种安装的残留信息，导致添加节点初始化失败。删除之... 解决。</p>
+<p>为避免添加节点<code>no clean</code>再次出现问题，建议预先执行下<a href=https://tke-release-1251707795.cos.ap-guangzhou.myqcloud.com/tools/clean.sh>clean.sh</a>脚本。</p>
 <h2 id=小技巧>小技巧</h2>
 <p>如下使用，可以愉快的敲命令了，因为我是用oh-my-zsh的shell主题(没有自动加载kubectl plugin)，kubectl的命令补全使用zsh，可根据实际情况调整。</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#a2f>source</span> &lt;<span style=color:#666>(</span>nerdctl completion bash<span style=color:#666>)</span>  
@@ -5200,9 +5268,9 @@ kubectl label node node0 <span style=color:#b8860b>ca</span><span style=color:#6
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-cd46a064c31d13b424ac3d15ccfe9cf1>6 - RPA机器人</h1>
-<div class=lead>介绍RPA机器人流程自动化领域的所见所闻。</div>
+<div class=lead>介绍介绍如何建设企业自己的RPA机器人流程自动化平台</div>
 <div class="pageinfo pageinfo-primary">
-<p>主要介绍如何搭建企业自己的RPA平台。</p>
+<p>主要介绍如何建设企业自己的RPA机器人流程自动化平台。</p>
 </div>
 <p>TODO.</p>
 </div>

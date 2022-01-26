@@ -17,7 +17,7 @@
 <meta itemprop=name content="k3s实践-01">
 <meta itemprop=description content="k3s的安装及基本工作方式解读
 ">
-<meta itemprop=wordCount content="66">
+<meta itemprop=wordCount content="74">
 <meta itemprop=keywords content="容器,K8S,"><meta name=twitter:card content="summary">
 <meta name=twitter:title content="k3s实践-01">
 <meta name=twitter:description content="k3s的安装及基本工作方式解读
@@ -51,7 +51,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.d700a1afccbb9849065ad8fcb0b71a36.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.a8a89f06036b49411faaa9899bc4cf66.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -61,7 +61,7 @@
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.d700a1afccbb9849065ad8fcb0b71a36.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.a8a89f06036b49411faaa9899bc4cf66.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -131,11 +131,14 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-3-devops-openldap-e4-b9-8b-e6-8b-a8-e4-ba-91-e5-8e-bb-e6-97-a5-li>
 <input type=checkbox id=m-docs-3-devops-openldap-e4-b9-8b-e6-8b-a8-e4-ba-91-e5-8e-bb-e6-97-a5-check>
 <label for=m-docs-3-devops-openldap-e4-b9-8b-e6-8b-a8-e4-ba-91-e5-8e-bb-e6-97-a5-check><a href=/docs/3-devops/openldap%E4%B9%8B%E6%8B%A8%E4%BA%91%E5%8E%BB%E6%97%A5/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-3-devops-openldap-e4-b9-8b-e6-8b-a8-e4-ba-91-e5-8e-bb-e6-97-a5><span>Openldap之拨云见日</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-3-devops-casbin-li>
+<input type=checkbox id=m-docs-3-devops-casbin-check>
+<label for=m-docs-3-devops-casbin-check><a href=/docs/3-devops/casbin/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-3-devops-casbin><span>Casbin的权限管理解读</span></a></label>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs-4-cloud-li>
 <input type=checkbox id=m-docs-4-cloud-check checked>
-<label for=m-docs-4-cloud-check><a href=/docs/4-cloud/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-4-cloud><span>云计算</span></a></label>
+<label for=m-docs-4-cloud-check><a href=/docs/4-cloud/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-4-cloud><span>云原生</span></a></label>
 <ul class="ul-2 foldable">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-4-cloud-containers-li>
 <input type=checkbox id=m-docs-4-cloud-containers-check>
@@ -334,7 +337,7 @@
 <a href=https://xiaoping378.github.io/docs/>文档</a>
 </li>
 <li class=breadcrumb-item>
-<a href=https://xiaoping378.github.io/docs/4-cloud/>云计算</a>
+<a href=https://xiaoping378.github.io/docs/4-cloud/>云原生</a>
 </li>
 <li class=breadcrumb-item>
 <a href=https://xiaoping378.github.io/docs/4-cloud/k8s/>Kubernetes</a>
@@ -359,7 +362,7 @@
 <div class="pageinfo pageinfo-primary">
 <p>本文主要介绍k3s的安装和核心组件解读。</p>
 </div>
-<p>k3s是all-in-one的轻量k8s发行版，把所有k8s组件重新打包一个不到100M的二进制文件了。主要具备显著特点：</p>
+<p>k3s是all-in-one的轻量k8s发行版，把所有k8s组件打包成一个不到100M的二进制文件了。具备如下显著特点：</p>
 <ul>
 <li>打包成单一二进制</li>
 <li>默认集成了sqlite3来替代etcd，也可以指定其他数据库：etcd3、mysql、postgres。</li>
@@ -373,14 +376,24 @@
 </code></pre></div><blockquote>
 <p>由于网络原因，可能会失败，自行想办法<a href=https://github.com/k3s-io/k3s/releases/download/v1.19.16+k3s1/k3s>下载</a>下来，放置 <code>/usr/local/bin/k3s</code>，附上执行权限<code>chmod a+x /usr/local/bin/k3s</code>, 然后上面的命令加上<code>INSTALL_K3S_SKIP_DOWNLOAD=true</code>再执行一遍即可。</p>
 </blockquote>
+<blockquote>
+<p>安装里log里会输出一些重要信息: <code>kubectl、crictl、卸载脚本、systemd service</code></p>
+</blockquote>
 <p>不出意外，k3s server会被systemd启动，执行命令查看<code>systemctl status k3s</code>或者通过软链的kubectl验证是否启动成功：</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>➜  k3s kubectl get no
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>➜  kubectl get no
 NAME            STATUS   ROLES    AGE     VERSION
 gitlab-server   Ready    master   6m43s   v1.19.16+k3s1
 </code></pre></div><p><strong>(Optional)</strong> 启动 k3s agent端 (添加worker节点).</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -sfL https://get.k3s.io | <span style=color:#b8860b>K3S_URL</span><span style=color:#666>=</span>https://172.25.11.130:6443 <span style=color:#b8860b>K3S_TOKEN</span><span style=color:#666>=</span>bulabula <span style=color:#b8860b>INSTALL_K3S_VERSION</span><span style=color:#666>=</span>v1.19.16+k3s1 sh -
-</code></pre></div><p><code>K3S_TOKEN</code>内容需要从server端的<code>/var/lib/rancher/k3s/server/node-token</code>文件取出，<code>K3S_URL</code>中的IP是master节点的IP。</p>
-<h2 id=架构>架构</h2>
+</code></pre></div><ul>
+<li><code>K3S_TOKEN</code>内容需要从server端的<code>/var/lib/rancher/k3s/server/node-token</code>文件取出</li>
+<li><code>K3S_URL</code>中的IP是master节点的IP。</li>
+</ul>
+<h2 id=集群访问>集群访问</h2>
+<p>默认kubectl通过localhost访问本地集群，所以上文敲kubectl是没问题的，如果要被外部访问或者纳管的话，可以把kubeconfig文件拷走，默认路径是 <code>/etc/rancher/k3s/k3s.yaml</code>
+。记得修改文件内的server字段，改成外部可访问到的IP。</p>
+<h2 id=架构说明>架构说明</h2>
+<p>TODO.</p>
 </div>
 </main>
 </div>
