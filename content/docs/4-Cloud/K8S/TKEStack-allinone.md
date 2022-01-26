@@ -4,7 +4,7 @@ title: "TKEStack all-in-one入坑指南"
 linkTitle: "TKEStack all-in-one入坑指南"
 weight: 25
 description: >
-  TKEStack的all-in-one安装及基本功能解读
+  TKEStack的all-in-one安装、多租户和多集群管理功能解读
 ---
 
 {{% pageinfo %}}
@@ -52,6 +52,10 @@ nerdctl run --name registry-https -d --net=host --restart=always -p 443:
 
 默认初始安装后，很多pod是双副本的，我这里仅是验证功能使用，全部改成了单副本。
 
+## 多租户管理
+
+tkestack采用Casbin模型作为权限管理，TODO.
+
 ## FAQ
 
 ### 安装过程出现循环等待apiserver启动
@@ -60,7 +64,7 @@ nerdctl run --name registry-https -d --net=host --restart=always -p 443:
 2022-01-19 14:43:32.225 error   tke-installer.ClusterProvider.OnCreate.EnsureKubeadmInitPhaseWaitControlPlane   check healthz error {"statusCode": 0, "error": "Get \"https://****:6443/healthz?timeout=30s\": net/http: TLS handshake timeout"}
 ```
 
-我这里是因为在installer上制定的master的IP为外网IP（我使用外网IP是有原因的，穷... 后面需要跨云厂商组集群），通过查看kubelet日志提示本机找不到IP，如下使能网卡多IP可通过。
+我这里是因为在installer上指定的master的IP为外网IP（我使用外网IP是有原因的，穷... 后面需要跨云厂商组集群），通过查看kubelet日志提示本机找不到IP，如下开启网卡多IP，可通过。
 
 ```bash
 ip addr add 118.*.*.* dev eth0
@@ -84,11 +88,16 @@ etcdctl --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/ap
 
 ### 添加节点的过程中failed，无法删除节点重试
 
-应该是ansible，ssh信息设置完后，如果中间出问题，会陷入无限重试。
+ssh信息设置完后，如果中间出问题，会陷入无限重试...
 
 ![](/images/TKEStack-allinone-2022-01-25-09-48-43.png)
 
-解决（HACK）问题中...
+遇事不决，看日志，找不到日志，看源码...
+
+通过翻找源码，发现是`platform`相关组件在负责，查看相关日志`kubectl -n logs tke-platform-controller-*** --tail 100 -f`，定位问题，我这里是以前各种安装的残留信息，导致添加节点初始化失败。删除之... 解决。
+
+为避免添加节点`no clean`再次出现问题，建议预先执行下[clean.sh](https://tke-release-1251707795.cos.ap-guangzhou.myqcloud.com/tools/clean.sh)脚本。
+
 
 ## 小技巧
 
