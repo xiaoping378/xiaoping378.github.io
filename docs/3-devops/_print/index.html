@@ -50,7 +50,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.a8a89f06036b49411faaa9899bc4cf66.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.18f5f7b3fa43fd76adf0d53f7f435cc1.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -736,12 +736,37 @@ PML-EM实现了3个性质:</p>
 <p><img src=/images/Casbin-%E4%BD%BF%E7%94%A8%E7%A4%BA%E6%84%8F%E5%9B%BE.drawio.png alt></p>
 <ul>
 <li>1-2为管理人员下发权限策略</li>
-<li>3-6为用户日常操作资源的简易流程</li>
+<li>3-6为用户日常操作资源的简易流程，实际应用场景一般如下：</li>
 </ul>
-<h2 id=抽象模型>抽象模型</h2>
-<p>因为上面提到的，要支持这么多的模型，所以Casbin引入一种抽象的元模型控制- <strong>PERM</strong>，</p>
-<p>场景说明：</p>
-<p>未完待续 TODO...</p>
+<pre tabindex=0><code class=language-plantuml data-lang=plantuml>@startuml
+!theme aws-orange
+用户 -&gt; 认证中心: 登录操作
+认证中心 -&gt; 缓存: 存放(key=token+ip,value=token)token
+用户 &lt;- 认证中心 : 认证成功返回token
+用户 -&gt; 认证中心: 下次访问头部携带token认证
+认证中心 &lt;- 缓存: key=token+ip获取token
+Casbin &lt;- 认证中心: 存在且校验成功,则进入授权校验
+Casbin -&gt; 其他服务: 权限合规，则跳转到用户请求的其他服务
+其他服务 -&gt; 用户: 信息
+@enduml
+</code></pre><h2 id=抽象模型>抽象模型</h2>
+<p>正如上面提到的，要支持这么多的权限模型，，所以Casbin基于开头提到的PML（PERM modeling language）引入一种抽象的元模型控制，其中<strong>PERM</strong>是指的<strong>Policy, Effect, Request, Matchers</strong>，具体工作流如下：</p>
+<p><img src=/images/Casbin-2022-01-26-23-21-26.png alt></p>
+<p>这里的<code>PERM</code>是Casbin在启动时要加载的抽象校验模型，可以理解成一种权限校验模板。 简单说个场景串下这里的概念：</p>
+<ul>
+<li>管理员分配给用户权限<strong>Policy</strong>，可以得到<code>谁能操作什么资源</code>的信息</li>
+<li>用户发起请求<strong>Request</strong>，可以得到<code>谁要操作什么资源</code>的信息</li>
+<li>Casbin拿到Request和Policy做匹配<strong>Matcher</strong></li>
+<li>根据匹配结果<strong>Effect</strong>来决定是否允许用户的操作</li>
+</ul>
+<p>实际场景中，用户可能被分配了多个权限（角色），那具体权限校验如下：
+<img src=/images/Casbin-2022-01-26-23-47-48.png alt></p>
+<h2 id=按场景举例>按场景举例</h2>
+<p>TODO.</p>
+<h2 id=参考>参考</h2>
+<blockquote>
+<p><a href=https://casbin.org/docs/zh-CN/tutorials>https://casbin.org/docs/zh-CN/tutorials</a></p>
+</blockquote>
 <blockquote>
 <p>我的博客即将同步至腾讯云+社区，邀请大家一同入驻：https://cloud.tencent.com/developer/support-plan?invite_code=3ntkskjrcwow8</p>
 </blockquote>
@@ -801,6 +826,7 @@ PML-EM实现了3个性质:</p>
 <script src=https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js integrity=sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN crossorigin=anonymous></script>
 <script src=https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin=anonymous></script>
 <script src=/js/tabpane-persist.js></script>
-<script src=/js/main.min.8ab8f81ff7e1454d30024cd6f956d4d341c3a97e2a673f988065f2ee4e147922.js integrity="sha256-irj4H/fhRU0wAkzW+VbU00HDqX4qZz+YgGXy7k4UeSI=" crossorigin=anonymous></script>
+<script src=/js/deflate.js></script>
+<script src=/js/main.min.e016890ed6b0c42f5af3410eb57ac626a192a868609aee68cefe1e0f84a50b13.js integrity="sha256-4BaJDtawxC9a80EOtXrGJqGSqGhgmu5ozv4eD4SlCxM=" crossorigin=anonymous></script>
 </body>
 </html>

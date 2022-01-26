@@ -615,12 +615,37 @@ PML-EM实现了3个性质:&lt;/p>
 &lt;p>&lt;img src="https://xiaoping378.github.io/images/Casbin-%E4%BD%BF%E7%94%A8%E7%A4%BA%E6%84%8F%E5%9B%BE.drawio.png" alt="">&lt;/p>
 &lt;ul>
 &lt;li>1-2为管理人员下发权限策略&lt;/li>
-&lt;li>3-6为用户日常操作资源的简易流程&lt;/li>
+&lt;li>3-6为用户日常操作资源的简易流程，实际应用场景一般如下：&lt;/li>
 &lt;/ul>
-&lt;h2 id="抽象模型">抽象模型&lt;/h2>
-&lt;p>因为上面提到的，要支持这么多的模型，所以Casbin引入一种抽象的元模型控制- &lt;strong>PERM&lt;/strong>，&lt;/p>
-&lt;p>场景说明：&lt;/p>
-&lt;p>未完待续 TODO...&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-plantuml" data-lang="plantuml">@startuml
+!theme aws-orange
+用户 -&amp;gt; 认证中心: 登录操作
+认证中心 -&amp;gt; 缓存: 存放(key=token+ip,value=token)token
+用户 &amp;lt;- 认证中心 : 认证成功返回token
+用户 -&amp;gt; 认证中心: 下次访问头部携带token认证
+认证中心 &amp;lt;- 缓存: key=token+ip获取token
+Casbin &amp;lt;- 认证中心: 存在且校验成功,则进入授权校验
+Casbin -&amp;gt; 其他服务: 权限合规，则跳转到用户请求的其他服务
+其他服务 -&amp;gt; 用户: 信息
+@enduml
+&lt;/code>&lt;/pre>&lt;h2 id="抽象模型">抽象模型&lt;/h2>
+&lt;p>正如上面提到的，要支持这么多的权限模型，，所以Casbin基于开头提到的PML（PERM modeling language）引入一种抽象的元模型控制，其中&lt;strong>PERM&lt;/strong>是指的&lt;strong>Policy, Effect, Request, Matchers&lt;/strong>，具体工作流如下：&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.github.io/images/Casbin-2022-01-26-23-21-26.png" alt="">&lt;/p>
+&lt;p>这里的&lt;code>PERM&lt;/code>是Casbin在启动时要加载的抽象校验模型，可以理解成一种权限校验模板。 简单说个场景串下这里的概念：&lt;/p>
+&lt;ul>
+&lt;li>管理员分配给用户权限&lt;strong>Policy&lt;/strong>，可以得到&lt;code>谁能操作什么资源&lt;/code>的信息&lt;/li>
+&lt;li>用户发起请求&lt;strong>Request&lt;/strong>，可以得到&lt;code>谁要操作什么资源&lt;/code>的信息&lt;/li>
+&lt;li>Casbin拿到Request和Policy做匹配&lt;strong>Matcher&lt;/strong>&lt;/li>
+&lt;li>根据匹配结果&lt;strong>Effect&lt;/strong>来决定是否允许用户的操作&lt;/li>
+&lt;/ul>
+&lt;p>实际场景中，用户可能被分配了多个权限（角色），那具体权限校验如下：
+&lt;img src="https://xiaoping378.github.io/images/Casbin-2022-01-26-23-47-48.png" alt="">&lt;/p>
+&lt;h2 id="按场景举例">按场景举例&lt;/h2>
+&lt;p>TODO.&lt;/p>
+&lt;h2 id="参考">参考&lt;/h2>
+&lt;blockquote>
+&lt;p>&lt;a href="https://casbin.org/docs/zh-CN/tutorials">https://casbin.org/docs/zh-CN/tutorials&lt;/a>&lt;/p>
+&lt;/blockquote>
 &lt;blockquote>
 &lt;p>我的博客即将同步至腾讯云+社区，邀请大家一同入驻：https://cloud.tencent.com/developer/support-plan?invite_code=3ntkskjrcwow8&lt;/p>
 &lt;/blockquote></description></item></channel></rss>
