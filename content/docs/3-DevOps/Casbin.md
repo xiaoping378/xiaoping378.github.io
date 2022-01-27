@@ -4,7 +4,7 @@ title: "Casbin的权限管理解读"
 linkTitle: "Casbin的权限管理解读"
 weight: 8
 description: >
-  介绍Casbin的权限模型管理的用法。 
+  解读Casbin的权限管理。 
 ---
 
 {{% pageinfo %}}
@@ -73,15 +73,58 @@ Casbin -> 其他服务: 权限合规，则跳转到用户请求的其他服务
 
 - 管理员分配给用户权限**Policy**，可以得到`谁能操作什么资源`的信息
 - 用户发起请求**Request**，可以得到`谁要操作什么资源`的信息
-- Casbin拿到Request和Policy做匹配**Matcher**
+- Casbin拿到Request和Policy做匹配**Matcher**，也支持自定义函数匹配。
 - 根据匹配结果**Effect**来决定是否允许用户的操作
 
 实际场景中，用户可能被分配了多个权限（角色），那具体权限校验如下：
 ![](/images/Casbin-2022-01-26-23-47-48.png)
 
+既然是一种语言，就是有语法的，[PERM语法](https://casbin.org/docs/zh-CN/syntax-for-models)至少要有四部分：`[request_definition], [policy_definition], [policy_effect], [matchers]`。
+具体就不展开介绍了，可自行官网祥读，effect部分具备SQL背景可能好理些,,,理解不了也没关系，目前就内置了5种：
+Effect | 含义 | 样例
+----|------|----
+some(where (p.eft == allow)) | allow-override | [ACL, RBAC, etc.](https://casbin.org/docs/zh-CN/supported-models#examples)
+!some(where (p.eft == deny)) | deny-override | [Deny-override](https://casbin.org/docs/zh-CN/supported-models#examples)
+some(where (p.eft == allow)) && !some(where (p.eft == deny)) | allow-and-deny | [Allow-and-deny](https://casbin.org/docs/zh-CN/supported-models#examples)
+priority(p.eft) &#124;&#124; deny | priority | [Priority](https://casbin.org/docs/zh-CN/supported-models#examples)
+subjectPriority(p.eft) | priority base on role | [Subject-Priority](https://casbin.org/docs/zh-CN/supported-models#examples) 
+
+> 奉劝各位看官，既然是语法，就不要纠结里面的命名和写法，较真...人家就是这么定义的，知道能都有哪些写法就可以了...，实际使用中往往改动Macter的部分概率大些。
+
 ## 按场景举例
 
-TODO.
+### ACL模型
+
+先定义Casbin要加载的PERM Model，我使用在线编辑器定义一个[ACL典型模型](https://casbin.org/casbin-editor/#6TQQJ8EQF):
+
+![](/images/Casbin-2022-01-27-09-48-25.png)
+
+解读如下：
+- 左上侧为Casbin启动时要加载的标准ACL Model配置，不需要改动
+- 右上侧为Policy部分，属于管理员要分配权限时要改动的部分：示例中定义了5条规则，小王和小李对自己的Home目录可以读写，而小李额外可以读取小王的Home目录
+- 左下角Request表明用户的请求，一般是从用户实际发起的请求中获取信息，组合好格式后，用API发起校验，示例中小李发起读和写小王的操作
+- 右下角为权限校验结果：示例中小李的写操作被拒绝了
+
+### RBAC模型
+
+下图模式的在线[编辑地址](https://casbin.org/casbin-editor/#F8A6D8YHE)
+
+![](/images/Casbin-2022-01-27-16-31-44.png)
+
+Macters里的`g(r.sub, p.sub, r.dom)` 将检查用户 r.sub 在域内 r.dom 是否具有角色 p.sub ，这是该匹配器的工作方式。
+
+
+### ABAC模型
+
+上图中RBAC中的Matcher如下修改，及实现了ABAC的模型校验。表明用户必须是要访问资源的`Owner`才可以操作符合角色权限内的资源。
+
+```Conf
+m = r.obj.Owner == r.sub && (g(r.sub, p.sub, r.dom) && r.dom == p.dom && r.obj == p.obj && r.act == p.act)
+```
+
+## 总结
+
+Casbin提供了非常灵活的权限校验模型，还提供了丰富的API，方便更便捷的实现业务场景功能, 后面会针对具体的项目开展更贴地气的解读。
 
 ## 参考
 > https://casbin.org/docs/zh-CN/tutorials
