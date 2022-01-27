@@ -1,4 +1,5 @@
 ---
+tags: ["Dev"]
 title: "Golang开发-glog日志库"
 linkTitle: "Golang开发-glog日志库"
 weight: 4

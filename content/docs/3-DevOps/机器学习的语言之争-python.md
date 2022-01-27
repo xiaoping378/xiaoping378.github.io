@@ -1,4 +1,5 @@
 ---
+tags: ["Dev"]
 title: "机器学习的语言之争"
 date: 2017-01-05
 weight: 1

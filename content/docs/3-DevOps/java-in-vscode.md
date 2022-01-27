@@ -1,4 +1,5 @@
 ---
+tags: ["Dev"]
 title: "VSCode-开发已有的java项目"
 linkTitle: "VSCode-开发已有的java项目"
 weight: 5
