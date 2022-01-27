@@ -6,22 +6,22 @@
 <meta name=robots content="index, follow">
 <link rel="shortcut icon" href=/favicons/favicon.ico>
 <title>Casbin的权限管理解读 | 现代技能栈</title>
-<meta name=description content="介绍Casbin的权限模型管理的用法。 
+<meta name=description content="解读Casbin的权限管理。 
 ">
 <meta property="og:title" content="Casbin的权限管理解读">
-<meta property="og:description" content="介绍Casbin的权限模型管理的用法。 
+<meta property="og:description" content="解读Casbin的权限管理。 
 ">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://xiaoping378.github.io/docs/3-devops/casbin/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2022-01-26T23:53:21+08:00"><meta property="og:site_name" content="现代技能栈">
+<meta property="article:modified_time" content="2022-01-27T22:24:15+08:00"><meta property="og:site_name" content="现代技能栈">
 <meta itemprop=name content="Casbin的权限管理解读">
-<meta itemprop=description content="介绍Casbin的权限模型管理的用法。 
+<meta itemprop=description content="解读Casbin的权限管理。 
 ">
-<meta itemprop=dateModified content="2022-01-26T23:53:21+08:00">
-<meta itemprop=wordCount content="92">
-<meta itemprop=keywords content><meta name=twitter:card content="summary">
+<meta itemprop=dateModified content="2022-01-27T22:24:15+08:00">
+<meta itemprop=wordCount content="183">
+<meta itemprop=keywords content="Dev,"><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Casbin的权限管理解读">
-<meta name=twitter:description content="介绍Casbin的权限模型管理的用法。 
+<meta name=twitter:description content="解读Casbin的权限管理。 
 ">
 <link rel=preload href=/scss/main.min.8973293e550f2aebcff13ca0acf28013165ed1fa321e6a370fbd3fd2e00c7d33.css as=style>
 <link href=/scss/main.min.8973293e550f2aebcff13ca0acf28013165ed1fa321e6a370fbd3fd2e00c7d33.css rel=stylesheet integrity>
@@ -52,7 +52,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.18f5f7b3fa43fd76adf0d53f7f435cc1.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.3544e23400379cd892055854ea32363d.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -62,7 +62,7 @@
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.18f5f7b3fa43fd76adf0d53f7f435cc1.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.3544e23400379cd892055854ea32363d.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -320,13 +320,21 @@
 <ul>
 <li><a href=#基本介绍>基本介绍</a></li>
 <li><a href=#抽象模型>抽象模型</a></li>
-<li><a href=#按场景举例>按场景举例</a></li>
+<li><a href=#按场景举例>按场景举例</a>
+<ul>
+<li><a href=#acl模型>ACL模型</a></li>
+<li><a href=#rbac模型>RBAC模型</a></li>
+<li><a href=#abac模型>ABAC模型</a></li>
+</ul>
+</li>
+<li><a href=#总结>总结</a></li>
 <li><a href=#参考>参考</a></li>
 </ul>
 </nav></div>
 <div class="taxonomy taxonomy-terms-cloud taxo-tags">
 <h5 class=taxonomy-title>标签</h5>
 <ul class=taxonomy-terms>
+<li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/dev/ data-taxonomy-term=dev><span class=taxonomy-label>Dev</span><span class=taxonomy-count>5</span></a></li>
 <li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/hugo/ data-taxonomy-term=hugo><span class=taxonomy-label>hugo</span><span class=taxonomy-count>3</span></a></li>
 <li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/k8s/ data-taxonomy-term=k8s><span class=taxonomy-label>K8S</span><span class=taxonomy-count>21</span></a></li>
 <li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/linux/ data-taxonomy-term=linux><span class=taxonomy-label>linux</span><span class=taxonomy-count>3</span></a></li>
@@ -355,8 +363,14 @@
 </nav>
 <div class=td-content>
 <h1>Casbin的权限管理解读</h1>
-<div class=lead>介绍Casbin的权限模型管理的用法。</div>
+<div class=lead>解读Casbin的权限管理。</div>
 <header class=article-meta>
+<div class="taxonomy taxonomy-terms-article taxo-tags">
+<h5 class=taxonomy-title>Tags:</h5>
+<ul class=taxonomy-terms>
+<li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/dev/ data-taxonomy-term=dev><span class=taxonomy-label>Dev</span></a></li>
+</ul>
+</div>
 </header>
 <div class="pageinfo pageinfo-primary">
 <p>项目一般都要包含权限管理功能，或集成IAM，或自身实现。本文介绍一个强大、高效的开源访问控制框架--Casbin。</p>
@@ -418,13 +432,72 @@ Casbin -&gt; 其他服务: 权限合规，则跳转到用户请求的其他服�
 <ul>
 <li>管理员分配给用户权限<strong>Policy</strong>，可以得到<code>谁能操作什么资源</code>的信息</li>
 <li>用户发起请求<strong>Request</strong>，可以得到<code>谁要操作什么资源</code>的信息</li>
-<li>Casbin拿到Request和Policy做匹配<strong>Matcher</strong></li>
+<li>Casbin拿到Request和Policy做匹配<strong>Matcher</strong>，也支持自定义函数匹配。</li>
 <li>根据匹配结果<strong>Effect</strong>来决定是否允许用户的操作</li>
 </ul>
 <p>实际场景中，用户可能被分配了多个权限（角色），那具体权限校验如下：
 <img src=/images/Casbin-2022-01-26-23-47-48.png alt></p>
+<p>既然是一种语言，就是有语法的，<a href=https://casbin.org/docs/zh-CN/syntax-for-models>PERM语法</a>至少要有四部分：<code>[request_definition], [policy_definition], [policy_effect], [matchers]</code>。
+具体就不展开介绍了，可自行官网祥读，effect部分具备SQL背景可能好理些,,,理解不了也没关系，目前就内置了5种：</p>
+<table>
+<thead>
+<tr>
+<th>Effect</th>
+<th>含义</th>
+<th>样例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>some(where (p.eft == allow))</td>
+<td>allow-override</td>
+<td><a href=https://casbin.org/docs/zh-CN/supported-models#examples>ACL, RBAC, etc.</a></td>
+</tr>
+<tr>
+<td>!some(where (p.eft == deny))</td>
+<td>deny-override</td>
+<td><a href=https://casbin.org/docs/zh-CN/supported-models#examples>Deny-override</a></td>
+</tr>
+<tr>
+<td>some(where (p.eft == allow)) && !some(where (p.eft == deny))</td>
+<td>allow-and-deny</td>
+<td><a href=https://casbin.org/docs/zh-CN/supported-models#examples>Allow-and-deny</a></td>
+</tr>
+<tr>
+<td>priority(p.eft) || deny</td>
+<td>priority</td>
+<td><a href=https://casbin.org/docs/zh-CN/supported-models#examples>Priority</a></td>
+</tr>
+<tr>
+<td>subjectPriority(p.eft)</td>
+<td>priority base on role</td>
+<td><a href=https://casbin.org/docs/zh-CN/supported-models#examples>Subject-Priority</a></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>奉劝各位看官，既然是语法，就不要纠结里面的命名和写法，较真...人家就是这么定义的，知道能都有哪些写法就可以了...，实际使用中往往改动Macter的部分概率大些。</p>
+</blockquote>
 <h2 id=按场景举例>按场景举例</h2>
-<p>TODO.</p>
+<h3 id=acl模型>ACL模型</h3>
+<p>先定义Casbin要加载的PERM Model，我使用在线编辑器定义一个<a href=https://casbin.org/casbin-editor/#6TQQJ8EQF>ACL典型模型</a>:</p>
+<p><img src=/images/Casbin-2022-01-27-09-48-25.png alt></p>
+<p>解读如下：</p>
+<ul>
+<li>左上侧为Casbin启动时要加载的标准ACL Model配置，不需要改动</li>
+<li>右上侧为Policy部分，属于管理员要分配权限时要改动的部分：示例中定义了5条规则，小王和小李对自己的Home目录可以读写，而小李额外可以读取小王的Home目录</li>
+<li>左下角Request表明用户的请求，一般是从用户实际发起的请求中获取信息，组合好格式后，用API发起校验，示例中小李发起读和写小王的操作</li>
+<li>右下角为权限校验结果：示例中小李的写操作被拒绝了</li>
+</ul>
+<h3 id=rbac模型>RBAC模型</h3>
+<p>下图模式的在线<a href=https://casbin.org/casbin-editor/#F8A6D8YHE>编辑地址</a></p>
+<p><img src=/images/Casbin-2022-01-27-16-31-44.png alt></p>
+<p>Macters里的<code>g(r.sub, p.sub, r.dom)</code> 将检查用户 r.sub 在域内 r.dom 是否具有角色 p.sub ，这是该匹配器的工作方式。</p>
+<h3 id=abac模型>ABAC模型</h3>
+<p>上图中RBAC中的Matcher如下修改，及实现了ABAC的模型校验。表明用户必须是要访问资源的<code>Owner</code>才可以操作符合角色权限内的资源。</p>
+<pre tabindex=0><code class=language-Conf data-lang=Conf>m = r.obj.Owner == r.sub &amp;&amp; (g(r.sub, p.sub, r.dom) &amp;&amp; r.dom == p.dom &amp;&amp; r.obj == p.obj &amp;&amp; r.act == p.act)
+</code></pre><h2 id=总结>总结</h2>
+<p>Casbin提供了非常灵活的权限校验模型，还提供了丰富的API，方便更便捷的实现业务场景功能, 后面会针对具体的项目开展更贴地气的解读。</p>
 <h2 id=参考>参考</h2>
 <blockquote>
 <p><a href=https://casbin.org/docs/zh-CN/tutorials>https://casbin.org/docs/zh-CN/tutorials</a></p>
@@ -433,7 +506,7 @@ Casbin -&gt; 其他服务: 权限合规，则跳转到用户请求的其他服�
 <p>我的博客即将同步至腾讯云+社区，邀请大家一同入驻：https://cloud.tencent.com/developer/support-plan?invite_code=3ntkskjrcwow8</p>
 </blockquote>
 <div class="text-muted mt-5 pt-3 border-top">
-最后修改 January 26, 2022: <a href=https://github.com/xiaoping378/xiaoping378.github.io/commit/253867098c61813ab352387a601ab35898f35b4c>开启主题的plantuml渲染和更新Casbin解读 (2538670)</a>
+最后修改 January 27, 2022: <a href=https://github.com/xiaoping378/xiaoping378.github.io/commit/6039197a5084dc9ed06f5537fb05d66409f4f35a>update Casbin (6039197)</a>
 </div>
 </div>
 </main>

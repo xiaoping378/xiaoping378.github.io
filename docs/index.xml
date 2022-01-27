@@ -3961,13 +3961,72 @@ Casbin -&amp;gt; 其他服务: 权限合规，则跳转到用户请求的其他�
 &lt;ul>
 &lt;li>管理员分配给用户权限&lt;strong>Policy&lt;/strong>，可以得到&lt;code>谁能操作什么资源&lt;/code>的信息&lt;/li>
 &lt;li>用户发起请求&lt;strong>Request&lt;/strong>，可以得到&lt;code>谁要操作什么资源&lt;/code>的信息&lt;/li>
-&lt;li>Casbin拿到Request和Policy做匹配&lt;strong>Matcher&lt;/strong>&lt;/li>
+&lt;li>Casbin拿到Request和Policy做匹配&lt;strong>Matcher&lt;/strong>，也支持自定义函数匹配。&lt;/li>
 &lt;li>根据匹配结果&lt;strong>Effect&lt;/strong>来决定是否允许用户的操作&lt;/li>
 &lt;/ul>
 &lt;p>实际场景中，用户可能被分配了多个权限（角色），那具体权限校验如下：
 &lt;img src="https://xiaoping378.github.io/images/Casbin-2022-01-26-23-47-48.png" alt="">&lt;/p>
+&lt;p>既然是一种语言，就是有语法的，&lt;a href="https://casbin.org/docs/zh-CN/syntax-for-models">PERM语法&lt;/a>至少要有四部分：&lt;code>[request_definition], [policy_definition], [policy_effect], [matchers]&lt;/code>。
+具体就不展开介绍了，可自行官网祥读，effect部分具备SQL背景可能好理些,,,理解不了也没关系，目前就内置了5种：&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Effect&lt;/th>
+&lt;th>含义&lt;/th>
+&lt;th>样例&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>some(where (p.eft == allow))&lt;/td>
+&lt;td>allow-override&lt;/td>
+&lt;td>&lt;a href="https://casbin.org/docs/zh-CN/supported-models#examples">ACL, RBAC, etc.&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>!some(where (p.eft == deny))&lt;/td>
+&lt;td>deny-override&lt;/td>
+&lt;td>&lt;a href="https://casbin.org/docs/zh-CN/supported-models#examples">Deny-override&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>some(where (p.eft == allow)) &amp;amp;&amp;amp; !some(where (p.eft == deny))&lt;/td>
+&lt;td>allow-and-deny&lt;/td>
+&lt;td>&lt;a href="https://casbin.org/docs/zh-CN/supported-models#examples">Allow-and-deny&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>priority(p.eft) || deny&lt;/td>
+&lt;td>priority&lt;/td>
+&lt;td>&lt;a href="https://casbin.org/docs/zh-CN/supported-models#examples">Priority&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>subjectPriority(p.eft)&lt;/td>
+&lt;td>priority base on role&lt;/td>
+&lt;td>&lt;a href="https://casbin.org/docs/zh-CN/supported-models#examples">Subject-Priority&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;blockquote>
+&lt;p>奉劝各位看官，既然是语法，就不要纠结里面的命名和写法，较真...人家就是这么定义的，知道能都有哪些写法就可以了...，实际使用中往往改动Macter的部分概率大些。&lt;/p>
+&lt;/blockquote>
 &lt;h2 id="按场景举例">按场景举例&lt;/h2>
-&lt;p>TODO.&lt;/p>
+&lt;h3 id="acl模型">ACL模型&lt;/h3>
+&lt;p>先定义Casbin要加载的PERM Model，我使用在线编辑器定义一个&lt;a href="https://casbin.org/casbin-editor/#6TQQJ8EQF">ACL典型模型&lt;/a>:&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.github.io/images/Casbin-2022-01-27-09-48-25.png" alt="">&lt;/p>
+&lt;p>解读如下：&lt;/p>
+&lt;ul>
+&lt;li>左上侧为Casbin启动时要加载的标准ACL Model配置，不需要改动&lt;/li>
+&lt;li>右上侧为Policy部分，属于管理员要分配权限时要改动的部分：示例中定义了5条规则，小王和小李对自己的Home目录可以读写，而小李额外可以读取小王的Home目录&lt;/li>
+&lt;li>左下角Request表明用户的请求，一般是从用户实际发起的请求中获取信息，组合好格式后，用API发起校验，示例中小李发起读和写小王的操作&lt;/li>
+&lt;li>右下角为权限校验结果：示例中小李的写操作被拒绝了&lt;/li>
+&lt;/ul>
+&lt;h3 id="rbac模型">RBAC模型&lt;/h3>
+&lt;p>下图模式的在线&lt;a href="https://casbin.org/casbin-editor/#F8A6D8YHE">编辑地址&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.github.io/images/Casbin-2022-01-27-16-31-44.png" alt="">&lt;/p>
+&lt;p>Macters里的&lt;code>g(r.sub, p.sub, r.dom)&lt;/code> 将检查用户 r.sub 在域内 r.dom 是否具有角色 p.sub ，这是该匹配器的工作方式。&lt;/p>
+&lt;h3 id="abac模型">ABAC模型&lt;/h3>
+&lt;p>上图中RBAC中的Matcher如下修改，及实现了ABAC的模型校验。表明用户必须是要访问资源的&lt;code>Owner&lt;/code>才可以操作符合角色权限内的资源。&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-Conf" data-lang="Conf">m = r.obj.Owner == r.sub &amp;amp;&amp;amp; (g(r.sub, p.sub, r.dom) &amp;amp;&amp;amp; r.dom == p.dom &amp;amp;&amp;amp; r.obj == p.obj &amp;amp;&amp;amp; r.act == p.act)
+&lt;/code>&lt;/pre>&lt;h2 id="总结">总结&lt;/h2>
+&lt;p>Casbin提供了非常灵活的权限校验模型，还提供了丰富的API，方便更便捷的实现业务场景功能, 后面会针对具体的项目开展更贴地气的解读。&lt;/p>
 &lt;h2 id="参考">参考&lt;/h2>
 &lt;blockquote>
 &lt;p>&lt;a href="https://casbin.org/docs/zh-CN/tutorials">https://casbin.org/docs/zh-CN/tutorials&lt;/a>&lt;/p>
