@@ -3,8 +3,6 @@ tags: ["Dev"]
 title: "Casbin的权限管理解读"
 linkTitle: "Casbin的权限管理解读"
 weight: 8
-description: >
-  解读Casbin的权限管理。 
 ---
 
 {{% pageinfo %}}

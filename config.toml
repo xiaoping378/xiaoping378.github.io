@@ -6,6 +6,9 @@ baseURL = "https://xiaoping378.github.io"
 
 # 是否生成robots文件
 enableRobotsTXT = true
+disableBrowserError = true
+
+timeout = 3000
 
 # 主题选择，支持组合，优先级从左到右.
 theme = ["docsy"]
@@ -46,6 +49,11 @@ pygmentsStyle = "emacs"
 # 配置blog编译产物的路径.
 [permalinks]
 blog = "/:section/:year/:month/:day/:slug/"
+
+
+[sitemap]
+  filename = "sitemap.xml"
+  priority = 0.75
 
 # markdown渲染引擎配置: https://github.com/russross/blackfriday
 # [blackfriday]

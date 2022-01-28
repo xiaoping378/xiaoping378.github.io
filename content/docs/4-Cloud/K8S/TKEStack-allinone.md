@@ -3,12 +3,10 @@ tags: ["容器", "K8S"]
 title: "TKEStack all-in-one入坑指南"
 linkTitle: "TKEStack all-in-one入坑指南"
 weight: 25
-description: >
-  TKEStack的all-in-one安装、多租户和多集群管理功能解读
 ---
 
 {{% pageinfo %}}
-本文主要介绍当前最新版本TkeStack 1.8.1 的allinone安装入坑指南和基本核心功能介绍。
+本文主要介绍当前最新版本TkeStack 1.8.1 的TKEStack的all-in-one安装、多租户和多集群管理功能解读。
 {{% /pageinfo %}}
 
 ## 安装实录
@@ -54,7 +52,20 @@ nerdctl run --name registry-https -d --net=host --restart=always -p 443:
 
 ## 多租户管理
 
-tkestack采用Casbin模型作为权限管理，TODO.
+tkestack采用[Casbin框架](/docs/3-devops/casbin)实现的权限管理功能，默认集成的Model，查看[源码](https://github.com/tkestack/tke/blob/a024c064880d9180dc8b6d615ffc58b64bb7f903/api/auth/types.go#L633)得知：
+
+```Conf
+[request_definition]
+r = sub, dom, obj, act
+[policy_definition]
+p = sub, dom, obj, act, eft
+[role_definition]
+g = _, _, _
+[policy_effect]
+e = some(where (p.eft == allow)) && !some(where (p.eft == deny))
+[matchers]
+m = g(r.sub, p.sub, r.dom) && keyMatchCustom(r.obj, p.obj) && keyMatchCustom(r.act, p.act)
+```
 
 ## FAQ
 

@@ -3,8 +3,6 @@ tags: ["hugo"]
 title: "站点搭建方法"
 linkTitle: "站点搭建方法"
 weight: 1
-description: >
-  介绍本站点搭建的方法.
 ---
 
 {{% pageinfo %}}
