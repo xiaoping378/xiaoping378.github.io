@@ -4583,7 +4583,7 @@ osm_cluster_network_cidr=10.128.0.0/10
 &lt;p>未完搞 ...&lt;/p></description></item><item><title>Docs: 日志分析</title><link>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/</guid><description>
 &lt;p>未完搞 ...&lt;/p></description></item><item><title>Docs: TKEStack all-in-one入坑指南</title><link>https://xiaoping378.github.io/docs/4-cloud/k8s/tkestack-allinone/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/k8s/tkestack-allinone/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
-&lt;p>本文主要介绍当前最新版本TkeStack 1.8.1 的allinone安装入坑指南和基本核心功能介绍。&lt;/p>
+&lt;p>本文主要介绍当前最新版本TkeStack 1.8.1 的TKEStack的all-in-one安装、多租户和多集群管理功能解读。&lt;/p>
 &lt;/div>
 &lt;h2 id="安装实录">安装实录&lt;/h2>
 &lt;p>官方推荐至少需要2节点方可安装，配置如下，&lt;strong>硬盘空间&lt;/strong>一定要保障。也支持ALL-in-ONE的方式安装，但有BUG。&lt;/p>
@@ -4611,8 +4611,18 @@ tkestack/registry-amd64:2.7.1  
 &lt;img src="https://xiaoping378.github.io/images/TKEStack-allinone-2022-01-25-09-10-56.png" alt="">&lt;/p>
 &lt;p>默认初始安装后，很多pod是双副本的，我这里仅是验证功能使用，全部改成了单副本。&lt;/p>
 &lt;h2 id="多租户管理">多租户管理&lt;/h2>
-&lt;p>tkestack采用Casbin模型作为权限管理，TODO.&lt;/p>
-&lt;h2 id="faq">FAQ&lt;/h2>
+&lt;p>tkestack采用&lt;a href="https://xiaoping378.github.io/docs/3-devops/casbin">Casbin框架&lt;/a>实现的权限管理功能，默认集成的Model，查看&lt;a href="https://github.com/tkestack/tke/blob/a024c064880d9180dc8b6d615ffc58b64bb7f903/api/auth/types.go#L633">源码&lt;/a>得知：&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-Conf" data-lang="Conf">[request_definition]
+r = sub, dom, obj, act
+[policy_definition]
+p = sub, dom, obj, act, eft
+[role_definition]
+g = _, _, _
+[policy_effect]
+e = some(where (p.eft == allow)) &amp;amp;&amp;amp; !some(where (p.eft == deny))
+[matchers]
+m = g(r.sub, p.sub, r.dom) &amp;amp;&amp;amp; keyMatchCustom(r.obj, p.obj) &amp;amp;&amp;amp; keyMatchCustom(r.act, p.act)
+&lt;/code>&lt;/pre>&lt;h2 id="faq">FAQ&lt;/h2>
 &lt;h3 id="安装过程出现循环等待apiserver启动">安装过程出现循环等待apiserver启动&lt;/h3>
 &lt;pre tabindex="0">&lt;code class="language-log" data-lang="log">2022-01-19 14:43:32.225 error   tke-installer.ClusterProvider.OnCreate.EnsureKubeadmInitPhaseWaitControlPlane   check healthz error {&amp;quot;statusCode&amp;quot;: 0, &amp;quot;error&amp;quot;: &amp;quot;Get \&amp;quot;https://****:6443/healthz?timeout=30s\&amp;quot;: net/http: TLS handshake timeout&amp;quot;}
 &lt;/code>&lt;/pre>&lt;p>我这里是因为在installer上指定的master的IP为外网IP（我使用外网IP是有原因的，穷... 后面需要跨云厂商组集群），通过查看kubelet日志提示本机找不到IP，如下开启网卡多IP，可通过。&lt;/p>
