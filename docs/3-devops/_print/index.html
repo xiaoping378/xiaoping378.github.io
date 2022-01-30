@@ -50,7 +50,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.5f7c8ced3e1125e9e9c4576b202a3cc9.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.7cadd39400562c5f5e0a0525f6f73839.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -78,7 +78,7 @@
 <li>6: <a href=#pg-024476416cd1256abdf9950bb55be431>MongoDB之初见</a></li>
 <li>7: <a href=#pg-0869f908f4f0eb9cdf146f22565dc728>Openldap之拨云见日</a></li>
 <li>8: <a href=#pg-9763571770981514723f9ed615e69ea5>Casbin的权限管理解读</a></li>
-<li>9: <a href=#pg-e4c44f08a2c513a02fe3cb9aa2c655e0>Windows Terminal终端 入坑指南</a></li>
+<li>9: <a href=#pg-e4c44f08a2c513a02fe3cb9aa2c655e0>Windows Terminal终端入坑指南</a></li>
 </ul>
 <div class=content>
 <div class="pageinfo pageinfo-primary">
@@ -832,14 +832,14 @@ Casbin -&gt; 其他服务: 权限合规，则跳转到用户请求的其他服�
 </blockquote>
 </div>
 <div class=td-content style=page-break-before:always>
-<h1 id=pg-e4c44f08a2c513a02fe3cb9aa2c655e0>9 - Windows Terminal终端 入坑指南</h1>
-<div class=lead>介绍windows terminal从安装到配置指南</div>
+<h1 id=pg-e4c44f08a2c513a02fe3cb9aa2c655e0>9 - Windows Terminal终端入坑指南</h1>
+<div class=lead>介绍windows terminal安装和oh-my-zsh的配置</div>
 <div class="pageinfo pageinfo-primary">
 <p>为了这个东西，重新安装了系统，目前是在windows LTSC 2021版本下的使用指南。
 在IT界Terminal和Console差不多是一个意思，同属于界面层面的，不少人老和Shell搞混了，特此说明下Shell一般是指的Bash、zsh、PowerShell、cmd等。</p>
 </div>
 <h2 id=安装>安装</h2>
-<p>为了使用Windows Terminal，在春节期间，重新安装了LTSC 2021版本的系统（之前的LTSC 2019）。</p>
+<p>为了使用Windows Terminal，在春节期间，重新安装了LTSC 2021版本的系统（之前一直用的LTSC 2019）。</p>
 <blockquote>
 <p>它对操作系统内部版本的最低要求为 <code>18362.0</code>，通过<code>Win+R</code>输入<code>winver</code>可以确认本机系统是否支持。</p>
 </blockquote>
@@ -876,63 +876,62 @@ Casbin -&gt; 其他服务: 权限合规，则跳转到用户请求的其他服�
 </li>
 </ol>
 <h2 id=gitbash>GitBash</h2>
-<p><img src=/images/windows-terminal-2022-01-30-13-32-26.png alt></p>
-<p>本人环境<code>VSCode</code>和<code>git-bash</code>都是绿色版本了，免去每次重装系统，都进行各种重复的配置操作，这里介绍下git-bash改造的大致步骤。</p>
-<h3 id=绿色改造>绿色改造</h3>
-<p>在powershell中设置环境变量，git-bash每次启动可以根据此变量，决定加载配置的路径。</p>
+<p><img src=/images/windows-terminal-2022-01-30-23-03-08.png alt></p>
+<p>本人环境<code>VSCode</code>和<a href=https://git-scm.com/download/win>git-bash</a>都是绿色版本了，免去了每次重装系统，都进行各种重复的配置操作.</p>
+<blockquote>
+<p>没有环境的可以自行通过上面的连接下载GitBash，后面有时间会尝试下<code>WSL</code>和WSL2。</p>
+</blockquote>
+<h3 id=中文乱码>中文乱码</h3>
+<p>需要添加环境变量到<code>~/.bashrc</code>或者<code>~/.zshrc</code>中。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#a2f>export</span> <span style=color:#b8860b>LANG</span><span style=color:#666>=</span>zh_CN.UTF-8
+</code></pre></div><h3 id=绿色改造>绿色改造</h3>
+<p>绿色改造的核心，一个是安装时不默认安装在C盘，另一个就是设置<code>HOME</code>的系统环境变量，Git-Bash每次启动是可以根据<code>HOME</code>变量，决定加载配置的路径的。</p>
+<p>设置系统环境变量，两种办法：</p>
+<ul>
+<li>
+<p>图形界面操作： <code>Win+x</code> -> 系统 -> 高级系统设置 -> 环境变量, 自行添加<code>HOME</code>变量。(忘记了要不要注销才会生效)</p>
+</li>
+<li>
+<p>在PowerShell命令行中设置环境变量，执行完即可生效。</p>
+</li>
+</ul>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style=color:#800>[Environment]</span>::SetEnvironmentVariable(<span style=color:#b44>&#34;HOME&#34;</span>, <span style=color:#b44>&#34;D:\xxp&#34;</span>, <span style=color:#b44>&#34;User&#34;</span>)
-</code></pre></div><p>我这里是<code>D:\xxp</code>目录，这样的话，那些<code>ssh、git、vscode、bash</code>的自定义配置，都可以免去重装再来一次的痛苦了。</p>
+</code></pre></div><p>我这里是<code>D:\xxp</code>目录，这样的话，那些<code>ssh、git、vscode、bash、zsh</code>的自定义配置，都可以免去重装再来一次的痛苦了。</p>
 <p>还可以把日常用到<code>exe</code>小工具，也放到<code>$HOME/bin</code>目录下，再加到<code>PATH</code>环境变量里。</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style=color:#800>[Environment]</span>::SetEnvironmentVariable(<span style=color:#b44>&#34;Path&#34;</span>, <span style=color:#800>[Environment]</span>::GetEnvironmentVariable(<span style=color:#b44>&#34;Path&#34;</span>, <span style=color:#b44>&#34;User&#34;</span>) + <span style=color:#b44>&#34;;D:\xxp\bin&#34;</span>,<span style=color:#b44>&#34;User&#34;</span>)
 </code></pre></div><h3 id=oh-my-zsh主题改造>oh-my-zsh主题改造</h3>
-<p>现在有人直接把zsh装上，然后再安装github上的oh-my-zsh主题，但是启动速度会慢一些，本来bash就比cmd启动慢了，，，</p>
-<p>我是在bash的基础上改造下主题，修改<code>Git\etc\profile.d\git-prompt.sh</code>文件：</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#a2f;font-weight:700>if</span> <span style=color:#a2f>test</span> -f /etc/profile.d/git-sdk.sh
-<span style=color:#a2f;font-weight:700>then</span>
-	<span style=color:#b8860b>TITLEPREFIX</span><span style=color:#666>=</span>SDK-<span style=color:#b68;font-weight:700>${</span><span style=color:#b8860b>MSYSTEM</span>#MINGW<span style=color:#b68;font-weight:700>}</span>
-<span style=color:#a2f;font-weight:700>else</span>
-	<span style=color:#b8860b>TITLEPREFIX</span><span style=color:#666>=</span><span style=color:#b8860b>$MSYSTEM</span>
-<span style=color:#a2f;font-weight:700>fi</span>
-
-<span style=color:#a2f;font-weight:700>if</span> <span style=color:#a2f>test</span> -f ~/.config/git/git-prompt.sh
-<span style=color:#a2f;font-weight:700>then</span>
-	. ~/.config/git/git-prompt.sh
-<span style=color:#a2f;font-weight:700>else</span>
-	<span style=color:#b8860b>PS1</span><span style=color:#666>=</span><span style=color:#b44>&#39;\[\033]0;Bash\007\]&#39;</span>      <span style=color:#080;font-style:italic># 窗口标题</span>
-	<span style=color:#b8860b>PS1</span><span style=color:#666>=</span><span style=color:#b44>&#34;</span><span style=color:#b8860b>$PS1</span><span style=color:#b44>&#34;</span><span style=color:#b44>&#39;\n&#39;</span>                 <span style=color:#080;font-style:italic># 换行</span>
-	<span style=color:#b8860b>PS1</span><span style=color:#666>=</span><span style=color:#b44>&#34;</span><span style=color:#b8860b>$PS1</span><span style=color:#b44>&#34;</span><span style=color:#b44>&#39;\[\033[32;1m\]&#39;</span>     <span style=color:#080;font-style:italic># 高亮绿色</span>
-	<span style=color:#b8860b>PS1</span><span style=color:#666>=</span><span style=color:#b44>&#34;</span><span style=color:#b8860b>$PS1</span><span style=color:#b44>&#34;</span><span style=color:#b44>&#39;➜  &#39;</span>               <span style=color:#080;font-style:italic># unicode 字符，右箭头</span>
-	<span style=color:#b8860b>PS1</span><span style=color:#666>=</span><span style=color:#b44>&#34;</span><span style=color:#b8860b>$PS1</span><span style=color:#b44>&#34;</span><span style=color:#b44>&#39;\[\033[33;1m\]&#39;</span>     <span style=color:#080;font-style:italic># 高亮黄色</span>
-	<span style=color:#b8860b>PS1</span><span style=color:#666>=</span><span style=color:#b44>&#34;</span><span style=color:#b8860b>$PS1</span><span style=color:#b44>&#34;</span><span style=color:#b44>&#39;\W&#39;</span>                 <span style=color:#080;font-style:italic># 当前目录</span>
-	<span style=color:#a2f;font-weight:700>if</span> <span style=color:#a2f>test</span> -z <span style=color:#b44>&#34;</span><span style=color:#b8860b>$WINELOADERNOEXEC</span><span style=color:#b44>&#34;</span>
-	<span style=color:#a2f;font-weight:700>then</span>
-		<span style=color:#b8860b>GIT_EXEC_PATH</span><span style=color:#666>=</span><span style=color:#b44>&#34;</span><span style=color:#a2f;font-weight:700>$(</span>git --exec-path 2&gt;/dev/null<span style=color:#a2f;font-weight:700>)</span><span style=color:#b44>&#34;</span>
-		<span style=color:#b8860b>COMPLETION_PATH</span><span style=color:#666>=</span><span style=color:#b44>&#34;</span><span style=color:#b68;font-weight:700>${</span><span style=color:#b8860b>GIT_EXEC_PATH</span>%/libexec/git-core<span style=color:#b68;font-weight:700>}</span><span style=color:#b44>&#34;</span>
-		<span style=color:#b8860b>COMPLETION_PATH</span><span style=color:#666>=</span><span style=color:#b44>&#34;</span><span style=color:#b68;font-weight:700>${</span><span style=color:#b8860b>COMPLETION_PATH</span>%/lib/git-core<span style=color:#b68;font-weight:700>}</span><span style=color:#b44>&#34;</span>
-		<span style=color:#b8860b>COMPLETION_PATH</span><span style=color:#666>=</span><span style=color:#b44>&#34;</span><span style=color:#b8860b>$COMPLETION_PATH</span><span style=color:#b44>/share/git/completion&#34;</span>
-		<span style=color:#a2f;font-weight:700>if</span> <span style=color:#a2f>test</span> -f <span style=color:#b44>&#34;</span><span style=color:#b8860b>$COMPLETION_PATH</span><span style=color:#b44>/git-prompt.sh&#34;</span>
-		<span style=color:#a2f;font-weight:700>then</span>
-			. <span style=color:#b44>&#34;</span><span style=color:#b8860b>$COMPLETION_PATH</span><span style=color:#b44>/git-completion.bash&#34;</span>
-			. <span style=color:#b44>&#34;</span><span style=color:#b8860b>$COMPLETION_PATH</span><span style=color:#b44>/git-prompt.sh&#34;</span>
-			<span style=color:#b8860b>PS1</span><span style=color:#666>=</span><span style=color:#b44>&#34;</span><span style=color:#b8860b>$PS1</span><span style=color:#b44>&#34;</span><span style=color:#b44>&#39;\[\033[31m\]&#39;</span>   <span style=color:#080;font-style:italic># 红色</span>
-			<span style=color:#b8860b>PS1</span><span style=color:#666>=</span><span style=color:#b44>&#34;</span><span style=color:#b8860b>$PS1</span><span style=color:#b44>&#34;</span><span style=color:#b44>&#39;`__git_ps1`&#39;</span>    <span style=color:#080;font-style:italic># git 插件</span>
-		<span style=color:#a2f;font-weight:700>fi</span>
-	<span style=color:#a2f;font-weight:700>fi</span>
-	<span style=color:#b8860b>PS1</span><span style=color:#666>=</span><span style=color:#b44>&#34;</span><span style=color:#b8860b>$PS1</span><span style=color:#b44>&#34;</span><span style=color:#b44>&#39;\[\033[36m\] &#39;</span>      <span style=color:#080;font-style:italic># 青色</span>
-<span style=color:#a2f;font-weight:700>fi</span>
-
-<span style=color:#b8860b>MSYS2_PS1</span><span style=color:#666>=</span><span style=color:#b44>&#34;</span><span style=color:#b8860b>$PS1</span><span style=color:#b44>&#34;</span>
-
-<span style=color:#080;font-style:italic># Evaluate all user-specific Bash completion scripts (if any)</span>
-<span style=color:#a2f;font-weight:700>if</span> <span style=color:#a2f>test</span> -z <span style=color:#b44>&#34;</span><span style=color:#b8860b>$WINELOADERNOEXEC</span><span style=color:#b44>&#34;</span>
-<span style=color:#a2f;font-weight:700>then</span>
-	<span style=color:#a2f;font-weight:700>for</span> c in <span style=color:#b44>&#34;</span><span style=color:#b8860b>$HOME</span><span style=color:#b44>&#34;</span>/.bash_completion.d/*.bash
-	<span style=color:#a2f;font-weight:700>do</span>
-		<span style=color:#080;font-style:italic># Handle absence of any scripts (or the folder) gracefully</span>
-		<span style=color:#a2f>test</span> ! -f <span style=color:#b44>&#34;</span><span style=color:#b8860b>$c</span><span style=color:#b44>&#34;</span> <span style=color:#666>||</span>
-		. <span style=color:#b44>&#34;</span><span style=color:#b8860b>$c</span><span style=color:#b44>&#34;</span>
-	<span style=color:#a2f;font-weight:700>done</span>
-<span style=color:#a2f;font-weight:700>fi</span>
+<p><del>现在有人直接把zsh装上，然后再安装github上的oh-my-zsh主题，但是启动速度会慢一些，本来bash就比cmd启动慢了，，，</del></p>
+<p><del>我是在bash的基础上改造下主题，修改<code>Git\etc\profile.d\git-prompt.sh</code>文件，详见<a href=https://gist.github.com/xiaoping378/8d636ddfdcf68982b93b65acbd5dcd83>这里</a></del></p>
+<p>之前一直是Bash的基础上，修改了下主题凑活用着。其实可以直接使用zsh的，记录下大致操作。</p>
+<blockquote>
+<p>之前在网上看过的的教程大多是在<code>bashrc</code>里再启动<code>zsh</code>，会慢上加慢的，我就一直没弄，后来觉得是可以做个<code>Git-zsh</code>环境的。</p>
+</blockquote>
+<ol>
+<li><a href=https://mirror.msys2.org/msys/x86_64/zsh-5.8-5-x86_64.pkg.tar.zst>下载</a>zsh二进制</li>
+</ol>
+<p>现在msys2上的安装包，都变成zst格式（Facebook家出的）的压缩包了，还需要下载解压工具，我平常使用的就是7z，这里找了个<a href=https://github.com/mcmilk/7-Zip-zstd/releases>7z with ZS</a>的工具。</p>
+<p>解压到GitBash安装的根目录上。主要是<code>/etc/zsh</code>和<code>/usr</code>目录。</p>
+<ol start=2>
+<li>安装oh-my-zsh主题</li>
+</ol>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>sh -c <span style=color:#b44>&#34;</span><span style=color:#a2f;font-weight:700>$(</span>curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh<span style=color:#a2f;font-weight:700>)</span><span style=color:#b44>&#34;</span>
+</code></pre></div><ol start=3>
+<li>terminal和vscode中使用zsh.exe</li>
+</ol>
+<ul>
+<li>直接指定<code>zsh.exe</code>的路径</li>
+<li>还需要在<code>~/.zshrc</code>的<code>PATH</code>里添加<code>/mingw64/bin</code>，不然会提示找不到git，</li>
+</ul>
+<p>如下是Terminal的配置：
+<img src=/images/windows-terminal-2022-01-30-23-18-29.png alt></p>
+<p>如下是vscode中的配置：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>    <span style=color:#b44>&#34;terminal.integrated.profiles.windows&#34;</span><span>:</span> {
+        <span style=color:green;font-weight:700>&#34;git-bash&#34;</span>: {
+          <span style=color:green;font-weight:700>&#34;path&#34;</span>: <span style=color:#b44>&#34;D:\\Softwares\\Git\\usr\\bin\\zsh.exe&#34;</span>,
+          <span style=color:green;font-weight:700>&#34;args&#34;</span>: []
+        }
+      }<span>,</span>
+    <span style=color:#b44>&#34;terminal.integrated.defaultProfile.windows&#34;</span><span>:</span> <span style=color:#b44>&#34;git-bash&#34;</span><span>,</span>
 </code></pre></div>
 </div>
 </main>
