@@ -1948,7 +1948,8 @@ g = _, _, _
 e = some(where (p.eft == allow)) &amp;amp;&amp;amp; !some(where (p.eft == deny))
 [matchers]
 m = g(r.sub, p.sub, r.dom) &amp;amp;&amp;amp; keyMatchCustom(r.obj, p.obj) &amp;amp;&amp;amp; keyMatchCustom(r.act, p.act)
-&lt;/code>&lt;/pre>&lt;h2 id="faq">FAQ&lt;/h2>
+&lt;/code>&lt;/pre>&lt;p>实现了多租户级的RBAC权限模型。&lt;/p>
+&lt;h2 id="faq">FAQ&lt;/h2>
 &lt;h3 id="安装过程出现循环等待apiserver启动">安装过程出现循环等待apiserver启动&lt;/h3>
 &lt;pre tabindex="0">&lt;code class="language-log" data-lang="log">2022-01-19 14:43:32.225 error   tke-installer.ClusterProvider.OnCreate.EnsureKubeadmInitPhaseWaitControlPlane   check healthz error {&amp;quot;statusCode&amp;quot;: 0, &amp;quot;error&amp;quot;: &amp;quot;Get \&amp;quot;https://****:6443/healthz?timeout=30s\&amp;quot;: net/http: TLS handshake timeout&amp;quot;}
 &lt;/code>&lt;/pre>&lt;p>我这里是因为在installer上指定的master的IP为外网IP（我使用外网IP是有原因的，穷... 后面需要跨云厂商组集群），通过查看kubelet日志提示本机找不到IP，如下开启网卡多IP，可通过。&lt;/p>

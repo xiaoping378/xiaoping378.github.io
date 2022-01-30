@@ -707,4 +707,101 @@ Casbin -&amp;gt; 其他服务: 权限合规，则跳转到用户请求的其他�
 &lt;/blockquote>
 &lt;blockquote>
 &lt;p>我的博客即将同步至腾讯云+社区，邀请大家一同入驻：https://cloud.tencent.com/developer/support-plan?invite_code=3ntkskjrcwow8&lt;/p>
-&lt;/blockquote></description></item></channel></rss>
+&lt;/blockquote></description></item><item><title>Docs: Windows Terminal终端 入坑指南</title><link>https://xiaoping378.github.io/docs/3-devops/windows-terminal/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/3-devops/windows-terminal/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>为了这个东西，重新安装了系统，目前是在windows LTSC 2021版本下的使用指南。
+在IT界Terminal和Console差不多是一个意思，同属于界面层面的，不少人老和Shell搞混了，特此说明下Shell一般是指的Bash、zsh、PowerShell、cmd等。&lt;/p>
+&lt;/div>
+&lt;h2 id="安装">安装&lt;/h2>
+&lt;p>为了使用Windows Terminal，在春节期间，重新安装了LTSC 2021版本的系统（之前的LTSC 2019）。&lt;/p>
+&lt;blockquote>
+&lt;p>它对操作系统内部版本的最低要求为 &lt;code>18362.0&lt;/code>，通过&lt;code>Win+R&lt;/code>输入&lt;code>winver&lt;/code>可以确认本机系统是否支持。&lt;/p>
+&lt;/blockquote>
+&lt;p>目前有三种办法安装（本人选用的第二种）:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>是在应用商店中搜索&lt;code>Windows Terminal&lt;/code>，安装即可。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>通过&lt;a href="https://github.com/microsoft/terminal/releases">Github release&lt;/a>页面下载安装包，&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="color:#a2f">Add-AppxPackage&lt;/span> Microsoft.WindowsTerminal_&amp;lt;versionNumber&amp;gt;.msixbundle
+&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>通过命令行&lt;a href="https://github.com/microsoft/winget-cli">winget&lt;/a>、&lt;a href="https://chocolatey.org/">Chocolatey &lt;/a>、&lt;a href="https://scoop.sh/">Scoop &lt;/a>安装，下面以winget为例：&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-powershell" data-lang="powershell">winget install --id=Microsoft.WindowsTerminal -e
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="配置">配置&lt;/h2>
+&lt;p>现在基本可以图形界面配置了，按照自己的习惯图形操作即可，网上一坨坨的教程，此处不表。&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.github.io/images/windows-terminal-2022-01-30-12-53-50.png" alt="">&lt;/p>
+&lt;p>默认配置保存在了&lt;code>%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json&lt;/code>&lt;/p>
+&lt;h2 id="技巧">技巧&lt;/h2>
+&lt;ol>
+&lt;li>快捷键
+&lt;ul>
+&lt;li>新建终端 -- &lt;code>Ctrl+Shift+t&lt;/code>&lt;/li>
+&lt;li>切换终端 -- &lt;code>Alt + Num&lt;/code> , （我这里修改过了）&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Quake窗口
+&lt;ul>
+&lt;li>快捷键是&lt;strong>Win + `&lt;/strong> , 可以快速从屏幕上半区换出终端窗口&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="gitbash">GitBash&lt;/h2>
+&lt;p>&lt;img src="https://xiaoping378.github.io/images/windows-terminal-2022-01-30-13-32-26.png" alt="">&lt;/p>
+&lt;p>本人环境&lt;code>VSCode&lt;/code>和&lt;code>git-bash&lt;/code>都是绿色版本了，免去每次重装系统，都进行各种重复的配置操作，这里介绍下git-bash改造的大致步骤。&lt;/p>
+&lt;h3 id="绿色改造">绿色改造&lt;/h3>
+&lt;p>在powershell中设置环境变量，git-bash每次启动可以根据此变量，决定加载配置的路径。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="color:#800">[Environment]&lt;/span>::SetEnvironmentVariable(&lt;span style="color:#b44">&amp;#34;HOME&amp;#34;&lt;/span>, &lt;span style="color:#b44">&amp;#34;D:\xxp&amp;#34;&lt;/span>, &lt;span style="color:#b44">&amp;#34;User&amp;#34;&lt;/span>)
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>我这里是&lt;code>D:\xxp&lt;/code>目录，这样的话，那些&lt;code>ssh、git、vscode、bash&lt;/code>的自定义配置，都可以免去重装再来一次的痛苦了。&lt;/p>
+&lt;p>还可以把日常用到&lt;code>exe&lt;/code>小工具，也放到&lt;code>$HOME/bin&lt;/code>目录下，再加到&lt;code>PATH&lt;/code>环境变量里。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="color:#800">[Environment]&lt;/span>::SetEnvironmentVariable(&lt;span style="color:#b44">&amp;#34;Path&amp;#34;&lt;/span>, &lt;span style="color:#800">[Environment]&lt;/span>::GetEnvironmentVariable(&lt;span style="color:#b44">&amp;#34;Path&amp;#34;&lt;/span>, &lt;span style="color:#b44">&amp;#34;User&amp;#34;&lt;/span>) + &lt;span style="color:#b44">&amp;#34;;D:\xxp\bin&amp;#34;&lt;/span>,&lt;span style="color:#b44">&amp;#34;User&amp;#34;&lt;/span>)
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="oh-my-zsh主题改造">oh-my-zsh主题改造&lt;/h3>
+&lt;p>现在有人直接把zsh装上，然后再安装github上的oh-my-zsh主题，但是启动速度会慢一些，本来bash就比cmd启动慢了，，，&lt;/p>
+&lt;p>我是在bash的基础上改造下主题，修改&lt;code>Git\etc\profile.d\git-prompt.sh&lt;/code>文件：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#a2f;font-weight:bold">if&lt;/span> &lt;span style="color:#a2f">test&lt;/span> -f /etc/profile.d/git-sdk.sh
+&lt;span style="color:#a2f;font-weight:bold">then&lt;/span>
+&lt;span style="color:#b8860b">TITLEPREFIX&lt;/span>&lt;span style="color:#666">=&lt;/span>SDK-&lt;span style="color:#b68;font-weight:bold">${&lt;/span>&lt;span style="color:#b8860b">MSYSTEM&lt;/span>#MINGW&lt;span style="color:#b68;font-weight:bold">}&lt;/span>
+&lt;span style="color:#a2f;font-weight:bold">else&lt;/span>
+&lt;span style="color:#b8860b">TITLEPREFIX&lt;/span>&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#b8860b">$MSYSTEM&lt;/span>
+&lt;span style="color:#a2f;font-weight:bold">fi&lt;/span>
+&lt;span style="color:#a2f;font-weight:bold">if&lt;/span> &lt;span style="color:#a2f">test&lt;/span> -f ~/.config/git/git-prompt.sh
+&lt;span style="color:#a2f;font-weight:bold">then&lt;/span>
+. ~/.config/git/git-prompt.sh
+&lt;span style="color:#a2f;font-weight:bold">else&lt;/span>
+&lt;span style="color:#b8860b">PS1&lt;/span>&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#b44">&amp;#39;\[\033]0;Bash\007\]&amp;#39;&lt;/span> &lt;span style="color:#080;font-style:italic"># 窗口标题&lt;/span>
+&lt;span style="color:#b8860b">PS1&lt;/span>&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b8860b">$PS1&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b44">&amp;#39;\n&amp;#39;&lt;/span> &lt;span style="color:#080;font-style:italic"># 换行&lt;/span>
+&lt;span style="color:#b8860b">PS1&lt;/span>&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b8860b">$PS1&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b44">&amp;#39;\[\033[32;1m\]&amp;#39;&lt;/span> &lt;span style="color:#080;font-style:italic"># 高亮绿色&lt;/span>
+&lt;span style="color:#b8860b">PS1&lt;/span>&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b8860b">$PS1&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b44">&amp;#39;➜ &amp;#39;&lt;/span> &lt;span style="color:#080;font-style:italic"># unicode 字符，右箭头&lt;/span>
+&lt;span style="color:#b8860b">PS1&lt;/span>&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b8860b">$PS1&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b44">&amp;#39;\[\033[33;1m\]&amp;#39;&lt;/span> &lt;span style="color:#080;font-style:italic"># 高亮黄色&lt;/span>
+&lt;span style="color:#b8860b">PS1&lt;/span>&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b8860b">$PS1&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b44">&amp;#39;\W&amp;#39;&lt;/span> &lt;span style="color:#080;font-style:italic"># 当前目录&lt;/span>
+&lt;span style="color:#a2f;font-weight:bold">if&lt;/span> &lt;span style="color:#a2f">test&lt;/span> -z &lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b8860b">$WINELOADERNOEXEC&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>
+&lt;span style="color:#a2f;font-weight:bold">then&lt;/span>
+&lt;span style="color:#b8860b">GIT_EXEC_PATH&lt;/span>&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#a2f;font-weight:bold">$(&lt;/span>git --exec-path 2&amp;gt;/dev/null&lt;span style="color:#a2f;font-weight:bold">)&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>
+&lt;span style="color:#b8860b">COMPLETION_PATH&lt;/span>&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b68;font-weight:bold">${&lt;/span>&lt;span style="color:#b8860b">GIT_EXEC_PATH&lt;/span>%/libexec/git-core&lt;span style="color:#b68;font-weight:bold">}&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>
+&lt;span style="color:#b8860b">COMPLETION_PATH&lt;/span>&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b68;font-weight:bold">${&lt;/span>&lt;span style="color:#b8860b">COMPLETION_PATH&lt;/span>%/lib/git-core&lt;span style="color:#b68;font-weight:bold">}&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>
+&lt;span style="color:#b8860b">COMPLETION_PATH&lt;/span>&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b8860b">$COMPLETION_PATH&lt;/span>&lt;span style="color:#b44">/share/git/completion&amp;#34;&lt;/span>
+&lt;span style="color:#a2f;font-weight:bold">if&lt;/span> &lt;span style="color:#a2f">test&lt;/span> -f &lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b8860b">$COMPLETION_PATH&lt;/span>&lt;span style="color:#b44">/git-prompt.sh&amp;#34;&lt;/span>
+&lt;span style="color:#a2f;font-weight:bold">then&lt;/span>
+. &lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b8860b">$COMPLETION_PATH&lt;/span>&lt;span style="color:#b44">/git-completion.bash&amp;#34;&lt;/span>
+. &lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b8860b">$COMPLETION_PATH&lt;/span>&lt;span style="color:#b44">/git-prompt.sh&amp;#34;&lt;/span>
+&lt;span style="color:#b8860b">PS1&lt;/span>&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b8860b">$PS1&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b44">&amp;#39;\[\033[31m\]&amp;#39;&lt;/span> &lt;span style="color:#080;font-style:italic"># 红色&lt;/span>
+&lt;span style="color:#b8860b">PS1&lt;/span>&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b8860b">$PS1&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b44">&amp;#39;`__git_ps1`&amp;#39;&lt;/span> &lt;span style="color:#080;font-style:italic"># git 插件&lt;/span>
+&lt;span style="color:#a2f;font-weight:bold">fi&lt;/span>
+&lt;span style="color:#a2f;font-weight:bold">fi&lt;/span>
+&lt;span style="color:#b8860b">PS1&lt;/span>&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b8860b">$PS1&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b44">&amp;#39;\[\033[36m\] &amp;#39;&lt;/span> &lt;span style="color:#080;font-style:italic"># 青色&lt;/span>
+&lt;span style="color:#a2f;font-weight:bold">fi&lt;/span>
+&lt;span style="color:#b8860b">MSYS2_PS1&lt;/span>&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b8860b">$PS1&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>
+&lt;span style="color:#080;font-style:italic"># Evaluate all user-specific Bash completion scripts (if any)&lt;/span>
+&lt;span style="color:#a2f;font-weight:bold">if&lt;/span> &lt;span style="color:#a2f">test&lt;/span> -z &lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b8860b">$WINELOADERNOEXEC&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>
+&lt;span style="color:#a2f;font-weight:bold">then&lt;/span>
+&lt;span style="color:#a2f;font-weight:bold">for&lt;/span> c in &lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b8860b">$HOME&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>/.bash_completion.d/*.bash
+&lt;span style="color:#a2f;font-weight:bold">do&lt;/span>
+&lt;span style="color:#080;font-style:italic"># Handle absence of any scripts (or the folder) gracefully&lt;/span>
+&lt;span style="color:#a2f">test&lt;/span> ! -f &lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b8860b">$c&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span> &lt;span style="color:#666">||&lt;/span>
+. &lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b8860b">$c&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>
+&lt;span style="color:#a2f;font-weight:bold">done&lt;/span>
+&lt;span style="color:#a2f;font-weight:bold">fi&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

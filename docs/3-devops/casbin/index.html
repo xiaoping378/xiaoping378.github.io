@@ -6,53 +6,23 @@
 <meta name=robots content="index, follow">
 <link rel="shortcut icon" href=/favicons/favicon.ico>
 <title>Casbin的权限管理解读 | 现代技能栈</title>
-<meta name=description content="
-
-
-项目一般都要包含权限管理功能，或集成IAM，或自身实现。本文介绍一个强大、高效的开源访问控制框架--Casbin。
-
-
-
-基本介绍
-Casbin的由来，是出自开源作者罗杨的一篇论文《PML：一种基于Interpreter的Web服务访问控制策略语言》，该论文的主要摘要如下：
-
-为了保护云资源的 …">
+<meta name=description content="介绍Casbin的权限模型管理的用法。
+">
 <meta property="og:title" content="Casbin的权限管理解读">
-<meta property="og:description" content="项目一般都要包含权限管理功能，或集成IAM，或自身实现。本文介绍一个强大、高效的开源访问控制框架--Casbin。
- 基本介绍 Casbin的由来，是出自开源作者罗杨的一篇论文《PML：一种基于Interpreter的Web服务访问控制策略语言》，该论文的主要摘要如下：
- 为了保护云资源的安全,防止数据泄露和非授权访问,必须对云平台的资源访问实施访问控制.然而,目前主流云平台通常采用自己的安全策略语言和访问控制机制,从而造成两个问题:
- （1）云用户若要使用多个云平台,则需要学习不同的策略语言,分别编写安全策略; （2）云服务提供商需要自行设计符合自己平台的安全策略语言及访问控制机制,开发成本较高.  对此,提出一种基于元模型的访问控制策略描述语言PML及其实施机制PML-EM. PML支持表达BLP、RBAC、ABAC等访问控制模型. PML-EM实现了3个性质:
- 策略语言无关性 访问控制模型无关性 程序设计语言无关性  从而降低了用户编写策略的成本与云服务提供商开发访问控制机制的成本. 在OpenStack云平台上实现了PML-EM机制.实验结果表明,PML策略支持从其他策略进行自动转换, 在表达云中多租户场景时具有优势.性能方面,与OpenStack原有策略相比,PML策略的评估开销为4.8%.PML-EM机制的侵入性较小,与云平台原有代码相比增加约0.42%.
- 目前Casbin的权限策略管理支持主流的ACL、RBAC、ABAC、RESTful等模型，实现的编程语言主要有Go、java、Nodejs、PHP、Python、.Net、C++、Rust等。目前Go和Java的实现最为全面。
-先介绍下主流的访问控制模型：
- ACL（access control list）：是一种与访问对象关联的权限列表，在基础设施领域应用非常广泛：  文件系统：用户（组）对文件或进程等的访问权限控制 网络：常见的有防火墙（安全组、路由器、交换机）内的对目的IP和端口的规则控制 SQL：库、表的权限管理 LDAP：层级结构的实体权限管理：网络域权限管理...   RBAC（role-based access control）：基于角色的权限控制，围绕角色和权限定义的策略中立的访问控制机制，和组ACL等价，具体表现为在用户和权限之间加了一层角色，先建立具有某种权限的角色，然后用角色和用户绑定，目前多用于业务系统内的权限管理，还支持支持角色权限继承。 ABAC（Attribute-based access control）：基于属性的权限控制，属性可以是用户侧（所属组织、访问IP、访问时间）或资源侧（帖子的评论开关、留言再编辑）的，因为用户或资源的属性是动态的，不像前面两个(需要预先定义好策略，略显死板,,,）被称为是“下一代”的权限模型。 Restful：一种Web API规范，常用GET, POST等动作来实现与后台交互。  和Casbin结合，使用的基本示意图如下：
- 1-2为管理人员下发权限策略 3-6为用户日常操作资源的简易流程，实际应用场景一般如下：  @startuml !theme aws-orange 用户 -> 认证中心: 登录操作 认证中心 -> 缓存: 存放(key=token+ip,value=token)token 用户 <- 认证中心 : 认证成功返回token 用户 -> 认证中心: 下次访问头部携带token认证 认证中心 <- 缓存: key=token+ip获取token Casbin <- 认证中心: 存在且校验成功,则进入授权校验 Casbin -> 其他服务: 权限合规，则跳转到用户请求的其他服务 其他服务 -> 用户: 信息 @enduml 抽象模型 正如上面提到的，要支持这么多的权限模型，，所以Casbin基于开头提到的PML（PERM modeling language）引入一种抽象的元模型控制，其中PERM是指的Policy, Effect, Request, Matchers，具体工作流如下：">
+<meta property="og:description" content="介绍Casbin的权限模型管理的用法。
+">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://xiaoping378.github.io/docs/3-devops/casbin/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2022-01-28T11:18:14+08:00"><meta property="og:site_name" content="现代技能栈">
+<meta property="article:modified_time" content="2022-01-30T14:08:24+08:00"><meta property="og:site_name" content="现代技能栈">
 <meta itemprop=name content="Casbin的权限管理解读">
-<meta itemprop=description content="项目一般都要包含权限管理功能，或集成IAM，或自身实现。本文介绍一个强大、高效的开源访问控制框架--Casbin。
- 基本介绍 Casbin的由来，是出自开源作者罗杨的一篇论文《PML：一种基于Interpreter的Web服务访问控制策略语言》，该论文的主要摘要如下：
- 为了保护云资源的安全,防止数据泄露和非授权访问,必须对云平台的资源访问实施访问控制.然而,目前主流云平台通常采用自己的安全策略语言和访问控制机制,从而造成两个问题:
- （1）云用户若要使用多个云平台,则需要学习不同的策略语言,分别编写安全策略; （2）云服务提供商需要自行设计符合自己平台的安全策略语言及访问控制机制,开发成本较高.  对此,提出一种基于元模型的访问控制策略描述语言PML及其实施机制PML-EM. PML支持表达BLP、RBAC、ABAC等访问控制模型. PML-EM实现了3个性质:
- 策略语言无关性 访问控制模型无关性 程序设计语言无关性  从而降低了用户编写策略的成本与云服务提供商开发访问控制机制的成本. 在OpenStack云平台上实现了PML-EM机制.实验结果表明,PML策略支持从其他策略进行自动转换, 在表达云中多租户场景时具有优势.性能方面,与OpenStack原有策略相比,PML策略的评估开销为4.8%.PML-EM机制的侵入性较小,与云平台原有代码相比增加约0.42%.
- 目前Casbin的权限策略管理支持主流的ACL、RBAC、ABAC、RESTful等模型，实现的编程语言主要有Go、java、Nodejs、PHP、Python、.Net、C++、Rust等。目前Go和Java的实现最为全面。
-先介绍下主流的访问控制模型：
- ACL（access control list）：是一种与访问对象关联的权限列表，在基础设施领域应用非常广泛：  文件系统：用户（组）对文件或进程等的访问权限控制 网络：常见的有防火墙（安全组、路由器、交换机）内的对目的IP和端口的规则控制 SQL：库、表的权限管理 LDAP：层级结构的实体权限管理：网络域权限管理...   RBAC（role-based access control）：基于角色的权限控制，围绕角色和权限定义的策略中立的访问控制机制，和组ACL等价，具体表现为在用户和权限之间加了一层角色，先建立具有某种权限的角色，然后用角色和用户绑定，目前多用于业务系统内的权限管理，还支持支持角色权限继承。 ABAC（Attribute-based access control）：基于属性的权限控制，属性可以是用户侧（所属组织、访问IP、访问时间）或资源侧（帖子的评论开关、留言再编辑）的，因为用户或资源的属性是动态的，不像前面两个(需要预先定义好策略，略显死板,,,）被称为是“下一代”的权限模型。 Restful：一种Web API规范，常用GET, POST等动作来实现与后台交互。  和Casbin结合，使用的基本示意图如下：
- 1-2为管理人员下发权限策略 3-6为用户日常操作资源的简易流程，实际应用场景一般如下：  @startuml !theme aws-orange 用户 -> 认证中心: 登录操作 认证中心 -> 缓存: 存放(key=token+ip,value=token)token 用户 <- 认证中心 : 认证成功返回token 用户 -> 认证中心: 下次访问头部携带token认证 认证中心 <- 缓存: key=token+ip获取token Casbin <- 认证中心: 存在且校验成功,则进入授权校验 Casbin -> 其他服务: 权限合规，则跳转到用户请求的其他服务 其他服务 -> 用户: 信息 @enduml 抽象模型 正如上面提到的，要支持这么多的权限模型，，所以Casbin基于开头提到的PML（PERM modeling language）引入一种抽象的元模型控制，其中PERM是指的Policy, Effect, Request, Matchers，具体工作流如下：">
-<meta itemprop=dateModified content="2022-01-28T11:18:14+08:00">
+<meta itemprop=description content="介绍Casbin的权限模型管理的用法。
+">
+<meta itemprop=dateModified content="2022-01-30T14:08:24+08:00">
 <meta itemprop=wordCount content="183">
 <meta itemprop=keywords content="Dev,"><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Casbin的权限管理解读">
-<meta name=twitter:description content="项目一般都要包含权限管理功能，或集成IAM，或自身实现。本文介绍一个强大、高效的开源访问控制框架--Casbin。
- 基本介绍 Casbin的由来，是出自开源作者罗杨的一篇论文《PML：一种基于Interpreter的Web服务访问控制策略语言》，该论文的主要摘要如下：
- 为了保护云资源的安全,防止数据泄露和非授权访问,必须对云平台的资源访问实施访问控制.然而,目前主流云平台通常采用自己的安全策略语言和访问控制机制,从而造成两个问题:
- （1）云用户若要使用多个云平台,则需要学习不同的策略语言,分别编写安全策略; （2）云服务提供商需要自行设计符合自己平台的安全策略语言及访问控制机制,开发成本较高.  对此,提出一种基于元模型的访问控制策略描述语言PML及其实施机制PML-EM. PML支持表达BLP、RBAC、ABAC等访问控制模型. PML-EM实现了3个性质:
- 策略语言无关性 访问控制模型无关性 程序设计语言无关性  从而降低了用户编写策略的成本与云服务提供商开发访问控制机制的成本. 在OpenStack云平台上实现了PML-EM机制.实验结果表明,PML策略支持从其他策略进行自动转换, 在表达云中多租户场景时具有优势.性能方面,与OpenStack原有策略相比,PML策略的评估开销为4.8%.PML-EM机制的侵入性较小,与云平台原有代码相比增加约0.42%.
- 目前Casbin的权限策略管理支持主流的ACL、RBAC、ABAC、RESTful等模型，实现的编程语言主要有Go、java、Nodejs、PHP、Python、.Net、C++、Rust等。目前Go和Java的实现最为全面。
-先介绍下主流的访问控制模型：
- ACL（access control list）：是一种与访问对象关联的权限列表，在基础设施领域应用非常广泛：  文件系统：用户（组）对文件或进程等的访问权限控制 网络：常见的有防火墙（安全组、路由器、交换机）内的对目的IP和端口的规则控制 SQL：库、表的权限管理 LDAP：层级结构的实体权限管理：网络域权限管理...   RBAC（role-based access control）：基于角色的权限控制，围绕角色和权限定义的策略中立的访问控制机制，和组ACL等价，具体表现为在用户和权限之间加了一层角色，先建立具有某种权限的角色，然后用角色和用户绑定，目前多用于业务系统内的权限管理，还支持支持角色权限继承。 ABAC（Attribute-based access control）：基于属性的权限控制，属性可以是用户侧（所属组织、访问IP、访问时间）或资源侧（帖子的评论开关、留言再编辑）的，因为用户或资源的属性是动态的，不像前面两个(需要预先定义好策略，略显死板,,,）被称为是“下一代”的权限模型。 Restful：一种Web API规范，常用GET, POST等动作来实现与后台交互。  和Casbin结合，使用的基本示意图如下：
- 1-2为管理人员下发权限策略 3-6为用户日常操作资源的简易流程，实际应用场景一般如下：  @startuml !theme aws-orange 用户 -> 认证中心: 登录操作 认证中心 -> 缓存: 存放(key=token+ip,value=token)token 用户 <- 认证中心 : 认证成功返回token 用户 -> 认证中心: 下次访问头部携带token认证 认证中心 <- 缓存: key=token+ip获取token Casbin <- 认证中心: 存在且校验成功,则进入授权校验 Casbin -> 其他服务: 权限合规，则跳转到用户请求的其他服务 其他服务 -> 用户: 信息 @enduml 抽象模型 正如上面提到的，要支持这么多的权限模型，，所以Casbin基于开头提到的PML（PERM modeling language）引入一种抽象的元模型控制，其中PERM是指的Policy, Effect, Request, Matchers，具体工作流如下：">
+<meta name=twitter:description content="介绍Casbin的权限模型管理的用法。
+">
 <link rel=preload href=/scss/main.min.8973293e550f2aebcff13ca0acf28013165ed1fa321e6a370fbd3fd2e00c7d33.css as=style>
 <link href=/scss/main.min.8973293e550f2aebcff13ca0acf28013165ed1fa321e6a370fbd3fd2e00c7d33.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.5.1.min.js integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin=anonymous></script>
@@ -82,7 +52,7 @@ Casbin的由来，是出自开源作者罗杨的一篇论文《PML：一种基�
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.a4f98ffdcea59425bfff20816640a4a0.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.5f7c8ced3e1125e9e9c4576b202a3cc9.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -92,7 +62,7 @@ Casbin的由来，是出自开源作者罗杨的一篇论文《PML：一种基�
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.a4f98ffdcea59425bfff20816640a4a0.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.5f7c8ced3e1125e9e9c4576b202a3cc9.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -165,6 +135,9 @@ Casbin的由来，是出自开源作者罗杨的一篇论文《PML：一种基�
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-docs-3-devops-casbin-li>
 <input type=checkbox id=m-docs-3-devops-casbin-check checked>
 <label for=m-docs-3-devops-casbin-check><a href=/docs/3-devops/casbin/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docs-3-devops-casbin><span class=td-sidebar-nav-active-item>Casbin的权限管理解读</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-3-devops-windows-terminal-li>
+<input type=checkbox id=m-docs-3-devops-windows-terminal-check>
+<label for=m-docs-3-devops-windows-terminal-check><a href=/docs/3-devops/windows-terminal/ title="Windows Terminal终端 入坑指南" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-3-devops-windows-terminal><span>Windows Terminal终端</span></a></label>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-4-cloud-li>
@@ -369,6 +342,7 @@ Casbin的由来，是出自开源作者罗杨的一篇论文《PML：一种基�
 <li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/k8s/ data-taxonomy-term=k8s><span class=taxonomy-label>K8S</span><span class=taxonomy-count>21</span></a></li>
 <li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/linux/ data-taxonomy-term=linux><span class=taxonomy-label>linux</span><span class=taxonomy-count>3</span></a></li>
 <li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/openshift/ data-taxonomy-term=openshift><span class=taxonomy-label>Openshift</span><span class=taxonomy-count>12</span></a></li>
+<li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/ops/ data-taxonomy-term=ops><span class=taxonomy-label>Ops</span><span class=taxonomy-count>1</span></a></li>
 <li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/rpa/ data-taxonomy-term=rpa><span class=taxonomy-label>rpa</span><span class=taxonomy-count>1</span></a></li>
 <li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/ data-taxonomy-term=%E5%8C%BA%E5%9D%97%E9%93%BE><span class=taxonomy-label>区块链</span><span class=taxonomy-count>9</span></a></li>
 <li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/%E5%9F%BA%E7%A1%80/ data-taxonomy-term=%E5%9F%BA%E7%A1%80><span class=taxonomy-label>基础</span><span class=taxonomy-count>1</span></a></li>
@@ -393,6 +367,7 @@ Casbin的由来，是出自开源作者罗杨的一篇论文《PML：一种基�
 </nav>
 <div class=td-content>
 <h1>Casbin的权限管理解读</h1>
+<div class=lead>介绍Casbin的权限模型管理的用法。</div>
 <header class=article-meta>
 <div class="taxonomy taxonomy-terms-article taxo-tags">
 <h5 class=taxonomy-title>Tags:</h5>
@@ -535,7 +510,7 @@ Casbin -&gt; 其他服务: 权限合规，则跳转到用户请求的其他服�
 <p>我的博客即将同步至腾讯云+社区，邀请大家一同入驻：https://cloud.tencent.com/developer/support-plan?invite_code=3ntkskjrcwow8</p>
 </blockquote>
 <div class="text-muted mt-5 pt-3 border-top">
-最后修改 January 28, 2022: <a href=https://github.com/xiaoping378/xiaoping378.github.io/commit/d79fe1da209efc6c31a5b20a59fda793d4b43551>去掉部分文章的Description部分，优化SEO检索 (d79fe1d)</a>
+最后修改 January 30, 2022: <a href=https://github.com/xiaoping378/xiaoping378.github.io/commit/2238cdb671deeee348eb0ba8d3d4627f354a5d1f>添加terminal (2238cdb)</a>
 </div>
 </div>
 </main>

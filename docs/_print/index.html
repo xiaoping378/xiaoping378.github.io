@@ -53,7 +53,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.a4f98ffdcea59425bfff20816640a4a0.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.5f7c8ced3e1125e9e9c4576b202a3cc9.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -99,6 +99,7 @@
 <li>3.6: <a href=#pg-024476416cd1256abdf9950bb55be431>MongoDB之初见</a></li>
 <li>3.7: <a href=#pg-0869f908f4f0eb9cdf146f22565dc728>Openldap之拨云见日</a></li>
 <li>3.8: <a href=#pg-9763571770981514723f9ed615e69ea5>Casbin的权限管理解读</a></li>
+<li>3.9: <a href=#pg-e4c44f08a2c513a02fe3cb9aa2c655e0>Windows Terminal终端 入坑指南</a></li>
 </ul>
 <li>4: <a href=#pg-1737f808bd604b410f639c3e20a801ea>云原生</a></li>
 <ul>
@@ -182,6 +183,7 @@
 </div>
 <div class=td-content>
 <h1 id=pg-7da332af27a085cd90d962e4624eef75>1.1 - 站点搭建方法</h1>
+<div class=lead>主要介绍本站点的搭建方法-hugo&Docsy主题</div>
 <div class="pageinfo pageinfo-primary">
 <p>主要涉及到hugo和docsy主题的使用。</p>
 </div>
@@ -1531,6 +1533,7 @@ robo3t-1.1.1-linux-x86_64-c93c6b0/bin/robo3t
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-9763571770981514723f9ed615e69ea5>3.8 - Casbin的权限管理解读</h1>
+<div class=lead>介绍Casbin的权限模型管理的用法。</div>
 <div class="pageinfo pageinfo-primary">
 <p>项目一般都要包含权限管理功能，或集成IAM，或自身实现。本文介绍一个强大、高效的开源访问控制框架--Casbin。</p>
 </div>
@@ -1664,6 +1667,110 @@ Casbin -&gt; 其他服务: 权限合规，则跳转到用户请求的其他服�
 <blockquote>
 <p>我的博客即将同步至腾讯云+社区，邀请大家一同入驻：https://cloud.tencent.com/developer/support-plan?invite_code=3ntkskjrcwow8</p>
 </blockquote>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-e4c44f08a2c513a02fe3cb9aa2c655e0>3.9 - Windows Terminal终端 入坑指南</h1>
+<div class=lead>介绍windows terminal从安装到配置指南</div>
+<div class="pageinfo pageinfo-primary">
+<p>为了这个东西，重新安装了系统，目前是在windows LTSC 2021版本下的使用指南。
+在IT界Terminal和Console差不多是一个意思，同属于界面层面的，不少人老和Shell搞混了，特此说明下Shell一般是指的Bash、zsh、PowerShell、cmd等。</p>
+</div>
+<h2 id=安装>安装</h2>
+<p>为了使用Windows Terminal，在春节期间，重新安装了LTSC 2021版本的系统（之前的LTSC 2019）。</p>
+<blockquote>
+<p>它对操作系统内部版本的最低要求为 <code>18362.0</code>，通过<code>Win+R</code>输入<code>winver</code>可以确认本机系统是否支持。</p>
+</blockquote>
+<p>目前有三种办法安装（本人选用的第二种）:</p>
+<ul>
+<li>
+<p>是在应用商店中搜索<code>Windows Terminal</code>，安装即可。</p>
+</li>
+<li>
+<p>通过<a href=https://github.com/microsoft/terminal/releases>Github release</a>页面下载安装包，</p>
+</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style=color:#a2f>Add-AppxPackage</span> Microsoft.WindowsTerminal_&lt;versionNumber&gt;.msixbundle
+</code></pre></div><ul>
+<li>通过命令行<a href=https://github.com/microsoft/winget-cli>winget</a>、<a href=https://chocolatey.org/>Chocolatey </a>、<a href=https://scoop.sh/>Scoop </a>安装，下面以winget为例：</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell>winget install --id=Microsoft.WindowsTerminal -e
+</code></pre></div><h2 id=配置>配置</h2>
+<p>现在基本可以图形界面配置了，按照自己的习惯图形操作即可，网上一坨坨的教程，此处不表。</p>
+<p><img src=/images/windows-terminal-2022-01-30-12-53-50.png alt></p>
+<p>默认配置保存在了<code>%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json</code></p>
+<h2 id=技巧>技巧</h2>
+<ol>
+<li>快捷键
+<ul>
+<li>新建终端 -- <code>Ctrl+Shift+t</code></li>
+<li>切换终端 -- <code>Alt + Num</code> , （我这里修改过了）</li>
+</ul>
+</li>
+<li>Quake窗口
+<ul>
+<li>快捷键是<strong>Win + `</strong> , 可以快速从屏幕上半区换出终端窗口</li>
+</ul>
+</li>
+</ol>
+<h2 id=gitbash>GitBash</h2>
+<p><img src=/images/windows-terminal-2022-01-30-13-32-26.png alt></p>
+<p>本人环境<code>VSCode</code>和<code>git-bash</code>都是绿色版本了，免去每次重装系统，都进行各种重复的配置操作，这里介绍下git-bash改造的大致步骤。</p>
+<h3 id=绿色改造>绿色改造</h3>
+<p>在powershell中设置环境变量，git-bash每次启动可以根据此变量，决定加载配置的路径。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style=color:#800>[Environment]</span>::SetEnvironmentVariable(<span style=color:#b44>&#34;HOME&#34;</span>, <span style=color:#b44>&#34;D:\xxp&#34;</span>, <span style=color:#b44>&#34;User&#34;</span>)
+</code></pre></div><p>我这里是<code>D:\xxp</code>目录，这样的话，那些<code>ssh、git、vscode、bash</code>的自定义配置，都可以免去重装再来一次的痛苦了。</p>
+<p>还可以把日常用到<code>exe</code>小工具，也放到<code>$HOME/bin</code>目录下，再加到<code>PATH</code>环境变量里。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style=color:#800>[Environment]</span>::SetEnvironmentVariable(<span style=color:#b44>&#34;Path&#34;</span>, <span style=color:#800>[Environment]</span>::GetEnvironmentVariable(<span style=color:#b44>&#34;Path&#34;</span>, <span style=color:#b44>&#34;User&#34;</span>) + <span style=color:#b44>&#34;;D:\xxp\bin&#34;</span>,<span style=color:#b44>&#34;User&#34;</span>)
+</code></pre></div><h3 id=oh-my-zsh主题改造>oh-my-zsh主题改造</h3>
+<p>现在有人直接把zsh装上，然后再安装github上的oh-my-zsh主题，但是启动速度会慢一些，本来bash就比cmd启动慢了，，，</p>
+<p>我是在bash的基础上改造下主题，修改<code>Git\etc\profile.d\git-prompt.sh</code>文件：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#a2f;font-weight:700>if</span> <span style=color:#a2f>test</span> -f /etc/profile.d/git-sdk.sh
+<span style=color:#a2f;font-weight:700>then</span>
+	<span style=color:#b8860b>TITLEPREFIX</span><span style=color:#666>=</span>SDK-<span style=color:#b68;font-weight:700>${</span><span style=color:#b8860b>MSYSTEM</span>#MINGW<span style=color:#b68;font-weight:700>}</span>
+<span style=color:#a2f;font-weight:700>else</span>
+	<span style=color:#b8860b>TITLEPREFIX</span><span style=color:#666>=</span><span style=color:#b8860b>$MSYSTEM</span>
+<span style=color:#a2f;font-weight:700>fi</span>
+
+<span style=color:#a2f;font-weight:700>if</span> <span style=color:#a2f>test</span> -f ~/.config/git/git-prompt.sh
+<span style=color:#a2f;font-weight:700>then</span>
+	. ~/.config/git/git-prompt.sh
+<span style=color:#a2f;font-weight:700>else</span>
+	<span style=color:#b8860b>PS1</span><span style=color:#666>=</span><span style=color:#b44>&#39;\[\033]0;Bash\007\]&#39;</span>      <span style=color:#080;font-style:italic># 窗口标题</span>
+	<span style=color:#b8860b>PS1</span><span style=color:#666>=</span><span style=color:#b44>&#34;</span><span style=color:#b8860b>$PS1</span><span style=color:#b44>&#34;</span><span style=color:#b44>&#39;\n&#39;</span>                 <span style=color:#080;font-style:italic># 换行</span>
+	<span style=color:#b8860b>PS1</span><span style=color:#666>=</span><span style=color:#b44>&#34;</span><span style=color:#b8860b>$PS1</span><span style=color:#b44>&#34;</span><span style=color:#b44>&#39;\[\033[32;1m\]&#39;</span>     <span style=color:#080;font-style:italic># 高亮绿色</span>
+	<span style=color:#b8860b>PS1</span><span style=color:#666>=</span><span style=color:#b44>&#34;</span><span style=color:#b8860b>$PS1</span><span style=color:#b44>&#34;</span><span style=color:#b44>&#39;➜  &#39;</span>               <span style=color:#080;font-style:italic># unicode 字符，右箭头</span>
+	<span style=color:#b8860b>PS1</span><span style=color:#666>=</span><span style=color:#b44>&#34;</span><span style=color:#b8860b>$PS1</span><span style=color:#b44>&#34;</span><span style=color:#b44>&#39;\[\033[33;1m\]&#39;</span>     <span style=color:#080;font-style:italic># 高亮黄色</span>
+	<span style=color:#b8860b>PS1</span><span style=color:#666>=</span><span style=color:#b44>&#34;</span><span style=color:#b8860b>$PS1</span><span style=color:#b44>&#34;</span><span style=color:#b44>&#39;\W&#39;</span>                 <span style=color:#080;font-style:italic># 当前目录</span>
+	<span style=color:#a2f;font-weight:700>if</span> <span style=color:#a2f>test</span> -z <span style=color:#b44>&#34;</span><span style=color:#b8860b>$WINELOADERNOEXEC</span><span style=color:#b44>&#34;</span>
+	<span style=color:#a2f;font-weight:700>then</span>
+		<span style=color:#b8860b>GIT_EXEC_PATH</span><span style=color:#666>=</span><span style=color:#b44>&#34;</span><span style=color:#a2f;font-weight:700>$(</span>git --exec-path 2&gt;/dev/null<span style=color:#a2f;font-weight:700>)</span><span style=color:#b44>&#34;</span>
+		<span style=color:#b8860b>COMPLETION_PATH</span><span style=color:#666>=</span><span style=color:#b44>&#34;</span><span style=color:#b68;font-weight:700>${</span><span style=color:#b8860b>GIT_EXEC_PATH</span>%/libexec/git-core<span style=color:#b68;font-weight:700>}</span><span style=color:#b44>&#34;</span>
+		<span style=color:#b8860b>COMPLETION_PATH</span><span style=color:#666>=</span><span style=color:#b44>&#34;</span><span style=color:#b68;font-weight:700>${</span><span style=color:#b8860b>COMPLETION_PATH</span>%/lib/git-core<span style=color:#b68;font-weight:700>}</span><span style=color:#b44>&#34;</span>
+		<span style=color:#b8860b>COMPLETION_PATH</span><span style=color:#666>=</span><span style=color:#b44>&#34;</span><span style=color:#b8860b>$COMPLETION_PATH</span><span style=color:#b44>/share/git/completion&#34;</span>
+		<span style=color:#a2f;font-weight:700>if</span> <span style=color:#a2f>test</span> -f <span style=color:#b44>&#34;</span><span style=color:#b8860b>$COMPLETION_PATH</span><span style=color:#b44>/git-prompt.sh&#34;</span>
+		<span style=color:#a2f;font-weight:700>then</span>
+			. <span style=color:#b44>&#34;</span><span style=color:#b8860b>$COMPLETION_PATH</span><span style=color:#b44>/git-completion.bash&#34;</span>
+			. <span style=color:#b44>&#34;</span><span style=color:#b8860b>$COMPLETION_PATH</span><span style=color:#b44>/git-prompt.sh&#34;</span>
+			<span style=color:#b8860b>PS1</span><span style=color:#666>=</span><span style=color:#b44>&#34;</span><span style=color:#b8860b>$PS1</span><span style=color:#b44>&#34;</span><span style=color:#b44>&#39;\[\033[31m\]&#39;</span>   <span style=color:#080;font-style:italic># 红色</span>
+			<span style=color:#b8860b>PS1</span><span style=color:#666>=</span><span style=color:#b44>&#34;</span><span style=color:#b8860b>$PS1</span><span style=color:#b44>&#34;</span><span style=color:#b44>&#39;`__git_ps1`&#39;</span>    <span style=color:#080;font-style:italic># git 插件</span>
+		<span style=color:#a2f;font-weight:700>fi</span>
+	<span style=color:#a2f;font-weight:700>fi</span>
+	<span style=color:#b8860b>PS1</span><span style=color:#666>=</span><span style=color:#b44>&#34;</span><span style=color:#b8860b>$PS1</span><span style=color:#b44>&#34;</span><span style=color:#b44>&#39;\[\033[36m\] &#39;</span>      <span style=color:#080;font-style:italic># 青色</span>
+<span style=color:#a2f;font-weight:700>fi</span>
+
+<span style=color:#b8860b>MSYS2_PS1</span><span style=color:#666>=</span><span style=color:#b44>&#34;</span><span style=color:#b8860b>$PS1</span><span style=color:#b44>&#34;</span>
+
+<span style=color:#080;font-style:italic># Evaluate all user-specific Bash completion scripts (if any)</span>
+<span style=color:#a2f;font-weight:700>if</span> <span style=color:#a2f>test</span> -z <span style=color:#b44>&#34;</span><span style=color:#b8860b>$WINELOADERNOEXEC</span><span style=color:#b44>&#34;</span>
+<span style=color:#a2f;font-weight:700>then</span>
+	<span style=color:#a2f;font-weight:700>for</span> c in <span style=color:#b44>&#34;</span><span style=color:#b8860b>$HOME</span><span style=color:#b44>&#34;</span>/.bash_completion.d/*.bash
+	<span style=color:#a2f;font-weight:700>do</span>
+		<span style=color:#080;font-style:italic># Handle absence of any scripts (or the folder) gracefully</span>
+		<span style=color:#a2f>test</span> ! -f <span style=color:#b44>&#34;</span><span style=color:#b8860b>$c</span><span style=color:#b44>&#34;</span> <span style=color:#666>||</span>
+		. <span style=color:#b44>&#34;</span><span style=color:#b8860b>$c</span><span style=color:#b44>&#34;</span>
+	<span style=color:#a2f;font-weight:700>done</span>
+<span style=color:#a2f;font-weight:700>fi</span>
+</code></pre></div>
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-1737f808bd604b410f639c3e20a801ea>4 - 云原生</h1>
@@ -2921,6 +3028,7 @@ gitlab-server   Ready    master   6m43s   v1.19.16+k3s1
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-8d71550d3ee2751c7f80b3cef9ae8232>4.2.9 - TKEStack all-in-one入坑指南</h1>
+<div class=lead>TkeStack的all-in-one安装、多租户和多集群管理功能解读。</div>
 <div class="pageinfo pageinfo-primary">
 <p>本文主要介绍当前最新版本TkeStack 1.8.1 的TKEStack的all-in-one安装、多租户和多集群管理功能解读。</p>
 </div>
@@ -2961,7 +3069,8 @@ g = _, _, _
 e = some(where (p.eft == allow)) &amp;&amp; !some(where (p.eft == deny))
 [matchers]
 m = g(r.sub, p.sub, r.dom) &amp;&amp; keyMatchCustom(r.obj, p.obj) &amp;&amp; keyMatchCustom(r.act, p.act)
-</code></pre><h2 id=faq>FAQ</h2>
+</code></pre><p>实现了多租户级的RBAC权限模型。</p>
+<h2 id=faq>FAQ</h2>
 <h3 id=安装过程出现循环等待apiserver启动>安装过程出现循环等待apiserver启动</h3>
 <pre tabindex=0><code class=language-log data-lang=log>2022-01-19 14:43:32.225 error   tke-installer.ClusterProvider.OnCreate.EnsureKubeadmInitPhaseWaitControlPlane   check healthz error {&quot;statusCode&quot;: 0, &quot;error&quot;: &quot;Get \&quot;https://****:6443/healthz?timeout=30s\&quot;: net/http: TLS handshake timeout&quot;}
 </code></pre><p>我这里是因为在installer上指定的master的IP为外网IP（我使用外网IP是有原因的，穷... 后面需要跨云厂商组集群），通过查看kubelet日志提示本机找不到IP，如下开启网卡多IP，可通过。</p>

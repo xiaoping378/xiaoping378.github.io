@@ -50,7 +50,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.a4f98ffdcea59425bfff20816640a4a0.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.5f7c8ced3e1125e9e9c4576b202a3cc9.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -932,6 +932,7 @@ gitlab-server   Ready    master   6m43s   v1.19.16+k3s1
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-8d71550d3ee2751c7f80b3cef9ae8232>9 - TKEStack all-in-one入坑指南</h1>
+<div class=lead>TkeStack的all-in-one安装、多租户和多集群管理功能解读。</div>
 <div class="pageinfo pageinfo-primary">
 <p>本文主要介绍当前最新版本TkeStack 1.8.1 的TKEStack的all-in-one安装、多租户和多集群管理功能解读。</p>
 </div>
@@ -972,7 +973,8 @@ g = _, _, _
 e = some(where (p.eft == allow)) &amp;&amp; !some(where (p.eft == deny))
 [matchers]
 m = g(r.sub, p.sub, r.dom) &amp;&amp; keyMatchCustom(r.obj, p.obj) &amp;&amp; keyMatchCustom(r.act, p.act)
-</code></pre><h2 id=faq>FAQ</h2>
+</code></pre><p>实现了多租户级的RBAC权限模型。</p>
+<h2 id=faq>FAQ</h2>
 <h3 id=安装过程出现循环等待apiserver启动>安装过程出现循环等待apiserver启动</h3>
 <pre tabindex=0><code class=language-log data-lang=log>2022-01-19 14:43:32.225 error   tke-installer.ClusterProvider.OnCreate.EnsureKubeadmInitPhaseWaitControlPlane   check healthz error {&quot;statusCode&quot;: 0, &quot;error&quot;: &quot;Get \&quot;https://****:6443/healthz?timeout=30s\&quot;: net/http: TLS handshake timeout&quot;}
 </code></pre><p>我这里是因为在installer上指定的master的IP为外网IP（我使用外网IP是有原因的，穷... 后面需要跨云厂商组集群），通过查看kubelet日志提示本机找不到IP，如下开启网卡多IP，可通过。</p>

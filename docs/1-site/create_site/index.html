@@ -6,64 +6,23 @@
 <meta name=robots content="index, follow">
 <link rel="shortcut icon" href=/favicons/favicon.ico>
 <title>站点搭建方法 | 现代技能栈</title>
-<meta name=description content="
-
-
-主要涉及到hugo和docsy主题的使用。
-
-
-
-hugo介绍
-hugo是spf13的开源作品，目前任职于google，对他最早的印象是使用他的vim-spf13配置，后来又接触到他的cobra、plfag、viper... 为golang的生态完善做了很大贡献，致敬!
-书归正传，hugo是基 …">
+<meta name=description content="主要介绍本站点的搭建方法-hugo&Docsy主题
+">
 <meta property="og:title" content="站点搭建方法">
-<meta property="og:description" content="主要涉及到hugo和docsy主题的使用。
- hugo介绍 hugo是spf13的开源作品，目前任职于google，对他最早的印象是使用他的vim-spf13配置，后来又接触到他的cobra、plfag、viper... 为golang的生态完善做了很大贡献，致敬!
-书归正传，hugo是基于golang开发的世界上最快的网站构建框架，本文介绍如何基于它构建技术类文档库，也可作为内部wiki或开源书籍使用。之所以没选择gitbook，发现CLI版本已于2018年停止维护了。
-准备环境 安装git和hugo
-  具体过程此处不表。注意是安装hugo_extended的版本。
-  如果要编译成html，部署到webserver上，还需要安装nodejs 12+。
-  主题选择 选用Docsy主题，出自google的开源主题，很多流行项目使用此主题作为官方站点，有k8s、kubeflow、grpc、etcd、Selenium等，详见此。主要功能包含：
- 支持树形目录 国际化 搜索功能 移动端自适应适配 标签分类 全站打印 文档版本化 用户反馈等  官方提供了快速上手的脚手架，具体操作如下：
-git clone https://github.com/google/docsy-example.git 脚手架初始化
-cd docsy-example && git submodule update --init --recursive 本地启动，默认可通过localhost:1313访问，官方提供了在线的预览地址。
-hugo server ​
-目录结构说明 默认脚手架目录结构如下，只关注config.toml文件和content目录，就可以满足日常使用。
-➜ docsy-example git:(master) tree -L 1 . ├── assets # 静态资源 ├── config.toml # 站点的配置文件：主题选择、名称、链接、页面分析、markdown解析引擎... ├── content # 站点内容：顶层导航，左侧树形章节 ├── CONTRIBUTING.md ├── deploy.">
+<meta property="og:description" content="主要介绍本站点的搭建方法-hugo&Docsy主题
+">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://xiaoping378.github.io/docs/1-site/create_site/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2022-01-28T11:18:14+08:00"><meta property="og:site_name" content="现代技能栈">
+<meta property="article:modified_time" content="2022-01-30T14:08:24+08:00"><meta property="og:site_name" content="现代技能栈">
 <meta itemprop=name content="站点搭建方法">
-<meta itemprop=description content="主要涉及到hugo和docsy主题的使用。
- hugo介绍 hugo是spf13的开源作品，目前任职于google，对他最早的印象是使用他的vim-spf13配置，后来又接触到他的cobra、plfag、viper... 为golang的生态完善做了很大贡献，致敬!
-书归正传，hugo是基于golang开发的世界上最快的网站构建框架，本文介绍如何基于它构建技术类文档库，也可作为内部wiki或开源书籍使用。之所以没选择gitbook，发现CLI版本已于2018年停止维护了。
-准备环境 安装git和hugo
-  具体过程此处不表。注意是安装hugo_extended的版本。
-  如果要编译成html，部署到webserver上，还需要安装nodejs 12+。
-  主题选择 选用Docsy主题，出自google的开源主题，很多流行项目使用此主题作为官方站点，有k8s、kubeflow、grpc、etcd、Selenium等，详见此。主要功能包含：
- 支持树形目录 国际化 搜索功能 移动端自适应适配 标签分类 全站打印 文档版本化 用户反馈等  官方提供了快速上手的脚手架，具体操作如下：
-git clone https://github.com/google/docsy-example.git 脚手架初始化
-cd docsy-example && git submodule update --init --recursive 本地启动，默认可通过localhost:1313访问，官方提供了在线的预览地址。
-hugo server ​
-目录结构说明 默认脚手架目录结构如下，只关注config.toml文件和content目录，就可以满足日常使用。
-➜ docsy-example git:(master) tree -L 1 . ├── assets # 静态资源 ├── config.toml # 站点的配置文件：主题选择、名称、链接、页面分析、markdown解析引擎... ├── content # 站点内容：顶层导航，左侧树形章节 ├── CONTRIBUTING.md ├── deploy.">
-<meta itemprop=dateModified content="2022-01-28T11:18:14+08:00">
+<meta itemprop=description content="主要介绍本站点的搭建方法-hugo&Docsy主题
+">
+<meta itemprop=dateModified content="2022-01-30T14:08:24+08:00">
 <meta itemprop=wordCount content="900">
 <meta itemprop=keywords content="hugo,"><meta name=twitter:card content="summary">
 <meta name=twitter:title content="站点搭建方法">
-<meta name=twitter:description content="主要涉及到hugo和docsy主题的使用。
- hugo介绍 hugo是spf13的开源作品，目前任职于google，对他最早的印象是使用他的vim-spf13配置，后来又接触到他的cobra、plfag、viper... 为golang的生态完善做了很大贡献，致敬!
-书归正传，hugo是基于golang开发的世界上最快的网站构建框架，本文介绍如何基于它构建技术类文档库，也可作为内部wiki或开源书籍使用。之所以没选择gitbook，发现CLI版本已于2018年停止维护了。
-准备环境 安装git和hugo
-  具体过程此处不表。注意是安装hugo_extended的版本。
-  如果要编译成html，部署到webserver上，还需要安装nodejs 12+。
-  主题选择 选用Docsy主题，出自google的开源主题，很多流行项目使用此主题作为官方站点，有k8s、kubeflow、grpc、etcd、Selenium等，详见此。主要功能包含：
- 支持树形目录 国际化 搜索功能 移动端自适应适配 标签分类 全站打印 文档版本化 用户反馈等  官方提供了快速上手的脚手架，具体操作如下：
-git clone https://github.com/google/docsy-example.git 脚手架初始化
-cd docsy-example && git submodule update --init --recursive 本地启动，默认可通过localhost:1313访问，官方提供了在线的预览地址。
-hugo server ​
-目录结构说明 默认脚手架目录结构如下，只关注config.toml文件和content目录，就可以满足日常使用。
-➜ docsy-example git:(master) tree -L 1 . ├── assets # 静态资源 ├── config.toml # 站点的配置文件：主题选择、名称、链接、页面分析、markdown解析引擎... ├── content # 站点内容：顶层导航，左侧树形章节 ├── CONTRIBUTING.md ├── deploy.">
+<meta name=twitter:description content="主要介绍本站点的搭建方法-hugo&Docsy主题
+">
 <link rel=preload href=/scss/main.min.8973293e550f2aebcff13ca0acf28013165ed1fa321e6a370fbd3fd2e00c7d33.css as=style>
 <link href=/scss/main.min.8973293e550f2aebcff13ca0acf28013165ed1fa321e6a370fbd3fd2e00c7d33.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.5.1.min.js integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin=anonymous></script>
@@ -93,7 +52,7 @@ hugo server ​
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.a4f98ffdcea59425bfff20816640a4a0.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.5f7c8ced3e1125e9e9c4576b202a3cc9.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -103,7 +62,7 @@ hugo server ​
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.a4f98ffdcea59425bfff20816640a4a0.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.5f7c8ced3e1125e9e9c4576b202a3cc9.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -176,6 +135,9 @@ hugo server ​
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-3-devops-casbin-li>
 <input type=checkbox id=m-docs-3-devops-casbin-check>
 <label for=m-docs-3-devops-casbin-check><a href=/docs/3-devops/casbin/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-3-devops-casbin><span>Casbin的权限管理解读</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-3-devops-windows-terminal-li>
+<input type=checkbox id=m-docs-3-devops-windows-terminal-check>
+<label for=m-docs-3-devops-windows-terminal-check><a href=/docs/3-devops/windows-terminal/ title="Windows Terminal终端 入坑指南" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-3-devops-windows-terminal><span>Windows Terminal终端</span></a></label>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-4-cloud-li>
@@ -375,6 +337,7 @@ hugo server ​
 <li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/k8s/ data-taxonomy-term=k8s><span class=taxonomy-label>K8S</span><span class=taxonomy-count>21</span></a></li>
 <li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/linux/ data-taxonomy-term=linux><span class=taxonomy-label>linux</span><span class=taxonomy-count>3</span></a></li>
 <li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/openshift/ data-taxonomy-term=openshift><span class=taxonomy-label>Openshift</span><span class=taxonomy-count>12</span></a></li>
+<li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/ops/ data-taxonomy-term=ops><span class=taxonomy-label>Ops</span><span class=taxonomy-count>1</span></a></li>
 <li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/rpa/ data-taxonomy-term=rpa><span class=taxonomy-label>rpa</span><span class=taxonomy-count>1</span></a></li>
 <li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/ data-taxonomy-term=%E5%8C%BA%E5%9D%97%E9%93%BE><span class=taxonomy-label>区块链</span><span class=taxonomy-count>9</span></a></li>
 <li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/%E5%9F%BA%E7%A1%80/ data-taxonomy-term=%E5%9F%BA%E7%A1%80><span class=taxonomy-label>基础</span><span class=taxonomy-count>1</span></a></li>
@@ -399,6 +362,7 @@ hugo server ​
 </nav>
 <div class=td-content>
 <h1>站点搭建方法</h1>
+<div class=lead>主要介绍本站点的搭建方法-hugo&Docsy主题</div>
 <header class=article-meta>
 <div class="taxonomy taxonomy-terms-article taxo-tags">
 <h5 class=taxonomy-title>Tags:</h5>
@@ -719,7 +683,7 @@ enable = <span style=color:#a2f;font-weight:700>false</span>
 <p>如果自己搭建嫌麻烦，可直接Copy本站，编写自己的内容即可，搭建本站时，也遇到了Docsy国际化方面的问题，已提交官方<a href=https://github.com/google/docsy/pull/826>PR</a>修复。</p>
 <p><a href=../actions_pages>下文</a>介绍使用github的actions和pages自动托管站点。</p>
 <div class="text-muted mt-5 pt-3 border-top">
-最后修改 January 28, 2022: <a href=https://github.com/xiaoping378/xiaoping378.github.io/commit/d79fe1da209efc6c31a5b20a59fda793d4b43551>去掉部分文章的Description部分，优化SEO检索 (d79fe1d)</a>
+最后修改 January 30, 2022: <a href=https://github.com/xiaoping378/xiaoping378.github.io/commit/2238cdb671deeee348eb0ba8d3d4627f354a5d1f>添加terminal (2238cdb)</a>
 </div>
 </div>
 </main>
