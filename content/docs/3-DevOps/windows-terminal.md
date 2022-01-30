@@ -1,10 +1,10 @@
 ---
 tags: ["Ops"]
-title: "Windows Terminal终端 入坑指南"
+title: "Windows Terminal终端入坑指南"
 linkTitle: "Windows Terminal终端"
 weight: 9
 description: >
- 介绍windows terminal从安装到配置指南
+ 介绍windows terminal安装和oh-my-zsh的配置
 ---
 
 {{% pageinfo %}}
@@ -15,7 +15,7 @@ description: >
 
 ## 安装
 
-为了使用Windows Terminal，在春节期间，重新安装了LTSC 2021版本的系统（之前的LTSC 2019）。
+为了使用Windows Terminal，在春节期间，重新安装了LTSC 2021版本的系统（之前一直用的LTSC 2019）。
 
 > 它对操作系统内部版本的最低要求为 `18362.0`，通过`Win+R`输入`winver`可以确认本机系统是否支持。
 
@@ -53,75 +53,78 @@ winget install --id=Microsoft.WindowsTerminal -e
 
 ## GitBash
 
-![](/images/windows-terminal-2022-01-30-13-32-26.png)
+![](/images/windows-terminal-2022-01-30-23-03-08.png)
 
-本人环境`VSCode`和`git-bash`都是绿色版本了，免去每次重装系统，都进行各种重复的配置操作，这里介绍下git-bash改造的大致步骤。
+本人环境`VSCode`和[git-bash](https://git-scm.com/download/win)都是绿色版本了，免去了每次重装系统，都进行各种重复的配置操作.
+
+> 没有环境的可以自行通过上面的连接下载GitBash，后面有时间会尝试下`WSL`和WSL2。
+
+### 中文乱码
+
+需要添加环境变量到`~/.bashrc`或者`~/.zshrc`中。
+
+```bash
+export LANG=zh_CN.UTF-8
+```
 
 ### 绿色改造
 
-在powershell中设置环境变量，git-bash每次启动可以根据此变量，决定加载配置的路径。
+绿色改造的核心，一个是安装时不默认安装在C盘，另一个就是设置`HOME`的系统环境变量，Git-Bash每次启动是可以根据`HOME`变量，决定加载配置的路径的。
+
+设置系统环境变量，两种办法：
+
+- 图形界面操作： `Win+x` -> 系统 -> 高级系统设置 -> 环境变量, 自行添加`HOME`变量。(忘记了要不要注销才会生效)
+
+- 在PowerShell命令行中设置环境变量，执行完即可生效。
 ```powershell
 [Environment]::SetEnvironmentVariable("HOME", "D:\xxp", "User")
 ```
 
-我这里是`D:\xxp`目录，这样的话，那些`ssh、git、vscode、bash`的自定义配置，都可以免去重装再来一次的痛苦了。
+我这里是`D:\xxp`目录，这样的话，那些`ssh、git、vscode、bash、zsh`的自定义配置，都可以免去重装再来一次的痛苦了。
 
 还可以把日常用到`exe`小工具，也放到`$HOME/bin`目录下，再加到`PATH`环境变量里。
+  
 ```powershell
 [Environment]::SetEnvironmentVariable("Path", [Environment]::GetEnvironmentVariable("Path", "User") + ";D:\xxp\bin","User")
 ```
 
 ### oh-my-zsh主题改造
 
-现在有人直接把zsh装上，然后再安装github上的oh-my-zsh主题，但是启动速度会慢一些，本来bash就比cmd启动慢了，，，
+~~现在有人直接把zsh装上，然后再安装github上的oh-my-zsh主题，但是启动速度会慢一些，本来bash就比cmd启动慢了，，，~~
 
-我是在bash的基础上改造下主题，修改`Git\etc\profile.d\git-prompt.sh`文件：
+~~我是在bash的基础上改造下主题，修改`Git\etc\profile.d\git-prompt.sh`文件，详见[这里](https://gist.github.com/xiaoping378/8d636ddfdcf68982b93b65acbd5dcd83)~~
+
+之前一直是Bash的基础上，修改了下主题凑活用着。其实可以直接使用zsh的，记录下大致操作。
+
+> 之前在网上看过的的教程大多是在`bashrc`里再启动`zsh`，会慢上加慢的，我就一直没弄，后来觉得是可以做个`Git-zsh`环境的。
+
+1. [下载](https://mirror.msys2.org/msys/x86_64/zsh-5.8-5-x86_64.pkg.tar.zst)zsh二进制
+
+现在msys2上的安装包，都变成zst格式（Facebook家出的）的压缩包了，还需要下载解压工具，我平常使用的就是7z，这里找了个[7z with ZS](https://github.com/mcmilk/7-Zip-zstd/releases)的工具。
+
+解压到GitBash安装的根目录上。主要是`/etc/zsh`和`/usr`目录。
+
+2. 安装oh-my-zsh主题
 
 ```bash
-if test -f /etc/profile.d/git-sdk.sh
-then
-	TITLEPREFIX=SDK-${MSYSTEM#MINGW}
-else
-	TITLEPREFIX=$MSYSTEM
-fi
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
 
-if test -f ~/.config/git/git-prompt.sh
-then
-	. ~/.config/git/git-prompt.sh
-else
-	PS1='\[\033]0;Bash\007\]'      # 窗口标题
-	PS1="$PS1"'\n'                 # 换行
-	PS1="$PS1"'\[\033[32;1m\]'     # 高亮绿色
-	PS1="$PS1"'➜  '               # unicode 字符，右箭头
-	PS1="$PS1"'\[\033[33;1m\]'     # 高亮黄色
-	PS1="$PS1"'\W'                 # 当前目录
-	if test -z "$WINELOADERNOEXEC"
-	then
-		GIT_EXEC_PATH="$(git --exec-path 2>/dev/null)"
-		COMPLETION_PATH="${GIT_EXEC_PATH%/libexec/git-core}"
-		COMPLETION_PATH="${COMPLETION_PATH%/lib/git-core}"
-		COMPLETION_PATH="$COMPLETION_PATH/share/git/completion"
-		if test -f "$COMPLETION_PATH/git-prompt.sh"
-		then
-			. "$COMPLETION_PATH/git-completion.bash"
-			. "$COMPLETION_PATH/git-prompt.sh"
-			PS1="$PS1"'\[\033[31m\]'   # 红色
-			PS1="$PS1"'`__git_ps1`'    # git 插件
-		fi
-	fi
-	PS1="$PS1"'\[\033[36m\] '      # 青色
-fi
+3. terminal和vscode中使用zsh.exe
 
-MSYS2_PS1="$PS1"
+- 直接指定`zsh.exe`的路径
+- 还需要在`~/.zshrc`的`PATH`里添加`/mingw64/bin`，不然会提示找不到git，
 
-# Evaluate all user-specific Bash completion scripts (if any)
-if test -z "$WINELOADERNOEXEC"
-then
-	for c in "$HOME"/.bash_completion.d/*.bash
-	do
-		# Handle absence of any scripts (or the folder) gracefully
-		test ! -f "$c" ||
-		. "$c"
-	done
-fi
+如下是Terminal的配置： 
+![](/images/windows-terminal-2022-01-30-23-18-29.png)
+
+如下是vscode中的配置：
+```json
+    "terminal.integrated.profiles.windows": {
+        "git-bash": {
+          "path": "D:\\Softwares\\Git\\usr\\bin\\zsh.exe",
+          "args": []
+        }
+      },
+    "terminal.integrated.defaultProfile.windows": "git-bash",
 ```
