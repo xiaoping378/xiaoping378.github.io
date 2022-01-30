@@ -3,6 +3,8 @@ tags: ["容器", "K8S"]
 title: "TKEStack all-in-one入坑指南"
 linkTitle: "TKEStack all-in-one入坑指南"
 weight: 25
+description: >
+    TkeStack的all-in-one安装、多租户和多集群管理功能解读。
 ---
 
 {{% pageinfo %}}
@@ -66,6 +68,8 @@ e = some(where (p.eft == allow)) && !some(where (p.eft == deny))
 [matchers]
 m = g(r.sub, p.sub, r.dom) && keyMatchCustom(r.obj, p.obj) && keyMatchCustom(r.act, p.act)
 ```
+
+实现了多租户级的RBAC权限模型。
 
 ## FAQ
 

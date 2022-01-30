@@ -3,6 +3,8 @@ tags: ["hugo"]
 title: "站点搭建方法"
 linkTitle: "站点搭建方法"
 weight: 1
+description: >
+  主要介绍本站点的搭建方法-hugo&Docsy主题
 ---
 
 {{% pageinfo %}}
