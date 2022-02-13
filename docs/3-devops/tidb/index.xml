@@ -1,0 +1,43 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>现代技能栈 – TiDB分布式数据库</title><link>https://xiaoping378.github.io/docs/3-devops/tidb/</link><description>Recent content in TiDB分布式数据库 on 现代技能栈</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Thu, 03 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://xiaoping378.github.io/docs/3-devops/tidb/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: TiDB初体验</title><link>https://xiaoping378.github.io/docs/3-devops/tidb/github-dev/</link><pubDate>Thu, 03 Feb 2022 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/3-devops/tidb/github-dev/</guid><description>
+&lt;h2 id="安装">安装&lt;/h2>
+&lt;blockquote>
+&lt;p>安装环境要求：&lt;/p>
+&lt;ul>
+&lt;li>Mac或者单机Linux环境&lt;/li>
+&lt;li>可以连接外网&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;ol>
+&lt;li>执行命令安装&lt;code>TiUP&lt;/code>工具，官方运维管理工具。&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">curl --proto &lt;span style="color:#b44">&amp;#39;=https&amp;#39;&lt;/span> --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>命令会有关键信息输出:添加了证书、修改了PATH变量等，需要声明下环境变量，以使&lt;code>tiup&lt;/code>命令能被找到。&lt;/p>
+&lt;ol start="2">
+&lt;li>声明系统环境变量&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#080;font-style:italic"># 因个人环境，此处会有差异&lt;/span>
+&lt;span style="color:#a2f">source&lt;/span> ~/.zshrc
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>可以&lt;code>echo $PATH&lt;/code>下，看到&lt;code>/root/.tiup/bin&lt;/code>被加到了最前面。&lt;/p>
+&lt;ol start="3">
+&lt;li>启动单实例集群&lt;/li>
+&lt;/ol>
+&lt;p>直接执行&lt;code>tiup playground&lt;/code>命令默认会运行最新版本的TiDB集群，其中TiDB Server、TiKV、PD 和 TiFlash 实例各 1 个：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">tiup playground
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>具体如下图所示，需要另开一个终端，使用mysql发起连接：
+&lt;img src="https://xiaoping378.github.io/images/github-dev-2022-02-04-16-16-18.png" alt="">&lt;/p>
+&lt;p>目前tidb playground默认启动监听在127的地址，可以通过--host参数更改，但还不能更改端口（经查代码是写死了端口）。&lt;/p>
+&lt;ul>
+&lt;li>其他可修改参数，可通过&lt;code>tiup playground -h&lt;/code>查看。&lt;/li>
+&lt;li>dashboard的默认root用户没有密码，如果是公网暴露了，建议如下添加密码(我这里设置了root密码为&lt;code>tidb&lt;/code>):&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">mysql -h127.0.0.1 -P4000 -uroot
+alter user &lt;span style="color:#b44">&amp;#39;root&amp;#39;&lt;/span> identified by &lt;span style="color:#b44">&amp;#39;tidb&amp;#39;&lt;/span>;
+&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>grafana的登录密码，默认为admin/admin&lt;/li>
+&lt;li>&lt;code>tiup update --self&lt;/code>可升级tiup命令&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>mysql客户端可通过&lt;code>yum install -y mysql&lt;/code>或者&lt;code>apt install mysql-client&lt;/code>安装。&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="集群">集群&lt;/h2>
+&lt;p>没有多节点的环境，折腾了一下，要单机玩这个模式的话，需要hack的东西太多，，，目前还不建议这么搞，等有时间看能不能提个PR.&lt;/p></description></item></channel></rss>

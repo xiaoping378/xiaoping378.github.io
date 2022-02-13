@@ -4397,7 +4397,49 @@ kubectl label node node0 &lt;span style="color:#b8860b">ca&lt;/span>&lt;span sty
 }
 }&lt;span style="">,&lt;/span>
 &lt;span style="color:#b44">&amp;#34;terminal.integrated.defaultProfile.windows&amp;#34;&lt;/span>&lt;span style="">:&lt;/span> &lt;span style="color:#b44">&amp;#34;git-bash&amp;#34;&lt;/span>&lt;span style="">,&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: DEIS 开源PAAS平台实践</title><link>https://xiaoping378.github.io/docs/4-cloud/k8s/deis-%E5%BC%80%E6%BA%90paas%E5%B9%B3%E5%8F%B0%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/k8s/deis-%E5%BC%80%E6%BA%90paas%E5%B9%B3%E5%8F%B0%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93/</guid><description>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: TiDB初体验</title><link>https://xiaoping378.github.io/docs/3-devops/tidb/github-dev/</link><pubDate>Thu, 03 Feb 2022 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/3-devops/tidb/github-dev/</guid><description>
+&lt;h2 id="安装">安装&lt;/h2>
+&lt;blockquote>
+&lt;p>安装环境要求：&lt;/p>
+&lt;ul>
+&lt;li>Mac或者单机Linux环境&lt;/li>
+&lt;li>可以连接外网&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;ol>
+&lt;li>执行命令安装&lt;code>TiUP&lt;/code>工具，官方运维管理工具。&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">curl --proto &lt;span style="color:#b44">&amp;#39;=https&amp;#39;&lt;/span> --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>命令会有关键信息输出:添加了证书、修改了PATH变量等，需要声明下环境变量，以使&lt;code>tiup&lt;/code>命令能被找到。&lt;/p>
+&lt;ol start="2">
+&lt;li>声明系统环境变量&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#080;font-style:italic"># 因个人环境，此处会有差异&lt;/span>
+&lt;span style="color:#a2f">source&lt;/span> ~/.zshrc
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>可以&lt;code>echo $PATH&lt;/code>下，看到&lt;code>/root/.tiup/bin&lt;/code>被加到了最前面。&lt;/p>
+&lt;ol start="3">
+&lt;li>启动单实例集群&lt;/li>
+&lt;/ol>
+&lt;p>直接执行&lt;code>tiup playground&lt;/code>命令默认会运行最新版本的TiDB集群，其中TiDB Server、TiKV、PD 和 TiFlash 实例各 1 个：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">tiup playground
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>具体如下图所示，需要另开一个终端，使用mysql发起连接：
+&lt;img src="https://xiaoping378.github.io/images/github-dev-2022-02-04-16-16-18.png" alt="">&lt;/p>
+&lt;p>目前tidb playground默认启动监听在127的地址，可以通过--host参数更改，但还不能更改端口（经查代码是写死了端口）。&lt;/p>
+&lt;ul>
+&lt;li>其他可修改参数，可通过&lt;code>tiup playground -h&lt;/code>查看。&lt;/li>
+&lt;li>dashboard的默认root用户没有密码，如果是公网暴露了，建议如下添加密码(我这里设置了root密码为&lt;code>tidb&lt;/code>):&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">mysql -h127.0.0.1 -P4000 -uroot
+alter user &lt;span style="color:#b44">&amp;#39;root&amp;#39;&lt;/span> identified by &lt;span style="color:#b44">&amp;#39;tidb&amp;#39;&lt;/span>;
+&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>grafana的登录密码，默认为admin/admin&lt;/li>
+&lt;li>&lt;code>tiup update --self&lt;/code>可升级tiup命令&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>mysql客户端可通过&lt;code>yum install -y mysql&lt;/code>或者&lt;code>apt install mysql-client&lt;/code>安装。&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="集群">集群&lt;/h2>
+&lt;p>没有多节点的环境，折腾了一下，要单机玩这个模式的话，需要hack的东西太多，，，目前还不建议这么搞，等有时间看能不能提个PR.&lt;/p></description></item><item><title>Docs: DEIS 开源PAAS平台实践</title><link>https://xiaoping378.github.io/docs/4-cloud/k8s/deis-%E5%BC%80%E6%BA%90paas%E5%B9%B3%E5%8F%B0%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/k8s/deis-%E5%BC%80%E6%BA%90paas%E5%B9%B3%E5%8F%B0%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93/</guid><description>
 &lt;p>DEIS（目前已被微软收购）的workflow是开源的Paas平台，基于kubernetes做了一层面向开发者的CLI和接口，做到了让开发者对容器无感知的情况下快速的开发和部署线上应用。&lt;/p>
 &lt;blockquote>
 &lt;p>workflow是 on top of k8s的，所有组件默认全是跑在pod里的，不像openshift那样对k8s的侵入性很大。&lt;/p>
@@ -4679,5 +4721,4 @@ osm_cluster_network_cidr=10.128.0.0/10
 &lt;p>其实openshift基于k8s提供了一站式解决方案, 如果公司不具备k8s二次开发能力，openshift足矣。&lt;/p></description></item><item><title>Docs: 网络整理</title><link>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E7%BD%91%E7%BB%9C%E6%95%B4%E7%90%86/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E7%BD%91%E7%BB%9C%E6%95%B4%E7%90%86/</guid><description>
 &lt;p>介绍利用openshift-ansible项目安装后的生产环境里的网络情况。&lt;/p>
 &lt;p>待整理。。。&lt;/p></description></item><item><title>Docs: 监控梳理</title><link>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E7%9B%91%E6%8E%A7%E6%A2%B3%E7%90%86/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E7%9B%91%E6%8E%A7%E6%A2%B3%E7%90%86/</guid><description>
-&lt;p>未完搞 ...&lt;/p></description></item><item><title>Docs: 日志分析</title><link>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/</guid><description>
 &lt;p>未完搞 ...&lt;/p></description></item></channel></rss>

@@ -806,4 +806,7 @@ Casbin -&amp;gt; 其他服务: 权限合规，则跳转到用户请求的其他�
 }
 }&lt;span style="">,&lt;/span>
 &lt;span style="color:#b44">&amp;#34;terminal.integrated.defaultProfile.windows&amp;#34;&lt;/span>&lt;span style="">:&lt;/span> &lt;span style="color:#b44">&amp;#34;git-bash&amp;#34;&lt;/span>&lt;span style="">,&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: TiDB分布式数据库</title><link>https://xiaoping378.github.io/docs/3-devops/tidb/</link><pubDate>Thu, 03 Feb 2022 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/3-devops/tidb/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>主要介绍TiDB周边生态和实践体验&lt;/p>
+&lt;/div></description></item></channel></rss>

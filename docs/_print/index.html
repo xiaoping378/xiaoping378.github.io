@@ -53,7 +53,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.7cadd39400562c5f5e0a0525f6f73839.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.597222a5c86558aafee2ddd4e231fd31.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -100,6 +100,10 @@
 <li>3.7: <a href=#pg-0869f908f4f0eb9cdf146f22565dc728>Openldap之拨云见日</a></li>
 <li>3.8: <a href=#pg-9763571770981514723f9ed615e69ea5>Casbin的权限管理解读</a></li>
 <li>3.9: <a href=#pg-e4c44f08a2c513a02fe3cb9aa2c655e0>Windows Terminal终端入坑指南</a></li>
+<li>3.10: <a href=#pg-6a2aa71420594dce8734ef70bec7f0ce>TiDB分布式数据库</a></li>
+<ul>
+<li>3.10.1: <a href=#pg-dbade70acb9d1251e7daa5e8afbaaa82>TiDB初体验</a></li>
+</ul>
 </ul>
 <li>4: <a href=#pg-1737f808bd604b410f639c3e20a801ea>云原生</a></li>
 <ul>
@@ -1770,6 +1774,59 @@ Casbin -&gt; 其他服务: 权限合规，则跳转到用户请求的其他服�
       }<span>,</span>
     <span style=color:#b44>&#34;terminal.integrated.defaultProfile.windows&#34;</span><span>:</span> <span style=color:#b44>&#34;git-bash&#34;</span><span>,</span>
 </code></pre></div>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-6a2aa71420594dce8734ef70bec7f0ce>3.10 - TiDB分布式数据库</h1>
+<div class=lead>TiDB分布式数据库的介绍和深度探索</div>
+<div class="pageinfo pageinfo-primary">
+<p>主要介绍TiDB周边生态和实践体验</p>
+</div>
+</div>
+<div class=td-content>
+<h1 id=pg-dbade70acb9d1251e7daa5e8afbaaa82>3.10.1 - TiDB初体验</h1>
+<div class=lead>TiDB 初体验安装介绍</div>
+<h2 id=安装>安装</h2>
+<blockquote>
+<p>安装环境要求：</p>
+<ul>
+<li>Mac或者单机Linux环境</li>
+<li>可以连接外网</li>
+</ul>
+</blockquote>
+<ol>
+<li>执行命令安装<code>TiUP</code>工具，官方运维管理工具。</li>
+</ol>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl --proto <span style=color:#b44>&#39;=https&#39;</span> --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
+</code></pre></div><p>命令会有关键信息输出:添加了证书、修改了PATH变量等，需要声明下环境变量，以使<code>tiup</code>命令能被找到。</p>
+<ol start=2>
+<li>声明系统环境变量</li>
+</ol>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#080;font-style:italic># 因个人环境，此处会有差异</span>
+<span style=color:#a2f>source</span> ~/.zshrc
+</code></pre></div><p>可以<code>echo $PATH</code>下，看到<code>/root/.tiup/bin</code>被加到了最前面。</p>
+<ol start=3>
+<li>启动单实例集群</li>
+</ol>
+<p>直接执行<code>tiup playground</code>命令默认会运行最新版本的TiDB集群，其中TiDB Server、TiKV、PD 和 TiFlash 实例各 1 个：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>tiup playground
+</code></pre></div><p>具体如下图所示，需要另开一个终端，使用mysql发起连接：
+<img src=/images/github-dev-2022-02-04-16-16-18.png alt></p>
+<p>目前tidb playground默认启动监听在127的地址，可以通过--host参数更改，但还不能更改端口（经查代码是写死了端口）。</p>
+<ul>
+<li>其他可修改参数，可通过<code>tiup playground -h</code>查看。</li>
+<li>dashboard的默认root用户没有密码，如果是公网暴露了，建议如下添加密码(我这里设置了root密码为<code>tidb</code>):</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>mysql -h127.0.0.1 -P4000 -uroot
+alter user <span style=color:#b44>&#39;root&#39;</span> identified by <span style=color:#b44>&#39;tidb&#39;</span>;
+</code></pre></div><ul>
+<li>grafana的登录密码，默认为admin/admin</li>
+<li><code>tiup update --self</code>可升级tiup命令</li>
+</ul>
+<blockquote>
+<p>mysql客户端可通过<code>yum install -y mysql</code>或者<code>apt install mysql-client</code>安装。</p>
+</blockquote>
+<h2 id=集群>集群</h2>
+<p>没有多节点的环境，折腾了一下，要单机玩这个模式的话，需要hack的东西太多，，，目前还不建议这么搞，等有时间看能不能提个PR.</p>
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-1737f808bd604b410f639c3e20a801ea>4 - 云原生</h1>
