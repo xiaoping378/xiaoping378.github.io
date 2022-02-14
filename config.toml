@@ -28,6 +28,11 @@ enableMissingTranslationPlaceholders = true
 # 注释后，可以开启标签分类功能
 # disableKinds = ["taxonomy", "taxonomyTerm"]
 
+# robots模板里，有用到部分变量，加入到白名单中, 可实现NETLIFY上写文章，非生产环境不抓取效果。
+[security.funcs]
+getenv = ['^HUGO_', 'NETLIFY']
+
+
 [params.taxonomy]
 # set taxonomyCloud = [] to hide taxonomy clouds
 taxonomyCloud = ["tags"] 
