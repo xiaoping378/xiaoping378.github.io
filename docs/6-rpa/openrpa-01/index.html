@@ -5,24 +5,23 @@
 <meta name=generator content="Hugo 0.91.2">
 <meta name=robots content="index, follow">
 <link rel="shortcut icon" href=/favicons/favicon.ico>
-<title>TiDB初体验 | 现代技能栈</title>
-<meta name=description content="TiDB 初体验安装介绍
+<title>openrpa介绍 | 现代技能栈</title>
+<meta name=description content="开源openrpa的架构介绍
 ">
-<meta property="og:title" content="TiDB初体验">
-<meta property="og:description" content="TiDB 初体验安装介绍
+<meta property="og:title" content="openrpa介绍">
+<meta property="og:description" content="开源openrpa的架构介绍
 ">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://xiaoping378.github.io/docs/3-devops/tidb/github-dev/"><meta property="article:section" content="docs">
-<meta property="article:published_time" content="2022-02-03T00:00:00+00:00">
-<meta property="article:modified_time" content="2022-02-11T10:03:16+08:00"><meta property="og:site_name" content="现代技能栈">
-<meta itemprop=name content="TiDB初体验">
-<meta itemprop=description content="TiDB 初体验安装介绍
-"><meta itemprop=datePublished content="2022-02-03T00:00:00+00:00">
-<meta itemprop=dateModified content="2022-02-11T10:03:16+08:00">
-<meta itemprop=wordCount content="61">
-<meta itemprop=keywords content="Ops,SQL,"><meta name=twitter:card content="summary">
-<meta name=twitter:title content="TiDB初体验">
-<meta name=twitter:description content="TiDB 初体验安装介绍
+<meta property="og:url" content="https://xiaoping378.github.io/docs/6-rpa/openrpa-01/"><meta property="article:section" content="docs">
+<meta property="article:modified_time" content="2022-02-18T15:01:11+08:00"><meta property="og:site_name" content="现代技能栈">
+<meta itemprop=name content="openrpa介绍">
+<meta itemprop=description content="开源openrpa的架构介绍
+">
+<meta itemprop=dateModified content="2022-02-18T15:01:11+08:00">
+<meta itemprop=wordCount content="20">
+<meta itemprop=keywords content="rpa,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="openrpa介绍">
+<meta name=twitter:description content="开源openrpa的架构介绍
 ">
 <link rel=preload href=/scss/main.min.8973293e550f2aebcff13ca0acf28013165ed1fa321e6a370fbd3fd2e00c7d33.css as=style>
 <link href=/scss/main.min.8973293e550f2aebcff13ca0acf28013165ed1fa321e6a370fbd3fd2e00c7d33.css rel=stylesheet integrity>
@@ -53,7 +52,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.597222a5c86558aafee2ddd4e231fd31.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.2baeca93aa085d469cbcd45a536311f4.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -63,7 +62,7 @@
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.597222a5c86558aafee2ddd4e231fd31.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.2baeca93aa085d469cbcd45a536311f4.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -108,8 +107,8 @@
 </ul>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs-3-devops-li>
-<input type=checkbox id=m-docs-3-devops-check checked>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-3-devops-li>
+<input type=checkbox id=m-docs-3-devops-check>
 <label for=m-docs-3-devops-check><a href=/docs/3-devops/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-3-devops><span>Dev|Ops</span></a></label>
 <ul class="ul-2 foldable">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-3-devops-e6-9c-ba-e5-99-a8-e5-ad-a6-e4-b9-a0-e7-9a-84-e8-af-ad-e8-a8-80-e4-b9-8b-e4-ba-89-python-li>
@@ -139,13 +138,13 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-3-devops-windows-terminal-li>
 <input type=checkbox id=m-docs-3-devops-windows-terminal-check>
 <label for=m-docs-3-devops-windows-terminal-check><a href=/docs/3-devops/windows-terminal/ title="Windows Terminal终端入坑指南" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-3-devops-windows-terminal><span>Windows Terminal终端</span></a></label>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs-3-devops-tidb-li>
-<input type=checkbox id=m-docs-3-devops-tidb-check checked>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-3-devops-tidb-li>
+<input type=checkbox id=m-docs-3-devops-tidb-check>
 <label for=m-docs-3-devops-tidb-check><a href=/docs/3-devops/tidb/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-3-devops-tidb><span>TiDB分布式数据库</span></a></label>
 <ul class="ul-3 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-docs-3-devops-tidb-github-dev-li>
-<input type=checkbox id=m-docs-3-devops-tidb-github-dev-check checked>
-<label for=m-docs-3-devops-tidb-github-dev-check><a href=/docs/3-devops/tidb/github-dev/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docs-3-devops-tidb-github-dev><span class=td-sidebar-nav-active-item>TiDB初体验</span></a></label>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-3-devops-tidb-tidb-e5-88-9d-e4-bd-93-e9-aa-8c-li>
+<input type=checkbox id=m-docs-3-devops-tidb-tidb-e5-88-9d-e4-bd-93-e9-aa-8c-check>
+<label for=m-docs-3-devops-tidb-tidb-e5-88-9d-e4-bd-93-e9-aa-8c-check><a href=/docs/3-devops/tidb/tidb-%E5%88%9D%E4%BD%93%E9%AA%8C/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-3-devops-tidb-tidb-e5-88-9d-e4-bd-93-e9-aa-8c><span>TiDB初体验</span></a></label>
 </li>
 </ul>
 </li>
@@ -179,6 +178,9 @@
 <label for=m-docs-4-cloud-containers-swarm-docker-sarm3-check><a href=/docs/4-cloud/containers/swarm/docker-sarm3/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-containers-swarm-docker-sarm3><span>构建生产环境级的docker Swarm集群-3</span></a></label>
 </li>
 </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-containers-containerd-li>
+<input type=checkbox id=m-docs-4-cloud-containers-containerd-check>
+<label for=m-docs-4-cloud-containers-containerd-check><a href=/docs/4-cloud/containers/containerd/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-containers-containerd><span>从docker迁移到containerd</span></a></label>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-4-cloud-k8s-li>
@@ -265,6 +267,9 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-kvm-virsh-e5-ae-9e-e8-b7-b5-e6-95-b4-e7-90-86-li>
 <input type=checkbox id=m-docs-4-cloud-kvm-virsh-e5-ae-9e-e8-b7-b5-e6-95-b4-e7-90-86-check>
 <label for=m-docs-4-cloud-kvm-virsh-e5-ae-9e-e8-b7-b5-e6-95-b4-e7-90-86-check><a href=/docs/4-cloud/kvm-virsh%E5%AE%9E%E8%B7%B5%E6%95%B4%E7%90%86/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-kvm-virsh-e5-ae-9e-e8-b7-b5-e6-95-b4-e7-90-86><span>KVM和Libvirt的实践整理</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-e8-a7-a3-e8-af-bbconsu-01-li>
+<input type=checkbox id=m-docs-4-cloud-e8-a7-a3-e8-af-bbconsu-01-check>
+<label for=m-docs-4-cloud-e8-a7-a3-e8-af-bbconsu-01-check><a href=/docs/4-cloud/%E8%A7%A3%E8%AF%BBconsu-01/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-e8-a7-a3-e8-af-bbconsu-01><span>解读Consul</span></a></label>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-5-blockchain-li>
@@ -300,9 +305,15 @@
 <label for=m-docs-5-blockchain-farbic-e5-8c-ba-e5-9d-97-e9-93-be-e7-9a-84-e9-9b-86-e7-be-a4-e5-8c-96-kubernetes-e5-ae-9e-e6-88-98-check><a href=/docs/5-blockchain/farbic%E5%8C%BA%E5%9D%97%E9%93%BE%E7%9A%84%E9%9B%86%E7%BE%A4%E5%8C%96-kubernetes%E5%AE%9E%E6%88%98/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-5-blockchain-farbic-e5-8c-ba-e5-9d-97-e9-93-be-e7-9a-84-e9-9b-86-e7-be-a4-e5-8c-96-kubernetes-e5-ae-9e-e6-88-98><span>farbic-区块链的生产集群化</span></a></label>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-6-rpa-li>
-<input type=checkbox id=m-docs-6-rpa-check>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs-6-rpa-li>
+<input type=checkbox id=m-docs-6-rpa-check checked>
 <label for=m-docs-6-rpa-check><a href=/docs/6-rpa/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-6-rpa><span>RPA机器人</span></a></label>
+<ul class="ul-2 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-docs-6-rpa-openrpa-01-li>
+<input type=checkbox id=m-docs-6-rpa-openrpa-01-check checked>
+<label for=m-docs-6-rpa-openrpa-01-check><a href=/docs/6-rpa/openrpa-01/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docs-6-rpa-openrpa-01><span class=td-sidebar-nav-active-item>openrpa介绍</span></a></label>
+</li>
+</ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-reference-li>
 <input type=checkbox id=m-docs-reference-check>
 <label for=m-docs-reference-check><a href=/docs/reference/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-reference><span>其他推荐</span></a></label>
@@ -324,10 +335,10 @@
 </aside>
 <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
-<a href=https://github.com/xiaoping378/xiaoping378.github.io/edit/master///content/docs/3-DevOps/TiDB/github-dev.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
-<a href="https://github.com/xiaoping378/xiaoping378.github.io/new/master///content/docs/3-DevOps/TiDB/github-dev.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
-<a href="https://github.com/xiaoping378/xiaoping378.github.io/issues/new?title=TiDB%e5%88%9d%e4%bd%93%e9%aa%8c" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
-<a id=print href=https://xiaoping378.github.io/docs/3-devops/tidb/_print/><i class="fa fa-print fa-fw"></i> 整节打印</a>
+<a href=https://github.com/xiaoping378/xiaoping378.github.io/edit/master///content/docs/6-RPA/openrpa-01.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
+<a href="https://github.com/xiaoping378/xiaoping378.github.io/new/master///content/docs/6-RPA/openrpa-01.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
+<a href="https://github.com/xiaoping378/xiaoping378.github.io/issues/new?title=openrpa%e4%bb%8b%e7%bb%8d" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
+<a id=print href=https://xiaoping378.github.io/docs/6-rpa/_print/><i class="fa fa-print fa-fw"></i> 整节打印</a>
 </div>
 <div class="taxonomy taxonomy-terms-cloud taxo-tags">
 <h5 class=taxonomy-title>标签</h5>
@@ -338,11 +349,11 @@
 <li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/linux/ data-taxonomy-term=linux><span class=taxonomy-label>linux</span><span class=taxonomy-count>3</span></a></li>
 <li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/openshift/ data-taxonomy-term=openshift><span class=taxonomy-label>Openshift</span><span class=taxonomy-count>12</span></a></li>
 <li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/ops/ data-taxonomy-term=ops><span class=taxonomy-label>Ops</span><span class=taxonomy-count>2</span></a></li>
-<li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/rpa/ data-taxonomy-term=rpa><span class=taxonomy-label>rpa</span><span class=taxonomy-count>1</span></a></li>
+<li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/rpa/ data-taxonomy-term=rpa><span class=taxonomy-label>rpa</span><span class=taxonomy-count>2</span></a></li>
 <li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/sql/ data-taxonomy-term=sql><span class=taxonomy-label>SQL</span><span class=taxonomy-count>1</span></a></li>
 <li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/ data-taxonomy-term=%E5%8C%BA%E5%9D%97%E9%93%BE><span class=taxonomy-label>区块链</span><span class=taxonomy-count>9</span></a></li>
 <li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/%E5%9F%BA%E7%A1%80/ data-taxonomy-term=%E5%9F%BA%E7%A1%80><span class=taxonomy-label>基础</span><span class=taxonomy-count>1</span></a></li>
-<li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/%E5%AE%B9%E5%99%A8/ data-taxonomy-term=%E5%AE%B9%E5%99%A8><span class=taxonomy-label>容器</span><span class=taxonomy-count>26</span></a></li>
+<li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/%E5%AE%B9%E5%99%A8/ data-taxonomy-term=%E5%AE%B9%E5%99%A8><span class=taxonomy-label>容器</span><span class=taxonomy-count>27</span></a></li>
 <li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/%E7%BD%91%E7%BB%9C/ data-taxonomy-term=%E7%BD%91%E7%BB%9C><span class=taxonomy-label>网络</span><span class=taxonomy-count>1</span></a></li>
 </ul>
 </div>
@@ -354,72 +365,53 @@
 <a href=https://xiaoping378.github.io/docs/>文档</a>
 </li>
 <li class=breadcrumb-item>
-<a href=https://xiaoping378.github.io/docs/3-devops/>Dev|Ops</a>
-</li>
-<li class=breadcrumb-item>
-<a href=https://xiaoping378.github.io/docs/3-devops/tidb/>TiDB分布式数据库</a>
+<a href=https://xiaoping378.github.io/docs/6-rpa/>RPA机器人</a>
 </li>
 <li class="breadcrumb-item active" aria-current=page>
-<a href=https://xiaoping378.github.io/docs/3-devops/tidb/github-dev/>TiDB初体验</a>
+<a href=https://xiaoping378.github.io/docs/6-rpa/openrpa-01/>openrpa介绍</a>
 </li>
 </ol>
 </nav>
 <div class=td-content>
-<h1>TiDB初体验</h1>
-<div class=lead>TiDB 初体验安装介绍</div>
+<h1>openrpa介绍</h1>
+<div class=lead>开源openrpa的架构介绍</div>
 <header class=article-meta>
 <div class="taxonomy taxonomy-terms-article taxo-tags">
 <h5 class=taxonomy-title>Tags:</h5>
 <ul class=taxonomy-terms>
-<li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/ops/ data-taxonomy-term=ops><span class=taxonomy-label>Ops</span></a></li>
-<li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/sql/ data-taxonomy-term=sql><span class=taxonomy-label>SQL</span></a></li>
+<li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/rpa/ data-taxonomy-term=rpa><span class=taxonomy-label>rpa</span></a></li>
 </ul>
 </div>
 </header>
-<h2 id=安装>安装</h2>
-<blockquote>
-<p>安装环境要求：</p>
+<div class="pageinfo pageinfo-primary">
+<p>openrpa的架构介绍</p>
+</div>
+<h2 id=概述>概述</h2>
+<p>openrpa项目，提供了<strong>OON</strong>技术栈（OpenRPA、Openflow、Node-RED）来实现的RPA功能。</p>
+<p><strong>OpenRPA</strong></p>
+<p>该组件可以认为是机器人的IDE设计器部分，基于<a href=https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/>MWF</a>框架实现的，</p>
 <ul>
-<li>Mac或者单机Linux环境</li>
-<li>可以连接外网</li>
+<li>可以图形化拖拽的方式实现基本功能<code>Activity</code>，如点击邮箱、打开浏览器网址、输入文字、录屏录音、各类监听探测器等等</li>
+<li>多个<code>Activity</code>可以组合成一个序列，来实现工作流<code>workflow</code>，串行执行一系列动作</li>
+<li>也可以通过配置作为agent（机器人）运行，负责执行设计好的工作流</li>
+<li>默认远程连接到云端控制端（openflow），可上传同步本地的工作流和接受控制端的调度管理。</li>
 </ul>
-</blockquote>
-<ol>
-<li>执行命令安装<code>TiUP</code>工具，官方运维管理工具。</li>
-</ol>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl --proto <span style=color:#b44>&#39;=https&#39;</span> --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
-</code></pre></div><p>命令会有关键信息输出:添加了证书、修改了PATH变量等，需要声明下环境变量，以使<code>tiup</code>命令能被找到。</p>
-<ol start=2>
-<li>声明系统环境变量</li>
-</ol>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#080;font-style:italic># 因个人环境，此处会有差异</span>
-<span style=color:#a2f>source</span> ~/.zshrc
-</code></pre></div><p>可以<code>echo $PATH</code>下，看到<code>/root/.tiup/bin</code>被加到了最前面。</p>
-<ol start=3>
-<li>启动单实例集群</li>
-</ol>
-<p>直接执行<code>tiup playground</code>命令默认会运行最新版本的TiDB集群，其中TiDB Server、TiKV、PD 和 TiFlash 实例各 1 个：</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>tiup playground
-</code></pre></div><p>具体如下图所示，需要另开一个终端，使用mysql发起连接：
-<img src=/images/github-dev-2022-02-04-16-16-18.png alt></p>
-<p>目前tidb playground默认启动监听在127的地址，可以通过--host参数更改，但还不能更改端口（经查代码是写死了端口）。</p>
+<p><img src=/images/openrpa-01-2022-02-14-13-54-44.png alt></p>
+<p><strong>Openflow</strong></p>
+<p>OON技术栈的后台核心部分，可以关编排管理所有的活动，主要具备一下特性：</p>
 <ul>
-<li>其他可修改参数，可通过<code>tiup playground -h</code>查看。</li>
-<li>dashboard的默认root用户没有密码，如果是公网暴露了，建议如下添加密码(我这里设置了root密码为<code>tidb</code>):</li>
+<li>管理，调用和配置机器人和工作流</li>
+<li>管理用户和权限(组)</li>
+<li>创建Web表单，供和真实用户交互，实现工作流的输入，审批和确认等操作。</li>
+<li>管理后端MongoDB存储</li>
+<li>存储工作流、表单等数据信息</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>mysql -h127.0.0.1 -P4000 -uroot
-alter user <span style=color:#b44>&#39;root&#39;</span> identified by <span style=color:#b44>&#39;tidb&#39;</span>;
-</code></pre></div><ul>
-<li>grafana的登录密码，默认为admin/admin</li>
-<li><code>tiup update --self</code>可升级tiup命令</li>
-</ul>
-<blockquote>
-<p>mysql客户端可通过<code>yum install -y mysql</code>或者<code>apt install mysql-client</code>安装。</p>
-</blockquote>
-<h2 id=集群>集群</h2>
-<p>没有多节点的环境，折腾了一下，要单机玩这个模式的话，需要hack的东西太多，，，目前还不建议这么搞，等有时间看能不能提个PR.</p>
+<p><img src=/images/openrpa-01-2022-02-15-09-23-27.png alt="openflow with Monitoring"></p>
+<p><strong>Node-RED</strong></p>
+<h2 id=faq>FAQ</h2>
+<p>三大组件汇总具有<code>流</code>的概念，openrpa中叫<code>workflow</code>，node-red中叫<code>flow</code>, openflow组件名称自身就带了flow的字样，界面上也有</p>
 <div class="text-muted mt-5 pt-3 border-top">
-最后修改 February 11, 2022: <a href=https://github.com/xiaoping378/xiaoping378.github.io/commit/9ade7a56ad8a0ecac6985af08d7ea8ad69ea73ff>add tidb-01 (9ade7a5)</a>
+最后修改 February 18, 2022: <a href=https://github.com/xiaoping378/xiaoping378.github.io/commit/a1c824361dd96c573902b255ce36025797d0a1a1>add consul & rpa & tidb (a1c8243)</a>
 </div>
 </div>
 </main>

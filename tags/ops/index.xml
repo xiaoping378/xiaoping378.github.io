@@ -97,7 +97,7 @@
 }
 }&lt;span style="">,&lt;/span>
 &lt;span style="color:#b44">&amp;#34;terminal.integrated.defaultProfile.windows&amp;#34;&lt;/span>&lt;span style="">:&lt;/span> &lt;span style="color:#b44">&amp;#34;git-bash&amp;#34;&lt;/span>&lt;span style="">,&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: TiDB初体验</title><link>https://xiaoping378.github.io/docs/3-devops/tidb/github-dev/</link><pubDate>Thu, 03 Feb 2022 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/3-devops/tidb/github-dev/</guid><description>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: TiDB初体验</title><link>https://xiaoping378.github.io/docs/3-devops/tidb/tidb-%E5%88%9D%E4%BD%93%E9%AA%8C/</link><pubDate>Thu, 03 Feb 2022 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/3-devops/tidb/tidb-%E5%88%9D%E4%BD%93%E9%AA%8C/</guid><description>
 &lt;h2 id="安装">安装&lt;/h2>
 &lt;blockquote>
 &lt;p>安装环境要求：&lt;/p>
@@ -139,4 +139,83 @@ alter user &lt;span style="color:#b44">&amp;#39;root&amp;#39;&lt;/span> identifi
 &lt;p>mysql客户端可通过&lt;code>yum install -y mysql&lt;/code>或者&lt;code>apt install mysql-client&lt;/code>安装。&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="集群">集群&lt;/h2>
-&lt;p>没有多节点的环境，折腾了一下，要单机玩这个模式的话，需要hack的东西太多，，，目前还不建议这么搞，等有时间看能不能提个PR.&lt;/p></description></item></channel></rss>
+&lt;p>没有多节点的环境，折腾了一下，要单机玩这个模式的话，需要hack的东西太多，，，目前还不建议这么搞，等有时间看能不能提个PR.&lt;/p>
+&lt;h2 id="tidb-server">TIDB Server&lt;/h2>
+&lt;p>处理client的SQL请求.&lt;/p>
+&lt;h2 id="pd">PD&lt;/h2>
+&lt;p>提供全局时钟和Region调度和管理（扩缩容）。&lt;/p>
+&lt;h2 id="tikv">TIKV&lt;/h2>
+&lt;p>使用rocksDB实现数据持久化，基于此实现了分布式存储引擎，其中的核心点可以理解为以下三点：&lt;/p>
+&lt;ul>
+&lt;li>事务&lt;/li>
+&lt;li>MVCC&lt;/li>
+&lt;li>Raft&lt;/li>
+&lt;/ul>
+&lt;h3 id="分布式事务percolator">分布式事务Percolator&lt;/h3>
+&lt;p>基于时间戳的两阶段提交事务解决方案。&lt;/p>
+&lt;h3 id="mvcc多版本并发控制">MVCC多版本并发控制&lt;/h3>
+&lt;p>&lt;code>COW&lt;/code>的本质。默认revision大的为最新值，&lt;/p>
+&lt;h3 id="多副本raft一致性">多副本Raft一致性&lt;/h3>
+&lt;p>&lt;strong>Leader选举：&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>Term&lt;/code>状态变化，follower -&amp;gt; (random timeout) -&amp;gt; candidate -&amp;gt; leader. 此过程因为网络延迟问题，很可能是进行多轮选举。&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code class="language-plantuml" data-lang="plantuml">@startuml
+!theme aws-orange
+TiKV1 -&amp;gt; TiKV1: 随机选举时间到，切换为candidate角色，进入term2，发出选举信息
+TiKV1 -&amp;gt; TiKV2: 发起选举，term=2
+TiKV1 -&amp;gt; TiKV3: 发起选举，term=2
+TiKV2 -&amp;gt; TiKV2: 对比term（非拜占庭环境，大家默认信任term大的）
+TiKV3 -&amp;gt; TiKV3: 对比term
+TiKV2 -&amp;gt; TiKV1: 投一票
+TiKV3 -&amp;gt; TiKV1: 投一票
+TiKV1 -&amp;gt; TiKV1: 超过一半投票（2x+1），成为Leader
+TiKV1 -&amp;gt; TiKV2: 心跳保活
+TiKV1 -&amp;gt; TiKV3: 心跳保活
+TiKV1 -&amp;gt; TiKV1: 异常了
+TiKV2 -&amp;gt; TiKV2: 心跳超时，切换candidate角色，进入term3
+TiKV2 -&amp;gt; TiKV3: 发起选举
+TiKV3 -&amp;gt; TiKV2: 对比term，并投一票
+TiKV2 -&amp;gt; TiKV2: 加上自己的一票，超过一半投票，成为Leader
+@enduml
+&lt;/code>&lt;/pre>&lt;blockquote>
+&lt;p>leader负责读写请求，follower负责数据多副本复制。日常心跳保活，出问题后，重新选举。&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>数据写入&lt;/strong>：&lt;/p>
+&lt;ul>
+&lt;li>propose -&amp;gt; append (local) -&amp;gt; Replicate (remote append) -&amp;gt; commited -&amp;gt; apply&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code class="language-plantuml" data-lang="plantuml">@startuml
+!theme aws-orange
+用户 -&amp;gt; TiDB_Server: 发起事务数据写入
+TiDB_Server -&amp;gt; TiDB_Server: 解析语句，SQL -&amp;gt; KV
+TiDB_Server -&amp;gt; PD: 获取KV元信息
+PD -&amp;gt; TiDB_Server: 告知该key的range leader信息（TiKV1）
+TiDB_Server -&amp;gt; TiKV1: 发起propose
+TiKV1 -&amp;gt; TiKV1: 本地append为raft_log
+TiKV1 -&amp;gt; TiKV2: 发起Replicate复制
+TiKV1 -&amp;gt; TiKV3: 发起Replicate复制
+TiKV2 -&amp;gt; TiKV2: 本地append为raft_log
+TiKV3 -&amp;gt; TiKV3: 本地append为raft_log
+TiKV2 -&amp;gt; TiKV1: 反馈已记录成功
+TiKV3 -&amp;gt; TiKV1: 反馈已记录成功
+TiKV1 -&amp;gt; TiKV1: 收到大多数节点反馈，进入commited状态
+TiKV1 -&amp;gt; TiKV2: 发起commited确认
+TiKV1 -&amp;gt; TiKV3: 发起commited确认
+TiKV2 -&amp;gt; TiKV1: 进入commited
+TiKV3 -&amp;gt; TiKV1: 进入commited
+TiKV1 -&amp;gt; TiKV1: 收到大多数节点反馈，进入apply状态，此时业务数据才算真正落盘
+TiKV1 -&amp;gt; TiKV2: 发起apply确认
+TiKV1 -&amp;gt; TiKV3: 发起apply确认
+TiKV2 -&amp;gt; TiKV1: 进入apply
+TiKV3 -&amp;gt; TiKV1: 进入apply
+TiKV1 -&amp;gt; TiDB_Server: 收到一个apply成功反馈，即可反馈用户写入成功
+TiDB_Server -&amp;gt; 用户: 反馈写入成功
+@enduml
+&lt;/code>&lt;/pre>&lt;blockquote>
+&lt;p>SQL事务的commit对应到这里的apply，这里的commited是指raft中记录上用户的数据更新了（多数据节点记录上用户的写入请求了）。&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>数据读取：&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>tidb server解析SQL语句 -&amp;gt; 从pd获取对应key的tikv节点信息 -&amp;gt;&lt;/li>
+&lt;/ul></description></item></channel></rss>

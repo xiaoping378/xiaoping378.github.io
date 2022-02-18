@@ -1,5 +1,40 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>现代技能栈 – rpa</title><link>https://xiaoping378.github.io/tags/rpa/</link><description>Recent content in rpa on 现代技能栈</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://xiaoping378.github.io/tags/rpa/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: RPA机器人</title><link>https://xiaoping378.github.io/docs/6-rpa/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/6-rpa/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>现代技能栈 – rpa</title><link>https://xiaoping378.github.io/tags/rpa/</link><description>Recent content in rpa on 现代技能栈</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://xiaoping378.github.io/tags/rpa/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: openrpa介绍</title><link>https://xiaoping378.github.io/docs/6-rpa/openrpa-01/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/6-rpa/openrpa-01/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>openrpa的架构介绍&lt;/p>
+&lt;/div>
+&lt;h2 id="概述">概述&lt;/h2>
+&lt;p>openrpa项目，提供了&lt;strong>OON&lt;/strong>技术栈（OpenRPA、Openflow、Node-RED）来实现的RPA功能。&lt;/p>
+&lt;p>&lt;strong>OpenRPA&lt;/strong>&lt;/p>
+&lt;p>该组件可以认为是机器人的IDE设计器部分，基于&lt;a href="https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/">MWF&lt;/a>框架实现的，&lt;/p>
+&lt;ul>
+&lt;li>可以图形化拖拽的方式实现基本功能&lt;code>Activity&lt;/code>，如点击邮箱、打开浏览器网址、输入文字、录屏录音、各类监听探测器等等&lt;/li>
+&lt;li>多个&lt;code>Activity&lt;/code>可以组合成一个序列，来实现工作流&lt;code>workflow&lt;/code>，串行执行一系列动作&lt;/li>
+&lt;li>也可以通过配置作为agent（机器人）运行，负责执行设计好的工作流&lt;/li>
+&lt;li>默认远程连接到云端控制端（openflow），可上传同步本地的工作流和接受控制端的调度管理。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://xiaoping378.github.io/images/openrpa-01-2022-02-14-13-54-44.png" alt="">&lt;/p>
+&lt;p>&lt;strong>Openflow&lt;/strong>&lt;/p>
+&lt;p>OON技术栈的后台核心部分，可以关编排管理所有的活动，主要具备一下特性：&lt;/p>
+&lt;ul>
+&lt;li>管理，调用和配置机器人和工作流&lt;/li>
+&lt;li>管理用户和权限(组)&lt;/li>
+&lt;li>创建Web表单，供和真实用户交互，实现工作流的输入，审批和确认等操作。&lt;/li>
+&lt;li>管理后端MongoDB存储&lt;/li>
+&lt;li>存储工作流、表单等数据信息&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://xiaoping378.github.io/images/openrpa-01-2022-02-15-09-23-27.png" alt="openflow with Monitoring">&lt;/p>
+&lt;p>&lt;strong>Node-RED&lt;/strong>&lt;/p>
+&lt;h2 id="faq">FAQ&lt;/h2>
+&lt;p>三大组件汇总具有&lt;code>流&lt;/code>的概念，openrpa中叫&lt;code>workflow&lt;/code>，node-red中叫&lt;code>flow&lt;/code>, openflow组件名称自身就带了flow的字样，界面上也有&lt;/p></description></item><item><title>Docs: RPA机器人</title><link>https://xiaoping378.github.io/docs/6-rpa/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/6-rpa/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
 &lt;p>主要介绍如何建设企业自己的RPA机器人流程自动化平台。&lt;/p>
 &lt;/div>
-&lt;p>TODO.&lt;/p></description></item></channel></rss>
+&lt;p>RPA（机器人流程自动化）借助AI（OCR、NLP）等技术，在疫情劳动力不足和数字化转型的大背景下，东风又起。国内该领域最早可追溯到&lt;code>按键精灵&lt;/code>时代，可以模拟人操作设备（电脑、手机）的行为，无缝集成新旧系统，减少重复性任务，实现桌面流自动化。&lt;/p>
+&lt;p>本质上可以认为是自动化领域的技术，Gartner连续三年提到的技术趋势-&lt;strong>超级自动化HyperAutomation&lt;/strong>（一种技术合集），主要包括&lt;/p>
+&lt;ul>
+&lt;li>RPA（机器人流程自动化）&lt;/li>
+&lt;li>LCAP（低代码应用平台）&lt;/li>
+&lt;li>AI（人工智能技术&lt;/li>
+&lt;li>iBPMS（智能业务流程管理）&lt;/li>
+&lt;/ul>
+&lt;p>目前&lt;a href="https://github.com/open-rpa/openrpa">openrpa&lt;/a>开源项目, 基本实现了hyperautomaion的前三项技术要求。&lt;/p></description></item></channel></rss>

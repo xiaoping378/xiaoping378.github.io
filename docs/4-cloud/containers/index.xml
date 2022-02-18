@@ -70,4 +70,12 @@ RX bytes:17485434 &lt;span style="color:#666">(&lt;/span>17.4 MB&lt;span style="
 &lt;div class="pageinfo pageinfo-primary">
 &lt;p>Docker内置容器编排方案&lt;/p>
 &lt;/div>
-&lt;p>当年的swarm、k8s、mesos三大系统竞争之激烈，现在都归于k8s了。&lt;/p></description></item></channel></rss>
+&lt;p>当年的swarm、k8s、mesos三大系统竞争之激烈，现在都归于k8s了。&lt;/p></description></item><item><title>Docs: 从docker迁移到containerd</title><link>https://xiaoping378.github.io/docs/4-cloud/containers/containerd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/containers/containerd/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>记录个人从docker迁移到containerd的事项&lt;/p>
+&lt;/div>
+&lt;h2 id="介绍">介绍&lt;/h2>
+&lt;p>&lt;a href="https://github.com/containerd/containerd">https://github.com/containerd/containerd&lt;/a>&lt;/p>
+&lt;p>TODO.&lt;/p>
+&lt;h2 id="安装containerd">安装containerd&lt;/h2>
+&lt;p>下载必要组件：https://github.com/containerd/nerdctl/releases，&lt;/p></description></item></channel></rss>

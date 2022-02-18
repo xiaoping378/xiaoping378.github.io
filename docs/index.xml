@@ -332,7 +332,34 @@
 &lt;/ul>
 &lt;blockquote>
 &lt;p>[Scala]在编译的时候可能是慢，但它比CPython更安全，并且快得多（除了使用非字节码的代码和调用C/Fortran库之外），并且还有一些我现在在Python中及其想念的概念，例如，Option[T]，隐式修改器，不废柴的map/reduce/filter，不废柴的lambda，等等。&lt;/p>
-&lt;/blockquote></description></item><item><title>Docs: 快速安装</title><link>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85/</guid><description>
+&lt;/blockquote></description></item><item><title>Docs: openrpa介绍</title><link>https://xiaoping378.github.io/docs/6-rpa/openrpa-01/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/6-rpa/openrpa-01/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>openrpa的架构介绍&lt;/p>
+&lt;/div>
+&lt;h2 id="概述">概述&lt;/h2>
+&lt;p>openrpa项目，提供了&lt;strong>OON&lt;/strong>技术栈（OpenRPA、Openflow、Node-RED）来实现的RPA功能。&lt;/p>
+&lt;p>&lt;strong>OpenRPA&lt;/strong>&lt;/p>
+&lt;p>该组件可以认为是机器人的IDE设计器部分，基于&lt;a href="https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/">MWF&lt;/a>框架实现的，&lt;/p>
+&lt;ul>
+&lt;li>可以图形化拖拽的方式实现基本功能&lt;code>Activity&lt;/code>，如点击邮箱、打开浏览器网址、输入文字、录屏录音、各类监听探测器等等&lt;/li>
+&lt;li>多个&lt;code>Activity&lt;/code>可以组合成一个序列，来实现工作流&lt;code>workflow&lt;/code>，串行执行一系列动作&lt;/li>
+&lt;li>也可以通过配置作为agent（机器人）运行，负责执行设计好的工作流&lt;/li>
+&lt;li>默认远程连接到云端控制端（openflow），可上传同步本地的工作流和接受控制端的调度管理。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://xiaoping378.github.io/images/openrpa-01-2022-02-14-13-54-44.png" alt="">&lt;/p>
+&lt;p>&lt;strong>Openflow&lt;/strong>&lt;/p>
+&lt;p>OON技术栈的后台核心部分，可以关编排管理所有的活动，主要具备一下特性：&lt;/p>
+&lt;ul>
+&lt;li>管理，调用和配置机器人和工作流&lt;/li>
+&lt;li>管理用户和权限(组)&lt;/li>
+&lt;li>创建Web表单，供和真实用户交互，实现工作流的输入，审批和确认等操作。&lt;/li>
+&lt;li>管理后端MongoDB存储&lt;/li>
+&lt;li>存储工作流、表单等数据信息&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://xiaoping378.github.io/images/openrpa-01-2022-02-15-09-23-27.png" alt="openflow with Monitoring">&lt;/p>
+&lt;p>&lt;strong>Node-RED&lt;/strong>&lt;/p>
+&lt;h2 id="faq">FAQ&lt;/h2>
+&lt;p>三大组件汇总具有&lt;code>流&lt;/code>的概念，openrpa中叫&lt;code>workflow&lt;/code>，node-red中叫&lt;code>flow&lt;/code>, openflow组件名称自身就带了flow的字样，界面上也有&lt;/p></description></item><item><title>Docs: 快速安装</title><link>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85/</guid><description>
 &lt;p>不知道为什么openshift在国内热度这么低，那些要做自己容器云的公司，不知道有openshift项目的存在么？完全满足我的需求。&lt;/p>
 &lt;p>docker负责应用的隔离打包，k8s提供集群管理和容器的编排服务，而openshfit则负责整个应用的生命周期：&lt;/p>
 &lt;ul>
@@ -1848,7 +1875,15 @@ flannel有多种方式可以完成报文的转发。&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;/ul></description></item><item><title>Docs: 构建生产环境级的docker Swarm集群-3</title><link>https://xiaoping378.github.io/docs/4-cloud/containers/swarm/docker-sarm3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/containers/swarm/docker-sarm3/</guid><description>
+&lt;/ul></description></item><item><title>Docs: 从docker迁移到containerd</title><link>https://xiaoping378.github.io/docs/4-cloud/containers/containerd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/containers/containerd/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>记录个人从docker迁移到containerd的事项&lt;/p>
+&lt;/div>
+&lt;h2 id="介绍">介绍&lt;/h2>
+&lt;p>&lt;a href="https://github.com/containerd/containerd">https://github.com/containerd/containerd&lt;/a>&lt;/p>
+&lt;p>TODO.&lt;/p>
+&lt;h2 id="安装containerd">安装containerd&lt;/h2>
+&lt;p>下载必要组件：https://github.com/containerd/nerdctl/releases，&lt;/p></description></item><item><title>Docs: 构建生产环境级的docker Swarm集群-3</title><link>https://xiaoping378.github.io/docs/4-cloud/containers/swarm/docker-sarm3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/containers/swarm/docker-sarm3/</guid><description>
 &lt;p>如前文所述，默认已经搭建好环境，基于docker1.12版本。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#666">[&lt;/span>root@manager0 ~&lt;span style="color:#666">]&lt;/span>&lt;span style="color:#080;font-style:italic"># docker node ls&lt;/span>
 ID HOSTNAME STATUS AVAILABILITY MANAGER STATUS
@@ -4397,7 +4432,93 @@ kubectl label node node0 &lt;span style="color:#b8860b">ca&lt;/span>&lt;span sty
 }
 }&lt;span style="">,&lt;/span>
 &lt;span style="color:#b44">&amp;#34;terminal.integrated.defaultProfile.windows&amp;#34;&lt;/span>&lt;span style="">:&lt;/span> &lt;span style="color:#b44">&amp;#34;git-bash&amp;#34;&lt;/span>&lt;span style="">,&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: TiDB初体验</title><link>https://xiaoping378.github.io/docs/3-devops/tidb/github-dev/</link><pubDate>Thu, 03 Feb 2022 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/3-devops/tidb/github-dev/</guid><description>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: 解读Consul</title><link>https://xiaoping378.github.io/docs/4-cloud/%E8%A7%A3%E8%AF%BBconsu-01/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/%E8%A7%A3%E8%AF%BBconsu-01/</guid><description>
+&lt;h2 id="概述">概述&lt;/h2>
+&lt;p>介绍现在的Consul前，有必要先介绍下&lt;code>Service Mesh&lt;/code>的概念，&lt;/p>
+&lt;p>&lt;strong>Service Mesh&lt;/strong>&lt;/p>
+&lt;p>Service Mesh是一种面向服务间安全通信的基础设施层，俗称代理服务的东西向流量。 典型的实现包含控制面板和数据面。&lt;/p>
+&lt;ul>
+&lt;li>控制面：跟踪记录所有的服务和访问地址，提供服务发现、健康检查、策略管理等。&lt;/li>
+&lt;li>数据面：通过sidcar机制代理服务间的通信。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;em>传统 vs 微服务优势 :&lt;/em>&lt;/p>
+&lt;ul>
+&lt;li>单体 -&amp;gt; 微服务架构&lt;/li>
+&lt;li>函数调用 -&amp;gt; 服务发现（熔断、健康检查）&lt;/li>
+&lt;li>配置文件 -&amp;gt; 配置中心&lt;/li>
+&lt;li>防火墙 -&amp;gt; 访问策略&lt;/li>
+&lt;li>DMZ、生产区 -&amp;gt; 零信任&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Consul&lt;/strong>&lt;/p>
+&lt;p>Consul是Service mesh中的控制面的实现，主要有一下几大特色：&lt;/p>
+&lt;ul>
+&lt;li>服务发现：分为注册服务、发现服务、健康检查三大功能。&lt;/li>
+&lt;li>K-V存储：&lt;a href="https://github.com/etcd-io/bbolt">BoltDB&lt;/a>，支持 ACID 事务、无锁并发事务 MVCC，提供 B+Tree 索引。&lt;/li>
+&lt;li>多数据中心：多中心Gossip数据同步&lt;/li>
+&lt;li>Servie Mesh: 利用sidecar机制实现了端到端的认证和加密通信&lt;/li>
+&lt;/ul>
+&lt;h2 id="部署架构">部署架构&lt;/h2>
+&lt;p>下图为经典的多中心consul集群配置。&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.github.io/images/%E8%A7%A3%E8%AF%BBconsu-01-2022-02-16-15-57-53.png" alt="">&lt;/p>
+&lt;ul>
+&lt;li>每个datacenter，都有N个Server和M个Client节点。因为网络延迟对Consul分布式一致性的性能影响，会出现节点越多，共识越慢的现象，server节点一般推荐为3~5个，但client节点没有限制。&lt;/li>
+&lt;li>Client主要充当DNS server、负载均衡和健康检查的作用。&lt;/li>
+&lt;li>Server实现数据的分布式存储一致性，一般用来存储节点状态、注册的服务信息、应用配置、通信策略等。&lt;/li>
+&lt;li>Consul在选主和数据事务中都使用了Raft算法，但是其WAN(多个数据中心间)、LAN(节点间)通信、故障广播使用了Gossip算法（流行病协议）。&lt;/li>
+&lt;li>在单集群内，Consul server默认的Follower节点收到读写请求后，会转发给Leader处理&lt;/li>
+&lt;li>若查询的服务不在本集群，本地的Leader转发给远程集群的Leader处理。&lt;/li>
+&lt;/ul>
+&lt;h2 id="运维高可用管理">运维高可用管理&lt;/h2>
+&lt;p>目前分布式系统的高可靠实现，均受限于&lt;strong>CAP&lt;/strong>（一致性（Consistency）、可用性（Availability）和分区容错性（Partition tolerance））理论，根据不同业务场景的会采取三者之间的平衡取舍。本文的Consul是采用Raft算法来实现的，采用此算法的还有EverDB、RocketDB、Etcd、Kafka3等系统。&lt;/p>
+&lt;p>&lt;strong>Raft算法状态机&lt;/strong>：&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.github.io/images/%E8%A7%A3%E8%AF%BBconsu-01-2022-02-16-14-50-29.png" alt="">&lt;/p>
+&lt;p>主要有三种状态&lt;code>Follower&lt;/code>、&lt;code>Candidate&lt;/code>和&lt;code>Leader&lt;/code>，其中值得关注有以下几个方面：&lt;/p>
+&lt;ul>
+&lt;li>第一次启动后，默认进入为&lt;code>Follower&lt;/code>，经过随机时间（Election Time）后，进入&lt;code>Candidate&lt;/code>状态，发起投票流程。&lt;/li>
+&lt;li>收到大多数节点投票，可以成为&lt;code>Leader&lt;/code>&lt;/li>
+&lt;li>非拜占庭环境，每进行一次选举，选举周期Term就回自加1，默认大家都遵从term高的节点&lt;/li>
+&lt;li>选主成功后，Leader会发起心跳保活&lt;/li>
+&lt;li>Follower可以根据CAP相性调整，一般是收到请求后转发给Leader处理。&lt;/li>
+&lt;/ul>
+&lt;p>详情可查看&lt;a href="http://thesecretlivesofdata.com/raft/">动画&lt;/a>展示。&lt;/p>
+&lt;p>从Raft算法原理可以得出，Leader选举和日志同步都只需要大多数的节点正常互联即可，所以少量节点故障或网络异常不会影响系统的可用性。&lt;/p>
+&lt;p>即使Leader故障，在选举超时后，剩余节点会自发选举新Leader，无需人工干预，RTO时间极小。如果网络发生脑裂，待网络恢复后，也会保证数据最终一致性。&lt;/p>
+&lt;p>&lt;strong>Gossip通信&lt;/strong>&lt;/p>
+&lt;p>Gossip是Consul节点间状态同步的，下图为形象表示：&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.github.io/images/gossip%E6%B5%81%E8%A1%8C%E7%97%85.gif" alt="">&lt;/p>
+&lt;p>可以理解为&lt;code>一传十、十传百&lt;/code>，随机选择几个节点发出消息，收到信息的节点在向其他节点传播，这种方式在数据量大、环境复杂的情况下比&lt;code>一传百&lt;/code>更具备可扩展性和可靠性。Consul默认有两个Gossip池，LAN池和WAN池。&lt;/p>
+&lt;p>&lt;strong>LAN池&lt;/strong> :Consul中的每个数据中心有一个LAN池，它包含了这个数据中心的所有成员，包括clients和servers。LAN池用于以下几个目的:&lt;/p>
+&lt;ul>
+&lt;li>成员关系信息允许client自动发现server, 免去如何发现server端的配置。&lt;/li>
+&lt;li>分布式失败检测机制使得由整个集群来做失败检测这件事， 而不是集中到几台机器上。&lt;/li>
+&lt;li>gossip池使得类似Leader选举这样的事件，可以更可靠、迅速的传达。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>WAN池&lt;/strong>: WAN池是全局唯一的，因为所有的server都应该加入到WAN池中，无论它位于哪个数据中心。由WAN池提供的成员关系信息允许server做一些跨数据中心的请求。一体化的失败检测机制允许Consul优雅地去处理：整个数据中心失去连接， 或者仅仅是别的数据中心的某一台失去了连接。&lt;/p>
+&lt;h2 id="数据读写一致性">数据读写一致性&lt;/h2>
+&lt;p>&lt;img src="https://xiaoping378.github.io/images/%E8%A7%A3%E8%AF%BBconsu-01-2022-02-16-15-30-35.png" alt="">&lt;/p>
+&lt;p>数据写入必须走Leader，经过两阶段提交（propose、prewrite(append、replicate)、commited、apply）过程，详情可以参考&lt;a href="https://xiaoping378.github.io/docs/3-devops/tidb/tidb-%E5%88%9D%E4%BD%93%E9%AA%8C/#%E5%A4%9A%E5%89%AF%E6%9C%ACraft%E4%B8%80%E8%87%B4%E6%80%A7">这里&lt;/a>，读取数据Consul有&lt;a href="https://www.consul.io/docs/architecture/consensus">三个&lt;/a>级别可以配置。&lt;/p>
+&lt;ul>
+&lt;li>consistent： Leader处理数据前，要和所有节点确认自己还是Leader，每次请求都会额外的网络请求&lt;/li>
+&lt;li>default: 引入Leader Lease机制，一定时间窗口内，Learder利用状态缓存,直接处理请求。&lt;/li>
+&lt;li>stale: 所有server节点都可以直接回应请求，会产生Follower节点反应过久的数据。&lt;/li>
+&lt;/ul>
+&lt;h2 id="acl授权">ACL授权&lt;/h2>
+&lt;p>TODO.&lt;/p>
+&lt;p>&lt;strong>client说明：&lt;/strong>&lt;/p>
+&lt;p>configmap中的字段：
+client的配置datacenter、encrypt&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>-encrypt&lt;/code>：和sever段保持一致，可用&lt;code>consul keygen&lt;/code>生成，只在启动后加载一次，之后便不需要了，用于加密consul的gossip协议通信。&lt;/li>
+&lt;li>&lt;code>datacenter&lt;/code>: 和要接入的server端保持一致，代表consul集群名称。&lt;/li>
+&lt;li>&lt;code>acl.tokens.agent&lt;/code>: acl申请的token，代表了该client可以操作服务、配置的权限&lt;/li>
+&lt;/ul>
+&lt;p>deployment的字段：&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>CONSUL_RETRY_JOIN_ADDR&lt;/code>里的值，会填充到 &lt;code>join&lt;/code>和 &lt;code>--retry-join&lt;/code>参数中，代表要接入的consul集群，前者加入一次不成功会失败，后者会重复尝试直到成功。&lt;/li>
+&lt;li>&lt;code>CONSUL_NODE_NAME&lt;/code>，会填充到&lt;code>-node&lt;/code>参数，默认是hostname，要求全局唯一，此处代表要接入注册中心的系统的名字。&lt;/li>
+&lt;li>&lt;code>AGENT_TOKEN&lt;/code>：acl里申请的token&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>server说明&lt;/strong>：&lt;/p></description></item><item><title>Docs: TiDB初体验</title><link>https://xiaoping378.github.io/docs/3-devops/tidb/tidb-%E5%88%9D%E4%BD%93%E9%AA%8C/</link><pubDate>Thu, 03 Feb 2022 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/3-devops/tidb/tidb-%E5%88%9D%E4%BD%93%E9%AA%8C/</guid><description>
 &lt;h2 id="安装">安装&lt;/h2>
 &lt;blockquote>
 &lt;p>安装环境要求：&lt;/p>
@@ -4439,7 +4560,86 @@ alter user &lt;span style="color:#b44">&amp;#39;root&amp;#39;&lt;/span> identifi
 &lt;p>mysql客户端可通过&lt;code>yum install -y mysql&lt;/code>或者&lt;code>apt install mysql-client&lt;/code>安装。&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="集群">集群&lt;/h2>
-&lt;p>没有多节点的环境，折腾了一下，要单机玩这个模式的话，需要hack的东西太多，，，目前还不建议这么搞，等有时间看能不能提个PR.&lt;/p></description></item><item><title>Docs: DEIS 开源PAAS平台实践</title><link>https://xiaoping378.github.io/docs/4-cloud/k8s/deis-%E5%BC%80%E6%BA%90paas%E5%B9%B3%E5%8F%B0%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/k8s/deis-%E5%BC%80%E6%BA%90paas%E5%B9%B3%E5%8F%B0%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93/</guid><description>
+&lt;p>没有多节点的环境，折腾了一下，要单机玩这个模式的话，需要hack的东西太多，，，目前还不建议这么搞，等有时间看能不能提个PR.&lt;/p>
+&lt;h2 id="tidb-server">TIDB Server&lt;/h2>
+&lt;p>处理client的SQL请求.&lt;/p>
+&lt;h2 id="pd">PD&lt;/h2>
+&lt;p>提供全局时钟和Region调度和管理（扩缩容）。&lt;/p>
+&lt;h2 id="tikv">TIKV&lt;/h2>
+&lt;p>使用rocksDB实现数据持久化，基于此实现了分布式存储引擎，其中的核心点可以理解为以下三点：&lt;/p>
+&lt;ul>
+&lt;li>事务&lt;/li>
+&lt;li>MVCC&lt;/li>
+&lt;li>Raft&lt;/li>
+&lt;/ul>
+&lt;h3 id="分布式事务percolator">分布式事务Percolator&lt;/h3>
+&lt;p>基于时间戳的两阶段提交事务解决方案。&lt;/p>
+&lt;h3 id="mvcc多版本并发控制">MVCC多版本并发控制&lt;/h3>
+&lt;p>&lt;code>COW&lt;/code>的本质。默认revision大的为最新值，&lt;/p>
+&lt;h3 id="多副本raft一致性">多副本Raft一致性&lt;/h3>
+&lt;p>&lt;strong>Leader选举：&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>Term&lt;/code>状态变化，follower -&amp;gt; (random timeout) -&amp;gt; candidate -&amp;gt; leader. 此过程因为网络延迟问题，很可能是进行多轮选举。&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code class="language-plantuml" data-lang="plantuml">@startuml
+!theme aws-orange
+TiKV1 -&amp;gt; TiKV1: 随机选举时间到，切换为candidate角色，进入term2，发出选举信息
+TiKV1 -&amp;gt; TiKV2: 发起选举，term=2
+TiKV1 -&amp;gt; TiKV3: 发起选举，term=2
+TiKV2 -&amp;gt; TiKV2: 对比term（非拜占庭环境，大家默认信任term大的）
+TiKV3 -&amp;gt; TiKV3: 对比term
+TiKV2 -&amp;gt; TiKV1: 投一票
+TiKV3 -&amp;gt; TiKV1: 投一票
+TiKV1 -&amp;gt; TiKV1: 超过一半投票（2x+1），成为Leader
+TiKV1 -&amp;gt; TiKV2: 心跳保活
+TiKV1 -&amp;gt; TiKV3: 心跳保活
+TiKV1 -&amp;gt; TiKV1: 异常了
+TiKV2 -&amp;gt; TiKV2: 心跳超时，切换candidate角色，进入term3
+TiKV2 -&amp;gt; TiKV3: 发起选举
+TiKV3 -&amp;gt; TiKV2: 对比term，并投一票
+TiKV2 -&amp;gt; TiKV2: 加上自己的一票，超过一半投票，成为Leader
+@enduml
+&lt;/code>&lt;/pre>&lt;blockquote>
+&lt;p>leader负责读写请求，follower负责数据多副本复制。日常心跳保活，出问题后，重新选举。&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>数据写入&lt;/strong>：&lt;/p>
+&lt;ul>
+&lt;li>propose -&amp;gt; append (local) -&amp;gt; Replicate (remote append) -&amp;gt; commited -&amp;gt; apply&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code class="language-plantuml" data-lang="plantuml">@startuml
+!theme aws-orange
+用户 -&amp;gt; TiDB_Server: 发起事务数据写入
+TiDB_Server -&amp;gt; TiDB_Server: 解析语句，SQL -&amp;gt; KV
+TiDB_Server -&amp;gt; PD: 获取KV元信息
+PD -&amp;gt; TiDB_Server: 告知该key的range leader信息（TiKV1）
+TiDB_Server -&amp;gt; TiKV1: 发起propose
+TiKV1 -&amp;gt; TiKV1: 本地append为raft_log
+TiKV1 -&amp;gt; TiKV2: 发起Replicate复制
+TiKV1 -&amp;gt; TiKV3: 发起Replicate复制
+TiKV2 -&amp;gt; TiKV2: 本地append为raft_log
+TiKV3 -&amp;gt; TiKV3: 本地append为raft_log
+TiKV2 -&amp;gt; TiKV1: 反馈已记录成功
+TiKV3 -&amp;gt; TiKV1: 反馈已记录成功
+TiKV1 -&amp;gt; TiKV1: 收到大多数节点反馈，进入commited状态
+TiKV1 -&amp;gt; TiKV2: 发起commited确认
+TiKV1 -&amp;gt; TiKV3: 发起commited确认
+TiKV2 -&amp;gt; TiKV1: 进入commited
+TiKV3 -&amp;gt; TiKV1: 进入commited
+TiKV1 -&amp;gt; TiKV1: 收到大多数节点反馈，进入apply状态，此时业务数据才算真正落盘
+TiKV1 -&amp;gt; TiKV2: 发起apply确认
+TiKV1 -&amp;gt; TiKV3: 发起apply确认
+TiKV2 -&amp;gt; TiKV1: 进入apply
+TiKV3 -&amp;gt; TiKV1: 进入apply
+TiKV1 -&amp;gt; TiDB_Server: 收到一个apply成功反馈，即可反馈用户写入成功
+TiDB_Server -&amp;gt; 用户: 反馈写入成功
+@enduml
+&lt;/code>&lt;/pre>&lt;blockquote>
+&lt;p>SQL事务的commit对应到这里的apply，这里的commited是指raft中记录上用户的数据更新了（多数据节点记录上用户的写入请求了）。&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>数据读取：&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>tidb server解析SQL语句 -&amp;gt; 从pd获取对应key的tikv节点信息 -&amp;gt;&lt;/li>
+&lt;/ul></description></item><item><title>Docs: DEIS 开源PAAS平台实践</title><link>https://xiaoping378.github.io/docs/4-cloud/k8s/deis-%E5%BC%80%E6%BA%90paas%E5%B9%B3%E5%8F%B0%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/k8s/deis-%E5%BC%80%E6%BA%90paas%E5%B9%B3%E5%8F%B0%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93/</guid><description>
 &lt;p>DEIS（目前已被微软收购）的workflow是开源的Paas平台，基于kubernetes做了一层面向开发者的CLI和接口，做到了让开发者对容器无感知的情况下快速的开发和部署线上应用。&lt;/p>
 &lt;blockquote>
 &lt;p>workflow是 on top of k8s的，所有组件默认全是跑在pod里的，不像openshift那样对k8s的侵入性很大。&lt;/p>
@@ -4584,141 +4784,4 @@ gitlab-server Ready master 6m43s v1.19.16+k3s1
 &lt;p>默认kubectl通过localhost访问本地集群，所以上文敲kubectl是没问题的，如果要被外部访问或者纳管的话，可以把kubeconfig文件拷走，默认路径是 &lt;code>/etc/rancher/k3s/k3s.yaml&lt;/code>
 。记得修改文件内的server字段，改成外部可访问到的IP。&lt;/p>
 &lt;h2 id="架构说明">架构说明&lt;/h2>
-&lt;p>TODO.&lt;/p></description></item><item><title>Docs: 性能优化指南</title><link>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97/</guid><description>
-&lt;p>主要参考的官方&lt;a href="https://access.redhat.com/documentation/en-us/openshift_container_platform/3.5/html-single/scaling_and_performance_guide/">链接&lt;/a>， 本文是基于openshift 3.5说的。&lt;/p>
-&lt;h2 id="概览">概览&lt;/h2>
-&lt;p>本指南提供了如何提高OpenShift容器平台的集群性能和生产环境下的最佳实践。 主要包括建立，扩展和调优OpenShift集群的推荐做法。&lt;/p>
-&lt;p>个人看法，其实性能这个东西是个权衡的过程，根据自身硬件条件和实际需求，选择适合自己的调优手段。&lt;/p>
-&lt;h2 id="安装实践">安装实践&lt;/h2>
-&lt;h3 id="网络依赖">网络依赖&lt;/h3>
-&lt;p>首先安装自然要选择官方的&lt;a href="https://github.com/openshift/openshift-ansible">openshift-ansible项目&lt;/a>， 默认是rpm安装方式，需要依赖网络，比如要去联网下载&lt;code>atomic-openshift-*, iptables, 和 docker&lt;/code>包依赖，&lt;/p>
-&lt;p>如果有不能联网的节点，可以参考我之前写的&lt;a href="https://github.com/xiaoping378/openshift-deploy">离线安装openshift&lt;/a>。&lt;/p>
-&lt;h3 id="ansible优化">ansible优化&lt;/h3>
-&lt;p>官方推荐使用ansible安装，这里说下针对ansible的优化，以提高安装效率，主要参考&lt;a href="https://www.ansible.com/blog/ansible-performance-tuning">ansible官方blog&lt;/a>,&lt;/p>
-&lt;p>如果参考上文离线安装的话，不建议跨外网连接rpm仓或者镜像仓，下面是推荐的ansible配置&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#080;font-style:italic"># cat /etc/ansible/ansible.cfg&lt;/span>
-&lt;span style="color:#080;font-style:italic"># config file for ansible -- http://ansible.com/&lt;/span>
-&lt;span style="color:#080;font-style:italic"># ==============================================&lt;/span>
-&lt;span style="color:#666">[&lt;/span>defaults&lt;span style="color:#666">]&lt;/span>
-&lt;span style="color:#b8860b">forks&lt;/span> &lt;span style="color:#666">=&lt;/span> &lt;span style="color:#666">20&lt;/span> &lt;span style="color:#080;font-style:italic"># 20个并发是理想值，太高的话中间会有概率出错&lt;/span>
-&lt;span style="color:#b8860b">host_key_checking&lt;/span> &lt;span style="color:#666">=&lt;/span> False
-&lt;span style="color:#b8860b">remote_user&lt;/span> &lt;span style="color:#666">=&lt;/span> root
-&lt;span style="color:#b8860b">roles_path&lt;/span> &lt;span style="color:#666">=&lt;/span> roles/
-&lt;span style="color:#b8860b">gathering&lt;/span> &lt;span style="color:#666">=&lt;/span> smart
-&lt;span style="color:#b8860b">fact_caching&lt;/span> &lt;span style="color:#666">=&lt;/span> jsonfile
-&lt;span style="color:#b8860b">fact_caching_connection&lt;/span> &lt;span style="color:#666">=&lt;/span> &lt;span style="color:#b8860b">$HOME&lt;/span>/ansible/facts
-&lt;span style="color:#b8860b">fact_caching_timeout&lt;/span> &lt;span style="color:#666">=&lt;/span> &lt;span style="color:#666">600&lt;/span>
-&lt;span style="color:#b8860b">log_path&lt;/span> &lt;span style="color:#666">=&lt;/span> &lt;span style="color:#b8860b">$HOME&lt;/span>/ansible.log
-&lt;span style="color:#b8860b">nocows&lt;/span> &lt;span style="color:#666">=&lt;/span> &lt;span style="color:#666">1&lt;/span>
-&lt;span style="color:#b8860b">callback_whitelist&lt;/span> &lt;span style="color:#666">=&lt;/span> profile_tasks
-&lt;span style="color:#666">[&lt;/span>privilege_escalation&lt;span style="color:#666">]&lt;/span>
-&lt;span style="color:#b8860b">become&lt;/span> &lt;span style="color:#666">=&lt;/span> False
-&lt;span style="color:#666">[&lt;/span>ssh_connection&lt;span style="color:#666">]&lt;/span>
-&lt;span style="color:#b8860b">ssh_args&lt;/span> &lt;span style="color:#666">=&lt;/span> -o &lt;span style="color:#b8860b">ControlMaster&lt;/span>&lt;span style="color:#666">=&lt;/span>auto -o &lt;span style="color:#b8860b">ControlPersist&lt;/span>&lt;span style="color:#666">=&lt;/span>600s
-&lt;span style="color:#b8860b">control_path&lt;/span> &lt;span style="color:#666">=&lt;/span> %&lt;span style="color:#666">(&lt;/span>directory&lt;span style="color:#666">)&lt;/span>s/%%h-%%r
-&lt;span style="color:#b8860b">pipelining&lt;/span> &lt;span style="color:#666">=&lt;/span> True &lt;span style="color:#080;font-style:italic"># 多路复用，减少了控制机和目标间的连接次数，加速了性能。&lt;/span>
-&lt;span style="color:#b8860b">timeout&lt;/span> &lt;span style="color:#666">=&lt;/span> &lt;span style="color:#666">10&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="网络配置">网络配置&lt;/h3>
-&lt;p>这里必须要提下，一定要安装前做好网络规划，不然后面改起来很麻烦，&lt;/p>
-&lt;p>默认是每个node上最多可跑110个pods，这个要看自身硬件条件，比如说我的环境全是高配物理机，我就改成了，每个节点可以跑1024个pods，这个主要改下面的地方。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#b8860b">openshift_node_kubelet_args&lt;/span>&lt;span style="color:#666">={&lt;/span>&lt;span style="color:#b44">&amp;#39;pods-per-core&amp;#39;&lt;/span>: &lt;span style="color:#666">[&lt;/span>&lt;span style="color:#b44">&amp;#39;0&amp;#39;&lt;/span>&lt;span style="color:#666">]&lt;/span>, &lt;span style="color:#b44">&amp;#39;max-pods&amp;#39;&lt;/span>: &lt;span style="color:#666">[&lt;/span>&lt;span style="color:#b44">&amp;#39;1024&amp;#39;&lt;/span>&lt;span style="color:#666">]&lt;/span>, &lt;span style="color:#b44">&amp;#39;image-gc-high-threshold&amp;#39;&lt;/span>: &lt;span style="color:#666">[&lt;/span>&lt;span style="color:#b44">&amp;#39;90&amp;#39;&lt;/span>&lt;span style="color:#666">]&lt;/span>, &lt;span style="color:#b44">&amp;#39;image-gc-low-threshold&amp;#39;&lt;/span>: &lt;span style="color:#666">[&lt;/span>&lt;span style="color:#b44">&amp;#39;80&amp;#39;&lt;/span>&lt;span style="color:#666">]}&lt;/span>
-&lt;span style="color:#b8860b">osm_host_subnet_length&lt;/span>&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#666">10&lt;/span>
-&lt;span style="color:#b8860b">osm_cluster_network_cidr&lt;/span>&lt;span style="color:#666">=&lt;/span>12.1.0.0/12
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>关于网络的更多优化项，后面有单独介绍。&lt;/p>
-&lt;h2 id="主机节点优化">主机节点优化&lt;/h2>
-&lt;p>openhshift集群里，除了pod间的网络通信外，最大的开销就是master和etcd间的通信了，openshift的master集成了k8s里的api-server, master主要通过etcd来交互node状态，网络配置，secrets和卷挂载等等信息&lt;/p>
-&lt;h3 id="master侧">master侧&lt;/h3>
-&lt;p>主要优化点包括：&lt;/p>
-&lt;ul>
-&lt;li>master和etcd尽量部署在一起.&lt;/li>
-&lt;li>高可用集群里，master尽量部署在低延迟的网络里.&lt;/li>
-&lt;li>确保**/etc/origin/master/master-config.yaml**里的etcds，第一个是本地的etcd实例.&lt;/li>
-&lt;/ul>
-&lt;h3 id="node侧">node侧&lt;/h3>
-&lt;p>node节点的配置主要在**/etc/origin/node/node-config.yaml**里， 优化点视具体情况定，主要可以优化的点有：&lt;/p>
-&lt;ul>
-&lt;li>iptables synchronization period,&lt;/li>
-&lt;li>MTU值&lt;/li>
-&lt;li>代理模式&lt;/li>
-&lt;/ul>
-&lt;p>配合自文件里还可以配置kubelet的启动参数，主要关注两点&lt;code>pods-per-core 和 max-pods&lt;/code>，这两个决定了node节点的pod数，两者不一致时，&lt;code>取值小的&lt;/code>。如果数值过大（严重超卖）会导致：&lt;/p>
-&lt;ul>
-&lt;li>增加cpu消耗，主要是docker和openshift自身管理消耗的&lt;/li>
-&lt;li>降低pod调度效率&lt;/li>
-&lt;li>加大了OOM的风险&lt;/li>
-&lt;li>分配pod ip出异常（可能地址池不够了，默认254个ip）&lt;/li>
-&lt;li>影响应用的性能&lt;/li>
-&lt;/ul>
-&lt;blockquote>
-&lt;p>有一点要注意，k8s体系的平台，跑一个pod，实际会启动两个容器，一个pause先于业务容器启动，主要负责网络事项，所以跑10个pods，实际上会运行20个容器&lt;/p>
-&lt;/blockquote>
-&lt;h3 id="etcd节点">etcd节点&lt;/h3>
-&lt;p>etcd是一个分布式的key-value存储，所以有条件的话，存储读写性能的提升，上ssd最好了。&lt;/p>
-&lt;p>其次是网络的优化，比如和masters部署在一起，或者提供专网连接。&lt;/p>
-&lt;blockquote>
-&lt;p>etcd实际使用中，最好的提升手段，是关注内存，这个官网有个换算公式的，多少pods推荐多大内存的使用&lt;/p>
-&lt;/blockquote>
-&lt;h3 id="内核优化">内核优化&lt;/h3>
-&lt;p>上面的所有节点，内核层面都需要做些优化，这里推荐使用tuned工具来做，这点属于常规运维优化了，具体可以参考&lt;a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html-single/Performance_Tuning_Guide/index.html#chap-Red_Hat_Enterprise_Linux-Performance_Tuning_Guide-Tuned">这里&lt;/a>来做， 不想明白原理的，可以如下 快速操作，redhat的人已经自动化了。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">yum install tuned
-systemctl start tune
-systemctl &lt;span style="color:#a2f">enable&lt;/span> tuned
-tuned-adm profile throughput-performance&lt;span style="color:#666">)&lt;/span>来做
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="资源优化">资源优化&lt;/h2>
-&lt;h3 id="超卖现象">超卖现象&lt;/h3>
-&lt;p>主要是资源管理这块儿的注意点， 我以前有&lt;a href="../openshift%E5%AE%9E%E8%B7%B5-%E6%9D%83%E9%99%90%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86">blog&lt;/a>专门介绍过，主要值得一提的是，这里有个隐形的QoS级别&lt;/p>
-&lt;p>&lt;img src="https://xiaoping378.github.io/openshift-qos.png" alt="">&lt;/p>
-&lt;p>Guaranteed类型的pod是优先级最高的，是有保证的，只会在程序本身“异常”超出limits（一般的应用在pod层设置了limits，就不会超过该限制的，除非是java系的，其需要用环境变量来控制），才会被杀掉，其他类型的配额在集群资源紧张时会被kill掉的。&lt;/p>
-&lt;p>这块儿更多的细节也可以参考&lt;a href="https://docs.openshift.org/latest/admin_guide/overcommit.html">官文&lt;/a>&lt;/p>
-&lt;h3 id="镜像">镜像&lt;/h3>
-&lt;p>这里需要注意的是，可以提前把需要的基础镜像先pull到node节点上，比如&lt;code>origin-pod&lt;/code>镜像等，还有其他自定义的&lt;code>Gold 镜像&lt;/code>，这样可以减少应用部署时间。&lt;/p>
-&lt;p>如果是采用镜像方式部署集群的话，也可以采取提前pull镜像的方式，当然有私有镜像仓的，可以忽略。&lt;/p>
-&lt;p>主要是现在默认的镜像拉取策略就是&lt;code>IfNotPresent&lt;/code>，才能完成加速部署的效果&lt;/p>
-&lt;h3 id="线上debug容器">线上debug容器&lt;/h3>
-&lt;p>线上容器环境可能很&lt;code>干净&lt;/code>， 如何调试一个线上正在运行的容器，估计困扰过很多开发人员，这个其实利用docker原生特性，可以很easy的做到&lt;/p>
-&lt;p>比如你自己build一个工具包镜像tools，里面装有&lt;code>tcpdump，perf，strace&lt;/code>等等debug工具，如下可以很方便的动态的嵌入到运行的线上容器中。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">docker run -t --pid&lt;span style="color:#666">=&lt;/span>container:production &lt;span style="color:#b62;font-weight:bold">\
-&lt;/span>&lt;span style="color:#b62;font-weight:bold">&lt;/span> --net&lt;span style="color:#666">=&lt;/span>container:production &lt;span style="color:#b62;font-weight:bold">\
-&lt;/span>&lt;span style="color:#b62;font-weight:bold">&lt;/span> --cap-add sys_admin &lt;span style="color:#b62;font-weight:bold">\
-&lt;/span>&lt;span style="color:#b62;font-weight:bold">&lt;/span> --cap-add sys_ptrace &lt;span style="color:#b62;font-weight:bold">\
-&lt;/span>&lt;span style="color:#b62;font-weight:bold">&lt;/span> tools
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>当然万能的日志调式，也是OK的。&lt;/p>
-&lt;h2 id="存储优化">存储优化&lt;/h2>
-&lt;p>这里的存储说的是docker的graph驱动（ Device Mapper, Overlay, 和 Btrfs），首先overlay在启停容器速度方面要优于devicemapper，其还能带来更优良的页面缓存共享，但存在POSIX兼容性问题，比如不支持SELinux。&lt;/p>
-&lt;p>官方是推荐使用thin devicemapper的，但需要额外的独立块盘才能搞定。如果系统是7.2的话，使用overlay亦可，关闭selinux的代价就是牺牲部分容器安全。&lt;/p>
-&lt;h2 id="路由和网络优化">路由和网络优化&lt;/h2>
-&lt;p>openshift里的Router是基于haproxy做的，等价于k8s里的nginx ingress服务，提供集群内的service供外访问能力。&lt;/p>
-&lt;p>一般一个4 vCPU/16GB RAM的虚机，可以提供7000-32000 HTTP keep-alive连接请求，这取决于连接是否加密和页面大小，如果是物理机的话，性能会翻倍。&lt;/p>
-&lt;p>可通过Router sharding的技术来扩展性能。下图各种配置是统计性能（默认100个routes）&lt;/p>
-&lt;p>&lt;img src="https://xiaoping378.github.io/haproxy-perf.png" alt="">&lt;/p>
-&lt;h3 id="网络优化">网络优化&lt;/h3>
-&lt;p>默认openshift提供了一个基于ovs的sdn方案，其中涉及到了vxlan, OpenFlow和iptables，当然这些相关的优化项社区已经有很成熟的优化点和方法了，比如增大MTU，UDP-offload，多路复用等等，&lt;/p>
-&lt;p>这里重点说下vxlan， 基于二层网络，vxlan从4096提升到了16百万多个，vxlan就是把原报文封装进UDP报文，以提供所有pods间通信的能力，自然这样会增加cpu解封包的开销，具体网络吞吐取决于cpu的性能，另外还会额外增加延时响应。&lt;/p>
-&lt;p>直白的说，现在云主机或物理机的cpu都可以打满千兆网卡，如果是万兆网卡，那vxlan网络的吞吐带宽会卡在CPU上，这是所有overlay网络的现状。&lt;/p>
-&lt;p>如果你的主机用用万兆或者40Gbps, 那就要考虑网络的性能优化了：&lt;/p>
-&lt;ul>
-&lt;li>通过直接路由，负责pod间通信，不过需要手动维护node节点添加删除时的路由变化。&lt;/li>
-&lt;li>条件允许的话，可以考虑BGP的calico网络方案&lt;/li>
-&lt;li>另外就是购置支持udp-offload的网卡&lt;/li>
-&lt;/ul>
-&lt;p>值得注意点是，及时使用了udp-offload的网卡，和非overlay网络比，延迟是不会减少的，只是减少了cpu开销，从而提高了带宽吞吐。&lt;/p>
-&lt;h3 id="子网大小">子网大小&lt;/h3>
-&lt;p>现在openshift-ansible项目默认的安装出来的配置是：&lt;/p>
-&lt;ul>
-&lt;li>集群里内最多1024个节点&lt;/li>
-&lt;li>每个节点最多可以跑510个pods&lt;/li>
-&lt;li>支持65,536个service&lt;/li>
-&lt;/ul>
-&lt;p>比如我要搞一个8192个节点的集群，每个节点允许510个pods运行：&lt;/p>
-&lt;pre tabindex="0">&lt;code>[OSE3:vars]
-osm_cluster_network_cidr=10.128.0.0/10
-&lt;/code>&lt;/pre>&lt;h2 id="监控">监控&lt;/h2>
-&lt;p>都知道k8s里的弹性伸缩，依赖于Heapster, 而openshift内置的监控系统又是用的自家的Haw系列，导致监控镜像相当的大&lt;/p>
-&lt;p>在opneshift里有两点要提的是&lt;code>METRICS_RESOLUTION&lt;/code>和&lt;code>METRICS_DURATION&lt;/code>变量，前者是默认是30s,指的是监控时间间隔，后者默认是7天，指的是监控数据保留时长（过期就会删掉）。&lt;/p>
-&lt;p>&lt;img src="https://xiaoping378.github.io/openshift-monitor%E7%A9%BA%E9%97%B4.png" alt="">&lt;/p>
-&lt;p>默认的监控体系(Cassandra/Hawkular/Heapster)可以监控25000个pods。&lt;/p>
-&lt;h2 id="总结">总结&lt;/h2>
-&lt;p>其实openshift基于k8s提供了一站式解决方案, 如果公司不具备k8s二次开发能力，openshift足矣。&lt;/p></description></item><item><title>Docs: 网络整理</title><link>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E7%BD%91%E7%BB%9C%E6%95%B4%E7%90%86/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E7%BD%91%E7%BB%9C%E6%95%B4%E7%90%86/</guid><description>
-&lt;p>介绍利用openshift-ansible项目安装后的生产环境里的网络情况。&lt;/p>
-&lt;p>待整理。。。&lt;/p></description></item><item><title>Docs: 监控梳理</title><link>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E7%9B%91%E6%8E%A7%E6%A2%B3%E7%90%86/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E7%9B%91%E6%8E%A7%E6%A2%B3%E7%90%86/</guid><description>
-&lt;p>未完搞 ...&lt;/p></description></item></channel></rss>
+&lt;p>TODO.&lt;/p></description></item></channel></rss>

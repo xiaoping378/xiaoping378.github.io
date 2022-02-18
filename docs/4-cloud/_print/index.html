@@ -50,7 +50,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.597222a5c86558aafee2ddd4e231fd31.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.2baeca93aa085d469cbcd45a536311f4.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -80,6 +80,7 @@
 <li>1.3.2: <a href=#pg-d909113e9543ac3fe911d0a23fec6fd2>构建生产环境级的docker Swarm集群-2</a></li>
 <li>1.3.3: <a href=#pg-2ff8ed6e755645d7ae818d9b0fcbb120>构建生产环境级的docker Swarm集群-3</a></li>
 </ul>
+<li>1.4: <a href=#pg-37045fcceebb8772a7634ea2fe9730e1>从docker迁移到containerd</a></li>
 </ul>
 <li>2: <a href=#pg-25b4bdd20ef272997f77141ba8377466>Kubernetes</a></li>
 <ul>
@@ -111,6 +112,7 @@
 <li>4: <a href=#pg-9b97802e4b9534134796bbfce8ffeaa3>混合云网络SDN</a></li>
 <li>5: <a href=#pg-e1249fd54f922b9832ed9ab695a6bbe4>Vagrant实践整理</a></li>
 <li>6: <a href=#pg-1d949ee52eaaed1383ba6bd02be6695c>KVM和Libvirt的实践整理</a></li>
+<li>7: <a href=#pg-6e7f79285674a5f225b4c9c21b735285>解读Consul</a></li>
 </ul>
 <div class=content>
 <div class="pageinfo pageinfo-primary">
@@ -513,6 +515,18 @@ redis:6379&gt; get user
 redis:6379&gt;
 
 </code></pre>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-37045fcceebb8772a7634ea2fe9730e1>1.4 - 从docker迁移到containerd</h1>
+<div class=lead>记录从docker迁移到containerd的事项</div>
+<div class="pageinfo pageinfo-primary">
+<p>记录个人从docker迁移到containerd的事项</p>
+</div>
+<h2 id=介绍>介绍</h2>
+<p><a href=https://github.com/containerd/containerd>https://github.com/containerd/containerd</a></p>
+<p>TODO.</p>
+<h2 id=安装containerd>安装containerd</h2>
+<p>下载必要组件：https://github.com/containerd/nerdctl/releases，</p>
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-25b4bdd20ef272997f77141ba8377466>2 - Kubernetes</h1>
@@ -2806,6 +2820,96 @@ Bringing machine <span style=color:#b44>&#39;default&#39;</span> up with <span s
 <p>安装完输入<code>kvm-ok</code>查看是否安装OK，另外还<code>需要重启</code>以使kvm和libvirt daemon启动。</p>
 <h2 id=配置网络>配置网络</h2>
 <p>未完。。。</p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-6e7f79285674a5f225b4c9c21b735285>7 - 解读Consul</h1>
+<div class=lead>解读Consul和背后的设计原理。</div>
+<h2 id=概述>概述</h2>
+<p>介绍现在的Consul前，有必要先介绍下<code>Service Mesh</code>的概念，</p>
+<p><strong>Service Mesh</strong></p>
+<p>Service Mesh是一种面向服务间安全通信的基础设施层，俗称代理服务的东西向流量。 典型的实现包含控制面板和数据面。</p>
+<ul>
+<li>控制面：跟踪记录所有的服务和访问地址，提供服务发现、健康检查、策略管理等。</li>
+<li>数据面：通过sidcar机制代理服务间的通信。</li>
+</ul>
+<p><em>传统 vs 微服务优势 :</em></p>
+<ul>
+<li>单体 -> 微服务架构</li>
+<li>函数调用 -> 服务发现（熔断、健康检查）</li>
+<li>配置文件 -> 配置中心</li>
+<li>防火墙 -> 访问策略</li>
+<li>DMZ、生产区 -> 零信任</li>
+</ul>
+<p><strong>Consul</strong></p>
+<p>Consul是Service mesh中的控制面的实现，主要有一下几大特色：</p>
+<ul>
+<li>服务发现：分为注册服务、发现服务、健康检查三大功能。</li>
+<li>K-V存储：<a href=https://github.com/etcd-io/bbolt>BoltDB</a>，支持 ACID 事务、无锁并发事务 MVCC，提供 B+Tree 索引。</li>
+<li>多数据中心：多中心Gossip数据同步</li>
+<li>Servie Mesh: 利用sidecar机制实现了端到端的认证和加密通信</li>
+</ul>
+<h2 id=部署架构>部署架构</h2>
+<p>下图为经典的多中心consul集群配置。</p>
+<p><img src=/images/%E8%A7%A3%E8%AF%BBconsu-01-2022-02-16-15-57-53.png alt></p>
+<ul>
+<li>每个datacenter，都有N个Server和M个Client节点。因为网络延迟对Consul分布式一致性的性能影响，会出现节点越多，共识越慢的现象，server节点一般推荐为3~5个，但client节点没有限制。</li>
+<li>Client主要充当DNS server、负载均衡和健康检查的作用。</li>
+<li>Server实现数据的分布式存储一致性，一般用来存储节点状态、注册的服务信息、应用配置、通信策略等。</li>
+<li>Consul在选主和数据事务中都使用了Raft算法，但是其WAN(多个数据中心间)、LAN(节点间)通信、故障广播使用了Gossip算法（流行病协议）。</li>
+<li>在单集群内，Consul server默认的Follower节点收到读写请求后，会转发给Leader处理</li>
+<li>若查询的服务不在本集群，本地的Leader转发给远程集群的Leader处理。</li>
+</ul>
+<h2 id=运维高可用管理>运维高可用管理</h2>
+<p>目前分布式系统的高可靠实现，均受限于<strong>CAP</strong>（一致性（Consistency）、可用性（Availability）和分区容错性（Partition tolerance））理论，根据不同业务场景的会采取三者之间的平衡取舍。本文的Consul是采用Raft算法来实现的，采用此算法的还有EverDB、RocketDB、Etcd、Kafka3等系统。</p>
+<p><strong>Raft算法状态机</strong>：</p>
+<p><img src=/images/%E8%A7%A3%E8%AF%BBconsu-01-2022-02-16-14-50-29.png alt></p>
+<p>主要有三种状态<code>Follower</code>、<code>Candidate</code>和<code>Leader</code>，其中值得关注有以下几个方面：</p>
+<ul>
+<li>第一次启动后，默认进入为<code>Follower</code>，经过随机时间（Election Time）后，进入<code>Candidate</code>状态，发起投票流程。</li>
+<li>收到大多数节点投票，可以成为<code>Leader</code></li>
+<li>非拜占庭环境，每进行一次选举，选举周期Term就回自加1，默认大家都遵从term高的节点</li>
+<li>选主成功后，Leader会发起心跳保活</li>
+<li>Follower可以根据CAP相性调整，一般是收到请求后转发给Leader处理。</li>
+</ul>
+<p>详情可查看<a href=http://thesecretlivesofdata.com/raft/>动画</a>展示。</p>
+<p>从Raft算法原理可以得出，Leader选举和日志同步都只需要大多数的节点正常互联即可，所以少量节点故障或网络异常不会影响系统的可用性。</p>
+<p>即使Leader故障，在选举超时后，剩余节点会自发选举新Leader，无需人工干预，RTO时间极小。如果网络发生脑裂，待网络恢复后，也会保证数据最终一致性。</p>
+<p><strong>Gossip通信</strong></p>
+<p>Gossip是Consul节点间状态同步的，下图为形象表示：</p>
+<p><img src=/images/gossip%E6%B5%81%E8%A1%8C%E7%97%85.gif alt></p>
+<p>可以理解为<code>一传十、十传百</code>，随机选择几个节点发出消息，收到信息的节点在向其他节点传播，这种方式在数据量大、环境复杂的情况下比<code>一传百</code>更具备可扩展性和可靠性。Consul默认有两个Gossip池，LAN池和WAN池。</p>
+<p><strong>LAN池</strong> :Consul中的每个数据中心有一个LAN池，它包含了这个数据中心的所有成员，包括clients和servers。LAN池用于以下几个目的:</p>
+<ul>
+<li>成员关系信息允许client自动发现server, 免去如何发现server端的配置。</li>
+<li>分布式失败检测机制使得由整个集群来做失败检测这件事， 而不是集中到几台机器上。</li>
+<li>gossip池使得类似Leader选举这样的事件，可以更可靠、迅速的传达。</li>
+</ul>
+<p><strong>WAN池</strong>: WAN池是全局唯一的，因为所有的server都应该加入到WAN池中，无论它位于哪个数据中心。由WAN池提供的成员关系信息允许server做一些跨数据中心的请求。一体化的失败检测机制允许Consul优雅地去处理：整个数据中心失去连接， 或者仅仅是别的数据中心的某一台失去了连接。</p>
+<h2 id=数据读写一致性>数据读写一致性</h2>
+<p><img src=/images/%E8%A7%A3%E8%AF%BBconsu-01-2022-02-16-15-30-35.png alt></p>
+<p>数据写入必须走Leader，经过两阶段提交（propose、prewrite(append、replicate)、commited、apply）过程，详情可以参考<a href=/docs/3-devops/tidb/tidb-%E5%88%9D%E4%BD%93%E9%AA%8C/#%E5%A4%9A%E5%89%AF%E6%9C%ACraft%E4%B8%80%E8%87%B4%E6%80%A7>这里</a>，读取数据Consul有<a href=https://www.consul.io/docs/architecture/consensus>三个</a>级别可以配置。</p>
+<ul>
+<li>consistent： Leader处理数据前，要和所有节点确认自己还是Leader，每次请求都会额外的网络请求</li>
+<li>default: 引入Leader Lease机制，一定时间窗口内，Learder利用状态缓存,直接处理请求。</li>
+<li>stale: 所有server节点都可以直接回应请求，会产生Follower节点反应过久的数据。</li>
+</ul>
+<h2 id=acl授权>ACL授权</h2>
+<p>TODO.</p>
+<p><strong>client说明：</strong></p>
+<p>configmap中的字段：
+client的配置datacenter、encrypt</p>
+<ul>
+<li><code>-encrypt</code>：和sever段保持一致，可用<code>consul keygen</code>生成，只在启动后加载一次，之后便不需要了，用于加密consul的gossip协议通信。</li>
+<li><code>datacenter</code>: 和要接入的server端保持一致，代表consul集群名称。</li>
+<li><code>acl.tokens.agent</code>: acl申请的token，代表了该client可以操作服务、配置的权限</li>
+</ul>
+<p>deployment的字段：</p>
+<ul>
+<li><code>CONSUL_RETRY_JOIN_ADDR</code>里的值，会填充到 <code>join</code>和 <code>--retry-join</code>参数中，代表要接入的consul集群，前者加入一次不成功会失败，后者会重复尝试直到成功。</li>
+<li><code>CONSUL_NODE_NAME</code>，会填充到<code>-node</code>参数，默认是hostname，要求全局唯一，此处代表要接入注册中心的系统的名字。</li>
+<li><code>AGENT_TOKEN</code>：acl里申请的token</li>
+</ul>
+<p><strong>server说明</strong>：</p>
 </div>
 </main>
 </div>

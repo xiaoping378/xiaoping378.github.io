@@ -53,7 +53,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.597222a5c86558aafee2ddd4e231fd31.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.2baeca93aa085d469cbcd45a536311f4.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -102,7 +102,7 @@
 <li>3.9: <a href=#pg-e4c44f08a2c513a02fe3cb9aa2c655e0>Windows Terminal终端入坑指南</a></li>
 <li>3.10: <a href=#pg-6a2aa71420594dce8734ef70bec7f0ce>TiDB分布式数据库</a></li>
 <ul>
-<li>3.10.1: <a href=#pg-dbade70acb9d1251e7daa5e8afbaaa82>TiDB初体验</a></li>
+<li>3.10.1: <a href=#pg-07ef033d5a20184955fad1e45f4c9e36>TiDB初体验</a></li>
 </ul>
 </ul>
 <li>4: <a href=#pg-1737f808bd604b410f639c3e20a801ea>云原生</a></li>
@@ -117,6 +117,7 @@
 <li>4.1.3.2: <a href=#pg-d909113e9543ac3fe911d0a23fec6fd2>构建生产环境级的docker Swarm集群-2</a></li>
 <li>4.1.3.3: <a href=#pg-2ff8ed6e755645d7ae818d9b0fcbb120>构建生产环境级的docker Swarm集群-3</a></li>
 </ul>
+<li>4.1.4: <a href=#pg-37045fcceebb8772a7634ea2fe9730e1>从docker迁移到containerd</a></li>
 </ul>
 <li>4.2: <a href=#pg-25b4bdd20ef272997f77141ba8377466>Kubernetes</a></li>
 <ul>
@@ -148,6 +149,7 @@
 <li>4.4: <a href=#pg-9b97802e4b9534134796bbfce8ffeaa3>混合云网络SDN</a></li>
 <li>4.5: <a href=#pg-e1249fd54f922b9832ed9ab695a6bbe4>Vagrant实践整理</a></li>
 <li>4.6: <a href=#pg-1d949ee52eaaed1383ba6bd02be6695c>KVM和Libvirt的实践整理</a></li>
+<li>4.7: <a href=#pg-6e7f79285674a5f225b4c9c21b735285>解读Consul</a></li>
 </ul>
 <li>5: <a href=#pg-e69aa5dce9883c4cb86ecafde4465420>区块链</a></li>
 <ul>
@@ -163,6 +165,7 @@
 </ul>
 <li>6: <a href=#pg-cd46a064c31d13b424ac3d15ccfe9cf1>RPA机器人</a></li>
 <ul>
+<li>6.1: <a href=#pg-43ac517c4b1e7e9e5883d173db65cd07>openrpa介绍</a></li>
 </ul>
 <li>7: <a href=#pg-8df6ea6904416b571ff9bc73afb50933>其他推荐</a></li>
 <ul>
@@ -1783,7 +1786,7 @@ Casbin -&gt; 其他服务: 权限合规，则跳转到用户请求的其他服�
 </div>
 </div>
 <div class=td-content>
-<h1 id=pg-dbade70acb9d1251e7daa5e8afbaaa82>3.10.1 - TiDB初体验</h1>
+<h1 id=pg-07ef033d5a20184955fad1e45f4c9e36>3.10.1 - TiDB初体验</h1>
 <div class=lead>TiDB 初体验安装介绍</div>
 <h2 id=安装>安装</h2>
 <blockquote>
@@ -1827,6 +1830,86 @@ alter user <span style=color:#b44>&#39;root&#39;</span> identified by <span styl
 </blockquote>
 <h2 id=集群>集群</h2>
 <p>没有多节点的环境，折腾了一下，要单机玩这个模式的话，需要hack的东西太多，，，目前还不建议这么搞，等有时间看能不能提个PR.</p>
+<h2 id=tidb-server>TIDB Server</h2>
+<p>处理client的SQL请求.</p>
+<h2 id=pd>PD</h2>
+<p>提供全局时钟和Region调度和管理（扩缩容）。</p>
+<h2 id=tikv>TIKV</h2>
+<p>使用rocksDB实现数据持久化，基于此实现了分布式存储引擎，其中的核心点可以理解为以下三点：</p>
+<ul>
+<li>事务</li>
+<li>MVCC</li>
+<li>Raft</li>
+</ul>
+<h3 id=分布式事务percolator>分布式事务Percolator</h3>
+<p>基于时间戳的两阶段提交事务解决方案。</p>
+<h3 id=mvcc多版本并发控制>MVCC多版本并发控制</h3>
+<p><code>COW</code>的本质。默认revision大的为最新值，</p>
+<h3 id=多副本raft一致性>多副本Raft一致性</h3>
+<p><strong>Leader选举：</strong></p>
+<ul>
+<li><code>Term</code>状态变化，follower -> (random timeout) -> candidate -> leader. 此过程因为网络延迟问题，很可能是进行多轮选举。</li>
+</ul>
+<pre tabindex=0><code class=language-plantuml data-lang=plantuml>@startuml
+!theme aws-orange
+TiKV1 -&gt; TiKV1: 随机选举时间到，切换为candidate角色，进入term2，发出选举信息
+TiKV1 -&gt; TiKV2: 发起选举，term=2
+TiKV1 -&gt; TiKV3: 发起选举，term=2
+TiKV2 -&gt; TiKV2: 对比term（非拜占庭环境，大家默认信任term大的）
+TiKV3 -&gt; TiKV3: 对比term
+TiKV2 -&gt; TiKV1: 投一票
+TiKV3 -&gt; TiKV1: 投一票
+TiKV1 -&gt; TiKV1: 超过一半投票（2x+1），成为Leader
+TiKV1 -&gt; TiKV2: 心跳保活
+TiKV1 -&gt; TiKV3: 心跳保活
+TiKV1 -&gt; TiKV1: 异常了
+TiKV2 -&gt; TiKV2: 心跳超时，切换candidate角色，进入term3
+TiKV2 -&gt; TiKV3: 发起选举
+TiKV3 -&gt; TiKV2: 对比term，并投一票
+TiKV2 -&gt; TiKV2: 加上自己的一票，超过一半投票，成为Leader
+@enduml
+</code></pre><blockquote>
+<p>leader负责读写请求，follower负责数据多副本复制。日常心跳保活，出问题后，重新选举。</p>
+</blockquote>
+<p><strong>数据写入</strong>：</p>
+<ul>
+<li>propose -> append (local) -> Replicate (remote append) -> commited -> apply</li>
+</ul>
+<pre tabindex=0><code class=language-plantuml data-lang=plantuml>@startuml
+!theme aws-orange
+
+用户 -&gt; TiDB_Server: 发起事务数据写入
+TiDB_Server -&gt; TiDB_Server: 解析语句，SQL -&gt; KV
+TiDB_Server -&gt; PD: 获取KV元信息
+PD -&gt; TiDB_Server: 告知该key的range leader信息（TiKV1）
+TiDB_Server -&gt; TiKV1: 发起propose
+TiKV1 -&gt; TiKV1: 本地append为raft_log
+TiKV1 -&gt; TiKV2: 发起Replicate复制
+TiKV1 -&gt; TiKV3: 发起Replicate复制
+TiKV2 -&gt; TiKV2: 本地append为raft_log
+TiKV3 -&gt; TiKV3: 本地append为raft_log
+TiKV2 -&gt; TiKV1: 反馈已记录成功
+TiKV3 -&gt; TiKV1: 反馈已记录成功
+TiKV1 -&gt; TiKV1: 收到大多数节点反馈，进入commited状态
+TiKV1 -&gt; TiKV2: 发起commited确认
+TiKV1 -&gt; TiKV3: 发起commited确认
+TiKV2 -&gt; TiKV1: 进入commited
+TiKV3 -&gt; TiKV1: 进入commited
+TiKV1 -&gt; TiKV1: 收到大多数节点反馈，进入apply状态，此时业务数据才算真正落盘
+TiKV1 -&gt; TiKV2: 发起apply确认
+TiKV1 -&gt; TiKV3: 发起apply确认
+TiKV2 -&gt; TiKV1: 进入apply
+TiKV3 -&gt; TiKV1: 进入apply
+TiKV1 -&gt; TiDB_Server: 收到一个apply成功反馈，即可反馈用户写入成功
+TiDB_Server -&gt; 用户: 反馈写入成功
+@enduml
+</code></pre><blockquote>
+<p>SQL事务的commit对应到这里的apply，这里的commited是指raft中记录上用户的数据更新了（多数据节点记录上用户的写入请求了）。</p>
+</blockquote>
+<p><strong>数据读取：</strong></p>
+<ul>
+<li>tidb server解析SQL语句 -> 从pd获取对应key的tikv节点信息 -></li>
+</ul>
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-1737f808bd604b410f639c3e20a801ea>4 - 云原生</h1>
@@ -2230,6 +2313,18 @@ redis:6379&gt; get user
 redis:6379&gt;
 
 </code></pre>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-37045fcceebb8772a7634ea2fe9730e1>4.1.4 - 从docker迁移到containerd</h1>
+<div class=lead>记录从docker迁移到containerd的事项</div>
+<div class="pageinfo pageinfo-primary">
+<p>记录个人从docker迁移到containerd的事项</p>
+</div>
+<h2 id=介绍>介绍</h2>
+<p><a href=https://github.com/containerd/containerd>https://github.com/containerd/containerd</a></p>
+<p>TODO.</p>
+<h2 id=安装containerd>安装containerd</h2>
+<p>下载必要组件：https://github.com/containerd/nerdctl/releases，</p>
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-25b4bdd20ef272997f77141ba8377466>4.2 - Kubernetes</h1>
@@ -4525,6 +4620,96 @@ Bringing machine <span style=color:#b44>&#39;default&#39;</span> up with <span s
 <p>未完。。。</p>
 </div>
 <div class=td-content style=page-break-before:always>
+<h1 id=pg-6e7f79285674a5f225b4c9c21b735285>4.7 - 解读Consul</h1>
+<div class=lead>解读Consul和背后的设计原理。</div>
+<h2 id=概述>概述</h2>
+<p>介绍现在的Consul前，有必要先介绍下<code>Service Mesh</code>的概念，</p>
+<p><strong>Service Mesh</strong></p>
+<p>Service Mesh是一种面向服务间安全通信的基础设施层，俗称代理服务的东西向流量。 典型的实现包含控制面板和数据面。</p>
+<ul>
+<li>控制面：跟踪记录所有的服务和访问地址，提供服务发现、健康检查、策略管理等。</li>
+<li>数据面：通过sidcar机制代理服务间的通信。</li>
+</ul>
+<p><em>传统 vs 微服务优势 :</em></p>
+<ul>
+<li>单体 -> 微服务架构</li>
+<li>函数调用 -> 服务发现（熔断、健康检查）</li>
+<li>配置文件 -> 配置中心</li>
+<li>防火墙 -> 访问策略</li>
+<li>DMZ、生产区 -> 零信任</li>
+</ul>
+<p><strong>Consul</strong></p>
+<p>Consul是Service mesh中的控制面的实现，主要有一下几大特色：</p>
+<ul>
+<li>服务发现：分为注册服务、发现服务、健康检查三大功能。</li>
+<li>K-V存储：<a href=https://github.com/etcd-io/bbolt>BoltDB</a>，支持 ACID 事务、无锁并发事务 MVCC，提供 B+Tree 索引。</li>
+<li>多数据中心：多中心Gossip数据同步</li>
+<li>Servie Mesh: 利用sidecar机制实现了端到端的认证和加密通信</li>
+</ul>
+<h2 id=部署架构>部署架构</h2>
+<p>下图为经典的多中心consul集群配置。</p>
+<p><img src=/images/%E8%A7%A3%E8%AF%BBconsu-01-2022-02-16-15-57-53.png alt></p>
+<ul>
+<li>每个datacenter，都有N个Server和M个Client节点。因为网络延迟对Consul分布式一致性的性能影响，会出现节点越多，共识越慢的现象，server节点一般推荐为3~5个，但client节点没有限制。</li>
+<li>Client主要充当DNS server、负载均衡和健康检查的作用。</li>
+<li>Server实现数据的分布式存储一致性，一般用来存储节点状态、注册的服务信息、应用配置、通信策略等。</li>
+<li>Consul在选主和数据事务中都使用了Raft算法，但是其WAN(多个数据中心间)、LAN(节点间)通信、故障广播使用了Gossip算法（流行病协议）。</li>
+<li>在单集群内，Consul server默认的Follower节点收到读写请求后，会转发给Leader处理</li>
+<li>若查询的服务不在本集群，本地的Leader转发给远程集群的Leader处理。</li>
+</ul>
+<h2 id=运维高可用管理>运维高可用管理</h2>
+<p>目前分布式系统的高可靠实现，均受限于<strong>CAP</strong>（一致性（Consistency）、可用性（Availability）和分区容错性（Partition tolerance））理论，根据不同业务场景的会采取三者之间的平衡取舍。本文的Consul是采用Raft算法来实现的，采用此算法的还有EverDB、RocketDB、Etcd、Kafka3等系统。</p>
+<p><strong>Raft算法状态机</strong>：</p>
+<p><img src=/images/%E8%A7%A3%E8%AF%BBconsu-01-2022-02-16-14-50-29.png alt></p>
+<p>主要有三种状态<code>Follower</code>、<code>Candidate</code>和<code>Leader</code>，其中值得关注有以下几个方面：</p>
+<ul>
+<li>第一次启动后，默认进入为<code>Follower</code>，经过随机时间（Election Time）后，进入<code>Candidate</code>状态，发起投票流程。</li>
+<li>收到大多数节点投票，可以成为<code>Leader</code></li>
+<li>非拜占庭环境，每进行一次选举，选举周期Term就回自加1，默认大家都遵从term高的节点</li>
+<li>选主成功后，Leader会发起心跳保活</li>
+<li>Follower可以根据CAP相性调整，一般是收到请求后转发给Leader处理。</li>
+</ul>
+<p>详情可查看<a href=http://thesecretlivesofdata.com/raft/>动画</a>展示。</p>
+<p>从Raft算法原理可以得出，Leader选举和日志同步都只需要大多数的节点正常互联即可，所以少量节点故障或网络异常不会影响系统的可用性。</p>
+<p>即使Leader故障，在选举超时后，剩余节点会自发选举新Leader，无需人工干预，RTO时间极小。如果网络发生脑裂，待网络恢复后，也会保证数据最终一致性。</p>
+<p><strong>Gossip通信</strong></p>
+<p>Gossip是Consul节点间状态同步的，下图为形象表示：</p>
+<p><img src=/images/gossip%E6%B5%81%E8%A1%8C%E7%97%85.gif alt></p>
+<p>可以理解为<code>一传十、十传百</code>，随机选择几个节点发出消息，收到信息的节点在向其他节点传播，这种方式在数据量大、环境复杂的情况下比<code>一传百</code>更具备可扩展性和可靠性。Consul默认有两个Gossip池，LAN池和WAN池。</p>
+<p><strong>LAN池</strong> :Consul中的每个数据中心有一个LAN池，它包含了这个数据中心的所有成员，包括clients和servers。LAN池用于以下几个目的:</p>
+<ul>
+<li>成员关系信息允许client自动发现server, 免去如何发现server端的配置。</li>
+<li>分布式失败检测机制使得由整个集群来做失败检测这件事， 而不是集中到几台机器上。</li>
+<li>gossip池使得类似Leader选举这样的事件，可以更可靠、迅速的传达。</li>
+</ul>
+<p><strong>WAN池</strong>: WAN池是全局唯一的，因为所有的server都应该加入到WAN池中，无论它位于哪个数据中心。由WAN池提供的成员关系信息允许server做一些跨数据中心的请求。一体化的失败检测机制允许Consul优雅地去处理：整个数据中心失去连接， 或者仅仅是别的数据中心的某一台失去了连接。</p>
+<h2 id=数据读写一致性>数据读写一致性</h2>
+<p><img src=/images/%E8%A7%A3%E8%AF%BBconsu-01-2022-02-16-15-30-35.png alt></p>
+<p>数据写入必须走Leader，经过两阶段提交（propose、prewrite(append、replicate)、commited、apply）过程，详情可以参考<a href=/docs/3-devops/tidb/tidb-%E5%88%9D%E4%BD%93%E9%AA%8C/#%E5%A4%9A%E5%89%AF%E6%9C%ACraft%E4%B8%80%E8%87%B4%E6%80%A7>这里</a>，读取数据Consul有<a href=https://www.consul.io/docs/architecture/consensus>三个</a>级别可以配置。</p>
+<ul>
+<li>consistent： Leader处理数据前，要和所有节点确认自己还是Leader，每次请求都会额外的网络请求</li>
+<li>default: 引入Leader Lease机制，一定时间窗口内，Learder利用状态缓存,直接处理请求。</li>
+<li>stale: 所有server节点都可以直接回应请求，会产生Follower节点反应过久的数据。</li>
+</ul>
+<h2 id=acl授权>ACL授权</h2>
+<p>TODO.</p>
+<p><strong>client说明：</strong></p>
+<p>configmap中的字段：
+client的配置datacenter、encrypt</p>
+<ul>
+<li><code>-encrypt</code>：和sever段保持一致，可用<code>consul keygen</code>生成，只在启动后加载一次，之后便不需要了，用于加密consul的gossip协议通信。</li>
+<li><code>datacenter</code>: 和要接入的server端保持一致，代表consul集群名称。</li>
+<li><code>acl.tokens.agent</code>: acl申请的token，代表了该client可以操作服务、配置的权限</li>
+</ul>
+<p>deployment的字段：</p>
+<ul>
+<li><code>CONSUL_RETRY_JOIN_ADDR</code>里的值，会填充到 <code>join</code>和 <code>--retry-join</code>参数中，代表要接入的consul集群，前者加入一次不成功会失败，后者会重复尝试直到成功。</li>
+<li><code>CONSUL_NODE_NAME</code>，会填充到<code>-node</code>参数，默认是hostname，要求全局唯一，此处代表要接入注册中心的系统的名字。</li>
+<li><code>AGENT_TOKEN</code>：acl里申请的token</li>
+</ul>
+<p><strong>server说明</strong>：</p>
+</div>
+<div class=td-content style=page-break-before:always>
 <h1 id=pg-e69aa5dce9883c4cb86ecafde4465420>5 - 区块链</h1>
 <div class=lead>区块链领域的所思所为!</div>
 <div class="pageinfo pageinfo-primary">
@@ -5524,11 +5709,50 @@ kubectl label node node0 <span style=color:#b8860b>ca</span><span style=color:#6
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-cd46a064c31d13b424ac3d15ccfe9cf1>6 - RPA机器人</h1>
-<div class=lead>介绍介绍如何建设企业自己的RPA机器人流程自动化平台</div>
+<div class=lead>介绍如何建设企业自己的RPA机器人流程自动化平台</div>
 <div class="pageinfo pageinfo-primary">
 <p>主要介绍如何建设企业自己的RPA机器人流程自动化平台。</p>
 </div>
-<p>TODO.</p>
+<p>RPA（机器人流程自动化）借助AI（OCR、NLP）等技术，在疫情劳动力不足和数字化转型的大背景下，东风又起。国内该领域最早可追溯到<code>按键精灵</code>时代，可以模拟人操作设备（电脑、手机）的行为，无缝集成新旧系统，减少重复性任务，实现桌面流自动化。</p>
+<p>本质上可以认为是自动化领域的技术，Gartner连续三年提到的技术趋势-<strong>超级自动化HyperAutomation</strong>（一种技术合集），主要包括</p>
+<ul>
+<li>RPA（机器人流程自动化）</li>
+<li>LCAP（低代码应用平台）</li>
+<li>AI（人工智能技术</li>
+<li>iBPMS（智能业务流程管理）</li>
+</ul>
+<p>目前<a href=https://github.com/open-rpa/openrpa>openrpa</a>开源项目, 基本实现了hyperautomaion的前三项技术要求。</p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-43ac517c4b1e7e9e5883d173db65cd07>6.1 - openrpa介绍</h1>
+<div class=lead>开源openrpa的架构介绍</div>
+<div class="pageinfo pageinfo-primary">
+<p>openrpa的架构介绍</p>
+</div>
+<h2 id=概述>概述</h2>
+<p>openrpa项目，提供了<strong>OON</strong>技术栈（OpenRPA、Openflow、Node-RED）来实现的RPA功能。</p>
+<p><strong>OpenRPA</strong></p>
+<p>该组件可以认为是机器人的IDE设计器部分，基于<a href=https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/>MWF</a>框架实现的，</p>
+<ul>
+<li>可以图形化拖拽的方式实现基本功能<code>Activity</code>，如点击邮箱、打开浏览器网址、输入文字、录屏录音、各类监听探测器等等</li>
+<li>多个<code>Activity</code>可以组合成一个序列，来实现工作流<code>workflow</code>，串行执行一系列动作</li>
+<li>也可以通过配置作为agent（机器人）运行，负责执行设计好的工作流</li>
+<li>默认远程连接到云端控制端（openflow），可上传同步本地的工作流和接受控制端的调度管理。</li>
+</ul>
+<p><img src=/images/openrpa-01-2022-02-14-13-54-44.png alt></p>
+<p><strong>Openflow</strong></p>
+<p>OON技术栈的后台核心部分，可以关编排管理所有的活动，主要具备一下特性：</p>
+<ul>
+<li>管理，调用和配置机器人和工作流</li>
+<li>管理用户和权限(组)</li>
+<li>创建Web表单，供和真实用户交互，实现工作流的输入，审批和确认等操作。</li>
+<li>管理后端MongoDB存储</li>
+<li>存储工作流、表单等数据信息</li>
+</ul>
+<p><img src=/images/openrpa-01-2022-02-15-09-23-27.png alt="openflow with Monitoring"></p>
+<p><strong>Node-RED</strong></p>
+<h2 id=faq>FAQ</h2>
+<p>三大组件汇总具有<code>流</code>的概念，openrpa中叫<code>workflow</code>，node-red中叫<code>flow</code>, openflow组件名称自身就带了flow的字样，界面上也有</p>
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-8df6ea6904416b571ff9bc73afb50933>7 - 其他推荐</h1>

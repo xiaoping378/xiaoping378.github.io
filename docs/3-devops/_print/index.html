@@ -50,7 +50,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.597222a5c86558aafee2ddd4e231fd31.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.2baeca93aa085d469cbcd45a536311f4.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -81,7 +81,7 @@
 <li>9: <a href=#pg-e4c44f08a2c513a02fe3cb9aa2c655e0>Windows Terminal终端入坑指南</a></li>
 <li>10: <a href=#pg-6a2aa71420594dce8734ef70bec7f0ce>TiDB分布式数据库</a></li>
 <ul>
-<li>10.1: <a href=#pg-dbade70acb9d1251e7daa5e8afbaaa82>TiDB初体验</a></li>
+<li>10.1: <a href=#pg-07ef033d5a20184955fad1e45f4c9e36>TiDB初体验</a></li>
 </ul>
 </ul>
 <div class=content>
@@ -946,7 +946,7 @@ Casbin -&gt; 其他服务: 权限合规，则跳转到用户请求的其他服�
 </div>
 </div>
 <div class=td-content>
-<h1 id=pg-dbade70acb9d1251e7daa5e8afbaaa82>10.1 - TiDB初体验</h1>
+<h1 id=pg-07ef033d5a20184955fad1e45f4c9e36>10.1 - TiDB初体验</h1>
 <div class=lead>TiDB 初体验安装介绍</div>
 <h2 id=安装>安装</h2>
 <blockquote>
@@ -990,6 +990,86 @@ alter user <span style=color:#b44>&#39;root&#39;</span> identified by <span styl
 </blockquote>
 <h2 id=集群>集群</h2>
 <p>没有多节点的环境，折腾了一下，要单机玩这个模式的话，需要hack的东西太多，，，目前还不建议这么搞，等有时间看能不能提个PR.</p>
+<h2 id=tidb-server>TIDB Server</h2>
+<p>处理client的SQL请求.</p>
+<h2 id=pd>PD</h2>
+<p>提供全局时钟和Region调度和管理（扩缩容）。</p>
+<h2 id=tikv>TIKV</h2>
+<p>使用rocksDB实现数据持久化，基于此实现了分布式存储引擎，其中的核心点可以理解为以下三点：</p>
+<ul>
+<li>事务</li>
+<li>MVCC</li>
+<li>Raft</li>
+</ul>
+<h3 id=分布式事务percolator>分布式事务Percolator</h3>
+<p>基于时间戳的两阶段提交事务解决方案。</p>
+<h3 id=mvcc多版本并发控制>MVCC多版本并发控制</h3>
+<p><code>COW</code>的本质。默认revision大的为最新值，</p>
+<h3 id=多副本raft一致性>多副本Raft一致性</h3>
+<p><strong>Leader选举：</strong></p>
+<ul>
+<li><code>Term</code>状态变化，follower -> (random timeout) -> candidate -> leader. 此过程因为网络延迟问题，很可能是进行多轮选举。</li>
+</ul>
+<pre tabindex=0><code class=language-plantuml data-lang=plantuml>@startuml
+!theme aws-orange
+TiKV1 -&gt; TiKV1: 随机选举时间到，切换为candidate角色，进入term2，发出选举信息
+TiKV1 -&gt; TiKV2: 发起选举，term=2
+TiKV1 -&gt; TiKV3: 发起选举，term=2
+TiKV2 -&gt; TiKV2: 对比term（非拜占庭环境，大家默认信任term大的）
+TiKV3 -&gt; TiKV3: 对比term
+TiKV2 -&gt; TiKV1: 投一票
+TiKV3 -&gt; TiKV1: 投一票
+TiKV1 -&gt; TiKV1: 超过一半投票（2x+1），成为Leader
+TiKV1 -&gt; TiKV2: 心跳保活
+TiKV1 -&gt; TiKV3: 心跳保活
+TiKV1 -&gt; TiKV1: 异常了
+TiKV2 -&gt; TiKV2: 心跳超时，切换candidate角色，进入term3
+TiKV2 -&gt; TiKV3: 发起选举
+TiKV3 -&gt; TiKV2: 对比term，并投一票
+TiKV2 -&gt; TiKV2: 加上自己的一票，超过一半投票，成为Leader
+@enduml
+</code></pre><blockquote>
+<p>leader负责读写请求，follower负责数据多副本复制。日常心跳保活，出问题后，重新选举。</p>
+</blockquote>
+<p><strong>数据写入</strong>：</p>
+<ul>
+<li>propose -> append (local) -> Replicate (remote append) -> commited -> apply</li>
+</ul>
+<pre tabindex=0><code class=language-plantuml data-lang=plantuml>@startuml
+!theme aws-orange
+
+用户 -&gt; TiDB_Server: 发起事务数据写入
+TiDB_Server -&gt; TiDB_Server: 解析语句，SQL -&gt; KV
+TiDB_Server -&gt; PD: 获取KV元信息
+PD -&gt; TiDB_Server: 告知该key的range leader信息（TiKV1）
+TiDB_Server -&gt; TiKV1: 发起propose
+TiKV1 -&gt; TiKV1: 本地append为raft_log
+TiKV1 -&gt; TiKV2: 发起Replicate复制
+TiKV1 -&gt; TiKV3: 发起Replicate复制
+TiKV2 -&gt; TiKV2: 本地append为raft_log
+TiKV3 -&gt; TiKV3: 本地append为raft_log
+TiKV2 -&gt; TiKV1: 反馈已记录成功
+TiKV3 -&gt; TiKV1: 反馈已记录成功
+TiKV1 -&gt; TiKV1: 收到大多数节点反馈，进入commited状态
+TiKV1 -&gt; TiKV2: 发起commited确认
+TiKV1 -&gt; TiKV3: 发起commited确认
+TiKV2 -&gt; TiKV1: 进入commited
+TiKV3 -&gt; TiKV1: 进入commited
+TiKV1 -&gt; TiKV1: 收到大多数节点反馈，进入apply状态，此时业务数据才算真正落盘
+TiKV1 -&gt; TiKV2: 发起apply确认
+TiKV1 -&gt; TiKV3: 发起apply确认
+TiKV2 -&gt; TiKV1: 进入apply
+TiKV3 -&gt; TiKV1: 进入apply
+TiKV1 -&gt; TiDB_Server: 收到一个apply成功反馈，即可反馈用户写入成功
+TiDB_Server -&gt; 用户: 反馈写入成功
+@enduml
+</code></pre><blockquote>
+<p>SQL事务的commit对应到这里的apply，这里的commited是指raft中记录上用户的数据更新了（多数据节点记录上用户的写入请求了）。</p>
+</blockquote>
+<p><strong>数据读取：</strong></p>
+<ul>
+<li>tidb server解析SQL语句 -> 从pd获取对应key的tikv节点信息 -></li>
+</ul>
 </div>
 </main>
 </div>

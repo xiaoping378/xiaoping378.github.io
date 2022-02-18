@@ -661,7 +661,15 @@ flannel有多种方式可以完成报文的转发。&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;/ul></description></item><item><title>Docs: 构建生产环境级的docker Swarm集群-3</title><link>https://xiaoping378.github.io/docs/4-cloud/containers/swarm/docker-sarm3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/containers/swarm/docker-sarm3/</guid><description>
+&lt;/ul></description></item><item><title>Docs: 从docker迁移到containerd</title><link>https://xiaoping378.github.io/docs/4-cloud/containers/containerd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/containers/containerd/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>记录个人从docker迁移到containerd的事项&lt;/p>
+&lt;/div>
+&lt;h2 id="介绍">介绍&lt;/h2>
+&lt;p>&lt;a href="https://github.com/containerd/containerd">https://github.com/containerd/containerd&lt;/a>&lt;/p>
+&lt;p>TODO.&lt;/p>
+&lt;h2 id="安装containerd">安装containerd&lt;/h2>
+&lt;p>下载必要组件：https://github.com/containerd/nerdctl/releases，&lt;/p></description></item><item><title>Docs: 构建生产环境级的docker Swarm集群-3</title><link>https://xiaoping378.github.io/docs/4-cloud/containers/swarm/docker-sarm3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/containers/swarm/docker-sarm3/</guid><description>
 &lt;p>如前文所述，默认已经搭建好环境，基于docker1.12版本。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#666">[&lt;/span>root@manager0 ~&lt;span style="color:#666">]&lt;/span>&lt;span style="color:#080;font-style:italic"># docker node ls&lt;/span>
 ID HOSTNAME STATUS AVAILABILITY MANAGER STATUS
