@@ -332,7 +332,72 @@
 &lt;/ul>
 &lt;blockquote>
 &lt;p>[Scala]在编译的时候可能是慢，但它比CPython更安全，并且快得多（除了使用非字节码的代码和调用C/Fortran库之外），并且还有一些我现在在Python中及其想念的概念，例如，Option[T]，隐式修改器，不废柴的map/reduce/filter，不废柴的lambda，等等。&lt;/p>
-&lt;/blockquote></description></item><item><title>Docs: openrpa介绍</title><link>https://xiaoping378.github.io/docs/6-rpa/openrpa-01/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/6-rpa/openrpa-01/</guid><description>
+&lt;/blockquote></description></item><item><title>Docs: frp内网穿透开发</title><link>https://xiaoping378.github.io/docs/2-infra/network/frp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/2-infra/network/frp/</guid><description>
+&lt;h2 id="frp介绍">FRP介绍&lt;/h2>
+&lt;p>frp 是国人开源的一种快速反向代理，可将 NAT 或防火墙后面的本地服务器暴露到互联网上。目前，它支持暴露 TCP 和 UDP，以及 HTTP 和 HTTPS 协议，也可以通过域名将请求转发到内部服务。&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.github.io/images/frp-2022-03-06-20-21-49.png" alt="">&lt;/p>
+&lt;h2 id="安装">安装&lt;/h2>
+&lt;p>二进制下载&lt;a href="https://github.com/fatedier/frp/releases">地址&lt;/a>, 解压后内容如下：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ frp_0.39.1_linux_amd64 tree
+.
+├── frpc
+├── frpc_full.ini
+├── frpc.ini
+├── frps
+├── frps_full.ini
+├── frps.ini
+├── LICENSE
+└── systemd
+├── frpc.service
+├── frpc@.service
+├── frps.service
+└── frps@.service
+&lt;span style="color:#666">1&lt;/span> directory, &lt;span style="color:#666">11&lt;/span> files
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>可将其中的 frpc 拷贝到内网服务所在的机器上，将 frps 拷贝到具有公网 IP 的机器上，放置在任意目录。&lt;/p>
+&lt;p>后续使用思路：&lt;/p>
+&lt;ul>
+&lt;li>编写配置文件，先通过 ./frps -c ./frps.ini 启动服务端，&lt;/li>
+&lt;li>再通过 ./frpc -c ./frpc.ini 启动客户端。&lt;/li>
+&lt;li>如果需要在后台长期运行，可使用压缩包内写好的的systemd服务&lt;/li>
+&lt;/ul>
+&lt;h2 id="代理ssh">代理ssh&lt;/h2>
+&lt;p>本人日常开发使用vsocde，众所周知，其&lt;a href="https://code.visualstudio.com/docs/remote/ssh">remote SSH开发&lt;/a>的特性非常惊艳，可以提供本地开发的体验，背后需要通过ssh连接到远端服务器，高配云主机价格不菲，公司电脑长期荒废中，，，，遂有了此想法，只购买一个低配的云主机用来代理到内网的公司电脑（已安装linux）上，然后利用vscode实现内网穿透开发。&lt;/p>
+&lt;h3 id="服务端">服务端&lt;/h3>
+&lt;p>外网云主机用作服务端的配置：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ ~ cat /etc/frp/frps.ini
+&lt;span style="color:#080;font-style:italic"># common为服务端基础配置&lt;/span>
+&lt;span style="color:#666">[&lt;/span>common&lt;span style="color:#666">]&lt;/span>
+&lt;span style="color:#080;font-style:italic"># 服务端监听的端口，用于和内网客户端建立通信，来接受需要代理服务的配置。&lt;/span>
+&lt;span style="color:#b8860b">bind_port&lt;/span> &lt;span style="color:#666">=&lt;/span> &lt;span style="color:#666">7380&lt;/span>
+&lt;span style="color:#080;font-style:italic"># 服务端与客户端建立连接的Token，两边保持一致即可&lt;/span>
+&lt;span style="color:#b8860b">token&lt;/span> &lt;span style="color:#666">=&lt;/span> PassWord
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">frps -c /etc/frp/frps.ini
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="客户端">客户端&lt;/h3>
+&lt;p>内网本地linux上，编写客户端配置：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#080;font-style:italic"># common为客户端基础配置&lt;/span>
+&lt;span style="color:#666">[&lt;/span>common&lt;span style="color:#666">]&lt;/span>
+&lt;span style="color:#080;font-style:italic"># 上例服务端运行的外网IP&lt;/span>
+&lt;span style="color:#b8860b">server_addr&lt;/span> &lt;span style="color:#666">=&lt;/span> 39.*.*.*
+&lt;span style="color:#b8860b">server_port&lt;/span> &lt;span style="color:#666">=&lt;/span> &lt;span style="color:#666">7380&lt;/span>
+&lt;span style="color:#b8860b">token&lt;/span> &lt;span style="color:#666">=&lt;/span> PassWord
+&lt;span style="color:#080;font-style:italic"># 需要代理的服务配置，可以根绝自身情况开启多个代理服务如web、 后端api等。&lt;/span>
+&lt;span style="color:#666">[&lt;/span>ssh&lt;span style="color:#666">]&lt;/span>
+&lt;span style="color:#a2f">type&lt;/span> &lt;span style="color:#666">=&lt;/span> tcp
+&lt;span style="color:#080;font-style:italic"># 本地服务信息&lt;/span>
+&lt;span style="color:#b8860b">local_ip&lt;/span> &lt;span style="color:#666">=&lt;/span> 127.0.0.1
+&lt;span style="color:#b8860b">local_port&lt;/span> &lt;span style="color:#666">=&lt;/span> &lt;span style="color:#666">22&lt;/span>
+&lt;span style="color:#080;font-style:italic"># 配置服务端代理端口， remote 2222 -&amp;gt; local 22&lt;/span>
+&lt;span style="color:#b8860b">remote_port&lt;/span> &lt;span style="color:#666">=&lt;/span> &lt;span style="color:#666">2222&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">frpc -c ./frpc.ini
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>如上设置运行，可在任意机器上，通过 &lt;code>ssh -p 2222 root@39.*.*.*&lt;/code> 登录内网机器。&lt;/p>
+&lt;h3 id="vscode连接">vscode连接&lt;/h3>
+&lt;p>安装正常步骤添加远端SSH机器，即可。
+&lt;img src="https://xiaoping378.github.io/images/frp-2022-03-06-21-22-51.png" alt="">&lt;/p>
+&lt;h2 id="总结">总结&lt;/h2>
+&lt;p>frp还有很多其他安全、UI、负载均衡等方面的配置，可根据自身环境选择，服务端和客户端选项更全面的配置&lt;a href="https://gofrp.org/docs/reference/">见此&lt;/a>&lt;/p>
+&lt;p>总体上使用frp代理简单的服务，配置上可以很简单，但要配置稍复杂的场景，目前的设计感觉有些缺陷，让人容易犯迷糊，比如设计多种端口字段，来开启某特性。&lt;/p></description></item><item><title>Docs: openrpa介绍</title><link>https://xiaoping378.github.io/docs/6-rpa/openrpa-01/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/6-rpa/openrpa-01/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
 &lt;p>openrpa的架构介绍&lt;/p>
 &lt;/div>
@@ -4749,39 +4814,4 @@ Configuration file written to /home/xxp/.deis/client.json
 ➜ ~ deis whoami
 You are admin at http://deis.192.168.31.49.xip.io
 &lt;/code>&lt;/pre>
-&lt;h3 id="部署第一个应用">部署第一个应用&lt;/h3></description></item><item><title>Docs: k3s实践-01</title><link>https://xiaoping378.github.io/docs/4-cloud/k8s/k3s-%E5%BC%80%E7%AF%87/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/k8s/k3s-%E5%BC%80%E7%AF%87/</guid><description>
-&lt;div class="pageinfo pageinfo-primary">
-&lt;p>本文主要介绍k3s的安装和核心组件解读。&lt;/p>
-&lt;/div>
-&lt;p>k3s是all-in-one的轻量k8s发行版，把所有k8s组件打包成一个不到100M的二进制文件了。具备如下显著特点：&lt;/p>
-&lt;ul>
-&lt;li>打包成单一二进制&lt;/li>
-&lt;li>默认集成了sqlite3来替代etcd，也可以指定其他数据库：etcd3、mysql、postgres。&lt;/li>
-&lt;li>默认内置Coredns、Metrics Server、Flannel、Traefik ingress、Local-path-provisioner等&lt;/li>
-&lt;li>默认启用了TLS加密通信。&lt;/li>
-&lt;/ul>
-&lt;h2 id="安装">安装&lt;/h2>
-&lt;p>官方提供了一键安装脚本&lt;a href="https://get.k3s.io">install.sh&lt;/a> ，执行&lt;code>curl -sfL https://get.k3s.io | sh -&lt;/code>可一键安装server端。此命令会从&lt;code>https://update.k3s.io/v1-release/channels/stable&lt;/code>取到最新的稳定版安装，可以通过&lt;code>INSTALL_K3S_VERSION&lt;/code>环境变量指定版本，本文将以1.19为例。&lt;/p>
-&lt;p>&lt;strong>启动 k3s server端(master节点).&lt;/strong>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">curl -sfL https://get.k3s.io | &lt;span style="color:#b8860b">INSTALL_K3S_VERSION&lt;/span>&lt;span style="color:#666">=&lt;/span>v1.19.16+k3s1 sh -
-&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>由于网络原因，可能会失败，自行想办法&lt;a href="https://github.com/k3s-io/k3s/releases/download/v1.19.16+k3s1/k3s">下载&lt;/a>下来，放置 &lt;code>/usr/local/bin/k3s&lt;/code>，附上执行权限&lt;code>chmod a+x /usr/local/bin/k3s&lt;/code>, 然后上面的命令加上&lt;code>INSTALL_K3S_SKIP_DOWNLOAD=true&lt;/code>再执行一遍即可。&lt;/p>
-&lt;/blockquote>
-&lt;blockquote>
-&lt;p>安装里log里会输出一些重要信息: &lt;code>kubectl、crictl、卸载脚本、systemd service&lt;/code>&lt;/p>
-&lt;/blockquote>
-&lt;p>不出意外，k3s server会被systemd启动，执行命令查看&lt;code>systemctl status k3s&lt;/code>或者通过软链的kubectl验证是否启动成功：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ kubectl get no
-NAME STATUS ROLES AGE VERSION
-gitlab-server Ready master 6m43s v1.19.16+k3s1
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>(Optional)&lt;/strong> 启动 k3s agent端 (添加worker节点).&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">curl -sfL https://get.k3s.io | &lt;span style="color:#b8860b">K3S_URL&lt;/span>&lt;span style="color:#666">=&lt;/span>https://172.25.11.130:6443 &lt;span style="color:#b8860b">K3S_TOKEN&lt;/span>&lt;span style="color:#666">=&lt;/span>bulabula &lt;span style="color:#b8860b">INSTALL_K3S_VERSION&lt;/span>&lt;span style="color:#666">=&lt;/span>v1.19.16+k3s1 sh -
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>&lt;code>K3S_TOKEN&lt;/code>内容需要从server端的&lt;code>/var/lib/rancher/k3s/server/node-token&lt;/code>文件取出&lt;/li>
-&lt;li>&lt;code>K3S_URL&lt;/code>中的IP是master节点的IP。&lt;/li>
-&lt;/ul>
-&lt;h2 id="集群访问">集群访问&lt;/h2>
-&lt;p>默认kubectl通过localhost访问本地集群，所以上文敲kubectl是没问题的，如果要被外部访问或者纳管的话，可以把kubeconfig文件拷走，默认路径是 &lt;code>/etc/rancher/k3s/k3s.yaml&lt;/code>
-。记得修改文件内的server字段，改成外部可访问到的IP。&lt;/p>
-&lt;h2 id="架构说明">架构说明&lt;/h2>
-&lt;p>TODO.&lt;/p></description></item></channel></rss>
+&lt;h3 id="部署第一个应用">部署第一个应用&lt;/h3></description></item></channel></rss>

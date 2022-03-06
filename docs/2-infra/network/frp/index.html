@@ -3,23 +3,25 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=generator content="Hugo 0.91.2">
-<link rel=alternate type=text/html href=https://xiaoping378.github.io/docs/5-blockchain/_print/>
-<link rel=alternate type=application/rss+xml href=https://xiaoping378.github.io/docs/5-blockchain/index.xml>
 <meta name=robots content="index, follow">
 <link rel="shortcut icon" href=/favicons/favicon.ico>
-<title>区块链 | 现代技能栈</title>
-<meta name=description content="区块链领域的所思所为!
+<title>frp内网穿透开发 | 现代技能栈</title>
+<meta name=description content="利用frp实现外网代理ssh到内网开发机
 ">
-<meta property="og:title" content="区块链">
-<meta property="og:description" content="区块链领域的所思所为!
+<meta property="og:title" content="frp内网穿透开发">
+<meta property="og:description" content="利用frp实现外网代理ssh到内网开发机
 ">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://xiaoping378.github.io/docs/5-blockchain/"><meta property="og:site_name" content="现代技能栈">
-<meta itemprop=name content="区块链">
-<meta itemprop=description content="区块链领域的所思所为!
-"><meta name=twitter:card content="summary">
-<meta name=twitter:title content="区块链">
-<meta name=twitter:description content="区块链领域的所思所为!
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://xiaoping378.github.io/docs/2-infra/network/frp/"><meta property="article:section" content="docs">
+<meta property="article:modified_time" content="2022-03-06T22:05:20+08:00"><meta property="og:site_name" content="现代技能栈">
+<meta itemprop=name content="frp内网穿透开发">
+<meta itemprop=description content="利用frp实现外网代理ssh到内网开发机
+">
+<meta itemprop=dateModified content="2022-03-06T22:05:20+08:00">
+<meta itemprop=wordCount content="148">
+<meta itemprop=keywords content="网络,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="frp内网穿透开发">
+<meta name=twitter:description content="利用frp实现外网代理ssh到内网开发机
 ">
 <link rel=preload href=/scss/main.min.8973293e550f2aebcff13ca0acf28013165ed1fa321e6a370fbd3fd2e00c7d33.css as=style>
 <link href=/scss/main.min.8973293e550f2aebcff13ca0acf28013165ed1fa321e6a370fbd3fd2e00c7d33.css rel=stylesheet integrity>
@@ -28,7 +30,7 @@
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-217913492-1','auto'),ga('send','pageview'))</script>
 <script async src=https://www.google-analytics.com/analytics.js></script>
 </head>
-<body class=td-section>
+<body class=td-page>
 <header>
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
 <a class=navbar-brand href=/>
@@ -87,17 +89,17 @@
 <label for=m-docs-1-site-tutorial2-check><a href=/docs/1-site/tutorial2/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-1-site-tutorial2><span>markdown语法</span></a></label>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-2-infra-li>
-<input type=checkbox id=m-docs-2-infra-check>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs-2-infra-li>
+<input type=checkbox id=m-docs-2-infra-check checked>
 <label for=m-docs-2-infra-check><a href=/docs/2-infra/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-2-infra><span>基础知识</span></a></label>
 <ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-2-infra-network-li>
-<input type=checkbox id=m-docs-2-infra-network-check>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs-2-infra-network-li>
+<input type=checkbox id=m-docs-2-infra-network-check checked>
 <label for=m-docs-2-infra-network-check><a href=/docs/2-infra/network/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-2-infra-network><span>网络篇</span></a></label>
 <ul class="ul-3 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-2-infra-network-frp-li>
-<input type=checkbox id=m-docs-2-infra-network-frp-check>
-<label for=m-docs-2-infra-network-frp-check><a href=/docs/2-infra/network/frp/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-2-infra-network-frp><span>frp内网穿透开发</span></a></label>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-docs-2-infra-network-frp-li>
+<input type=checkbox id=m-docs-2-infra-network-frp-check checked>
+<label for=m-docs-2-infra-network-frp-check><a href=/docs/2-infra/network/frp/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docs-2-infra-network-frp><span class=td-sidebar-nav-active-item>frp内网穿透开发</span></a></label>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-2-infra-linux-li>
@@ -276,9 +278,9 @@
 <label for=m-docs-4-cloud-e8-a7-a3-e8-af-bbconsu-01-check><a href=/docs/4-cloud/%E8%A7%A3%E8%AF%BBconsu-01/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-e8-a7-a3-e8-af-bbconsu-01><span>解读Consul</span></a></label>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs-5-blockchain-li>
-<input type=checkbox id=m-docs-5-blockchain-check checked>
-<label for=m-docs-5-blockchain-check><a href=/docs/5-blockchain/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__section" id=m-docs-5-blockchain><span class=td-sidebar-nav-active-item>区块链</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-5-blockchain-li>
+<input type=checkbox id=m-docs-5-blockchain-check>
+<label for=m-docs-5-blockchain-check><a href=/docs/5-blockchain/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-5-blockchain><span>区块链</span></a></label>
 <ul class="ul-2 foldable">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-5-blockchain-e4-bb-a5-e5-a4-aa-e5-9d-8a-e5-9f-ba-e7-a1-800-li>
 <input type=checkbox id=m-docs-5-blockchain-e4-bb-a5-e5-a4-aa-e5-9d-8a-e5-9f-ba-e7-a1-800-check>
@@ -339,11 +341,25 @@
 </aside>
 <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
-<a href=https://github.com/xiaoping378/xiaoping378.github.io/edit/master///content/docs/5-Blockchain/_index.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
-<a href="https://github.com/xiaoping378/xiaoping378.github.io/new/master///content/docs/5-Blockchain/_index.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
-<a href="https://github.com/xiaoping378/xiaoping378.github.io/issues/new?title=%e5%8c%ba%e5%9d%97%e9%93%be" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
-<a id=print href=https://xiaoping378.github.io/docs/5-blockchain/_print/><i class="fa fa-print fa-fw"></i> 整节打印</a>
+<a href=https://github.com/xiaoping378/xiaoping378.github.io/edit/master///content/docs/2-Infra/Network/frp.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
+<a href="https://github.com/xiaoping378/xiaoping378.github.io/new/master///content/docs/2-Infra/Network/frp.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
+<a href="https://github.com/xiaoping378/xiaoping378.github.io/issues/new?title=frp%e5%86%85%e7%bd%91%e7%a9%bf%e9%80%8f%e5%bc%80%e5%8f%91" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
+<a id=print href=https://xiaoping378.github.io/docs/2-infra/network/_print/><i class="fa fa-print fa-fw"></i> 整节打印</a>
 </div>
+<div class=td-toc><nav id=TableOfContents>
+<ul>
+<li><a href=#frp介绍>FRP介绍</a></li>
+<li><a href=#安装>安装</a></li>
+<li><a href=#代理ssh>代理ssh</a>
+<ul>
+<li><a href=#服务端>服务端</a></li>
+<li><a href=#客户端>客户端</a></li>
+<li><a href=#vscode连接>vscode连接</a></li>
+</ul>
+</li>
+<li><a href=#总结>总结</a></li>
+</ul>
+</nav></div>
 <div class="taxonomy taxonomy-terms-cloud taxo-tags">
 <h5 class=taxonomy-title>标签</h5>
 <ul class=taxonomy-terms>
@@ -368,78 +384,97 @@
 <li class=breadcrumb-item>
 <a href=https://xiaoping378.github.io/docs/>文档</a>
 </li>
+<li class=breadcrumb-item>
+<a href=https://xiaoping378.github.io/docs/2-infra/>基础知识</a>
+</li>
+<li class=breadcrumb-item>
+<a href=https://xiaoping378.github.io/docs/2-infra/network/>网络篇</a>
+</li>
 <li class="breadcrumb-item active" aria-current=page>
-<a href=https://xiaoping378.github.io/docs/5-blockchain/>区块链</a>
+<a href=https://xiaoping378.github.io/docs/2-infra/network/frp/>frp内网穿透开发</a>
 </li>
 </ol>
 </nav>
 <div class=td-content>
-<h1>区块链</h1>
-<div class=lead>区块链领域的所思所为!</div>
+<h1>frp内网穿透开发</h1>
+<div class=lead>利用frp实现外网代理ssh到内网开发机</div>
 <header class=article-meta>
+<div class="taxonomy taxonomy-terms-article taxo-tags">
+<h5 class=taxonomy-title>Tags:</h5>
+<ul class=taxonomy-terms>
+<li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/%E7%BD%91%E7%BB%9C/ data-taxonomy-term=%E7%BD%91%E7%BB%9C><span class=taxonomy-label>网络</span></a></li>
+</ul>
+</div>
 </header>
-<div class="pageinfo pageinfo-primary">
-<p>存放些曾经在区块链界战斗过的痕迹。</p>
-</div>
-<div class=section-index>
-<hr class=panel-line>
-<div class=entry>
-<h5>
-<a href=/docs/5-blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A-%E5%9F%BA%E7%A1%800/>什么是以太坊</a>
-</h5>
-<p>介绍以太坊公链</p>
-</div>
-<div class=entry>
-<h5>
-<a href=/docs/5-blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A-%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA%E5%88%9D%E6%AD%A5%E5%AE%9E%E8%B7%B5/>搭建以太坊私链网络</a>
-</h5>
-<p>利用puppeth搭建POA共识的以太坊私链网络</p>
-</div>
-<div class=entry>
-<h5>
-<a href=/docs/5-blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A-truffle-box%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/>以太坊的truffle box开发实战</a>
-</h5>
-<p>介绍以太坊私合约开发</p>
-</div>
-<div class=entry>
-<h5>
-<a href=/docs/5-blockchain/fomo3d-%E4%B8%8A%E7%BA%BF%E9%83%A8%E7%BD%B2%E8%A6%81%E7%82%B9/>fomo3d-上线部署要点</a>
-</h5>
-<p>介绍以太坊私合约fomo3d本地调试要点</p>
-</div>
-<div class=entry>
-<h5>
-<a href=/docs/5-blockchain/fomo3d-%E9%92%B1%E9%83%BD%E5%8E%BB%E5%93%AA%E5%84%BF%E4%BA%86/>fomo3d-钱都去哪儿了</a>
-</h5>
-<p>分析太坊私合约fomo3d的数据流向</p>
-</div>
-<div class=entry>
-<h5>
-<a href=/docs/5-blockchain/cosmos_sdk_1/>解读cosmos-sdk系列(1)</a>
-</h5>
-<p>分析解读cosmos跨链方案</p>
-</div>
-<div class=entry>
-<h5>
-<a href=/docs/5-blockchain/farbic-%E5%8C%BA%E5%9D%97%E9%93%BE%E7%BD%91%E7%BB%9C%E6%90%AD%E5%BB%BA/>farbic-搭建高并发交易网络</a>
-</h5>
-<p>联盟链改造方案</p>
-</div>
-<div class=entry>
-<h5>
-<a href=/docs/5-blockchain/frabic-%E7%A4%BA%E4%BE%8B%E9%9B%86%E7%BE%A4%E5%8C%96%E6%93%8D%E4%BD%9C/>fabric-示例集群化操作</a>
-</h5>
-<p>介绍fabric示例中的集群化操作</p>
-</div>
-<div class=entry>
-<h5>
-<a href=/docs/5-blockchain/farbic%E5%8C%BA%E5%9D%97%E9%93%BE%E7%9A%84%E9%9B%86%E7%BE%A4%E5%8C%96-kubernetes%E5%AE%9E%E6%88%98/>farbic-区块链的生产集群化</a>
-</h5>
-<p>介绍fabric示例中的生产中的集群化操作</p>
-</div>
-</div>
+<h2 id=frp介绍>FRP介绍</h2>
+<p>frp 是国人开源的一种快速反向代理，可将 NAT 或防火墙后面的本地服务器暴露到互联网上。目前，它支持暴露 TCP 和 UDP，以及 HTTP 和 HTTPS 协议，也可以通过域名将请求转发到内部服务。</p>
+<p><img src=/images/frp-2022-03-06-20-21-49.png alt></p>
+<h2 id=安装>安装</h2>
+<p>二进制下载<a href=https://github.com/fatedier/frp/releases>地址</a>, 解压后内容如下：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>➜  frp_0.39.1_linux_amd64 tree
+.
+├── frpc
+├── frpc_full.ini
+├── frpc.ini
+├── frps
+├── frps_full.ini
+├── frps.ini
+├── LICENSE
+└── systemd
+    ├── frpc.service
+    ├── frpc@.service
+    ├── frps.service
+    └── frps@.service
+
+<span style=color:#666>1</span> directory, <span style=color:#666>11</span> files
+</code></pre></div><p>可将其中的 frpc 拷贝到内网服务所在的机器上，将 frps 拷贝到具有公网 IP 的机器上，放置在任意目录。</p>
+<p>后续使用思路：</p>
+<ul>
+<li>编写配置文件，先通过 ./frps -c ./frps.ini 启动服务端，</li>
+<li>再通过 ./frpc -c ./frpc.ini 启动客户端。</li>
+<li>如果需要在后台长期运行，可使用压缩包内写好的的systemd服务</li>
+</ul>
+<h2 id=代理ssh>代理ssh</h2>
+<p>本人日常开发使用vsocde，众所周知，其<a href=https://code.visualstudio.com/docs/remote/ssh>remote SSH开发</a>的特性非常惊艳，可以提供本地开发的体验，背后需要通过ssh连接到远端服务器，高配云主机价格不菲，公司电脑长期荒废中，，，，遂有了此想法，只购买一个低配的云主机用来代理到内网的公司电脑（已安装linux）上，然后利用vscode实现内网穿透开发。</p>
+<h3 id=服务端>服务端</h3>
+<p>外网云主机用作服务端的配置：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>➜  ~ cat /etc/frp/frps.ini
+<span style=color:#080;font-style:italic># common为服务端基础配置</span>
+<span style=color:#666>[</span>common<span style=color:#666>]</span>
+<span style=color:#080;font-style:italic># 服务端监听的端口，用于和内网客户端建立通信，来接受需要代理服务的配置。</span>
+<span style=color:#b8860b>bind_port</span> <span style=color:#666>=</span> <span style=color:#666>7380</span>
+<span style=color:#080;font-style:italic># 服务端与客户端建立连接的Token，两边保持一致即可</span>
+<span style=color:#b8860b>token</span> <span style=color:#666>=</span> PassWord
+</code></pre></div><p>启动：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>frps -c /etc/frp/frps.ini
+</code></pre></div><h3 id=客户端>客户端</h3>
+<p>内网本地linux上，编写客户端配置：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#080;font-style:italic># common为客户端基础配置</span>
+<span style=color:#666>[</span>common<span style=color:#666>]</span>
+<span style=color:#080;font-style:italic># 上例服务端运行的外网IP</span>
+<span style=color:#b8860b>server_addr</span> <span style=color:#666>=</span> 39.*.*.*
+<span style=color:#b8860b>server_port</span> <span style=color:#666>=</span> <span style=color:#666>7380</span>
+<span style=color:#b8860b>token</span> <span style=color:#666>=</span> PassWord
+
+<span style=color:#080;font-style:italic># 需要代理的服务配置，可以根绝自身情况开启多个代理服务如web、 后端api等。</span>
+<span style=color:#666>[</span>ssh<span style=color:#666>]</span>
+<span style=color:#a2f>type</span> <span style=color:#666>=</span> tcp
+<span style=color:#080;font-style:italic># 本地服务信息</span>
+<span style=color:#b8860b>local_ip</span> <span style=color:#666>=</span> 127.0.0.1
+<span style=color:#b8860b>local_port</span> <span style=color:#666>=</span> <span style=color:#666>22</span>
+<span style=color:#080;font-style:italic># 配置服务端代理端口， remote 2222 -&gt; local 22</span>
+<span style=color:#b8860b>remote_port</span> <span style=color:#666>=</span> <span style=color:#666>2222</span>
+</code></pre></div><p>启动：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>frpc -c ./frpc.ini
+</code></pre></div><p>如上设置运行，可在任意机器上，通过 <code>ssh -p 2222 root@39.*.*.*</code> 登录内网机器。</p>
+<h3 id=vscode连接>vscode连接</h3>
+<p>安装正常步骤添加远端SSH机器，即可。
+<img src=/images/frp-2022-03-06-21-22-51.png alt></p>
+<h2 id=总结>总结</h2>
+<p>frp还有很多其他安全、UI、负载均衡等方面的配置，可根据自身环境选择，服务端和客户端选项更全面的配置<a href=https://gofrp.org/docs/reference/>见此</a></p>
+<p>总体上使用frp代理简单的服务，配置上可以很简单，但要配置稍复杂的场景，目前的设计感觉有些缺陷，让人容易犯迷糊，比如设计多种端口字段，来开启某特性。</p>
 <div class="text-muted mt-5 pt-3 border-top">
-最后修改 January 23, 2022: <a href=https://github.com/xiaoping378/xiaoping378.github.io/commit/1588b8be0d338604c7109e6a53d358c8a521c995>迁移陈年老文到新站 (1588b8b)</a>
+最后修改 March 6, 2022: <a href=https://github.com/xiaoping378/xiaoping378.github.io/commit/87563698171053bc7b5264b17fd65643ba30fa32>add frp blog (8756369)</a>
 </div>
 </div>
 </main>

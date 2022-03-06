@@ -50,7 +50,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.2baeca93aa085d469cbcd45a536311f4.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.1d38c20c77197266c650b9534aec6f74.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -70,12 +70,84 @@
 <h1 class=title>网络篇</h1>
 <div class=lead>网络领域的基础知识分享</div>
 <ul>
+<li>1: <a href=#pg-a6eedb17687092baf6a80230ecc011df>frp内网穿透开发</a></li>
 </ul>
 <div class=content>
 <div class="pageinfo pageinfo-primary">
 <p>主要介绍网络领域的基础知识</p>
 </div>
 </div>
+</div>
+<div class=td-content>
+<h1 id=pg-a6eedb17687092baf6a80230ecc011df>1 - frp内网穿透开发</h1>
+<div class=lead>利用frp实现外网代理ssh到内网开发机</div>
+<h2 id=frp介绍>FRP介绍</h2>
+<p>frp 是国人开源的一种快速反向代理，可将 NAT 或防火墙后面的本地服务器暴露到互联网上。目前，它支持暴露 TCP 和 UDP，以及 HTTP 和 HTTPS 协议，也可以通过域名将请求转发到内部服务。</p>
+<p><img src=/images/frp-2022-03-06-20-21-49.png alt></p>
+<h2 id=安装>安装</h2>
+<p>二进制下载<a href=https://github.com/fatedier/frp/releases>地址</a>, 解压后内容如下：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>➜  frp_0.39.1_linux_amd64 tree
+.
+├── frpc
+├── frpc_full.ini
+├── frpc.ini
+├── frps
+├── frps_full.ini
+├── frps.ini
+├── LICENSE
+└── systemd
+    ├── frpc.service
+    ├── frpc@.service
+    ├── frps.service
+    └── frps@.service
+
+<span style=color:#666>1</span> directory, <span style=color:#666>11</span> files
+</code></pre></div><p>可将其中的 frpc 拷贝到内网服务所在的机器上，将 frps 拷贝到具有公网 IP 的机器上，放置在任意目录。</p>
+<p>后续使用思路：</p>
+<ul>
+<li>编写配置文件，先通过 ./frps -c ./frps.ini 启动服务端，</li>
+<li>再通过 ./frpc -c ./frpc.ini 启动客户端。</li>
+<li>如果需要在后台长期运行，可使用压缩包内写好的的systemd服务</li>
+</ul>
+<h2 id=代理ssh>代理ssh</h2>
+<p>本人日常开发使用vsocde，众所周知，其<a href=https://code.visualstudio.com/docs/remote/ssh>remote SSH开发</a>的特性非常惊艳，可以提供本地开发的体验，背后需要通过ssh连接到远端服务器，高配云主机价格不菲，公司电脑长期荒废中，，，，遂有了此想法，只购买一个低配的云主机用来代理到内网的公司电脑（已安装linux）上，然后利用vscode实现内网穿透开发。</p>
+<h3 id=服务端>服务端</h3>
+<p>外网云主机用作服务端的配置：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>➜  ~ cat /etc/frp/frps.ini
+<span style=color:#080;font-style:italic># common为服务端基础配置</span>
+<span style=color:#666>[</span>common<span style=color:#666>]</span>
+<span style=color:#080;font-style:italic># 服务端监听的端口，用于和内网客户端建立通信，来接受需要代理服务的配置。</span>
+<span style=color:#b8860b>bind_port</span> <span style=color:#666>=</span> <span style=color:#666>7380</span>
+<span style=color:#080;font-style:italic># 服务端与客户端建立连接的Token，两边保持一致即可</span>
+<span style=color:#b8860b>token</span> <span style=color:#666>=</span> PassWord
+</code></pre></div><p>启动：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>frps -c /etc/frp/frps.ini
+</code></pre></div><h3 id=客户端>客户端</h3>
+<p>内网本地linux上，编写客户端配置：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#080;font-style:italic># common为客户端基础配置</span>
+<span style=color:#666>[</span>common<span style=color:#666>]</span>
+<span style=color:#080;font-style:italic># 上例服务端运行的外网IP</span>
+<span style=color:#b8860b>server_addr</span> <span style=color:#666>=</span> 39.*.*.*
+<span style=color:#b8860b>server_port</span> <span style=color:#666>=</span> <span style=color:#666>7380</span>
+<span style=color:#b8860b>token</span> <span style=color:#666>=</span> PassWord
+
+<span style=color:#080;font-style:italic># 需要代理的服务配置，可以根绝自身情况开启多个代理服务如web、 后端api等。</span>
+<span style=color:#666>[</span>ssh<span style=color:#666>]</span>
+<span style=color:#a2f>type</span> <span style=color:#666>=</span> tcp
+<span style=color:#080;font-style:italic># 本地服务信息</span>
+<span style=color:#b8860b>local_ip</span> <span style=color:#666>=</span> 127.0.0.1
+<span style=color:#b8860b>local_port</span> <span style=color:#666>=</span> <span style=color:#666>22</span>
+<span style=color:#080;font-style:italic># 配置服务端代理端口， remote 2222 -&gt; local 22</span>
+<span style=color:#b8860b>remote_port</span> <span style=color:#666>=</span> <span style=color:#666>2222</span>
+</code></pre></div><p>启动：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>frpc -c ./frpc.ini
+</code></pre></div><p>如上设置运行，可在任意机器上，通过 <code>ssh -p 2222 root@39.*.*.*</code> 登录内网机器。</p>
+<h3 id=vscode连接>vscode连接</h3>
+<p>安装正常步骤添加远端SSH机器，即可。
+<img src=/images/frp-2022-03-06-21-22-51.png alt></p>
+<h2 id=总结>总结</h2>
+<p>frp还有很多其他安全、UI、负载均衡等方面的配置，可根据自身环境选择，服务端和客户端选项更全面的配置<a href=https://gofrp.org/docs/reference/>见此</a></p>
+<p>总体上使用frp代理简单的服务，配置上可以很简单，但要配置稍复杂的场景，目前的设计感觉有些缺陷，让人容易犯迷糊，比如设计多种端口字段，来开启某特性。</p>
 </div>
 </main>
 </div>
