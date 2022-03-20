@@ -1,0 +1,773 @@
+<!doctype html><html lang=zh-cn class=no-js>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=generator content="Hugo 0.91.2">
+<link rel=canonical type=text/html href=https://xiaoping378.gitee.io/docs/1-site/>
+<link rel=alternate type=application/rss+xml href=https://xiaoping378.gitee.io/docs/1-site/index.xml>
+<meta name=robots content="noindex, nofollow">
+<link rel="shortcut icon" href=/favicons/favicon.ico>
+<title>站点介绍 | 现代技能栈</title>
+<meta name=description content="主要是搭建本站点和日常添加文档的全流程介绍.
+">
+<meta property="og:title" content="站点介绍">
+<meta property="og:description" content="主要是搭建本站点和日常添加文档的全流程介绍.
+">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://xiaoping378.gitee.io/docs/1-site/"><meta property="og:site_name" content="现代技能栈">
+<meta itemprop=name content="站点介绍">
+<meta itemprop=description content="主要是搭建本站点和日常添加文档的全流程介绍.
+"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="站点介绍">
+<meta name=twitter:description content="主要是搭建本站点和日常添加文档的全流程介绍.
+">
+<link rel=preload href=/scss/main.min.8973293e550f2aebcff13ca0acf28013165ed1fa321e6a370fbd3fd2e00c7d33.css as=style>
+<link href=/scss/main.min.8973293e550f2aebcff13ca0acf28013165ed1fa321e6a370fbd3fd2e00c7d33.css rel=stylesheet integrity>
+<script src=https://code.jquery.com/jquery-3.5.1.min.js integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin=anonymous></script>
+<script src=https://unpkg.com/lunr@2.3.8/lunr.min.js integrity=sha384-vRQ9bDyE0Wnu+lMfm57BlYLO0/XauFuKpVsZPs7KEDwYKktWi5+Kz3MP8++DFlRY crossorigin=anonymous></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-217913492-1','auto'),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</head>
+<body class=td-section>
+<header>
+<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
+<a class=navbar-brand href=/>
+<span class=navbar-logo></span><span class="text-uppercase font-weight-bold">现代技能栈</span>
+</a>
+<div class="td-navbar-nav-scroll ml-md-auto" id=main_navbar>
+<ul class="navbar-nav mt-2 mt-lg-0">
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class=nav-link href=/about/><span>关于</span></a>
+</li>
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class="nav-link active" href=/docs/><span class=active>文档</span></a>
+</li>
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class=nav-link href=/blog/><span>博客</span></a>
+</li>
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class=nav-link href=/community/><span>社区</span></a>
+</li>
+</ul>
+</div>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.2e4493fb40bc730b36b40ccf0e74dcbd.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+</div>
+</nav>
+</header>
+<div class="container-fluid td-outer">
+<div class=td-main>
+<div class="row flex-xl-nowrap">
+<main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main>
+<div class=td-content>
+<div class="pageinfo pageinfo-primary d-print-none">
+<p>
+这是本节的多页打印视图。
+<a href=# onclick="return print(),!1">点击此处打印</a>.
+</p><p>
+<a href=/docs/1-site/>返回本页常规视图</a>.
+</p>
+</div>
+<h1 class=title>站点介绍</h1>
+<div class=lead>主要是搭建本站点和日常添加文档的全流程介绍.</div>
+<ul>
+<li>1: <a href=#pg-7da332af27a085cd90d962e4624eef75>站点搭建方法</a></li>
+<li>2: <a href=#pg-19a76bb4dc197415e2432cc478ab88b6>自动托管markdown</a></li>
+<li>3: <a href=#pg-6f8aca1242b2f852da65b9ef918c3e91>编写文章注意项</a></li>
+<li>4: <a href=#pg-a168addfd2c2179ddc483753a4c94876>markdown语法</a></li>
+</ul>
+<div class=content>
+<div class="pageinfo pageinfo-primary">
+<p>按先后顺序，记录本站点的不断完善之旅。</p>
+</div>
+</div>
+</div>
+<div class=td-content>
+<h1 id=pg-7da332af27a085cd90d962e4624eef75>1 - 站点搭建方法</h1>
+<div class=lead>主要介绍本站点的搭建方法-hugo&Docsy主题</div>
+<div class="pageinfo pageinfo-primary">
+<p>主要涉及到hugo和docsy主题的使用。</p>
+</div>
+<h2 id=hugo介绍>hugo介绍</h2>
+<p>hugo是spf13的开源作品，目前任职于google，对他最早的印象是使用他的vim-spf13配置，后来又接触到他的cobra、plfag、viper... 为golang的生态完善做了很大贡献，致敬!</p>
+<p>书归正传，hugo是基于golang开发的世界上最快的网站构建框架，本文介绍如何基于它构建技术类文档库，也可作为内部wiki或开源书籍使用。之所以没选择gitbook，发现CLI版本已于2018年停止维护了。</p>
+<h2 id=准备环境>准备环境</h2>
+<p>安装git和hugo</p>
+<ul>
+<li>
+<p>具体过程此处不表。注意是安装hugo_extended的版本。</p>
+</li>
+<li>
+<p>如果要编译成html，部署到webserver上，还需要安装nodejs 12+。</p>
+</li>
+</ul>
+<h2 id=主题选择>主题选择</h2>
+<p>选用Docsy主题，出自google的开源主题，很多流行项目使用此主题作为官方站点，有k8s、kubeflow、grpc、etcd、Selenium等，详见此。主要功能包含：</p>
+<ul>
+<li>支持树形目录</li>
+<li>国际化</li>
+<li>搜索功能</li>
+<li>移动端自适应适配</li>
+<li>标签分类</li>
+<li>全站打印</li>
+<li>文档版本化</li>
+<li>用户反馈等</li>
+</ul>
+<p>官方提供了快速上手的脚手架，具体操作如下：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git clone https://github.com/google/docsy-example.git
+</code></pre></div><p>脚手架初始化</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#a2f>cd</span> docsy-example <span style=color:#666>&amp;&amp;</span> git submodule update --init --recursive
+</code></pre></div><p>本地启动，默认可通过<code>localhost:1313</code>访问，官方提供了在线的<a href=https://example.docsy.dev/>预览地址</a>。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>hugo server
+</code></pre></div><p>​</p>
+<h2 id=目录结构说明>目录结构说明</h2>
+<p>默认脚手架目录结构如下，只关注<code>config.toml</code>文件和<code>content</code>目录，就可以满足日常使用。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>➜  docsy-example git:<span style=color:#666>(</span>master<span style=color:#666>)</span>  tree -L <span style=color:#666>1</span>
+.
+├── assets <span style=color:#080;font-style:italic># 静态资源</span>
+├── config.toml <span style=color:#080;font-style:italic># 站点的配置文件：主题选择、名称、链接、页面分析、markdown解析引擎...</span>
+├── content <span style=color:#080;font-style:italic># 站点内容：顶层导航，左侧树形章节</span>
+├── CONTRIBUTING.md
+├── deploy.sh
+├── docker-compose.yaml
+├── Dockerfile
+├── layouts <span style=color:#080;font-style:italic># 可覆盖主题的默认布局，添加自定义页面布局</span>
+├── LICENSE
+├── netlify.toml
+├── package.json
+├── README.md
+├── resources
+└── themes <span style=color:#080;font-style:italic># Docsy主题的目录，hugo推荐的存放路径</span>
+</code></pre></div><h2 id=重点说明>重点说明</h2>
+<ul>
+<li>
+<p>修改主题的页面布局</p>
+<ul>
+<li>大部分内容可以通过修改根目录的config.toml的文件来实现</li>
+<li>不能通过上条实现的，也不建议直接修改themes目录下的内容，copy到在根目录同样的相对路径上再修改，会覆盖默认主题相关的实现。</li>
+</ul>
+</li>
+<li>
+<p>docsy主题默认提供了3种版面布局, 分别在content目录下，写markdown文件，不同目录按照各自类型风格渲染。</p>
+<ul>
+<li>docs技术文档类的布局</li>
+<li>blog博客类的布局</li>
+<li>community社区相关介绍的布局</li>
+</ul>
+</li>
+<li>
+<p>docs的目录章节可以任意分级，目录下的_index.md或者_index.html为该章、节的首页描述。</p>
+</li>
+<li>
+<p>根目录运行如下命令可编译最终html，可能会提示<code>POSTCSS</code>编译失败，需要根目录运行<code>npm install</code>安装依赖。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>rm -rf public/ <span style=color:#666>&amp;&amp;</span> <span style=color:#b8860b>HUGO_ENV</span><span style=color:#666>=</span><span style=color:#b44>&#34;production&#34;</span> hugo --gc <span style=color:#666>||</span> <span style=color:#a2f>exit</span> <span style=color:#666>1</span>
+</code></pre></div></li>
+<li>
+<p>站点内搜索功能依赖编译后的json文件，需要上一步才能使用。</p>
+</li>
+<li>
+<p>关于config.toml配置的解读（最新注释说明，可查看本站的<a href=https://github.com/xiaoping378/xiaoping378.github.io/blob/master/config.toml>原件</a>）。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-toml data-lang=toml><span style=color:#080;font-style:italic># 站点的访问地址，本地预览时(hugo server)可忽悠</span>
+baseURL = <span style=color:#b44>&#34;https://xiaoping378.github.io&#34;</span>
+
+<span style=color:#080;font-style:italic># 站点title,会被多语言里的设置覆盖</span>
+<span style=color:#080;font-style:italic># title = &#34;小平栈&#34;</span>
+
+<span style=color:#080;font-style:italic># 是否生成robots文件</span>
+enableRobotsTXT = <span style=color:#a2f;font-weight:700>true</span>
+
+<span style=color:#080;font-style:italic># 主题选择，支持组合，优先级从左到右.</span>
+theme = [<span style=color:#b44>&#34;docsy&#34;</span>]
+
+<span style=color:#080;font-style:italic># 页面上提供类似&#34;最后修改&#34;的信息</span>
+enableGitInfo = <span style=color:#a2f;font-weight:700>true</span>
+
+<span style=color:#080;font-style:italic># 国际化相关设置</span>
+<span style=color:#080;font-style:italic># 默认语言的的站点内容路径</span>
+contentDir = <span style=color:#b44>&#34;content&#34;</span>
+<span style=color:#080;font-style:italic># 默认语言</span>
+defaultContentLanguage = <span style=color:#b44>&#34;zh-cn&#34;</span>
+
+<span style=color:#080;font-style:italic># 国际化翻译中，如果有缺失是否用占位符显示</span>
+enableMissingTranslationPlaceholders = <span style=color:#a2f;font-weight:700>true</span>
+
+<span style=color:#080;font-style:italic># 注释后，可以开启标签分类功能</span>
+<span style=color:#080;font-style:italic># disableKinds = [&#34;taxonomy&#34;, &#34;taxonomyTerm&#34;]</span>
+
+[params.taxonomy]
+<span style=color:#080;font-style:italic># set taxonomyCloud = [] to hide taxonomy clouds</span>
+taxonomyCloud = [<span style=color:#b44>&#34;tags&#34;</span>] 
+<span style=color:#080;font-style:italic># If used, must have same lang as taxonomyCloud</span>
+taxonomyCloudTitle = [<span style=color:#b44>&#34;标签&#34;</span>] 
+<span style=color:#080;font-style:italic># set taxonomyPageHeader = [] to hide taxonomies on the page headers</span>
+taxonomyPageHeader = [<span style=color:#b44>&#34;tags&#34;</span>] 
+
+
+<span style=color:#080;font-style:italic># 代码块高亮配置</span>
+pygmentsCodeFences = <span style=color:#a2f;font-weight:700>true</span>
+pygmentsUseClasses = <span style=color:#a2f;font-weight:700>false</span>
+<span style=color:#080;font-style:italic># Use the new Chroma Go highlighter in Hugo.</span>
+pygmentsUseClassic = <span style=color:#a2f;font-weight:700>false</span>
+<span style=color:#080;font-style:italic>#pygmentsOptions = &#34;linenos=table&#34;</span>
+<span style=color:#080;font-style:italic># See https://help.farbox.com/pygments.html</span>
+pygmentsStyle = <span style=color:#b44>&#34;emacs&#34;</span>
+
+<span style=color:#080;font-style:italic># 配置blog编译产物的路径.</span>
+[permalinks]
+blog = <span style=color:#b44>&#34;/:section/:year/:month/:day/:slug/&#34;</span>
+
+<span style=color:#080;font-style:italic># markdown渲染引擎配置: https://github.com/russross/blackfriday</span>
+<span style=color:#080;font-style:italic># [blackfriday]</span>
+<span style=color:#080;font-style:italic># plainIDAnchors = true</span>
+<span style=color:#080;font-style:italic># hrefTargetBlank = true</span>
+<span style=color:#080;font-style:italic># angledQuotes = false</span>
+<span style=color:#080;font-style:italic># latexDashes = true</span>
+
+<span style=color:#080;font-style:italic># 图片引擎处理: https://github.com/disintegration/imaging</span>
+[imaging]
+resampleFilter = <span style=color:#b44>&#34;CatmullRom&#34;</span>
+quality = <span style=color:#666>75</span>
+anchor = <span style=color:#b44>&#34;smart&#34;</span>
+
+<span style=color:#080;font-style:italic># [services]</span>
+<span style=color:#080;font-style:italic># [services.googleAnalytics]</span>
+<span style=color:#080;font-style:italic># # Comment out the next line to disable GA tracking. Also disables the feature described in [params.ui.feedback].</span>
+<span style=color:#080;font-style:italic># id = &#34;UA-00000000-0&#34;</span>
+
+<span style=color:#080;font-style:italic># Language configuration</span>
+
+[languages]
+[languages.zh-cn]
+title = <span style=color:#b44>&#34;现代技能栈&#34;</span>
+description = <span style=color:#b44>&#34;小平-所思所为&#34;</span>
+languageName = <span style=color:#b44>&#34;中文&#34;</span>
+
+<span style=color:#080;font-style:italic># 用于多语言排序，越小越靠上。</span>
+weight = <span style=color:#666>1</span>
+
+<span style=color:#080;font-style:italic># markdown的解析设置，抄的k8s 文档设置...</span>
+[markup]
+  [markup.goldmark]
+  [markup.goldmark.extensions]
+    definitionList = <span style=color:#a2f;font-weight:700>true</span>
+    table = <span style=color:#a2f;font-weight:700>true</span>
+    typographer = <span style=color:#a2f;font-weight:700>false</span>
+  [markup.goldmark.parser]
+    attribute = <span style=color:#a2f;font-weight:700>true</span>
+    autoHeadingID = <span style=color:#a2f;font-weight:700>true</span>
+    autoHeadingIDType = <span style=color:#b44>&#34;blackfriday&#34;</span>
+  [markup.goldmark.renderer]
+    unsafe = <span style=color:#a2f;font-weight:700>true</span>
+  [markup.highlight]
+    codeFences = <span style=color:#a2f;font-weight:700>true</span>
+    guessSyntax = <span style=color:#a2f;font-weight:700>false</span>
+    hl_Lines = <span style=color:#b44>&#34;&#34;</span>
+    lineNoStart = <span style=color:#666>1</span>
+    lineNos = <span style=color:#a2f;font-weight:700>false</span>
+    lineNumbersInTable = <span style=color:#a2f;font-weight:700>true</span>
+    noClasses = <span style=color:#a2f;font-weight:700>true</span>
+    style = <span style=color:#b44>&#34;emacs&#34;</span>
+    tabWidth = <span style=color:#666>4</span>
+  [markup.tableOfContents]
+    endLevel = <span style=color:#666>3</span>
+    ordered = <span style=color:#a2f;font-weight:700>false</span>
+    startLevel = <span style=color:#666>2</span>
+
+<span style=color:#080;font-style:italic># Everything below this are Site Params</span>
+
+<span style=color:#080;font-style:italic># Comment out if you don&#39;t want the &#34;print entire section&#34; link enabled.</span>
+[outputs]
+section = [<span style=color:#b44>&#34;HTML&#34;</span>, <span style=color:#b44>&#34;print&#34;</span>, <span style=color:#b44>&#34;RSS&#34;</span>]
+
+[params]
+copyright = <span style=color:#b44>&#34;xiaoping378&#34;</span>
+privacy_policy = <span style=color:#b44>&#34;#&#34;</span>
+
+<span style=color:#080;font-style:italic># First one is picked as the Twitter card image if not set on page.</span>
+<span style=color:#080;font-style:italic># images = [&#34;images/project-illustration.png&#34;]</span>
+
+<span style=color:#080;font-style:italic># Menu title if your navbar has a versions selector to access old versions of your site.</span>
+<span style=color:#080;font-style:italic># This menu appears only if you have at least one [params.versions] set.</span>
+version_menu = <span style=color:#b44>&#34;Releases&#34;</span>
+
+<span style=color:#080;font-style:italic># Flag used in the &#34;version-banner&#34; partial to decide whether to display a </span>
+<span style=color:#080;font-style:italic># banner on every page indicating that this is an archived version of the docs.</span>
+<span style=color:#080;font-style:italic># Set this flag to &#34;true&#34; if you want to display the banner.</span>
+archived_version = <span style=color:#a2f;font-weight:700>false</span>
+
+<span style=color:#080;font-style:italic># The version number for the version of the docs represented in this doc set.</span>
+<span style=color:#080;font-style:italic># Used in the &#34;version-banner&#34; partial to display a version number for the </span>
+<span style=color:#080;font-style:italic># current doc set.</span>
+version = <span style=color:#b44>&#34;0.0&#34;</span>
+
+<span style=color:#080;font-style:italic># A link to latest version of the docs. Used in the &#34;version-banner&#34; partial to</span>
+<span style=color:#080;font-style:italic># point people to the main doc site.</span>
+<span style=color:#080;font-style:italic># url_latest_version = &#34;https://example.com&#34;</span>
+
+<span style=color:#080;font-style:italic># 方便用户反馈，提交技术文章问题的仓库地址</span>
+github_repo = <span style=color:#b44>&#34;https://github.com/xiaoping378/xiaoping378.github.io&#34;</span>
+<span style=color:#080;font-style:italic># 技术站点背后的项目issue地址</span>
+<span style=color:#080;font-style:italic># github_project_repo = &#34;https://github.com/xiaoping378/xiaoping378.github.io&#34;</span>
+
+<span style=color:#080;font-style:italic># 以下三个是设置远程文档位置的，目前用不上，这里hack一下，不然“编辑此页”的功能会去链接到content/zh-cn下</span>
+<span style=color:#080;font-style:italic># Specify a value here if your content directory is not in your repo&#39;s root directory</span>
+github_subdir = <span style=color:#b44>&#34;/&#34;</span>
+
+<span style=color:#080;font-style:italic># Uncomment this if you have a newer GitHub repo with &#34;main&#34; as the default branch,</span>
+<span style=color:#080;font-style:italic># or specify a new value if you want to reference another branch in your GitHub links</span>
+<span style=color:#080;font-style:italic># github_branch= &#34;main&#34;</span>
+
+<span style=color:#080;font-style:italic># 支持三种搜索，三选一，禁用google搜索，需要注释掉此处</span>
+<span style=color:#080;font-style:italic># gcs_engine_id = &#34;d72aa9b2712488cc3&#34;</span>
+
+<span style=color:#080;font-style:italic># Enable Algolia DocSearch</span>
+algolia_docsearch = <span style=color:#a2f;font-weight:700>false</span>
+
+<span style=color:#080;font-style:italic># Enable Lunr.js offline search</span>
+offlineSearch = <span style=color:#a2f;font-weight:700>false</span>
+
+<span style=color:#080;font-style:italic># 默认使用的Chroma代码高亮方案，可换成prism方案。</span>
+prism_syntax_highlighting = <span style=color:#a2f;font-weight:700>false</span>
+
+<span style=color:#080;font-style:italic># User interface configuration</span>
+[params.ui]
+<span style=color:#080;font-style:italic>#  是否禁用面包屑导航.</span>
+breadcrumb_disable = <span style=color:#a2f;font-weight:700>false</span>
+<span style=color:#080;font-style:italic># 是否禁用底部About链接</span>
+footer_about_disable = <span style=color:#a2f;font-weight:700>true</span>
+<span style=color:#080;font-style:italic># 是否展示项目logo，位置必须放置在 assets/icons/logo.svg</span>
+navbar_logo = <span style=color:#a2f;font-weight:700>true</span>
+<span style=color:#080;font-style:italic># 在首页，上下滑动页面，顶部导航是否禁用半透明</span>
+navbar_translucent_over_cover_disable = <span style=color:#a2f;font-weight:700>false</span>
+<span style=color:#080;font-style:italic># 左侧章节树形目录默认是否处于折叠状态</span>
+sidebar_menu_compact = <span style=color:#a2f;font-weight:700>true</span>
+<span style=color:#080;font-style:italic># 左侧章节树形目录上是否不显示搜索框，前提是需要开启搜索功能</span>
+sidebar_search_disable = <span style=color:#a2f;font-weight:700>false</span>
+
+<span style=color:#080;font-style:italic># 关闭了google分析，下面功能不会启用</span>
+[params.ui.feedback]
+enable = <span style=color:#a2f;font-weight:700>true</span>
+<span style=color:#080;font-style:italic># The responses that the user sees after clicking &#34;yes&#34; (the page was helpful) or &#34;no&#34; (the page was not helpful).</span>
+yes = <span style=color:#b44>&#39;Glad to hear it! Please &lt;a href=&#34;https://github.com/USERNAME/REPOSITORY/issues/new&#34;&gt;tell us how we can improve&lt;/a&gt;.&#39;</span>
+no = <span style=color:#b44>&#39;Sorry to hear that. Please &lt;a href=&#34;https://github.com/USERNAME/REPOSITORY/issues/new&#34;&gt;tell us how we can improve&lt;/a&gt;.&#39;</span>
+
+<span style=color:#080;font-style:italic># 在文章上面显示“阅读时长：x分钟”</span>
+[params.ui.readingtime]
+enable = <span style=color:#a2f;font-weight:700>false</span>
+
+
+<span style=color:#080;font-style:italic># 社区community版面要用到的参数</span>
+[params.links]
+<span style=color:#080;font-style:italic># End user relevant links. These will show up on left side of footer and in the community page if you have one.</span>
+[[params.links.user]]
+  name = <span style=color:#b44>&#34;个人邮箱 xiaoping378@163.com&#34;</span>
+  url = <span style=color:#b44>&#34;mailto:xiaoping378@163.com&#34;</span>
+  icon = <span style=color:#b44>&#34;fa fa-envelope&#34;</span>
+  desc = <span style=color:#b44>&#34;欢迎邮件交流&#34;</span>
+[[params.links.user]]
+  name =<span style=color:#b44>&#34;微博&#34;</span>
+  url = <span style=color:#b44>&#34;https://weibo.com/xiaoping378&#34;</span>
+  icon = <span style=color:#b44>&#34;fab fa-weibo&#34;</span>
+  desc = <span style=color:#b44>&#34;个人微博，基本不用&#34;</span>
+[[params.links.user]]
+  name = <span style=color:#b44>&#34;知乎&#34;</span>
+  url = <span style=color:#b44>&#34;https://www.zhihu.com/people/xiaoping378&#34;</span>
+  icon = <span style=color:#b44>&#34;fab fa-zhihu&#34;</span>
+  desc = <span style=color:#b44>&#34;知乎专栏&#34;</span>
+<span style=color:#080;font-style:italic># Developer relevant links. These will show up on right side of footer and in the community page if you have one.</span>
+[[params.links.developer]]
+  name = <span style=color:#b44>&#34;GitHub&#34;</span>
+  url = <span style=color:#b44>&#34;https://github.com/xiaoping378/xiaoping378.github.io&#34;</span>
+  icon = <span style=color:#b44>&#34;fab fa-github&#34;</span>
+  desc = <span style=color:#b44>&#34;文集开源地址!&#34;</span>
+[[params.links.developer]]
+  name = <span style=color:#b44>&#34;Slack&#34;</span>
+  url = <span style=color:#b44>&#34;https://example.org/slack&#34;</span>
+  icon = <span style=color:#b44>&#34;fab fa-slack&#34;</span>
+  desc = <span style=color:#b44>&#34;未开通&#34;</span>
+[[params.links.developer]]
+  name = <span style=color:#b44>&#34;Developer mailing list&#34;</span>
+  url = <span style=color:#b44>&#34;https://example.org/mail&#34;</span>
+  icon = <span style=color:#b44>&#34;fa fa-envelope&#34;</span>
+  desc = <span style=color:#b44>&#34;未开通&#34;</span>
+</code></pre></div></li>
+</ul>
+<h2 id=总结>总结</h2>
+<p>不定期更新此文，待进一步优化，，，</p>
+<p>如果自己搭建嫌麻烦，可直接Copy本站，编写自己的内容即可，搭建本站时，也遇到了Docsy国际化方面的问题，已提交官方<a href=https://github.com/google/docsy/pull/826>PR</a>修复。</p>
+<p><a href=../actions_pages>下文</a>介绍使用github的actions和pages自动托管站点。</p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-19a76bb4dc197415e2432cc478ab88b6>2 - 自动托管markdown</h1>
+<div class=lead>描述如何利用github的CI/CD实现自动更新站点。</div>
+<div class="pageinfo pageinfo-primary">
+<p>利用github actions和pages实现自动更新托管内容。</p>
+</div>
+<h2 id=项目仓库的名字由来>项目仓库的名字由来</h2>
+<p>本源码仓之所以起如此长的名字，完全是因为github pages的不成熟，不然会带个小尾巴：</p>
+<p>如果叫 <em>blog</em>, github的托管页面的访问地址会是 <em>xiaoping378.github.io/blog</em>，这也没什么，但会和hugo的<a href=/docs/1-site/add_content/#%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98>static机制</a>出现冲突。</p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-6f8aca1242b2f852da65b9ef918c3e91>3 - 编写文章注意项</h1>
+<div class=lead>描述在hugo的Docsy主题下如何编写文章和添加图片路径处理等相关的技巧。</div>
+<div class="pageinfo pageinfo-primary">
+<p>本章节主要描述日常编写文章的注意事项和docsy主题内的使用技巧。</p>
+</div>
+<h2 id=编写markdown>编写markdown</h2>
+<h3 id=图片路径问题>图片路径问题</h3>
+<p>习惯md文件中的图片路径写成<code>![](/images/file.png)</code> ，但hugo中图片实际要存放到<code>/static/images/</code>路径下，hugo会自动渲染到站点的根路径<code>/</code>上。</p>
+<p>这样的话，无法在编辑器中预览md了，有两种玩法如下：</p>
+<ul>
+<li>可以使用一个临时目录，把图片和md文件放到同一目录，编写完毕后，再把图片和md文件放置上述合适的目录位置上。</li>
+<li>日常一直启用<code>hugo server</code>编写文章，放弃编辑器中预览md，后面还会有别的坑....</li>
+</ul>
+<p>推荐后者，本人日常使用VSCode编写md，和代码开发同款，这里推荐安装<code>mushan.vscode-paste-image</code>扩展，再额外如下配置：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>    <span style=color:#b44>&#34;pasteImage.namePrefix&#34;</span><span>:</span> <span style=color:#b44>&#34;${currentFileNameWithoutExt}-&#34;</span><span>,</span>
+    <span style=color:#b44>&#34;pasteImage.path&#34;</span><span>:</span> <span style=color:#b44>&#34;${projectRoot}/static/images/&#34;</span><span>,</span>
+    <span style=color:#b44>&#34;pasteImage.basePath&#34;</span><span>:</span> <span style=color:#b44>&#34;${projectRoot}&#34;</span><span>,</span>
+    <span style=color:#b44>&#34;pasteImage.insertPattern&#34;</span><span>:</span> <span style=color:#b44>&#34;${imageSyntaxPrefix}/images/${imageFileName}${imageSyntaxSuffix}&#34;</span>
+</code></pre></div><p>日常编写文章，<code>Alt+A</code>截图，<code>Ctrl+Alt+A</code>粘贴到md文件，和hugo的配合，完美...</p>
+<h3 id=seo优化关注点>SEO优化关注点</h3>
+<p>日常文章编写，如下部分要精准描述，Google搜索引擎推荐使用<code>description</code>的meta标签告诉它页面内容的，Docsy主题会自动把红框部分填充到<code>layouts/partials/head.html</code>中。</p>
+<p><img src=/images/add_content-2022-01-25-09-38-48.png alt></p>
+<p>hugo解析编译后，html页面会如下呈现：</p>
+<p><img src=/images/add_content-2022-01-25-09-37-12.png alt></p>
+<h3 id=日常编写注意事项>日常编写注意事项</h3>
+<h4 id=md文件中相互引用内容的路径要记得对应到站点html的路径上>md文件中相互引用内容的路径要记得对应到站点html的路径上</h4>
+<p>比如此处引用<code>自动托管markdown</code>文章，按照md习惯写,虽然编辑器上可以正常打开，但hugo渲染后的页面是404的。</p>
+<ul>
+<li><code>[引用](./actions_pages.md)</code> 需要改成 <code>[引用](../actions_pages)</code></li>
+<li><code>[引用](/content/docs/1-site/actions_pages.md)</code> 需要改成 <code>[引用](/docs/1-site/actions_pages)</code></li>
+</ul>
+<p>不定时更新注意事项。日常编写，建议本机启用<code>hugo server</code>实时预览，</p>
+<h4 id=文章weight的使用>文章weight的使用</h4>
+<p>文章开头的<code>weight</code>部分决定了目录中的排序，推荐新开的系列文章，从两位数开始递增，比如<code>30</code>, 以后老系列有更新的时候，免去批量修改调整排序的麻烦。</p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-a168addfd2c2179ddc483753a4c94876>4 - markdown语法</h1>
+<div class=lead>英文markdown的语法样例展示.</div>
+<div class="pageinfo pageinfo-primary">
+<p>This is a placeholder page. Replace it with your own content.</p>
+</div>
+<p>Text can be <strong>bold</strong>, <em>italic</em>, or <del>strikethrough</del>. <a href=https://gohugo.io>Links</a> should be blue with no underlines (unless hovered over).</p>
+<p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.</p>
+<p>90's four loko seitan photo booth gochujang freegan tumeric listicle fam ugh humblebrag. Bespoke leggings gastropub, biodiesel brunch pug fashion axe meh swag art party neutra deep v chia. Enamel pin fanny pack knausgaard tofu, artisan cronut hammock meditation occupy master cleanse chartreuse lumbersexual. Kombucha kogi viral truffaut synth distillery single-origin coffee ugh slow-carb marfa selfies. Pitchfork schlitz semiotics fanny pack, ugh artisan vegan vaporware hexagon. Polaroid fixie post-ironic venmo wolf ramps <strong>kale chips</strong>.</p>
+<blockquote>
+<p>There should be no margin above this first sentence.</p>
+<p>Blockquotes should be a lighter gray with a border along the left side in the secondary color.</p>
+<p>There should be no margin below this final sentence.</p>
+</blockquote>
+<h2 id=first-header-2>First Header 2</h2>
+<p>This is a normal paragraph following a header. Knausgaard kale chips snackwave microdosing cronut copper mug swag synth bitters letterpress glossier <strong>craft beer</strong>. Mumblecore bushwick authentic gochujang vegan chambray meditation jean shorts irony. Viral farm-to-table kale chips, pork belly palo santo distillery activated charcoal aesthetic jianbing air plant woke lomo VHS organic. Tattooed locavore succulents heirloom, small batch sriracha echo park DIY af. Shaman you probably haven't heard of them copper mug, crucifix green juice vape <em>single-origin coffee</em> brunch actually. Mustache etsy vexillologist raclette authentic fam. Tousled beard humblebrag asymmetrical. I love turkey, I love my job, I love my friends, I love Chardonnay!</p>
+<p>Deae legum paulatimque terra, non vos mutata tacet: dic. Vocant docuique me plumas fila quin afuerunt copia haec o neque.</p>
+<p>On big screens, paragraphs and headings should not take up the full container width, but we want tables, code blocks and similar to take the full width.</p>
+<p>Scenester tumeric pickled, authentic crucifix post-ironic fam freegan VHS pork belly 8-bit yuccie PBR&B. <strong>I love this life we live in</strong>.</p>
+<h2 id=second-header-2>Second Header 2</h2>
+<blockquote>
+<p>This is a blockquote following a header. Bacon ipsum dolor sit amet t-bone doner shank drumstick, pork belly porchetta chuck sausage brisket ham hock rump pig. Chuck kielbasa leberkas, pork bresaola ham hock filet mignon cow shoulder short ribs biltong.</p>
+</blockquote>
+<h3 id=header-3>Header 3</h3>
+<pre tabindex=0><code>This is a code block following a header.
+</code></pre><p>Next level leggings before they sold out, PBR&B church-key shaman echo park. Kale chips occupy godard whatever pop-up freegan pork belly selfies. Gastropub Belinda subway tile woke post-ironic seitan. Shabby chic man bun semiotics vape, chia messenger bag plaid cardigan.</p>
+<h4 id=header-4>Header 4</h4>
+<ul>
+<li>This is an unordered list following a header.</li>
+<li>This is an unordered list following a header.</li>
+<li>This is an unordered list following a header.</li>
+</ul>
+<h5 id=header-5>Header 5</h5>
+<ol>
+<li>This is an ordered list following a header.</li>
+<li>This is an ordered list following a header.</li>
+<li>This is an ordered list following a header.</li>
+</ol>
+<h6 id=header-6>Header 6</h6>
+<table>
+<thead>
+<tr>
+<th>What</th>
+<th>Follows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A table</td>
+<td>A header</td>
+</tr>
+<tr>
+<td>A table</td>
+<td>A header</td>
+</tr>
+<tr>
+<td>A table</td>
+<td>A header</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>There's a horizontal rule above and below this.</p>
+<hr>
+<p>Here is an unordered list:</p>
+<ul>
+<li>Liverpool F.C.</li>
+<li>Chelsea F.C.</li>
+<li>Manchester United F.C.</li>
+</ul>
+<p>And an ordered list:</p>
+<ol>
+<li>Michael Brecker</li>
+<li>Seamus Blake</li>
+<li>Branford Marsalis</li>
+</ol>
+<p>And an unordered task list:</p>
+<ul>
+<li><input checked disabled type=checkbox> Create a Hugo theme</li>
+<li><input checked disabled type=checkbox> Add task lists to it</li>
+<li><input disabled type=checkbox> Take a vacation</li>
+</ul>
+<p>And a "mixed" task list:</p>
+<ul>
+<li><input disabled type=checkbox> Pack bags</li>
+<li>?</li>
+<li><input disabled type=checkbox> Travel!</li>
+</ul>
+<p>And a nested list:</p>
+<ul>
+<li>Jackson 5
+<ul>
+<li>Michael</li>
+<li>Tito</li>
+<li>Jackie</li>
+<li>Marlon</li>
+<li>Jermaine</li>
+</ul>
+</li>
+<li>TMNT
+<ul>
+<li>Leonardo</li>
+<li>Michelangelo</li>
+<li>Donatello</li>
+<li>Raphael</li>
+</ul>
+</li>
+</ul>
+<p>Definition lists can be used with Markdown syntax. Definition headers are bold.</p>
+<dl>
+<dt>Name</dt>
+<dd>Godzilla</dd>
+<dt>Born</dt>
+<dd>1952</dd>
+<dt>Birthplace</dt>
+<dd>Japan</dd>
+<dt>Color</dt>
+<dd>Green</dd>
+</dl>
+<hr>
+<p>Tables should have bold headings and alternating shaded rows.</p>
+<table>
+<thead>
+<tr>
+<th>Artist</th>
+<th>Album</th>
+<th>Year</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Michael Jackson</td>
+<td>Thriller</td>
+<td>1982</td>
+</tr>
+<tr>
+<td>Prince</td>
+<td>Purple Rain</td>
+<td>1984</td>
+</tr>
+<tr>
+<td>Beastie Boys</td>
+<td>License to Ill</td>
+<td>1986</td>
+</tr>
+</tbody>
+</table>
+<p>If a table is too wide, it should scroll horizontally.</p>
+<table>
+<thead>
+<tr>
+<th>Artist</th>
+<th>Album</th>
+<th>Year</th>
+<th>Label</th>
+<th>Awards</th>
+<th>Songs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Michael Jackson</td>
+<td>Thriller</td>
+<td>1982</td>
+<td>Epic Records</td>
+<td>Grammy Award for Album of the Year, American Music Award for Favorite Pop/Rock Album, American Music Award for Favorite Soul/R&B Album, Brit Award for Best Selling Album, Grammy Award for Best Engineered Album, Non-Classical</td>
+<td>Wanna Be Startin' Somethin', Baby Be Mine, The Girl Is Mine, Thriller, Beat It, Billie Jean, Human Nature, P.Y.T. (Pretty Young Thing), The Lady in My Life</td>
+</tr>
+<tr>
+<td>Prince</td>
+<td>Purple Rain</td>
+<td>1984</td>
+<td>Warner Brothers Records</td>
+<td>Grammy Award for Best Score Soundtrack for Visual Media, American Music Award for Favorite Pop/Rock Album, American Music Award for Favorite Soul/R&B Album, Brit Award for Best Soundtrack/Cast Recording, Grammy Award for Best Rock Performance by a Duo or Group with Vocal</td>
+<td>Let's Go Crazy, Take Me With U, The Beautiful Ones, Computer Blue, Darling Nikki, When Doves Cry, I Would Die 4 U, Baby I'm a Star, Purple Rain</td>
+</tr>
+<tr>
+<td>Beastie Boys</td>
+<td>License to Ill</td>
+<td>1986</td>
+<td>Mercury Records</td>
+<td>noawardsbutthistablecelliswide</td>
+<td>Rhymin & Stealin, The New Style, She's Crafty, Posse in Effect, Slow Ride, Girls, (You Gotta) Fight for Your Right, No Sleep Till Brooklyn, Paul Revere, Hold It Now, Hit It, Brass Monkey, Slow and Low, Time to Get Ill</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>Code snippets like <code>var foo = "bar";</code> can be shown inline.</p>
+<p>Also, <code>this should vertically align</code> <del><code>with this</code></del> <del>and this</del>.</p>
+<p>Code can also be shown in a block element.</p>
+<pre tabindex=0><code>foo := &quot;bar&quot;;
+bar := &quot;foo&quot;;
+</code></pre><p>Code can also use syntax highlighting.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#a2f;font-weight:700>func</span> <span style=color:#00a000>main</span>() {
+  input <span style=color:#666>:=</span> <span style=color:#b44>`var foo = &#34;bar&#34;;`</span>
+
+  lexer <span style=color:#666>:=</span> lexers.<span style=color:#00a000>Get</span>(<span style=color:#b44>&#34;javascript&#34;</span>)
+  iterator, _ <span style=color:#666>:=</span> lexer.<span style=color:#00a000>Tokenise</span>(<span style=color:#a2f;font-weight:700>nil</span>, input)
+  style <span style=color:#666>:=</span> styles.<span style=color:#00a000>Get</span>(<span style=color:#b44>&#34;github&#34;</span>)
+  formatter <span style=color:#666>:=</span> html.<span style=color:#00a000>New</span>(html.<span style=color:#00a000>WithLineNumbers</span>())
+
+  <span style=color:#a2f;font-weight:700>var</span> buff bytes.Buffer
+  formatter.<span style=color:#00a000>Format</span>(<span style=color:#666>&amp;</span>buff, style, iterator)
+
+  fmt.<span style=color:#00a000>Println</span>(buff.<span style=color:#00a000>String</span>())
+}
+</code></pre></div><pre tabindex=0><code>Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
+</code></pre><p>Inline code inside table cells should still be distinguishable.</p>
+<table>
+<thead>
+<tr>
+<th>Language</th>
+<th>Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Javascript</td>
+<td><code>var foo = "bar";</code></td>
+</tr>
+<tr>
+<td>Ruby</td>
+<td><code>foo = "bar"{</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>Small images should be shown at their actual size.</p>
+<p><img src=https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Picea_abies_shoot_with_buds%2C_Sogndal%2C_Norway.jpg/240px-Picea_abies_shoot_with_buds%2C_Sogndal%2C_Norway.jpg alt></p>
+<p>Large images should always scale down and fit in the content container.</p>
+<p><img src=https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Picea_abies_shoot_with_buds%2C_Sogndal%2C_Norway.jpg/1024px-Picea_abies_shoot_with_buds%2C_Sogndal%2C_Norway.jpg alt></p>
+<p><em>The photo above of the Spruce Picea abies shoot with foliage buds: Bjørn Erik Pedersen, CC-BY-SA.</em></p>
+<h2 id=components>Components</h2>
+<h3 id=alerts>Alerts</h3>
+<p>
+<div class="alert alert-primary" role=alert>
+This is an alert.
+</div>
+<div class="alert alert-primary" role=alert>
+<h4 class=alert-heading>Note</h4>
+This is an alert with a title.
+</div>
+<div class="alert alert-primary" role=alert>
+<h4 class=alert-heading>Note</h4>
+This is an alert with a title and <strong>Markdown</strong>.
+</div>
+<div class="alert alert-success" role=alert>
+This is a successful alert.
+</div>
+<div class="alert alert-warning" role=alert>
+This is a warning.
+</div>
+<div class="alert alert-warning" role=alert>
+<h4 class=alert-heading>Warning</h4>
+This is a warning with a title.
+</div>
+</p>
+<h2 id=another-heading>Another Heading</h2>
+<p>Add some sections here to see how the ToC looks like. Bacon ipsum dolor sit amet t-bone doner shank drumstick, pork belly porchetta chuck sausage brisket ham hock rump pig. Chuck kielbasa leberkas, pork bresaola ham hock filet mignon cow shoulder short ribs biltong.</p>
+<h3 id=this-document>This Document</h3>
+<p>Inguina genus: Anaphen post: lingua violente voce suae meus aetate diversi. Orbis unam nec flammaeque status deam Silenum erat et a ferrea. Excitus rigidum ait: vestro et Herculis convicia: nitidae deseruit coniuge Proteaque adiciam <em>eripitur</em>? Sitim noceat signa <em>probat quidem</em>. Sua longis <em>fugatis</em> quidem genae.</p>
+<h3 id=pixel-count>Pixel Count</h3>
+<p>Tilde photo booth wayfarers cliche lomo intelligentsia man braid kombucha vaporware farm-to-table mixtape portland. PBR&B pickled cornhole ugh try-hard ethical subway tile. Fixie paleo intelligentsia pabst. Ennui waistcoat vinyl gochujang. Poutine salvia authentic affogato, chambray lumbersexual shabby chic.</p>
+<h3 id=contact-info>Contact Info</h3>
+<p>Plaid hell of cred microdosing, succulents tilde pour-over. Offal shabby chic 3 wolf moon blue bottle raw denim normcore poutine pork belly.</p>
+<h3 id=external-links>External Links</h3>
+<p>Stumptown PBR&B keytar plaid street art, forage XOXO pitchfork selvage affogato green juice listicle pickled everyday carry hashtag. Organic sustainable letterpress sartorial scenester intelligentsia swag bushwick. Put a bird on it stumptown neutra locavore. IPhone typewriter messenger bag narwhal. Ennui cold-pressed seitan flannel keytar, single-origin coffee adaptogen occupy yuccie williamsburg chillwave shoreditch forage waistcoat.</p>
+<pre tabindex=0><code>This is the final element on the page and there should be no margin below this.
+</code></pre>
+</div>
+</main>
+</div>
+</div>
+<footer class="bg-dark py-5 row d-print-none">
+<div class="container-fluid mx-sm-5">
+<div class=row>
+<div class="col-6 col-sm-4 text-xs-center order-sm-2">
+<ul class="list-inline mb-0">
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title="个人邮箱 xiaoping378@163.com" aria-label="个人邮箱 xiaoping378@163.com">
+<a class=text-white target=_blank rel=noopener href=mailto:xiaoping378@163.com aria-label="个人邮箱 xiaoping378@163.com">
+<i class="fa fa-envelope"></i>
+</a>
+</li>
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=微博 aria-label=微博>
+<a class=text-white target=_blank rel=noopener href=https://weibo.com/xiaoping378 aria-label=微博>
+<i class="fab fa-weibo"></i>
+</a>
+</li>
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=知乎 aria-label=知乎>
+<a class=text-white target=_blank rel=noopener href=https://www.zhihu.com/people/xiaoping378 aria-label=知乎>
+<i class="fab fa-zhihu"></i>
+</a>
+</li>
+</ul>
+</div>
+<div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+<ul class="list-inline mb-0">
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=GitHub aria-label=GitHub>
+<a class=text-white target=_blank rel=noopener href=https://github.com/xiaoping378/xiaoping378.github.io aria-label=GitHub>
+<i class="fab fa-github"></i>
+</a>
+</li>
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=Slack aria-label=Slack>
+<a class=text-white target=_blank rel=noopener href=https://example.org/slack aria-label=Slack>
+<i class="fab fa-slack"></i>
+</a>
+</li>
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title="Developer mailing list" aria-label="Developer mailing list">
+<a class=text-white target=_blank rel=noopener href=https://example.org/mail aria-label="Developer mailing list">
+<i class="fa fa-envelope"></i>
+</a>
+</li>
+</ul>
+</div>
+<div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+<small class=text-white>&copy; 2022 xiaoping378 保留所有权利</small>
+<small class=ml-1><a href=# target=_blank rel=noopener>隐私政策</a></small>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js integrity=sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin=anonymous></script>
+<script src=/js/tabpane-persist.js></script>
+<script src=/js/deflate.js></script>
+<script src=/js/main.min.e016890ed6b0c42f5af3410eb57ac626a192a868609aee68cefe1e0f84a50b13.js integrity="sha256-4BaJDtawxC9a80EOtXrGJqGSqGhgmu5ozv4eD4SlCxM=" crossorigin=anonymous></script>
+</body>
+</html>

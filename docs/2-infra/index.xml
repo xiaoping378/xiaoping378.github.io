@@ -1,0 +1,7 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>现代技能栈 – 基础知识</title><link>https://xiaoping378.gitee.io/docs/2-infra/</link><description>Recent content in 基础知识 on 现代技能栈</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://xiaoping378.gitee.io/docs/2-infra/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: 网络篇</title><link>https://xiaoping378.gitee.io/docs/2-infra/network/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.gitee.io/docs/2-infra/network/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>主要介绍网络领域的基础知识&lt;/p>
+&lt;/div></description></item><item><title>Docs: linux基础</title><link>https://xiaoping378.gitee.io/docs/2-infra/linux/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.gitee.io/docs/2-infra/linux/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>主要是本地环境搭建、日常使用技巧和linux性能方面的解读.&lt;/p>
+&lt;/div></description></item></channel></rss>

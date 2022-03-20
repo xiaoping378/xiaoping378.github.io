@@ -1,0 +1,854 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>现代技能栈 – Kubernetes</title><link>https://xiaoping378.gitee.io/docs/4-cloud/k8s/</link><description>Recent content in Kubernetes on 现代技能栈</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://xiaoping378.gitee.io/docs/4-cloud/k8s/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: 源码部署K8S</title><link>https://xiaoping378.gitee.io/docs/4-cloud/k8s/%E6%BA%90%E7%A0%81%E9%83%A8%E7%BD%B2k8s/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.gitee.io/docs/4-cloud/k8s/%E6%BA%90%E7%A0%81%E9%83%A8%E7%BD%B2k8s/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>此文应该不能运行成功了，，，陈年老文，有待验证。&lt;/p>
+&lt;/div>
+&lt;h4 id="一-先介绍最省事的部署方法-直接从官网下release版本安装">一. 先介绍最省事的部署方法，直接从官网下release版本安装:&lt;/h4>
+&lt;p>git clone 代码步骤省略 ...&lt;/p>
+&lt;ol>
+&lt;li>下载各依赖的release版本&lt;/li>
+&lt;/ol>
+&lt;p>通过修改配置文件 &lt;strong>cluster/centos/config-build.sh&lt;/strong>， 可自定义（k8s, docker, flannel, etcd）各自的下载地址和版本， 不同的版本的依赖可能会需要小改下脚本（版本变更有些打包路径发生了变化，兼容性问题）&lt;/p>
+&lt;pre tabindex="0">&lt;code>cd cluster/centos &amp;amp;&amp;amp; ./build.sh all
+&lt;/code>&lt;/pre>&lt;ol start="2">
+&lt;li>安装并启动k8s集群环境&lt;/li>
+&lt;/ol>
+&lt;p>通过修改配置文件 &lt;strong>cluster/centos/config-default.sh&lt;/strong>，定义你环境里的设备的IP和其他参数，推荐运行脚本前先通过ssh-copy-id做好免密钥认证；&lt;/p>
+&lt;pre tabindex="0">&lt;code>export KUBERNETES_PROVIDER=centos &amp;amp;&amp;amp; cluster/kube-up.sh
+&lt;/code>&lt;/pre>&lt;h4 id="二-源码级编译安装">二. 源码级编译安装&lt;/h4>
+&lt;p>本步骤基于上一大步来说,
+先来看下载各依赖的release后，cluster/centos下目录发生了什么变化&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.gitee.io/k8s-binaries-tree.png" alt="">&lt;/p>
+&lt;p>多了一个binaries的目录，里面是各master和minion上各依赖的二进制文件， 所以我们只要源码编译的结果，替换到这里来， 然后继续上一大步的第2小步即可。&lt;/p>
+&lt;p>这里说下，本地编译k8s的话，需要设置安装godep，然后命令本地化。&lt;/p>
+&lt;pre tabindex="0">&lt;code>export PATH=$PATH:$GOPATH/bin
+&lt;/code>&lt;/pre>&lt;p>最后只需要去源码根目录下执行， 编译结果在_output目录下&lt;/p>
+&lt;pre tabindex="0">&lt;code>make
+&lt;/code>&lt;/pre>&lt;p>替换到相应的binaries目录下，重新运行kube-up.sh即可。&lt;/p></description></item><item><title>Docs: 离线安装kubernetes</title><link>https://xiaoping378.gitee.io/docs/4-cloud/k8s/kuberbetes-1.5-%E7%A6%BB%E7%BA%BF%E9%83%A8%E7%BD%B2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.gitee.io/docs/4-cloud/k8s/kuberbetes-1.5-%E7%A6%BB%E7%BA%BF%E9%83%A8%E7%BD%B2/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>虽然距离当前主流版本已经差之千里，但其中的思想仍记得借鉴。&lt;/p>
+&lt;/div>
+&lt;p>经常遇到全新初始安装k8s集群的问题，所以想着搞成离线模式，本着最小依赖原则，提高安装速度&lt;/p>
+&lt;p>基于Centos7-1511-minimal, 非此版本脚本应该会运行出错，自行修改吧&lt;/p>
+&lt;p>本离线安装所有的依赖都打包放到了&lt;a href="https://pan.baidu.com/s/1i5jusip">百度网盘&lt;/a>&lt;/p>
+&lt;p>为了便于维护，已建立独立项目&lt;a href="https://github.com/xiaoping378/k8s-deploy">k8s-deploy&lt;/a>&lt;/p>
+&lt;h2 id="第一步">第一步&lt;/h2>
+&lt;p>基本思路是，在k8s-deploy目录下，临时启个http server， node节点上会从此拉取所依赖镜像和rpms&lt;/p>
+&lt;pre tabindex="0">&lt;code># python -m SimpleHTTPServer
+Serving HTTP on 0.0.0.0 port 8000 ...
+&lt;/code>&lt;/pre>&lt;p>windows上可以用hfs临时启个http server， 自行百度如何使用&lt;/p>
+&lt;h2 id="master侧">master侧&lt;/h2>
+&lt;p>运行以下命令，初始化master&lt;/p>
+&lt;p>192.168.56.1:8000 是我的http-server, 注意要将k8s-deploy.sh 里的HTTP-SERVER变量也改下&lt;/p>
+&lt;pre tabindex="0">&lt;code>curl -L http://192.168.56.1:8000/k8s-deploy.sh | bash -s master
+&lt;/code>&lt;/pre>&lt;h2 id="minion侧">minion侧&lt;/h2>
+&lt;p>视自己的情况而定&lt;/p>
+&lt;pre tabindex="0">&lt;code>curl -L http://192.168.56.1:8000/k8s-deploy.sh | bash -s join --token=6669b1.81f129bc847154f9 192.168.56.100
+&lt;/code>&lt;/pre>&lt;h2 id="总结">总结&lt;/h2>
+&lt;p>整个脚本实现比较简单， 坑都在脚本里解决了。脚本文件在&lt;a href="https://gist.github.com/xiaoping378/3a129aa6c81eaecae199a50236ad8bf7">这里&lt;/a>&lt;/p>
+&lt;p>就一个master-up和node-up， 基本一个函数只做一件事，很清晰，可以自己查看具体过程。&lt;/p>
+&lt;p>1.5 与 1.3给我感觉最大的变化是网络部分， 1.5启用了cni网络插件
+不需要像以前一样非要把flannel和docker绑在一起了（先启flannel才能启docker）。&lt;/p>
+&lt;p>具体可以看这里
+&lt;a href="https://github.com/containernetworking/cni/blob/master/Documentation/flannel.md">https://github.com/containernetworking/cni/blob/master/Documentation/flannel.md&lt;/a>&lt;/p>
+&lt;p>master侧如果是单核的话，会因资源不足， dns安装失败。&lt;/p></description></item><item><title>Docs: k8s的各组件认知</title><link>https://xiaoping378.gitee.io/docs/4-cloud/k8s/k8s%E5%90%84%E7%BB%84%E4%BB%B6%E7%9A%84%E8%AE%A4%E7%9F%A5/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.gitee.io/docs/4-cloud/k8s/k8s%E5%90%84%E7%BB%84%E4%BB%B6%E7%9A%84%E8%AE%A4%E7%9F%A5/</guid><description>
+&lt;h3 id="flannel">flannel&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>flannel的设计就是为集群中所有节点能重新规划IP地址的使用规则，从而使得不同节点上的容器能够获得“同属一个内网”且”不重复的”IP地址，
+并让属于不同节点上的容器能够直接通过内网IP通信。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>实际上就是给每个节点的docker重新设置容器上可分配的IP段， &lt;code>--bip&lt;/code>的妙用。
+这恰好迎合了k8s的设计，即一个pod（container）在集群中拥有唯一、可路由到的IP，带来的好处就是减少跨主机容器间通信要port mapping的复杂性。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>原理&lt;/p>
+&lt;ul>
+&lt;li>flannle需要运行一个叫flanned的agent，其用etcd来存储网络配置、已经分配的子网、和辅助信息（主机IP),如下&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#666">[&lt;/span>root@master1 ~&lt;span style="color:#666">]&lt;/span>&lt;span style="color:#080;font-style:italic"># etcdctl ls /coreos.com/network&lt;/span>
+/coreos.com/network/config
+/coreos.com/network/subnets
+&lt;span style="color:#666">[&lt;/span>root@master1 ~&lt;span style="color:#666">]&lt;/span>&lt;span style="color:#080;font-style:italic">#&lt;/span>
+&lt;span style="color:#666">[&lt;/span>root@master1 ~&lt;span style="color:#666">]&lt;/span>&lt;span style="color:#080;font-style:italic"># etcdctl get /coreos.com/network/config&lt;/span>
+&lt;span style="color:#666">{&lt;/span>&lt;span style="color:#b44">&amp;#34;Network&amp;#34;&lt;/span>:&lt;span style="color:#b44">&amp;#34;172.16.0.0/16&amp;#34;&lt;/span>&lt;span style="color:#666">}&lt;/span>
+&lt;span style="color:#666">[&lt;/span>root@master1 ~&lt;span style="color:#666">]&lt;/span>&lt;span style="color:#080;font-style:italic">#&lt;/span>
+&lt;span style="color:#666">[&lt;/span>root@master1 ~&lt;span style="color:#666">]&lt;/span>&lt;span style="color:#080;font-style:italic"># etcdctl ls /coreos.com/network/subnets&lt;/span>
+/coreos.com/network/subnets/172.16.29.0-24
+/coreos.com/network/subnets/172.16.40.0-24
+/coreos.com/network/subnets/172.16.60.0-24
+&lt;span style="color:#666">[&lt;/span>root@master1 ~&lt;span style="color:#666">]&lt;/span>&lt;span style="color:#080;font-style:italic">#&lt;/span>
+&lt;span style="color:#666">[&lt;/span>root@master1 ~&lt;span style="color:#666">]&lt;/span>&lt;span style="color:#080;font-style:italic"># etcdctl get /coreos.com/network/subnets/172.16.29.0-24&lt;/span>
+&lt;span style="color:#666">{&lt;/span>&lt;span style="color:#b44">&amp;#34;PublicIP&amp;#34;&lt;/span>:&lt;span style="color:#b44">&amp;#34;192.168.1.129&amp;#34;&lt;/span>&lt;span style="color:#666">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>
+&lt;p>flannel0 还负责解封装报文,或者创建路由。
+flannel有多种方式可以完成报文的转发。&lt;/p>
+&lt;ul>
+&lt;li>UDP&lt;/li>
+&lt;li>vxlan&lt;/li>
+&lt;li>host-gw&lt;/li>
+&lt;li>aws-vpc&lt;/li>
+&lt;li>gce&lt;/li>
+&lt;li>alloc&lt;/li>
+&lt;/ul>
+&lt;p>下图是经典的UDP封装方式数据流图
+&lt;img src="https://xiaoping378.gitee.io/flannel-packet-01.png" alt="UDP">&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item><item><title>Docs: Helm模板介绍</title><link>https://xiaoping378.gitee.io/docs/4-cloud/k8s/kubernetes-helm%E6%A8%A1%E6%9D%BF%E6%80%BB%E7%BB%93/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.gitee.io/docs/4-cloud/k8s/kubernetes-helm%E6%A8%A1%E6%9D%BF%E6%80%BB%E7%BB%93/</guid><description>
+&lt;h3 id="概要">概要&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>Helm是一个管理kubernetes集群内应用的工具，提供了一系列管理应用的快捷方式，例如 inspect， install， upgrade， delete等，经验可以沿用以前apt，yum，homebrew的,区别就是helm管理的是kubernetes集群内的应用。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>还有一个概念必须得提，就是&lt;code>chart&lt;/code>， 它代表的就是被helm管理的应用包，里面具体就是放一些预先配置的Kubernetes资源(pod, rc, deployment, service, ingress)，一个包描述文件(&lt;code>Chart.yaml&lt;/code>), 还可以通过指定依赖来组织成更复杂的应用，支持go template语法，可参数化模板，让使用者定制化安装
+charts可以存放在本地，也可以放在远端，这点理解成yum仓很合适。。。&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>这里有个&lt;a href="https://kubeapps.com">应用市场&lt;/a> ，里面罗列了各种应用charts。由开源项目&lt;a href="https://github.com/helm/monocular">monocular&lt;/a>支撑&lt;/p>
+&lt;p>下面主要介绍helm的基本使用流程和具体场景的实践。&lt;/p>
+&lt;h3 id="初始化k8s集群v1-6-2">初始化k8s集群v1.6.2&lt;/h3>
+&lt;p>先来准备k8s环境，可以通过&lt;a href="https://github.com/xiaoping378/k8s-deploy">k8s-deploy&lt;/a>项目来离线安装高可用kubernetes集群，我这里是单机演示环境。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">kubeadm init --kubernetes-version v1.6.2 --pod-network-cidr 12.240.0.0/12
+&lt;span style="color:#080;font-style:italic">#方便命令自动补全&lt;/span>
+&lt;span style="color:#a2f">source&lt;/span> &amp;lt;&lt;span style="color:#666">(&lt;/span>kubectl completion zsh&lt;span style="color:#666">)&lt;/span>
+&lt;span style="color:#080;font-style:italic">#安装cni网络&lt;/span>
+cp /etc/kubernetes/admin.conf &lt;span style="color:#b8860b">$HOME&lt;/span>/.kube/config
+kubectl apply -f kube-flannel-rbac.yml
+kubectl apply -f kube-flannel.yml
+&lt;span style="color:#080;font-style:italic">#使能master可以被调度&lt;/span>
+kubectl taint node --all node-role.kubernetes.io/master-
+&lt;span style="color:#080;font-style:italic">#安装ingress-controller, 边界路由作用&lt;/span>
+kubectl create -f ingress-traefik-rbac.yml
+kubectl create -f ingress-traefik-deploy.yml
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>这样一个比较完整的k8s环境就具备了，另外监控和日志不在此文的讨论范围内。&lt;/p>
+&lt;h3 id="初始化helm环境">初始化Helm环境&lt;/h3>
+&lt;p>由于刚才创建的k8s集群默认启用RBAC机制，个人认为这个特性是k8s真正走向成熟的一大标志，废话不表，为了helm可以安装任何应用，我们先给他最高权限。&lt;/p>
+&lt;pre tabindex="0">&lt;code>kubectl create serviceaccount helm --namespace kube-system
+kubectl create clusterrolebinding cluster-admin-helm --clusterrole=cluster-admin --serviceaccount=kube-system:helm
+&lt;/code>&lt;/pre>&lt;p>初始化helm，如下执行，会在kube-system namepsace里安装一个tiller服务端，这个服务端就是用来解析helm语义的，后台再转成api-server的API执行：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ helm init --service-account helm
+&lt;span style="color:#b8860b">$HELM_HOME&lt;/span> has been configured at /home/xxp/.helm.
+Tiller &lt;span style="color:#666">(&lt;/span>the helm server side component&lt;span style="color:#666">)&lt;/span> has been installed into your Kubernetes Cluster.
+Happy Helming!
+➜ helm version
+Client: &amp;amp;version.Version&lt;span style="color:#666">{&lt;/span>SemVer:&lt;span style="color:#b44">&amp;#34;v2.4.1&amp;#34;&lt;/span>, GitCommit:&lt;span style="color:#b44">&amp;#34;46d9ea82e2c925186e1fc620a8320ce1314cbb02&amp;#34;&lt;/span>, GitTreeState:&lt;span style="color:#b44">&amp;#34;clean&amp;#34;&lt;/span>&lt;span style="color:#666">}&lt;/span>
+Server: &amp;amp;version.Version&lt;span style="color:#666">{&lt;/span>SemVer:&lt;span style="color:#b44">&amp;#34;v2.4.1&amp;#34;&lt;/span>, GitCommit:&lt;span style="color:#b44">&amp;#34;46d9ea82e2c925186e1fc620a8320ce1314cbb02&amp;#34;&lt;/span>, GitTreeState:&lt;span style="color:#b44">&amp;#34;clean&amp;#34;&lt;/span>&lt;span style="color:#666">}&lt;/span>
+&lt;span style="color:#080;font-style:italic">#命令行补全&lt;/span>
+➜ &lt;span style="color:#a2f">source&lt;/span> &amp;lt;&lt;span style="color:#666">(&lt;/span>helm completion zsh&lt;span style="color:#666">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="安装第一个应用">安装第一个应用&lt;/h3>
+&lt;p>初始化Helm后，默认就导入了2个repos，后面安装和搜索应用时，都是从这2个仓里出的，当然也可以自己通过&lt;code>helm repo add&lt;/code>添加本地私有仓&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ helm repo list
+NAME URL
+stable https://kubernetes-charts.storage.googleapis.com
+&lt;span style="color:#a2f">local&lt;/span> http://127.0.0.1:8879/charts
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>其实上面的repo仓的索引信息是存放在&lt;code>~/.helm/repository&lt;/code>的, 类似/etc/yum.repos.d/的作用&lt;/p>
+&lt;p>helm的使用基本流程如下:&lt;/p>
+&lt;ul>
+&lt;li>helm search: 搜索自己想要安装的应用（chart）&lt;/li>
+&lt;li>helm fetch: 下载应用（chart）到本地，可以忽略此步&lt;/li>
+&lt;li>helm install: 安装应用&lt;/li>
+&lt;li>helm ls: 查看已安装的应用情况&lt;/li>
+&lt;/ul>
+&lt;p>这里举例安装redis&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ helm install stable/redis --set persistence.enabled&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#a2f">false&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>如上，如果网络给力的话，很快就会装上最新的redis版本，Helm安装应用，目前有四种方式：&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>helm install stable/mariadb&lt;/code> 通过chart仓来安装&lt;/li>
+&lt;li>&lt;code>helm install ./nginx-1.2.3.tgz&lt;/code> 通过本地打包后的压缩chart包来安装&lt;/li>
+&lt;li>&lt;code>helm install ./nginx&lt;/code> 通过本地的chart目录来安装&lt;/li>
+&lt;li>&lt;code>helm install https://example.com/charts/nginx-1.2.3.tgz&lt;/code> 通过绝对网络地址来安装chart压缩包&lt;/li>
+&lt;/ul>
+&lt;h3 id="实战演示">实战演示&lt;/h3>
+&lt;p>主要从&lt;code>制作自己的chart&lt;/code>， &lt;code>构建自己的repo&lt;/code>， &lt;code>组装复杂应用的实战&lt;/code>三方面来演示&lt;/p>
+&lt;h4 id="制作自己的chart">制作自己的chart&lt;/h4>
+&lt;p>helm有一个很好的引导教程模板, 如下会自动创建一个通用的应用模板&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ helm create myapp
+Creating myapp
+➜ tree myapp
+myapp
+├── charts //此应用包的依赖包定义（如果有的话，也会是类似此包的目录结构）
+├── Chart.yaml // 包的描述文件
+├── templates // 包的主体目录
+│ ├── deployment.yaml // kubernetes里的deployment yaml文件
+│ ├── _helpers.tpl // 模板里如果复杂的话，可能需要函数或者其他数据结构，这里就是定义的地方
+│ ├── ingress.yaml // kubernetes里的ingress yaml文件
+│ ├── NOTES.txt // 想提供给使用者的一些注意事项，一般提供install后，如何访问之类的信息
+│ └── service.yaml // kubernetes里的service yaml文件
+└── values.yaml // 参数的默认值
+&lt;span style="color:#666">2&lt;/span> directories, &lt;span style="color:#666">7&lt;/span> files
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>如上操作，我们就有了一个&lt;code>myapp&lt;/code>的应用，目录结构如上，来看看看values.yaml的内容, 这个里面就是模板里可定制参数的默认值&lt;/p>
+&lt;p>很容易看到，kubernetes里的rc实例数，镜像名，servie配置，路由ingress配置都可以轻松定制。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-YAML" data-lang="YAML">&lt;span style="color:#080;font-style:italic"># Default values for myapp.&lt;/span>&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb">&lt;/span>&lt;span style="color:#080;font-style:italic"># This is a YAML-formatted file.&lt;/span>&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb">&lt;/span>&lt;span style="color:#080;font-style:italic"># Declare variables to be passed into your templates.&lt;/span>&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb">&lt;/span>&lt;span style="color:#008000;font-weight:bold">replicaCount&lt;/span>:&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#666">1&lt;/span>&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb">&lt;/span>&lt;span style="color:#008000;font-weight:bold">image&lt;/span>:&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#008000;font-weight:bold">repository&lt;/span>:&lt;span style="color:#bbb"> &lt;/span>nginx&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#008000;font-weight:bold">tag&lt;/span>:&lt;span style="color:#bbb"> &lt;/span>stable&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#008000;font-weight:bold">pullPolicy&lt;/span>:&lt;span style="color:#bbb"> &lt;/span>IfNotPresent&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb">&lt;/span>&lt;span style="color:#008000;font-weight:bold">service&lt;/span>:&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#008000;font-weight:bold">name&lt;/span>:&lt;span style="color:#bbb"> &lt;/span>nginx&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#008000;font-weight:bold">type&lt;/span>:&lt;span style="color:#bbb"> &lt;/span>ClusterIP&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#008000;font-weight:bold">externalPort&lt;/span>:&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#666">80&lt;/span>&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#008000;font-weight:bold">internalPort&lt;/span>:&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#666">80&lt;/span>&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb">&lt;/span>&lt;span style="color:#008000;font-weight:bold">ingress&lt;/span>:&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#008000;font-weight:bold">enabled&lt;/span>:&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#a2f;font-weight:bold">false&lt;/span>&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-style:italic"># Used to create Ingress record (should used with service.type: ClusterIP).&lt;/span>&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#008000;font-weight:bold">hosts&lt;/span>:&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb"> &lt;/span>- chart-example.local&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#008000;font-weight:bold">annotations&lt;/span>:&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-style:italic"># kubernetes.io/ingress.class: nginx&lt;/span>&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-style:italic"># kubernetes.io/tls-acme: &amp;#34;true&amp;#34;&lt;/span>&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#008000;font-weight:bold">tls&lt;/span>:&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-style:italic"># Secrets must be manually created in the namespace.&lt;/span>&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-style:italic"># - secretName: chart-example-tls&lt;/span>&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-style:italic"># hosts:&lt;/span>&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-style:italic"># - chart-example.local&lt;/span>&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb">&lt;/span>&lt;span style="color:#008000;font-weight:bold">resources&lt;/span>:&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#008000;font-weight:bold">limits&lt;/span>:&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#008000;font-weight:bold">cpu&lt;/span>:&lt;span style="color:#bbb"> &lt;/span>100m&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#008000;font-weight:bold">memory&lt;/span>:&lt;span style="color:#bbb"> &lt;/span>128Mi&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#008000;font-weight:bold">requests&lt;/span>:&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#008000;font-weight:bold">cpu&lt;/span>:&lt;span style="color:#bbb"> &lt;/span>100m&lt;span style="color:#bbb">
+&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#008000;font-weight:bold">memory&lt;/span>:&lt;span style="color:#bbb"> &lt;/span>128Mi&lt;span style="color:#bbb">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>note.&lt;/p>
+&lt;blockquote>
+&lt;p>一般拿到一个现有的app chart后，这个文件是必看的，通过&lt;code>helm fetch myapp&lt;/code>会得到一个类似上面目录的压缩包&lt;/p>
+&lt;/blockquote>
+&lt;p>我们可以通过 &lt;code>--set&lt;/code>或传入values.yaml文件来定制化安装，&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#080;font-style:italic"># 安装myapp模板： 启动2个实例，并可通过ingress对外提供myapp.192.168.31.49.xip.io的域名访问&lt;/span>
+➜ helm install --name myapp --set &lt;span style="color:#b8860b">replicaCount&lt;/span>&lt;span style="color:#666">=&lt;/span>2,ingress.enabled&lt;span style="color:#666">=&lt;/span>true,ingress.hosts&lt;span style="color:#666">={&lt;/span>myapp.192.168.31.49.xip.io&lt;span style="color:#666">}&lt;/span> ./myapp
+➜ helm ls
+NAME REVISION UPDATED STATUS CHART NAMESPACE
+exasperated-rottweiler &lt;span style="color:#666">1&lt;/span> Wed May &lt;span style="color:#666">10&lt;/span> 13:58:56 2017 DEPLOYED redis-0.5.2 default
+myapp &lt;span style="color:#666">1&lt;/span> Wed May &lt;span style="color:#666">10&lt;/span> 21:46:51 2017 DEPLOYED myapp-0.1.0 default
+&lt;span style="color:#080;font-style:italic">#通过传入yml文件来安装&lt;/span>
+&lt;span style="color:#080;font-style:italic">#helm install --name myapp -f myvalues.yaml ./myapp&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="构建私有charts-repo">构建私有charts repo&lt;/h4>
+&lt;p>通过 &lt;code>helm repo list&lt;/code>, 得知默认的local repo地址是&lt;code>http://127.0.0.1:8879/charts&lt;/code>， 可以简单的通过&lt;code>helm serve&lt;/code>来操作，再或者自己起个web server也是一样的。&lt;/p>
+&lt;p>这里举例，把刚才创建的myapp放到本地仓里&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ helm search myapp
+No results found
+➜
+➜ &lt;span style="color:#a2f">source&lt;/span> &amp;lt;&lt;span style="color:#666">(&lt;/span>helm completion zsh&lt;span style="color:#666">)&lt;/span>
+➜
+➜ helm package myapp
+➜
+➜ helm serve &amp;amp;
+&lt;span style="color:#666">[&lt;/span>1&lt;span style="color:#666">]&lt;/span> &lt;span style="color:#666">10619&lt;/span>
+➜ Regenerating index. This may take a moment.
+Now serving you on 127.0.0.1:8879
+➜ deis helm search myapp
+NAME VERSION DESCRIPTION
+local/myapp 0.1.0 A Helm chart &lt;span style="color:#a2f;font-weight:bold">for&lt;/span> Kubernetes
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>目前个人感觉体验不太好的是，私有仓里的app必须以tar包的形式存在。&lt;/p>
+&lt;h4 id="构建复杂应用">构建复杂应用&lt;/h4>
+&lt;p>透过例子学习，会加速理解，我们从deis里的workflow应用来介绍&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ ~ helm repo add deis https://charts.deis.com/workflow
+&lt;span style="color:#b44">&amp;#34;deis&amp;#34;&lt;/span> has been added to your repositories
+➜ ~
+➜ ~ helm search workflow
+NAME VERSION DESCRIPTION
+deis/workflow v2.14.0 Deis Workflow
+➜ ~
+➜ ~ helm fetch deis/workflow --untar
+➜ ~ helm dep list workflow
+NAME VERSION REPOSITORY STATUS
+builder v2.10.1 https://charts.deis.com/builder unpacked
+slugbuilder v2.4.12 https://charts.deis.com/slugbuilder unpacked
+dockerbuilder v2.7.2 https://charts.deis.com/dockerbuilder unpacked
+controller v2.14.0 https://charts.deis.com/controller unpacked
+slugrunner v2.3.0 https://charts.deis.com/slugrunner unpacked
+database v2.5.3 https://charts.deis.com/database unpacked
+fluentd v2.9.0 https://charts.deis.com/fluentd unpacked
+redis v2.2.6 https://charts.deis.com/redis unpacked
+logger v2.4.3 https://charts.deis.com/logger unpacked
+minio v2.3.5 https://charts.deis.com/minio unpacked
+monitor v2.9.0 https://charts.deis.com/monitor unpacked
+nsqd v2.2.7 https://charts.deis.com/nsqd unpacked
+registry v2.4.0 https://charts.deis.com/registry unpacked
+registry-proxy v1.3.0 https://charts.deis.com/registry-proxy unpacked
+registry-token-refresher v1.1.2 https://charts.deis.com/registry-token-refresher unpacked
+router v2.12.1 https://charts.deis.com/router unpacked
+workflow-manager v2.5.0 https://charts.deis.com/workflow-manager unpacked
+➜ ~ ls workflow
+charts Chart.yaml requirements.lock requirements.yaml templates values.yaml
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>如上操作，我们会得到一个巨型应用，实际上便是deis出品的workflow开源paas平台，具体这个平台的介绍下次有机会再分享&lt;/p>
+&lt;p>整个大型应用是通过 wofkflow/requirements.yaml组织起来的，所有依赖的chart放到charts目录，然后charts目录里就是些类似myapp的小应用&lt;/p>
+&lt;p>更复杂的应用，甚至有人把openstack用helm安装到Kubernetes上，感兴趣的可以参考&lt;a href="https://github.com/openstack/openstack-helm">这里&lt;/a>&lt;/p></description></item><item><title>Docs: k8s的监控方案</title><link>https://xiaoping378.gitee.io/docs/4-cloud/k8s/kuerbernetes%E7%9A%84%E7%9B%91%E6%8E%A7%E6%96%B9%E6%A1%88/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.gitee.io/docs/4-cloud/k8s/kuerbernetes%E7%9A%84%E7%9B%91%E6%8E%A7%E6%96%B9%E6%A1%88/</guid><description>
+&lt;h2 id="方案选型">方案选型&lt;/h2>
+&lt;p>如果已存在完善的监控系统的话，推荐使用k8s原生的&lt;strong>heapster&lt;/strong>，比较轻量，容易集成。&lt;/p>
+&lt;p>我选择的是&lt;strong>prometheus&lt;/strong>, 它是比较完善的云平台级监控方案，继k8s之后同样已被列入&lt;a href="https://cncf.io/projects">云计算基金会&lt;/a>项目, 除了具备heapster的能力之外，还支持监控广泛的应用(mysql, JMX, HAProxy等)和灵活的告警的能力，并具备多IDC federation的能力，兼容多种开源监控系统（StatsD, Ganglia, collectd, nagios等）。&lt;/p>
+&lt;p>本文主要参考&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/kubernetes/heapster/issues/645">prometheus和heapster开发者之间的对话&lt;/a>&lt;/li>
+&lt;li>CoreOS的blog&lt;a href="https://coreos.com/blog/monitoring-kubernetes-with-prometheus.html">Monitoring Kubernetes with Prometheus&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>下面分别介绍下两种方案&lt;/p>
+&lt;h3 id="heapster">heapster&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>heapster的介绍:&lt;/p>
+&lt;p>通过向kubelet拉取stats的方式， 可提供15分钟内的缓存供k8s的dashboard用，也支持第三方存储，如influxdb等，还具备REST API(经我实验，这个API还不完善 &lt;a href="https://github.com/kubernetes/heapster/issues/1155">缺少diskIO API&lt;/a>).&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>heapster的监控范围&lt;/p>
+&lt;p>可监控的内容包括集群内的Container, Pod, Node 和 Namespace的性能或配置信息，
+目前container级别还不支持网络和硬盘信息，具体性能项如下&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Metric Name&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>cpu/limit&lt;/td>
+&lt;td>CPU hard limit in millicores.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>cpu/node_capacity&lt;/td>
+&lt;td>Cpu capacity of a node.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>cpu/node_allocatable&lt;/td>
+&lt;td>Cpu allocatable of a node.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>cpu/node_reservation&lt;/td>
+&lt;td>Share of cpu that is reserved on the node allocatable.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>cpu/node_utilization&lt;/td>
+&lt;td>CPU utilization as a share of node allocatable.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>cpu/request&lt;/td>
+&lt;td>CPU request (the guaranteed amount of resources) in millicores.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>cpu/usage&lt;/td>
+&lt;td>Cumulative CPU usage on all cores.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>cpu/usage_rate&lt;/td>
+&lt;td>CPU usage on all cores in millicores.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>filesystem/usage&lt;/td>
+&lt;td>Total number of bytes consumed on a filesystem.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>filesystem/limit&lt;/td>
+&lt;td>The total size of filesystem in bytes.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>filesystem/available&lt;/td>
+&lt;td>The number of available bytes remaining in a the filesystem&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>memory/limit&lt;/td>
+&lt;td>Memory hard limit in bytes.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>memory/major_page_faults&lt;/td>
+&lt;td>Number of major page faults.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>memory/major_page_faults_rate&lt;/td>
+&lt;td>Number of major page faults per second.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>memory/node_capacity&lt;/td>
+&lt;td>Memory capacity of a node.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>memory/node_allocatable&lt;/td>
+&lt;td>Memory allocatable of a node.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>memory/node_reservation&lt;/td>
+&lt;td>Share of memory that is reserved on the node allocatable.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>memory/node_utilization&lt;/td>
+&lt;td>Memory utilization as a share of memory allocatable.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>memory/page_faults&lt;/td>
+&lt;td>Number of page faults.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>memory/page_faults_rate&lt;/td>
+&lt;td>Number of page faults per second.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>memory/request&lt;/td>
+&lt;td>Memory request (the guaranteed amount of resources) in bytes.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>memory/usage&lt;/td>
+&lt;td>Total memory usage.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>memory/working_set&lt;/td>
+&lt;td>Total working set usage. Working set is the memory being used and not easily dropped by the kernel.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>network/rx&lt;/td>
+&lt;td>Cumulative number of bytes received over the network.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>network/rx_errors&lt;/td>
+&lt;td>Cumulative number of errors while receiving over the network.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>network/rx_errors_rate&lt;/td>
+&lt;td>Number of errors while receiving over the network per second.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>network/rx_rate&lt;/td>
+&lt;td>Number of bytes received over the network per second.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>network/tx&lt;/td>
+&lt;td>Cumulative number of bytes sent over the network&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>network/tx_errors&lt;/td>
+&lt;td>Cumulative number of errors while sending over the network&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>network/tx_errors_rate&lt;/td>
+&lt;td>Number of errors while sending over the network&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>network/tx_rate&lt;/td>
+&lt;td>Number of bytes sent over the network per second.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>uptime&lt;/td>
+&lt;td>Number of milliseconds since the container was started.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="prometheus">Prometheus&lt;/h3>
+&lt;p>Prometheus集成了数据采集，存储，异常告警多项功能，是一款一体化的完整方案。 它针对大规模的集群环境设计了拉取式的数据采集方式、多维度数据存储格式以及服务发现等创新功能。&lt;/p>
+&lt;h4 id="功能特点">功能特点：&lt;/h4>
+&lt;pre>&lt;code>* 多维数据模型（有metric名称和键值对确定的时间序列）
+* 灵活的查询语言
+* 不依赖分布式存储
+* 通过pull方式采集时间序列，通过http协议传输
+* 支持通过中介网关的push时间序列的方式
+* 监控数据通过服务或者静态配置来发现
+* 支持多维度可视化分析和dashboard等
+&lt;/code>&lt;/pre>
+&lt;h4 id="组件介绍">组件介绍：&lt;/h4>
+&lt;p>这个生态里包含的组件，大多是可选的：
+* 核心prometheus server提供收集和存储时间序列数据
+* 大量的&lt;a href="https://prometheus.io/docs/instrumenting/clientlibs/">client libraries&lt;/a>来支持应用业务代码的探针
+* 适用于短时任务的push gateway
+* 基于Rails/SQL语句的可视化分析
+* 特殊用途的exporter（包括HAProxy、StatsD、Ganglia等）
+* 用于报警的alertmanager
+* 支持命令行查询的工具
+* 其他工具
+大多数的组件都是用Go语言来完成的，使得它们方便构建和部署。&lt;/p>
+&lt;h4 id="架构图">架构图：&lt;/h4>
+&lt;p>&lt;img src="https://xiaoping378.gitee.io/prometheus-architecture.png" alt="架构图">&lt;/p>
+&lt;p>Promethues直接或通过短期Jobs的中介网关拉取收集指标。 它在本地存储所有抓取的数据样本，并对数据进行规则匹配检测，这样可以基于现有数据创建新的时间系列指标或生成警报。
+PromDash或其他API使用者对收集的数据进行可视化。&lt;/p>
+&lt;h4 id="引入prometheus对k8s的影响">引入Prometheus对k8s的影响&lt;/h4>
+&lt;p>下图是Redhat研发人员的回答&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.gitee.io/prometheus-affect-k8s.png" alt="promethue-affect-k8s">&lt;/p>
+&lt;p>并不会对k8s产生太大的影响，其主要是通过api-server来发现需要监控的目标，然后会周期性的通过各个Node上kubelet来拉取数据。
+更详细的讨论见&lt;a href="https://github.com/prometheus/prometheus/pull/905">这里&lt;/a>&lt;/p>
+&lt;h3 id="部署prometheus">部署Prometheus&lt;/h3>
+&lt;p>下文是基于&lt;a href="https://github.com/xiaoping378/k8s-monitor">k8s-monitor项目&lt;/a>来说的&lt;/p>
+&lt;p>&lt;a href="https://prometheus.io/">Prometheus&lt;/a> is an open-source monitoring solution that includes the gathering of metrics, their storage in an internal time series database as well as querying and alerting based on that data.&lt;/p>
+&lt;p>It offers a lot of integrations incl. Docker, Kubernetes, etc.&lt;/p>
+&lt;p>Prometheus can also visualize your data. However, in this recipe we include another open-source tool, &lt;a href="http://grafana.org/">Grafana&lt;/a>, for the visualization part, as it offers a more powerful and flexible way to generate visuals and dashboards.&lt;/p>
+&lt;p>If you just want to get Prometheus and Grafana up and running you can deploy the whole recipe with a single command instead of going through all steps detailed out below:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">kubectl create --filename manifests/
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="deploying-prometheus">Deploying Prometheus&lt;/h2>
+&lt;p>First, we need to create the configuration for our Prometheus. For this we use a Config Map, which we later mount into our Prometheus pod to configure it. This way we can change the configuration without having to redeploy Prometheus itself.&lt;/p>
+&lt;p>&lt;code>kubectl create --filename manifests/prometheus-core-configmap.yaml&lt;/code>&lt;/p>
+&lt;p>Then, we create a service to be able to access Prometheus.&lt;/p>
+&lt;p>&lt;code>kubectl create --filename manifests/prometheus-core-service.yaml&lt;/code>&lt;/p>
+&lt;p>Finally, we can deploy Prometheus itself.&lt;/p>
+&lt;p>&lt;code>kubectl create --filename manifests/prometheus-core-deployment.yaml&lt;/code>&lt;/p>
+&lt;p>Further, we need the Prometheus Node Exporter deployed to each node. For this we use a Daemon Set and a fronting service for Prometheus to be able to access the node exporters.&lt;/p>
+&lt;pre tabindex="0">&lt;code>kubectl create --filename manifests/prometheus-node-exporter-service.yaml
+kubectl create --filename manifests/prometheus-node-exporter-daemonset.yaml
+&lt;/code>&lt;/pre>&lt;p>Wait a bit for all the pods to come up. Then Prometheus should be ready and running. We can check the Prometheus targets at &lt;a href="https://mycluster.k8s.gigantic.io/api/v1/proxy/namespaces/default/services/prometheus/targets">https://mycluster.k8s.gigantic.io/api/v1/proxy/namespaces/default/services/prometheus/targets&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.gitee.io/prometheus_targets.png" alt="Prometheus Targets">&lt;/p>
+&lt;h2 id="deploying-alertmanager">Deploying Alertmanager&lt;/h2>
+&lt;p>we need to create the configuration for our Alertmanager. For this we use a Config Map, which we later mount into our Alertmanager pod to configure it. This way we can change the configuration without having to redeploy Alertmanager itself.&lt;/p>
+&lt;p>&lt;code>kubectl create --filename manifests/prometheus-alert-configmap.yaml&lt;/code>&lt;/p>
+&lt;p>Then, we create a service to be able to access Alertmanager.&lt;/p>
+&lt;p>&lt;code>kubectl create --filename manifests/prometheus-alert-service.yaml&lt;/code>&lt;/p>
+&lt;p>Finally, we can deploy Alertmanager itself.&lt;/p>
+&lt;p>&lt;code>kubectl create --filename manifests/prometheus-alert-deployment.yaml&lt;/code>&lt;/p>
+&lt;p>Wait a bit for all the pods to come up. Then Alertmanager should be ready and running. We can check the Alertmanager targets at
+&lt;a href="https://mycluster.k8s.gigantic.io/api/v1/proxy/namespaces/default/services/alertmanager/">https://mycluster.k8s.gigantic.io/api/v1/proxy/namespaces/default/services/alertmanager/&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.gitee.io/alertmanager.png" alt="Alertmanager">&lt;/p>
+&lt;h2 id="deploying-grafana">Deploying Grafana&lt;/h2>
+&lt;p>Now that we have Prometheus up and running we can deploy Grafana to have a nicer frontend for our metrics.&lt;/p>
+&lt;p>Again, we create a service to be able to access Grafana and a deployment to manage the pods.&lt;/p>
+&lt;pre tabindex="0">&lt;code>kubectl create --filename manifests/grafana-services.yaml
+kubectl create --filename manifests/grafana-deployment.yaml
+&lt;/code>&lt;/pre>&lt;p>Wait a bit for Grafana to come up. Then you can access Grafana at &lt;a href="https://mycluster.k8s.gigantic.io/api/v1/proxy/namespaces/default/services/grafana/">https://mycluster.k8s.gigantic.io/api/v1/proxy/namespaces/default/services/grafana/&lt;/a>&lt;/p>
+&lt;h2 id="setting-up-grafana">Setting Up Grafana&lt;/h2>
+&lt;p>TLDR: If you don't want to go through all the manual steps below you can let the following job use the API to configure Grafana to a similar state.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">kubectl create --filename manifests/grafana-import-dashboards-job.yaml
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Once we're in Grafana we need to first configure &lt;a href="https://grafana.net/plugins/prometheus">Prometheus&lt;/a> as a data source.&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>Grafana UI / Data Sources / Add data source&lt;/code>
+&lt;ul>
+&lt;li>&lt;code>Name&lt;/code>: &lt;code>prometheus&lt;/code>&lt;/li>
+&lt;li>&lt;code>Type&lt;/code>: &lt;code>Prometheus&lt;/code>&lt;/li>
+&lt;li>&lt;code>Url&lt;/code>: &lt;code>http://prometheus:9090&lt;/code>&lt;/li>
+&lt;li>&lt;code>Add&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://xiaoping378.gitee.io/grafana_datasource.png" alt="Grafana Datasource">&lt;/p>
+&lt;p>Then go to the Dashboards tab and import the &lt;a href="https://grafana.net/dashboards/2">Prometheus Stats dashboard&lt;/a>, which shows the status of Prometheus itself.&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.gitee.io/grafana_datasource_dashboard.png" alt="Grafana Datasource Dashboard">&lt;/p>
+&lt;p>You can check it out to see how your Prometheus is doing.&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.gitee.io/grafana_prometheus_stats.png" alt="Grafana Datasource Dashboard">&lt;/p>
+&lt;p>Last, but not least we can import a sample &lt;a href="https://grafana.net/dashboards/597">Kubernetes cluster monitoring dashboard&lt;/a>, to get a first overview over our cluster metrics.&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>Grafana UI / Dashboards / Import&lt;/code>
+&lt;ul>
+&lt;li>&lt;code>Grafana.net Dashboard&lt;/code>: &lt;code>https://grafana.net/dashboards/597&lt;/code>&lt;/li>
+&lt;li>&lt;code>Load&lt;/code>&lt;/li>
+&lt;li>&lt;code>Prometheus&lt;/code>: &lt;code>prometheus&lt;/code>&lt;/li>
+&lt;li>&lt;code>Save &amp;amp; Open&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://xiaoping378.gitee.io/grafana_import_dashboard.png" alt="Grafana Import Dashboard">&lt;/p>
+&lt;p>Voilá. You have a nice first dashboard with metrics of your Kubernetes cluster.&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.gitee.io/grafana_cluster_overview.png" alt="Grafana Import Dashboard">&lt;/p>
+&lt;h2 id="next-steps">Next Steps&lt;/h2>
+&lt;p>Next, you should get into the &lt;a href="http://docs.grafana.org/">Grafana&lt;/a> and &lt;a href="https://prometheus.io/docs/introduction/overview/">Prometheus&lt;/a> documentations to get to know the tools and either build your own dashboards or extend the samples from above.&lt;/p>
+&lt;p>You can also check out grafana.net for some more example &lt;a href="https://grafana.net/dashboards">dashboards&lt;/a> and &lt;a href="https://grafana.net/plugins">plugins&lt;/a>.&lt;/p>
+&lt;p>More Alertmanager documentations in &lt;a href="https://prometheus.io/docs/alerting/overview/">here&lt;/a>&lt;/p></description></item><item><title>Docs: 配置harbor默认https访问</title><link>https://xiaoping378.gitee.io/docs/4-cloud/k8s/harbor_https/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.gitee.io/docs/4-cloud/k8s/harbor_https/</guid><description>
+&lt;p>因为使用自签证书（reg.300.cn），所以需要把中间过程生成的ca.crt拷贝到需要pull/push的node上 (懒的翻译了，很详细的文档，已验证OK)&lt;/p>
+&lt;p>Because Harbor does not ship with any certificates, it uses HTTP by default to serve registry requests. This makes it relatively simple to configure. However, it is highly recommended that security be enabled for any production environment. Harbor has an Nginx instance as a reverse proxy for all services, you can configure Nginx to enable https.&lt;/p>
+&lt;p>##Getting a certificate&lt;/p>
+&lt;p>Assuming that your registry's &lt;strong>hostname&lt;/strong> is &lt;strong>reg.yourdomain.com&lt;/strong>, and that its DNS record points to the host where you are running Harbor. You first should get a certificate from a CA. The certificate usually contains a .crt file and a .key file, for example, &lt;strong>yourdomain.com.crt&lt;/strong> and &lt;strong>yourdomain.com.key&lt;/strong>.&lt;/p>
+&lt;p>In a test or development environment, you may choose to use a self-signed certificate instead of the one from a CA. The below commands generate your own certificate:&lt;/p>
+&lt;ol>
+&lt;li>Create your own CA certificate:&lt;/li>
+&lt;/ol>
+&lt;pre tabindex="0">&lt;code> openssl req \
+-newkey rsa:4096 -nodes -sha256 -keyout ca.key \
+-x509 -days 365 -out ca.crt
+&lt;/code>&lt;/pre>&lt;ol start="2">
+&lt;li>Generate a Certificate Signing Request:&lt;/li>
+&lt;/ol>
+&lt;p>If you use FQDN like &lt;strong>reg.yourdomain.com&lt;/strong> to connect your registry host, then you must use &lt;strong>reg.yourdomain.com&lt;/strong> as CN (Common Name).
+Otherwise, if you use IP address to connect your registry host, CN can be anything like your name and so on:&lt;/p>
+&lt;pre tabindex="0">&lt;code> openssl req \
+-newkey rsa:4096 -nodes -sha256 -keyout yourdomain.com.key \
+-out yourdomain.com.csr
+&lt;/code>&lt;/pre>&lt;ol start="3">
+&lt;li>Generate the certificate of your registry host:&lt;/li>
+&lt;/ol>
+&lt;p>On Ubuntu, the config file of openssl locates at &lt;strong>/etc/ssl/openssl.cnf&lt;/strong>. Refer to openssl document for more information. The default CA directory of openssl is called demoCA. Let's create necessary directories and files:&lt;/p>
+&lt;pre tabindex="0">&lt;code> mkdir demoCA
+cd demoCA
+touch index.txt
+echo '01' &amp;gt; serial
+cd ..
+&lt;/code>&lt;/pre>&lt;p>If you're using FQDN like &lt;strong>reg.yourdomain.com&lt;/strong> to connect your registry host, then run this command to generate the certificate of your registry host:&lt;/p>
+&lt;pre tabindex="0">&lt;code> openssl ca -in yourdomain.com.csr -out yourdomain.com.crt -cert ca.crt -keyfile ca.key -outdir .
+&lt;/code>&lt;/pre>&lt;p>If you're using &lt;strong>IP&lt;/strong> to connect your registry host, you may instead run the command below:&lt;/p>
+&lt;pre tabindex="0">&lt;code>
+echo subjectAltName = IP:your registry host IP &amp;gt; extfile.cnf
+openssl ca -in yourdomain.com.csr -out yourdomain.com.crt -cert ca.crt -keyfile ca.key -extfile extfile.cnf -outdir .
+&lt;/code>&lt;/pre>&lt;p>##Configuration of Nginx
+After obtaining the &lt;strong>yourdomain.com.crt&lt;/strong> and &lt;strong>yourdomain.com.key&lt;/strong> files, change the directory to Deploy/config/nginx in Harbor project.&lt;/p>
+&lt;pre tabindex="0">&lt;code> cd Deploy/config/nginx
+&lt;/code>&lt;/pre>&lt;p>Create a new directory cert/, if it does not exist. Then copy &lt;strong>yourdomain.com.crt&lt;/strong> and &lt;strong>yourdomain.com.key&lt;/strong> to cert/, e.g. :&lt;/p>
+&lt;pre tabindex="0">&lt;code> cp yourdomain.com.crt cert/
+cp yourdomain.com.key cert/
+&lt;/code>&lt;/pre>&lt;p>Rename the existing configuration file of Nginx:&lt;/p>
+&lt;pre tabindex="0">&lt;code> mv nginx.conf nginx.conf.bak
+&lt;/code>&lt;/pre>&lt;p>Copy the template &lt;strong>nginx.https.conf&lt;/strong> as the new configuration file:&lt;/p>
+&lt;pre tabindex="0">&lt;code> cp nginx.https.conf nginx.conf
+&lt;/code>&lt;/pre>&lt;p>Edit the file nginx.conf and replace two occurrences of &lt;strong>harbordomain.com&lt;/strong> to your own host name, such as reg.yourdomain.com . If you use a customized port rather than the default port 443, replace the port &amp;quot;443&amp;quot; in the line &amp;quot;rewrite ^/(.*) https://$server_name:443/$1 permanent;&amp;quot; as well. Please refer to the &lt;a href="https://github.com/vmware/harbor/blob/master/docs/installation_guide.md">installation guide&lt;/a> for other required steps of port customization.&lt;/p>
+&lt;pre tabindex="0">&lt;code> server {
+listen 443 ssl;
+server_name harbordomain.com;
+...
+server {
+listen 80;
+server_name harbordomain.com;
+rewrite ^/(.*) https://$server_name:443/$1 permanent;
+&lt;/code>&lt;/pre>&lt;p>Then look for the SSL section to make sure the files of your certificates match the names in the config file. Do not change the path of the files.&lt;/p>
+&lt;pre tabindex="0">&lt;code> ...
+# SSL
+ssl_certificate /etc/nginx/cert/yourdomain.com.crt;
+ssl_certificate_key /etc/nginx/cert/yourdomain.com.key;
+&lt;/code>&lt;/pre>&lt;p>Save your changes in nginx.conf.&lt;/p>
+&lt;p>##Installation of Harbor
+Next, edit the file Deploy/harbor.cfg , update the hostname and the protocol:&lt;/p>
+&lt;pre tabindex="0">&lt;code> #set hostname
+hostname = reg.yourdomain.com
+#set ui_url_protocol
+ui_url_protocol = https
+&lt;/code>&lt;/pre>&lt;p>Generate configuration files for Harbor:&lt;/p>
+&lt;pre tabindex="0">&lt;code>./prepare
+&lt;/code>&lt;/pre>&lt;p>If Harbor is already running, stop and remove the existing instance. Your image data remain in the file system&lt;/p>
+&lt;pre tabindex="0">&lt;code> docker-compose stop
+docker-compose rm
+&lt;/code>&lt;/pre>&lt;p>Finally, restart Harbor:&lt;/p>
+&lt;pre tabindex="0">&lt;code> docker-compose up -d
+&lt;/code>&lt;/pre>&lt;p>After setting up HTTPS for Harbor, you can verify it by the following steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Open a browser and enter the address: &lt;a href="https://reg.yourdomain.com">https://reg.yourdomain.com&lt;/a> . It should display the user interface of Harbor.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>On a machine with Docker daemon, make sure the option &amp;quot;-insecure-registry&amp;quot; does not present, and you must copy ca.crt generated in the above step to &lt;strong>/etc/docker/certs.d/yourdomain.com&lt;/strong>(or your registry host IP), if the directory does not exist, create it.
+If you mapped nginx port 443 to another port, then you should instead create the directory /etc/docker/certs.d/yourdomain.com:port(or your registry host IP:port). Then run any docker command to verify the setup, e.g.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;pre tabindex="0">&lt;code> docker login reg.yourdomain.com
+&lt;/code>&lt;/pre>&lt;p>If you've mapped nginx 443 port to another, you need to add the port to login, like below:&lt;/p>
+&lt;pre tabindex="0">&lt;code> docker login reg.yourdomain.com:port
+&lt;/code>&lt;/pre>&lt;p>##Troubleshooting&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>You may get an intermediate certificate from a certificate issuer. In this case, you should merge the intermediate certificate with your own certificate to create a certificate bundle. You can achieve this by the below command:&lt;/p>
+&lt;pre tabindex="0">&lt;code>cat intermediate-certificate.pem &amp;gt;&amp;gt; yourdomain.com.crt
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>
+&lt;p>On some systems where docker daemon runs, you may need to trust the certificate at OS level.
+On Ubuntu, this can be done by below commands:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">cp youdomain.com.crt /usr/local/share/ca-certificates/reg.yourdomain.com.crt
+update-ca-certificates
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>On Red Hat (CentOS etc), the commands are:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">cp yourdomain.com.crt /etc/pki/ca-trust/source/anchors/reg.yourdomain.com.crt
+update-ca-trust
+&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol></description></item><item><title>Docs: DEIS 开源PAAS平台实践</title><link>https://xiaoping378.gitee.io/docs/4-cloud/k8s/deis-%E5%BC%80%E6%BA%90paas%E5%B9%B3%E5%8F%B0%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.gitee.io/docs/4-cloud/k8s/deis-%E5%BC%80%E6%BA%90paas%E5%B9%B3%E5%8F%B0%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93/</guid><description>
+&lt;p>DEIS（目前已被微软收购）的workflow是开源的Paas平台，基于kubernetes做了一层面向开发者的CLI和接口，做到了让开发者对容器无感知的情况下快速的开发和部署线上应用。&lt;/p>
+&lt;blockquote>
+&lt;p>workflow是 on top of k8s的，所有组件默认全是跑在pod里的，不像openshift那样对k8s的侵入性很大。&lt;/p>
+&lt;/blockquote>
+&lt;p>特性如下：&lt;/p>
+&lt;ul>
+&lt;li>S2I(自动识别源码直接编译成镜像)&lt;/li>
+&lt;li>日志聚合&lt;/li>
+&lt;li>应用管理（发布，回滚）&lt;/li>
+&lt;li>认证&amp;amp;授权机制&lt;/li>
+&lt;li>边界路由&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://xiaoping378.gitee.io/Workflow_Detail.png" alt="Workflow_Detail">&lt;/p>
+&lt;p>下面从环境搭建，安装workflow及其基本使用做个梳理。&lt;/p>
+&lt;h3 id="初始化k8s集群">初始化k8s集群&lt;/h3>
+&lt;p>可以通过&lt;a href="https://github.com/xiaoping378/k8s-deploy">k8s-deploy&lt;/a>项目来离线安装高可用kubernetes集群，我这里是单机演示环境。&lt;/p>
+&lt;pre>&lt;code>kubeadm init --kubernetes-version v1.6.2 --pod-network-cidr 12.240.0.0/12
+#方便命令自动补全
+source &amp;lt;(kubectl completion zsh)
+#安装cni网络
+cp /etc/kubernetes/admin.conf $HOME/.kube/config
+kubectl apply -f kube-flannel-rbac.yml
+kubectl apply -f kube-flannel.yml
+#使能master可以被调度
+kubectl taint node --all node-role.kubernetes.io/master-
+#安装ingress-controller, 边界路由作用
+kubectl create -f ingress-traefik-rbac.yml
+kubectl create -f ingress-traefik-deploy.yml
+&lt;/code>&lt;/pre>
+&lt;h3 id="初始化helm">初始化helm&lt;/h3>
+&lt;p>helm相当于kubernetes里的包管理器，类似yum和apt的作用，只不过它操作的是charts（各种k8s yaml文件的集合，额外还有Chart.yaml -- 包的描述文件）可以理解为基于k8s的应用模板管理类工具， 后面会用它来安装workflow到上面跑起来的k8s集群里。&lt;/p>
+&lt;p>从k8s 1.6之后，kubeadm安装的集群，默认会开启RBAC机制，为了让helm可以安装任何应用，我们这里赋予tiller cluster-admin权限&lt;/p>
+&lt;pre>&lt;code>kubectl create serviceaccount helm --namespace kube-system
+kubectl create clusterrolebinding cluster-admin-helm --clusterrole=cluster-admin --serviceaccount=kube-system:helm
+&lt;/code>&lt;/pre>
+&lt;p>初始化helm：&lt;/p>
+&lt;pre>&lt;code>➜ helm init --service-account helm
+$HELM_HOME has been configured at /home/xxp/.helm.
+Tiller (the helm server side component) has been installed into your Kubernetes Cluster.
+Happy Helming!
+➜ helm version
+Client: &amp;amp;version.Version{SemVer:&amp;quot;v2.4.1&amp;quot;, GitCommit:&amp;quot;46d9ea82e2c925186e1fc620a8320ce1314cbb02&amp;quot;, GitTreeState:&amp;quot;clean&amp;quot;}
+Server: &amp;amp;version.Version{SemVer:&amp;quot;v2.4.1&amp;quot;, GitCommit:&amp;quot;46d9ea82e2c925186e1fc620a8320ce1314cbb02&amp;quot;, GitTreeState:&amp;quot;clean&amp;quot;}
+&lt;/code>&lt;/pre>
+&lt;p>安装后，默认导入了2个repos，后面安装和搜索应用时，都是从这2个仓里出的，当然也可以自己通过&lt;code>helm repo add&lt;/code>添加本地私有仓&lt;/p>
+&lt;pre>&lt;code>➜ helm repo list
+NAME URL
+stable https://kubernetes-charts.storage.googleapis.com
+local http://127.0.0.1:8879/charts
+&lt;/code>&lt;/pre>
+&lt;p>helm的使用基本流程如下:&lt;/p>
+&lt;ul>
+&lt;li>helm search: 搜索自己想要安装的应用（chart）&lt;/li>
+&lt;li>helm fetch: 下载应用（chart）到本地，可以忽略此步&lt;/li>
+&lt;li>helm install: 安装应用&lt;/li>
+&lt;li>helm list: 查看已安装的应用情况&lt;/li>
+&lt;/ul>
+&lt;h3 id="安装workflow">安装workflow&lt;/h3>
+&lt;p>添加workflow的repo仓&lt;/p>
+&lt;pre>&lt;code>helm repo add deis https://charts.deis.com/workflow
+&lt;/code>&lt;/pre>
+&lt;p>开始安装workflow，因为RBAC的原因，同样要赋予workflow各组件相应的权限，yml文件在[这里]（https://gist.github.com/xiaoping378/798c39e0b607be4130db655f4873bd24）&lt;/p>
+&lt;pre>&lt;code>kubectl apply -f workflow-rbac.yml --namespace deis
+helm install deis/workflow --name workflow --namespace deis \
+--set global.experimental_native_ingress=true,controller.platform_domain=192.168.31.49.xip.io
+&lt;/code>&lt;/pre>
+&lt;p>其中会拉取所需镜像，不出意外会有如下结果：&lt;/p>
+&lt;pre>&lt;code>➜ kubectl --namespace=deis get pods
+NAME READY STATUS RESTARTS AGE
+deis-builder-1134410811-11xpp 1/1 Running 0 46m
+deis-controller-2000207379-5wr10 1/1 Running 1 46m
+deis-database-244447703-v2sh9 1/1 Running 0 46m
+deis-logger-2533678197-pzmbs 1/1 Running 2 46m
+deis-logger-fluentd-08hms 1/1 Running 0 42m
+deis-logger-redis-1307646428-fz1kk 1/1 Running 0 46m
+deis-minio-3195500219-tv7wz 1/1 Running 0 46m
+deis-monitor-grafana-59098797-mdqh1 1/1 Running 0 46m
+deis-monitor-influxdb-168332144-24ngs 1/1 Running 0 46m
+deis-monitor-telegraf-vgbr9 1/1 Running 0 41m
+deis-nsqd-1042535208-40fkm 1/1 Running 0 46m
+deis-registry-2249489191-2jz3p 1/1 Running 2 46m
+deis-registry-proxy-qsqc2 1/1 Running 0 46m
+deis-router-3258454730-3rfpq 1/1 Running 0 41m
+deis-workflow-manager-3582051402-m11zn 1/1 Running 0 46m
+&lt;/code>&lt;/pre>
+&lt;h3 id="注册管理用户">注册管理用户&lt;/h3>
+&lt;p>由于我们是本地ingress-controller, 必须保障deis-builder.$host可以被解析, 自行创建ingress of deis-builder.&lt;/p>
+&lt;pre>&lt;code>kubectl apply -f deis-buidler-ingress.yml
+&lt;/code>&lt;/pre>
+&lt;p>确保traefik有如下状态：&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.gitee.io/traefik-status.png" alt="traefik-status">&lt;/p>
+&lt;p>如下操作注册，默认第一个用户为管理员用户，可操作所有其他用户。&lt;/p>
+&lt;pre>&lt;code>➜ ~ kubectl get --namespace deis ingress
+NAME HOSTS ADDRESS PORTS AGE
+builder-api-server-ingress-http deis-builder.192.168.31.49.xip.io 80 18m
+controller-api-server-ingress-http deis.192.168.31.49.xip.io 80 1h
+➜ ~
+➜ ~ deis register deis.192.168.31.49.xip.io
+username: admin
+password:
+password (confirm):
+email: xiaoping378@163.com
+Registered admin
+Logged in as admin
+Configuration file written to /home/xxp/.deis/client.json
+➜ ~
+➜ ~ deis whoami
+You are admin at http://deis.192.168.31.49.xip.io
+&lt;/code>&lt;/pre>
+&lt;h3 id="部署第一个应用">部署第一个应用&lt;/h3></description></item><item><title>Docs: k3s实践-01</title><link>https://xiaoping378.gitee.io/docs/4-cloud/k8s/k3s-%E5%BC%80%E7%AF%87/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.gitee.io/docs/4-cloud/k8s/k3s-%E5%BC%80%E7%AF%87/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>本文主要介绍k3s的安装和核心组件解读。&lt;/p>
+&lt;/div>
+&lt;p>k3s是all-in-one的轻量k8s发行版，把所有k8s组件打包成一个不到100M的二进制文件了。具备如下显著特点：&lt;/p>
+&lt;ul>
+&lt;li>打包成单一二进制&lt;/li>
+&lt;li>默认集成了sqlite3来替代etcd，也可以指定其他数据库：etcd3、mysql、postgres。&lt;/li>
+&lt;li>默认内置Coredns、Metrics Server、Flannel、Traefik ingress、Local-path-provisioner等&lt;/li>
+&lt;li>默认启用了TLS加密通信。&lt;/li>
+&lt;/ul>
+&lt;h2 id="安装">安装&lt;/h2>
+&lt;p>官方提供了一键安装脚本&lt;a href="https://get.k3s.io">install.sh&lt;/a> ，执行&lt;code>curl -sfL https://get.k3s.io | sh -&lt;/code>可一键安装server端。此命令会从&lt;code>https://update.k3s.io/v1-release/channels/stable&lt;/code>取到最新的稳定版安装，可以通过&lt;code>INSTALL_K3S_VERSION&lt;/code>环境变量指定版本，本文将以1.19为例。&lt;/p>
+&lt;p>&lt;strong>启动 k3s server端(master节点).&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">curl -sfL https://get.k3s.io | &lt;span style="color:#b8860b">INSTALL_K3S_VERSION&lt;/span>&lt;span style="color:#666">=&lt;/span>v1.19.16+k3s1 sh -
+&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>由于网络原因，可能会失败，自行想办法&lt;a href="https://github.com/k3s-io/k3s/releases/download/v1.19.16+k3s1/k3s">下载&lt;/a>下来，放置 &lt;code>/usr/local/bin/k3s&lt;/code>，附上执行权限&lt;code>chmod a+x /usr/local/bin/k3s&lt;/code>, 然后上面的命令加上&lt;code>INSTALL_K3S_SKIP_DOWNLOAD=true&lt;/code>再执行一遍即可。&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>安装里log里会输出一些重要信息: &lt;code>kubectl、crictl、卸载脚本、systemd service&lt;/code>&lt;/p>
+&lt;/blockquote>
+&lt;p>不出意外，k3s server会被systemd启动，执行命令查看&lt;code>systemctl status k3s&lt;/code>或者通过软链的kubectl验证是否启动成功：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ kubectl get no
+NAME STATUS ROLES AGE VERSION
+gitlab-server Ready master 6m43s v1.19.16+k3s1
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>(Optional)&lt;/strong> 启动 k3s agent端 (添加worker节点).&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">curl -sfL https://get.k3s.io | &lt;span style="color:#b8860b">K3S_URL&lt;/span>&lt;span style="color:#666">=&lt;/span>https://172.25.11.130:6443 &lt;span style="color:#b8860b">K3S_TOKEN&lt;/span>&lt;span style="color:#666">=&lt;/span>bulabula &lt;span style="color:#b8860b">INSTALL_K3S_VERSION&lt;/span>&lt;span style="color:#666">=&lt;/span>v1.19.16+k3s1 sh -
+&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>&lt;code>K3S_TOKEN&lt;/code>内容需要从server端的&lt;code>/var/lib/rancher/k3s/server/node-token&lt;/code>文件取出&lt;/li>
+&lt;li>&lt;code>K3S_URL&lt;/code>中的IP是master节点的IP。&lt;/li>
+&lt;/ul>
+&lt;h2 id="集群访问">集群访问&lt;/h2>
+&lt;p>默认kubectl通过localhost访问本地集群，所以上文敲kubectl是没问题的，如果要被外部访问或者纳管的话，可以把kubeconfig文件拷走，默认路径是 &lt;code>/etc/rancher/k3s/k3s.yaml&lt;/code>
+。记得修改文件内的server字段，改成外部可访问到的IP。&lt;/p>
+&lt;h2 id="架构说明">架构说明&lt;/h2>
+&lt;p>TODO.&lt;/p></description></item><item><title>Docs: TKEStack all-in-one入坑指南</title><link>https://xiaoping378.gitee.io/docs/4-cloud/k8s/tkestack-allinone/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.gitee.io/docs/4-cloud/k8s/tkestack-allinone/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>本文主要介绍当前最新版本TkeStack 1.8.1 的TKEStack的all-in-one安装、多租户和多集群管理功能解读。&lt;/p>
+&lt;/div>
+&lt;h2 id="安装实录">安装实录&lt;/h2>
+&lt;p>官方推荐至少需要2节点方可安装，配置如下，&lt;strong>硬盘空间&lt;/strong>一定要保障。也支持ALL-in-ONE的方式安装，但有BUG。&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.gitee.io/images/TKEStack-allinone-2022-01-25-08-47-30.png" alt="">&lt;/p>
+&lt;h2 id="启动init服务">启动init服务&lt;/h2>
+&lt;p>启动init服务，即安装tke-installer和registry服务，安装命令行如下：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#b8860b">arch&lt;/span>&lt;span style="color:#666">=&lt;/span>amd64 &lt;span style="color:#b8860b">version&lt;/span>&lt;span style="color:#666">=&lt;/span>v1.8.1 &lt;span style="color:#b62;font-weight:bold">\
+&lt;/span>&lt;span style="color:#b62;font-weight:bold">&lt;/span> &lt;span style="color:#666">&amp;amp;&amp;amp;&lt;/span> wget https://tke-release-1251707795.cos.ap-guangzhou.myqcloud.com/tke-installer-linux-&lt;span style="color:#b8860b">$arch&lt;/span>-&lt;span style="color:#b8860b">$version&lt;/span>.run&lt;span style="color:#666">{&lt;/span>,.sha256&lt;span style="color:#666">}&lt;/span> &lt;span style="color:#b62;font-weight:bold">\
+&lt;/span>&lt;span style="color:#b62;font-weight:bold">&lt;/span> &lt;span style="color:#666">&amp;amp;&amp;amp;&lt;/span> sha256sum --check --status tke-installer-linux-&lt;span style="color:#b8860b">$arch&lt;/span>-&lt;span style="color:#b8860b">$version&lt;/span>.run.sha256 &lt;span style="color:#b62;font-weight:bold">\
+&lt;/span>&lt;span style="color:#b62;font-weight:bold">&lt;/span> &lt;span style="color:#666">&amp;amp;&amp;amp;&lt;/span> chmod +x tke-installer-linux-&lt;span style="color:#b8860b">$arch&lt;/span>-&lt;span style="color:#b8860b">$version&lt;/span>.run &lt;span style="color:#b62;font-weight:bold">\
+&lt;/span>&lt;span style="color:#b62;font-weight:bold">&lt;/span> &lt;span style="color:#666">&amp;amp;&amp;amp;&lt;/span> ./tke-installer-linux-&lt;span style="color:#b8860b">$arch&lt;/span>-&lt;span style="color:#b8860b">$version&lt;/span>.run  
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>如上命令执行后，会下载8G左右的安装包，并执行解压后的install.sh脚本，启动3个容器：1个为tke-installer和另2个为registry仓，且为containerd容器，需要使用&lt;code>nerdctl [images | ps]&lt;/code>等命令查看相关信息。&lt;/p>
+&lt;p>通过查看脚本，上文启动的本地registry的启动命令等效如下：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">nerdctl run --name registry-https -d --net&lt;span style="color:#666">=&lt;/span>host --restart&lt;span style="color:#666">=&lt;/span>always -p 443:443 &lt;span style="color:#b62;font-weight:bold">\ &lt;/span> 
+-v /opt/tke-installer/registry:/var/lib/registry &lt;span style="color:#b62;font-weight:bold">\ &lt;/span> 
+-v registry-certs:/certs &lt;span style="color:#b62;font-weight:bold">\ &lt;/span> 
+-e &lt;span style="color:#b8860b">REGISTRY_HTTP_ADDR&lt;/span>&lt;span style="color:#666">=&lt;/span>0.0.0.0:443 &lt;span style="color:#b62;font-weight:bold">\ &lt;/span> 
+-e &lt;span style="color:#b8860b">REGISTRY_HTTP_TLS_CERTIFICATE&lt;/span>&lt;span style="color:#666">=&lt;/span>/certs/server.crt &lt;span style="color:#b62;font-weight:bold">\ &lt;/span> 
+-e &lt;span style="color:#b8860b">REGISTRY_HTTP_TLS_KEY&lt;/span>&lt;span style="color:#666">=&lt;/span>/certs/server.key  &lt;span style="color:#b62;font-weight:bold">\ &lt;/span> 
+tkestack/registry-amd64:2.7.1  
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>还有个http 80的registry，这里不贴了，后面的部分坑，就是这里埋下的，预先占用了节点的80和443端口，后面tke的gateway pod会启动失败。&lt;/p>
+&lt;h2 id="启动tke集群">启动TKE集群&lt;/h2>
+&lt;p>上章节执行完后，会启动tke-installer（一个web操作台），通过访问本地8080端口，可访问界面操作安装global集群。按照官方指引操作就行，此处不表。另外需要说明的是在安装过程中，如果要查看本地容器，不能使用&lt;code>docker ps&lt;/code>了，需要使用&lt;code>nerdctl -n k8s.io ps&lt;/code>。整个安装过程是使用ansible和kubeadm完成的，kubelet是通过systemd启动的，k8s组件为静态pod。&lt;/p>
+&lt;p>因为我是使用的ALL-in-ONE安装，遇到了不少问题，可详见FAQ如何解决。安装成功后会提示如下指引：
+&lt;img src="https://xiaoping378.gitee.io/images/TKEStack-allinone-2022-01-25-09-10-56.png" alt="">&lt;/p>
+&lt;p>默认初始安装后，很多pod是双副本的，我这里仅是验证功能使用，全部改成了单副本。&lt;/p>
+&lt;h2 id="多租户管理">多租户管理&lt;/h2>
+&lt;p>tkestack采用&lt;a href="https://xiaoping378.gitee.io/docs/3-devops/casbin">Casbin框架&lt;/a>实现的权限管理功能，默认集成的Model，查看&lt;a href="https://github.com/tkestack/tke/blob/a024c064880d9180dc8b6d615ffc58b64bb7f903/api/auth/types.go#L633">源码&lt;/a>得知：&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-Conf" data-lang="Conf">[request_definition]
+r = sub, dom, obj, act
+[policy_definition]
+p = sub, dom, obj, act, eft
+[role_definition]
+g = _, _, _
+[policy_effect]
+e = some(where (p.eft == allow)) &amp;amp;&amp;amp; !some(where (p.eft == deny))
+[matchers]
+m = g(r.sub, p.sub, r.dom) &amp;amp;&amp;amp; keyMatchCustom(r.obj, p.obj) &amp;amp;&amp;amp; keyMatchCustom(r.act, p.act)
+&lt;/code>&lt;/pre>&lt;p>实现了多租户级的RBAC权限模型。&lt;/p>
+&lt;h2 id="faq">FAQ&lt;/h2>
+&lt;h3 id="安装过程出现循环等待apiserver启动">安装过程出现循环等待apiserver启动&lt;/h3>
+&lt;pre tabindex="0">&lt;code class="language-log" data-lang="log">2022-01-19 14:43:32.225 error   tke-installer.ClusterProvider.OnCreate.EnsureKubeadmInitPhaseWaitControlPlane   check healthz error {&amp;quot;statusCode&amp;quot;: 0, &amp;quot;error&amp;quot;: &amp;quot;Get \&amp;quot;https://****:6443/healthz?timeout=30s\&amp;quot;: net/http: TLS handshake timeout&amp;quot;}
+&lt;/code>&lt;/pre>&lt;p>我这里是因为在installer上指定的master的IP为外网IP（我使用外网IP是有原因的，穷... 后面需要跨云厂商组集群），通过查看kubelet日志提示本机找不到IP，如下开启网卡多IP，可通过。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">ip addr add 118.*.*.* dev eth0
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="gateway-pod启动失败">Gateway POD启动失败&lt;/h3>
+&lt;p>我这里是因为init节点和gobal master节点，共用了一个，本registry服务占用了80和443端口，需要修改gateway hostNetwork为false，另外可以通过修改svc 为nodePort，还需要修改targetPort，官方现在这里有bug，不知道为指到944*的端口上，我这里设置的30080来访问安装好的集群。&lt;/p>
+&lt;h3 id="页面登录错误unregistered-redirect-uri">页面登录错误Unregistered redirect_uri&lt;/h3>
+&lt;p>官方没有相关说明，一切都是ALL-in-ONE的原因，我改动了默认集群console的访问端口为30080。。。 通过查看源码发现是每次认证时dex会校验tke-auth-api向它注册过的合法client地址。于是我就修改了tke命名空间下tke-auth-api的相关configmap：&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.gitee.io/images/TKEStack-allinone-2022-01-25-09-47-16.png" alt="">&lt;/p>
+&lt;p>重启tke-auth-api后，问题依旧存在，继续源码走查，发现这玩意儿叫init真的只发挥一次作用，改完配置，不会重新读取，细读逻辑发现etcd中不存在这个key，会重新读取写入一次，于是决定删除etcd中的相关key。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">etcdctl --cacert&lt;span style="color:#666">=&lt;/span>/etc/kubernetes/pki/etcd/ca.crt --cert&lt;span style="color:#666">=&lt;/span>/etc/kubernetes/pki/apiserver-etcd-client.crt --key&lt;span style="color:#666">=&lt;/span>/etc/kubernetes/pki/apiserver-etcd-client.key del /tke/auth-api/client/default  --prefix
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="添加节点的过程中failed-无法删除节点重试">添加节点的过程中failed，无法删除节点重试&lt;/h3>
+&lt;p>ssh信息设置完后，如果中间出问题，会陷入无限重试...&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.gitee.io/images/TKEStack-allinone-2022-01-25-09-48-43.png" alt="">&lt;/p>
+&lt;p>遇事不决，看日志，找不到日志，看源码...&lt;/p>
+&lt;p>通过翻找源码，发现是&lt;code>platform&lt;/code>相关组件在负责，查看相关日志&lt;code>kubectl -n logs tke-platform-controller-*** --tail 100 -f&lt;/code>，定位问题，我这里是以前各种安装的残留信息，导致添加节点初始化失败。删除之... 解决。&lt;/p>
+&lt;p>为避免添加节点&lt;code>no clean&lt;/code>再次出现问题，建议预先执行下&lt;a href="https://tke-release-1251707795.cos.ap-guangzhou.myqcloud.com/tools/clean.sh">clean.sh&lt;/a>脚本。&lt;/p>
+&lt;h2 id="小技巧">小技巧&lt;/h2>
+&lt;p>如下使用，可以愉快的敲命令了，因为我是用oh-my-zsh的shell主题(没有自动加载kubectl plugin)，kubectl的命令补全使用zsh，可根据实际情况调整。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#a2f">source&lt;/span> &amp;lt;&lt;span style="color:#666">(&lt;/span>nerdctl completion bash&lt;span style="color:#666">)&lt;/span>  
+&lt;span style="color:#a2f">source&lt;/span> &amp;lt;&lt;span style="color:#666">(&lt;/span>kubectl completion zsh&lt;span style="color:#666">)&lt;/span> 
+&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

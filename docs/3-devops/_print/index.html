@@ -1,0 +1,1132 @@
+<!doctype html><html lang=zh-cn class=no-js>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=generator content="Hugo 0.91.2">
+<link rel=canonical type=text/html href=https://xiaoping378.gitee.io/docs/3-devops/>
+<link rel=alternate type=application/rss+xml href=https://xiaoping378.gitee.io/docs/3-devops/index.xml>
+<meta name=robots content="noindex, nofollow">
+<link rel="shortcut icon" href=/favicons/favicon.ico>
+<title>Dev|Ops | 现代技能栈</title>
+<meta name=description content="此Dev|Ops非彼DevOps，很明显有墙！
+">
+<meta property="og:title" content="Dev|Ops">
+<meta property="og:description" content="此Dev|Ops非彼DevOps，很明显有墙！
+">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://xiaoping378.gitee.io/docs/3-devops/"><meta property="og:site_name" content="现代技能栈">
+<meta itemprop=name content="Dev|Ops">
+<meta itemprop=description content="此Dev|Ops非彼DevOps，很明显有墙！
+"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="Dev|Ops">
+<meta name=twitter:description content="此Dev|Ops非彼DevOps，很明显有墙！
+">
+<link rel=preload href=/scss/main.min.8973293e550f2aebcff13ca0acf28013165ed1fa321e6a370fbd3fd2e00c7d33.css as=style>
+<link href=/scss/main.min.8973293e550f2aebcff13ca0acf28013165ed1fa321e6a370fbd3fd2e00c7d33.css rel=stylesheet integrity>
+<script src=https://code.jquery.com/jquery-3.5.1.min.js integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin=anonymous></script>
+<script src=https://unpkg.com/lunr@2.3.8/lunr.min.js integrity=sha384-vRQ9bDyE0Wnu+lMfm57BlYLO0/XauFuKpVsZPs7KEDwYKktWi5+Kz3MP8++DFlRY crossorigin=anonymous></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-217913492-1','auto'),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</head>
+<body class=td-section>
+<header>
+<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
+<a class=navbar-brand href=/>
+<span class=navbar-logo></span><span class="text-uppercase font-weight-bold">现代技能栈</span>
+</a>
+<div class="td-navbar-nav-scroll ml-md-auto" id=main_navbar>
+<ul class="navbar-nav mt-2 mt-lg-0">
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class=nav-link href=/about/><span>关于</span></a>
+</li>
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class="nav-link active" href=/docs/><span class=active>文档</span></a>
+</li>
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class=nav-link href=/blog/><span>博客</span></a>
+</li>
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class=nav-link href=/community/><span>社区</span></a>
+</li>
+</ul>
+</div>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.2e4493fb40bc730b36b40ccf0e74dcbd.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+</div>
+</nav>
+</header>
+<div class="container-fluid td-outer">
+<div class=td-main>
+<div class="row flex-xl-nowrap">
+<main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main>
+<div class=td-content>
+<div class="pageinfo pageinfo-primary d-print-none">
+<p>
+这是本节的多页打印视图。
+<a href=# onclick="return print(),!1">点击此处打印</a>.
+</p><p>
+<a href=/docs/3-devops/>返回本页常规视图</a>.
+</p>
+</div>
+<h1 class=title>Dev|Ops</h1>
+<div class=lead>此Dev|Ops非彼DevOps，很明显有墙！</div>
+<ul>
+<li>1: <a href=#pg-f89170561e7ba5d22dad21ac53e50275>机器学习的语言之争</a></li>
+<li>2: <a href=#pg-0780688bfe78ed87ae0f1f07fabe1a2e>监控之我见</a></li>
+<li>3: <a href=#pg-f22bca21d5c764f3e5a5bdde5e6519d9>Github开源项目的正确贡献姿势</a></li>
+<li>4: <a href=#pg-c55eef8486d34bec7cfc37db356d9097>Golang开发-glog日志库</a></li>
+<li>5: <a href=#pg-a9f4bf3f89e3c59df21a53d3b7c87e0d>VSCode-开发已有的java项目</a></li>
+<li>6: <a href=#pg-024476416cd1256abdf9950bb55be431>MongoDB之初见</a></li>
+<li>7: <a href=#pg-0869f908f4f0eb9cdf146f22565dc728>Openldap之拨云见日</a></li>
+<li>8: <a href=#pg-9763571770981514723f9ed615e69ea5>Casbin的权限管理解读</a></li>
+<li>9: <a href=#pg-e4c44f08a2c513a02fe3cb9aa2c655e0>Windows Terminal终端入坑指南</a></li>
+<li>10: <a href=#pg-6a2aa71420594dce8734ef70bec7f0ce>TiDB分布式数据库</a></li>
+<ul>
+<li>10.1: <a href=#pg-07ef033d5a20184955fad1e45f4c9e36>TiDB初体验</a></li>
+</ul>
+</ul>
+<div class=content>
+<div class="pageinfo pageinfo-primary">
+<p>主要是开发和运维领域的介绍，尚不成体系，待整理TODO</p>
+</div>
+</div>
+</div>
+<div class=td-content>
+<h1 id=pg-f89170561e7ba5d22dad21ac53e50275>1 - 机器学习的语言之争</h1>
+<div class=lead>机器学习的语言之争（译文）.</div>
+<p>原文：<a href=http://sebastianraschka.com/blog/2015/why-python.html>Python, Machine Learning, and Language Wars - A Highly Subjective Point of View</a></p>
+<hr>
+<p>噢，天呀，那些主观有针对性的，自以为标题党的文章的另一个？是哒！为什么我还要不厌其烦的写下来呢？嗯，这里是来自于我的前教授的最琐碎但又改变生活的洞察和世俗的智慧之一，它已经成为了我的口头禅了：“如果你必须做这个任务超过三次以上，那么只要写一个脚本，然后对其自动化。”</p>
+<p>现在，你或许已经开始琢磨这个博客了。我已经超过半年没写什么东西了！好吧，<a href=https://twitter.com/rasbt>沉迷在社交网络平台</a>除外，那不是真的：我写了<a href=https://github.com/rasbt/python-machine-learning-book>一些东西</a> —— 准确来说，约400页。最近，对我来说，这真的已经是一次旅程了。而对于经常被问道的问题“为什么你选择Python来进行机器学习？”，我猜，是时候来写_我的脚本_了。</p>
+<p>在下面的段落中，我真的不打算告诉你为什么_你_或者其他人应该使用Python。老实说，我真心讨厌那类问题：“哪个<em>最好？”（这里，用“编程语言、文本编辑器、IDE、操作系统、计算机制造商”替换掉</em>）。这实在是扯淡。虽然有时它挺有意思的，但是我建议你节省下关于这个问题的时间，用来在下班后跟朋友或者同事偶尔喝喝啤酒或咖啡。</p>
+<h4 id=目录>目录</h4>
+<ul>
+<li><a href=#%E5%AF%B9%E4%BA%8E%E4%B8%80%E4%B8%AA%E5%A4%8D%E6%9D%82%E9%97%AE%E9%A2%98%E7%9A%84%E7%AE%80%E7%9F%AD%E5%9B%9E%E7%AD%94>对于一个复杂问题的简短回答</a></li>
+<li><a href=#%E6%88%91%E6%9C%80%E5%96%9C%E6%AC%A2%E7%9A%84python%E5%B7%A5%E5%85%B7%E6%98%AF%E4%BB%80%E4%B9%88>我最喜欢的Python工具是什么？</a></li>
+<li><a href=#%E6%88%91%E5%AF%B9matlab%E6%98%AF%E6%80%8E%E4%B9%88%E7%9C%8B%E7%9A%84>我对MATLAB是怎么看的？</a></li>
+<li><a href=#julia%E7%9C%9F%E6%A3%92%E7%90%86%E8%AE%BA%E4%B8%8A>Julia真棒……理论上！</a></li>
+<li><a href=#r%E5%AE%9E%E5%9C%A8%E6%B2%A1%E5%95%A5%E9%94%99>R实在没啥错</a></li>
+<li><a href=#perl%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88>Perl发生了什么？</a></li>
+<li><a href=#%E5%85%B6%E4%BB%96%E8%A7%82%E7%82%B9>其他观点</a></li>
+<li><a href=#python%E6%98%AF%E4%B8%80%E4%B8%AA%E6%AD%A3%E5%9C%A8%E6%AD%BB%E6%8E%89%E7%9A%84%E8%AF%AD%E8%A8%80%E5%90%97>Python是一个正在死掉的语言吗？</a></li>
+<li><a href=#%E6%80%BB%E7%BB%93>总结</a></li>
+<li><a href=#%E5%8F%8D%E9%A6%88%E5%92%8C%E8%A7%82%E7%82%B9>反馈和观点</a>
+<ul>
+<li><a href=#python>Python</a></li>
+<li><a href=#perl>Perl</a></li>
+<li><a href=#r>R</a></li>
+<li><a href=#matlaboctave>MATLAB/Octave</a></li>
+<li><a href=#julia>Julia</a></li>
+<li><a href=#%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80-%E6%88%91%E5%BF%98%E8%AE%B0%E6%8F%90%E7%9A%84%E9%82%A3%E4%BA%9B>其他语言 (我忘记提的那些)</a></li>
+</ul>
+</li>
+</ul>
+<h2 id=对于一个复杂问题的简短回答>对于一个复杂问题的简短回答</h2>
+<p>或许我应该从一个简短的回答开始。欢迎你停止阅读这段后面的文章，因为它真的解决掉这个问题了。我是一个科学家，我喜欢完成我的工作。我喜欢有一个环境，在那里我可以快速原型，并记下我的模型和想法。我需要解决非常特殊的问题。我分析给定的数据集以得出结论。这对我来说是最重要的：我怎样才能最多产的完成我的工作呢？“多产”这里意味着什么？好吧，我通常只进行一次分析 (不同的想法测试和调试除外); 我不需要重复地24/7地运行一段特定的代码，我并不是在为最终用户开发软件应用或web应用。当我_量化y_ “多产”时，我从字面上评估(1) 把想法以代码的形式写下来所花费的时间，(2) 调试的时间和 (3) 执行的时间之和。对我来说，“最多产”意味着“获得结果需要花费多少时间？” 现在，这么多年来，我发现，Python就是为我而生的。并非总是如此，但很多时候是这样。正如生活中的其他东西一样，Python并不是“银弹”，它并非总是每一个问题的“最佳”解决方案。然而，如果你跨常见和不那么常见的问题任务来比较编程语言的话，它已经非常接近（最佳解决方案）了；Python可能是最通用，最有能力的全才。</p>
+<p><img src=http://sebastianraschka.com/images/blog/2015/why-python/the_general_problem.png alt></p>
+<p>(来源: <a href=https://xkcd.com/974/>https://xkcd.com/974/</a>)</p>
+<p>请记住：“过早的优化是一切罪恶的根源” (Donald Knuth)。如果你是那种想要从机器学习和数据科学划分中中优化下一个颠覆性高频交易模型的软件工程团队中的一员，那么Python可能不适合你 (但或许它是数据科学团队的语言选择，所以学习如何读懂它仍然有用)。因此，我的一个小小的忠告是，当你选择一门语言时，评估你每天的问题任务和需求。“如果你只有一把锤子，那么一切开始看起来都像一个钉子” – 你聪明得不会掉入这个陷阱！然而，记住，有一个平衡点。在有些场景下，即使螺丝刀可能是“更漂亮的”解决方法，锤子可能还是最好的选择。再次，这归结为生产力。</p>
+<p><strong>让我从个人经历中挑个例子来说说。</strong> 关于一个非常问题相关的假设，我需要开发一堆新颖的算法来“筛选”1千5百万个小的化合物。我完全是一个计算型人，但我和进行非计算性实验（我们称它们为“湿实验室”实验）的生物学家一起合作。目标是缩小它到一个包含100个潜在化合物的列表，这样他们可以在实验室里测试它们。提醒是，他们需要快速获得结果，因为他们仅有有限的实际来做实验。相信我，时间真的是“有限的”：在必须收集结果之前，我们刚让我们的补助金申请受理和研究得到资助 (我们的合作者对某种特定的只知春季产卵的幼虫做实验)。因此，我开始想“我要怎样尽可能快的把结果给他们？” 嗯，我懂C++和FORTRAN，如果我在各个语言中实现那些算法，那么与Python实现相比，执行“筛选”运行也许会更快些。这更多是一种有根据的猜测，我真的不知道实质上是否会更快。但有一件事我可以肯定：如果我开始用Python写代码，那么我可以让它在几天内运行 – 或许让对应的C++版本能够跑起来需要花一周的时间。以后，我会操心一个更有效的实现。在那一刻，重要的是，把那些结果拿给我的合作者 – “过早的优化是一切罪恶的根源。” 边注：相同的思路运用到数据存储解决方案。这里，我只是使用SQLite。CSV没有多大意义，因为我必须重复地注释和检索某些分子。我当然不想每次想要查看一个分子或者操作它的时候，都要全过程扫描或重写一个CSV – 在处理内存容量预留的问题。也许用MySQL会更好，但是出于上面提到的原因，我想快速地完成这项工作，并建立一个额外的SQL服务器……没时间做它了，用SQLite来完成这项工作挺好的。</p>
+<p><img src=http://sebastianraschka.com/images/blog/2015/why-python/automation.png alt></p>
+<p>(来源: <a href=https://xkcd.com/1319/>https://xkcd.com/1319/</a>)</p>
+<p>结论：**选择满足_你的_需求的那个语言！**不过，这里有一个小小的告诫！初学者在学习一门语言之前怎么能知道它的优势和缺点，程序员应该怎么知道这门语言对她来说会是有用的呢？这就是我会做的事：只要在谷歌和<a href=https://github.com>GitHub</a>上搜索那些与你最常见的问题任务有关的特别的应用和解决方法。你不需要阅读和了解代码。只需要看看最终产品，另外，不要犹豫问别人。不要只是询问一般“最好的”编程语言，而是具体点，描述你的目标以及为什么你想要学习如何编程。如果你想为MacOS X开发应用，那么你可能会想要看看Objective C和Swift，如果你想在Android上开发，那么你可能会对Java更感兴趣，以此类推。</p>
+<h2 id=我最喜欢的python工具是什么>我最喜欢的Python工具是什么？</h2>
+<p>如果你感兴趣，那些是我最喜欢并且最常使用的Python“工具”，每天，我都会使用它们中的大部分。</p>
+<ul>
+<li><a href=http://www.numpy.org>NumPy</a>: 我处理线性代数阵列结构和量化公式最喜欢的库；由<a href="http://scipy2015.scipy.org/ehome/index.php?eventid=115969&">SciPy</a>增强。</li>
+<li><a href=https://theano.readthedocs.org/en/latest/>Theano</a>: 为机器学习算法减负，并将计算分布到我的GPU内核中。</li>
+<li><a href=http://scikit-learn.org/stable/>scikit-learn</a>: 用于每日、更基本的机器学习任务的最方便的API。</li>
+<li><a href=http://matplotlib.org>matplotlib</a>: 当涉及到画图时，这是我所选择的库。有时，我还使用<a href=http://stanford.edu/~mwaskom/software/seaborn/index.html>seaborn</a>来绘制特殊的图，例如，热图超级棒！</li>
+</ul>
+<p><img src=http://sebastianraschka.com/images/blog/2015/why-python/heatmap.png alt></p>
+<p>(来源: <a href=http://stanford.edu/~mwaskom/software/seaborn/examples/structured_heatmap.html>http://stanford.edu/~mwaskom/software/seaborn/examples/structured_heatmap.html</a>)</p>
+<ul>
+<li><a href=http://flask.pocoo.org>Flask (Django)</a>: 难得，我想要将一个想法转换成一个web应用。这里，Flask非常方便！</li>
+<li><a href=http://www.sympy.org/en/index.html>SymPy</a>: 对于符号数学，对我来说，它取代了WolframAlpha。</li>
+<li><a href=http://pandas.pydata.org>pandas</a>: 处理相当小的数据集，大多数来自于CSV文件。</li>
+<li><a href=https://docs.python.org/2/library/sqlite3.html>sqlite3</a>:注释和查询“中型”数据集。</li>
+<li><a href=http://ipython.org>IPython notebooks</a>: 我还能说什么呢？我90%的研究发生在IPython notebooks。它只是一个让所有的东西都放在一个地方的好环境：想法、代码、注释、LaTeX方程、插图、图表、输出……</li>
+</ul>
+<p><img src=http://sebastianraschka.com/images/blog/2015/why-python/ipython_notebook.png alt></p>
+<p>注意，IPython项目最近演变成了<a href=https://jupyter.org>Jupyter项目</a>。现在，你不止可以使用Jupyter notebook环境到Python上，还可以是R, Julia, 等等。</p>
+<h2 id=我对matlab是怎么看的>我对MATLAB是怎么看的？</h2>
+<p>几年前，我想当常用MATLAB (/Octave)；大多数的计算机科学数据科学课都是用MATLAB。我真的觉得这对于原型真的一点儿都不是一个糟糕的环境！由于它的设计充分考虑了线性代数 (用于MATrix LABoratory的MATLAB)，当涉及到实现机器学习算法时，比之Python/NumPy，MATLAB让人感觉更多点“自然” —— 好啦，为了公平起见，<a href=https://www.cs.utexas.edu/users/EWD/transcriptions/EWD08xx/EWD831.html>1-indexed</a>编程语言对我们程序员来说，可能看起来有点奇怪。但是，记住，MATLAB带有一个大的价格标签，我认为它真正慢慢地淡出学术界以及工业界。此外，毕竟，我是开源粉 ;)。另外，与其他“生产性”的语言相比，它的性能也并不是那么的引人注目。看看下面的标准：</p>
+<p><img src=http://sebastianraschka.com/images/blog/2015/why-python/julia_benchmark.png alt></p>
+<p>(相对于C的基准次数 —— 越小越好，C的性能 = 1.0; 来源: <a href=http://julialang.org/benchmarks/>http://julialang.org/benchmarks/</a>)</p>
+<p>然而，我们不应忘记，对于Python，也有这样整洁的Theano库。在2010年，Theano的开发者报道，当代码运行在CPU时，它比NumPy快1.8倍，而如果Theano针对GPU，那么它甚至比NumPy快11倍 (J. Bergstra, O. Breuleux, F. Bastien, P. Lamblin, R. Pascanu, G. Desjardins, J. Turian, D. Warde-Farley, 和Y. Bengio. Theano: Python中的的一个CPU和GPU运算编译器。在Proc. 9th Python in Science Conf, 第1–7页，2010年。)。现在，记住，这个Theano基准是来自2010年，而多年来，Theano得到了显著的改善，现代显卡的功能也是。</p>
+<blockquote>
+<p>我了解到，很多希腊人相信毕达哥拉斯所说的，所有的东西都是从数字生成的。这个断言带来了一个难题：不存在的东西怎么可以甚至设想生成？- Theano of Croton (哲学家，公元前6世纪)</p>
+</blockquote>
+<p>PS: 如果你不喜欢NumPy的<code>dot</code>方法，那么敬请期待即将到来的<a href=https://docs.python.org/3.6/whatsnew/3.5.html>Python 3.5</a> – 对于矩阵乘法，我们将获得一个中缀<a href=http://legacy.python.org/dev/peps/pep-0465/>运算符</a>，耶！</p>
+<p>“手动的”矩阵矩阵乘法 (我的意思是，无需NumPy的帮助，而BLAS或者LAPACK看起来繁琐且非常低效)。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>
+    [[<span style=color:#666>1</span>, <span style=color:#666>2</span>],     [[<span style=color:#666>5</span>, <span style=color:#666>6</span>],     [[<span style=color:#666>1</span> <span style=color:#666>*</span> <span style=color:#666>5</span> <span style=color:#666>+</span> <span style=color:#666>2</span> <span style=color:#666>*</span> <span style=color:#666>7</span>, <span style=color:#666>1</span> <span style=color:#666>*</span> <span style=color:#666>6</span> <span style=color:#666>+</span> <span style=color:#666>2</span> <span style=color:#666>*</span> <span style=color:#666>8</span>],
+    [<span style=color:#666>3</span>, <span style=color:#666>4</span>]]  x   [<span style=color:#666>7</span>, <span style=color:#666>8</span>]]  <span style=color:#666>=</span>   [<span style=color:#666>3</span> <span style=color:#666>*</span> <span style=color:#666>5</span> <span style=color:#666>+</span> <span style=color:#666>4</span> <span style=color:#666>*</span> <span style=color:#666>7</span>, <span style=color:#666>3</span> <span style=color:#666>*</span> <span style=color:#666>6</span> <span style=color:#666>+</span> <span style=color:#666>4</span> <span style=color:#666>*</span> <span style=color:#666>8</span>]]
+
+</code></pre></div><p>如果我们有线性代数和经过优化的库来处理它，谁还会想使用嵌套的for循环来实现这个表达式！？</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>
+    <span style=color:#666>&gt;&gt;&gt;</span> X <span style=color:#666>=</span> numpy<span style=color:#666>.</span>array()
+    <span style=color:#666>&gt;&gt;&gt;</span> W <span style=color:#666>=</span> numpy<span style=color:#666>.</span>array()
+    <span style=color:#666>&gt;&gt;&gt;</span> X<span style=color:#666>.</span>dot(W)
+    [[<span style=color:#666>19</span>, <span style=color:#666>22</span>],
+    [<span style=color:#666>43</span>, <span style=color:#666>50</span>]]
+
+</code></pre></div><p>现在，如果这个<code>dot</code>产品对你来说并无吸引力，那么这是它将会在Python 3.5中的样子：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>
+    <span style=color:#666>&gt;&gt;&gt;</span> X <span style=color:#666>@</span> W
+    [[<span style=color:#666>19</span>, <span style=color:#666>22</span>],
+    [<span style=color:#666>43</span>, <span style=color:#666>50</span>]]
+
+</code></pre></div><p>老实说，我不得不承认，我并不一定是“@”符号作为矩阵操作符的一个大粉丝。然而，我真的长时间苦苦想了这个问题，没法找到更好的“未使用的”符号了。如果你有更好的想法，请让我知道，我真的很好奇！</p>
+<h2 id=julia真棒-理论上>Julia真棒……理论上！</h2>
+<p>我认为Julia是一个伟大的语言，并且我会将其推荐给那些开始编程和机器学习的人。虽然，我不确定是否真的应该这样做。为什么呢？要把自己交给这个编程语言，是有点悲伤矛盾的。使用Julia，我们无法肯定在接下来的几年内，它是否会变得够“流行”。等等，“流行性”跟一门编程语言有多棒多有用有啥关系？让我告诉你。窘境是，最有用的语言不一定是设计良好的，但一定是流行的。为什么？</p>
+<ol>
+<li>已经有大量的（大多数是免费的）库以供你使用，这样一来，你可以对你的时间尽其所用，而无需重新发明轮子。</li>
+<li>在线查找帮助、教程和样例容易得多。</li>
+<li>更频繁的语言改善、更新和补丁，会让它“甚至更好”。</li>
+<li>对协作更友好，并且在团队中工作更简单。</li>
+<li>更多的人会从你的代码中受益 (例如，如果你决定将其分享到GitHub上)。</li>
+</ol>
+<p>就个人而言，我爱Julia本身。它完美的匹配了我的个人兴趣。虽然，我使用Python；主要是因为已经有了那么多超级棒的东西在那里了，这使得它格外得心应手。Python社区一切安好，而我相信在（至少）下一个5到10年内，它还会存在并蓬勃发展。但是对于Julia，我并没那么肯定。我喜欢设计，我觉得这很棒。尽管如此，如果它并不流行，那么我无法分辨它是“面向未来的”。如果在几年内发展停止了呢？我会对那些在这点上将“死”的东西进行投资。然而，如果每个人都这样想，那么新语言就永远没戏了。</p>
+<h2 id=r实在没啥错>R实在没啥错</h2>
+<p>嗯，我猜我曾经是一个R人，这并不是什么大秘密。甚至我还写过一本关于它的书 (好吧，准确来讲，实际上是关于<a href="http://www.amazon.com/Instant-Heat-Maps-R-How-/dp/1782165649/ref=sr_1_1?ie=UTF8&qid=1372160113&sr=8-1&keywords=instant+heat+maps+in+r+how-to">R中的热图(Heat maps in R)</a>。注意，这是在几年前，在<code>ggplot2</code>是个事之前。没有真正令人信服的理由让你去看看 —— 我指的是这本书。不过，如果你无法抗拒要看看的话，这是免费的、5分钟就可读完的<a href=http://sebastianraschka.com/Articles/heatmaps_in_r.html>简短版本</a>)。我同意，有点扯远了。所以，回到讨论：R怎么了？我觉得它完全没有不好的地方。我的意思是，毕竟，对于“数据科学”，R是非常强大的，并且完全可以胜任且“大众化”的语言！不久前，甚至微软也开始非常非常感兴趣：<a href=http://www.cio.com/article/2906456/data-analytics/microsoft-closes-acquisition-of-r-software-and-services-provider.html>Microsoft收购Revolution Analytics，一家用于统计计算和预测分析的开源R编程语言服务商业提供商</a>。</p>
+<p>所以，我可以如何总结下对于R的感受呢？我不大确定这句话出自何处 —— 我在前段时间从某处某人那里看到的 —— 但它很好的解释了R和Python之间的区别：“R是统计学家为了自己开发的一门编程语言；而Python是计算机科学家开发的，程序员可以用它来应用统计技术。”该消息的部分是，R和Python都同样能够用于“数据科学”任务，然而，Python语法对我来说，只是感觉更自然 —— 这是个人品味问题。</p>
+<p>我只想提出，Theano和在GPU上计算是Python的一个大增益，但我看到R也完全可以：<a href=http://blog.revolutionanalytics.com/2015/01/parallel-programming-with-gpus-and-r.html>GPU和R上的并行编程</a>。我知道接下来你想问什么：“好吧，那么要是把我当模型编程一个漂亮_闪亮_的web应用又如何？我打赌，这是你没法在R中做的事！” 抱歉，但是你输了；看看<a href=http://www.rstudio.com/shiny/>Shiny by RStudio，一个R语言的web应用框架</a>。你明白我的意思吗？这里没有赢家。可能永远都不会有。</p>
+<p>把我最喜欢的Python引述中的一个从其原有语境中拿出来：“这里，我们都是大人” —— 不要在把我们的时间浪费在语言之争上了。选择那个“适合”你的语言。当涉及到就业市场上的观点：这里也没有对错。我不认为要聘请你为“数据科学家”的公司真的会计较你最喜欢的工具箱 —— 毕竟，编程语言只是“工具”。而最重要的技能是像“数据科学家”一样思考，问正确的问题，能够解决问题。难的是数学和机器学习理论，新的编程语言是可以很容易学到的。试想一下，你学会了如何挥舞锤子来把钉子敲进去，而从不同的制造商那里挑一把锤子能有多难？但如果你仍然感兴趣，例如看看TIOBE Index，_一个_编程语言流行性的估量：</p>
+<p><img src=http://sebastianraschka.com/images/blog/2015/why-python/tiobe.png alt></p>
+<p>(来源: <a href=http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html>http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html</a>)</p>
+<p>但是，如果我们看看来自Spectrum IEEE的<a href=http://spectrum.ieee.org/computing/software/the-2015-top-ten-programming-languages>2015年十大编程语言</a>，那么会发现，R语言正在快速攀升(左列：2015，右列：2014）。</p>
+<p><img src=http://sebastianraschka.com/images/blog/2015/why-python/spectrum.jpg alt></p>
+<p>(来源: <a href=http://spectrum.ieee.org/computing/software/the%E2%80%932015-top-ten-programming-languages>http://spectrum.ieee.org/computing/software/the-2015-top-ten-programming-languages</a>)</p>
+<p>我想你了解了。Python和R，不再有什么真正打的区别了。此外，当你在选择使用哪个语言的时候，你不应该担心工作计划。</p>
+<h2 id=perl发生了什么>Perl发生了什么？</h2>
+<p>Perl是在我早起职业生涯中选取的第一门语言(当然，除了高中时使用的Basic, Pascal, 和Delphi)。在我还是德国的一个大学生的时候，我上了一门Perl编程课。那时，我真心喜欢它，但是，嘿，在这点上，我确实没有什么好对其进行比较的。就个人而言，我只知道少数几个积极使用Perl为每天写脚本。虽然，我认为在生物信息学领域这仍然相当普遍!? 不管怎么说，让我们保持这部分简短，让它安息：“<a href=http://archive.oreilly.com/pub/post/perl_is_dead_long_live_perl.html>“Perl死了。Perl万岁。”</a></p>
+<h2 id=其他观点>其他观点</h2>
+<p>还有许多其他语言可以用于机器学习，例如，<a href=https://www.ruby-lang.org>Ruby</a> (<a href="http://www.amazon.com/Thoughtful-Machine-Learning-Test-Driven-Approach/dp/1449374069/ref=sr_1_1?ie=UTF8&qid=1440407371&sr=8-1&keywords=machine+learning+ruby">Thoughtful Machine Learning: A Test-Driven Approach</a>), <a href=https://www.java.com/en/>Java</a> (<a href=http://java-ml.sourceforge.net>Java-ML</a>), <a href=http://www.scala-lang.org>Scala</a>(<a href=https://github.com/scalanlp/breeze>Breeze</a>), <a href=http://www.lua.org>Lua</a>(<a href=http://torch.ch>Torch</a>), 等等。然而，除了我多年前参与的一个Java类，或者<a href=https://spark.apache.org/docs/0.9.0/python-programming-guide.html>PySpark</a>, 这一用于Spark的Python API，它是用Scala写的，我真的没有使用那些语言的丰富经验，因此不知道该说些什么好。</p>
+<h2 id=python是一个正在死掉的语言吗>Python是一个正在死掉的语言吗？</h2>
+<p>这是一个合法的问题，最近它在Quora出现了，如果你想听听关于这个的一些其他不错的观点，那么看看这个<a href=http://www.quora.com/Is-it-true-that-Python-is-a-dying-language>问题支线</a>。不过，如果你想听听我的观点，我会说，不，它不是。为什么？好吧，Python是一门“相当”古老的语言 —— 它的第一个版本是在90年代初的某个时候 (我们可以从1991年开始算起)，它像每一个编程语言一样，不得不做出某些选择和妥协。每一个编程语言都有它自己的怪癖，而更现代的语言趋向于从过去的错误中学习，这是件好事 (顺便说一下，R是在Python之后不久发布的：1995)。 Python远不“完美”，而像其他每个语言一样，它有自己的缺点。作为一个核心Python用户，我必须提一下，GIL (Global Interpreter Lock，全局解释锁)是让我最苦恼的东西 —— 但是请注意，有一个多进程和多线程模块，因此它实际上并非是一种限制，而是某些上下文中的小小“不便”。</p>
+<p>对于一个编程语言“多棒”并无可以量化的度量，它真正取决于你在找寻什么。你想要问的问题是：“我想要实现什么，哪一个是实现它的最好的工具” —— “如果你只有一把锤子，那么一切开始看起来都像一个钉子。”再次说到锤子和钉子，Python是非常灵活的，我每天大部分的研究都是通过Python，使用强大的scikit-learn机器学习库 —— 用于数据改写的pandas，用户可视化的matplotlib/seaborn，以及用以跟踪所有这些东西的IPython notebooks —— 来完成的。</p>
+<h2 id=总结>总结</h2>
+<p>好啦，这是对于一个看似很简单的问题的一个相当长的答案。相信我，我可以花几小时或几天继续写下去。但为嘛要把事情搞复杂呢？让我们总结一下：</p>
+<p><img src=http://sebastianraschka.com/images/blog/2015/why-python/python.png alt></p>
+<p>(来源: <a href=https://xkcd.com/353/>https://xkcd.com/353/</a>)</p>
+<h2 id=反馈和观点>反馈和观点</h2>
+<p>我想要跟你分享关于这篇文章的很多很好的意见。记住，“一句忠告”有所偏颇是自然的；你或许发现了额，我的偏见是非常喜欢Python —— 抱歉啦，但这就是我！我相信，听取其他人的想法也是非常有用的！特别是当你是“数据科学”、机器学习和编程领域的新手的时候。话虽如此，请继续，看看下面的那些带干货的评论！</p>
+<h3 id=python>Python</h3>
+<ul>
+<li><a href="https://news.ycombinator.com/item?id=10113413">hackernews</a>上的rm999:</li>
+</ul>
+<blockquote>
+<p>为了把我的数据管道（从数据源一直到生产模型和前端/可视化）弄到一块，大概一年前，我从大多使用R切换到大多使用Python。这对我能够做的事或者我当生产力并无实际影响，除了我在使用任何语言的前几年中需要对其进行额外的谷歌。我选择Python的主要原因是单纯的实用：这是一个我团队之外的人会尊重和使用的语言。这使得我更容易以许多不同的方法进行协作：与其他团队共享工具，转移代码的所有权，在我需要的时候获得帮助，等等等等。在一些公司，数据科学有“设计一些东西，然后将其抛出墙外让其他人处理”这种美誉。根据我的经验，R只是加深了这种美誉。这太糟糕了，它真的能把它所做的事情做得很好。</p>
+</blockquote>
+<ul>
+<li><a href="https://news.ycombinator.com/item?id=10113413">hackernews</a>上的DrNuke:</li>
+</ul>
+<blockquote>
+<p>我喜欢文章中的黑客方法：工具仅仅是做一些有价值的事情的工具，而不是目标本身。如今，因为数据科学爆炸以及快速与非专业人员进行交互的需要，所以，Python生态是正确的时候的正确的工具。</p>
+</blockquote>
+<ul>
+<li><a href="https://news.ycombinator.com/item?id=10113413">hackernews</a>上的zzleeper:</li>
+</ul>
+<blockquote>
+<p>非常有意思的文章。我觉得很多数值Pythonistas都处在相同的境地：他们容忍大多数语言，但发现R的语法有点不自然，当试图超越纯矩阵的东西时Matlab有所不足，并都在观望Julia是否会崛起 (在我看来，似乎是会的)</p>
+</blockquote>
+<ul>
+<li><a href=https://www.reddit.com/r/MachineLearning/comments/3ibx9j/python_machine_learning_and_language_wars_a/>reddit</a>上的JanneJM:</li>
+</ul>
+<blockquote>
+<p>关键是有足够高品质的库。我知道的许多人，包括我，并不是真的对Python很感兴趣。我们使用Numpy, Scipy, Matplotlib, Pandas等等等等。Python只是来凑凑热闹。要是这些库出现在Ruby / Perl / Lua，那么它们就是我们今天会使用的语言。</p>
+</blockquote>
+<h3 id=perl>Perl</h3>
+<ul>
+<li><a href="https://news.ycombinator.com/item?id=10113413">hackernews</a>上的leni536：</li>
+</ul>
+<blockquote>
+<p>“然而，我认为Perl在生物信息学领域还是相当常见的！？”这是事实 —— 许多生物信息学每天的任务都或多或少有纯文本分析[1]，而Perl在解析文本和快速使用正则表达式方面有过人之处。“我”这一代的生物信息学家(20–30)使用Python进行数据清理和分析，有时是因为绘图更好，语言更容易上手，它在高校中较为普遍，或者其他原因 —— 比我这一代年长的人们通常使用P</p>
+</blockquote>
+<h3 id=r>R</h3>
+<ul>
+<li><a href="https://news.ycombinator.com/item?id=10113413">hackernews</a>上的geomark：</li>
+</ul>
+<blockquote>
+<p>我刚完成了Coursera数据科学之路，这让我从一个完全的R新手变得至少有点精通了。之前我用Python来进行相当多的web编程，起初，除了它统计编程的能力，我并不喜欢R。但最近，我发现了一些不错的R包，它们能让那些我通常会用Python做的事情用R来做变得愉悦。就像我最近发现的用于爬取网页的rvest包。用R进行数据可视化似乎优得多，除非我想念Python中的某些东西（极有可能）。并且提供一个漂亮的统计数据应用是很容易用shiny或者RStudio Presenter做到的。但R真的没法扩展到一个大型生产应用，不是吗？因此，我觉得我需要同时用Python 和R。新增：这是一个不错的列表。谢谢。另外，在文章中，他说Python语法感觉更自然，这也是我所觉得的。但后来我开始使用R中诸如magrittr和dplyr这种包，它们给你像管道一样不错的东西，因此那种感觉开始消退了。</p>
+</blockquote>
+<ul>
+<li><a href="https://news.ycombinator.com/item?id=10113413">hackernews</a>上的Adam_O</li>
+</ul>
+<blockquote>
+<p>从一个学生的角度来看，大多数不错的在线分析/数据分析/统计课程都使用R，从医在学习材料的时候，很难摆脱它。一旦你获取了基础概念，那么转到Python应该不难。虽然，我想大多数的人仍然更喜欢用ggplot2进行可视化。每当我使用R的时候，我觉得自己像是一个统计学家，我可以感觉到从这门语言从散发出来的“冷严谨”。但最后，我觉得同时使用这两门语言是有利的。</p>
+</blockquote>
+<h3 id=matlab-octave>MATLAB/Octave</h3>
+<ul>
+<li><a href="https://news.ycombinator.com/item?id=10113413">hackernews</a>上的sampo</li>
+</ul>
+<blockquote>
+<p>Andrew Ng在Coursera的机器学习课上说，根据他的经验，用Octave/Matlab完成课程作业的学生比用Python完成的快。但是是的，课程的关键是实现和玩转小数值算法，而该博客是关于那些主要调用Python中已有的机器学习库的人。</p>
+</blockquote>
+<ul>
+<li><a href="https://news.ycombinator.com/item?id=10113413">hackernews</a>上的misiti3780</li>
+</ul>
+<blockquote>
+<p>Octave/Matlab是“不错”，但是尝试将其集成到一个生产web应用上还需要点好运气。既然你无法真正做到这点 —— 那么避免使用它们，除非你对实现相同的算法两次并无意见。Matlab license还要花钱买，而工具箱还需要花额外的钱。R是有用的，因为长时间以来它一直有很多资源，并且统计信息社区大部分都在使用它。它还有许多尚未移植到其他语言的有用的库 (ggmap!!!)。但你仍然还是要面对相同的问题，也就是说你没法将R集成到生产WEB应用上。我非常确定，Hadoop之流不支持R, Octave, 或者Matlab。</p>
+</blockquote>
+<ul>
+<li><a href="https://news.ycombinator.com/item?id=10113413">hackernews</a>上的thanatropism</li>
+</ul>
+<blockquote>
+<p>这里少了一件事：Matlab的语法其实是非常接近现代Fortran的。我至少通过添加类型/常规的冗余/修改do-loops语法/等等重写Matlab代码，从而写了两次Fortran代码(用于蒙特卡罗模拟；不同的上下文)。</p>
+</blockquote>
+<h3 id=julia>Julia</h3>
+<ul>
+<li><a href="https://news.ycombinator.com/item?id=10113413">hackernews</a>上的Lofkin:</li>
+</ul>
+<blockquote>
+<p>就个人而言，我尝试转到Julia，但速度缓慢的高阶函数，核心数据基础设施的高流失率，以及没有Pymc 3，这些都让我在pydata待了更长一点。我已经拴在numba上了。</p>
+</blockquote>
+<ul>
+<li><a href="https://news.ycombinator.com/item?id=10113413">hackernews</a>上的Buttons 840:</li>
+</ul>
+<blockquote>
+<p>我专业使用Python 8年了，这是我最喜欢的语言。我有点常使用numpy和scikit-learn。这么说，最近，我真的很享受学习Julia的过程。它简单易学，并且确实表现良好（读：很快）。事实上，我认为学习Julia将会和学习一些诸如numba一样有用，并且提供相似的（有人说会略胜一筹）性能。</p>
+</blockquote>
+<ul>
+<li><a href="https://news.ycombinator.com/item?id=10113413">hackernews</a>上的idunning:</li>
+</ul>
+<blockquote>
+<p>作为那种在日常工作（及编外项目）中几乎完全使用Julia的人中的一员，我认为作者对Julia的大部分想法都是正确的。我认为这个语言很棒，使用它让我的生活更美好。在我看来有一些包实际上比它们在其他语言中的等价物更好。另一方面，我对那些不完美的事物拥有更高的容忍度，我能自己理出头绪（幸运的是有时间这样做），并且如果不存在的话（在每一点上），我愿意为它编码。当然，对大多数的人来说，并不是这样的，但没关系。作者不愿意冒着Julia将会不“存在”的风险，这很公平。它肯定尚未完成，但它正在完成的路上。虽然，我有信心，它会存活下来（并且繁荣发展），并且继续增长不充实的社区。我有一种感觉，在一两年左右，最终，作者将找到他到Julia王国之路。</p>
+</blockquote>
+<ul>
+<li><a href=https://www.reddit.com/r/Python/comments/3i8crj/python_machine_learning_and_language_wars_a/>reddit</a>上的niksko:</li>
+</ul>
+<blockquote>
+<p>我同意Julia主题。它潜力巨大，并且它基本上是专门为这些类型的应用准备的，但现在还没有社区和支持。我花了一个学期进行计算进化动力学领域的一个小的研究项目，而最繁琐最困难的部分是让Julia绘制我所想要的图。另外，那个时候，它还没有支持文档字符串 :/。它速度快，炫，但不够成熟。</p>
+</blockquote>
+<ul>
+<li><a href=https://www.reddit.com/r/MachineLearning/comments/3ibx9j/python_machine_learning_and_language_wars_a/>reddit</a>上的KG7ULQ:</li>
+</ul>
+<blockquote>
+<p>在我学习Coursera上的Ng ML课程后，我看了看，似乎要做的事情就是使用Python……但必须学习几个大库，包括你提到的那些。然后我看到了Julia，觉得我还不如学习它，因为它已经内置了所有的线性代数和SIMD相关的东西，并且性能更好。它的确看起来像是ML的“最佳”语言。</p>
+</blockquote>
+<h3 id=其他语言-我忘记提的那些>其他语言 (我忘记提的那些)</h3>
+<ul>
+<li><a href="https://news.ycombinator.com/item?id=10113413">hackernews</a>上的leni536:</li>
+</ul>
+<blockquote>
+<p>C++并没有做错什么。对于线性代数，我使用armadillo库，它是LAPACK和BLAS一个非常棒的封装 (并且也快！)。出于某些原因，科学家有点怕C++。由于某些原因，你“不得不”在一个“更容易的”语言中进行原型。当然，你你能把C++当成计算器而不是解释语言，但我看到人们卡在原型语言的计算上，最终并没有把它带到一个更快的平台上。要点是：C++对于科学计算并不难。</p>
+</blockquote>
+<ul>
+<li><a href=https://www.reddit.com/r/Python/comments/3i8crj/python_machine_learning_and_language_wars_a/>reddit</a>上的leni536:</li>
+</ul>
+<blockquote>
+<p>对我来说，如果有什么会替换掉Python，那么Scala应该是最可能的候选者。我认为，函数式语言很好的适用于数学工作，并且它在JVM上，因此原型可以变成生产代码，而不需太多开销就可以“到处”运行。Spark是Scala的杀手级应用。现在，我可以从原型到在任意大的数据集之上运行，并且之间不会有太多的障碍。</p>
+</blockquote>
+<ul>
+<li><a href=https://www.reddit.com/r/Python/comments/3i8crj/python_machine_learning_and_language_wars_a/>reddit</a>上的rpcope1:</li>
+</ul>
+<blockquote>
+<p>[Scala]在编译的时候可能是慢，但它比CPython更安全，并且快得多（除了使用非字节码的代码和调用C/Fortran库之外），并且还有一些我现在在Python中及其想念的概念，例如，Option[T]，隐式修改器，不废柴的map/reduce/filter，不废柴的lambda，等等。</p>
+</blockquote>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-0780688bfe78ed87ae0f1f07fabe1a2e>2 - 监控之我见</h1>
+<div class=lead>总结监控领域的认知</div>
+<ul>
+<li><a href=#%E6%A6%82%E8%BF%B0>概述</a></li>
+<li><a href=#%E7%9B%91%E6%8E%A7%E7%9B%AE%E6%A0%87>监控目标</a></li>
+<li><a href=#%E7%9B%91%E6%8E%A7%E6%96%B9%E6%B3%95>监控方法</a></li>
+<li><a href=#%E7%9B%91%E6%8E%A7%E6%A0%B8%E5%BF%83>监控核心</a></li>
+<li><a href=#%E7%9B%91%E6%8E%A7%E6%B5%81%E7%A8%8B>监控流程</a></li>
+<li><a href=#%E7%9B%91%E6%8E%A7%E6%8C%87%E6%A0%87>监控指标</a>
+<ul>
+<li><a href=#%E7%A1%AC%E4%BB%B6%E7%9B%91%E6%8E%A7>硬件监控</a></li>
+<li><a href=#%E7%B3%BB%E7%BB%9F%E7%9B%91%E6%8E%A7>系统监控</a></li>
+<li><a href=#%E5%BA%94%E7%94%A8%E7%9B%91%E6%8E%A7>应用监控</a></li>
+<li><a href=#%E7%BD%91%E7%BB%9C%E7%9B%91%E6%8E%A7>网络监控</a></li>
+<li><a href=#%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90>流量分析</a></li>
+<li><a href=#%E6%97%A5%E5%BF%97%E7%9B%91%E6%8E%A7>日志监控</a></li>
+<li><a href=#%E5%AE%89%E5%85%A8%E7%9B%91%E6%8E%A7>安全监控</a></li>
+<li><a href=#api%E7%9B%91%E6%8E%A7>API监控</a></li>
+<li><a href=#%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7>性能监控</a></li>
+<li><a href=#%E4%B8%9A%E5%8A%A1%E7%9B%91%E6%8E%A7>业务监控</a></li>
+</ul>
+</li>
+<li><a href=#%E7%9B%91%E6%8E%A7%E6%8A%A5%E8%AD%A6>监控报警</a></li>
+<li><a href=#%E6%8A%A5%E8%AD%A6%E5%A4%84%E7%90%86>报警处理</a></li>
+<li><a href=#%E6%80%BB%E7%BB%93>总结</a></li>
+</ul>
+<h2 id=概述>概述</h2>
+<p>监控是整个运维乃至整个产品生命周期中非常重要的一环，可以事前及时预警发现故障，事后提供详实的数据用于追查定位问题。</p>
+<p>目前业界存在各种开源监控产品，如Zabbix，ELK体系，Prometheus等等，各有自身的适用场景，所以选择基于一款开源的的监控系统会是事半功倍的事情。</p>
+<h2 id=监控目标>监控目标</h2>
+<p>站在公司各业务角度考虑，整理如下四点目标：</p>
+<p><img src=/%E7%9B%91%E6%8E%A7%E7%9B%AE%E6%A0%87.jpeg alt></p>
+<ul>
+<li><strong>对系统不间断实时监控</strong>: 实际上是对系统不间断的实时监控(这就是监控)</li>
+<li><strong>实时反馈系统当前状态</strong>: 我们监控某个硬件、某个系统，某个进程服务,都是需要能实时看到当前系统的状态，是正常、异常、或者故障</li>
+<li><strong>保证服务可靠性安全性</strong>：我们监控的目的就是要保证系统、服务、业务正常运行</li>
+<li><strong>保证业务持续稳定运行</strong>：如果我们的监控做得很完善，即使出现故障，能第一时间接收到故障报警，在第一时间处理解决，从而保证业务持续性的稳定运行；</li>
+</ul>
+<h2 id=监控方法>监控方法</h2>
+<p>既然我们了解到了监控的重要性、以及监控的目的，那么下面我们需要了解下监控有哪些方法。</p>
+<p><img src=/%E7%9B%91%E6%8E%A7%E6%96%B9%E6%B3%95.jpeg alt></p>
+<ul>
+<li><strong>了解监控对象</strong>：我们要监控的对象你是否了解呢？比如 CPU 到底是如何工作的？</li>
+<li><strong>性能基准指标</strong>：我们要监控这个东西的什么属性？比如 CPU 的使用率、负载、用户态、内核态、上下文切换。</li>
+<li><strong>报警阈值定义</strong>：怎么样才算是故障，要报警呢？比如 CPU 的负载到底多少算高，用户态、内核态分别跑多少算高？</li>
+<li><strong>故障处理流程</strong>：收到了故障报警，我们怎么处理呢？有什么更高效的处理流程吗？</li>
+</ul>
+<h2 id=监控核心>监控核心</h2>
+<p>我们了解了监控的方法、监控对象、性能指标、报警阈值定义、以及故障处理流程几步骤，当然我们更需要知道监控的核心是什么？</p>
+<p><img src=/%E7%9B%91%E6%8E%A7%E6%A0%B8%E5%BF%83.png alt></p>
+<ul>
+<li><strong>发现问题</strong>：当系统发生故障报警，我们会收到故障报警的信息 ；</li>
+<li><strong>定位问题</strong>：故障邮件一般都会写某某主机故障、具体故障的内容，我们需要对报警内容进行分析，比如一台服务器连不上：我们就需要考虑是网络问题、还是负载太高导致长时间无法连接，又或者某开发触发了防火墙禁止的相关策略等等，我们就需要去分析故障具体原因；</li>
+<li><strong>解决问题</strong>：当然我们了解到故障的原因后，就需要通过故障解决的优先级去解决该故障；</li>
+<li><strong>总结问题</strong>：当我们解决完重大故障后，需要对故障原因以及防范进行总结归纳，避免以后重复出现；</li>
+</ul>
+<h2 id=监控流程>监控流程</h2>
+<p>基于 Zabbix 来构建整个监控体系生态圈</p>
+<p><img src=/%E7%9B%91%E6%8E%A7%E6%B5%81%E7%A8%8B.png alt></p>
+<ul>
+<li><strong>数据采集</strong>：Zabbix 通过 SNMP、Agent、ICMP、SSH、IPMI 等对系统进行数据采集；</li>
+<li><strong>数据存储</strong>：Zabbix 存储在 MySQL 上，也可以存储在其他数据库服务；</li>
+<li><strong>数据分析</strong>：当我们事后需要复盘分析故障时，Zabbix 能给我们提供图形以及时间等相关信息，方面我们确定故障所在；</li>
+<li><strong>数据展示</strong>：web 界面展示、(移动 APP、java_php 开发一个 web 界面也可以) ；</li>
+<li><strong>监控报警</strong>：电话报警、邮件报警、微信报警、短信报警、报警升级机制等（无论什么报警都可以）；</li>
+<li><strong>报警处理</strong>：当接收到报警，我们需要根据故障的级别进行处理，比如:重要紧急、重要不紧急等。根据故障的级别，配合相关的人员进行快速处理；</li>
+</ul>
+<h2 id=监控指标>监控指标</h2>
+<p>具体要监控些什么东西？那么我在这里进行了分类整理:</p>
+<h3 id=硬件监控>硬件监控</h3>
+<p>早期我们通过机房巡检的方式，查看硬件设备灯光闪烁情况判断是否故障，这样非常浪费人力，并且是重复性无技术含量的工作，大家懂得。</p>
+<p><img src=/%E7%A1%AC%E4%BB%B6%E7%9B%91%E6%8E%A7.jpeg alt></p>
+<p>当然我们现在可以通过IPMI对硬件详细情况进行监控，并对 CPU、内存、磁盘、温度、风扇、电压等设置报警阈值(自行对监控报警内容编写合理的报警范围)</p>
+<h3 id=系统监控>系统监控</h3>
+<p>基本全是 Linux 服务器，那么我们肯定要监控系统资源的使用情况，系统监控是监控体系的基础。</p>
+<p>**监控主要对象: **</p>
+<p><img src=/%E7%9B%91%E6%8E%A7%E5%AF%B9%E8%B1%A1.jpeg alt></p>
+<p>CPU 有几个重要的概念：<code>上下文切换、运行队列和使用率</code>。
+这也是我们 CPU 监控的几个重点指标。
+通常情况，每个处理器的运行队列不要高于3，CPU 利用率中“用户态/内核态”比例维持在70/30，空闲状态维持在50%，上下文切换
+要根据系统繁忙程度来综合考量。</p>
+<p>针对 CPU 常用的工具有：htop、top、vmstat、mpstat、dstat、glances</p>
+<p>Zabbix 提供系统监控模板：<code>Zabbix Agent Interface</code></p>
+<p>cpu整体状态
+<img src=/cpu%E6%95%B4%E4%BD%93%E7%8A%B6%E6%80%81.jpeg alt></p>
+<p>cpu上下文切换
+<img src=/cpu%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2.jpeg alt></p>
+<p>硬盘读写吞吐
+<img src=/%E7%A1%AC%E7%9B%98%E8%AF%BB%E5%86%99%E5%90%9E%E5%90%90.jpeg alt></p>
+<p>其它的系统监控还有运行的进程端口、进程数、登陆用户、Open File 等（详细查看 zabbix 自带 OS Linux 模板）</p>
+<h3 id=应用监控>应用监控</h3>
+<p>把硬件监控和系统监控研究明白后，我们进一步操作是需要登陆到服务器上查看服务器运行了哪些服务，都需要监控起来。
+应用服务监控也是监控体系中比较重要的内容，例如：LVS、Haproxy、Docker、Nginx、PHP、Memcached、Redis、MySQL、Rabbitmq 等等，相关的服务都需要使用zabbix监控起来。</p>
+<p>PHP-FPM状态
+<img src=/PHP-FPM_status.jpeg alt></p>
+<p>redis状态
+<img src=/redis_status.jpeg alt></p>
+<p>Zabbix 提供应用服务监控：Zabbix Agent UserParameter
+Zabbix 提供的Java监控：Zabbix JMX Interface
+percona 提供 MySQL 数据库监控：percona-monitoring-plulgins</p>
+<h3 id=网络监控>网络监控</h3>
+<p>网络监控是我们构建监控平台时必须要考虑的，尤其是针对有多个机房的场景，各个机房之间的网络状态，机房和全国各地的网络状态都是我们需要重点关注的对象。</p>
+<p>需要借助于网络监控工具 Smokeping监控机房链路。</p>
+<p>Smokeping 是 rrdtool 的作者 Tobi Oetiker 的作品，是用 Perl 写的，主要是监视网络性能，www 服务器性能，dns 查询性能等，使用 rrdtool 绘图，而且支持分布式，直接从多个 agent 进行数据的汇总。</p>
+<p>CDN监控。。。对接第三方接口
+<img src=/cdn%E7%9B%91%E6%8E%A7.jpeg alt></p>
+<h3 id=流量分析>流量分析</h3>
+<p>网站流量分析对于运维人员来说，更是一门必须掌握的知识了。比如对于300.cn站点来说：</p>
+<p>通过对网站来源的统计和分析，可以了解我们在某个网站上的广告投入有没有收到预期的效果。
+可以区分不同地区的访问人数、甚至产品交易额等。
+百度统计、google 分析、站长工具等等，只需要在页面嵌入一个js即可，但是，数据始终是在对方手中，个性化定制不方便，推荐使用google的piwik开源网站访问统计系统。</p>
+<p><img src=/piwik%E7%BD%91%E7%AB%99%E7%BB%9F%E8%AE%A1.png alt></p>
+<h3 id=日志监控>日志监控</h3>
+<p>通常情况下，随着系统的运行，操作系统会产生系统日志，应用程序会产生应用程序的访问日志、错误日志、运行日志、网络日志，我们可以使用 ELK 来进行日志监控。</p>
+<p>对于日志监控来说，最见的需求就是收集、存储、查询、展示。</p>
+<p>开源社区正好有相对应的开源项目： logstash（收集） + elasticsearch（存储+搜索） + kibana（展示）
+我们将这三个组合起来的技术称之为 ELK Stack，所以说 ELK Stack 指的是 Elasticsearch、Logstash、Kibana 技术栈的结合。</p>
+<p>如果收集了日志信息，那么如果部署更新有异常出现，可以立即在 kibana 上看到。</p>
+<p><img src=/kibana-log.png alt></p>
+<p>当然也可以通过Zabbix过滤错误日志来进行告警。</p>
+<p><img src=/zabbix-log.jpeg alt></p>
+<h3 id=安全监控>安全监控</h3>
+<p>虽然Linux开源的安全产品不少，比如四层 iptables，七层WEB防护 Nginx+lua 实现 WAF，最后将相关的日志都收至 ELK Stack，通过图形化进行不同的攻击类型展示。但是始终是一件比较耗费时间的事情，并且个人认为效果并不是很好。</p>
+<h3 id=api监控>API监控</h3>
+<p>由于微服务架构的推行， API 变得越来越重要，很显然我们也需要这样的数据来分辨我们提供的 API 是否能够正常运作。</p>
+<p>监控 API 接口 GET、POST、PUT、DELETE、HEAD、OPTIONS 的请求， 可用性、正确性、响应时间为三大重性能指标</p>
+<p><img src=/api-monitor.jpeg alt></p>
+<h3 id=性能监控>性能监控</h3>
+<p>全面监控网页性能，DNS 响应时间、HTTP 建立连接时间、页面性能指数、响应时间、可用率、元素大小等</p>
+<p>Zabbix 提供 URL监控：Zabbix Web 监控</p>
+<p><img src=/%E7%9B%91%E6%8E%A7download-speed.jpeg alt></p>
+<h3 id=业务监控>业务监控</h3>
+<p>没有业务指标监控的监控平台，不是一个完善的监控平台，通常在我们的监控系统中，必须将我们重要的业务指标进行监控，并设置阈值进行告警通知。</p>
+<p>例如一个产品集群：</p>
+<ul>
+<li>每天产生多少订单；</li>
+<li>每天注册多少用户；</li>
+<li>每天有多少活跃用户；</li>
+<li>每天有多少推广活动；</li>
+<li>推广活动引入多少用户；</li>
+<li>推广活动引入多少流量；</li>
+<li>推广活动引入多少利润；</li>
+</ul>
+<p>等等 重要指标都可以加到 Zabbix 上，然后通过 screen 展示。</p>
+<h2 id=监控报警>监控报警</h2>
+<p>故障报警通知的方式有很多种，当然我们最常用的还是短信，邮件</p>
+<p><img src=/%E7%9B%91%E6%8E%A7%E6%8A%A5%E8%AD%A6.png alt></p>
+<h2 id=报警处理>报警处理</h2>
+<p>一般报警后我们故障如何处理，首先，我们可以通过告警升级机制先自动处理，比如 Nginx 服务 down 了，可以设置告警升级自动启动 Nginx。</p>
+<p>但是如果一般业务出现了严重故障，我们通常根据故障的级别，故障的业务，来指派不同的运维人员进行处理。
+当然不同业务形态、不同架构、不同服务可能采用的方式都不同，这个没有一个固定的模式套用。</p>
+<p><img src=/%E6%8A%A5%E8%AD%A6%E5%A4%84%E7%90%86.png alt></p>
+<h2 id=总结>总结</h2>
+<ol>
+<li>监控是一个长期持续的项目, 需要特定的1-2人跟踪改进;</li>
+<li>监控使用方是业务和运维;</li>
+<li>业务方应提供监控项获取方法;</li>
+<li>如果有投诉，先找监控项目组，没有做到“事先”发现问题，监控项目组应该承担其责任;</li>
+<li>对外提供api，供业务方使用</li>
+</ol>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-f22bca21d5c764f3e5a5bdde5e6519d9>3 - Github开源项目的正确贡献姿势</h1>
+<div class=lead>介绍个人的github项目贡献经验</div>
+<p>常见的开源项目贡献指导里都是差不多的样子：</p>
+<pre><code>* 要先fork
+* 然后change something
+* 再然后fetch，rebase
+* push origin， 最后发起pull request
+</code></pre>
+<p>具体到不同的项目，可能会要求更多的细节步骤,但大体如上。</p>
+<p>这些都没错，但实际操作起来，和习惯不符。因为我一般是先clone一个项目，然后使用中发现有问题，会尝试去修改，fix OK的话，才会想着去贡献代码
+可事情到了这一步，再按照一开始的方式操作，会平白无辜耗费很多时间，还涉及到已经修改完代码如何同步过去的问题。
+以下是我个人总结的一套方法，屡试不爽乎。</p>
+<p>这里我以k8s项目的贡献经历来举例，以备不时之需。git这个东西，不常用，会忘记的，即使你已经理解原理了。。。</p>
+<ul>
+<li>
+<p>首先clone K8s的项目代码。</p>
+<pre tabindex=0><code>git clone https://github.com/kubernetes/kubernetes.git
+</code></pre></li>
+<li>
+<p>然后自行编译 <strong>make</strong>, 使用中发现一些问题</p>
+<p>就会去github的issue里找找看。。。竟然没人提这个问题，问问同事或同行，人家表示没碰到过你的问题，
+好吧，自己尝试去修改... 不断编译 ... 测试... 最终OK了，我要贡献代码！！！
+完啦，没有按照最佳习惯来，改动前忘记新建分支了。。。（这个习惯很重要，可以省掉很多麻烦）
+只能如此操作了，可以来个大挪移到新建分支上</p>
+<pre tabindex=0><code>git stash
+git checkout -b fix_something
+git stash apply
+</code></pre></li>
+<li>
+<p>此时去github上fork下原项目，拿到fork后的项目地址，再来个偷天换日。</p>
+<pre tabindex=0><code>git remote rename origin upstream
+git remote add origin git@github.com:xiaoping378/kubernetes.git
+</code></pre></li>
+<li>
+<p>再然后就可以按一开始介绍的，fetch, rebase, push origin, 发起PR了。</p>
+<pre tabindex=0><code>git fetch upstream
+git rebase upstream/master
+# 有冲突就git mergetool
+git push origin fix_something 
+# 然后去github页面发起pull request即可。
+</code></pre></li>
+<li>
+<p>注意事项
+值的注意的是，以后在master分支上<strong>git pull</strong>，就是从upstream/master那里拉取的，和一般情况不一样的地方。
+这样会少了烦人的merge msg（-ff可以解决）， 还可以用简单的pull来同步上游代码。
+更可以意淫自己是原项目的核心开发人员了。。。
+以后本地同步fork的项目到上游的最新状态，这样操作：</p>
+<pre tabindex=0><code>git checkout master
+git pull
+git push origin master
+</code></pre><p>其实github上那个fork的项目，只是用来提PR的，这样可以在原项目的分支上任意玩耍了。当然你也可以用来备份一些比较大的feature</p>
+</li>
+<li>
+<p>最后记录下个人的git global配置</p>
+<pre tabindex=0><code># cat ~/.gitconfig
+[user]
+  email = xiaoping378@163.com
+  name = xiaoping378
+[merge]
+  tool = meld
+[push]
+  default = simple
+[core]
+  quotepath = false
+</code></pre></li>
+</ul>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-c55eef8486d34bec7cfc37db356d9097>4 - Golang开发-glog日志库</h1>
+<div class=lead>介绍Golang开发中的glog日志库</div>
+<p>基于Golang 1.7.5版本</p>
+<p>软件项目里的日志输出是很重要的环节，可以用于日后BI分析，或者线上调试（万能调试大法printf）等等。</p>
+<blockquote>
+<p>对于当年刚入软件行业时，自己的printf("11111\n")的做法，记忆犹新呀，调试完再删掉自己胡乱加的打印语句，偶尔还有漏删的情况，就commit，push上去了。</p>
+</blockquote>
+<p>golang语言里有个<code>golang/glog</code>包，是类似google内部<a href=https://github.com/google/glog>glog</a>的开源实现，其可以做到无侵入式调试程序，主要是通过启动时命令行传参来控制打印级别。</p>
+<p>有以下特性，</p>
+<ul>
+<li>有四个级别的打印 Info, Warning, Error, Fatal，级别越来越高，分别都支持格式化输出Infof, Warningf, Errorf, Fatalf</li>
+<li>支持 -v传参，指定打印级别</li>
+<li>支持 -vmodule=file=2， 指定特殊文件开启打印，避免日志输出过多。</li>
+<li>支持 -log_dir="", 指定日志输出目录， 默认会按级别输出/tmp目录下， 高级别的会记录到低级别里日志文件里</li>
+</ul>
+<p>下面举个简单的例子</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#080;font-style:italic>//file name: glog.go
+</span><span style=color:#080;font-style:italic></span><span style=color:#a2f;font-weight:700>package</span> main
+
+<span style=color:#a2f;font-weight:700>import</span> (
+	<span style=color:#b44>&#34;flag&#34;</span>
+	<span style=color:#b44>&#34;github.com/golang/glog&#34;</span>
+)
+
+<span style=color:#a2f;font-weight:700>func</span> <span style=color:#00a000>main</span>() {
+	flag.<span style=color:#00a000>Parse</span>()
+	<span style=color:#080;font-style:italic>//flag.Set(&#34;logtostderr&#34;, &#34;true&#34;)
+</span><span style=color:#080;font-style:italic></span>	<span style=color:#a2f;font-weight:700>defer</span> glog.<span style=color:#00a000>Flush</span>()
+
+	glog.<span style=color:#00a000>Info</span>(<span style=color:#b44>&#34;这里是Info级别的日志&#34;</span>)
+	glog.<span style=color:#00a000>Warning</span>(<span style=color:#b44>&#34;这里是Warning级别的日志&#34;</span>)
+	glog.<span style=color:#00a000>Errorf</span>(<span style=color:#b44>&#34;这里是Error级别的日志: %s&#34;</span>, <span style=color:#b44>&#34;error&#34;</span>)
+
+	glog.<span style=color:#00a000>V</span>(<span style=color:#666>3</span>).<span style=color:#00a000>Infoln</span>(<span style=color:#b44>&#34;级别3的日志&#34;</span>)
+}
+</code></pre></div><p>代码如上运行，你需要执行<code>go get github.com/golang/glog</code>下载依赖包， 然后运行</p>
+<pre tabindex=0><code>➜  go run glog.go -v 3
+E0408 09:35:38.703186    8663 glog.go:15] This is a Error log error
+</code></pre><ul>
+<li>
+<p>Error级别的会输出到标准输出，并记录到文件，</p>
+</li>
+<li>
+<p>日志默认输出到/tmp目录， 每次执行都会记录新的文件，日志文件如下样式命名， glog是文件名，air13是主机名，xxp是用户名</p>
+<pre tabindex=0><code> ➜  ls /tmp/glog.* -l
+-rw-rw-r-- 1 xxp xxp 260 4月   8 10:11 /tmp/glog.air13.xxp.log.ERROR.20170408-101153.12771
+-rw-rw-r-- 1 xxp xxp 405 4月   8 10:11 /tmp/glog.air13.xxp.log.INFO.20170408-101153.12771
+-rw-rw-r-- 1 xxp xxp 334 4月   8 10:11 /tmp/glog.air13.xxp.log.WARNING.20170408-101153.12771
+lrwxrwxrwx 1 xxp xxp  46 4月   8 10:11 /tmp/glog.ERROR -&gt; glog.air13.xxp.log.ERROR.20170408-101153.12771
+lrwxrwxrwx 1 xxp xxp  45 4月   8 10:11 /tmp/glog.INFO -&gt; glog.air13.xxp.log.INFO.20170408-101153.12771
+lrwxrwxrwx 1 xxp xxp  48 4月   8 10:11 /tmp/glog.WARNING -&gt; glog.air13.xxp.log.WARNING.20170408-101153.12771
+</code></pre><p>``</p>
+</li>
+<li>
+<p><code>-v 3</code> 指定运行时的记录的日志级别，因为3>=3, 这样<code>V(3).Infoln</code>会输出， 如果是传入 <code>-v 2</code>, 则不会</p>
+</li>
+<li>
+<p><code> go run glog.go -v 2 -logtostderr=true</code>， 则会关闭记录文件，输出到标准输出。
+当然可以在程序里加上 <code>flag.Set("logtostderr", "true")</code>来关闭记录文件。</p>
+</li>
+</ul>
+<p>总之，glog包对日志的控制非常实用和灵活，大型Golang项目必备包之一。</p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-a9f4bf3f89e3c59df21a53d3b7c87e0d>5 - VSCode-开发已有的java项目</h1>
+<div class=lead>介绍如何在vscode中开发编译调试已有的java的项目</div>
+<p>个人经验记录：</p>
+<ol>
+<li>
+<p>install deps</p>
+<p><img src=/vscode-java.png alt></p>
+</li>
+<li>
+<p>clean workspace</p>
+<p>代开设置 Ctrl+Shift+P, 输入 <code>clean java workspace</code> and restart</p>
+</li>
+<li>
+<p>support lombok</p>
+<p>java代码出了名的冗长，lombok可以优雅解决此类问题，如果项目依赖了lombok， vsocde打开java项目就会显示各种<code>cannot be resloved</code>错误,</p>
+<p>下面是我个人的配置,其中<code>java.jdt.ls.vmargs</code>的配置（看个人项目maven依赖和安装路径了），会消除错误，并可以支持跳转：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{
+    <span style=color:green;font-weight:700>&#34;window.menuBarVisibility&#34;</span>: <span style=color:#b44>&#34;toggle&#34;</span>,
+    <span style=color:green;font-weight:700>&#34;window.zoomLevel&#34;</span>: <span style=color:#666>1</span>,
+    <span style=color:green;font-weight:700>&#34;explorer.confirmDelete&#34;</span>: <span style=color:#a2f;font-weight:700>false</span>,
+    <span style=color:green;font-weight:700>&#34;workbench.colorTheme&#34;</span>: <span style=color:#b44>&#34;Solarized Dark&#34;</span>,
+    <span style=color:green;font-weight:700>&#34;files.associations&#34;</span>: {
+        <span style=color:green;font-weight:700>&#34;default&#34;</span>: <span style=color:#b44>&#34;toml&#34;</span>
+    },
+    <span style=color:green;font-weight:700>&#34;editor.fontLigatures&#34;</span>: <span style=color:#a2f;font-weight:700>true</span>,
+    <span style=color:green;font-weight:700>&#34;java.configuration.checkProjectSettingsExclusions&#34;</span>: <span style=color:#a2f;font-weight:700>false</span>,
+    <span style=color:green;font-weight:700>&#34;go.autocompleteUnimportedPackages&#34;</span>: <span style=color:#a2f;font-weight:700>true</span>,
+    <span style=color:green;font-weight:700>&#34;java.jdt.ls.vmargs&#34;</span>:<span style=color:#b44>&#34;-javaagent:/home/xxp/.m2/repository/./org/projectlombok/lombok/1.16.20/lombok-1.16.20.jar -Xbootclasspath/a:/home/xxp/.m2/repository/./org/projectlombok/lombok/1.16.20/lombok-1.16.20.jar&#34;</span>
+}
+</code></pre></div></li>
+</ol>
+<p>参考链接</p>
+<ul>
+<li><a href=https://github.com/redhat-developer/vscode-java/wiki/Lombok-support>https://github.com/redhat-developer/vscode-java/wiki/Lombok-support</a></li>
+<li><a href=https://code.visualstudio.com/docs/languages/java>https://code.visualstudio.com/docs/languages/java</a></li>
+<li><a href=https://github.com/redhat-developer/vscode-java/wiki/Troubleshooting>https://github.com/redhat-developer/vscode-java/wiki/Troubleshooting</a></li>
+</ul>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-024476416cd1256abdf9950bb55be431>6 - MongoDB之初见</h1>
+<div class=lead>介绍MongoDB的基本使用。</div>
+<ol>
+<li>手动启动</li>
+</ol>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#080;font-style:italic># 下载二进制</span>
+wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.4.9.tgz
+tar -zxvf mongodb-linux-x86_64-3.4.9.tgz
+ln -s <span style=color:#b8860b>$PWD</span>/mongodb-linux-x86_64-3.4.9/bin/* /home/xxp/Software/bin
+<span style=color:#080;font-style:italic># 创建数据存储目录	</span>
+mkdir mongodb
+sudo chown -R <span style=color:#b8860b>$USER</span> ./mongodb
+mongod -dbpath<span style=color:#666>=</span><span style=color:#b8860b>$PWD</span>/mongodb
+</code></pre></div><p>默认监听27017， 根据情况选择关闭warning。</p>
+<ol start=2>
+<li>推荐调试方法</li>
+</ol>
+<p>默认可以使用<code>mongo</code>进入shell交互模式，
+亦可使用图形管理界面，推荐<code>robo3T</code>, 目前1.1.1版本在ubuntu桌面上有crash问题，需要如下操作：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -O https://download.robomongo.org/1.1.1/linux/robo3t-1.1.1-linux-x86_64-c93c6b0.tar.gz
+tar zxvf robo3t-1.1.1-linux-x86_64-c93c6b0.tar.gz
+
+mkdir ~/robo-backup
+mv robo3t-1.1.1-linux-x86_64-c93c6b0/lib/libstdc++* ~/robo-backup/
+robo3t-1.1.1-linux-x86_64-c93c6b0/bin/robo3t
+</code></pre></div><p><img src=/robo3t.png alt></p>
+<ol>
+<li>基本使用</li>
+</ol>
+<p>shell里敲mongo进入交互界面，</p>
+<p>手续推荐查看<a href=http://www.mongoing.com/docs/reference/sql-comparison.html>mongodb中文文档</a></p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-0869f908f4f0eb9cdf146f22565dc728>7 - Openldap之拨云见日</h1>
+<div class=lead>介绍Openldap的原理。</div>
+<p>很早就听说LDAP/AD之流的企业级概念，认为是做统一用户认证的，具体怎么使用对接，一直有点儿糊涂，今天决定搞明白这些，并深入实践下openldap。</p>
+<p>未完...TODO</p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-9763571770981514723f9ed615e69ea5>8 - Casbin的权限管理解读</h1>
+<div class=lead>介绍Casbin的权限模型管理的用法。</div>
+<div class="pageinfo pageinfo-primary">
+<p>项目一般都要包含权限管理功能，或集成IAM，或自身实现。本文介绍一个强大、高效的开源访问控制框架--Casbin。</p>
+</div>
+<h2 id=基本介绍>基本介绍</h2>
+<p>Casbin的由来，是出自开源作者<code>罗杨</code>的一篇论文<a href=https://arxiv.org/abs/1903.09756>《PML：一种基于Interpreter的Web服务访问控制策略语言》</a>，该论文的主要摘要如下：</p>
+<blockquote>
+<p>为了保护云资源的安全,防止数据泄露和非授权访问,必须对云平台的资源访问实施访问控制.然而,目前主流云平台通常采用自己的安全策略语言和访问控制机制,从而造成两个问题:</p>
+<ul>
+<li>（1）云用户若要使用多个云平台,则需要学习不同的策略语言,分别编写安全策略;</li>
+<li>（2）云服务提供商需要自行设计符合自己平台的安全策略语言及访问控制机制,开发成本较高.</li>
+</ul>
+<p>对此,提出一种基于元模型的访问控制策略描述语言PML及其实施机制PML-EM. PML支持表达BLP、RBAC、ABAC等访问控制模型.
+PML-EM实现了3个性质:</p>
+<ul>
+<li>策略语言无关性</li>
+<li>访问控制模型无关性</li>
+<li>程序设计语言无关性</li>
+</ul>
+<p>从而降低了用户编写策略的成本与云服务提供商开发访问控制机制的成本. 在OpenStack云平台上实现了PML-EM机制.实验结果表明,PML策略支持从其他策略进行自动转换,
+在表达云中多租户场景时具有优势.性能方面,与OpenStack原有策略相比,PML策略的评估开销为4.8%.PML-EM机制的侵入性较小,与云平台原有代码相比增加约0.42%.</p>
+</blockquote>
+<p>目前Casbin的权限策略管理支持主流的<strong>ACL、RBAC、ABAC</strong>、RESTful等模型，实现的编程语言主要有Go、java、Nodejs、PHP、Python、.Net、C++、Rust等。目前Go和Java的实现最为全面。</p>
+<p>先介绍下主流的访问控制模型：</p>
+<ul>
+<li><em>ACL（access control list）</em>：是一种与访问对象关联的权限列表，在基础设施领域应用非常广泛：
+<ul>
+<li>文件系统：用户（组）对文件或进程等的访问权限控制</li>
+<li>网络：常见的有防火墙（安全组、路由器、交换机）内的对目的IP和端口的规则控制</li>
+<li>SQL：库、表的权限管理</li>
+<li><a href=../openldap%E4%B9%8B%E6%8B%A8%E4%BA%91%E5%8E%BB%E6%97%A5>LDAP</a>：层级结构的实体权限管理：网络域权限管理...</li>
+</ul>
+</li>
+<li><em>RBAC（role-based access control）</em>：基于角色的权限控制，围绕角色和权限定义的策略中立的访问控制机制，和组ACL等价，具体表现为在用户和权限之间加了一层角色，先建立具有某种权限的角色，然后用角色和用户绑定，目前多用于业务系统内的权限管理，还支持支持角色权限继承。</li>
+<li><em>ABAC（Attribute-based access control）</em>：基于属性的权限控制，属性可以是用户侧（所属组织、访问IP、访问时间）或资源侧（帖子的评论开关、留言再编辑）的，因为用户或资源的属性是动态的，不像前面两个(需要预先定义好策略，略显死板,,,）被称为是“下一代”的权限模型。</li>
+<li><em>Restful</em>：一种Web API规范，常用GET, POST等动作来实现与后台交互。</li>
+</ul>
+<p>和Casbin结合，使用的基本示意图如下：</p>
+<p><img src=/images/Casbin-%E4%BD%BF%E7%94%A8%E7%A4%BA%E6%84%8F%E5%9B%BE.drawio.png alt></p>
+<ul>
+<li>1-2为管理人员下发权限策略</li>
+<li>3-6为用户日常操作资源的简易流程，实际应用场景一般如下：</li>
+</ul>
+<pre tabindex=0><code class=language-plantuml data-lang=plantuml>@startuml
+!theme aws-orange
+用户 -&gt; 认证中心: 登录操作
+认证中心 -&gt; 缓存: 存放(key=token+ip,value=token)token
+用户 &lt;- 认证中心 : 认证成功返回token
+用户 -&gt; 认证中心: 下次访问头部携带token认证
+认证中心 &lt;- 缓存: key=token+ip获取token
+Casbin &lt;- 认证中心: 存在且校验成功,则进入授权校验
+Casbin -&gt; 其他服务: 权限合规，则跳转到用户请求的其他服务
+其他服务 -&gt; 用户: 信息
+@enduml
+</code></pre><h2 id=抽象模型>抽象模型</h2>
+<p>正如上面提到的，要支持这么多的权限模型，，所以Casbin基于开头提到的PML（PERM modeling language）引入一种抽象的元模型控制，其中<strong>PERM</strong>是指的<strong>Policy, Effect, Request, Matchers</strong>，具体工作流如下：</p>
+<p><img src=/images/Casbin-2022-01-26-23-21-26.png alt></p>
+<p>这里的<code>PERM</code>是Casbin在启动时要加载的抽象校验模型，可以理解成一种权限校验模板。 简单说个场景串下这里的概念：</p>
+<ul>
+<li>管理员分配给用户权限<strong>Policy</strong>，可以得到<code>谁能操作什么资源</code>的信息</li>
+<li>用户发起请求<strong>Request</strong>，可以得到<code>谁要操作什么资源</code>的信息</li>
+<li>Casbin拿到Request和Policy做匹配<strong>Matcher</strong>，也支持自定义函数匹配。</li>
+<li>根据匹配结果<strong>Effect</strong>来决定是否允许用户的操作</li>
+</ul>
+<p>实际场景中，用户可能被分配了多个权限（角色），那具体权限校验如下：
+<img src=/images/Casbin-2022-01-26-23-47-48.png alt></p>
+<p>既然是一种语言，就是有语法的，<a href=https://casbin.org/docs/zh-CN/syntax-for-models>PERM语法</a>至少要有四部分：<code>[request_definition], [policy_definition], [policy_effect], [matchers]</code>。
+具体就不展开介绍了，可自行官网祥读，effect部分具备SQL背景可能好理些,,,理解不了也没关系，目前就内置了5种：</p>
+<table>
+<thead>
+<tr>
+<th>Effect</th>
+<th>含义</th>
+<th>样例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>some(where (p.eft == allow))</td>
+<td>allow-override</td>
+<td><a href=https://casbin.org/docs/zh-CN/supported-models#examples>ACL, RBAC, etc.</a></td>
+</tr>
+<tr>
+<td>!some(where (p.eft == deny))</td>
+<td>deny-override</td>
+<td><a href=https://casbin.org/docs/zh-CN/supported-models#examples>Deny-override</a></td>
+</tr>
+<tr>
+<td>some(where (p.eft == allow)) && !some(where (p.eft == deny))</td>
+<td>allow-and-deny</td>
+<td><a href=https://casbin.org/docs/zh-CN/supported-models#examples>Allow-and-deny</a></td>
+</tr>
+<tr>
+<td>priority(p.eft) || deny</td>
+<td>priority</td>
+<td><a href=https://casbin.org/docs/zh-CN/supported-models#examples>Priority</a></td>
+</tr>
+<tr>
+<td>subjectPriority(p.eft)</td>
+<td>priority base on role</td>
+<td><a href=https://casbin.org/docs/zh-CN/supported-models#examples>Subject-Priority</a></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>奉劝各位看官，既然是语法，就不要纠结里面的命名和写法，较真...人家就是这么定义的，知道能都有哪些写法就可以了...，实际使用中往往改动Macter的部分概率大些。</p>
+</blockquote>
+<h2 id=按场景举例>按场景举例</h2>
+<h3 id=acl模型>ACL模型</h3>
+<p>先定义Casbin要加载的PERM Model，我使用在线编辑器定义一个<a href=https://casbin.org/casbin-editor/#6TQQJ8EQF>ACL典型模型</a>:</p>
+<p><img src=/images/Casbin-2022-01-27-09-48-25.png alt></p>
+<p>解读如下：</p>
+<ul>
+<li>左上侧为Casbin启动时要加载的标准ACL Model配置，不需要改动</li>
+<li>右上侧为Policy部分，属于管理员要分配权限时要改动的部分：示例中定义了5条规则，小王和小李对自己的Home目录可以读写，而小李额外可以读取小王的Home目录</li>
+<li>左下角Request表明用户的请求，一般是从用户实际发起的请求中获取信息，组合好格式后，用API发起校验，示例中小李发起读和写小王的操作</li>
+<li>右下角为权限校验结果：示例中小李的写操作被拒绝了</li>
+</ul>
+<h3 id=rbac模型>RBAC模型</h3>
+<p>下图模式的在线<a href=https://casbin.org/casbin-editor/#F8A6D8YHE>编辑地址</a></p>
+<p><img src=/images/Casbin-2022-01-27-16-31-44.png alt></p>
+<p>Macters里的<code>g(r.sub, p.sub, r.dom)</code> 将检查用户 r.sub 在域内 r.dom 是否具有角色 p.sub ，这是该匹配器的工作方式。</p>
+<h3 id=abac模型>ABAC模型</h3>
+<p>上图中RBAC中的Matcher如下修改，及实现了ABAC的模型校验。表明用户必须是要访问资源的<code>Owner</code>才可以操作符合角色权限内的资源。</p>
+<pre tabindex=0><code class=language-Conf data-lang=Conf>m = r.obj.Owner == r.sub &amp;&amp; (g(r.sub, p.sub, r.dom) &amp;&amp; r.dom == p.dom &amp;&amp; r.obj == p.obj &amp;&amp; r.act == p.act)
+</code></pre><h2 id=总结>总结</h2>
+<p>Casbin提供了非常灵活的权限校验模型，还提供了丰富的API，方便更便捷的实现业务场景功能, 后面会针对具体的项目开展更贴地气的解读。</p>
+<h2 id=参考>参考</h2>
+<blockquote>
+<p><a href=https://casbin.org/docs/zh-CN/tutorials>https://casbin.org/docs/zh-CN/tutorials</a></p>
+</blockquote>
+<blockquote>
+<p>我的博客即将同步至腾讯云+社区，邀请大家一同入驻：https://cloud.tencent.com/developer/support-plan?invite_code=3ntkskjrcwow8</p>
+</blockquote>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-e4c44f08a2c513a02fe3cb9aa2c655e0>9 - Windows Terminal终端入坑指南</h1>
+<div class=lead>介绍windows terminal安装和oh-my-zsh的配置</div>
+<div class="pageinfo pageinfo-primary">
+<p>为了这个东西，重新安装了系统，目前是在windows LTSC 2021版本下的使用指南。
+在IT界Terminal和Console差不多是一个意思，同属于界面层面的，不少人老和Shell搞混了，特此说明下Shell一般是指的Bash、zsh、PowerShell、cmd等。</p>
+</div>
+<h2 id=安装>安装</h2>
+<p>为了使用Windows Terminal，在春节期间，重新安装了LTSC 2021版本的系统（之前一直用的LTSC 2019）。</p>
+<blockquote>
+<p>它对操作系统内部版本的最低要求为 <code>18362.0</code>，通过<code>Win+R</code>输入<code>winver</code>可以确认本机系统是否支持。</p>
+</blockquote>
+<p>目前有三种办法安装（本人选用的第二种）:</p>
+<ul>
+<li>
+<p>是在应用商店中搜索<code>Windows Terminal</code>，安装即可。</p>
+</li>
+<li>
+<p>通过<a href=https://github.com/microsoft/terminal/releases>Github release</a>页面下载安装包，</p>
+</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style=color:#a2f>Add-AppxPackage</span> Microsoft.WindowsTerminal_&lt;versionNumber&gt;.msixbundle
+</code></pre></div><ul>
+<li>通过命令行<a href=https://github.com/microsoft/winget-cli>winget</a>、<a href=https://chocolatey.org/>Chocolatey </a>、<a href=https://scoop.sh/>Scoop </a>安装，下面以winget为例：</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell>winget install --id=Microsoft.WindowsTerminal -e
+</code></pre></div><h2 id=配置>配置</h2>
+<p>现在基本可以图形界面配置了，按照自己的习惯图形操作即可，网上一坨坨的教程，此处不表。</p>
+<p><img src=/images/windows-terminal-2022-01-30-12-53-50.png alt></p>
+<p>默认配置保存在了<code>%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json</code></p>
+<h2 id=技巧>技巧</h2>
+<ol>
+<li>快捷键
+<ul>
+<li>新建终端 -- <code>Ctrl+Shift+t</code></li>
+<li>切换终端 -- <code>Alt + Num</code> , （我这里修改过了）</li>
+</ul>
+</li>
+<li>Quake窗口
+<ul>
+<li>快捷键是<strong>Win + `</strong> , 可以快速从屏幕上半区换出终端窗口</li>
+</ul>
+</li>
+</ol>
+<h2 id=gitbash>GitBash</h2>
+<p><img src=/images/windows-terminal-2022-01-30-23-03-08.png alt></p>
+<p>本人环境<code>VSCode</code>和<a href=https://git-scm.com/download/win>git-bash</a>都是绿色版本了，免去了每次重装系统，都进行各种重复的配置操作.</p>
+<blockquote>
+<p>没有环境的可以自行通过上面的连接下载GitBash，后面有时间会尝试下<code>WSL</code>和WSL2。</p>
+</blockquote>
+<h3 id=中文乱码>中文乱码</h3>
+<p>需要添加环境变量到<code>~/.bashrc</code>或者<code>~/.zshrc</code>中。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#a2f>export</span> <span style=color:#b8860b>LANG</span><span style=color:#666>=</span>zh_CN.UTF-8
+</code></pre></div><h3 id=绿色改造>绿色改造</h3>
+<p>绿色改造的核心，一个是安装时不默认安装在C盘，另一个就是设置<code>HOME</code>的系统环境变量，Git-Bash每次启动是可以根据<code>HOME</code>变量，决定加载配置的路径的。</p>
+<p>设置系统环境变量，两种办法：</p>
+<ul>
+<li>
+<p>图形界面操作： <code>Win+x</code> -> 系统 -> 高级系统设置 -> 环境变量, 自行添加<code>HOME</code>变量。</p>
+</li>
+<li>
+<p>在PowerShell命令行中设置环境变量，执行完即可生效。</p>
+</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style=color:#800>[Environment]</span>::SetEnvironmentVariable(<span style=color:#b44>&#34;HOME&#34;</span>, <span style=color:#b44>&#34;D:\xxp&#34;</span>, <span style=color:#b44>&#34;User&#34;</span>)
+</code></pre></div><p>我这里是<code>D:\xxp</code>目录，这样的话，那些<code>ssh、git、vscode、bash、zsh</code>的自定义配置，都可以免去重装再来一次的痛苦了。</p>
+<p>还可以把日常用到<code>exe</code>小工具，也放到<code>$HOME/bin</code>目录下，再加到<code>PATH</code>环境变量里。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style=color:#800>[Environment]</span>::SetEnvironmentVariable(<span style=color:#b44>&#34;Path&#34;</span>, <span style=color:#800>[Environment]</span>::GetEnvironmentVariable(<span style=color:#b44>&#34;Path&#34;</span>, <span style=color:#b44>&#34;User&#34;</span>) + <span style=color:#b44>&#34;;D:\xxp\bin&#34;</span>,<span style=color:#b44>&#34;User&#34;</span>)
+</code></pre></div><h3 id=oh-my-zsh主题改造>oh-my-zsh主题改造</h3>
+<p><del>现在有人直接把zsh装上，然后再安装github上的oh-my-zsh主题，但是启动速度会慢一些，本来bash就比cmd启动慢了，，，</del></p>
+<p><del>我是在bash的基础上改造下主题，修改<code>Git\etc\profile.d\git-prompt.sh</code>文件，详见<a href=https://gist.github.com/xiaoping378/8d636ddfdcf68982b93b65acbd5dcd83>这里</a></del></p>
+<p>之前一直是Bash的基础上，修改了下主题凑活用着。其实可以直接使用zsh的，记录下大致操作。</p>
+<blockquote>
+<p>之前在网上看过的的教程大多是在<code>bashrc</code>里再启动<code>zsh</code>，会慢上加慢的，我就一直没弄，后来觉得是可以做个<code>Git-zsh</code>环境的。</p>
+</blockquote>
+<ol>
+<li><a href=https://mirror.msys2.org/msys/x86_64/zsh-5.8-5-x86_64.pkg.tar.zst>下载</a>zsh二进制</li>
+</ol>
+<p>现在msys2上的安装包，都变成zst格式（Facebook家出的）的压缩包了，还需要下载解压工具，我平常使用的就是7z，这里找了个<a href=https://github.com/mcmilk/7-Zip-zstd/releases>7z with ZS</a>的工具。</p>
+<p>解压到GitBash安装的根目录上。主要是<code>/etc/zsh</code>和<code>/usr</code>目录。</p>
+<ol start=2>
+<li>安装oh-my-zsh主题</li>
+</ol>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>sh -c <span style=color:#b44>&#34;</span><span style=color:#a2f;font-weight:700>$(</span>curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh<span style=color:#a2f;font-weight:700>)</span><span style=color:#b44>&#34;</span>
+</code></pre></div><ol start=3>
+<li>terminal和vscode中使用zsh.exe</li>
+</ol>
+<ul>
+<li>直接指定<code>zsh.exe</code>的路径</li>
+<li>还需要在<code>~/.zshrc</code>的<code>PATH</code>里添加<code>/mingw64/bin</code>，不然会提示找不到git，</li>
+</ul>
+<p>如下是Terminal的配置：
+<img src=/images/windows-terminal-2022-01-30-23-18-29.png alt></p>
+<p>如下是vscode中的配置：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>    <span style=color:#b44>&#34;terminal.integrated.profiles.windows&#34;</span><span>:</span> {
+        <span style=color:green;font-weight:700>&#34;git-bash&#34;</span>: {
+          <span style=color:green;font-weight:700>&#34;path&#34;</span>: <span style=color:#b44>&#34;D:\\Softwares\\Git\\usr\\bin\\zsh.exe&#34;</span>,
+          <span style=color:green;font-weight:700>&#34;args&#34;</span>: []
+        }
+      }<span>,</span>
+    <span style=color:#b44>&#34;terminal.integrated.defaultProfile.windows&#34;</span><span>:</span> <span style=color:#b44>&#34;git-bash&#34;</span><span>,</span>
+</code></pre></div>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-6a2aa71420594dce8734ef70bec7f0ce>10 - TiDB分布式数据库</h1>
+<div class=lead>TiDB分布式数据库的介绍和深度探索</div>
+<div class="pageinfo pageinfo-primary">
+<p>主要介绍TiDB周边生态和实践体验</p>
+</div>
+</div>
+<div class=td-content>
+<h1 id=pg-07ef033d5a20184955fad1e45f4c9e36>10.1 - TiDB初体验</h1>
+<div class=lead>TiDB 初体验安装介绍</div>
+<h2 id=安装>安装</h2>
+<blockquote>
+<p>安装环境要求：</p>
+<ul>
+<li>Mac或者单机Linux环境</li>
+<li>可以连接外网</li>
+</ul>
+</blockquote>
+<ol>
+<li>执行命令安装<code>TiUP</code>工具，官方运维管理工具。</li>
+</ol>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl --proto <span style=color:#b44>&#39;=https&#39;</span> --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
+</code></pre></div><p>命令会有关键信息输出:添加了证书、修改了PATH变量等，需要声明下环境变量，以使<code>tiup</code>命令能被找到。</p>
+<ol start=2>
+<li>声明系统环境变量</li>
+</ol>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#080;font-style:italic># 因个人环境，此处会有差异</span>
+<span style=color:#a2f>source</span> ~/.zshrc
+</code></pre></div><p>可以<code>echo $PATH</code>下，看到<code>/root/.tiup/bin</code>被加到了最前面。</p>
+<ol start=3>
+<li>启动单实例集群</li>
+</ol>
+<p>直接执行<code>tiup playground</code>命令默认会运行最新版本的TiDB集群，其中TiDB Server、TiKV、PD 和 TiFlash 实例各 1 个：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>tiup playground
+</code></pre></div><p>具体如下图所示，需要另开一个终端，使用mysql发起连接：
+<img src=/images/github-dev-2022-02-04-16-16-18.png alt></p>
+<p>目前tidb playground默认启动监听在127的地址，可以通过--host参数更改，但还不能更改端口（经查代码是写死了端口）。</p>
+<ul>
+<li>其他可修改参数，可通过<code>tiup playground -h</code>查看。</li>
+<li>dashboard的默认root用户没有密码，如果是公网暴露了，建议如下添加密码(我这里设置了root密码为<code>tidb</code>):</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>mysql -h127.0.0.1 -P4000 -uroot
+alter user <span style=color:#b44>&#39;root&#39;</span> identified by <span style=color:#b44>&#39;tidb&#39;</span>;
+</code></pre></div><ul>
+<li>grafana的登录密码，默认为admin/admin</li>
+<li><code>tiup update --self</code>可升级tiup命令</li>
+</ul>
+<blockquote>
+<p>mysql客户端可通过<code>yum install -y mysql</code>或者<code>apt install mysql-client</code>安装。</p>
+</blockquote>
+<h2 id=集群>集群</h2>
+<p>没有多节点的环境，折腾了一下，要单机玩这个模式的话，需要hack的东西太多，，，目前还不建议这么搞，等有时间看能不能提个PR.</p>
+<h2 id=tidb-server>TIDB Server</h2>
+<p>处理client的SQL请求.</p>
+<h2 id=pd>PD</h2>
+<p>提供全局时钟和Region调度和管理（扩缩容）。</p>
+<h2 id=tikv>TIKV</h2>
+<p>使用rocksDB实现数据持久化，基于此实现了分布式存储引擎，其中的核心点可以理解为以下三点：</p>
+<ul>
+<li>事务</li>
+<li>MVCC</li>
+<li>Raft</li>
+</ul>
+<h3 id=分布式事务percolator>分布式事务Percolator</h3>
+<p>基于时间戳的两阶段提交事务解决方案。</p>
+<h3 id=mvcc多版本并发控制>MVCC多版本并发控制</h3>
+<p><code>COW</code>的本质。默认revision大的为最新值，</p>
+<h3 id=多副本raft一致性>多副本Raft一致性</h3>
+<p><strong>Leader选举：</strong></p>
+<ul>
+<li><code>Term</code>状态变化，follower -> (random timeout) -> candidate -> leader. 此过程因为网络延迟问题，很可能是进行多轮选举。</li>
+</ul>
+<pre tabindex=0><code class=language-plantuml data-lang=plantuml>@startuml
+!theme aws-orange
+TiKV1 -&gt; TiKV1: 随机选举时间到，切换为candidate角色，进入term2，发出选举信息
+TiKV1 -&gt; TiKV2: 发起选举，term=2
+TiKV1 -&gt; TiKV3: 发起选举，term=2
+TiKV2 -&gt; TiKV2: 对比term（非拜占庭环境，大家默认信任term大的）
+TiKV3 -&gt; TiKV3: 对比term
+TiKV2 -&gt; TiKV1: 投一票
+TiKV3 -&gt; TiKV1: 投一票
+TiKV1 -&gt; TiKV1: 超过一半投票（2x+1），成为Leader
+TiKV1 -&gt; TiKV2: 心跳保活
+TiKV1 -&gt; TiKV3: 心跳保活
+TiKV1 -&gt; TiKV1: 异常了
+TiKV2 -&gt; TiKV2: 心跳超时，切换candidate角色，进入term3
+TiKV2 -&gt; TiKV3: 发起选举
+TiKV3 -&gt; TiKV2: 对比term，并投一票
+TiKV2 -&gt; TiKV2: 加上自己的一票，超过一半投票，成为Leader
+@enduml
+</code></pre><blockquote>
+<p>leader负责读写请求，follower负责数据多副本复制。日常心跳保活，出问题后，重新选举。</p>
+</blockquote>
+<p><strong>数据写入</strong>：</p>
+<ul>
+<li>propose -> append (local) -> Replicate (remote append) -> commited -> apply</li>
+</ul>
+<pre tabindex=0><code class=language-plantuml data-lang=plantuml>@startuml
+!theme aws-orange
+
+用户 -&gt; TiDB_Server: 发起事务数据写入
+TiDB_Server -&gt; TiDB_Server: 解析语句，SQL -&gt; KV
+TiDB_Server -&gt; PD: 获取KV元信息
+PD -&gt; TiDB_Server: 告知该key的range leader信息（TiKV1）
+TiDB_Server -&gt; TiKV1: 发起propose
+TiKV1 -&gt; TiKV1: 本地append为raft_log
+TiKV1 -&gt; TiKV2: 发起Replicate复制
+TiKV1 -&gt; TiKV3: 发起Replicate复制
+TiKV2 -&gt; TiKV2: 本地append为raft_log
+TiKV3 -&gt; TiKV3: 本地append为raft_log
+TiKV2 -&gt; TiKV1: 反馈已记录成功
+TiKV3 -&gt; TiKV1: 反馈已记录成功
+TiKV1 -&gt; TiKV1: 收到大多数节点反馈，进入commited状态
+TiKV1 -&gt; TiKV2: 发起commited确认
+TiKV1 -&gt; TiKV3: 发起commited确认
+TiKV2 -&gt; TiKV1: 进入commited
+TiKV3 -&gt; TiKV1: 进入commited
+TiKV1 -&gt; TiKV1: 收到大多数节点反馈，进入apply状态，此时业务数据才算真正落盘
+TiKV1 -&gt; TiKV2: 发起apply确认
+TiKV1 -&gt; TiKV3: 发起apply确认
+TiKV2 -&gt; TiKV1: 进入apply
+TiKV3 -&gt; TiKV1: 进入apply
+TiKV1 -&gt; TiDB_Server: 收到一个apply成功反馈，即可反馈用户写入成功
+TiDB_Server -&gt; 用户: 反馈写入成功
+@enduml
+</code></pre><blockquote>
+<p>SQL事务的commit对应到这里的apply，这里的commited是指raft中记录上用户的数据更新了（多数据节点记录上用户的写入请求了）。</p>
+</blockquote>
+<p><strong>数据读取：</strong></p>
+<ul>
+<li>tidb server解析SQL语句 -> 从pd获取对应key的tikv节点信息 -></li>
+</ul>
+</div>
+</main>
+</div>
+</div>
+<footer class="bg-dark py-5 row d-print-none">
+<div class="container-fluid mx-sm-5">
+<div class=row>
+<div class="col-6 col-sm-4 text-xs-center order-sm-2">
+<ul class="list-inline mb-0">
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title="个人邮箱 xiaoping378@163.com" aria-label="个人邮箱 xiaoping378@163.com">
+<a class=text-white target=_blank rel=noopener href=mailto:xiaoping378@163.com aria-label="个人邮箱 xiaoping378@163.com">
+<i class="fa fa-envelope"></i>
+</a>
+</li>
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=微博 aria-label=微博>
+<a class=text-white target=_blank rel=noopener href=https://weibo.com/xiaoping378 aria-label=微博>
+<i class="fab fa-weibo"></i>
+</a>
+</li>
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=知乎 aria-label=知乎>
+<a class=text-white target=_blank rel=noopener href=https://www.zhihu.com/people/xiaoping378 aria-label=知乎>
+<i class="fab fa-zhihu"></i>
+</a>
+</li>
+</ul>
+</div>
+<div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+<ul class="list-inline mb-0">
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=GitHub aria-label=GitHub>
+<a class=text-white target=_blank rel=noopener href=https://github.com/xiaoping378/xiaoping378.github.io aria-label=GitHub>
+<i class="fab fa-github"></i>
+</a>
+</li>
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=Slack aria-label=Slack>
+<a class=text-white target=_blank rel=noopener href=https://example.org/slack aria-label=Slack>
+<i class="fab fa-slack"></i>
+</a>
+</li>
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title="Developer mailing list" aria-label="Developer mailing list">
+<a class=text-white target=_blank rel=noopener href=https://example.org/mail aria-label="Developer mailing list">
+<i class="fa fa-envelope"></i>
+</a>
+</li>
+</ul>
+</div>
+<div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+<small class=text-white>&copy; 2022 xiaoping378 保留所有权利</small>
+<small class=ml-1><a href=# target=_blank rel=noopener>隐私政策</a></small>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js integrity=sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin=anonymous></script>
+<script src=/js/tabpane-persist.js></script>
+<script src=/js/deflate.js></script>
+<script src=/js/main.min.e016890ed6b0c42f5af3410eb57ac626a192a868609aee68cefe1e0f84a50b13.js integrity="sha256-4BaJDtawxC9a80EOtXrGJqGSqGhgmu5ozv4eD4SlCxM=" crossorigin=anonymous></script>
+</body>
+</html>

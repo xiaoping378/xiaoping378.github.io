@@ -1,0 +1,240 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>现代技能栈 – 云原生</title><link>https://xiaoping378.gitee.io/docs/4-cloud/</link><description>Recent content in 云原生 on 现代技能栈</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://xiaoping378.gitee.io/docs/4-cloud/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: 容器篇</title><link>https://xiaoping378.gitee.io/docs/4-cloud/containers/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.gitee.io/docs/4-cloud/containers/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>容器基础界还在不断向前发展，持续更新认知。&lt;/p>
+&lt;/div>
+&lt;p>自15年开始接触容器，当时容器就是Docker，Docker就是容器，当然现在docker仍是主流的容器runtime方案，随着k8s的规模落地，生态也在潜移默化的变化着，此篇会把以前编写的一些文章挪移到此处，顺便开启新的认知。&lt;/p></description></item><item><title>Docs: Kubernetes</title><link>https://xiaoping378.gitee.io/docs/4-cloud/k8s/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.gitee.io/docs/4-cloud/k8s/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>主要介绍k8s的核心功能和周边生态&lt;/p>
+&lt;/div></description></item><item><title>Docs: Openshift</title><link>https://xiaoping378.gitee.io/docs/4-cloud/openshift/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.gitee.io/docs/4-cloud/openshift/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>主要记录介绍以前个人的Openshfit实践总结。&lt;/p>
+&lt;/div></description></item><item><title>Docs: 混合云网络SDN</title><link>https://xiaoping378.gitee.io/docs/4-cloud/%E6%B7%B7%E5%90%88%E4%BA%91sdn%E9%80%89%E5%9E%8B/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.gitee.io/docs/4-cloud/%E6%B7%B7%E5%90%88%E4%BA%91sdn%E9%80%89%E5%9E%8B/</guid><description>
+&lt;ul>
+&lt;li>TODO.&lt;/li>
+&lt;/ul>
+&lt;h3 id="为什么需要sdn">为什么需要SDN&lt;/h3>
+&lt;ul>
+&lt;li>网络可编程&lt;/li>
+&lt;li>VPC（Virtual Private Cloud）&lt;/li>
+&lt;/ul>
+&lt;h3 id="现有sdn方案">现有SDN方案&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>硬件方案（软件定义，硬件实现）&lt;/p>
+&lt;ul>
+&lt;li>主流网络设备厂商有各自实现&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>软件方案（NFV）&lt;/p>
+&lt;ul>
+&lt;li>VMWare NSX, Juniper OpenContrail, OpenStack DVR...&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="业务需求">业务需求&lt;/h3>
+&lt;ul>
+&lt;li>用户网络隔离 - 多租户&lt;/li>
+&lt;li>保证中等流量规模的高性能低延迟&lt;/li>
+&lt;li>适应复杂异构的基础架构（混合云-- kubernetes，虚机，裸机）&lt;/li>
+&lt;li>端点迁移，IP不变&lt;/li>
+&lt;li>负载均衡（L2/L3）&lt;/li>
+&lt;li>端到端流量精细ACL&lt;/li>
+&lt;li>可API控制&lt;/li>
+&lt;li>运维监控（包，字节流）&lt;/li>
+&lt;/ul>
+&lt;h3 id="方案选型">方案选型&lt;/h3>
+&lt;ul>
+&lt;li>成本&lt;/li>
+&lt;li>设备依赖&lt;/li>
+&lt;/ul>
+&lt;h3 id="开源方案">开源方案&lt;/h3>
+&lt;p>各开源SDN方案对比：&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>flannel vxlan:
+不具备网络隔离功能。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>OpenShift SDN:&lt;/p>
+&lt;p>基于vxlan利用ovs-multienant可实现基于项目的网络隔离，和flannel vxlan相比，其使用的ovs-subnet插件，数据流场景大体一致，容器向外网发包也使用的NAT。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Calico:&lt;/p>
+&lt;p>支持混合云，安全加密，
+纯3层的路由实现保证了性能和低延迟
+支持了网络隔离和ACL
+但存在目前只支持TCP、UDP、ICMP、ICMPv6协议，四层协议不支持。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>OpenStack Neutron&lt;/p>
+&lt;p>支持网络隔离
+性能和低延迟 -- 需要优化
+支持多租户
+基于ML2支持混合云方案 -- kubernetes的支持需要第三方的kubestack项目
+虚机迁移，IP可不变，容器迁移，IP不变 -- 需要开发
+支持负载均衡LBaaS
+支持精细级的ACL
+API ?
+可运维监控基本数据&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>OpenContrail&lt;/p>
+&lt;p>&lt;strong>完全满足我们的网络需求&lt;/strong>, 值得深入研究&lt;/p>
+&lt;p>Juniper开源的SDN &amp;amp; NFV方案&lt;/p>
+&lt;p>已经集成支持OpenStack, VMware, Docker 和 Kubernetes.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="各大厂商公开资料">各大厂商公开资料&lt;/h3>
+&lt;ul>
+&lt;li>网易蜂巢： VxLAN, 基于Openstack Neutron&lt;/li>
+&lt;li>待补充...&lt;/li>
+&lt;/ul></description></item><item><title>Docs: Vagrant实践整理</title><link>https://xiaoping378.gitee.io/docs/4-cloud/vagrant%E7%9A%84%E4%BD%BF%E7%94%A8/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.gitee.io/docs/4-cloud/vagrant%E7%9A%84%E4%BD%BF%E7%94%A8/</guid><description>
+&lt;p>很早就听说vagrant的大名，是个创建和管理虚机环境的工具，但一直没有机会实践下，近日我的VirtuablBox让我搞砸了，决定试用下，便于快速搭建各种环境。&lt;/p>
+&lt;h2 id="安装vagrant">安装vagrant&lt;/h2>
+&lt;p>图省事儿的话，直接&lt;code>sudo apt install vagrant&lt;/code>就可以安装，不过版本有点儿低，是1.8.1。&lt;/p>
+&lt;p>通过官方&lt;a href="https://www.vagrantup.com/downloads.html">下载地址&lt;/a>, 可直接下载最新的安装包。我这里安装的是1.9.4&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ ~ vagrant -v
+Vagrant 1.9.4
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="常用命令">常用命令&lt;/h2>
+&lt;p>一个打包好的操作系统在Vagrant中称为Box，即Box是一个打包好的操作系统环境，网上有很多打包好的环境，官方也有下载各种Boxes的&lt;a href="https://atlas.hashicorp.com/boxes/search">地址&lt;/a>&lt;/p>
+&lt;p>一般使用流程如下：&lt;/p>
+&lt;ul>
+&lt;li>vagrant box add 添加box的操作&lt;/li>
+&lt;li>vagrant init 初始化box的操作&lt;/li>
+&lt;li>vagrant up 启动虚拟机的操作&lt;/li>
+&lt;li>vagrant ssh 登录虚拟机的操作&lt;/li>
+&lt;/ul>
+&lt;p>额外还有些常用的命令&lt;/p>
+&lt;ul>
+&lt;li>vagrant box list 显示当前已经添加的box列表&lt;/li>
+&lt;li>vagrant box remove 删除相应的box&lt;/li>
+&lt;li>vagrant halt -f 冷关机（切断电源）&lt;/li>
+&lt;li>vagrant suspend 挂起当前的虚拟机&lt;/li>
+&lt;/ul>
+&lt;h2 id="实践">实践&lt;/h2>
+&lt;p>目前vagrant 1.9.4支持适配VirtualBox, VMware，Hyper-V, 和 Docker，本文使用的是VirtualBox。&lt;/p>
+&lt;p>需要你本机已经&lt;a href="https://www.virtualbox.org/wiki/Downloads">安装virtuablbox&lt;/a>环境&lt;/p>
+&lt;p>一般只要如下初始化，就会有个最新的centos-7虚机环境&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ vagrant init centos/7
+A &lt;span style="color:#b44">`&lt;/span>Vagrantfile&lt;span style="color:#b44">`&lt;/span> has been placed in this directory. You are now
+ready to &lt;span style="color:#b44">`&lt;/span>vagrant up&lt;span style="color:#b44">`&lt;/span> your first virtual environment! Please &lt;span style="color:#a2f">read&lt;/span>
+the comments in the Vagrantfile as well as documentation on
+&lt;span style="color:#b44">`&lt;/span>vagrantup.com&lt;span style="color:#b44">`&lt;/span> &lt;span style="color:#a2f;font-weight:bold">for&lt;/span> more information on using Vagrant.
+➜ ls
+Vagrantfile
+➜ vagrant up --provider virtualbox
+Bringing machine &lt;span style="color:#b44">&amp;#39;default&amp;#39;&lt;/span> up with &lt;span style="color:#b44">&amp;#39;virtualbox&amp;#39;&lt;/span> provider...
+&lt;span style="color:#666">==&lt;/span>&amp;gt; default: Box &lt;span style="color:#b44">&amp;#39;centos/7&amp;#39;&lt;/span> could not be found. Attempting to find and install...
+default: Box Provider: virtualbox
+default: Box Version: &amp;gt;&lt;span style="color:#666">=&lt;/span> &lt;span style="color:#b8860b">0&lt;/span>
+&lt;span style="color:#666">==&lt;/span>&amp;gt; default: Loading metadata &lt;span style="color:#a2f;font-weight:bold">for&lt;/span> box &lt;span style="color:#b44">&amp;#39;centos/7&amp;#39;&lt;/span>
+default: URL: https://atlas.hashicorp.com/centos/7
+&lt;span style="color:#666">==&lt;/span>&amp;gt; default: Adding box &lt;span style="color:#b44">&amp;#39;centos/7&amp;#39;&lt;/span> &lt;span style="color:#666">(&lt;/span>v1704.01&lt;span style="color:#666">)&lt;/span> &lt;span style="color:#a2f;font-weight:bold">for&lt;/span> provider: virtualbox
+default: Downloading: https://atlas.hashicorp.com/centos/boxes/7/versions/1704.01/providers/virtualbox.box
+default: Progress: 2% &lt;span style="color:#666">(&lt;/span>Rate: 94086/s, Estimated &lt;span style="color:#a2f">time&lt;/span> remaining: 1:52:14&lt;span style="color:#666">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>但如上需要依赖外网, 国内环境一般会下载失败，我这里介绍一种通过本地iso创建Box的方法，然后通过本地Box启动虚机环境。&lt;/p>
+&lt;p>这个iso转box的方法需要&lt;code>Packer&lt;/code>工具，此工具同样和vagrant都是&lt;code>HashiCorp&lt;/code>公司出品的，目前国外很火的工具，
+支持创建各式各样的镜像，包括各种国内外主流的公有云, openstack的镜像，甚至docker镜像都是可以OK的。&lt;/p>
+&lt;h3 id="参考">参考&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/astaxie/go-best-practice/blob/master/ebook/zh/01.2.md">https://github.com/astaxie/go-best-practice/blob/master/ebook/zh/01.2.md&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: KVM和Libvirt的实践整理</title><link>https://xiaoping378.gitee.io/docs/4-cloud/kvm-virsh%E5%AE%9E%E8%B7%B5%E6%95%B4%E7%90%86/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.gitee.io/docs/4-cloud/kvm-virsh%E5%AE%9E%E8%B7%B5%E6%95%B4%E7%90%86/</guid><description>
+&lt;h2 id="介绍">介绍&lt;/h2>
+&lt;p>此前一直用Virtualbox操作虚机的东西，对于个人搭建环境还是显的有些笨重，不能实现Iac的目标，故尝试了Vagrant和Libvirt，综合考虑我选择libvirt继续深入下去，也是希望以后有机会可以深入搞下openstack的nova组件。&lt;/p>
+&lt;h2 id="安装必要依赖">安装必要依赖&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">sudo apt install bridge-utils qemu-kvm virtinst -y
+&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>qemu-kvm: 这个负责hypervisor层和仿真器（可以模拟x86, arm体系）.&lt;/li>
+&lt;li>virtinst: 安装和管理虚机的命令行工具&lt;/li>
+&lt;li>bridge-utils： 创建和管理bridge网络&lt;/li>
+&lt;/ul>
+&lt;p>安装完输入&lt;code>kvm-ok&lt;/code>查看是否安装OK，另外还&lt;code>需要重启&lt;/code>以使kvm和libvirt daemon启动。&lt;/p>
+&lt;h2 id="配置网络">配置网络&lt;/h2>
+&lt;p>未完。。。&lt;/p></description></item><item><title>Docs: 解读Consul</title><link>https://xiaoping378.gitee.io/docs/4-cloud/%E8%A7%A3%E8%AF%BBconsu-01/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.gitee.io/docs/4-cloud/%E8%A7%A3%E8%AF%BBconsu-01/</guid><description>
+&lt;h2 id="概述">概述&lt;/h2>
+&lt;p>介绍现在的Consul前，有必要先介绍下&lt;code>Service Mesh&lt;/code>的概念，&lt;/p>
+&lt;p>&lt;strong>Service Mesh&lt;/strong>&lt;/p>
+&lt;p>Service Mesh是一种面向服务间安全通信的基础设施层，俗称代理服务的东西向流量。 典型的实现包含控制面板和数据面。&lt;/p>
+&lt;ul>
+&lt;li>控制面：跟踪记录所有的服务和访问地址，提供服务发现、健康检查、策略管理等。&lt;/li>
+&lt;li>数据面：通过sidcar机制代理服务间的通信。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;em>传统 vs 微服务优势 :&lt;/em>&lt;/p>
+&lt;ul>
+&lt;li>单体 -&amp;gt; 微服务架构&lt;/li>
+&lt;li>函数调用 -&amp;gt; 服务发现（熔断、健康检查）&lt;/li>
+&lt;li>配置文件 -&amp;gt; 配置中心&lt;/li>
+&lt;li>防火墙 -&amp;gt; 访问策略&lt;/li>
+&lt;li>DMZ、生产区 -&amp;gt; 零信任&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Consul&lt;/strong>&lt;/p>
+&lt;p>Consul是Service mesh中的控制面的实现，主要有一下几大特色：&lt;/p>
+&lt;ul>
+&lt;li>服务发现：分为注册服务、发现服务、健康检查三大功能。&lt;/li>
+&lt;li>K-V存储：&lt;a href="https://github.com/etcd-io/bbolt">BoltDB&lt;/a>，支持 ACID 事务、无锁并发事务 MVCC，提供 B+Tree 索引。&lt;/li>
+&lt;li>多数据中心：多中心Gossip数据同步&lt;/li>
+&lt;li>Servie Mesh: 利用sidecar机制实现了端到端的认证和加密通信&lt;/li>
+&lt;/ul>
+&lt;h2 id="部署架构">部署架构&lt;/h2>
+&lt;p>下图为经典的多中心consul集群配置。&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.gitee.io/images/%E8%A7%A3%E8%AF%BBconsu-01-2022-02-16-15-57-53.png" alt="">&lt;/p>
+&lt;ul>
+&lt;li>每个datacenter，都有N个Server和M个Client节点。因为网络延迟对Consul分布式一致性的性能影响，会出现节点越多，共识越慢的现象，server节点一般推荐为3~5个，但client节点没有限制。&lt;/li>
+&lt;li>Client主要充当DNS server、负载均衡和健康检查的作用。&lt;/li>
+&lt;li>Server实现数据的分布式存储一致性，一般用来存储节点状态、注册的服务信息、应用配置、通信策略等。&lt;/li>
+&lt;li>Consul在选主和数据事务中都使用了Raft算法，但是其WAN(多个数据中心间)、LAN(节点间)通信、故障广播使用了Gossip算法（流行病协议）。&lt;/li>
+&lt;li>在单集群内，Consul server默认的Follower节点收到读写请求后，会转发给Leader处理&lt;/li>
+&lt;li>若查询的服务不在本集群，本地的Leader转发给远程集群的Leader处理。&lt;/li>
+&lt;/ul>
+&lt;h2 id="运维高可用管理">运维高可用管理&lt;/h2>
+&lt;p>目前分布式系统的高可靠实现，均受限于&lt;strong>CAP&lt;/strong>（一致性（Consistency）、可用性（Availability）和分区容错性（Partition tolerance））理论，根据不同业务场景的会采取三者之间的平衡取舍。本文的Consul是采用Raft算法来实现的，采用此算法的还有EverDB、RocketDB、Etcd、Kafka3等系统。&lt;/p>
+&lt;p>&lt;strong>Raft算法状态机&lt;/strong>：&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.gitee.io/images/%E8%A7%A3%E8%AF%BBconsu-01-2022-02-16-14-50-29.png" alt="">&lt;/p>
+&lt;p>主要有三种状态&lt;code>Follower&lt;/code>、&lt;code>Candidate&lt;/code>和&lt;code>Leader&lt;/code>，其中值得关注有以下几个方面：&lt;/p>
+&lt;ul>
+&lt;li>第一次启动后，默认进入为&lt;code>Follower&lt;/code>，经过随机时间（Election Time）后，进入&lt;code>Candidate&lt;/code>状态，发起投票流程。&lt;/li>
+&lt;li>收到大多数节点投票，可以成为&lt;code>Leader&lt;/code>&lt;/li>
+&lt;li>非拜占庭环境，每进行一次选举，选举周期Term就回自加1，默认大家都遵从term高的节点&lt;/li>
+&lt;li>选主成功后，Leader会发起心跳保活&lt;/li>
+&lt;li>Follower可以根据CAP相性调整，一般是收到请求后转发给Leader处理。&lt;/li>
+&lt;/ul>
+&lt;p>详情可查看&lt;a href="http://thesecretlivesofdata.com/raft/">动画&lt;/a>展示。&lt;/p>
+&lt;p>从Raft算法原理可以得出，Leader选举和日志同步都只需要大多数的节点正常互联即可，所以少量节点故障或网络异常不会影响系统的可用性。&lt;/p>
+&lt;p>即使Leader故障，在选举超时后，剩余节点会自发选举新Leader，无需人工干预，RTO时间极小。如果网络发生脑裂，待网络恢复后，也会保证数据最终一致性。&lt;/p>
+&lt;p>&lt;strong>Gossip通信&lt;/strong>&lt;/p>
+&lt;p>Gossip是Consul节点间状态同步的，下图为形象表示：&lt;/p>
+&lt;p>&lt;img src="https://xiaoping378.gitee.io/images/gossip%E6%B5%81%E8%A1%8C%E7%97%85.gif" alt="">&lt;/p>
+&lt;p>可以理解为&lt;code>一传十、十传百&lt;/code>，随机选择几个节点发出消息，收到信息的节点在向其他节点传播，这种方式在数据量大、环境复杂的情况下比&lt;code>一传百&lt;/code>更具备可扩展性和可靠性。Consul默认有两个Gossip池，LAN池和WAN池。&lt;/p>
+&lt;p>&lt;strong>LAN池&lt;/strong> :Consul中的每个数据中心有一个LAN池，它包含了这个数据中心的所有成员，包括clients和servers。LAN池用于以下几个目的:&lt;/p>
+&lt;ul>
+&lt;li>成员关系信息允许client自动发现server, 免去如何发现server端的配置。&lt;/li>
+&lt;li>分布式失败检测机制使得由整个集群来做失败检测这件事， 而不是集中到几台机器上。&lt;/li>
+&lt;li>gossip池使得类似Leader选举这样的事件，可以更可靠、迅速的传达。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>WAN池&lt;/strong>: WAN池是全局唯一的，因为所有的server都应该加入到WAN池中，无论它位于哪个数据中心。由WAN池提供的成员关系信息允许server做一些跨数据中心的请求。一体化的失败检测机制允许Consul优雅地去处理：整个数据中心失去连接， 或者仅仅是别的数据中心的某一台失去了连接。&lt;/p>
+&lt;h2 id="数据读写一致性">数据读写一致性&lt;/h2>
+&lt;p>&lt;img src="https://xiaoping378.gitee.io/images/%E8%A7%A3%E8%AF%BBconsu-01-2022-02-16-15-30-35.png" alt="">&lt;/p>
+&lt;p>数据写入必须走Leader，经过两阶段提交（propose、prewrite(append、replicate)、commited、apply）过程，详情可以参考&lt;a href="https://xiaoping378.gitee.io/docs/3-devops/tidb/tidb-%E5%88%9D%E4%BD%93%E9%AA%8C/#%E5%A4%9A%E5%89%AF%E6%9C%ACraft%E4%B8%80%E8%87%B4%E6%80%A7">这里&lt;/a>，读取数据Consul有&lt;a href="https://www.consul.io/docs/architecture/consensus">三个&lt;/a>级别可以配置。&lt;/p>
+&lt;ul>
+&lt;li>consistent： Leader处理数据前，要和所有节点确认自己还是Leader，每次请求都会额外的网络请求&lt;/li>
+&lt;li>default: 引入Leader Lease机制，一定时间窗口内，Learder利用状态缓存,直接处理请求。&lt;/li>
+&lt;li>stale: 所有server节点都可以直接回应请求，会产生Follower节点反应过久的数据。&lt;/li>
+&lt;/ul>
+&lt;h2 id="acl授权">ACL授权&lt;/h2>
+&lt;p>TODO.&lt;/p>
+&lt;p>&lt;strong>client说明：&lt;/strong>&lt;/p>
+&lt;p>configmap中的字段：
+client的配置datacenter、encrypt&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>-encrypt&lt;/code>：和sever段保持一致，可用&lt;code>consul keygen&lt;/code>生成，只在启动后加载一次，之后便不需要了，用于加密consul的gossip协议通信。&lt;/li>
+&lt;li>&lt;code>datacenter&lt;/code>: 和要接入的server端保持一致，代表consul集群名称。&lt;/li>
+&lt;li>&lt;code>acl.tokens.agent&lt;/code>: acl申请的token，代表了该client可以操作服务、配置的权限&lt;/li>
+&lt;/ul>
+&lt;p>deployment的字段：&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>CONSUL_RETRY_JOIN_ADDR&lt;/code>里的值，会填充到 &lt;code>join&lt;/code>和 &lt;code>--retry-join&lt;/code>参数中，代表要接入的consul集群，前者加入一次不成功会失败，后者会重复尝试直到成功。&lt;/li>
+&lt;li>&lt;code>CONSUL_NODE_NAME&lt;/code>，会填充到&lt;code>-node&lt;/code>参数，默认是hostname，要求全局唯一，此处代表要接入注册中心的系统的名字。&lt;/li>
+&lt;li>&lt;code>AGENT_TOKEN&lt;/code>：acl里申请的token&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>server说明&lt;/strong>：&lt;/p></description></item><item><title>Docs: 解读Kafka</title><link>https://xiaoping378.gitee.io/docs/4-cloud/kafka-0/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.gitee.io/docs/4-cloud/kafka-0/</guid><description/></item></channel></rss>

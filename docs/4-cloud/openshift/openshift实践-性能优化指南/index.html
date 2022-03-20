@@ -1,0 +1,630 @@
+<!doctype html><html lang=zh-cn class=no-js>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=generator content="Hugo 0.91.2">
+<meta name=robots content="index, follow">
+<link rel="shortcut icon" href=/favicons/favicon.ico>
+<title>性能优化指南 | 现代技能栈</title>
+<meta name=description content="介绍openshift的性能优化方案。 
+">
+<meta property="og:title" content="性能优化指南">
+<meta property="og:description" content="介绍openshift的性能优化方案。 
+">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://xiaoping378.gitee.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97/"><meta property="article:section" content="docs">
+<meta property="og:site_name" content="现代技能栈">
+<meta itemprop=name content="性能优化指南">
+<meta itemprop=description content="介绍openshift的性能优化方案。 
+">
+<meta itemprop=wordCount content="225">
+<meta itemprop=keywords content="容器,K8S,Openshift,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="性能优化指南">
+<meta name=twitter:description content="介绍openshift的性能优化方案。 
+">
+<link rel=preload href=/scss/main.min.8973293e550f2aebcff13ca0acf28013165ed1fa321e6a370fbd3fd2e00c7d33.css as=style>
+<link href=/scss/main.min.8973293e550f2aebcff13ca0acf28013165ed1fa321e6a370fbd3fd2e00c7d33.css rel=stylesheet integrity>
+<script src=https://code.jquery.com/jquery-3.5.1.min.js integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin=anonymous></script>
+<script src=https://unpkg.com/lunr@2.3.8/lunr.min.js integrity=sha384-vRQ9bDyE0Wnu+lMfm57BlYLO0/XauFuKpVsZPs7KEDwYKktWi5+Kz3MP8++DFlRY crossorigin=anonymous></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-217913492-1','auto'),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</head>
+<body class=td-page>
+<header>
+<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
+<a class=navbar-brand href=/>
+<span class=navbar-logo></span><span class="text-uppercase font-weight-bold">现代技能栈</span>
+</a>
+<div class="td-navbar-nav-scroll ml-md-auto" id=main_navbar>
+<ul class="navbar-nav mt-2 mt-lg-0">
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class=nav-link href=/about/><span>关于</span></a>
+</li>
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class="nav-link active" href=/docs/><span class=active>文档</span></a>
+</li>
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class=nav-link href=/blog/><span>博客</span></a>
+</li>
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class=nav-link href=/community/><span>社区</span></a>
+</li>
+</ul>
+</div>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.2e4493fb40bc730b36b40ccf0e74dcbd.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+</div>
+</nav>
+</header>
+<div class="container-fluid td-outer">
+<div class=td-main>
+<div class="row flex-xl-nowrap">
+<aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+<div id=td-sidebar-menu class=td-sidebar__inner>
+<form class="td-sidebar__search d-flex align-items-center">
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.2e4493fb40bc730b36b40ccf0e74dcbd.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
+</button>
+</form>
+<nav class="collapse td-sidebar-nav foldable-nav" id=td-section-nav>
+<ul class="td-sidebar-nav__section pr-md-3 ul-0">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs-li>
+<a href=/docs/ title=文集 class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-docs><span>文档</span></a>
+<ul class=ul-1>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-1-site-li>
+<input type=checkbox id=m-docs-1-site-check>
+<label for=m-docs-1-site-check><a href=/docs/1-site/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-1-site><span>站点介绍</span></a></label>
+<ul class="ul-2 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-1-site-create-site-li>
+<input type=checkbox id=m-docs-1-site-create-site-check>
+<label for=m-docs-1-site-create-site-check><a href=/docs/1-site/create_site/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-1-site-create-site><span>站点搭建方法</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-1-site-actions-pages-li>
+<input type=checkbox id=m-docs-1-site-actions-pages-check>
+<label for=m-docs-1-site-actions-pages-check><a href=/docs/1-site/actions_pages/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-1-site-actions-pages><span>自动托管markdown</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-1-site-add-content-li>
+<input type=checkbox id=m-docs-1-site-add-content-check>
+<label for=m-docs-1-site-add-content-check><a href=/docs/1-site/add_content/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-1-site-add-content><span>编写文章注意项</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-1-site-tutorial2-li>
+<input type=checkbox id=m-docs-1-site-tutorial2-check>
+<label for=m-docs-1-site-tutorial2-check><a href=/docs/1-site/tutorial2/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-1-site-tutorial2><span>markdown语法</span></a></label>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-2-infra-li>
+<input type=checkbox id=m-docs-2-infra-check>
+<label for=m-docs-2-infra-check><a href=/docs/2-infra/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-2-infra><span>基础知识</span></a></label>
+<ul class="ul-2 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-2-infra-network-li>
+<input type=checkbox id=m-docs-2-infra-network-check>
+<label for=m-docs-2-infra-network-check><a href=/docs/2-infra/network/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-2-infra-network><span>网络篇</span></a></label>
+<ul class="ul-3 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-2-infra-network-frp-li>
+<input type=checkbox id=m-docs-2-infra-network-frp-check>
+<label for=m-docs-2-infra-network-frp-check><a href=/docs/2-infra/network/frp/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-2-infra-network-frp><span>内网机穿透开发</span></a></label>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-2-infra-linux-li>
+<input type=checkbox id=m-docs-2-infra-linux-check>
+<label for=m-docs-2-infra-linux-check><a href=/docs/2-infra/linux/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-2-infra-linux><span>linux基础</span></a></label>
+<ul class="ul-3 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-2-infra-linux-centos-li>
+<input type=checkbox id=m-docs-2-infra-linux-centos-check>
+<label for=m-docs-2-infra-linux-centos-check><a href=/docs/2-infra/linux/centos/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-2-infra-linux-centos><span>Centos7 配置记录</span></a></label>
+</li>
+</ul>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-3-devops-li>
+<input type=checkbox id=m-docs-3-devops-check>
+<label for=m-docs-3-devops-check><a href=/docs/3-devops/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-3-devops><span>Dev|Ops</span></a></label>
+<ul class="ul-2 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-3-devops-e6-9c-ba-e5-99-a8-e5-ad-a6-e4-b9-a0-e7-9a-84-e8-af-ad-e8-a8-80-e4-b9-8b-e4-ba-89-python-li>
+<input type=checkbox id=m-docs-3-devops-e6-9c-ba-e5-99-a8-e5-ad-a6-e4-b9-a0-e7-9a-84-e8-af-ad-e8-a8-80-e4-b9-8b-e4-ba-89-python-check>
+<label for=m-docs-3-devops-e6-9c-ba-e5-99-a8-e5-ad-a6-e4-b9-a0-e7-9a-84-e8-af-ad-e8-a8-80-e4-b9-8b-e4-ba-89-python-check><a href=/docs/3-devops/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%AF%AD%E8%A8%80%E4%B9%8B%E4%BA%89-python/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-3-devops-e6-9c-ba-e5-99-a8-e5-ad-a6-e4-b9-a0-e7-9a-84-e8-af-ad-e8-a8-80-e4-b9-8b-e4-ba-89-python><span>机器学习的语言之争</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-3-devops-e7-9b-91-e6-8e-a7-e4-b9-8b-e6-88-91-e8-a7-81-li>
+<input type=checkbox id=m-docs-3-devops-e7-9b-91-e6-8e-a7-e4-b9-8b-e6-88-91-e8-a7-81-check>
+<label for=m-docs-3-devops-e7-9b-91-e6-8e-a7-e4-b9-8b-e6-88-91-e8-a7-81-check><a href=/docs/3-devops/%E7%9B%91%E6%8E%A7%E4%B9%8B%E6%88%91%E8%A7%81/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-3-devops-e7-9b-91-e6-8e-a7-e4-b9-8b-e6-88-91-e8-a7-81><span>监控之我见</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-3-devops-github-dev-li>
+<input type=checkbox id=m-docs-3-devops-github-dev-check>
+<label for=m-docs-3-devops-github-dev-check><a href=/docs/3-devops/github-dev/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-3-devops-github-dev><span>Github开源项目的正确贡献姿势</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-3-devops-golang-e5-bc-80-e5-8f-91-e6-97-a5-e5-bf-97-e7-af-87-li>
+<input type=checkbox id=m-docs-3-devops-golang-e5-bc-80-e5-8f-91-e6-97-a5-e5-bf-97-e7-af-87-check>
+<label for=m-docs-3-devops-golang-e5-bc-80-e5-8f-91-e6-97-a5-e5-bf-97-e7-af-87-check><a href=/docs/3-devops/golang%E5%BC%80%E5%8F%91-%E6%97%A5%E5%BF%97%E7%AF%87/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-3-devops-golang-e5-bc-80-e5-8f-91-e6-97-a5-e5-bf-97-e7-af-87><span>Golang开发-glog日志库</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-3-devops-java-in-vscode-li>
+<input type=checkbox id=m-docs-3-devops-java-in-vscode-check>
+<label for=m-docs-3-devops-java-in-vscode-check><a href=/docs/3-devops/java-in-vscode/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-3-devops-java-in-vscode><span>VSCode-开发已有的java项目</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-3-devops-mogodb-0-li>
+<input type=checkbox id=m-docs-3-devops-mogodb-0-check>
+<label for=m-docs-3-devops-mogodb-0-check><a href=/docs/3-devops/mogodb-0/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-3-devops-mogodb-0><span>MongoDB之初见</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-3-devops-openldap-e4-b9-8b-e6-8b-a8-e4-ba-91-e5-8e-bb-e6-97-a5-li>
+<input type=checkbox id=m-docs-3-devops-openldap-e4-b9-8b-e6-8b-a8-e4-ba-91-e5-8e-bb-e6-97-a5-check>
+<label for=m-docs-3-devops-openldap-e4-b9-8b-e6-8b-a8-e4-ba-91-e5-8e-bb-e6-97-a5-check><a href=/docs/3-devops/openldap%E4%B9%8B%E6%8B%A8%E4%BA%91%E5%8E%BB%E6%97%A5/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-3-devops-openldap-e4-b9-8b-e6-8b-a8-e4-ba-91-e5-8e-bb-e6-97-a5><span>Openldap之拨云见日</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-3-devops-casbin-li>
+<input type=checkbox id=m-docs-3-devops-casbin-check>
+<label for=m-docs-3-devops-casbin-check><a href=/docs/3-devops/casbin/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-3-devops-casbin><span>Casbin的权限管理解读</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-3-devops-windows-terminal-li>
+<input type=checkbox id=m-docs-3-devops-windows-terminal-check>
+<label for=m-docs-3-devops-windows-terminal-check><a href=/docs/3-devops/windows-terminal/ title="Windows Terminal终端入坑指南" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-3-devops-windows-terminal><span>Windows Terminal终端</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-3-devops-tidb-li>
+<input type=checkbox id=m-docs-3-devops-tidb-check>
+<label for=m-docs-3-devops-tidb-check><a href=/docs/3-devops/tidb/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-3-devops-tidb><span>TiDB分布式数据库</span></a></label>
+<ul class="ul-3 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-3-devops-tidb-tidb-e5-88-9d-e4-bd-93-e9-aa-8c-li>
+<input type=checkbox id=m-docs-3-devops-tidb-tidb-e5-88-9d-e4-bd-93-e9-aa-8c-check>
+<label for=m-docs-3-devops-tidb-tidb-e5-88-9d-e4-bd-93-e9-aa-8c-check><a href=/docs/3-devops/tidb/tidb-%E5%88%9D%E4%BD%93%E9%AA%8C/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-3-devops-tidb-tidb-e5-88-9d-e4-bd-93-e9-aa-8c><span>TiDB初体验</span></a></label>
+</li>
+</ul>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs-4-cloud-li>
+<input type=checkbox id=m-docs-4-cloud-check checked>
+<label for=m-docs-4-cloud-check><a href=/docs/4-cloud/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-4-cloud><span>云原生</span></a></label>
+<ul class="ul-2 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-4-cloud-containers-li>
+<input type=checkbox id=m-docs-4-cloud-containers-check>
+<label for=m-docs-4-cloud-containers-check><a href=/docs/4-cloud/containers/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-4-cloud-containers><span>容器篇</span></a></label>
+<ul class="ul-3 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-containers-e7-99-be-e5-ae-9d-e7-ae-b1-e8-84-9a-e6-9c-ac-li>
+<input type=checkbox id=m-docs-4-cloud-containers-e7-99-be-e5-ae-9d-e7-ae-b1-e8-84-9a-e6-9c-ac-check>
+<label for=m-docs-4-cloud-containers-e7-99-be-e5-ae-9d-e7-ae-b1-e8-84-9a-e6-9c-ac-check><a href=/docs/4-cloud/containers/%E7%99%BE%E5%AE%9D%E7%AE%B1%E8%84%9A%E6%9C%AC/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-containers-e7-99-be-e5-ae-9d-e7-ae-b1-e8-84-9a-e6-9c-ac><span>百宝箱脚本</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-containers-docker-network-li>
+<input type=checkbox id=m-docs-4-cloud-containers-docker-network-check>
+<label for=m-docs-4-cloud-containers-docker-network-check><a href=/docs/4-cloud/containers/docker-network/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-containers-docker-network><span>docker网络</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-4-cloud-containers-swarm-li>
+<input type=checkbox id=m-docs-4-cloud-containers-swarm-check>
+<label for=m-docs-4-cloud-containers-swarm-check><a href=/docs/4-cloud/containers/swarm/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-4-cloud-containers-swarm><span>Swarm篇</span></a></label>
+<ul class="ul-4 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-containers-swarm-docker-swarm-li>
+<input type=checkbox id=m-docs-4-cloud-containers-swarm-docker-swarm-check>
+<label for=m-docs-4-cloud-containers-swarm-docker-swarm-check><a href=/docs/4-cloud/containers/swarm/docker-swarm/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-containers-swarm-docker-swarm><span>构建生产环境级的docker Swarm集群-1</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-containers-swarm-docker-swarm2-li>
+<input type=checkbox id=m-docs-4-cloud-containers-swarm-docker-swarm2-check>
+<label for=m-docs-4-cloud-containers-swarm-docker-swarm2-check><a href=/docs/4-cloud/containers/swarm/docker-swarm2/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-containers-swarm-docker-swarm2><span>构建生产环境级的docker Swarm集群-2</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-containers-swarm-docker-sarm3-li>
+<input type=checkbox id=m-docs-4-cloud-containers-swarm-docker-sarm3-check>
+<label for=m-docs-4-cloud-containers-swarm-docker-sarm3-check><a href=/docs/4-cloud/containers/swarm/docker-sarm3/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-containers-swarm-docker-sarm3><span>构建生产环境级的docker Swarm集群-3</span></a></label>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-containers-containerd-li>
+<input type=checkbox id=m-docs-4-cloud-containers-containerd-check>
+<label for=m-docs-4-cloud-containers-containerd-check><a href=/docs/4-cloud/containers/containerd/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-containers-containerd><span>从docker迁移到containerd</span></a></label>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-4-cloud-k8s-li>
+<input type=checkbox id=m-docs-4-cloud-k8s-check>
+<label for=m-docs-4-cloud-k8s-check><a href=/docs/4-cloud/k8s/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-4-cloud-k8s><span>Kubernetes</span></a></label>
+<ul class="ul-3 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-k8s-e6-ba-90-e7-a0-81-e9-83-a8-e7-bd-b2k8s-li>
+<input type=checkbox id=m-docs-4-cloud-k8s-e6-ba-90-e7-a0-81-e9-83-a8-e7-bd-b2k8s-check>
+<label for=m-docs-4-cloud-k8s-e6-ba-90-e7-a0-81-e9-83-a8-e7-bd-b2k8s-check><a href=/docs/4-cloud/k8s/%E6%BA%90%E7%A0%81%E9%83%A8%E7%BD%B2k8s/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-k8s-e6-ba-90-e7-a0-81-e9-83-a8-e7-bd-b2k8s><span>源码部署K8S</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-k8s-kuberbetes-1-5-e7-a6-bb-e7-ba-bf-e9-83-a8-e7-bd-b2-li>
+<input type=checkbox id=m-docs-4-cloud-k8s-kuberbetes-1-5-e7-a6-bb-e7-ba-bf-e9-83-a8-e7-bd-b2-check>
+<label for=m-docs-4-cloud-k8s-kuberbetes-1-5-e7-a6-bb-e7-ba-bf-e9-83-a8-e7-bd-b2-check><a href=/docs/4-cloud/k8s/kuberbetes-1.5-%E7%A6%BB%E7%BA%BF%E9%83%A8%E7%BD%B2/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-k8s-kuberbetes-1-5-e7-a6-bb-e7-ba-bf-e9-83-a8-e7-bd-b2><span>离线安装kubernetes</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-k8s-k8s-e5-90-84-e7-bb-84-e4-bb-b6-e7-9a-84-e8-ae-a4-e7-9f-a5-li>
+<input type=checkbox id=m-docs-4-cloud-k8s-k8s-e5-90-84-e7-bb-84-e4-bb-b6-e7-9a-84-e8-ae-a4-e7-9f-a5-check>
+<label for=m-docs-4-cloud-k8s-k8s-e5-90-84-e7-bb-84-e4-bb-b6-e7-9a-84-e8-ae-a4-e7-9f-a5-check><a href=/docs/4-cloud/k8s/k8s%E5%90%84%E7%BB%84%E4%BB%B6%E7%9A%84%E8%AE%A4%E7%9F%A5/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-k8s-k8s-e5-90-84-e7-bb-84-e4-bb-b6-e7-9a-84-e8-ae-a4-e7-9f-a5><span>k8s的各组件认知</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-k8s-kubernetes-helm-e6-a8-a1-e6-9d-bf-e6-80-bb-e7-bb-93-li>
+<input type=checkbox id=m-docs-4-cloud-k8s-kubernetes-helm-e6-a8-a1-e6-9d-bf-e6-80-bb-e7-bb-93-check>
+<label for=m-docs-4-cloud-k8s-kubernetes-helm-e6-a8-a1-e6-9d-bf-e6-80-bb-e7-bb-93-check><a href=/docs/4-cloud/k8s/kubernetes-helm%E6%A8%A1%E6%9D%BF%E6%80%BB%E7%BB%93/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-k8s-kubernetes-helm-e6-a8-a1-e6-9d-bf-e6-80-bb-e7-bb-93><span>Helm模板介绍</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-k8s-kuerbernetes-e7-9a-84-e7-9b-91-e6-8e-a7-e6-96-b9-e6-a1-88-li>
+<input type=checkbox id=m-docs-4-cloud-k8s-kuerbernetes-e7-9a-84-e7-9b-91-e6-8e-a7-e6-96-b9-e6-a1-88-check>
+<label for=m-docs-4-cloud-k8s-kuerbernetes-e7-9a-84-e7-9b-91-e6-8e-a7-e6-96-b9-e6-a1-88-check><a href=/docs/4-cloud/k8s/kuerbernetes%E7%9A%84%E7%9B%91%E6%8E%A7%E6%96%B9%E6%A1%88/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-k8s-kuerbernetes-e7-9a-84-e7-9b-91-e6-8e-a7-e6-96-b9-e6-a1-88><span>k8s的监控方案</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-k8s-harbor-https-li>
+<input type=checkbox id=m-docs-4-cloud-k8s-harbor-https-check>
+<label for=m-docs-4-cloud-k8s-harbor-https-check><a href=/docs/4-cloud/k8s/harbor_https/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-k8s-harbor-https><span>配置harbor默认https访问</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-k8s-deis-e5-bc-80-e6-ba-90paas-e5-b9-b3-e5-8f-b0-e5-ae-9e-e8-b7-b5-e6-80-bb-e7-bb-93-li>
+<input type=checkbox id=m-docs-4-cloud-k8s-deis-e5-bc-80-e6-ba-90paas-e5-b9-b3-e5-8f-b0-e5-ae-9e-e8-b7-b5-e6-80-bb-e7-bb-93-check>
+<label for=m-docs-4-cloud-k8s-deis-e5-bc-80-e6-ba-90paas-e5-b9-b3-e5-8f-b0-e5-ae-9e-e8-b7-b5-e6-80-bb-e7-bb-93-check><a href=/docs/4-cloud/k8s/deis-%E5%BC%80%E6%BA%90paas%E5%B9%B3%E5%8F%B0%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-k8s-deis-e5-bc-80-e6-ba-90paas-e5-b9-b3-e5-8f-b0-e5-ae-9e-e8-b7-b5-e6-80-bb-e7-bb-93><span>DEIS 开源PAAS平台实践</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-k8s-k3s-e5-bc-80-e7-af-87-li>
+<input type=checkbox id=m-docs-4-cloud-k8s-k3s-e5-bc-80-e7-af-87-check>
+<label for=m-docs-4-cloud-k8s-k3s-e5-bc-80-e7-af-87-check><a href=/docs/4-cloud/k8s/k3s-%E5%BC%80%E7%AF%87/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-k8s-k3s-e5-bc-80-e7-af-87><span>k3s实践-01</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-k8s-tkestack-allinone-li>
+<input type=checkbox id=m-docs-4-cloud-k8s-tkestack-allinone-check>
+<label for=m-docs-4-cloud-k8s-tkestack-allinone-check><a href=/docs/4-cloud/k8s/tkestack-allinone/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-k8s-tkestack-allinone><span>TKEStack all-in-one入坑指南</span></a></label>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs-4-cloud-openshift-li>
+<input type=checkbox id=m-docs-4-cloud-openshift-check checked>
+<label for=m-docs-4-cloud-openshift-check><a href=/docs/4-cloud/openshift/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-4-cloud-openshift><span>Openshift</span></a></label>
+<ul class="ul-3 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e5-bf-ab-e9-80-9f-e5-ae-89-e8-a3-85-li>
+<input type=checkbox id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e5-bf-ab-e9-80-9f-e5-ae-89-e8-a3-85-check>
+<label for=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e5-bf-ab-e9-80-9f-e5-ae-89-e8-a3-85-check><a href=/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e5-bf-ab-e9-80-9f-e5-ae-89-e8-a3-85><span>快速安装</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e6-9d-83-e9-99-90-e8-b5-84-e6-ba-90-e7-ae-a1-e7-90-86-li>
+<input type=checkbox id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e6-9d-83-e9-99-90-e8-b5-84-e6-ba-90-e7-ae-a1-e7-90-86-check>
+<label for=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e6-9d-83-e9-99-90-e8-b5-84-e6-ba-90-e7-ae-a1-e7-90-86-check><a href=/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E6%9D%83%E9%99%90%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e6-9d-83-e9-99-90-e8-b5-84-e6-ba-90-e7-ae-a1-e7-90-86><span>权限资源管理</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e5-bc-80-e5-8f-91-e5-ae-9e-e6-88-98-li>
+<input type=checkbox id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e5-bc-80-e5-8f-91-e5-ae-9e-e6-88-98-check>
+<label for=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e5-bc-80-e5-8f-91-e5-ae-9e-e6-88-98-check><a href=/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e5-bc-80-e5-8f-91-e5-ae-9e-e6-88-98><span>项目开发实战</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-devops-e5-ae-9e-e6-88-98-0-li>
+<input type=checkbox id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-devops-e5-ae-9e-e6-88-98-0-check>
+<label for=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-devops-e5-ae-9e-e6-88-98-0-check><a href=/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-devops%E5%AE%9E%E6%88%98-0/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-devops-e5-ae-9e-e6-88-98-0><span>DevOps实战-0</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-devops-e5-ae-9e-e6-88-98-1-li>
+<input type=checkbox id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-devops-e5-ae-9e-e6-88-98-1-check>
+<label for=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-devops-e5-ae-9e-e6-88-98-1-check><a href=/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-devops%E5%AE%9E%E6%88%98-1/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-devops-e5-ae-9e-e6-88-98-1><span>DevOps实战-1</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-openshift-openshift-e6-ba-90-e7-a0-81-e7-bc-96-e8-af-91-e5-92-8c-e7-9b-ae-e5-bd-95-e7-bb-93-e6-9e-84-li>
+<input type=checkbox id=m-docs-4-cloud-openshift-openshift-e6-ba-90-e7-a0-81-e7-bc-96-e8-af-91-e5-92-8c-e7-9b-ae-e5-bd-95-e7-bb-93-e6-9e-84-check>
+<label for=m-docs-4-cloud-openshift-openshift-e6-ba-90-e7-a0-81-e7-bc-96-e8-af-91-e5-92-8c-e7-9b-ae-e5-bd-95-e7-bb-93-e6-9e-84-check><a href=/docs/4-cloud/openshift/openshift%E6%BA%90%E7%A0%81-%E7%BC%96%E8%AF%91%E5%92%8C%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-openshift-openshift-e6-ba-90-e7-a0-81-e7-bc-96-e8-af-91-e5-92-8c-e7-9b-ae-e5-bd-95-e7-bb-93-e6-9e-84><span> 编译和目录结构介绍</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-router-e5-92-8chaproxy-li>
+<input type=checkbox id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-router-e5-92-8chaproxy-check>
+<label for=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-router-e5-92-8chaproxy-check><a href=/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-router%E5%92%8Chaproxy/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-router-e5-92-8chaproxy><span>多负载均衡方案</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e9-95-9c-e5-83-8f-e7-ae-a1-e7-90-86-li>
+<input type=checkbox id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e9-95-9c-e5-83-8f-e7-ae-a1-e7-90-86-check>
+<label for=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e9-95-9c-e5-83-8f-e7-ae-a1-e7-90-86-check><a href=/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E9%95%9C%E5%83%8F%E7%AE%A1%E7%90%86/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e9-95-9c-e5-83-8f-e7-ae-a1-e7-90-86><span>镜像管理</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e6-80-a7-e8-83-bd-e4-bc-98-e5-8c-96-e6-8c-87-e5-8d-97-li>
+<input type=checkbox id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e6-80-a7-e8-83-bd-e4-bc-98-e5-8c-96-e6-8c-87-e5-8d-97-check checked>
+<label for=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e6-80-a7-e8-83-bd-e4-bc-98-e5-8c-96-e6-8c-87-e5-8d-97-check><a href=/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e6-80-a7-e8-83-bd-e4-bc-98-e5-8c-96-e6-8c-87-e5-8d-97><span class=td-sidebar-nav-active-item>性能优化指南</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e7-bd-91-e7-bb-9c-e6-95-b4-e7-90-86-li>
+<input type=checkbox id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e7-bd-91-e7-bb-9c-e6-95-b4-e7-90-86-check>
+<label for=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e7-bd-91-e7-bb-9c-e6-95-b4-e7-90-86-check><a href=/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E7%BD%91%E7%BB%9C%E6%95%B4%E7%90%86/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e7-bd-91-e7-bb-9c-e6-95-b4-e7-90-86><span>网络整理</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e7-9b-91-e6-8e-a7-e6-a2-b3-e7-90-86-li>
+<input type=checkbox id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e7-9b-91-e6-8e-a7-e6-a2-b3-e7-90-86-check>
+<label for=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e7-9b-91-e6-8e-a7-e6-a2-b3-e7-90-86-check><a href=/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E7%9B%91%E6%8E%A7%E6%A2%B3%E7%90%86/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e7-9b-91-e6-8e-a7-e6-a2-b3-e7-90-86><span>监控梳理</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e6-97-a5-e5-bf-97-e5-88-86-e6-9e-90-li>
+<input type=checkbox id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e6-97-a5-e5-bf-97-e5-88-86-e6-9e-90-check>
+<label for=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e6-97-a5-e5-bf-97-e5-88-86-e6-9e-90-check><a href=/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-openshift-openshift-e5-ae-9e-e8-b7-b5-e6-97-a5-e5-bf-97-e5-88-86-e6-9e-90><span>日志分析</span></a></label>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-e6-b7-b7-e5-90-88-e4-ba-91sdn-e9-80-89-e5-9e-8b-li>
+<input type=checkbox id=m-docs-4-cloud-e6-b7-b7-e5-90-88-e4-ba-91sdn-e9-80-89-e5-9e-8b-check>
+<label for=m-docs-4-cloud-e6-b7-b7-e5-90-88-e4-ba-91sdn-e9-80-89-e5-9e-8b-check><a href=/docs/4-cloud/%E6%B7%B7%E5%90%88%E4%BA%91sdn%E9%80%89%E5%9E%8B/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-e6-b7-b7-e5-90-88-e4-ba-91sdn-e9-80-89-e5-9e-8b><span>混合云网络SDN</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-vagrant-e7-9a-84-e4-bd-bf-e7-94-a8-li>
+<input type=checkbox id=m-docs-4-cloud-vagrant-e7-9a-84-e4-bd-bf-e7-94-a8-check>
+<label for=m-docs-4-cloud-vagrant-e7-9a-84-e4-bd-bf-e7-94-a8-check><a href=/docs/4-cloud/vagrant%E7%9A%84%E4%BD%BF%E7%94%A8/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-vagrant-e7-9a-84-e4-bd-bf-e7-94-a8><span>Vagrant实践整理</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-kvm-virsh-e5-ae-9e-e8-b7-b5-e6-95-b4-e7-90-86-li>
+<input type=checkbox id=m-docs-4-cloud-kvm-virsh-e5-ae-9e-e8-b7-b5-e6-95-b4-e7-90-86-check>
+<label for=m-docs-4-cloud-kvm-virsh-e5-ae-9e-e8-b7-b5-e6-95-b4-e7-90-86-check><a href=/docs/4-cloud/kvm-virsh%E5%AE%9E%E8%B7%B5%E6%95%B4%E7%90%86/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-kvm-virsh-e5-ae-9e-e8-b7-b5-e6-95-b4-e7-90-86><span>KVM和Libvirt的实践整理</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-e8-a7-a3-e8-af-bbconsu-01-li>
+<input type=checkbox id=m-docs-4-cloud-e8-a7-a3-e8-af-bbconsu-01-check>
+<label for=m-docs-4-cloud-e8-a7-a3-e8-af-bbconsu-01-check><a href=/docs/4-cloud/%E8%A7%A3%E8%AF%BBconsu-01/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-e8-a7-a3-e8-af-bbconsu-01><span>解读Consul</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-kafka-0-li>
+<input type=checkbox id=m-docs-4-cloud-kafka-0-check>
+<label for=m-docs-4-cloud-kafka-0-check><a href=/docs/4-cloud/kafka-0/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-kafka-0><span>解读Kafka</span></a></label>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-5-blockchain-li>
+<input type=checkbox id=m-docs-5-blockchain-check>
+<label for=m-docs-5-blockchain-check><a href=/docs/5-blockchain/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-5-blockchain><span>区块链</span></a></label>
+<ul class="ul-2 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-5-blockchain-e4-bb-a5-e5-a4-aa-e5-9d-8a-e5-9f-ba-e7-a1-800-li>
+<input type=checkbox id=m-docs-5-blockchain-e4-bb-a5-e5-a4-aa-e5-9d-8a-e5-9f-ba-e7-a1-800-check>
+<label for=m-docs-5-blockchain-e4-bb-a5-e5-a4-aa-e5-9d-8a-e5-9f-ba-e7-a1-800-check><a href=/docs/5-blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A-%E5%9F%BA%E7%A1%800/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-5-blockchain-e4-bb-a5-e5-a4-aa-e5-9d-8a-e5-9f-ba-e7-a1-800><span>什么是以太坊</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-5-blockchain-e4-bb-a5-e5-a4-aa-e5-9d-8a-e7-a7-81-e6-9c-89-e9-93-be-e6-90-ad-e5-bb-ba-e5-88-9d-e6-ad-a5-e5-ae-9e-e8-b7-b5-li>
+<input type=checkbox id=m-docs-5-blockchain-e4-bb-a5-e5-a4-aa-e5-9d-8a-e7-a7-81-e6-9c-89-e9-93-be-e6-90-ad-e5-bb-ba-e5-88-9d-e6-ad-a5-e5-ae-9e-e8-b7-b5-check>
+<label for=m-docs-5-blockchain-e4-bb-a5-e5-a4-aa-e5-9d-8a-e7-a7-81-e6-9c-89-e9-93-be-e6-90-ad-e5-bb-ba-e5-88-9d-e6-ad-a5-e5-ae-9e-e8-b7-b5-check><a href=/docs/5-blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A-%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA%E5%88%9D%E6%AD%A5%E5%AE%9E%E8%B7%B5/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-5-blockchain-e4-bb-a5-e5-a4-aa-e5-9d-8a-e7-a7-81-e6-9c-89-e9-93-be-e6-90-ad-e5-bb-ba-e5-88-9d-e6-ad-a5-e5-ae-9e-e8-b7-b5><span>搭建以太坊私链网络</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-5-blockchain-e4-bb-a5-e5-a4-aa-e5-9d-8a-truffle-box-e5-bc-80-e5-8f-91-e5-ae-9e-e6-88-98-li>
+<input type=checkbox id=m-docs-5-blockchain-e4-bb-a5-e5-a4-aa-e5-9d-8a-truffle-box-e5-bc-80-e5-8f-91-e5-ae-9e-e6-88-98-check>
+<label for=m-docs-5-blockchain-e4-bb-a5-e5-a4-aa-e5-9d-8a-truffle-box-e5-bc-80-e5-8f-91-e5-ae-9e-e6-88-98-check><a href=/docs/5-blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A-truffle-box%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-5-blockchain-e4-bb-a5-e5-a4-aa-e5-9d-8a-truffle-box-e5-bc-80-e5-8f-91-e5-ae-9e-e6-88-98><span>以太坊的truffle box开发实战</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-5-blockchain-fomo3d-e4-b8-8a-e7-ba-bf-e9-83-a8-e7-bd-b2-e8-a6-81-e7-82-b9-li>
+<input type=checkbox id=m-docs-5-blockchain-fomo3d-e4-b8-8a-e7-ba-bf-e9-83-a8-e7-bd-b2-e8-a6-81-e7-82-b9-check>
+<label for=m-docs-5-blockchain-fomo3d-e4-b8-8a-e7-ba-bf-e9-83-a8-e7-bd-b2-e8-a6-81-e7-82-b9-check><a href=/docs/5-blockchain/fomo3d-%E4%B8%8A%E7%BA%BF%E9%83%A8%E7%BD%B2%E8%A6%81%E7%82%B9/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-5-blockchain-fomo3d-e4-b8-8a-e7-ba-bf-e9-83-a8-e7-bd-b2-e8-a6-81-e7-82-b9><span>fomo3d-上线部署要点</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-5-blockchain-fomo3d-e9-92-b1-e9-83-bd-e5-8e-bb-e5-93-aa-e5-84-bf-e4-ba-86-li>
+<input type=checkbox id=m-docs-5-blockchain-fomo3d-e9-92-b1-e9-83-bd-e5-8e-bb-e5-93-aa-e5-84-bf-e4-ba-86-check>
+<label for=m-docs-5-blockchain-fomo3d-e9-92-b1-e9-83-bd-e5-8e-bb-e5-93-aa-e5-84-bf-e4-ba-86-check><a href=/docs/5-blockchain/fomo3d-%E9%92%B1%E9%83%BD%E5%8E%BB%E5%93%AA%E5%84%BF%E4%BA%86/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-5-blockchain-fomo3d-e9-92-b1-e9-83-bd-e5-8e-bb-e5-93-aa-e5-84-bf-e4-ba-86><span>fomo3d-钱都去哪儿了</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-5-blockchain-cosmos-sdk-1-li>
+<input type=checkbox id=m-docs-5-blockchain-cosmos-sdk-1-check>
+<label for=m-docs-5-blockchain-cosmos-sdk-1-check><a href=/docs/5-blockchain/cosmos_sdk_1/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-5-blockchain-cosmos-sdk-1><span>解读cosmos-sdk系列(1)</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-5-blockchain-farbic-e5-8c-ba-e5-9d-97-e9-93-be-e7-bd-91-e7-bb-9c-e6-90-ad-e5-bb-ba-li>
+<input type=checkbox id=m-docs-5-blockchain-farbic-e5-8c-ba-e5-9d-97-e9-93-be-e7-bd-91-e7-bb-9c-e6-90-ad-e5-bb-ba-check>
+<label for=m-docs-5-blockchain-farbic-e5-8c-ba-e5-9d-97-e9-93-be-e7-bd-91-e7-bb-9c-e6-90-ad-e5-bb-ba-check><a href=/docs/5-blockchain/farbic-%E5%8C%BA%E5%9D%97%E9%93%BE%E7%BD%91%E7%BB%9C%E6%90%AD%E5%BB%BA/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-5-blockchain-farbic-e5-8c-ba-e5-9d-97-e9-93-be-e7-bd-91-e7-bb-9c-e6-90-ad-e5-bb-ba><span>farbic-搭建高并发交易网络</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-5-blockchain-frabic-e7-a4-ba-e4-be-8b-e9-9b-86-e7-be-a4-e5-8c-96-e6-93-8d-e4-bd-9c-li>
+<input type=checkbox id=m-docs-5-blockchain-frabic-e7-a4-ba-e4-be-8b-e9-9b-86-e7-be-a4-e5-8c-96-e6-93-8d-e4-bd-9c-check>
+<label for=m-docs-5-blockchain-frabic-e7-a4-ba-e4-be-8b-e9-9b-86-e7-be-a4-e5-8c-96-e6-93-8d-e4-bd-9c-check><a href=/docs/5-blockchain/frabic-%E7%A4%BA%E4%BE%8B%E9%9B%86%E7%BE%A4%E5%8C%96%E6%93%8D%E4%BD%9C/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-5-blockchain-frabic-e7-a4-ba-e4-be-8b-e9-9b-86-e7-be-a4-e5-8c-96-e6-93-8d-e4-bd-9c><span>fabric-示例集群化操作</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-5-blockchain-farbic-e5-8c-ba-e5-9d-97-e9-93-be-e7-9a-84-e9-9b-86-e7-be-a4-e5-8c-96-kubernetes-e5-ae-9e-e6-88-98-li>
+<input type=checkbox id=m-docs-5-blockchain-farbic-e5-8c-ba-e5-9d-97-e9-93-be-e7-9a-84-e9-9b-86-e7-be-a4-e5-8c-96-kubernetes-e5-ae-9e-e6-88-98-check>
+<label for=m-docs-5-blockchain-farbic-e5-8c-ba-e5-9d-97-e9-93-be-e7-9a-84-e9-9b-86-e7-be-a4-e5-8c-96-kubernetes-e5-ae-9e-e6-88-98-check><a href=/docs/5-blockchain/farbic%E5%8C%BA%E5%9D%97%E9%93%BE%E7%9A%84%E9%9B%86%E7%BE%A4%E5%8C%96-kubernetes%E5%AE%9E%E6%88%98/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-5-blockchain-farbic-e5-8c-ba-e5-9d-97-e9-93-be-e7-9a-84-e9-9b-86-e7-be-a4-e5-8c-96-kubernetes-e5-ae-9e-e6-88-98><span>farbic-区块链的生产集群化</span></a></label>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-6-rpa-li>
+<input type=checkbox id=m-docs-6-rpa-check>
+<label for=m-docs-6-rpa-check><a href=/docs/6-rpa/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-6-rpa><span>RPA机器人</span></a></label>
+<ul class="ul-2 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-6-rpa-openrpa-01-li>
+<input type=checkbox id=m-docs-6-rpa-openrpa-01-check>
+<label for=m-docs-6-rpa-openrpa-01-check><a href=/docs/6-rpa/openrpa-01/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-6-rpa-openrpa-01><span>openrpa介绍</span></a></label>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-reference-li>
+<input type=checkbox id=m-docs-reference-check>
+<label for=m-docs-reference-check><a href=/docs/reference/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-reference><span>其他推荐</span></a></label>
+<ul class="ul-2 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-reference-e4-bc-98-e7-a7-80-e6-96-87-e9-9b-86-li>
+<input type=checkbox id=m-docs-reference-e4-bc-98-e7-a7-80-e6-96-87-e9-9b-86-check>
+<label for=m-docs-reference-e4-bc-98-e7-a7-80-e6-96-87-e9-9b-86-check><a href=/docs/reference/%E4%BC%98%E7%A7%80%E6%96%87%E9%9B%86/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-reference-e4-bc-98-e7-a7-80-e6-96-87-e9-9b-86><span>优秀文集</span></a></label>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-contribution-li>
+<input type=checkbox id=m-docs-contribution-check>
+<label for=m-docs-contribution-check><a href=/docs/contribution/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-contribution><span>贡献指南</span></a></label>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</aside>
+<aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
+<div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
+<a href=https://github.com/xiaoping378/xiaoping378.github.io/edit/master///content/docs/4-Cloud/Openshift/openshift%e5%ae%9e%e8%b7%b5-%e6%80%a7%e8%83%bd%e4%bc%98%e5%8c%96%e6%8c%87%e5%8d%97.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
+<a href="https://github.com/xiaoping378/xiaoping378.github.io/new/master///content/docs/4-Cloud/Openshift/openshift%e5%ae%9e%e8%b7%b5-%e6%80%a7%e8%83%bd%e4%bc%98%e5%8c%96%e6%8c%87%e5%8d%97.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
+<a href="https://github.com/xiaoping378/xiaoping378.github.io/issues/new?title=%e6%80%a7%e8%83%bd%e4%bc%98%e5%8c%96%e6%8c%87%e5%8d%97" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
+<a id=print href=https://xiaoping378.gitee.io/docs/4-cloud/openshift/_print/><i class="fa fa-print fa-fw"></i> 整节打印</a>
+</div>
+<div class=td-toc><nav id=TableOfContents>
+<ul>
+<li><a href=#概览>概览</a></li>
+<li><a href=#安装实践>安装实践</a>
+<ul>
+<li><a href=#网络依赖>网络依赖</a></li>
+<li><a href=#ansible优化>ansible优化</a></li>
+<li><a href=#网络配置>网络配置</a></li>
+</ul>
+</li>
+<li><a href=#主机节点优化>主机节点优化</a>
+<ul>
+<li><a href=#master侧>master侧</a></li>
+<li><a href=#node侧>node侧</a></li>
+<li><a href=#etcd节点>etcd节点</a></li>
+<li><a href=#内核优化>内核优化</a></li>
+</ul>
+</li>
+<li><a href=#资源优化>资源优化</a>
+<ul>
+<li><a href=#超卖现象>超卖现象</a></li>
+<li><a href=#镜像>镜像</a></li>
+<li><a href=#线上debug容器>线上debug容器</a></li>
+</ul>
+</li>
+<li><a href=#存储优化>存储优化</a></li>
+<li><a href=#路由和网络优化>路由和网络优化</a>
+<ul>
+<li><a href=#网络优化>网络优化</a></li>
+<li><a href=#子网大小>子网大小</a></li>
+</ul>
+</li>
+<li><a href=#监控>监控</a></li>
+<li><a href=#总结>总结</a></li>
+</ul>
+</nav></div>
+<div class="taxonomy taxonomy-terms-cloud taxo-tags">
+<h5 class=taxonomy-title>标签</h5>
+<ul class=taxonomy-terms>
+<li><a class=taxonomy-term href=https://xiaoping378.gitee.io/tags/dev/ data-taxonomy-term=dev><span class=taxonomy-label>Dev</span><span class=taxonomy-count>5</span></a></li>
+<li><a class=taxonomy-term href=https://xiaoping378.gitee.io/tags/hugo/ data-taxonomy-term=hugo><span class=taxonomy-label>hugo</span><span class=taxonomy-count>3</span></a></li>
+<li><a class=taxonomy-term href=https://xiaoping378.gitee.io/tags/k8s/ data-taxonomy-term=k8s><span class=taxonomy-label>K8S</span><span class=taxonomy-count>21</span></a></li>
+<li><a class=taxonomy-term href=https://xiaoping378.gitee.io/tags/linux/ data-taxonomy-term=linux><span class=taxonomy-label>linux</span><span class=taxonomy-count>3</span></a></li>
+<li><a class=taxonomy-term href=https://xiaoping378.gitee.io/tags/openshift/ data-taxonomy-term=openshift><span class=taxonomy-label>Openshift</span><span class=taxonomy-count>12</span></a></li>
+<li><a class=taxonomy-term href=https://xiaoping378.gitee.io/tags/ops/ data-taxonomy-term=ops><span class=taxonomy-label>Ops</span><span class=taxonomy-count>2</span></a></li>
+<li><a class=taxonomy-term href=https://xiaoping378.gitee.io/tags/rpa/ data-taxonomy-term=rpa><span class=taxonomy-label>rpa</span><span class=taxonomy-count>2</span></a></li>
+<li><a class=taxonomy-term href=https://xiaoping378.gitee.io/tags/sql/ data-taxonomy-term=sql><span class=taxonomy-label>SQL</span><span class=taxonomy-count>1</span></a></li>
+<li><a class=taxonomy-term href=https://xiaoping378.gitee.io/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/ data-taxonomy-term=%E5%8C%BA%E5%9D%97%E9%93%BE><span class=taxonomy-label>区块链</span><span class=taxonomy-count>9</span></a></li>
+<li><a class=taxonomy-term href=https://xiaoping378.gitee.io/tags/%E5%9F%BA%E7%A1%80/ data-taxonomy-term=%E5%9F%BA%E7%A1%80><span class=taxonomy-label>基础</span><span class=taxonomy-count>1</span></a></li>
+<li><a class=taxonomy-term href=https://xiaoping378.gitee.io/tags/%E5%AE%B9%E5%99%A8/ data-taxonomy-term=%E5%AE%B9%E5%99%A8><span class=taxonomy-label>容器</span><span class=taxonomy-count>27</span></a></li>
+<li><a class=taxonomy-term href=https://xiaoping378.gitee.io/tags/%E7%BD%91%E7%BB%9C/ data-taxonomy-term=%E7%BD%91%E7%BB%9C><span class=taxonomy-label>网络</span><span class=taxonomy-count>2</span></a></li>
+</ul>
+</div>
+</aside>
+<main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main>
+<nav aria-label=breadcrumb class=td-breadcrumbs>
+<ol class=breadcrumb>
+<li class=breadcrumb-item>
+<a href=https://xiaoping378.gitee.io/docs/>文档</a>
+</li>
+<li class=breadcrumb-item>
+<a href=https://xiaoping378.gitee.io/docs/4-cloud/>云原生</a>
+</li>
+<li class=breadcrumb-item>
+<a href=https://xiaoping378.gitee.io/docs/4-cloud/openshift/>Openshift</a>
+</li>
+<li class="breadcrumb-item active" aria-current=page>
+<a href=https://xiaoping378.gitee.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97/>性能优化指南</a>
+</li>
+</ol>
+</nav>
+<div class=td-content>
+<h1>性能优化指南</h1>
+<div class=lead>介绍openshift的性能优化方案。</div>
+<header class=article-meta>
+<div class="taxonomy taxonomy-terms-article taxo-tags">
+<h5 class=taxonomy-title>Tags:</h5>
+<ul class=taxonomy-terms>
+<li><a class=taxonomy-term href=https://xiaoping378.gitee.io/tags/%E5%AE%B9%E5%99%A8/ data-taxonomy-term=%E5%AE%B9%E5%99%A8><span class=taxonomy-label>容器</span></a></li>
+<li><a class=taxonomy-term href=https://xiaoping378.gitee.io/tags/k8s/ data-taxonomy-term=k8s><span class=taxonomy-label>K8S</span></a></li>
+<li><a class=taxonomy-term href=https://xiaoping378.gitee.io/tags/openshift/ data-taxonomy-term=openshift><span class=taxonomy-label>Openshift</span></a></li>
+</ul>
+</div>
+</header>
+<p>主要参考的官方<a href=https://access.redhat.com/documentation/en-us/openshift_container_platform/3.5/html-single/scaling_and_performance_guide/>链接</a>， 本文是基于openshift 3.5说的。</p>
+<h2 id=概览>概览</h2>
+<p>本指南提供了如何提高OpenShift容器平台的集群性能和生产环境下的最佳实践。 主要包括建立，扩展和调优OpenShift集群的推荐做法。</p>
+<p>个人看法，其实性能这个东西是个权衡的过程，根据自身硬件条件和实际需求，选择适合自己的调优手段。</p>
+<h2 id=安装实践>安装实践</h2>
+<h3 id=网络依赖>网络依赖</h3>
+<p>首先安装自然要选择官方的<a href=https://github.com/openshift/openshift-ansible>openshift-ansible项目</a>， 默认是rpm安装方式，需要依赖网络，比如要去联网下载<code>atomic-openshift-*, iptables, 和 docker</code>包依赖，</p>
+<p>如果有不能联网的节点，可以参考我之前写的<a href=https://github.com/xiaoping378/openshift-deploy>离线安装openshift</a>。</p>
+<h3 id=ansible优化>ansible优化</h3>
+<p>官方推荐使用ansible安装，这里说下针对ansible的优化，以提高安装效率，主要参考<a href=https://www.ansible.com/blog/ansible-performance-tuning>ansible官方blog</a>,</p>
+<p>如果参考上文离线安装的话，不建议跨外网连接rpm仓或者镜像仓，下面是推荐的ansible配置</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#080;font-style:italic># cat /etc/ansible/ansible.cfg</span>
+<span style=color:#080;font-style:italic># config file for ansible -- http://ansible.com/</span>
+<span style=color:#080;font-style:italic># ==============================================</span>
+<span style=color:#666>[</span>defaults<span style=color:#666>]</span>
+<span style=color:#b8860b>forks</span> <span style=color:#666>=</span> <span style=color:#666>20</span> <span style=color:#080;font-style:italic># 20个并发是理想值，太高的话中间会有概率出错</span>
+<span style=color:#b8860b>host_key_checking</span> <span style=color:#666>=</span> False
+<span style=color:#b8860b>remote_user</span> <span style=color:#666>=</span> root
+<span style=color:#b8860b>roles_path</span> <span style=color:#666>=</span> roles/
+<span style=color:#b8860b>gathering</span> <span style=color:#666>=</span> smart
+<span style=color:#b8860b>fact_caching</span> <span style=color:#666>=</span> jsonfile
+<span style=color:#b8860b>fact_caching_connection</span> <span style=color:#666>=</span> <span style=color:#b8860b>$HOME</span>/ansible/facts
+<span style=color:#b8860b>fact_caching_timeout</span> <span style=color:#666>=</span> <span style=color:#666>600</span>
+<span style=color:#b8860b>log_path</span> <span style=color:#666>=</span> <span style=color:#b8860b>$HOME</span>/ansible.log
+<span style=color:#b8860b>nocows</span> <span style=color:#666>=</span> <span style=color:#666>1</span>
+<span style=color:#b8860b>callback_whitelist</span> <span style=color:#666>=</span> profile_tasks
+
+<span style=color:#666>[</span>privilege_escalation<span style=color:#666>]</span>
+<span style=color:#b8860b>become</span> <span style=color:#666>=</span> False
+
+<span style=color:#666>[</span>ssh_connection<span style=color:#666>]</span>
+<span style=color:#b8860b>ssh_args</span> <span style=color:#666>=</span> -o <span style=color:#b8860b>ControlMaster</span><span style=color:#666>=</span>auto -o <span style=color:#b8860b>ControlPersist</span><span style=color:#666>=</span>600s
+<span style=color:#b8860b>control_path</span> <span style=color:#666>=</span> %<span style=color:#666>(</span>directory<span style=color:#666>)</span>s/%%h-%%r
+<span style=color:#b8860b>pipelining</span> <span style=color:#666>=</span> True <span style=color:#080;font-style:italic># 多路复用，减少了控制机和目标间的连接次数，加速了性能。</span>
+<span style=color:#b8860b>timeout</span> <span style=color:#666>=</span> <span style=color:#666>10</span>
+</code></pre></div><h3 id=网络配置>网络配置</h3>
+<p>这里必须要提下，一定要安装前做好网络规划，不然后面改起来很麻烦，</p>
+<p>默认是每个node上最多可跑110个pods，这个要看自身硬件条件，比如说我的环境全是高配物理机，我就改成了，每个节点可以跑1024个pods，这个主要改下面的地方。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#b8860b>openshift_node_kubelet_args</span><span style=color:#666>={</span><span style=color:#b44>&#39;pods-per-core&#39;</span>: <span style=color:#666>[</span><span style=color:#b44>&#39;0&#39;</span><span style=color:#666>]</span>, <span style=color:#b44>&#39;max-pods&#39;</span>: <span style=color:#666>[</span><span style=color:#b44>&#39;1024&#39;</span><span style=color:#666>]</span>, <span style=color:#b44>&#39;image-gc-high-threshold&#39;</span>: <span style=color:#666>[</span><span style=color:#b44>&#39;90&#39;</span><span style=color:#666>]</span>, <span style=color:#b44>&#39;image-gc-low-threshold&#39;</span>: <span style=color:#666>[</span><span style=color:#b44>&#39;80&#39;</span><span style=color:#666>]}</span>
+<span style=color:#b8860b>osm_host_subnet_length</span><span style=color:#666>=</span><span style=color:#666>10</span>
+<span style=color:#b8860b>osm_cluster_network_cidr</span><span style=color:#666>=</span>12.1.0.0/12
+</code></pre></div><p>关于网络的更多优化项，后面有单独介绍。</p>
+<h2 id=主机节点优化>主机节点优化</h2>
+<p>openhshift集群里，除了pod间的网络通信外，最大的开销就是master和etcd间的通信了，openshift的master集成了k8s里的api-server, master主要通过etcd来交互node状态，网络配置，secrets和卷挂载等等信息</p>
+<h3 id=master侧>master侧</h3>
+<p>主要优化点包括：</p>
+<ul>
+<li>master和etcd尽量部署在一起.</li>
+<li>高可用集群里，master尽量部署在低延迟的网络里.</li>
+<li>确保**/etc/origin/master/master-config.yaml**里的etcds，第一个是本地的etcd实例.</li>
+</ul>
+<h3 id=node侧>node侧</h3>
+<p>node节点的配置主要在**/etc/origin/node/node-config.yaml**里， 优化点视具体情况定，主要可以优化的点有：</p>
+<ul>
+<li>iptables synchronization period,</li>
+<li>MTU值</li>
+<li>代理模式</li>
+</ul>
+<p>配合自文件里还可以配置kubelet的启动参数，主要关注两点<code>pods-per-core 和 max-pods</code>，这两个决定了node节点的pod数，两者不一致时，<code>取值小的</code>。如果数值过大（严重超卖）会导致：</p>
+<ul>
+<li>增加cpu消耗，主要是docker和openshift自身管理消耗的</li>
+<li>降低pod调度效率</li>
+<li>加大了OOM的风险</li>
+<li>分配pod ip出异常（可能地址池不够了，默认254个ip）</li>
+<li>影响应用的性能</li>
+</ul>
+<blockquote>
+<p>有一点要注意，k8s体系的平台，跑一个pod，实际会启动两个容器，一个pause先于业务容器启动，主要负责网络事项，所以跑10个pods，实际上会运行20个容器</p>
+</blockquote>
+<h3 id=etcd节点>etcd节点</h3>
+<p>etcd是一个分布式的key-value存储，所以有条件的话，存储读写性能的提升，上ssd最好了。</p>
+<p>其次是网络的优化，比如和masters部署在一起，或者提供专网连接。</p>
+<blockquote>
+<p>etcd实际使用中，最好的提升手段，是关注内存，这个官网有个换算公式的，多少pods推荐多大内存的使用</p>
+</blockquote>
+<h3 id=内核优化>内核优化</h3>
+<p>上面的所有节点，内核层面都需要做些优化，这里推荐使用tuned工具来做，这点属于常规运维优化了，具体可以参考<a href=https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html-single/Performance_Tuning_Guide/index.html#chap-Red_Hat_Enterprise_Linux-Performance_Tuning_Guide-Tuned>这里</a>来做， 不想明白原理的，可以如下 快速操作，redhat的人已经自动化了。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>yum install tuned
+systemctl start tune
+systemctl <span style=color:#a2f>enable</span> tuned
+tuned-adm profile throughput-performance<span style=color:#666>)</span>来做
+</code></pre></div><h2 id=资源优化>资源优化</h2>
+<h3 id=超卖现象>超卖现象</h3>
+<p>主要是资源管理这块儿的注意点， 我以前有<a href=../openshift%E5%AE%9E%E8%B7%B5-%E6%9D%83%E9%99%90%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86>blog</a>专门介绍过，主要值得一提的是，这里有个隐形的QoS级别</p>
+<p><img src=/openshift-qos.png alt></p>
+<p>Guaranteed类型的pod是优先级最高的，是有保证的，只会在程序本身“异常”超出limits（一般的应用在pod层设置了limits，就不会超过该限制的，除非是java系的，其需要用环境变量来控制），才会被杀掉，其他类型的配额在集群资源紧张时会被kill掉的。</p>
+<p>这块儿更多的细节也可以参考<a href=https://docs.openshift.org/latest/admin_guide/overcommit.html>官文</a></p>
+<h3 id=镜像>镜像</h3>
+<p>这里需要注意的是，可以提前把需要的基础镜像先pull到node节点上，比如<code>origin-pod</code>镜像等，还有其他自定义的<code>Gold 镜像</code>，这样可以减少应用部署时间。</p>
+<p>如果是采用镜像方式部署集群的话，也可以采取提前pull镜像的方式，当然有私有镜像仓的，可以忽略。</p>
+<p>主要是现在默认的镜像拉取策略就是<code>IfNotPresent</code>，才能完成加速部署的效果</p>
+<h3 id=线上debug容器>线上debug容器</h3>
+<p>线上容器环境可能很<code>干净</code>， 如何调试一个线上正在运行的容器，估计困扰过很多开发人员，这个其实利用docker原生特性，可以很easy的做到</p>
+<p>比如你自己build一个工具包镜像tools，里面装有<code>tcpdump，perf，strace</code>等等debug工具，如下可以很方便的动态的嵌入到运行的线上容器中。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker run -t --pid<span style=color:#666>=</span>container:production <span style=color:#b62;font-weight:700>\
+</span><span style=color:#b62;font-weight:700></span>  --net<span style=color:#666>=</span>container:production <span style=color:#b62;font-weight:700>\
+</span><span style=color:#b62;font-weight:700></span>  --cap-add sys_admin <span style=color:#b62;font-weight:700>\
+</span><span style=color:#b62;font-weight:700></span>  --cap-add sys_ptrace <span style=color:#b62;font-weight:700>\
+</span><span style=color:#b62;font-weight:700></span>  tools
+</code></pre></div><p>当然万能的日志调式，也是OK的。</p>
+<h2 id=存储优化>存储优化</h2>
+<p>这里的存储说的是docker的graph驱动（ Device Mapper, Overlay, 和 Btrfs），首先overlay在启停容器速度方面要优于devicemapper，其还能带来更优良的页面缓存共享，但存在POSIX兼容性问题，比如不支持SELinux。</p>
+<p>官方是推荐使用thin devicemapper的，但需要额外的独立块盘才能搞定。如果系统是7.2的话，使用overlay亦可，关闭selinux的代价就是牺牲部分容器安全。</p>
+<h2 id=路由和网络优化>路由和网络优化</h2>
+<p>openshift里的Router是基于haproxy做的，等价于k8s里的nginx ingress服务，提供集群内的service供外访问能力。</p>
+<p>一般一个4 vCPU/16GB RAM的虚机，可以提供7000-32000 HTTP keep-alive连接请求，这取决于连接是否加密和页面大小，如果是物理机的话，性能会翻倍。</p>
+<p>可通过Router sharding的技术来扩展性能。下图各种配置是统计性能（默认100个routes）</p>
+<p><img src=/haproxy-perf.png alt></p>
+<h3 id=网络优化>网络优化</h3>
+<p>默认openshift提供了一个基于ovs的sdn方案，其中涉及到了vxlan, OpenFlow和iptables，当然这些相关的优化项社区已经有很成熟的优化点和方法了，比如增大MTU，UDP-offload，多路复用等等，</p>
+<p>这里重点说下vxlan， 基于二层网络，vxlan从4096提升到了16百万多个，vxlan就是把原报文封装进UDP报文，以提供所有pods间通信的能力，自然这样会增加cpu解封包的开销，具体网络吞吐取决于cpu的性能，另外还会额外增加延时响应。</p>
+<p>直白的说，现在云主机或物理机的cpu都可以打满千兆网卡，如果是万兆网卡，那vxlan网络的吞吐带宽会卡在CPU上，这是所有overlay网络的现状。</p>
+<p>如果你的主机用用万兆或者40Gbps, 那就要考虑网络的性能优化了：</p>
+<ul>
+<li>通过直接路由，负责pod间通信，不过需要手动维护node节点添加删除时的路由变化。</li>
+<li>条件允许的话，可以考虑BGP的calico网络方案</li>
+<li>另外就是购置支持udp-offload的网卡</li>
+</ul>
+<p>值得注意点是，及时使用了udp-offload的网卡，和非overlay网络比，延迟是不会减少的，只是减少了cpu开销，从而提高了带宽吞吐。</p>
+<h3 id=子网大小>子网大小</h3>
+<p>现在openshift-ansible项目默认的安装出来的配置是：</p>
+<ul>
+<li>集群里内最多1024个节点</li>
+<li>每个节点最多可以跑510个pods</li>
+<li>支持65,536个service</li>
+</ul>
+<p>比如我要搞一个8192个节点的集群，每个节点允许510个pods运行：</p>
+<pre tabindex=0><code>[OSE3:vars]
+osm_cluster_network_cidr=10.128.0.0/10
+</code></pre><h2 id=监控>监控</h2>
+<p>都知道k8s里的弹性伸缩，依赖于Heapster, 而openshift内置的监控系统又是用的自家的Haw系列，导致监控镜像相当的大</p>
+<p>在opneshift里有两点要提的是<code>METRICS_RESOLUTION</code>和<code>METRICS_DURATION</code>变量，前者是默认是30s,指的是监控时间间隔，后者默认是7天，指的是监控数据保留时长（过期就会删掉）。</p>
+<p><img src=/openshift-monitor%E7%A9%BA%E9%97%B4.png alt></p>
+<p>默认的监控体系(Cassandra/Hawkular/Heapster)可以监控25000个pods。</p>
+<h2 id=总结>总结</h2>
+<p>其实openshift基于k8s提供了一站式解决方案, 如果公司不具备k8s二次开发能力，openshift足矣。</p>
+</div>
+</main>
+</div>
+</div>
+<footer class="bg-dark py-5 row d-print-none">
+<div class="container-fluid mx-sm-5">
+<div class=row>
+<div class="col-6 col-sm-4 text-xs-center order-sm-2">
+<ul class="list-inline mb-0">
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title="个人邮箱 xiaoping378@163.com" aria-label="个人邮箱 xiaoping378@163.com">
+<a class=text-white target=_blank rel=noopener href=mailto:xiaoping378@163.com aria-label="个人邮箱 xiaoping378@163.com">
+<i class="fa fa-envelope"></i>
+</a>
+</li>
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=微博 aria-label=微博>
+<a class=text-white target=_blank rel=noopener href=https://weibo.com/xiaoping378 aria-label=微博>
+<i class="fab fa-weibo"></i>
+</a>
+</li>
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=知乎 aria-label=知乎>
+<a class=text-white target=_blank rel=noopener href=https://www.zhihu.com/people/xiaoping378 aria-label=知乎>
+<i class="fab fa-zhihu"></i>
+</a>
+</li>
+</ul>
+</div>
+<div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+<ul class="list-inline mb-0">
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=GitHub aria-label=GitHub>
+<a class=text-white target=_blank rel=noopener href=https://github.com/xiaoping378/xiaoping378.github.io aria-label=GitHub>
+<i class="fab fa-github"></i>
+</a>
+</li>
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=Slack aria-label=Slack>
+<a class=text-white target=_blank rel=noopener href=https://example.org/slack aria-label=Slack>
+<i class="fab fa-slack"></i>
+</a>
+</li>
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title="Developer mailing list" aria-label="Developer mailing list">
+<a class=text-white target=_blank rel=noopener href=https://example.org/mail aria-label="Developer mailing list">
+<i class="fa fa-envelope"></i>
+</a>
+</li>
+</ul>
+</div>
+<div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+<small class=text-white>&copy; 2022 xiaoping378 保留所有权利</small>
+<small class=ml-1><a href=# target=_blank rel=noopener>隐私政策</a></small>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js integrity=sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin=anonymous></script>
+<script src=/js/tabpane-persist.js></script>
+<script src=/js/deflate.js></script>
+<script src=/js/main.min.e016890ed6b0c42f5af3410eb57ac626a192a868609aee68cefe1e0f84a50b13.js integrity="sha256-4BaJDtawxC9a80EOtXrGJqGSqGhgmu5ozv4eD4SlCxM=" crossorigin=anonymous></script>
+</body>
+</html>
