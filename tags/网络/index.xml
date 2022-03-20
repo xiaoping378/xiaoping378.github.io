@@ -1,4 +1,7 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>现代技能栈 – 网络</title><link>https://xiaoping378.github.io/tags/%E7%BD%91%E7%BB%9C/</link><description>Recent content in 网络 on 现代技能栈</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://xiaoping378.github.io/tags/%E7%BD%91%E7%BB%9C/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: frp内网穿透开发</title><link>https://xiaoping378.github.io/docs/2-infra/network/frp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/2-infra/network/frp/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>现代技能栈 – 网络</title><link>https://xiaoping378.github.io/tags/%E7%BD%91%E7%BB%9C/</link><description>Recent content in 网络 on 现代技能栈</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://xiaoping378.github.io/tags/%E7%BD%91%E7%BB%9C/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: 内网机穿透开发</title><link>https://xiaoping378.github.io/docs/2-infra/network/frp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/2-infra/network/frp/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>充分利用外网开隧道代理到本地服务，演示或者内网开发的利器，自己具备公网服务器的可以使用frp，不具备的可以使用ngrok。&lt;/p>
+&lt;/div>
 &lt;h2 id="frp介绍">FRP介绍&lt;/h2>
 &lt;p>frp 是国人开源的一种快速反向代理，可将 NAT 或防火墙后面的本地服务器暴露到互联网上。目前，它支持暴露 TCP 和 UDP，以及 HTTP 和 HTTPS 协议，也可以通过域名将请求转发到内部服务。&lt;/p>
 &lt;p>&lt;img src="https://xiaoping378.github.io/images/frp-2022-03-06-20-21-49.png" alt="">&lt;/p>
@@ -61,9 +64,23 @@
 &lt;h3 id="vscode连接">vscode连接&lt;/h3>
 &lt;p>安装正常步骤添加远端SSH机器，即可。
 &lt;img src="https://xiaoping378.github.io/images/frp-2022-03-06-21-22-51.png" alt="">&lt;/p>
-&lt;h2 id="总结">总结&lt;/h2>
+&lt;h2 id="frp总结">FRP总结&lt;/h2>
 &lt;p>frp还有很多其他安全、UI、负载均衡等方面的配置，可根据自身环境选择，服务端和客户端选项更全面的配置&lt;a href="https://gofrp.org/docs/reference/">见此&lt;/a>&lt;/p>
-&lt;p>总体上使用frp代理简单的服务，配置上可以很简单，但要配置稍复杂的场景，目前的设计感觉有些缺陷，让人容易犯迷糊，比如设计多种端口字段，来开启某特性。&lt;/p></description></item><item><title>Docs: docker网络</title><link>https://xiaoping378.github.io/docs/4-cloud/containers/docker-network/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/containers/docker-network/</guid><description>
+&lt;p>总体上使用frp代理简单的服务，配置上可以很简单，但要配置稍复杂的场景，目前的设计感觉有些缺陷，让人容易犯迷糊，比如设计多种端口字段，来开启某特性。&lt;/p>
+&lt;h2 id="ngrok">ngrok&lt;/h2>
+&lt;p>针对个人免费的SaaS服务，需要注册账号，下载客户端，利用分配的token，发起链接，即可通过外网访问本地服务，具体操作步骤如下：&lt;/p>
+&lt;ol>
+&lt;li>进入ngrok官网（https://ngrok.com/），注册ngrok账号并下载ngrok；&lt;/li>
+&lt;li>根据官网给定的授权码，运行如下授权命令，会保存到在本地HOME目录&lt;/li>
+&lt;/ol>
+&lt;pre tabindex="0">&lt;code>ngrok authtoken 2689y3MT2qsAois0MG****
+&lt;/code>&lt;/pre>&lt;ol start="3">
+&lt;li>发起本地服务1080端口的代理&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">ngrok http &lt;span style="color:#666">1080&lt;/span> &amp;amp;
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>如上执行，可通过红色框访问本地1080端口服务，如果是要代理SSH的话，需要执行&lt;code>ngrok tcp 22 &amp;amp;&lt;/code>。
+&lt;img src="https://xiaoping378.github.io/images/frp-2022-03-09-21-51-39.png" alt="">&lt;/p>
+&lt;p>值得注意的是，每次运行命令都会重新生成新的域名地址，要想固定域名的话，需要付费。&lt;/p></description></item><item><title>Docs: docker网络</title><link>https://xiaoping378.github.io/docs/4-cloud/containers/docker-network/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/containers/docker-network/</guid><description>
 &lt;p>自去年就开始推动公司业务使用docker了， 至今也一年多了，但对docker网络的认知一直一知半解。。。&lt;/p>
 &lt;p>主要是太忙，加上线上业务也没出过关于网络吞吐性能方面的问题，就没太大动力去搞明白， 现在闲下来了，搞之！&lt;/p>
 &lt;h3 id="环境声明">环境声明&lt;/h3>

@@ -332,7 +332,37 @@
 &lt;/ul>
 &lt;blockquote>
 &lt;p>[Scala]在编译的时候可能是慢，但它比CPython更安全，并且快得多（除了使用非字节码的代码和调用C/Fortran库之外），并且还有一些我现在在Python中及其想念的概念，例如，Option[T]，隐式修改器，不废柴的map/reduce/filter，不废柴的lambda，等等。&lt;/p>
-&lt;/blockquote></description></item><item><title>Docs: frp内网穿透开发</title><link>https://xiaoping378.github.io/docs/2-infra/network/frp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/2-infra/network/frp/</guid><description>
+&lt;/blockquote></description></item><item><title>Docs: openrpa介绍</title><link>https://xiaoping378.github.io/docs/6-rpa/openrpa-01/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/6-rpa/openrpa-01/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>openrpa的架构介绍&lt;/p>
+&lt;/div>
+&lt;h2 id="概述">概述&lt;/h2>
+&lt;p>openrpa项目，提供了&lt;strong>OON&lt;/strong>技术栈（OpenRPA、Openflow、Node-RED）来实现的RPA功能。&lt;/p>
+&lt;p>&lt;strong>OpenRPA&lt;/strong>&lt;/p>
+&lt;p>该组件可以认为是机器人的IDE设计器部分，基于&lt;a href="https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/">MWF&lt;/a>框架实现的，&lt;/p>
+&lt;ul>
+&lt;li>可以图形化拖拽的方式实现基本功能&lt;code>Activity&lt;/code>，如点击邮箱、打开浏览器网址、输入文字、录屏录音、各类监听探测器等等&lt;/li>
+&lt;li>多个&lt;code>Activity&lt;/code>可以组合成一个序列，来实现工作流&lt;code>workflow&lt;/code>，串行执行一系列动作&lt;/li>
+&lt;li>也可以通过配置作为agent（机器人）运行，负责执行设计好的工作流&lt;/li>
+&lt;li>默认远程连接到云端控制端（openflow），可上传同步本地的工作流和接受控制端的调度管理。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://xiaoping378.github.io/images/openrpa-01-2022-02-14-13-54-44.png" alt="">&lt;/p>
+&lt;p>&lt;strong>Openflow&lt;/strong>&lt;/p>
+&lt;p>OON技术栈的后台核心部分，可以关编排管理所有的活动，主要具备一下特性：&lt;/p>
+&lt;ul>
+&lt;li>管理，调用和配置机器人和工作流&lt;/li>
+&lt;li>管理用户和权限(组)&lt;/li>
+&lt;li>创建Web表单，供和真实用户交互，实现工作流的输入，审批和确认等操作。&lt;/li>
+&lt;li>管理后端MongoDB存储&lt;/li>
+&lt;li>存储工作流、表单等数据信息&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://xiaoping378.github.io/images/openrpa-01-2022-02-15-09-23-27.png" alt="openflow with Monitoring">&lt;/p>
+&lt;p>&lt;strong>Node-RED&lt;/strong>&lt;/p>
+&lt;h2 id="faq">FAQ&lt;/h2>
+&lt;p>三大组件汇总具有&lt;code>流&lt;/code>的概念，openrpa中叫&lt;code>workflow&lt;/code>，node-red中叫&lt;code>flow&lt;/code>, openflow组件名称自身就带了flow的字样，界面上也有&lt;/p></description></item><item><title>Docs: 内网机穿透开发</title><link>https://xiaoping378.github.io/docs/2-infra/network/frp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/2-infra/network/frp/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>充分利用外网开隧道代理到本地服务，演示或者内网开发的利器，自己具备公网服务器的可以使用frp，不具备的可以使用ngrok。&lt;/p>
+&lt;/div>
 &lt;h2 id="frp介绍">FRP介绍&lt;/h2>
 &lt;p>frp 是国人开源的一种快速反向代理，可将 NAT 或防火墙后面的本地服务器暴露到互联网上。目前，它支持暴露 TCP 和 UDP，以及 HTTP 和 HTTPS 协议，也可以通过域名将请求转发到内部服务。&lt;/p>
 &lt;p>&lt;img src="https://xiaoping378.github.io/images/frp-2022-03-06-20-21-49.png" alt="">&lt;/p>
@@ -395,36 +425,23 @@
 &lt;h3 id="vscode连接">vscode连接&lt;/h3>
 &lt;p>安装正常步骤添加远端SSH机器，即可。
 &lt;img src="https://xiaoping378.github.io/images/frp-2022-03-06-21-22-51.png" alt="">&lt;/p>
-&lt;h2 id="总结">总结&lt;/h2>
+&lt;h2 id="frp总结">FRP总结&lt;/h2>
 &lt;p>frp还有很多其他安全、UI、负载均衡等方面的配置，可根据自身环境选择，服务端和客户端选项更全面的配置&lt;a href="https://gofrp.org/docs/reference/">见此&lt;/a>&lt;/p>
-&lt;p>总体上使用frp代理简单的服务，配置上可以很简单，但要配置稍复杂的场景，目前的设计感觉有些缺陷，让人容易犯迷糊，比如设计多种端口字段，来开启某特性。&lt;/p></description></item><item><title>Docs: openrpa介绍</title><link>https://xiaoping378.github.io/docs/6-rpa/openrpa-01/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/6-rpa/openrpa-01/</guid><description>
-&lt;div class="pageinfo pageinfo-primary">
-&lt;p>openrpa的架构介绍&lt;/p>
-&lt;/div>
-&lt;h2 id="概述">概述&lt;/h2>
-&lt;p>openrpa项目，提供了&lt;strong>OON&lt;/strong>技术栈（OpenRPA、Openflow、Node-RED）来实现的RPA功能。&lt;/p>
-&lt;p>&lt;strong>OpenRPA&lt;/strong>&lt;/p>
-&lt;p>该组件可以认为是机器人的IDE设计器部分，基于&lt;a href="https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/">MWF&lt;/a>框架实现的，&lt;/p>
-&lt;ul>
-&lt;li>可以图形化拖拽的方式实现基本功能&lt;code>Activity&lt;/code>，如点击邮箱、打开浏览器网址、输入文字、录屏录音、各类监听探测器等等&lt;/li>
-&lt;li>多个&lt;code>Activity&lt;/code>可以组合成一个序列，来实现工作流&lt;code>workflow&lt;/code>，串行执行一系列动作&lt;/li>
-&lt;li>也可以通过配置作为agent（机器人）运行，负责执行设计好的工作流&lt;/li>
-&lt;li>默认远程连接到云端控制端（openflow），可上传同步本地的工作流和接受控制端的调度管理。&lt;/li>
-&lt;/ul>
-&lt;p>&lt;img src="https://xiaoping378.github.io/images/openrpa-01-2022-02-14-13-54-44.png" alt="">&lt;/p>
-&lt;p>&lt;strong>Openflow&lt;/strong>&lt;/p>
-&lt;p>OON技术栈的后台核心部分，可以关编排管理所有的活动，主要具备一下特性：&lt;/p>
-&lt;ul>
-&lt;li>管理，调用和配置机器人和工作流&lt;/li>
-&lt;li>管理用户和权限(组)&lt;/li>
-&lt;li>创建Web表单，供和真实用户交互，实现工作流的输入，审批和确认等操作。&lt;/li>
-&lt;li>管理后端MongoDB存储&lt;/li>
-&lt;li>存储工作流、表单等数据信息&lt;/li>
-&lt;/ul>
-&lt;p>&lt;img src="https://xiaoping378.github.io/images/openrpa-01-2022-02-15-09-23-27.png" alt="openflow with Monitoring">&lt;/p>
-&lt;p>&lt;strong>Node-RED&lt;/strong>&lt;/p>
-&lt;h2 id="faq">FAQ&lt;/h2>
-&lt;p>三大组件汇总具有&lt;code>流&lt;/code>的概念，openrpa中叫&lt;code>workflow&lt;/code>，node-red中叫&lt;code>flow&lt;/code>, openflow组件名称自身就带了flow的字样，界面上也有&lt;/p></description></item><item><title>Docs: 快速安装</title><link>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85/</guid><description>
+&lt;p>总体上使用frp代理简单的服务，配置上可以很简单，但要配置稍复杂的场景，目前的设计感觉有些缺陷，让人容易犯迷糊，比如设计多种端口字段，来开启某特性。&lt;/p>
+&lt;h2 id="ngrok">ngrok&lt;/h2>
+&lt;p>针对个人免费的SaaS服务，需要注册账号，下载客户端，利用分配的token，发起链接，即可通过外网访问本地服务，具体操作步骤如下：&lt;/p>
+&lt;ol>
+&lt;li>进入ngrok官网（https://ngrok.com/），注册ngrok账号并下载ngrok；&lt;/li>
+&lt;li>根据官网给定的授权码，运行如下授权命令，会保存到在本地HOME目录&lt;/li>
+&lt;/ol>
+&lt;pre tabindex="0">&lt;code>ngrok authtoken 2689y3MT2qsAois0MG****
+&lt;/code>&lt;/pre>&lt;ol start="3">
+&lt;li>发起本地服务1080端口的代理&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">ngrok http &lt;span style="color:#666">1080&lt;/span> &amp;amp;
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>如上执行，可通过红色框访问本地1080端口服务，如果是要代理SSH的话，需要执行&lt;code>ngrok tcp 22 &amp;amp;&lt;/code>。
+&lt;img src="https://xiaoping378.github.io/images/frp-2022-03-09-21-51-39.png" alt="">&lt;/p>
+&lt;p>值得注意的是，每次运行命令都会重新生成新的域名地址，要想固定域名的话，需要付费。&lt;/p></description></item><item><title>Docs: 快速安装</title><link>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85/</guid><description>
 &lt;p>不知道为什么openshift在国内热度这么低，那些要做自己容器云的公司，不知道有openshift项目的存在么？完全满足我的需求。&lt;/p>
 &lt;p>docker负责应用的隔离打包，k8s提供集群管理和容器的编排服务，而openshfit则负责整个应用的生命周期：&lt;/p>
 &lt;ul>
@@ -4454,7 +4471,7 @@ kubectl label node node0 &lt;span style="color:#b8860b">ca&lt;/span>&lt;span sty
 &lt;p>设置系统环境变量，两种办法：&lt;/p>
 &lt;ul>
 &lt;li>
-&lt;p>图形界面操作： &lt;code>Win+x&lt;/code> -&amp;gt; 系统 -&amp;gt; 高级系统设置 -&amp;gt; 环境变量, 自行添加&lt;code>HOME&lt;/code>变量。(忘记了要不要注销才会生效)&lt;/p>
+&lt;p>图形界面操作： &lt;code>Win+x&lt;/code> -&amp;gt; 系统 -&amp;gt; 高级系统设置 -&amp;gt; 环境变量, 自行添加&lt;code>HOME&lt;/code>变量。&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>在PowerShell命令行中设置环境变量，执行完即可生效。&lt;/p>
@@ -4704,114 +4721,4 @@ TiDB_Server -&amp;gt; 用户: 反馈写入成功
 &lt;p>&lt;strong>数据读取：&lt;/strong>&lt;/p>
 &lt;ul>
 &lt;li>tidb server解析SQL语句 -&amp;gt; 从pd获取对应key的tikv节点信息 -&amp;gt;&lt;/li>
-&lt;/ul></description></item><item><title>Docs: DEIS 开源PAAS平台实践</title><link>https://xiaoping378.github.io/docs/4-cloud/k8s/deis-%E5%BC%80%E6%BA%90paas%E5%B9%B3%E5%8F%B0%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/k8s/deis-%E5%BC%80%E6%BA%90paas%E5%B9%B3%E5%8F%B0%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93/</guid><description>
-&lt;p>DEIS（目前已被微软收购）的workflow是开源的Paas平台，基于kubernetes做了一层面向开发者的CLI和接口，做到了让开发者对容器无感知的情况下快速的开发和部署线上应用。&lt;/p>
-&lt;blockquote>
-&lt;p>workflow是 on top of k8s的，所有组件默认全是跑在pod里的，不像openshift那样对k8s的侵入性很大。&lt;/p>
-&lt;/blockquote>
-&lt;p>特性如下：&lt;/p>
-&lt;ul>
-&lt;li>S2I(自动识别源码直接编译成镜像)&lt;/li>
-&lt;li>日志聚合&lt;/li>
-&lt;li>应用管理（发布，回滚）&lt;/li>
-&lt;li>认证&amp;amp;授权机制&lt;/li>
-&lt;li>边界路由&lt;/li>
-&lt;/ul>
-&lt;p>&lt;img src="https://xiaoping378.github.io/Workflow_Detail.png" alt="Workflow_Detail">&lt;/p>
-&lt;p>下面从环境搭建，安装workflow及其基本使用做个梳理。&lt;/p>
-&lt;h3 id="初始化k8s集群">初始化k8s集群&lt;/h3>
-&lt;p>可以通过&lt;a href="https://github.com/xiaoping378/k8s-deploy">k8s-deploy&lt;/a>项目来离线安装高可用kubernetes集群，我这里是单机演示环境。&lt;/p>
-&lt;pre>&lt;code>kubeadm init --kubernetes-version v1.6.2 --pod-network-cidr 12.240.0.0/12
-#方便命令自动补全
-source &amp;lt;(kubectl completion zsh)
-#安装cni网络
-cp /etc/kubernetes/admin.conf $HOME/.kube/config
-kubectl apply -f kube-flannel-rbac.yml
-kubectl apply -f kube-flannel.yml
-#使能master可以被调度
-kubectl taint node --all node-role.kubernetes.io/master-
-#安装ingress-controller, 边界路由作用
-kubectl create -f ingress-traefik-rbac.yml
-kubectl create -f ingress-traefik-deploy.yml
-&lt;/code>&lt;/pre>
-&lt;h3 id="初始化helm">初始化helm&lt;/h3>
-&lt;p>helm相当于kubernetes里的包管理器，类似yum和apt的作用，只不过它操作的是charts（各种k8s yaml文件的集合，额外还有Chart.yaml -- 包的描述文件）可以理解为基于k8s的应用模板管理类工具， 后面会用它来安装workflow到上面跑起来的k8s集群里。&lt;/p>
-&lt;p>从k8s 1.6之后，kubeadm安装的集群，默认会开启RBAC机制，为了让helm可以安装任何应用，我们这里赋予tiller cluster-admin权限&lt;/p>
-&lt;pre>&lt;code>kubectl create serviceaccount helm --namespace kube-system
-kubectl create clusterrolebinding cluster-admin-helm --clusterrole=cluster-admin --serviceaccount=kube-system:helm
-&lt;/code>&lt;/pre>
-&lt;p>初始化helm：&lt;/p>
-&lt;pre>&lt;code>➜ helm init --service-account helm
-$HELM_HOME has been configured at /home/xxp/.helm.
-Tiller (the helm server side component) has been installed into your Kubernetes Cluster.
-Happy Helming!
-➜ helm version
-Client: &amp;amp;version.Version{SemVer:&amp;quot;v2.4.1&amp;quot;, GitCommit:&amp;quot;46d9ea82e2c925186e1fc620a8320ce1314cbb02&amp;quot;, GitTreeState:&amp;quot;clean&amp;quot;}
-Server: &amp;amp;version.Version{SemVer:&amp;quot;v2.4.1&amp;quot;, GitCommit:&amp;quot;46d9ea82e2c925186e1fc620a8320ce1314cbb02&amp;quot;, GitTreeState:&amp;quot;clean&amp;quot;}
-&lt;/code>&lt;/pre>
-&lt;p>安装后，默认导入了2个repos，后面安装和搜索应用时，都是从这2个仓里出的，当然也可以自己通过&lt;code>helm repo add&lt;/code>添加本地私有仓&lt;/p>
-&lt;pre>&lt;code>➜ helm repo list
-NAME URL
-stable https://kubernetes-charts.storage.googleapis.com
-local http://127.0.0.1:8879/charts
-&lt;/code>&lt;/pre>
-&lt;p>helm的使用基本流程如下:&lt;/p>
-&lt;ul>
-&lt;li>helm search: 搜索自己想要安装的应用（chart）&lt;/li>
-&lt;li>helm fetch: 下载应用（chart）到本地，可以忽略此步&lt;/li>
-&lt;li>helm install: 安装应用&lt;/li>
-&lt;li>helm list: 查看已安装的应用情况&lt;/li>
-&lt;/ul>
-&lt;h3 id="安装workflow">安装workflow&lt;/h3>
-&lt;p>添加workflow的repo仓&lt;/p>
-&lt;pre>&lt;code>helm repo add deis https://charts.deis.com/workflow
-&lt;/code>&lt;/pre>
-&lt;p>开始安装workflow，因为RBAC的原因，同样要赋予workflow各组件相应的权限，yml文件在[这里]（https://gist.github.com/xiaoping378/798c39e0b607be4130db655f4873bd24）&lt;/p>
-&lt;pre>&lt;code>kubectl apply -f workflow-rbac.yml --namespace deis
-helm install deis/workflow --name workflow --namespace deis \
---set global.experimental_native_ingress=true,controller.platform_domain=192.168.31.49.xip.io
-&lt;/code>&lt;/pre>
-&lt;p>其中会拉取所需镜像，不出意外会有如下结果：&lt;/p>
-&lt;pre>&lt;code>➜ kubectl --namespace=deis get pods
-NAME READY STATUS RESTARTS AGE
-deis-builder-1134410811-11xpp 1/1 Running 0 46m
-deis-controller-2000207379-5wr10 1/1 Running 1 46m
-deis-database-244447703-v2sh9 1/1 Running 0 46m
-deis-logger-2533678197-pzmbs 1/1 Running 2 46m
-deis-logger-fluentd-08hms 1/1 Running 0 42m
-deis-logger-redis-1307646428-fz1kk 1/1 Running 0 46m
-deis-minio-3195500219-tv7wz 1/1 Running 0 46m
-deis-monitor-grafana-59098797-mdqh1 1/1 Running 0 46m
-deis-monitor-influxdb-168332144-24ngs 1/1 Running 0 46m
-deis-monitor-telegraf-vgbr9 1/1 Running 0 41m
-deis-nsqd-1042535208-40fkm 1/1 Running 0 46m
-deis-registry-2249489191-2jz3p 1/1 Running 2 46m
-deis-registry-proxy-qsqc2 1/1 Running 0 46m
-deis-router-3258454730-3rfpq 1/1 Running 0 41m
-deis-workflow-manager-3582051402-m11zn 1/1 Running 0 46m
-&lt;/code>&lt;/pre>
-&lt;h3 id="注册管理用户">注册管理用户&lt;/h3>
-&lt;p>由于我们是本地ingress-controller, 必须保障deis-builder.$host可以被解析, 自行创建ingress of deis-builder.&lt;/p>
-&lt;pre>&lt;code>kubectl apply -f deis-buidler-ingress.yml
-&lt;/code>&lt;/pre>
-&lt;p>确保traefik有如下状态：&lt;/p>
-&lt;p>&lt;img src="https://xiaoping378.github.io/traefik-status.png" alt="traefik-status">&lt;/p>
-&lt;p>如下操作注册，默认第一个用户为管理员用户，可操作所有其他用户。&lt;/p>
-&lt;pre>&lt;code>➜ ~ kubectl get --namespace deis ingress
-NAME HOSTS ADDRESS PORTS AGE
-builder-api-server-ingress-http deis-builder.192.168.31.49.xip.io 80 18m
-controller-api-server-ingress-http deis.192.168.31.49.xip.io 80 1h
-➜ ~
-➜ ~ deis register deis.192.168.31.49.xip.io
-username: admin
-password:
-password (confirm):
-email: xiaoping378@163.com
-Registered admin
-Logged in as admin
-Configuration file written to /home/xxp/.deis/client.json
-➜ ~
-➜ ~ deis whoami
-You are admin at http://deis.192.168.31.49.xip.io
-&lt;/code>&lt;/pre>
-&lt;h3 id="部署第一个应用">部署第一个应用&lt;/h3></description></item></channel></rss>
+&lt;/ul></description></item><item><title>Docs: 解读Kafka</title><link>https://xiaoping378.github.io/docs/4-cloud/kafka-0/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/kafka-0/</guid><description/></item></channel></rss>

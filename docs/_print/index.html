@@ -53,7 +53,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.1d38c20c77197266c650b9534aec6f74.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.2e4493fb40bc730b36b40ccf0e74dcbd.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -83,7 +83,7 @@
 <ul>
 <li>2.1: <a href=#pg-25450808cb089fd6b2c015d52ee74141>网络篇</a></li>
 <ul>
-<li>2.1.1: <a href=#pg-a6eedb17687092baf6a80230ecc011df>frp内网穿透开发</a></li>
+<li>2.1.1: <a href=#pg-a6eedb17687092baf6a80230ecc011df>内网机穿透开发</a></li>
 </ul>
 <li>2.2: <a href=#pg-97bf608b6e526e294502be8ba550730b>linux基础</a></li>
 <ul>
@@ -151,6 +151,7 @@
 <li>4.5: <a href=#pg-e1249fd54f922b9832ed9ab695a6bbe4>Vagrant实践整理</a></li>
 <li>4.6: <a href=#pg-1d949ee52eaaed1383ba6bd02be6695c>KVM和Libvirt的实践整理</a></li>
 <li>4.7: <a href=#pg-6e7f79285674a5f225b4c9c21b735285>解读Consul</a></li>
+<li>4.8: <a href=#pg-f17c92e126157ce4d04a173d77fe4f41>解读Kafka</a></li>
 </ul>
 <li>5: <a href=#pg-e69aa5dce9883c4cb86ecafde4465420>区块链</a></li>
 <ul>
@@ -832,8 +833,11 @@ This is a warning with a title.
 </div>
 </div>
 <div class=td-content>
-<h1 id=pg-a6eedb17687092baf6a80230ecc011df>2.1.1 - frp内网穿透开发</h1>
-<div class=lead>利用frp实现外网代理ssh到内网开发机</div>
+<h1 id=pg-a6eedb17687092baf6a80230ecc011df>2.1.1 - 内网机穿透开发</h1>
+<div class=lead>利用frp或者ngrok实现外网代理ssh到内网开发机</div>
+<div class="pageinfo pageinfo-primary">
+<p>充分利用外网开隧道代理到本地服务，演示或者内网开发的利器，自己具备公网服务器的可以使用frp，不具备的可以使用ngrok。</p>
+</div>
 <h2 id=frp介绍>FRP介绍</h2>
 <p>frp 是国人开源的一种快速反向代理，可将 NAT 或防火墙后面的本地服务器暴露到互联网上。目前，它支持暴露 TCP 和 UDP，以及 HTTP 和 HTTPS 协议，也可以通过域名将请求转发到内部服务。</p>
 <p><img src=/images/frp-2022-03-06-20-21-49.png alt></p>
@@ -898,9 +902,23 @@ This is a warning with a title.
 <h3 id=vscode连接>vscode连接</h3>
 <p>安装正常步骤添加远端SSH机器，即可。
 <img src=/images/frp-2022-03-06-21-22-51.png alt></p>
-<h2 id=总结>总结</h2>
+<h2 id=frp总结>FRP总结</h2>
 <p>frp还有很多其他安全、UI、负载均衡等方面的配置，可根据自身环境选择，服务端和客户端选项更全面的配置<a href=https://gofrp.org/docs/reference/>见此</a></p>
 <p>总体上使用frp代理简单的服务，配置上可以很简单，但要配置稍复杂的场景，目前的设计感觉有些缺陷，让人容易犯迷糊，比如设计多种端口字段，来开启某特性。</p>
+<h2 id=ngrok>ngrok</h2>
+<p>针对个人免费的SaaS服务，需要注册账号，下载客户端，利用分配的token，发起链接，即可通过外网访问本地服务，具体操作步骤如下：</p>
+<ol>
+<li>进入ngrok官网（https://ngrok.com/），注册ngrok账号并下载ngrok；</li>
+<li>根据官网给定的授权码，运行如下授权命令，会保存到在本地HOME目录</li>
+</ol>
+<pre tabindex=0><code>ngrok authtoken 2689y3MT2qsAois0MG****
+</code></pre><ol start=3>
+<li>发起本地服务1080端口的代理</li>
+</ol>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>ngrok http <span style=color:#666>1080</span> &amp;
+</code></pre></div><p>如上执行，可通过红色框访问本地1080端口服务，如果是要代理SSH的话，需要执行<code>ngrok tcp 22 &</code>。
+<img src=/images/frp-2022-03-09-21-51-39.png alt></p>
+<p>值得注意的是，每次运行命令都会重新生成新的域名地址，要想固定域名的话，需要付费。</p>
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-97bf608b6e526e294502be8ba550730b>2.2 - linux基础</h1>
@@ -1805,7 +1823,7 @@ Casbin -&gt; 其他服务: 权限合规，则跳转到用户请求的其他服�
 <p>设置系统环境变量，两种办法：</p>
 <ul>
 <li>
-<p>图形界面操作： <code>Win+x</code> -> 系统 -> 高级系统设置 -> 环境变量, 自行添加<code>HOME</code>变量。(忘记了要不要注销才会生效)</p>
+<p>图形界面操作： <code>Win+x</code> -> 系统 -> 高级系统设置 -> 环境变量, 自行添加<code>HOME</code>变量。</p>
 </li>
 <li>
 <p>在PowerShell命令行中设置环境变量，执行完即可生效。</p>
@@ -4780,6 +4798,10 @@ client的配置datacenter、encrypt</p>
 <li><code>AGENT_TOKEN</code>：acl里申请的token</li>
 </ul>
 <p><strong>server说明</strong>：</p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-f17c92e126157ce4d04a173d77fe4f41>4.8 - 解读Kafka</h1>
+<div class=lead>解读Kafka和背后的设计原理。</div>
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-e69aa5dce9883c4cb86ecafde4465420>5 - 区块链</h1>

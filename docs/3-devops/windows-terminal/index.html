@@ -13,11 +13,11 @@
 ">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://xiaoping378.github.io/docs/3-devops/windows-terminal/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2022-01-30T23:30:00+08:00"><meta property="og:site_name" content="现代技能栈">
+<meta property="article:modified_time" content="2022-03-20T20:58:29+08:00"><meta property="og:site_name" content="现代技能栈">
 <meta itemprop=name content="Windows Terminal终端入坑指南">
 <meta itemprop=description content="介绍windows terminal安装和oh-my-zsh的配置
 ">
-<meta itemprop=dateModified content="2022-01-30T23:30:00+08:00">
+<meta itemprop=dateModified content="2022-03-20T20:58:29+08:00">
 <meta itemprop=wordCount content="109">
 <meta itemprop=keywords content="Ops,"><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Windows Terminal终端入坑指南">
@@ -52,7 +52,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.1d38c20c77197266c650b9534aec6f74.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.2e4493fb40bc730b36b40ccf0e74dcbd.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -62,7 +62,7 @@
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.1d38c20c77197266c650b9534aec6f74.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.2e4493fb40bc730b36b40ccf0e74dcbd.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -99,7 +99,7 @@
 <ul class="ul-3 foldable">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-2-infra-network-frp-li>
 <input type=checkbox id=m-docs-2-infra-network-frp-check>
-<label for=m-docs-2-infra-network-frp-check><a href=/docs/2-infra/network/frp/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-2-infra-network-frp><span>frp内网穿透开发</span></a></label>
+<label for=m-docs-2-infra-network-frp-check><a href=/docs/2-infra/network/frp/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-2-infra-network-frp><span>内网机穿透开发</span></a></label>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-2-infra-linux-li>
@@ -276,6 +276,9 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-e8-a7-a3-e8-af-bbconsu-01-li>
 <input type=checkbox id=m-docs-4-cloud-e8-a7-a3-e8-af-bbconsu-01-check>
 <label for=m-docs-4-cloud-e8-a7-a3-e8-af-bbconsu-01-check><a href=/docs/4-cloud/%E8%A7%A3%E8%AF%BBconsu-01/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-e8-a7-a3-e8-af-bbconsu-01><span>解读Consul</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-kafka-0-li>
+<input type=checkbox id=m-docs-4-cloud-kafka-0-check>
+<label for=m-docs-4-cloud-kafka-0-check><a href=/docs/4-cloud/kafka-0/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-kafka-0><span>解读Kafka</span></a></label>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-5-blockchain-li>
@@ -458,7 +461,7 @@
 <p>设置系统环境变量，两种办法：</p>
 <ul>
 <li>
-<p>图形界面操作： <code>Win+x</code> -> 系统 -> 高级系统设置 -> 环境变量, 自行添加<code>HOME</code>变量。(忘记了要不要注销才会生效)</p>
+<p>图形界面操作： <code>Win+x</code> -> 系统 -> 高级系统设置 -> 环境变量, 自行添加<code>HOME</code>变量。</p>
 </li>
 <li>
 <p>在PowerShell命令行中设置环境变量，执行完即可生效。</p>
@@ -503,7 +506,7 @@
     <span style=color:#b44>&#34;terminal.integrated.defaultProfile.windows&#34;</span><span>:</span> <span style=color:#b44>&#34;git-bash&#34;</span><span>,</span>
 </code></pre></div>
 <div class="text-muted mt-5 pt-3 border-top">
-最后修改 January 30, 2022: <a href=https://github.com/xiaoping378/xiaoping378.github.io/commit/4446af668e85b0aaef3c1d5fca494ede9a385667>完善Terminal的使用 (4446af6)</a>
+最后修改 March 20, 2022: <a href=https://github.com/xiaoping378/xiaoping378.github.io/commit/72c2f36229612a44884ea008afac0d6e117c6638>enable to gitee pages branch (72c2f36)</a>
 </div>
 </div>
 </main>

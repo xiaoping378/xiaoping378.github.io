@@ -50,7 +50,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.1d38c20c77197266c650b9534aec6f74.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.2e4493fb40bc730b36b40ccf0e74dcbd.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -70,7 +70,7 @@
 <h1 class=title>网络篇</h1>
 <div class=lead>网络领域的基础知识分享</div>
 <ul>
-<li>1: <a href=#pg-a6eedb17687092baf6a80230ecc011df>frp内网穿透开发</a></li>
+<li>1: <a href=#pg-a6eedb17687092baf6a80230ecc011df>内网机穿透开发</a></li>
 </ul>
 <div class=content>
 <div class="pageinfo pageinfo-primary">
@@ -79,8 +79,11 @@
 </div>
 </div>
 <div class=td-content>
-<h1 id=pg-a6eedb17687092baf6a80230ecc011df>1 - frp内网穿透开发</h1>
-<div class=lead>利用frp实现外网代理ssh到内网开发机</div>
+<h1 id=pg-a6eedb17687092baf6a80230ecc011df>1 - 内网机穿透开发</h1>
+<div class=lead>利用frp或者ngrok实现外网代理ssh到内网开发机</div>
+<div class="pageinfo pageinfo-primary">
+<p>充分利用外网开隧道代理到本地服务，演示或者内网开发的利器，自己具备公网服务器的可以使用frp，不具备的可以使用ngrok。</p>
+</div>
 <h2 id=frp介绍>FRP介绍</h2>
 <p>frp 是国人开源的一种快速反向代理，可将 NAT 或防火墙后面的本地服务器暴露到互联网上。目前，它支持暴露 TCP 和 UDP，以及 HTTP 和 HTTPS 协议，也可以通过域名将请求转发到内部服务。</p>
 <p><img src=/images/frp-2022-03-06-20-21-49.png alt></p>
@@ -145,9 +148,23 @@
 <h3 id=vscode连接>vscode连接</h3>
 <p>安装正常步骤添加远端SSH机器，即可。
 <img src=/images/frp-2022-03-06-21-22-51.png alt></p>
-<h2 id=总结>总结</h2>
+<h2 id=frp总结>FRP总结</h2>
 <p>frp还有很多其他安全、UI、负载均衡等方面的配置，可根据自身环境选择，服务端和客户端选项更全面的配置<a href=https://gofrp.org/docs/reference/>见此</a></p>
 <p>总体上使用frp代理简单的服务，配置上可以很简单，但要配置稍复杂的场景，目前的设计感觉有些缺陷，让人容易犯迷糊，比如设计多种端口字段，来开启某特性。</p>
+<h2 id=ngrok>ngrok</h2>
+<p>针对个人免费的SaaS服务，需要注册账号，下载客户端，利用分配的token，发起链接，即可通过外网访问本地服务，具体操作步骤如下：</p>
+<ol>
+<li>进入ngrok官网（https://ngrok.com/），注册ngrok账号并下载ngrok；</li>
+<li>根据官网给定的授权码，运行如下授权命令，会保存到在本地HOME目录</li>
+</ol>
+<pre tabindex=0><code>ngrok authtoken 2689y3MT2qsAois0MG****
+</code></pre><ol start=3>
+<li>发起本地服务1080端口的代理</li>
+</ol>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>ngrok http <span style=color:#666>1080</span> &amp;
+</code></pre></div><p>如上执行，可通过红色框访问本地1080端口服务，如果是要代理SSH的话，需要执行<code>ngrok tcp 22 &</code>。
+<img src=/images/frp-2022-03-09-21-51-39.png alt></p>
+<p>值得注意的是，每次运行命令都会重新生成新的域名地址，要想固定域名的话，需要付费。</p>
 </div>
 </main>
 </div>

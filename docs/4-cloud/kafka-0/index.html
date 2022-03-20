@@ -5,24 +5,23 @@
 <meta name=generator content="Hugo 0.91.2">
 <meta name=robots content="index, follow">
 <link rel="shortcut icon" href=/favicons/favicon.ico>
-<title>farbic-搭建高并发交易网络 | 现代技能栈</title>
-<meta name=description content="联盟链改造方案
+<title>解读Kafka | 现代技能栈</title>
+<meta name=description content="解读Kafka和背后的设计原理。 
 ">
-<meta property="og:title" content="farbic-搭建高并发交易网络">
-<meta property="og:description" content="联盟链改造方案
+<meta property="og:title" content="解读Kafka">
+<meta property="og:description" content="解读Kafka和背后的设计原理。 
 ">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://xiaoping378.github.io/docs/5-blockchain/farbic-%E5%8C%BA%E5%9D%97%E9%93%BE%E7%BD%91%E7%BB%9C%E6%90%AD%E5%BB%BA/"><meta property="article:section" content="docs">
-<meta property="article:published_time" content="2017-01-05T00:00:00+00:00">
-<meta property="article:modified_time" content="2017-01-05T00:00:00+00:00"><meta property="og:site_name" content="现代技能栈">
-<meta itemprop=name content="farbic-搭建高并发交易网络">
-<meta itemprop=description content="联盟链改造方案
-"><meta itemprop=datePublished content="2017-01-05T00:00:00+00:00">
-<meta itemprop=dateModified content="2017-01-05T00:00:00+00:00">
-<meta itemprop=wordCount content="9">
-<meta itemprop=keywords content="区块链,"><meta name=twitter:card content="summary">
-<meta name=twitter:title content="farbic-搭建高并发交易网络">
-<meta name=twitter:description content="联盟链改造方案
+<meta property="og:url" content="https://xiaoping378.github.io/docs/4-cloud/kafka-0/"><meta property="article:section" content="docs">
+<meta property="article:modified_time" content="2022-03-20T20:58:29+08:00"><meta property="og:site_name" content="现代技能栈">
+<meta itemprop=name content="解读Kafka">
+<meta itemprop=description content="解读Kafka和背后的设计原理。 
+">
+<meta itemprop=dateModified content="2022-03-20T20:58:29+08:00">
+<meta itemprop=wordCount content="0">
+<meta itemprop=keywords content><meta name=twitter:card content="summary">
+<meta name=twitter:title content="解读Kafka">
+<meta name=twitter:description content="解读Kafka和背后的设计原理。 
 ">
 <link rel=preload href=/scss/main.min.8973293e550f2aebcff13ca0acf28013165ed1fa321e6a370fbd3fd2e00c7d33.css as=style>
 <link href=/scss/main.min.8973293e550f2aebcff13ca0acf28013165ed1fa321e6a370fbd3fd2e00c7d33.css rel=stylesheet integrity>
@@ -156,8 +155,8 @@
 </ul>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-4-cloud-li>
-<input type=checkbox id=m-docs-4-cloud-check>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs-4-cloud-li>
+<input type=checkbox id=m-docs-4-cloud-check checked>
 <label for=m-docs-4-cloud-check><a href=/docs/4-cloud/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-4-cloud><span>云原生</span></a></label>
 <ul class="ul-2 foldable">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-4-cloud-containers-li>
@@ -277,13 +276,13 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-e8-a7-a3-e8-af-bbconsu-01-li>
 <input type=checkbox id=m-docs-4-cloud-e8-a7-a3-e8-af-bbconsu-01-check>
 <label for=m-docs-4-cloud-e8-a7-a3-e8-af-bbconsu-01-check><a href=/docs/4-cloud/%E8%A7%A3%E8%AF%BBconsu-01/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-e8-a7-a3-e8-af-bbconsu-01><span>解读Consul</span></a></label>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-kafka-0-li>
-<input type=checkbox id=m-docs-4-cloud-kafka-0-check>
-<label for=m-docs-4-cloud-kafka-0-check><a href=/docs/4-cloud/kafka-0/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-kafka-0><span>解读Kafka</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-docs-4-cloud-kafka-0-li>
+<input type=checkbox id=m-docs-4-cloud-kafka-0-check checked>
+<label for=m-docs-4-cloud-kafka-0-check><a href=/docs/4-cloud/kafka-0/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-kafka-0><span class=td-sidebar-nav-active-item>解读Kafka</span></a></label>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs-5-blockchain-li>
-<input type=checkbox id=m-docs-5-blockchain-check checked>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-5-blockchain-li>
+<input type=checkbox id=m-docs-5-blockchain-check>
 <label for=m-docs-5-blockchain-check><a href=/docs/5-blockchain/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-5-blockchain><span>区块链</span></a></label>
 <ul class="ul-2 foldable">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-5-blockchain-e4-bb-a5-e5-a4-aa-e5-9d-8a-e5-9f-ba-e7-a1-800-li>
@@ -304,9 +303,9 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-5-blockchain-cosmos-sdk-1-li>
 <input type=checkbox id=m-docs-5-blockchain-cosmos-sdk-1-check>
 <label for=m-docs-5-blockchain-cosmos-sdk-1-check><a href=/docs/5-blockchain/cosmos_sdk_1/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-5-blockchain-cosmos-sdk-1><span>解读cosmos-sdk系列(1)</span></a></label>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-docs-5-blockchain-farbic-e5-8c-ba-e5-9d-97-e9-93-be-e7-bd-91-e7-bb-9c-e6-90-ad-e5-bb-ba-li>
-<input type=checkbox id=m-docs-5-blockchain-farbic-e5-8c-ba-e5-9d-97-e9-93-be-e7-bd-91-e7-bb-9c-e6-90-ad-e5-bb-ba-check checked>
-<label for=m-docs-5-blockchain-farbic-e5-8c-ba-e5-9d-97-e9-93-be-e7-bd-91-e7-bb-9c-e6-90-ad-e5-bb-ba-check><a href=/docs/5-blockchain/farbic-%E5%8C%BA%E5%9D%97%E9%93%BE%E7%BD%91%E7%BB%9C%E6%90%AD%E5%BB%BA/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docs-5-blockchain-farbic-e5-8c-ba-e5-9d-97-e9-93-be-e7-bd-91-e7-bb-9c-e6-90-ad-e5-bb-ba><span class=td-sidebar-nav-active-item>farbic-搭建高并发交易网络</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-5-blockchain-farbic-e5-8c-ba-e5-9d-97-e9-93-be-e7-bd-91-e7-bb-9c-e6-90-ad-e5-bb-ba-li>
+<input type=checkbox id=m-docs-5-blockchain-farbic-e5-8c-ba-e5-9d-97-e9-93-be-e7-bd-91-e7-bb-9c-e6-90-ad-e5-bb-ba-check>
+<label for=m-docs-5-blockchain-farbic-e5-8c-ba-e5-9d-97-e9-93-be-e7-bd-91-e7-bb-9c-e6-90-ad-e5-bb-ba-check><a href=/docs/5-blockchain/farbic-%E5%8C%BA%E5%9D%97%E9%93%BE%E7%BD%91%E7%BB%9C%E6%90%AD%E5%BB%BA/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-5-blockchain-farbic-e5-8c-ba-e5-9d-97-e9-93-be-e7-bd-91-e7-bb-9c-e6-90-ad-e5-bb-ba><span>farbic-搭建高并发交易网络</span></a></label>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-5-blockchain-frabic-e7-a4-ba-e4-be-8b-e9-9b-86-e7-be-a4-e5-8c-96-e6-93-8d-e4-bd-9c-li>
 <input type=checkbox id=m-docs-5-blockchain-frabic-e7-a4-ba-e4-be-8b-e9-9b-86-e7-be-a4-e5-8c-96-e6-93-8d-e4-bd-9c-check>
 <label for=m-docs-5-blockchain-frabic-e7-a4-ba-e4-be-8b-e9-9b-86-e7-be-a4-e5-8c-96-e6-93-8d-e4-bd-9c-check><a href=/docs/5-blockchain/frabic-%E7%A4%BA%E4%BE%8B%E9%9B%86%E7%BE%A4%E5%8C%96%E6%93%8D%E4%BD%9C/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-5-blockchain-frabic-e7-a4-ba-e4-be-8b-e9-9b-86-e7-be-a4-e5-8c-96-e6-93-8d-e4-bd-9c><span>fabric-示例集群化操作</span></a></label>
@@ -345,10 +344,10 @@
 </aside>
 <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
-<a href=https://github.com/xiaoping378/xiaoping378.github.io/edit/master///content/docs/5-Blockchain/farbic-%e5%8c%ba%e5%9d%97%e9%93%be%e7%bd%91%e7%bb%9c%e6%90%ad%e5%bb%ba.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
-<a href="https://github.com/xiaoping378/xiaoping378.github.io/new/master///content/docs/5-Blockchain/farbic-%e5%8c%ba%e5%9d%97%e9%93%be%e7%bd%91%e7%bb%9c%e6%90%ad%e5%bb%ba.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
-<a href="https://github.com/xiaoping378/xiaoping378.github.io/issues/new?title=farbic-%e6%90%ad%e5%bb%ba%e9%ab%98%e5%b9%b6%e5%8f%91%e4%ba%a4%e6%98%93%e7%bd%91%e7%bb%9c" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
-<a id=print href=https://xiaoping378.github.io/docs/5-blockchain/_print/><i class="fa fa-print fa-fw"></i> 整节打印</a>
+<a href=https://github.com/xiaoping378/xiaoping378.github.io/edit/master///content/docs/4-Cloud/kafka-0.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
+<a href="https://github.com/xiaoping378/xiaoping378.github.io/new/master///content/docs/4-Cloud/kafka-0.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
+<a href="https://github.com/xiaoping378/xiaoping378.github.io/issues/new?title=%e8%a7%a3%e8%af%bbKafka" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
+<a id=print href=https://xiaoping378.github.io/docs/4-cloud/_print/><i class="fa fa-print fa-fw"></i> 整节打印</a>
 </div>
 <div class="taxonomy taxonomy-terms-cloud taxo-tags">
 <h5 class=taxonomy-title>标签</h5>
@@ -375,30 +374,21 @@
 <a href=https://xiaoping378.github.io/docs/>文档</a>
 </li>
 <li class=breadcrumb-item>
-<a href=https://xiaoping378.github.io/docs/5-blockchain/>区块链</a>
+<a href=https://xiaoping378.github.io/docs/4-cloud/>云原生</a>
 </li>
 <li class="breadcrumb-item active" aria-current=page>
-<a href=https://xiaoping378.github.io/docs/5-blockchain/farbic-%E5%8C%BA%E5%9D%97%E9%93%BE%E7%BD%91%E7%BB%9C%E6%90%AD%E5%BB%BA/>farbic-搭建高并发交易网络</a>
+<a href=https://xiaoping378.github.io/docs/4-cloud/kafka-0/>解读Kafka</a>
 </li>
 </ol>
 </nav>
 <div class=td-content>
-<h1>farbic-搭建高并发交易网络</h1>
-<div class=lead>联盟链改造方案</div>
+<h1>解读Kafka</h1>
+<div class=lead>解读Kafka和背后的设计原理。</div>
 <header class=article-meta>
-<div class="taxonomy taxonomy-terms-article taxo-tags">
-<h5 class=taxonomy-title>Tags:</h5>
-<ul class=taxonomy-terms>
-<li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/ data-taxonomy-term=%E5%8C%BA%E5%9D%97%E9%93%BE><span class=taxonomy-label>区块链</span></a></li>
-</ul>
-</div>
 </header>
-<p>针对每秒数千笔交易的场景，默认的CCVC（并发控制版本检查）会导致交易失败率的上升，其实不需要对基础网络本身做特殊设置，从合约代码入手可以解决，参考官方例子<a href=https://github.com/hyperledger/fabric-samples>farbic-samples</a>.</p>
-<h3 id=下载项目>下载项目</h3>
-<p>基于目前最新的v1.0.3版本来说</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git clone https://github.com/hyperledger/fabric-samples.git
-<span style=color:#a2f>cd</span> fabric-samples/first-network
-</code></pre></div><p>未完...</p>
+<div class="text-muted mt-5 pt-3 border-top">
+最后修改 March 20, 2022: <a href=https://github.com/xiaoping378/xiaoping378.github.io/commit/72c2f36229612a44884ea008afac0d6e117c6638>enable to gitee pages branch (72c2f36)</a>
+</div>
 </div>
 </main>
 </div>

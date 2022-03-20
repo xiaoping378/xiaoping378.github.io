@@ -237,4 +237,4 @@ client的配置datacenter、encrypt&lt;/p>
 &lt;li>&lt;code>CONSUL_NODE_NAME&lt;/code>，会填充到&lt;code>-node&lt;/code>参数，默认是hostname，要求全局唯一，此处代表要接入注册中心的系统的名字。&lt;/li>
 &lt;li>&lt;code>AGENT_TOKEN&lt;/code>：acl里申请的token&lt;/li>
 &lt;/ul>
-&lt;p>&lt;strong>server说明&lt;/strong>：&lt;/p></description></item></channel></rss>
+&lt;p>&lt;strong>server说明&lt;/strong>：&lt;/p></description></item><item><title>Docs: 解读Kafka</title><link>https://xiaoping378.github.io/docs/4-cloud/kafka-0/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/kafka-0/</guid><description/></item></channel></rss>
