@@ -56,7 +56,7 @@ kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3
 
 可以在上面的初始化阶段直接改好主和成员集群的关系，这里参考[官文](https://kubesphere.com.cn/docs/multicluster-management/enable-multicluster/direct-connection/)即可
 
-host集群的UI地址，可以通过容器IP+30880来访问，主集群的容器ip，可以如下获取：
+host集群的UI地址，可以通过`host容器IP:30880`来访问，主集群的容器ip，可以如下获取：
 ```bash
 docker inspect --format '{{ .NetworkSettings.Networks.kind.IPAddress }}' host-control-plane
 ```
@@ -70,3 +70,5 @@ kind get kubeconfig --name member
 ## 总结
 
 验证功能、测试开发，挺方便的，可以视本地资源紧张情况停掉监控的ns。
+
+现在kind启动的集群默认使用了containerd的runtime，若想进一步调试查看集群内的情况，可以内部集成的`crictl`代替熟悉的docker工具。

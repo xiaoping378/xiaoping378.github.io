@@ -1,7 +1,7 @@
 ---
 tags: ["k8s"]
-title: "Kubesphere的异地多活方案"
-linkTitle: "Kubesphere的异地多活方案"
+title: "论Kubesphere的异地多活方案"
+linkTitle: "论Kubesphere的异地多活方案"
 weight: 41
 description: >
   混合容器云管理平台Kubesphere的异地多活方案... 
@@ -30,7 +30,7 @@ description: >
 
 ## 多集群管理原理
 
-上段提到QKE有3种角色，可通过修改`cc`配置文件的`clusterRole`来使能, ks-installer监听到配置变化的事件，会初始化对应多集群角色的功能。
+上段提到QKE有3种角色，可通过修改`cc`配置文件的`clusterRole`来使能, ks-installer监听到配置变化的事件，会初始化对应集群角色的功能。
 ```bash
 kubectl edit cc ks-installer -n kubesphere-system
 ```
@@ -76,7 +76,7 @@ kubectl -n kubesphere-system get cm kubesphere-config -o yaml | grep -v "apiVers
 
 > 写稿时，此处有个问题，需要修复，如果kubeconfig使用了`insecure-skip-tls-verify: true`会导致该集群添加失败，经定位主要是kubefed 空指针panic了，后续有时间我会去fix一下。
 
-校验完必要信息后，就执行实质动作`joinFederation`加入联邦，kubesphere多集群纳管，实质上组成联邦集群:
+校验完必要信息后，就执行实质动作`joinFederation`加入联邦，kubesphere多集群纳管，实质上是先组成联邦集群:
 - 在成员集群创建ns kube-federation-system
 - 在上面的命名空间中创建serviceAccount [clusterName]-kubesphere, 并绑定最高权限
 - 在主集群的kube-federation-system的命名空间创建`kubefedclusters.core.kubefed.io`，由kubefed stack驱动联邦的建立
@@ -86,8 +86,67 @@ kubectl -n kubesphere-system get cm kubesphere-config -o yaml | grep -v "apiVers
 
 ## 异地多活方案设计
 
-异地多活的方案主要是多个主集群能同时存在，且保证数据同步，经过上面的原理分析，可知多个主集群是可以同时存在的，也就是一个成员集群要和多个主集群组成联邦，示意图如下：
+异地多活的方案主要是多个主集群能同时存在，且保证数据双向同步，经过上面的原理分析，可知多个主集群是可以同时存在的，也就是一个成员集群要和多个主集群组成联邦，示意图如下：
 
 ![](/images/kcp-multi-hostclusters.png)
 
-开始实操！
+> 以下操作假设本地以具备三个QKE集群，如果不具备的可按照[此处](/docs/4-cloud/kubesphere/kind-multicluster-dev/)搭建`host、host2、member`3个集群
+
+大致实现逻辑的前提介绍：
+
+1. 三个集群的`jwtSecret`得保持一致
+2. 两个主集群都去`添加`纳管同一个member集群
+3. 利用`etcdctl make-mirror`实现双向同步（需改造，目前社区版仅支持单向同步）
+
+### 验证下可行性
+
+实操前先验证下可行性
+
+**实验1：**
+
+在两边创建一个同名用户，用户所有信息一致，可以添加成功，然后再修改一边的用户信息，使两边不一致
+
+可以看到member集群的用户xxp，一直会被两边不断的更新...
+```bash
+root@member-control-plane:/# kubectl get user xxp -w
+NAME   EMAIL         STATUS
+xxp    xxp@163.com   Active
+xxp    xxp-2@163.com   Active
+xxp    xxp@163.com    Active
+xxp    xxp-2@163.com   Active
+
+...
+
+```
+这个实验，即使在创建用户时，页面表单上两边信息填的都一样，也会出现互相刷新覆盖的情况，因为yaml里的uid和time信息不一致
+
+**实验2：**
+
+在两边添加一个同名用户，但两边用户信息（用户角色）不一致，可以创建成功，但后创建者kube-federa会同步失败, 到这里还能接受，毕竟有冲突直接就同步失败了
+
+但member集群上该用户的关联角色信息会出现上文的情况，被两边的主集群反复修改...
+
+
+**实验3：**
+
+在一侧的主集群上尝试修复冲突资源，采取删除有冲突的用户资源的操作，可以删除成功，但会出现联邦资源删失败的情况
+```
+➜  ~ kubectl get users.iam.kubesphere.io
+NAME    EMAIL                 STATUS
+admin   admin@kubesphere.io   Active
+xxp3    xxp3@163.com          Active
+➜  ~
+➜  ~ kubectl get federatedusers.types.kubefed.io
+NAME    AGE
+admin   5h33m
+xxp     65m # 这里是个正在删除的动作的资源
+xxp3    61m
+```
+
+这样就会出现，两个主集群：一个要删，一个要同步，member集群上：上演“一会儿消失，一会儿又出现了”的奇观。
+
+### 总结
+
+两个主集群同时工作，一旦出现同名冲突资源，处理起来会非常非常麻烦，当背后的ownerRef关联资源也出现异常时，往往问题点隐藏的更深，修复起来就棘手...
+
+双活，除非具备跨AZ的etcd集群，不然目前的社区方案 make-mirror只支持单向同步，适用用来做灾备方案。
