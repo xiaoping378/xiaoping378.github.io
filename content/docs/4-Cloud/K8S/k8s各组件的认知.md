@@ -1,11 +1,24 @@
 ---
 tags: ["容器", "K8S"]
-title: "k8s的各组件认知"
-linkTitle: "k8s的各组件认知"
+title: "k8s的各组件和特性扫盲"
+linkTitle: "k8s的各组件和特性认知"
 weight: 3
 description: >
-  主要介绍k8s中的各核心组件，未完...
+  主要介绍k8s中的各核心组件和特性
 ---
+{{% pageinfo %}}
+了解一个工具的特性可以从它的参数入手
+{{% /pageinfo %}}
+
+
+## api-server
+
+在k8s内发挥的网关和api
+
+CSR特性
+
+
+## 网络
 
 ### flannel
 

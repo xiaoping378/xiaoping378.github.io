@@ -1,7 +1,7 @@
 ---
 title: "Vagrant实践整理"
 linkTitle: "Vagrant实践整理"
-weight: 4
+weight: 6
 description: >
   介绍Vagrant的实践整理。 
 ---

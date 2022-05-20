@@ -9,5 +9,7 @@ menu:
 ---
 
 {{% pageinfo %}}
-现代技能栈的主站，分门别类整理如下，可通过 [RSS订阅](/docs/index.xml) 最新文章！
+本站源码开源[在此](https://github.com/xiaoping378/xiaoping378.github.io)
+
+以下为现代技能栈的主站，分门别类整理如下，可通过 [RSS订阅](/docs/index.xml) 最新文章！
 {{% /pageinfo %}}
