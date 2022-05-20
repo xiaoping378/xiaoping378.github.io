@@ -13,12 +13,12 @@
 ">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://xiaoping378.gitee.io/docs/4-cloud/kubesphere/multihosts/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2022-05-20T20:35:31+08:00"><meta property="og:site_name" content="现代技能栈">
+<meta property="article:modified_time" content="2022-05-20T20:45:57+08:00"><meta property="og:site_name" content="现代技能栈">
 <meta itemprop=name content="论Kubesphere的异地多活方案">
 <meta itemprop=description content="混合容器云管理平台Kubesphere的异地多活方案... 
 ">
-<meta itemprop=dateModified content="2022-05-20T20:35:31+08:00">
-<meta itemprop=wordCount content="183">
+<meta itemprop=dateModified content="2022-05-20T20:45:57+08:00">
+<meta itemprop=wordCount content="182">
 <meta itemprop=keywords content="k8s,"><meta name=twitter:card content="summary">
 <meta name=twitter:title content="论Kubesphere的异地多活方案">
 <meta name=twitter:description content="混合容器云管理平台Kubesphere的异地多活方案... 
@@ -52,7 +52,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.e77579ee1fd5ba0bd3f60936ebbb94a2.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.915087532020482936630e061d54a96e.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -62,7 +62,7 @@
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.e77579ee1fd5ba0bd3f60936ebbb94a2.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.915087532020482936630e061d54a96e.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -520,16 +520,16 @@
 <p>异地多活的方案主要是多个主集群能同时存在，且保证数据双向同步，经过上面的原理分析，可知多个主集群是可以同时存在的，也就是一个成员集群要和多个主集群组成联邦，示意图如下：</p>
 <p><img src=/images/kcp-multi-hostclusters.png alt></p>
 <blockquote>
-<p>以下操作假设本地以具备三个QKE集群，如果不具备的可按照<a href=/docs/4-cloud/kubesphere/kind-multicluster-dev/>此处</a>搭建<code>host、host2、member</code>3个集群</p>
+<p>以下操作假设本地已具备三个QKE集群，如果不具备的可按照<a href=/docs/4-cloud/kubesphere/kind-multicluster-dev/>此处</a>搭建<code>host、host2、member</code>3个集群</p>
 </blockquote>
 <p>大致实现逻辑的前提介绍：</p>
 <ol>
 <li>三个集群的<code>jwtSecret</code>得保持一致</li>
 <li>两个主集群都去<code>添加</code>纳管同一个member集群</li>
-<li>利用<code>etcdctl make-mirror</code>实现双向同步（需改造，目前社区版仅支持单向同步）</li>
+<li>利用<code>etcdctl make-mirror</code>实现双向同步</li>
 </ol>
 <h3 id=验证下可行性>验证下可行性</h3>
-<p>实操前先验证下可行性</p>
+<p>实操双活前，先验证下可行性</p>
 <p><strong>实验1：</strong></p>
 <p>在两边创建一个同名用户，用户所有信息一致，可以添加成功，然后再修改一边的用户信息，使两边不一致</p>
 <p>可以看到member集群的用户xxp，一直会被两边不断的更新...</p>
@@ -556,14 +556,15 @@ xxp3    xxp3@163.com          Active
 ➜  ~ kubectl get federatedusers.types.kubefed.io
 NAME    AGE
 admin   5h33m
-xxp     65m # 这里是个正在删除的动作的资源
+xxp     65m #这里是个正在删除的资源
 xxp3    61m
 </code></pre><p>这样就会出现，两个主集群：一个要删，一个要同步，member集群上：上演“一会儿消失，一会儿又出现了”的奇观。</p>
 <h3 id=总结>总结</h3>
 <p>两个主集群同时工作，一旦出现同名冲突资源，处理起来会非常非常麻烦，当背后的ownerRef关联资源也出现异常时，往往问题点隐藏的更深，修复起来就棘手...</p>
-<p>双活，除非具备跨AZ的etcd集群，不然目前的社区方案 make-mirror只支持单向同步，适用用来做灾备方案。</p>
+<p>后来调研发现：目前的社区方案make-mirror只支持单向同步，适用用来做灾备方案。</p>
+<p>所以双活，除非具备跨AZ的etcd集群。</p>
 <div class="text-muted mt-5 pt-3 border-top">
-最后修改 May 20, 2022: <a href=https://github.com/xiaoping378/xiaoping378.github.io/commit/05f92554895e5af477810071479f676673db1a10>kubespere 双活 (05f9255)</a>
+最后修改 May 20, 2022: <a href=https://github.com/xiaoping378/xiaoping378.github.io/commit/3a56a26c58b8b395e9e1a3478db4fdf9fd8ed3c0>kubespere 双活2 (3a56a26)</a>
 </div>
 </div>
 </main>

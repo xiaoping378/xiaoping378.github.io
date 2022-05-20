@@ -2125,16 +2125,16 @@ kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3
 &lt;p>异地多活的方案主要是多个主集群能同时存在，且保证数据双向同步，经过上面的原理分析，可知多个主集群是可以同时存在的，也就是一个成员集群要和多个主集群组成联邦，示意图如下：&lt;/p>
 &lt;p>&lt;img src="https://xiaoping378.gitee.io/images/kcp-multi-hostclusters.png" alt="">&lt;/p>
 &lt;blockquote>
-&lt;p>以下操作假设本地以具备三个QKE集群，如果不具备的可按照&lt;a href="https://xiaoping378.gitee.io/docs/4-cloud/kubesphere/kind-multicluster-dev/">此处&lt;/a>搭建&lt;code>host、host2、member&lt;/code>3个集群&lt;/p>
+&lt;p>以下操作假设本地已具备三个QKE集群，如果不具备的可按照&lt;a href="https://xiaoping378.gitee.io/docs/4-cloud/kubesphere/kind-multicluster-dev/">此处&lt;/a>搭建&lt;code>host、host2、member&lt;/code>3个集群&lt;/p>
 &lt;/blockquote>
 &lt;p>大致实现逻辑的前提介绍：&lt;/p>
 &lt;ol>
 &lt;li>三个集群的&lt;code>jwtSecret&lt;/code>得保持一致&lt;/li>
 &lt;li>两个主集群都去&lt;code>添加&lt;/code>纳管同一个member集群&lt;/li>
-&lt;li>利用&lt;code>etcdctl make-mirror&lt;/code>实现双向同步（需改造，目前社区版仅支持单向同步）&lt;/li>
+&lt;li>利用&lt;code>etcdctl make-mirror&lt;/code>实现双向同步&lt;/li>
 &lt;/ol>
 &lt;h3 id="验证下可行性">验证下可行性&lt;/h3>
-&lt;p>实操前先验证下可行性&lt;/p>
+&lt;p>实操双活前，先验证下可行性&lt;/p>
 &lt;p>&lt;strong>实验1：&lt;/strong>&lt;/p>
 &lt;p>在两边创建一个同名用户，用户所有信息一致，可以添加成功，然后再修改一边的用户信息，使两边不一致&lt;/p>
 &lt;p>可以看到member集群的用户xxp，一直会被两边不断的更新...&lt;/p>
@@ -2159,9 +2159,10 @@ xxp3 xxp3@163.com Active
 ➜ ~ kubectl get federatedusers.types.kubefed.io
 NAME AGE
 admin 5h33m
-xxp 65m # 这里是个正在删除的动作的资源
+xxp 65m #这里是个正在删除的资源
 xxp3 61m
 &lt;/code>&lt;/pre>&lt;p>这样就会出现，两个主集群：一个要删，一个要同步，member集群上：上演“一会儿消失，一会儿又出现了”的奇观。&lt;/p>
 &lt;h3 id="总结">总结&lt;/h3>
 &lt;p>两个主集群同时工作，一旦出现同名冲突资源，处理起来会非常非常麻烦，当背后的ownerRef关联资源也出现异常时，往往问题点隐藏的更深，修复起来就棘手...&lt;/p>
-&lt;p>双活，除非具备跨AZ的etcd集群，不然目前的社区方案 make-mirror只支持单向同步，适用用来做灾备方案。&lt;/p></description></item></channel></rss>
+&lt;p>后来调研发现：目前的社区方案make-mirror只支持单向同步，适用用来做灾备方案。&lt;/p>
+&lt;p>所以双活，除非具备跨AZ的etcd集群。&lt;/p></description></item></channel></rss>
