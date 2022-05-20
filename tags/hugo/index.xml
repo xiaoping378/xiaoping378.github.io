@@ -273,7 +273,7 @@ desc = &lt;span style="color:#b44">&amp;#34;未开通&amp;#34;&lt;/span>
 &lt;p>如果自己搭建嫌麻烦，可直接Copy本站，编写自己的内容即可，搭建本站时，也遇到了Docsy国际化方面的问题，已提交官方&lt;a href="https://github.com/google/docsy/pull/826">PR&lt;/a>修复。&lt;/p>
 &lt;p>&lt;a href="../actions_pages">下文&lt;/a>介绍使用github的actions和pages自动托管站点。&lt;/p></description></item><item><title>Docs: 自动托管markdown</title><link>https://xiaoping378.gitee.io/docs/1-site/actions_pages/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.gitee.io/docs/1-site/actions_pages/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
-&lt;p>利用github actions和pages实现自动更新托管内容。&lt;/p>
+&lt;p>利用github actions和pages实现自动更新托管内容，本站点已实现commit md后，自动更新&lt;a href="https://xiaoping378.gitee.io/">码云page&lt;/a>和&lt;a href="https://xiaoping378.github.io/">Github page&lt;/a>页面。&lt;/p>
 &lt;/div>
 &lt;h2 id="项目仓库的名字由来">项目仓库的名字由来&lt;/h2>
 &lt;p>本源码仓之所以起如此长的名字，完全是因为github pages的不成熟，不然会带个小尾巴：&lt;/p>

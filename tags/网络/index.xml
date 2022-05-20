@@ -40,6 +40,8 @@
 &lt;span style="color:#b8860b">bind_port&lt;/span> &lt;span style="color:#666">=&lt;/span> &lt;span style="color:#666">7380&lt;/span>
 &lt;span style="color:#080;font-style:italic"># 服务端与客户端建立连接的Token，两边保持一致即可&lt;/span>
 &lt;span style="color:#b8860b">token&lt;/span> &lt;span style="color:#666">=&lt;/span> PassWord
+&lt;span style="color:#080;font-style:italic"># 日志级别，默认的info，会打印很多被外网恶扫的连接信息&lt;/span>
+&lt;span style="color:#b8860b">log_level&lt;/span> &lt;span style="color:#666">=&lt;/span> warn
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>启动：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">frps -c /etc/frp/frps.ini
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="客户端">客户端&lt;/h3>
@@ -80,7 +82,9 @@
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">ngrok http &lt;span style="color:#666">1080&lt;/span> &amp;amp;
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>如上执行，可通过红色框访问本地1080端口服务，如果是要代理SSH的话，需要执行&lt;code>ngrok tcp 22 &amp;amp;&lt;/code>。
 &lt;img src="https://xiaoping378.gitee.io/images/frp-2022-03-09-21-51-39.png" alt="">&lt;/p>
-&lt;p>值得注意的是，每次运行命令都会重新生成新的域名地址，要想固定域名的话，需要付费。&lt;/p></description></item><item><title>Docs: docker网络</title><link>https://xiaoping378.gitee.io/docs/4-cloud/containers/docker-network/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.gitee.io/docs/4-cloud/containers/docker-network/</guid><description>
+&lt;p>值得注意的是，每次运行命令都会重新生成新的域名地址，要想固定域名的话，需要付费。&lt;/p>
+&lt;h2 id="总结">总结&lt;/h2>
+&lt;p>目前个人使用的方式，是利用frp建立ssh隧道，日常vscode远程开发，需要访问临时启动的服务的时候，利用ngrok随手启动即可访问到。&lt;/p></description></item><item><title>Docs: docker网络</title><link>https://xiaoping378.gitee.io/docs/4-cloud/containers/docker-network/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.gitee.io/docs/4-cloud/containers/docker-network/</guid><description>
 &lt;p>自去年就开始推动公司业务使用docker了， 至今也一年多了，但对docker网络的认知一直一知半解。。。&lt;/p>
 &lt;p>主要是太忙，加上线上业务也没出过关于网络吞吐性能方面的问题，就没太大动力去搞明白， 现在闲下来了，搞之！&lt;/p>
 &lt;h3 id="环境声明">环境声明&lt;/h3>
@@ -126,4 +130,5 @@ RX bytes:17485434 &lt;span style="color:#666">(&lt;/span>17.4 MB&lt;span style="
 &lt;h3 id="细说bridge模式">细说bridge模式&lt;/h3>
 &lt;p>这也是我们线上正在在用的网络模式。&lt;/p>
 &lt;p>bridge模式主要利用了iptables的Masquerading和DNAT功能。&lt;/p>
-&lt;p>未完。。。&lt;/p></description></item></channel></rss>
+&lt;p>未完。。。&lt;/p></description></item><item><title>Docs: 网络TCP/IP协议栈</title><link>https://xiaoping378.gitee.io/docs/2-infra/network/tcpip/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.gitee.io/docs/2-infra/network/tcpip/</guid><description>
+&lt;p>.TODO&lt;/p></description></item></channel></rss>

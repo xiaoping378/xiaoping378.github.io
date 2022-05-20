@@ -50,7 +50,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.2e4493fb40bc730b36b40ccf0e74dcbd.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.a129186848b960d9f9fa11c31b246c7f.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -73,10 +73,13 @@
 <li>1: <a href=#pg-25450808cb089fd6b2c015d52ee74141>网络篇</a></li>
 <ul>
 <li>1.1: <a href=#pg-a6eedb17687092baf6a80230ecc011df>内网机穿透开发</a></li>
+<li>1.2: <a href=#pg-4f5fb3b323a4d6abd7ca58c11b7add50>网络TCP/IP协议栈</a></li>
+<li>1.3: <a href=#pg-77cb18303df0bc0c142fa72da4208b99>混合云网络SDN</a></li>
 </ul>
 <li>2: <a href=#pg-97bf608b6e526e294502be8ba550730b>linux基础</a></li>
 <ul>
 <li>2.1: <a href=#pg-5c09401150b54f4b74cb181c0c1da24b>Centos7 配置记录</a></li>
+<li>2.2: <a href=#pg-69815f26ef19723bfea113c9f4d2d244>裁剪内核-BootLoader</a></li>
 </ul>
 </ul>
 <div class=content>
@@ -134,6 +137,8 @@
 <span style=color:#b8860b>bind_port</span> <span style=color:#666>=</span> <span style=color:#666>7380</span>
 <span style=color:#080;font-style:italic># 服务端与客户端建立连接的Token，两边保持一致即可</span>
 <span style=color:#b8860b>token</span> <span style=color:#666>=</span> PassWord
+<span style=color:#080;font-style:italic># 日志级别，默认的info，会打印很多被外网恶扫的连接信息</span>
+<span style=color:#b8860b>log_level</span> <span style=color:#666>=</span> warn
 </code></pre></div><p>启动：</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>frps -c /etc/frp/frps.ini
 </code></pre></div><h3 id=客户端>客户端</h3>
@@ -176,6 +181,98 @@
 </code></pre></div><p>如上执行，可通过红色框访问本地1080端口服务，如果是要代理SSH的话，需要执行<code>ngrok tcp 22 &</code>。
 <img src=/images/frp-2022-03-09-21-51-39.png alt></p>
 <p>值得注意的是，每次运行命令都会重新生成新的域名地址，要想固定域名的话，需要付费。</p>
+<h2 id=总结>总结</h2>
+<p>目前个人使用的方式，是利用frp建立ssh隧道，日常vscode远程开发，需要访问临时启动的服务的时候，利用ngrok随手启动即可访问到。</p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-4f5fb3b323a4d6abd7ca58c11b7add50>1.2 - 网络TCP/IP协议栈</h1>
+<div class=lead>介绍日常必备的网络基础</div>
+<p>.TODO</p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-77cb18303df0bc0c142fa72da4208b99>1.3 - 混合云网络SDN</h1>
+<div class=lead>目前云上的SDN网络已相对成熟，本文为初步介绍，未完...</div>
+<ul>
+<li>TODO.</li>
+</ul>
+<h3 id=为什么需要sdn>为什么需要SDN</h3>
+<ul>
+<li>网络可编程</li>
+<li>VPC（Virtual Private Cloud）</li>
+</ul>
+<h3 id=现有sdn方案>现有SDN方案</h3>
+<ul>
+<li>
+<p>硬件方案（软件定义，硬件实现）</p>
+<ul>
+<li>主流网络设备厂商有各自实现</li>
+</ul>
+</li>
+<li>
+<p>软件方案（NFV）</p>
+<ul>
+<li>VMWare NSX, Juniper OpenContrail, OpenStack DVR...</li>
+</ul>
+</li>
+</ul>
+<h3 id=业务需求>业务需求</h3>
+<ul>
+<li>用户网络隔离 - 多租户</li>
+<li>保证中等流量规模的高性能低延迟</li>
+<li>适应复杂异构的基础架构（混合云-- kubernetes，虚机，裸机）</li>
+<li>端点迁移，IP不变</li>
+<li>负载均衡（L2/L3）</li>
+<li>端到端流量精细ACL</li>
+<li>可API控制</li>
+<li>运维监控（包，字节流）</li>
+</ul>
+<h3 id=方案选型>方案选型</h3>
+<ul>
+<li>成本</li>
+<li>设备依赖</li>
+</ul>
+<h3 id=开源方案>开源方案</h3>
+<p>各开源SDN方案对比：</p>
+<ul>
+<li>
+<p>flannel vxlan:
+不具备网络隔离功能。</p>
+</li>
+<li>
+<p>OpenShift SDN:</p>
+<p>基于vxlan利用ovs-multienant可实现基于项目的网络隔离，和flannel vxlan相比，其使用的ovs-subnet插件，数据流场景大体一致，容器向外网发包也使用的NAT。</p>
+</li>
+<li>
+<p>Calico:</p>
+<p>支持混合云，安全加密，
+纯3层的路由实现保证了性能和低延迟
+支持了网络隔离和ACL
+但存在目前只支持TCP、UDP、ICMP、ICMPv6协议，四层协议不支持。</p>
+</li>
+<li>
+<p>OpenStack Neutron</p>
+<p>支持网络隔离
+性能和低延迟 -- 需要优化
+支持多租户
+基于ML2支持混合云方案 -- kubernetes的支持需要第三方的kubestack项目
+虚机迁移，IP可不变，容器迁移，IP不变 -- 需要开发
+支持负载均衡LBaaS
+支持精细级的ACL
+API ?
+可运维监控基本数据</p>
+</li>
+<li>
+<p>OpenContrail</p>
+<p><strong>完全满足我们的网络需求</strong>, 值得深入研究</p>
+<p>Juniper开源的SDN & NFV方案</p>
+<p>已经集成支持OpenStack, VMware, Docker 和 Kubernetes.</p>
+</li>
+</ul>
+<h3 id=各大厂商公开资料>各大厂商公开资料</h3>
+<ul>
+<li>网易蜂巢： VxLAN, 基于Openstack Neutron</li>
+<li>待补充...</li>
+</ul>
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-97bf608b6e526e294502be8ba550730b>2 - linux基础</h1>
@@ -269,6 +366,11 @@ ntpdate -u cn.pool.ntp.org
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl ipinfo.io
 </code></pre></div></li>
 </ul>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-69815f26ef19723bfea113c9f4d2d244>2.2 - 裁剪内核-BootLoader</h1>
+<div class=lead>记录定制化自己的linux内核和嵌入式硬件烧录引导的过程</div>
+<p>.TODO</p>
 </div>
 </main>
 </div>

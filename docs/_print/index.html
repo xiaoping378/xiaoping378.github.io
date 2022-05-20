@@ -11,7 +11,8 @@
 <meta name=description content="
 
 
-现代技能栈的主站，分门别类整理如下，可通过 RSS订阅 最新文章！
+本站源码开源在此
+以下为现代技能栈的主站，分门别类整理如下，可通过 RSS订阅 最新文章！
 
 
 
@@ -53,7 +54,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.2e4493fb40bc730b36b40ccf0e74dcbd.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.a129186848b960d9f9fa11c31b246c7f.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -84,10 +85,13 @@
 <li>2.1: <a href=#pg-25450808cb089fd6b2c015d52ee74141>网络篇</a></li>
 <ul>
 <li>2.1.1: <a href=#pg-a6eedb17687092baf6a80230ecc011df>内网机穿透开发</a></li>
+<li>2.1.2: <a href=#pg-4f5fb3b323a4d6abd7ca58c11b7add50>网络TCP/IP协议栈</a></li>
+<li>2.1.3: <a href=#pg-77cb18303df0bc0c142fa72da4208b99>混合云网络SDN</a></li>
 </ul>
 <li>2.2: <a href=#pg-97bf608b6e526e294502be8ba550730b>linux基础</a></li>
 <ul>
 <li>2.2.1: <a href=#pg-5c09401150b54f4b74cb181c0c1da24b>Centos7 配置记录</a></li>
+<li>2.2.2: <a href=#pg-69815f26ef19723bfea113c9f4d2d244>裁剪内核-BootLoader</a></li>
 </ul>
 </ul>
 <li>3: <a href=#pg-e97f0e656f5d2b291ee9f4302feeb241>Dev|Ops</a></li>
@@ -105,6 +109,7 @@
 <ul>
 <li>3.10.1: <a href=#pg-07ef033d5a20184955fad1e45f4c9e36>TiDB初体验</a></li>
 </ul>
+<li>3.11: <a href=#pg-e8554b330512aff46f27fa776df9c1b2>Golang单仓monorepo协作的设计与实践</a></li>
 </ul>
 <li>4: <a href=#pg-1737f808bd604b410f639c3e20a801ea>云原生</a></li>
 <ul>
@@ -124,13 +129,14 @@
 <ul>
 <li>4.2.1: <a href=#pg-f4385dd84140bf058c6b2a60389b58bb>源码部署K8S</a></li>
 <li>4.2.2: <a href=#pg-eac7def2dc8112b0573f9105edb534f5>离线安装kubernetes</a></li>
-<li>4.2.3: <a href=#pg-1592af4da4743e978bc3f2eba7c81eae>k8s的各组件认知</a></li>
+<li>4.2.3: <a href=#pg-1592af4da4743e978bc3f2eba7c81eae>k8s的各组件和特性扫盲</a></li>
 <li>4.2.4: <a href=#pg-a2415cefef7c5296c0a415526765a948>Helm模板介绍</a></li>
 <li>4.2.5: <a href=#pg-b781642b41630a327a3a5151285908a0>k8s的监控方案</a></li>
 <li>4.2.6: <a href=#pg-e7d513396d808a4808b498da552726e0>配置harbor默认https访问</a></li>
 <li>4.2.7: <a href=#pg-9defb3943138a8ddf6afc76610480f39>DEIS 开源PAAS平台实践</a></li>
 <li>4.2.8: <a href=#pg-e3c9486bfc693b58c1c315d2c7cde322>k3s实践-01</a></li>
-<li>4.2.9: <a href=#pg-8d71550d3ee2751c7f80b3cef9ae8232>TKEStack all-in-one入坑指南</a></li>
+<li>4.2.9: <a href=#pg-03baa014ac348ea7e2865ceaf8dacda4>kubeshere 自研-01</a></li>
+<li>4.2.10: <a href=#pg-8d71550d3ee2751c7f80b3cef9ae8232>TKEStack all-in-one入坑指南</a></li>
 </ul>
 <li>4.3: <a href=#pg-a99e9fbbf6490dd89c4d8471c702c778>Openshift</a></li>
 <ul>
@@ -147,9 +153,13 @@
 <li>4.3.11: <a href=#pg-cb9d98fa953e6ad69dc9105c1c11550b>监控梳理</a></li>
 <li>4.3.12: <a href=#pg-65d2c9ba3dda05a2d82269e367f5bdee>日志分析</a></li>
 </ul>
-<li>4.4: <a href=#pg-9b97802e4b9534134796bbfce8ffeaa3>混合云网络SDN</a></li>
-<li>4.5: <a href=#pg-e1249fd54f922b9832ed9ab695a6bbe4>Vagrant实践整理</a></li>
-<li>4.6: <a href=#pg-1d949ee52eaaed1383ba6bd02be6695c>KVM和Libvirt的实践整理</a></li>
+<li>4.4: <a href=#pg-db49329bdf5c268e489f2a3cc7cc78da>Kubersphere</a></li>
+<ul>
+<li>4.4.1: <a href=#pg-860749379d08e54cd43ce8d25912f35e>使用kind本地启动多集群</a></li>
+<li>4.4.2: <a href=#pg-c79f030e7c908d1a1a3729cd2bf8e478>Kubesphere的异地多活方案</a></li>
+</ul>
+<li>4.5: <a href=#pg-1d949ee52eaaed1383ba6bd02be6695c>KVM和Libvirt的实践整理</a></li>
+<li>4.6: <a href=#pg-e1249fd54f922b9832ed9ab695a6bbe4>Vagrant实践整理</a></li>
 <li>4.7: <a href=#pg-6e7f79285674a5f225b4c9c21b735285>解读Consul</a></li>
 <li>4.8: <a href=#pg-f17c92e126157ce4d04a173d77fe4f41>解读Kafka</a></li>
 </ul>
@@ -179,7 +189,8 @@
 </ul>
 <div class=content>
 <div class="pageinfo pageinfo-primary">
-<p>现代技能栈的主站，分门别类整理如下，可通过 <a href=/docs/index.xml>RSS订阅</a> 最新文章！</p>
+<p>本站源码开源<a href=https://github.com/xiaoping378/xiaoping378.github.io>在此</a></p>
+<p>以下为现代技能栈的主站，分门别类整理如下，可通过 <a href=/docs/index.xml>RSS订阅</a> 最新文章！</p>
 </div>
 </div>
 </div>
@@ -509,7 +520,7 @@ enable = <span style=color:#a2f;font-weight:700>false</span>
 <h1 id=pg-19a76bb4dc197415e2432cc478ab88b6>1.2 - 自动托管markdown</h1>
 <div class=lead>描述如何利用github的CI/CD实现自动更新站点。</div>
 <div class="pageinfo pageinfo-primary">
-<p>利用github actions和pages实现自动更新托管内容。</p>
+<p>利用github actions和pages实现自动更新托管内容，本站点已实现commit md后，自动更新<a href=https://xiaoping378.gitee.io/>码云page</a>和<a href=https://xiaoping378.github.io/>Github page</a>页面。</p>
 </div>
 <h2 id=项目仓库的名字由来>项目仓库的名字由来</h2>
 <p>本源码仓之所以起如此长的名字，完全是因为github pages的不成熟，不然会带个小尾巴：</p>
@@ -877,6 +888,8 @@ This is a warning with a title.
 <span style=color:#b8860b>bind_port</span> <span style=color:#666>=</span> <span style=color:#666>7380</span>
 <span style=color:#080;font-style:italic># 服务端与客户端建立连接的Token，两边保持一致即可</span>
 <span style=color:#b8860b>token</span> <span style=color:#666>=</span> PassWord
+<span style=color:#080;font-style:italic># 日志级别，默认的info，会打印很多被外网恶扫的连接信息</span>
+<span style=color:#b8860b>log_level</span> <span style=color:#666>=</span> warn
 </code></pre></div><p>启动：</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>frps -c /etc/frp/frps.ini
 </code></pre></div><h3 id=客户端>客户端</h3>
@@ -919,6 +932,98 @@ This is a warning with a title.
 </code></pre></div><p>如上执行，可通过红色框访问本地1080端口服务，如果是要代理SSH的话，需要执行<code>ngrok tcp 22 &</code>。
 <img src=/images/frp-2022-03-09-21-51-39.png alt></p>
 <p>值得注意的是，每次运行命令都会重新生成新的域名地址，要想固定域名的话，需要付费。</p>
+<h2 id=总结>总结</h2>
+<p>目前个人使用的方式，是利用frp建立ssh隧道，日常vscode远程开发，需要访问临时启动的服务的时候，利用ngrok随手启动即可访问到。</p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-4f5fb3b323a4d6abd7ca58c11b7add50>2.1.2 - 网络TCP/IP协议栈</h1>
+<div class=lead>介绍日常必备的网络基础</div>
+<p>.TODO</p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-77cb18303df0bc0c142fa72da4208b99>2.1.3 - 混合云网络SDN</h1>
+<div class=lead>目前云上的SDN网络已相对成熟，本文为初步介绍，未完...</div>
+<ul>
+<li>TODO.</li>
+</ul>
+<h3 id=为什么需要sdn>为什么需要SDN</h3>
+<ul>
+<li>网络可编程</li>
+<li>VPC（Virtual Private Cloud）</li>
+</ul>
+<h3 id=现有sdn方案>现有SDN方案</h3>
+<ul>
+<li>
+<p>硬件方案（软件定义，硬件实现）</p>
+<ul>
+<li>主流网络设备厂商有各自实现</li>
+</ul>
+</li>
+<li>
+<p>软件方案（NFV）</p>
+<ul>
+<li>VMWare NSX, Juniper OpenContrail, OpenStack DVR...</li>
+</ul>
+</li>
+</ul>
+<h3 id=业务需求>业务需求</h3>
+<ul>
+<li>用户网络隔离 - 多租户</li>
+<li>保证中等流量规模的高性能低延迟</li>
+<li>适应复杂异构的基础架构（混合云-- kubernetes，虚机，裸机）</li>
+<li>端点迁移，IP不变</li>
+<li>负载均衡（L2/L3）</li>
+<li>端到端流量精细ACL</li>
+<li>可API控制</li>
+<li>运维监控（包，字节流）</li>
+</ul>
+<h3 id=方案选型>方案选型</h3>
+<ul>
+<li>成本</li>
+<li>设备依赖</li>
+</ul>
+<h3 id=开源方案>开源方案</h3>
+<p>各开源SDN方案对比：</p>
+<ul>
+<li>
+<p>flannel vxlan:
+不具备网络隔离功能。</p>
+</li>
+<li>
+<p>OpenShift SDN:</p>
+<p>基于vxlan利用ovs-multienant可实现基于项目的网络隔离，和flannel vxlan相比，其使用的ovs-subnet插件，数据流场景大体一致，容器向外网发包也使用的NAT。</p>
+</li>
+<li>
+<p>Calico:</p>
+<p>支持混合云，安全加密，
+纯3层的路由实现保证了性能和低延迟
+支持了网络隔离和ACL
+但存在目前只支持TCP、UDP、ICMP、ICMPv6协议，四层协议不支持。</p>
+</li>
+<li>
+<p>OpenStack Neutron</p>
+<p>支持网络隔离
+性能和低延迟 -- 需要优化
+支持多租户
+基于ML2支持混合云方案 -- kubernetes的支持需要第三方的kubestack项目
+虚机迁移，IP可不变，容器迁移，IP不变 -- 需要开发
+支持负载均衡LBaaS
+支持精细级的ACL
+API ?
+可运维监控基本数据</p>
+</li>
+<li>
+<p>OpenContrail</p>
+<p><strong>完全满足我们的网络需求</strong>, 值得深入研究</p>
+<p>Juniper开源的SDN & NFV方案</p>
+<p>已经集成支持OpenStack, VMware, Docker 和 Kubernetes.</p>
+</li>
+</ul>
+<h3 id=各大厂商公开资料>各大厂商公开资料</h3>
+<ul>
+<li>网易蜂巢： VxLAN, 基于Openstack Neutron</li>
+<li>待补充...</li>
+</ul>
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-97bf608b6e526e294502be8ba550730b>2.2 - linux基础</h1>
@@ -1012,6 +1117,11 @@ ntpdate -u cn.pool.ntp.org
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl ipinfo.io
 </code></pre></div></li>
 </ul>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-69815f26ef19723bfea113c9f4d2d244>2.2.2 - 裁剪内核-BootLoader</h1>
+<div class=lead>记录定制化自己的linux内核和嵌入式硬件烧录引导的过程</div>
+<p>.TODO</p>
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-e97f0e656f5d2b291ee9f4302feeb241>3 - Dev|Ops</h1>
@@ -1663,9 +1773,13 @@ PML-EM实现了3个性质:</p>
 <li><a href=../openldap%E4%B9%8B%E6%8B%A8%E4%BA%91%E5%8E%BB%E6%97%A5>LDAP</a>：层级结构的实体权限管理：网络域权限管理...</li>
 </ul>
 </li>
-<li><em>RBAC（role-based access control）</em>：基于角色的权限控制，围绕角色和权限定义的策略中立的访问控制机制，和组ACL等价，具体表现为在用户和权限之间加了一层角色，先建立具有某种权限的角色，然后用角色和用户绑定，目前多用于业务系统内的权限管理，还支持支持角色权限继承。</li>
-<li><em>ABAC（Attribute-based access control）</em>：基于属性的权限控制，属性可以是用户侧（所属组织、访问IP、访问时间）或资源侧（帖子的评论开关、留言再编辑）的，因为用户或资源的属性是动态的，不像前面两个(需要预先定义好策略，略显死板,,,）被称为是“下一代”的权限模型。</li>
-<li><em>Restful</em>：一种Web API规范，常用GET, POST等动作来实现与后台交互。</li>
+<li><em>RBAC（role-based access control）</em>：基于角色的权限控制，围绕角色和权限定义的策略中立的访问控制机制，和组ACL等价，具体表现为在用户和权限之间加了一层角色，先建立具有某种权限的角色，然后用角色和用户绑定，目前多用于管控类业务系统的权限管理，还支持支持角色权限继承。</li>
+<li><em>ABAC（Attribute-based access control）</em>：基于属性的权限控制，属性可以是用户侧（所属组织、访问IP、访问时间）或资源侧（帖子的评论开关、留言再编辑）的，因为用户或资源的属性是动态的，不像前面两个(需要预先定义好策略，略显死板,,,）被称为是“下一代”的权限模型，可以实现更多元化的策略策略，比如
+<ul>
+<li>限制用户在什么固定时间段才可以编辑自己的帖子</li>
+<li>用户只能修改自己项目下的某些资源等</li>
+</ul>
+</li>
 </ul>
 <p>和Casbin结合，使用的基本示意图如下：</p>
 <p><img src=/images/Casbin-%E4%BD%BF%E7%94%A8%E7%A4%BA%E6%84%8F%E5%9B%BE.drawio.png alt></p>
@@ -1697,7 +1811,7 @@ Casbin -&gt; 其他服务: 权限合规，则跳转到用户请求的其他服�
 <p>实际场景中，用户可能被分配了多个权限（角色），那具体权限校验如下：
 <img src=/images/Casbin-2022-01-26-23-47-48.png alt></p>
 <p>既然是一种语言，就是有语法的，<a href=https://casbin.org/docs/zh-CN/syntax-for-models>PERM语法</a>至少要有四部分：<code>[request_definition], [policy_definition], [policy_effect], [matchers]</code>。
-具体就不展开介绍了，可自行官网祥读，effect部分具备SQL背景可能好理些,,,理解不了也没关系，目前就内置了5种：</p>
+具体就不展开介绍了，可自行官网详读，effect部分具备SQL背景可能好理些,,,理解不了也没关系，目前就内置了5种：</p>
 <table>
 <thead>
 <tr>
@@ -1735,7 +1849,7 @@ Casbin -&gt; 其他服务: 权限合规，则跳转到用户请求的其他服�
 </tbody>
 </table>
 <blockquote>
-<p>奉劝各位看官，既然是语法，就不要纠结里面的命名和写法，较真...人家就是这么定义的，知道能都有哪些写法就可以了...，实际使用中往往改动Macter的部分概率大些。</p>
+<p>奉劝各位看官，既然是语法，就不要纠结里面的命名和写法，较真...就是这么定义的，知道能都有哪些写法就可以了...，实际使用中往往改动Macter的部分。</p>
 </blockquote>
 <h2 id=按场景举例>按场景举例</h2>
 <h3 id=acl模型>ACL模型</h3>
@@ -1753,7 +1867,7 @@ Casbin -&gt; 其他服务: 权限合规，则跳转到用户请求的其他服�
 <p><img src=/images/Casbin-2022-01-27-16-31-44.png alt></p>
 <p>Macters里的<code>g(r.sub, p.sub, r.dom)</code> 将检查用户 r.sub 在域内 r.dom 是否具有角色 p.sub ，这是该匹配器的工作方式。</p>
 <h3 id=abac模型>ABAC模型</h3>
-<p>上图中RBAC中的Matcher如下修改，及实现了ABAC的模型校验。表明用户必须是要访问资源的<code>Owner</code>才可以操作符合角色权限内的资源。</p>
+<p>上图中RBAC中的Matcher如下修改，即实现了ABAC的模型校验。表明用户必须是被访问资源的<code>Owner</code>才可以操作符合角色权限内的资源。</p>
 <pre tabindex=0><code class=language-Conf data-lang=Conf>m = r.obj.Owner == r.sub &amp;&amp; (g(r.sub, p.sub, r.dom) &amp;&amp; r.dom == p.dom &amp;&amp; r.obj == p.obj &amp;&amp; r.act == p.act)
 </code></pre><h2 id=总结>总结</h2>
 <p>Casbin提供了非常灵活的权限校验模型，还提供了丰富的API，方便更便捷的实现业务场景功能, 后面会针对具体的项目开展更贴地气的解读。</p>
@@ -1761,9 +1875,7 @@ Casbin -&gt; 其他服务: 权限合规，则跳转到用户请求的其他服�
 <blockquote>
 <p><a href=https://casbin.org/docs/zh-CN/tutorials>https://casbin.org/docs/zh-CN/tutorials</a></p>
 </blockquote>
-<blockquote>
 <p>我的博客即将同步至腾讯云+社区，邀请大家一同入驻：https://cloud.tencent.com/developer/support-plan?invite_code=3ntkskjrcwow8</p>
-</blockquote>
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-e4c44f08a2c513a02fe3cb9aa2c655e0>3.9 - Windows Terminal终端入坑指南</h1>
@@ -2000,6 +2112,19 @@ TiDB_Server -&gt; 用户: 反馈写入成功
 <ul>
 <li>tidb server解析SQL语句 -> 从pd获取对应key的tikv节点信息 -></li>
 </ul>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-e8554b330512aff46f27fa776df9c1b2>3.11 - Golang单仓monorepo协作的设计与实践</h1>
+<div class=lead>介绍Golang单仓monorepo协作的设计与实践</div>
+<h2 id=什么是monorepo>什么是monorepo</h2>
+<p>多代码仓合一就是nomorepo，目前在前端领域比较火热，国外大厂如Google、Facebook、Microsoft内也在公司级采用此模式，国内的浮躁，是个项目就上微服务架构的现状，导致代码仓动辄就上几十个，感觉也适合此模式。这东西说起来简单，实际运转起来，需要相应的支撑工具，如代码仓管理、CI/CD适配等，本文主要设计一套可行的方案及记录实践关键过程。</p>
+<blockquote>
+<p>这里说下背景：为什么要研究这个，最近接手一个项目，发现团队积累几乎没有、需求响应进度慢、新成员接手难度大，另外该项目竟然有上百个仓库，哪些和线上正在运行的服务对应，也没有说明，，，相应的协作管理手段也薄弱，总之就是乱，。个人是信服<code>康威定律</code>（组织沟通方式会通过系统设计表达出来，反之亦成立）的，所以打算尝试下单仓的协作模式，一来可以梳理下以前的需求实现，二来促进组员交流沟通，制定些开发规范和统一框架之类的也好落地。</p>
+</blockquote>
+<h2 id=代码目录结构>代码目录结构</h2>
+<h2 id=codeowners机制>CODEOWNERS机制</h2>
+<h2 id=ci-cd机制>CI/CD机制</h2>
+<h2 id=工具实践-lighthouse>工具实践<code>Lighthouse</code></h2>
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-1737f808bd604b410f639c3e20a801ea>4 - 云原生</h1>
@@ -2485,8 +2610,15 @@ Serving HTTP on 0.0.0.0 port 8000 ...
 <p>master侧如果是单核的话，会因资源不足， dns安装失败。</p>
 </div>
 <div class=td-content style=page-break-before:always>
-<h1 id=pg-1592af4da4743e978bc3f2eba7c81eae>4.2.3 - k8s的各组件认知</h1>
-<div class=lead>主要介绍k8s中的各核心组件，未完...</div>
+<h1 id=pg-1592af4da4743e978bc3f2eba7c81eae>4.2.3 - k8s的各组件和特性扫盲</h1>
+<div class=lead>主要介绍k8s中的各核心组件和特性</div>
+<div class="pageinfo pageinfo-primary">
+<p>了解一个工具的特性可以从它的参数入手</p>
+</div>
+<h2 id=api-server>api-server</h2>
+<p>在k8s内发挥的网关和api</p>
+<p>CSR特性</p>
+<h2 id=网络>网络</h2>
 <h3 id=flannel>flannel</h3>
 <ul>
 <li>
@@ -3268,7 +3400,25 @@ gitlab-server   Ready    master   6m43s   v1.19.16+k3s1
 <p>TODO.</p>
 </div>
 <div class=td-content style=page-break-before:always>
-<h1 id=pg-8d71550d3ee2751c7f80b3cef9ae8232>4.2.9 - TKEStack all-in-one入坑指南</h1>
+<h1 id=pg-03baa014ac348ea7e2865ceaf8dacda4>4.2.9 - kubeshere 自研-01</h1>
+<div class=lead>自研系列文章整理。</div>
+<div class="pageinfo pageinfo-primary">
+<p>kubesphere 自研环境篇</p>
+</div>
+<h2 id=心态>心态</h2>
+<p>首先调整心态，这是一个新的生态，秉承学习的心态。</p>
+<h2 id=准备环境>准备环境</h2>
+<ul>
+<li>clone代码</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git clone https://github.com/kubesphere/kubesphere.git
+</code></pre></div><ul>
+<li>准备开发环境</li>
+</ul>
+<p><a href=https://github.com/kubesphere/community/blob/master/developer-guide/development/quickstart.md>启动快速开发环境</a></p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-8d71550d3ee2751c7f80b3cef9ae8232>4.2.10 - TKEStack all-in-one入坑指南</h1>
 <div class=lead>TkeStack的all-in-one安装、多租户和多集群管理功能解读。</div>
 <div class="pageinfo pageinfo-primary">
 <p>本文主要介绍当前最新版本TkeStack 1.8.1 的TKEStack的all-in-one安装、多租户和多集群管理功能解读。</p>
@@ -4555,92 +4705,171 @@ osm_cluster_network_cidr=10.128.0.0/10
 <p>未完搞 ...</p>
 </div>
 <div class=td-content style=page-break-before:always>
-<h1 id=pg-9b97802e4b9534134796bbfce8ffeaa3>4.4 - 混合云网络SDN</h1>
-<div class=lead>目前云上的SDN网络已相对成熟，本文为初步介绍，未完...</div>
-<ul>
-<li>TODO.</li>
-</ul>
-<h3 id=为什么需要sdn>为什么需要SDN</h3>
-<ul>
-<li>网络可编程</li>
-<li>VPC（Virtual Private Cloud）</li>
-</ul>
-<h3 id=现有sdn方案>现有SDN方案</h3>
-<ul>
-<li>
-<p>硬件方案（软件定义，硬件实现）</p>
-<ul>
-<li>主流网络设备厂商有各自实现</li>
-</ul>
-</li>
-<li>
-<p>软件方案（NFV）</p>
-<ul>
-<li>VMWare NSX, Juniper OpenContrail, OpenStack DVR...</li>
-</ul>
-</li>
-</ul>
-<h3 id=业务需求>业务需求</h3>
-<ul>
-<li>用户网络隔离 - 多租户</li>
-<li>保证中等流量规模的高性能低延迟</li>
-<li>适应复杂异构的基础架构（混合云-- kubernetes，虚机，裸机）</li>
-<li>端点迁移，IP不变</li>
-<li>负载均衡（L2/L3）</li>
-<li>端到端流量精细ACL</li>
-<li>可API控制</li>
-<li>运维监控（包，字节流）</li>
-</ul>
-<h3 id=方案选型>方案选型</h3>
-<ul>
-<li>成本</li>
-<li>设备依赖</li>
-</ul>
-<h3 id=开源方案>开源方案</h3>
-<p>各开源SDN方案对比：</p>
-<ul>
-<li>
-<p>flannel vxlan:
-不具备网络隔离功能。</p>
-</li>
-<li>
-<p>OpenShift SDN:</p>
-<p>基于vxlan利用ovs-multienant可实现基于项目的网络隔离，和flannel vxlan相比，其使用的ovs-subnet插件，数据流场景大体一致，容器向外网发包也使用的NAT。</p>
-</li>
-<li>
-<p>Calico:</p>
-<p>支持混合云，安全加密，
-纯3层的路由实现保证了性能和低延迟
-支持了网络隔离和ACL
-但存在目前只支持TCP、UDP、ICMP、ICMPv6协议，四层协议不支持。</p>
-</li>
-<li>
-<p>OpenStack Neutron</p>
-<p>支持网络隔离
-性能和低延迟 -- 需要优化
-支持多租户
-基于ML2支持混合云方案 -- kubernetes的支持需要第三方的kubestack项目
-虚机迁移，IP可不变，容器迁移，IP不变 -- 需要开发
-支持负载均衡LBaaS
-支持精细级的ACL
-API ?
-可运维监控基本数据</p>
-</li>
-<li>
-<p>OpenContrail</p>
-<p><strong>完全满足我们的网络需求</strong>, 值得深入研究</p>
-<p>Juniper开源的SDN & NFV方案</p>
-<p>已经集成支持OpenStack, VMware, Docker 和 Kubernetes.</p>
-</li>
-</ul>
-<h3 id=各大厂商公开资料>各大厂商公开资料</h3>
-<ul>
-<li>网易蜂巢： VxLAN, 基于Openstack Neutron</li>
-<li>待补充...</li>
-</ul>
+<h1 id=pg-db49329bdf5c268e489f2a3cc7cc78da>4.4 - Kubersphere</h1>
+<div class=lead>青云家的混合容器云管理平台，持续更新...</div>
+<div class="pageinfo pageinfo-primary">
+<p>主要记录介绍对kubersphere的架构认知和储备二次开发所必备的知识。</p>
+<p>本系列文章中会把kubesphere简说成KCP（Qingcloud kubernetes controller-manage platform）</p>
+</div>
 </div>
 <div class=td-content style=page-break-before:always>
-<h1 id=pg-e1249fd54f922b9832ed9ab695a6bbe4>4.5 - Vagrant实践整理</h1>
+<h1 id=pg-860749379d08e54cd43ce8d25912f35e>4.4.1 - 使用kind本地启动多集群</h1>
+<div class=lead>在本地利用kind搭建多个集群，验证多集群纳管...</div>
+<div class="pageinfo pageinfo-primary">
+<p>我本地4c/8G的小本儿，跑了两个集群，组建了多集群环境，还行，能玩动...</p>
+</div>
+<h2 id=环境篇>环境篇</h2>
+<ol>
+<li>
+<p>kind<a href=https://kind.sigs.k8s.io/docs/user/quick-start/>安装</a></p>
+</li>
+<li>
+<p>镜像准备</p>
+<p>视网络情况，可以把依赖镜像<code>kindest/node</code>提起pull到本地</p>
+</li>
+<li>
+<p>docker的data-root目录</p>
+<p>尽量不要放到/var目录下，kind起的集群容器会占用比较大的空间</p>
+</li>
+</ol>
+<h2 id=实操>实操</h2>
+<ol>
+<li>创建集群</li>
+</ol>
+<p>执行完如下命令后，docker ps可以看到本地启动了两个容器，一个容器对应一个集群。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kind create cluster --image kindest/node:v1.19.16 --name host
+kind create cluster --image kindest/node:v1.19.16 --name member
+</code></pre></div><p><code>kubectl config use-context [kind-host | kind-member]</code>，可以切换kubecl执行的上下文</p>
+<ol start=2>
+<li>安装kubesphere</li>
+</ol>
+<p>分别在两个集群各自安装ks组件</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#080;font-style:italic># 集群1安装</span>
+kubectl config use-context kind-host
+kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3.2.1/kubesphere-installer.yaml   
+kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3.2.1/cluster-configuration.yaml
+
+<span style=color:#080;font-style:italic># 集群2安装</span>
+kubectl config use-context kind-member
+kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3.2.1/kubesphere-installer.yaml   
+kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3.2.1/cluster-configuration.yaml
+</code></pre></div><ol start=3>
+<li>纳管集群</li>
+</ol>
+<p>可以在上面的初始化阶段直接改好主和成员集群的关系，这里参考<a href=https://kubesphere.com.cn/docs/multicluster-management/enable-multicluster/direct-connection/>官文</a>即可</p>
+<p>host集群的UI地址，可以通过容器IP+30880来访问，主集群的容器ip，可以如下获取：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker inspect --format <span style=color:#b44>&#39;{{ .NetworkSettings.Networks.kind.IPAddress }}&#39;</span> host-control-plane
+</code></pre></div><p>实操<code>添加</code>集群时，需要member集群的kubeconfig，可以用如下命令获取到</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kind get kubeconfig --name member
+</code></pre></div><p>记得把kubeconfig中的<code>server</code>地址中改成<code>member容器ip:6443</code>，这样host集群才能访问到member集群</p>
+<h2 id=总结>总结</h2>
+<p>验证功能、测试开发，挺方便的，可以视本地资源紧张情况停掉监控的ns。</p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-c79f030e7c908d1a1a3729cd2bf8e478>4.4.2 - Kubesphere的异地多活方案</h1>
+<div class=lead>混合容器云管理平台Kubesphere的异地多活方案...</div>
+<div class="pageinfo pageinfo-primary">
+<p>遇到这样一个场景，在同一套环境中需要存在多个host控制面集群...bulabula... 因此想探索下kubesphere的异地多活混合容器云管理方案</p>
+</div>
+<h2 id=集群角色介绍>集群角色介绍</h2>
+<p>一个兼容原生的k8s集群，可通过<code>ks-installer</code>来初始化完成安装，成为一个QKE集群。QKE集群分为多种角色，默认是none角色（standalone模式），开启多集群功能时，可以设置为host或者member角色。</p>
+<p><img src=/images/kcp-%E5%A4%9A%E9%9B%86%E7%BE%A4.png alt=多集群></p>
+<ul>
+<li>none角色，是最小化安装的默认模式，会安装必要的ks-apiserver, ks-controller-manager, ks-console和其他组件
+<ul>
+<li>ks-apiserver, kcp的API网关，包含审计、认证、权限校验等功能</li>
+<li>ks-controller, 各类自定义crd的控制器和平台管理逻辑的实现</li>
+<li>ks-console, 前端界面UI</li>
+<li>ks-installer, 初始化安装和变更QKE集群的工具，由shell-operator触发ansible-playbooks来工作。</li>
+</ul>
+</li>
+<li>member角色，承载工作负载的业务集群，和none模式的组件安装情况一致</li>
+<li>host角色，整个混合云管理平台的控制面，会在none的基础上，再额外安装tower，kubefed-controller-manager， kubefed-admission-webhook等组件
+<ul>
+<li>tower，代理业务集群通信的server端，常用于不能直连member集群api-server的情况</li>
+<li>kubefed-controller-manager，社区的<a href=https://github.com/kubernetes-sigs/kubefed>kubefed</a>联邦资源的控制器</li>
+<li>kubefed-admission-webhook， 社区的kubefed联邦资源的动态准入校验器</li>
+</ul>
+</li>
+</ul>
+<h2 id=多集群管理原理>多集群管理原理</h2>
+<p>上段提到QKE有3种角色，可通过修改<code>cc</code>配置文件的<code>clusterRole</code>来使能, ks-installer监听到配置变化的事件，会初始化对应多集群角色的功能。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl edit cc ks-installer -n kubesphere-system
+</code></pre></div><blockquote>
+<p>角色不要改来改去，会出现莫名问题，主要是背后ansible维护的逻辑有疏漏，没闭环</p>
+</blockquote>
+<h3 id=host集群>host集群</h3>
+<p>host角色的主集群会被创建25种联邦资源类型Kind，如下命令可查看，还会额外安装kubefed stack组件。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>➜  kubectl get FederatedTypeConfig  -A
+</code></pre></div><p>此外api-server被重启后，会根据配置内容的变化，做两件事，注册多集群相关的路由和缓存同步部分联邦资源。</p>
+<ul>
+<li>添加url里包含<code>clusters/{cluster}</code>路径的agent路由和转发的功能，要访问业务集群的信息，这样可以直接转发过去。</li>
+<li>cacheSync，缓存同步联邦资源，这里是个同步的操作。</li>
+</ul>
+<blockquote>
+<p>当开启多集群后，如果某个member出现异常导致不可通信，那host的api-server此时遇到故障要重启，会卡在cacheSync这一步，导致无法启动，进而整个平台无法访问。</p>
+</blockquote>
+<p>controller-manager被重启后，同样会根据配置的变化，把部分资源类型自动转化成联邦资源的逻辑，也就是说，在host集群创建的这部分资源会自动同步到所有成员集群，实际的多集群同步靠kubefed-controller-manager来执行。以下资源会被自动创建联邦资源下发：</p>
+<ul>
+<li>users.iam.kubesphere.io -> federatedusers.types.kubefed.io</li>
+<li>workspacetemplates.tenant.kubesphere.io -> federatedworkspaces.types.kubefed.io</li>
+<li>workspaceroles.iam.kubesphere.io -> federatedworkspaceroles.types.kubefed.io</li>
+<li>workspacerolebindings.iam.kubesphere.io -> federatedworkspacerolebindings.types.kubefed.io</li>
+</ul>
+<p>此外还会启动cluster、group和一些globalRole*相关资源的控制器逻辑，同上也会通过kubefed自动下发到所有集群，<code>clusters.cluster.kubesphere.io</code>资源除外。</p>
+<blockquote>
+<p>如果以上资源包含了<code>kubefed.io/managed: false</code>标签，kubefed就不会再做下发同步，而host集群下发完以上资源后，都会自动加上该标签，防止进入死循环</p>
+</blockquote>
+<h3 id=member集群>member集群</h3>
+<p>修改为member集群时，需要cc中的<strong>jwtSecret</strong>与host集群的保持一致(若该值为空的话，ks-installer默认会随机生成)，提取host集群的该值时，需要去cm里找，如下：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl -n kubesphere-system get cm kubesphere-config -o yaml | grep -v <span style=color:#b44>&#34;apiVersion&#34;</span> | grep jwtSecret
+</code></pre></div><blockquote>
+<p>jwtSecret要保持一致，主要是为了在host集群<strong>签发</strong>的用户token，在用户访问业务集群时token<strong>校验</strong>能通过。</p>
+</blockquote>
+<h3 id=添加集群>添加集群</h3>
+<p>本文只关注<code>直接连接</code>这种情况，当填好成员集群的kubeconfig信息，点击<code>添加</code>集群后,会做如下校验：</p>
+<ul>
+<li>通过kubeconfig信息先校验下是否会添加已存在的重复集群</li>
+<li>校验成员集群的网络连通性</li>
+<li>校验成员集群是否安装了ks-apiserver</li>
+<li>校验成员集群的<code>jwtSecret</code>是否和主集群的一致</li>
+</ul>
+<blockquote>
+<p>写稿时，此处有个问题，需要修复，如果kubeconfig使用了<code>insecure-skip-tls-verify: true</code>会导致该集群添加失败，经定位主要是kubefed 空指针panic了，后续有时间我会去fix一下。</p>
+</blockquote>
+<p>校验完必要信息后，就执行实质动作<code>joinFederation</code>加入联邦，kubesphere多集群纳管，实质上组成联邦集群:</p>
+<ul>
+<li>在成员集群创建ns kube-federation-system</li>
+<li>在上面的命名空间中创建serviceAccount [clusterName]-kubesphere, 并绑定最高权限</li>
+<li>在主集群的kube-federation-system的命名空间创建<code>kubefedclusters.core.kubefed.io</code>，由kubefed stack驱动联邦的建立</li>
+<li>加入联邦后，主机群的联邦资源会通过kubefed stack同步过来</li>
+</ul>
+<blockquote>
+<p>上述一顿操作，等效于 <code>kubefedctl join member-cluster --cluster-context member-cluster --host-cluster-context host-cluster</code></p>
+</blockquote>
+<h2 id=异地多活方案设计>异地多活方案设计</h2>
+<p>异地多活的方案主要是多个主集群能同时存在，且保证数据同步，经过上面的原理分析，可知多个主集群是可以同时存在的，也就是一个成员集群要和多个主集群组成联邦，示意图如下：</p>
+<p><img src=/images/kcp-multi-hostclusters.png alt></p>
+<p>开始实操！</p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-1d949ee52eaaed1383ba6bd02be6695c>4.5 - KVM和Libvirt的实践整理</h1>
+<div class=lead>介绍KVM和Libvirt在ubuntu16.04的实践整理。</div>
+<h2 id=介绍>介绍</h2>
+<p>此前一直用Virtualbox操作虚机的东西，对于个人搭建环境还是显的有些笨重，不能实现Iac的目标，故尝试了Vagrant和Libvirt，综合考虑我选择libvirt继续深入下去，也是希望以后有机会可以深入搞下openstack的nova组件。</p>
+<h2 id=安装必要依赖>安装必要依赖</h2>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>sudo apt install bridge-utils qemu-kvm virtinst -y
+</code></pre></div><ul>
+<li>qemu-kvm: 这个负责hypervisor层和仿真器（可以模拟x86, arm体系）.</li>
+<li>virtinst: 安装和管理虚机的命令行工具</li>
+<li>bridge-utils： 创建和管理bridge网络</li>
+</ul>
+<p>安装完输入<code>kvm-ok</code>查看是否安装OK，另外还<code>需要重启</code>以使kvm和libvirt daemon启动。</p>
+<h2 id=配置网络>配置网络</h2>
+<p>未完。。。</p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-e1249fd54f922b9832ed9ab695a6bbe4>4.6 - Vagrant实践整理</h1>
 <div class=lead>介绍Vagrant的实践整理。</div>
 <p>很早就听说vagrant的大名，是个创建和管理虚机环境的工具，但一直没有机会实践下，近日我的VirtuablBox让我搞砸了，决定试用下，便于快速搭建各种环境。</p>
 <h2 id=安装vagrant>安装vagrant</h2>
@@ -4692,22 +4921,6 @@ Bringing machine <span style=color:#b44>&#39;default&#39;</span> up with <span s
 <ul>
 <li><a href=https://github.com/astaxie/go-best-practice/blob/master/ebook/zh/01.2.md>https://github.com/astaxie/go-best-practice/blob/master/ebook/zh/01.2.md</a></li>
 </ul>
-</div>
-<div class=td-content style=page-break-before:always>
-<h1 id=pg-1d949ee52eaaed1383ba6bd02be6695c>4.6 - KVM和Libvirt的实践整理</h1>
-<div class=lead>介绍KVM和Libvirt在ubuntu16.04的实践整理。</div>
-<h2 id=介绍>介绍</h2>
-<p>此前一直用Virtualbox操作虚机的东西，对于个人搭建环境还是显的有些笨重，不能实现Iac的目标，故尝试了Vagrant和Libvirt，综合考虑我选择libvirt继续深入下去，也是希望以后有机会可以深入搞下openstack的nova组件。</p>
-<h2 id=安装必要依赖>安装必要依赖</h2>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>sudo apt install bridge-utils qemu-kvm virtinst -y
-</code></pre></div><ul>
-<li>qemu-kvm: 这个负责hypervisor层和仿真器（可以模拟x86, arm体系）.</li>
-<li>virtinst: 安装和管理虚机的命令行工具</li>
-<li>bridge-utils： 创建和管理bridge网络</li>
-</ul>
-<p>安装完输入<code>kvm-ok</code>查看是否安装OK，另外还<code>需要重启</code>以使kvm和libvirt daemon启动。</p>
-<h2 id=配置网络>配置网络</h2>
-<p>未完。。。</p>
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-6e7f79285674a5f225b4c9c21b735285>4.7 - 解读Consul</h1>
