@@ -13,11 +13,11 @@
 ">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://xiaoping378.gitee.io/docs/4-cloud/kubesphere/multihosts/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2022-05-20T20:45:57+08:00"><meta property="og:site_name" content="现代技能栈">
+<meta property="article:modified_time" content="2022-05-20T21:03:59+08:00"><meta property="og:site_name" content="现代技能栈">
 <meta itemprop=name content="论Kubesphere的异地多活方案">
 <meta itemprop=description content="混合容器云管理平台Kubesphere的异地多活方案... 
 ">
-<meta itemprop=dateModified content="2022-05-20T20:45:57+08:00">
+<meta itemprop=dateModified content="2022-05-20T21:03:59+08:00">
 <meta itemprop=wordCount content="182">
 <meta itemprop=keywords content="k8s,"><meta name=twitter:card content="summary">
 <meta name=twitter:title content="论Kubesphere的异地多活方案">
@@ -52,7 +52,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.915087532020482936630e061d54a96e.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.7be96b374cb7ce076722c2616916aeef.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -62,7 +62,7 @@
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.915087532020482936630e061d54a96e.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.7be96b374cb7ce076722c2616916aeef.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -517,7 +517,7 @@
 <p>上述一顿操作，等效于 <code>kubefedctl join member-cluster --cluster-context member-cluster --host-cluster-context host-cluster</code></p>
 </blockquote>
 <h2 id=异地多活方案设计>异地多活方案设计</h2>
-<p>异地多活的方案主要是多个主集群能同时存在，且保证数据双向同步，经过上面的原理分析，可知多个主集群是可以同时存在的，也就是一个成员集群要和多个主集群组成联邦，示意图如下：</p>
+<p>异地多活的方案主要是多个主集群能同时存在，且保证数据双向同步，经过上面的原理分析，可知多个主集群是可以同时存在的，也就是一个成员集群可以和多个主集群组成联邦。整体方案示意图设计如下：</p>
 <p><img src=/images/kcp-multi-hostclusters.png alt></p>
 <blockquote>
 <p>以下操作假设本地已具备三个QKE集群，如果不具备的可按照<a href=/docs/4-cloud/kubesphere/kind-multicluster-dev/>此处</a>搭建<code>host、host2、member</code>3个集群</p>
@@ -564,7 +564,7 @@ xxp3    61m
 <p>后来调研发现：目前的社区方案make-mirror只支持单向同步，适用用来做灾备方案。</p>
 <p>所以双活，除非具备跨AZ的etcd集群。</p>
 <div class="text-muted mt-5 pt-3 border-top">
-最后修改 May 20, 2022: <a href=https://github.com/xiaoping378/xiaoping378.github.io/commit/3a56a26c58b8b395e9e1a3478db4fdf9fd8ed3c0>kubespere 双活2 (3a56a26)</a>
+最后修改 May 20, 2022: <a href=https://github.com/xiaoping378/xiaoping378.github.io/commit/f856bc9cad379e45135e0bcf9925c6fe77484772>kubespere 双活 minor (f856bc9)</a>
 </div>
 </div>
 </main>

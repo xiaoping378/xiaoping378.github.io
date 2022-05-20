@@ -2122,7 +2122,7 @@ kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3
 &lt;p>上述一顿操作，等效于 &lt;code>kubefedctl join member-cluster --cluster-context member-cluster --host-cluster-context host-cluster&lt;/code>&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="异地多活方案设计">异地多活方案设计&lt;/h2>
-&lt;p>异地多活的方案主要是多个主集群能同时存在，且保证数据双向同步，经过上面的原理分析，可知多个主集群是可以同时存在的，也就是一个成员集群要和多个主集群组成联邦，示意图如下：&lt;/p>
+&lt;p>异地多活的方案主要是多个主集群能同时存在，且保证数据双向同步，经过上面的原理分析，可知多个主集群是可以同时存在的，也就是一个成员集群可以和多个主集群组成联邦。整体方案示意图设计如下：&lt;/p>
 &lt;p>&lt;img src="https://xiaoping378.gitee.io/images/kcp-multi-hostclusters.png" alt="">&lt;/p>
 &lt;blockquote>
 &lt;p>以下操作假设本地已具备三个QKE集群，如果不具备的可按照&lt;a href="https://xiaoping378.gitee.io/docs/4-cloud/kubesphere/kind-multicluster-dev/">此处&lt;/a>搭建&lt;code>host、host2、member&lt;/code>3个集群&lt;/p>

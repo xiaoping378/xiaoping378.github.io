@@ -54,7 +54,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.915087532020482936630e061d54a96e.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.7be96b374cb7ce076722c2616916aeef.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -4849,7 +4849,7 @@ kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3
 <p>上述一顿操作，等效于 <code>kubefedctl join member-cluster --cluster-context member-cluster --host-cluster-context host-cluster</code></p>
 </blockquote>
 <h2 id=异地多活方案设计>异地多活方案设计</h2>
-<p>异地多活的方案主要是多个主集群能同时存在，且保证数据双向同步，经过上面的原理分析，可知多个主集群是可以同时存在的，也就是一个成员集群要和多个主集群组成联邦，示意图如下：</p>
+<p>异地多活的方案主要是多个主集群能同时存在，且保证数据双向同步，经过上面的原理分析，可知多个主集群是可以同时存在的，也就是一个成员集群可以和多个主集群组成联邦。整体方案示意图设计如下：</p>
 <p><img src=/images/kcp-multi-hostclusters.png alt></p>
 <blockquote>
 <p>以下操作假设本地已具备三个QKE集群，如果不具备的可按照<a href=/docs/4-cloud/kubesphere/kind-multicluster-dev/>此处</a>搭建<code>host、host2、member</code>3个集群</p>
