@@ -50,7 +50,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.c677633ec58ce3a9a9b81b07aac54f38.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.f986aba0ccd28c1250cccf746a1cc7fd.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -2887,7 +2887,7 @@ xxp3    61m
 <h3 id=总结>总结</h3>
 <p>两个主集群可以同时工作，一旦出现同名冲突资源，处理起来会非常非常麻烦，当背后的ownerRef关联资源也出现异常时，往往问题点隐藏的更深，修复起来也棘手...</p>
 <p>后来调研发现：目前的社区方案make-mirror只支持单向同步，适用用来做灾备方案。</p>
-<p>所以容器云平台的双活，除非具备跨AZ的etcd集群，否则需要花相应的成本来研发支持了。我最开始要考虑的问题答案也就显而易见了：如果实在要多个host集群共存，可以考虑通过行政管理手段，尽量避免同名资源冲突。</p>
+<p>所以容器云平台的双活，除非具备跨AZ的etcd集群，否则需要二次开发改造类make-mirror方案来支持了。我最开始要考虑的问题答案也就显而易见了：如果要多个host集群共存，必须考虑通过行政管理手段，来尽量避免同名资源冲突。</p>
 </div>
 <div class=td-content style=page-break-before:always>
 <h1 id=pg-1d949ee52eaaed1383ba6bd02be6695c>5 - KVM和Libvirt的实践整理</h1>
