@@ -50,7 +50,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.f986aba0ccd28c1250cccf746a1cc7fd.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.038a5703439f59d7a7d484b82c086b4d.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -2845,7 +2845,7 @@ kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3
 <p>异地多活的方案主要是多个主集群能同时存在，且保证数据双向同步，经过上面的原理分析，可知多个主集群是可以同时存在的，也就是一个成员集群可以和多个主集群组成联邦。整体方案示意图设计如下：</p>
 <p><img src=/images/kcp-multi-hostclusters.png alt></p>
 <blockquote>
-<p>以下操作假设本地已具备三个QKE集群，如果不具备的可按照<a href=/docs/4-cloud/kubesphere/kind-multicluster-dev/>此处</a>搭建<code>host、host2、member</code>3个集群</p>
+<p>以下操作假设本地已具备三个QKE集群，如果不具备的可按照<a href=/docs/4-cloud/kubesphere/kind-multicluster-dev/>此处</a>快速搭建<code>host、host2、member</code>3个集群</p>
 </blockquote>
 <p>大致实现逻辑的前提介绍：</p>
 <ol>
@@ -2865,14 +2865,13 @@ xxp    xxp-2@163.com   Active
 xxp    xxp@163.com    Active
 xxp    xxp-2@163.com   Active
 
-...
-
+... 周而复始 ...
 </code></pre></div><p>这个实验，即使在创建用户时，页面表单上两边信息填的都一样，也会出现互相刷新覆盖的情况，因为yaml里的uid和time信息不一致</p>
 <p><strong>实验2：</strong></p>
-<p>在两边添加一个同名用户，但两边用户信息（用户角色）不一致，可以创建成功，但后创建者kube-federa会同步失败, 到这里还能接受，毕竟有冲突直接就同步失败了</p>
-<p>但member集群上该用户的关联角色信息会出现上文的情况，被两边的主集群反复修改...</p>
+<p>在两边添加一个同名用户，但两边用户信息（用户角色）不一致，可以创建成功，但后创建者的kube-federa会同步失败, 到这里还能接受，毕竟有冲突直接就同步失败了</p>
+<p>但member集群上该用户的关联角色会出现上文的情况，被两边的主集群持续反复地修改...</p>
 <p><strong>实验3：</strong></p>
-<p>在一侧的主集群上尝试修复冲突资源，采取删除有冲突的用户资源的操作，可以删除成功，但会出现联邦资源删失败的情况</p>
+<p>在一侧的主集群上尝试修复冲突资源，即删除有冲突的用户资源，可以删除成功，但对应的联邦资源会出现删失败的情况</p>
 <pre tabindex=0><code>➜  ~ kubectl get users.iam.kubesphere.io
 NAME    EMAIL                 STATUS
 admin   admin@kubesphere.io   Active
@@ -2881,12 +2880,12 @@ xxp3    xxp3@163.com          Active
 ➜  ~ kubectl get federatedusers.types.kubefed.io
 NAME    AGE
 admin   5h33m
-xxp     65m #这里是个正在删除的资源
+xxp     65m #这里是个删不掉的资源，fed controller会重复做失败尝试
 xxp3    61m
-</code></pre><p>这样就会出现，两个主集群：一个要删，一个要同步，member集群上：上演“一会儿消失，一会儿又出现了”的奇观。</p>
+</code></pre><p>这样就会出现，两个主集群：一个要删，一个要同步，member集群上：持续上演“一会儿消失，一会儿又出现了”的奇观。</p>
 <h3 id=总结>总结</h3>
-<p>两个主集群可以同时工作，一旦出现同名冲突资源，处理起来会非常非常麻烦，当背后的ownerRef关联资源也出现异常时，往往问题点隐藏的更深，修复起来也棘手...</p>
-<p>后来调研发现：目前的社区方案make-mirror只支持单向同步，适用用来做灾备方案。</p>
+<p>两个主集群可以同时工作，一旦出现同名冲突资源，处理起来会非常麻烦，尤其是背后的Dependent附属资源出现冲突时，往往问题点隐藏的更深，修复起来也棘手...</p>
+<p>后来调研也发现：目前的社区方案make-mirror只支持单向同步，适合用来做灾备方案。</p>
 <p>所以容器云平台的双活，除非具备跨AZ的etcd集群，否则需要二次开发改造类make-mirror方案来支持了。我最开始要考虑的问题答案也就显而易见了：如果要多个host集群共存，必须考虑通过行政管理手段，来尽量避免同名资源冲突。</p>
 </div>
 <div class=td-content style=page-break-before:always>
