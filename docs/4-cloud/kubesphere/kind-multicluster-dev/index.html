@@ -13,12 +13,12 @@
 ">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://xiaoping378.gitee.io/docs/4-cloud/kubesphere/kind-multicluster-dev/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2022-05-20T10:43:31+08:00"><meta property="og:site_name" content="现代技能栈">
+<meta property="article:modified_time" content="2022-05-20T20:35:31+08:00"><meta property="og:site_name" content="现代技能栈">
 <meta itemprop=name content="使用kind本地启动多集群">
 <meta itemprop=description content="在本地利用kind搭建多个集群，验证多集群纳管... 
 ">
-<meta itemprop=dateModified content="2022-05-20T10:43:31+08:00">
-<meta itemprop=wordCount content="80">
+<meta itemprop=dateModified content="2022-05-20T20:35:31+08:00">
+<meta itemprop=wordCount content="81">
 <meta itemprop=keywords content="k8s,"><meta name=twitter:card content="summary">
 <meta name=twitter:title content="使用kind本地启动多集群">
 <meta name=twitter:description content="在本地利用kind搭建多个集群，验证多集群纳管... 
@@ -52,7 +52,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.a129186848b960d9f9fa11c31b246c7f.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.e77579ee1fd5ba0bd3f60936ebbb94a2.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -62,7 +62,7 @@
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.a129186848b960d9f9fa11c31b246c7f.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.e77579ee1fd5ba0bd3f60936ebbb94a2.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -288,7 +288,7 @@
 <label for=m-docs-4-cloud-kubesphere-kind-multicluster-dev-check><a href=/docs/4-cloud/kubesphere/kind-multicluster-dev/ title=使用kind本地启动多集群 class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-kubesphere-kind-multicluster-dev><span class=td-sidebar-nav-active-item>kind本地启动多集群</span></a></label>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-kubesphere-multihosts-li>
 <input type=checkbox id=m-docs-4-cloud-kubesphere-multihosts-check>
-<label for=m-docs-4-cloud-kubesphere-multihosts-check><a href=/docs/4-cloud/kubesphere/multihosts/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-kubesphere-multihosts><span>Kubesphere的异地多活方案</span></a></label>
+<label for=m-docs-4-cloud-kubesphere-multihosts-check><a href=/docs/4-cloud/kubesphere/multihosts/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-kubesphere-multihosts><span>论Kubesphere的异地多活方案</span></a></label>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-kvm-virsh-e5-ae-9e-e8-b7-b5-e6-95-b4-e7-90-86-li>
@@ -461,15 +461,16 @@ kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3
 <li>纳管集群</li>
 </ol>
 <p>可以在上面的初始化阶段直接改好主和成员集群的关系，这里参考<a href=https://kubesphere.com.cn/docs/multicluster-management/enable-multicluster/direct-connection/>官文</a>即可</p>
-<p>host集群的UI地址，可以通过容器IP+30880来访问，主集群的容器ip，可以如下获取：</p>
+<p>host集群的UI地址，可以通过<code>host容器IP:30880</code>来访问，主集群的容器ip，可以如下获取：</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker inspect --format <span style=color:#b44>&#39;{{ .NetworkSettings.Networks.kind.IPAddress }}&#39;</span> host-control-plane
 </code></pre></div><p>实操<code>添加</code>集群时，需要member集群的kubeconfig，可以用如下命令获取到</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kind get kubeconfig --name member
 </code></pre></div><p>记得把kubeconfig中的<code>server</code>地址中改成<code>member容器ip:6443</code>，这样host集群才能访问到member集群</p>
 <h2 id=总结>总结</h2>
 <p>验证功能、测试开发，挺方便的，可以视本地资源紧张情况停掉监控的ns。</p>
+<p>现在kind启动的集群默认使用了containerd的runtime，若想进一步调试查看集群内的情况，可以内部集成的<code>crictl</code>代替熟悉的docker工具。</p>
 <div class="text-muted mt-5 pt-3 border-top">
-最后修改 May 20, 2022: <a href=https://github.com/xiaoping378/xiaoping378.github.io/commit/23363f270762a2b66577b4bf7fd0e6e60c3a7cf5>kind && kubesphere (23363f2)</a>
+最后修改 May 20, 2022: <a href=https://github.com/xiaoping378/xiaoping378.github.io/commit/05f92554895e5af477810071479f676673db1a10>kubespere 双活 (05f9255)</a>
 </div>
 </div>
 </main>

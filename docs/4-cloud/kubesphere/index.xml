@@ -40,13 +40,14 @@ kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3
 &lt;li>纳管集群&lt;/li>
 &lt;/ol>
 &lt;p>可以在上面的初始化阶段直接改好主和成员集群的关系，这里参考&lt;a href="https://kubesphere.com.cn/docs/multicluster-management/enable-multicluster/direct-connection/">官文&lt;/a>即可&lt;/p>
-&lt;p>host集群的UI地址，可以通过容器IP+30880来访问，主集群的容器ip，可以如下获取：&lt;/p>
+&lt;p>host集群的UI地址，可以通过&lt;code>host容器IP:30880&lt;/code>来访问，主集群的容器ip，可以如下获取：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">docker inspect --format &lt;span style="color:#b44">&amp;#39;{{ .NetworkSettings.Networks.kind.IPAddress }}&amp;#39;&lt;/span> host-control-plane
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>实操&lt;code>添加&lt;/code>集群时，需要member集群的kubeconfig，可以用如下命令获取到&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">kind get kubeconfig --name member
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>记得把kubeconfig中的&lt;code>server&lt;/code>地址中改成&lt;code>member容器ip:6443&lt;/code>，这样host集群才能访问到member集群&lt;/p>
 &lt;h2 id="总结">总结&lt;/h2>
-&lt;p>验证功能、测试开发，挺方便的，可以视本地资源紧张情况停掉监控的ns。&lt;/p></description></item><item><title>Docs: Kubesphere的异地多活方案</title><link>https://xiaoping378.gitee.io/docs/4-cloud/kubesphere/multihosts/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.gitee.io/docs/4-cloud/kubesphere/multihosts/</guid><description>
+&lt;p>验证功能、测试开发，挺方便的，可以视本地资源紧张情况停掉监控的ns。&lt;/p>
+&lt;p>现在kind启动的集群默认使用了containerd的runtime，若想进一步调试查看集群内的情况，可以内部集成的&lt;code>crictl&lt;/code>代替熟悉的docker工具。&lt;/p></description></item><item><title>Docs: 论Kubesphere的异地多活方案</title><link>https://xiaoping378.gitee.io/docs/4-cloud/kubesphere/multihosts/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.gitee.io/docs/4-cloud/kubesphere/multihosts/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
 &lt;p>遇到这样一个场景，在同一套环境中需要存在多个host控制面集群...bulabula... 因此想探索下kubesphere的异地多活混合容器云管理方案&lt;/p>
 &lt;/div>
@@ -72,7 +73,7 @@ kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3
 &lt;/li>
 &lt;/ul>
 &lt;h2 id="多集群管理原理">多集群管理原理&lt;/h2>
-&lt;p>上段提到QKE有3种角色，可通过修改&lt;code>cc&lt;/code>配置文件的&lt;code>clusterRole&lt;/code>来使能, ks-installer监听到配置变化的事件，会初始化对应多集群角色的功能。&lt;/p>
+&lt;p>上段提到QKE有3种角色，可通过修改&lt;code>cc&lt;/code>配置文件的&lt;code>clusterRole&lt;/code>来使能, ks-installer监听到配置变化的事件，会初始化对应集群角色的功能。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">kubectl edit cc ks-installer -n kubesphere-system
 &lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
 &lt;p>角色不要改来改去，会出现莫名问题，主要是背后ansible维护的逻辑有疏漏，没闭环&lt;/p>
@@ -116,7 +117,7 @@ kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3
 &lt;blockquote>
 &lt;p>写稿时，此处有个问题，需要修复，如果kubeconfig使用了&lt;code>insecure-skip-tls-verify: true&lt;/code>会导致该集群添加失败，经定位主要是kubefed 空指针panic了，后续有时间我会去fix一下。&lt;/p>
 &lt;/blockquote>
-&lt;p>校验完必要信息后，就执行实质动作&lt;code>joinFederation&lt;/code>加入联邦，kubesphere多集群纳管，实质上组成联邦集群:&lt;/p>
+&lt;p>校验完必要信息后，就执行实质动作&lt;code>joinFederation&lt;/code>加入联邦，kubesphere多集群纳管，实质上是先组成联邦集群:&lt;/p>
 &lt;ul>
 &lt;li>在成员集群创建ns kube-federation-system&lt;/li>
 &lt;li>在上面的命名空间中创建serviceAccount [clusterName]-kubesphere, 并绑定最高权限&lt;/li>
@@ -127,6 +128,46 @@ kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3
 &lt;p>上述一顿操作，等效于 &lt;code>kubefedctl join member-cluster --cluster-context member-cluster --host-cluster-context host-cluster&lt;/code>&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="异地多活方案设计">异地多活方案设计&lt;/h2>
-&lt;p>异地多活的方案主要是多个主集群能同时存在，且保证数据同步，经过上面的原理分析，可知多个主集群是可以同时存在的，也就是一个成员集群要和多个主集群组成联邦，示意图如下：&lt;/p>
+&lt;p>异地多活的方案主要是多个主集群能同时存在，且保证数据双向同步，经过上面的原理分析，可知多个主集群是可以同时存在的，也就是一个成员集群要和多个主集群组成联邦，示意图如下：&lt;/p>
 &lt;p>&lt;img src="https://xiaoping378.gitee.io/images/kcp-multi-hostclusters.png" alt="">&lt;/p>
-&lt;p>开始实操！&lt;/p></description></item></channel></rss>
+&lt;blockquote>
+&lt;p>以下操作假设本地以具备三个QKE集群，如果不具备的可按照&lt;a href="https://xiaoping378.gitee.io/docs/4-cloud/kubesphere/kind-multicluster-dev/">此处&lt;/a>搭建&lt;code>host、host2、member&lt;/code>3个集群&lt;/p>
+&lt;/blockquote>
+&lt;p>大致实现逻辑的前提介绍：&lt;/p>
+&lt;ol>
+&lt;li>三个集群的&lt;code>jwtSecret&lt;/code>得保持一致&lt;/li>
+&lt;li>两个主集群都去&lt;code>添加&lt;/code>纳管同一个member集群&lt;/li>
+&lt;li>利用&lt;code>etcdctl make-mirror&lt;/code>实现双向同步（需改造，目前社区版仅支持单向同步）&lt;/li>
+&lt;/ol>
+&lt;h3 id="验证下可行性">验证下可行性&lt;/h3>
+&lt;p>实操前先验证下可行性&lt;/p>
+&lt;p>&lt;strong>实验1：&lt;/strong>&lt;/p>
+&lt;p>在两边创建一个同名用户，用户所有信息一致，可以添加成功，然后再修改一边的用户信息，使两边不一致&lt;/p>
+&lt;p>可以看到member集群的用户xxp，一直会被两边不断的更新...&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">root@member-control-plane:/# kubectl get user xxp -w
+NAME EMAIL STATUS
+xxp xxp@163.com Active
+xxp xxp-2@163.com Active
+xxp xxp@163.com Active
+xxp xxp-2@163.com Active
+...
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>这个实验，即使在创建用户时，页面表单上两边信息填的都一样，也会出现互相刷新覆盖的情况，因为yaml里的uid和time信息不一致&lt;/p>
+&lt;p>&lt;strong>实验2：&lt;/strong>&lt;/p>
+&lt;p>在两边添加一个同名用户，但两边用户信息（用户角色）不一致，可以创建成功，但后创建者kube-federa会同步失败, 到这里还能接受，毕竟有冲突直接就同步失败了&lt;/p>
+&lt;p>但member集群上该用户的关联角色信息会出现上文的情况，被两边的主集群反复修改...&lt;/p>
+&lt;p>&lt;strong>实验3：&lt;/strong>&lt;/p>
+&lt;p>在一侧的主集群上尝试修复冲突资源，采取删除有冲突的用户资源的操作，可以删除成功，但会出现联邦资源删失败的情况&lt;/p>
+&lt;pre tabindex="0">&lt;code>➜ ~ kubectl get users.iam.kubesphere.io
+NAME EMAIL STATUS
+admin admin@kubesphere.io Active
+xxp3 xxp3@163.com Active
+➜ ~
+➜ ~ kubectl get federatedusers.types.kubefed.io
+NAME AGE
+admin 5h33m
+xxp 65m # 这里是个正在删除的动作的资源
+xxp3 61m
+&lt;/code>&lt;/pre>&lt;p>这样就会出现，两个主集群：一个要删，一个要同步，member集群上：上演“一会儿消失，一会儿又出现了”的奇观。&lt;/p>
+&lt;h3 id="总结">总结&lt;/h3>
+&lt;p>两个主集群同时工作，一旦出现同名冲突资源，处理起来会非常非常麻烦，当背后的ownerRef关联资源也出现异常时，往往问题点隐藏的更深，修复起来就棘手...&lt;/p>
+&lt;p>双活，除非具备跨AZ的etcd集群，不然目前的社区方案 make-mirror只支持单向同步，适用用来做灾备方案。&lt;/p></description></item></channel></rss>
