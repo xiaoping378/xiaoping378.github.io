@@ -50,7 +50,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.2e4493fb40bc730b36b40ccf0e74dcbd.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.a129186848b960d9f9fa11c31b246c7f.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -72,13 +72,14 @@
 <ul>
 <li>1: <a href=#pg-f4385dd84140bf058c6b2a60389b58bb>源码部署K8S</a></li>
 <li>2: <a href=#pg-eac7def2dc8112b0573f9105edb534f5>离线安装kubernetes</a></li>
-<li>3: <a href=#pg-1592af4da4743e978bc3f2eba7c81eae>k8s的各组件认知</a></li>
+<li>3: <a href=#pg-1592af4da4743e978bc3f2eba7c81eae>k8s的各组件和特性扫盲</a></li>
 <li>4: <a href=#pg-a2415cefef7c5296c0a415526765a948>Helm模板介绍</a></li>
 <li>5: <a href=#pg-b781642b41630a327a3a5151285908a0>k8s的监控方案</a></li>
 <li>6: <a href=#pg-e7d513396d808a4808b498da552726e0>配置harbor默认https访问</a></li>
 <li>7: <a href=#pg-9defb3943138a8ddf6afc76610480f39>DEIS 开源PAAS平台实践</a></li>
 <li>8: <a href=#pg-e3c9486bfc693b58c1c315d2c7cde322>k3s实践-01</a></li>
-<li>9: <a href=#pg-8d71550d3ee2751c7f80b3cef9ae8232>TKEStack all-in-one入坑指南</a></li>
+<li>9: <a href=#pg-03baa014ac348ea7e2865ceaf8dacda4>kubeshere 自研-01</a></li>
+<li>10: <a href=#pg-8d71550d3ee2751c7f80b3cef9ae8232>TKEStack all-in-one入坑指南</a></li>
 </ul>
 <div class=content>
 <div class="pageinfo pageinfo-primary">
@@ -148,8 +149,15 @@ Serving HTTP on 0.0.0.0 port 8000 ...
 <p>master侧如果是单核的话，会因资源不足， dns安装失败。</p>
 </div>
 <div class=td-content style=page-break-before:always>
-<h1 id=pg-1592af4da4743e978bc3f2eba7c81eae>3 - k8s的各组件认知</h1>
-<div class=lead>主要介绍k8s中的各核心组件，未完...</div>
+<h1 id=pg-1592af4da4743e978bc3f2eba7c81eae>3 - k8s的各组件和特性扫盲</h1>
+<div class=lead>主要介绍k8s中的各核心组件和特性</div>
+<div class="pageinfo pageinfo-primary">
+<p>了解一个工具的特性可以从它的参数入手</p>
+</div>
+<h2 id=api-server>api-server</h2>
+<p>在k8s内发挥的网关和api</p>
+<p>CSR特性</p>
+<h2 id=网络>网络</h2>
 <h3 id=flannel>flannel</h3>
 <ul>
 <li>
@@ -931,7 +939,25 @@ gitlab-server   Ready    master   6m43s   v1.19.16+k3s1
 <p>TODO.</p>
 </div>
 <div class=td-content style=page-break-before:always>
-<h1 id=pg-8d71550d3ee2751c7f80b3cef9ae8232>9 - TKEStack all-in-one入坑指南</h1>
+<h1 id=pg-03baa014ac348ea7e2865ceaf8dacda4>9 - kubeshere 自研-01</h1>
+<div class=lead>自研系列文章整理。</div>
+<div class="pageinfo pageinfo-primary">
+<p>kubesphere 自研环境篇</p>
+</div>
+<h2 id=心态>心态</h2>
+<p>首先调整心态，这是一个新的生态，秉承学习的心态。</p>
+<h2 id=准备环境>准备环境</h2>
+<ul>
+<li>clone代码</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git clone https://github.com/kubesphere/kubesphere.git
+</code></pre></div><ul>
+<li>准备开发环境</li>
+</ul>
+<p><a href=https://github.com/kubesphere/community/blob/master/developer-guide/development/quickstart.md>启动快速开发环境</a></p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-8d71550d3ee2751c7f80b3cef9ae8232>10 - TKEStack all-in-one入坑指南</h1>
 <div class=lead>TkeStack的all-in-one安装、多租户和多集群管理功能解读。</div>
 <div class="pageinfo pageinfo-primary">
 <p>本文主要介绍当前最新版本TkeStack 1.8.1 的TKEStack的all-in-one安装、多租户和多集群管理功能解读。</p>

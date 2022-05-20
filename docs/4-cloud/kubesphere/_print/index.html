@@ -1,0 +1,281 @@
+<!doctype html><html lang=zh-cn class=no-js>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=generator content="Hugo 0.91.2">
+<link rel=canonical type=text/html href=https://xiaoping378.github.io/docs/4-cloud/kubesphere/>
+<link rel=alternate type=application/rss+xml href=https://xiaoping378.github.io/docs/4-cloud/kubesphere/index.xml>
+<meta name=robots content="noindex, nofollow">
+<link rel="shortcut icon" href=/favicons/favicon.ico>
+<title>Kubersphere | 现代技能栈</title>
+<meta name=description content="青云家的混合容器云管理平台，持续更新... 
+">
+<meta property="og:title" content="Kubersphere">
+<meta property="og:description" content="青云家的混合容器云管理平台，持续更新... 
+">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://xiaoping378.github.io/docs/4-cloud/kubesphere/"><meta property="og:site_name" content="现代技能栈">
+<meta itemprop=name content="Kubersphere">
+<meta itemprop=description content="青云家的混合容器云管理平台，持续更新... 
+"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="Kubersphere">
+<meta name=twitter:description content="青云家的混合容器云管理平台，持续更新... 
+">
+<link rel=preload href=/scss/main.min.9f63fcc1b5f091883eb4c0c66b7bddf337a299d08451443230a201303e53b01c.css as=style>
+<link href=/scss/main.min.9f63fcc1b5f091883eb4c0c66b7bddf337a299d08451443230a201303e53b01c.css rel=stylesheet integrity>
+<script src=/js/jquery-3.5.1.min.js integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin=anonymous></script>
+<script src=/js/lunr.min.js integrity=sha384-vRQ9bDyE0Wnu+lMfm57BlYLO0/XauFuKpVsZPs7KEDwYKktWi5+Kz3MP8++DFlRY crossorigin=anonymous></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-217913492-1','auto'),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</head>
+<body class=td-section>
+<header>
+<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
+<a class=navbar-brand href=/>
+<span class=navbar-logo></span><span class="text-uppercase font-weight-bold">现代技能栈</span>
+</a>
+<div class="td-navbar-nav-scroll ml-md-auto" id=main_navbar>
+<ul class="navbar-nav mt-2 mt-lg-0">
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class=nav-link href=/about/><span>关于</span></a>
+</li>
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class="nav-link active" href=/docs/><span class=active>文档</span></a>
+</li>
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class=nav-link href=/blog/><span>博客</span></a>
+</li>
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class=nav-link href=/community/><span>社区</span></a>
+</li>
+</ul>
+</div>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.a129186848b960d9f9fa11c31b246c7f.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+</div>
+</nav>
+</header>
+<div class="container-fluid td-outer">
+<div class=td-main>
+<div class="row flex-xl-nowrap">
+<main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main>
+<div class=td-content>
+<div class="pageinfo pageinfo-primary d-print-none">
+<p>
+这是本节的多页打印视图。
+<a href=# onclick="return print(),!1">点击此处打印</a>.
+</p><p>
+<a href=/docs/4-cloud/kubesphere/>返回本页常规视图</a>.
+</p>
+</div>
+<h1 class=title>Kubersphere</h1>
+<div class=lead>青云家的混合容器云管理平台，持续更新...</div>
+<ul>
+<li>1: <a href=#pg-860749379d08e54cd43ce8d25912f35e>使用kind本地启动多集群</a></li>
+<li>2: <a href=#pg-c79f030e7c908d1a1a3729cd2bf8e478>Kubesphere的异地多活方案</a></li>
+</ul>
+<div class=content>
+<div class="pageinfo pageinfo-primary">
+<p>主要记录介绍对kubersphere的架构认知和储备二次开发所必备的知识。</p>
+<p>本系列文章中会把kubesphere简说成KCP（Qingcloud kubernetes controller-manage platform）</p>
+</div>
+</div>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-860749379d08e54cd43ce8d25912f35e>1 - 使用kind本地启动多集群</h1>
+<div class=lead>在本地利用kind搭建多个集群，验证多集群纳管...</div>
+<div class="pageinfo pageinfo-primary">
+<p>我本地4c/8G的小本儿，跑了两个集群，组建了多集群环境，还行，能玩动...</p>
+</div>
+<h2 id=环境篇>环境篇</h2>
+<ol>
+<li>
+<p>kind<a href=https://kind.sigs.k8s.io/docs/user/quick-start/>安装</a></p>
+</li>
+<li>
+<p>镜像准备</p>
+<p>视网络情况，可以把依赖镜像<code>kindest/node</code>提起pull到本地</p>
+</li>
+<li>
+<p>docker的data-root目录</p>
+<p>尽量不要放到/var目录下，kind起的集群容器会占用比较大的空间</p>
+</li>
+</ol>
+<h2 id=实操>实操</h2>
+<ol>
+<li>创建集群</li>
+</ol>
+<p>执行完如下命令后，docker ps可以看到本地启动了两个容器，一个容器对应一个集群。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kind create cluster --image kindest/node:v1.19.16 --name host
+kind create cluster --image kindest/node:v1.19.16 --name member
+</code></pre></div><p><code>kubectl config use-context [kind-host | kind-member]</code>，可以切换kubecl执行的上下文</p>
+<ol start=2>
+<li>安装kubesphere</li>
+</ol>
+<p>分别在两个集群各自安装ks组件</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#080;font-style:italic># 集群1安装</span>
+kubectl config use-context kind-host
+kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3.2.1/kubesphere-installer.yaml   
+kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3.2.1/cluster-configuration.yaml
+
+<span style=color:#080;font-style:italic># 集群2安装</span>
+kubectl config use-context kind-member
+kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3.2.1/kubesphere-installer.yaml   
+kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3.2.1/cluster-configuration.yaml
+</code></pre></div><ol start=3>
+<li>纳管集群</li>
+</ol>
+<p>可以在上面的初始化阶段直接改好主和成员集群的关系，这里参考<a href=https://kubesphere.com.cn/docs/multicluster-management/enable-multicluster/direct-connection/>官文</a>即可</p>
+<p>host集群的UI地址，可以通过容器IP+30880来访问，主集群的容器ip，可以如下获取：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker inspect --format <span style=color:#b44>&#39;{{ .NetworkSettings.Networks.kind.IPAddress }}&#39;</span> host-control-plane
+</code></pre></div><p>实操<code>添加</code>集群时，需要member集群的kubeconfig，可以用如下命令获取到</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kind get kubeconfig --name member
+</code></pre></div><p>记得把kubeconfig中的<code>server</code>地址中改成<code>member容器ip:6443</code>，这样host集群才能访问到member集群</p>
+<h2 id=总结>总结</h2>
+<p>验证功能、测试开发，挺方便的，可以视本地资源紧张情况停掉监控的ns。</p>
+</div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-c79f030e7c908d1a1a3729cd2bf8e478>2 - Kubesphere的异地多活方案</h1>
+<div class=lead>混合容器云管理平台Kubesphere的异地多活方案...</div>
+<div class="pageinfo pageinfo-primary">
+<p>遇到这样一个场景，在同一套环境中需要存在多个host控制面集群...bulabula... 因此想探索下kubesphere的异地多活混合容器云管理方案</p>
+</div>
+<h2 id=集群角色介绍>集群角色介绍</h2>
+<p>一个兼容原生的k8s集群，可通过<code>ks-installer</code>来初始化完成安装，成为一个QKE集群。QKE集群分为多种角色，默认是none角色（standalone模式），开启多集群功能时，可以设置为host或者member角色。</p>
+<p><img src=/images/kcp-%E5%A4%9A%E9%9B%86%E7%BE%A4.png alt=多集群></p>
+<ul>
+<li>none角色，是最小化安装的默认模式，会安装必要的ks-apiserver, ks-controller-manager, ks-console和其他组件
+<ul>
+<li>ks-apiserver, kcp的API网关，包含审计、认证、权限校验等功能</li>
+<li>ks-controller, 各类自定义crd的控制器和平台管理逻辑的实现</li>
+<li>ks-console, 前端界面UI</li>
+<li>ks-installer, 初始化安装和变更QKE集群的工具，由shell-operator触发ansible-playbooks来工作。</li>
+</ul>
+</li>
+<li>member角色，承载工作负载的业务集群，和none模式的组件安装情况一致</li>
+<li>host角色，整个混合云管理平台的控制面，会在none的基础上，再额外安装tower，kubefed-controller-manager， kubefed-admission-webhook等组件
+<ul>
+<li>tower，代理业务集群通信的server端，常用于不能直连member集群api-server的情况</li>
+<li>kubefed-controller-manager，社区的<a href=https://github.com/kubernetes-sigs/kubefed>kubefed</a>联邦资源的控制器</li>
+<li>kubefed-admission-webhook， 社区的kubefed联邦资源的动态准入校验器</li>
+</ul>
+</li>
+</ul>
+<h2 id=多集群管理原理>多集群管理原理</h2>
+<p>上段提到QKE有3种角色，可通过修改<code>cc</code>配置文件的<code>clusterRole</code>来使能, ks-installer监听到配置变化的事件，会初始化对应多集群角色的功能。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl edit cc ks-installer -n kubesphere-system
+</code></pre></div><blockquote>
+<p>角色不要改来改去，会出现莫名问题，主要是背后ansible维护的逻辑有疏漏，没闭环</p>
+</blockquote>
+<h3 id=host集群>host集群</h3>
+<p>host角色的主集群会被创建25种联邦资源类型Kind，如下命令可查看，还会额外安装kubefed stack组件。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>➜  kubectl get FederatedTypeConfig  -A
+</code></pre></div><p>此外api-server被重启后，会根据配置内容的变化，做两件事，注册多集群相关的路由和缓存同步部分联邦资源。</p>
+<ul>
+<li>添加url里包含<code>clusters/{cluster}</code>路径的agent路由和转发的功能，要访问业务集群的信息，这样可以直接转发过去。</li>
+<li>cacheSync，缓存同步联邦资源，这里是个同步的操作。</li>
+</ul>
+<blockquote>
+<p>当开启多集群后，如果某个member出现异常导致不可通信，那host的api-server此时遇到故障要重启，会卡在cacheSync这一步，导致无法启动，进而整个平台无法访问。</p>
+</blockquote>
+<p>controller-manager被重启后，同样会根据配置的变化，把部分资源类型自动转化成联邦资源的逻辑，也就是说，在host集群创建的这部分资源会自动同步到所有成员集群，实际的多集群同步靠kubefed-controller-manager来执行。以下资源会被自动创建联邦资源下发：</p>
+<ul>
+<li>users.iam.kubesphere.io -> federatedusers.types.kubefed.io</li>
+<li>workspacetemplates.tenant.kubesphere.io -> federatedworkspaces.types.kubefed.io</li>
+<li>workspaceroles.iam.kubesphere.io -> federatedworkspaceroles.types.kubefed.io</li>
+<li>workspacerolebindings.iam.kubesphere.io -> federatedworkspacerolebindings.types.kubefed.io</li>
+</ul>
+<p>此外还会启动cluster、group和一些globalRole*相关资源的控制器逻辑，同上也会通过kubefed自动下发到所有集群，<code>clusters.cluster.kubesphere.io</code>资源除外。</p>
+<blockquote>
+<p>如果以上资源包含了<code>kubefed.io/managed: false</code>标签，kubefed就不会再做下发同步，而host集群下发完以上资源后，都会自动加上该标签，防止进入死循环</p>
+</blockquote>
+<h3 id=member集群>member集群</h3>
+<p>修改为member集群时，需要cc中的<strong>jwtSecret</strong>与host集群的保持一致(若该值为空的话，ks-installer默认会随机生成)，提取host集群的该值时，需要去cm里找，如下：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl -n kubesphere-system get cm kubesphere-config -o yaml | grep -v <span style=color:#b44>&#34;apiVersion&#34;</span> | grep jwtSecret
+</code></pre></div><blockquote>
+<p>jwtSecret要保持一致，主要是为了在host集群<strong>签发</strong>的用户token，在用户访问业务集群时token<strong>校验</strong>能通过。</p>
+</blockquote>
+<h3 id=添加集群>添加集群</h3>
+<p>本文只关注<code>直接连接</code>这种情况，当填好成员集群的kubeconfig信息，点击<code>添加</code>集群后,会做如下校验：</p>
+<ul>
+<li>通过kubeconfig信息先校验下是否会添加已存在的重复集群</li>
+<li>校验成员集群的网络连通性</li>
+<li>校验成员集群是否安装了ks-apiserver</li>
+<li>校验成员集群的<code>jwtSecret</code>是否和主集群的一致</li>
+</ul>
+<blockquote>
+<p>写稿时，此处有个问题，需要修复，如果kubeconfig使用了<code>insecure-skip-tls-verify: true</code>会导致该集群添加失败，经定位主要是kubefed 空指针panic了，后续有时间我会去fix一下。</p>
+</blockquote>
+<p>校验完必要信息后，就执行实质动作<code>joinFederation</code>加入联邦，kubesphere多集群纳管，实质上组成联邦集群:</p>
+<ul>
+<li>在成员集群创建ns kube-federation-system</li>
+<li>在上面的命名空间中创建serviceAccount [clusterName]-kubesphere, 并绑定最高权限</li>
+<li>在主集群的kube-federation-system的命名空间创建<code>kubefedclusters.core.kubefed.io</code>，由kubefed stack驱动联邦的建立</li>
+<li>加入联邦后，主机群的联邦资源会通过kubefed stack同步过来</li>
+</ul>
+<blockquote>
+<p>上述一顿操作，等效于 <code>kubefedctl join member-cluster --cluster-context member-cluster --host-cluster-context host-cluster</code></p>
+</blockquote>
+<h2 id=异地多活方案设计>异地多活方案设计</h2>
+<p>异地多活的方案主要是多个主集群能同时存在，且保证数据同步，经过上面的原理分析，可知多个主集群是可以同时存在的，也就是一个成员集群要和多个主集群组成联邦，示意图如下：</p>
+<p><img src=/images/kcp-multi-hostclusters.png alt></p>
+<p>开始实操！</p>
+</div>
+</main>
+</div>
+</div>
+<footer class="bg-dark py-5 row d-print-none">
+<div class="container-fluid mx-sm-5">
+<div class=row>
+<div class="col-6 col-sm-4 text-xs-center order-sm-2">
+<ul class="list-inline mb-0">
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title="个人邮箱 xiaoping378@163.com" aria-label="个人邮箱 xiaoping378@163.com">
+<a class=text-white target=_blank rel=noopener href=mailto:xiaoping378@163.com aria-label="个人邮箱 xiaoping378@163.com">
+<i class="fa fa-envelope"></i>
+</a>
+</li>
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=微博 aria-label=微博>
+<a class=text-white target=_blank rel=noopener href=https://weibo.com/xiaoping378 aria-label=微博>
+<i class="fab fa-weibo"></i>
+</a>
+</li>
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=知乎 aria-label=知乎>
+<a class=text-white target=_blank rel=noopener href=https://www.zhihu.com/people/xiaoping378 aria-label=知乎>
+<i class="fab fa-zhihu"></i>
+</a>
+</li>
+</ul>
+</div>
+<div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+<ul class="list-inline mb-0">
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=GitHub aria-label=GitHub>
+<a class=text-white target=_blank rel=noopener href=https://github.com/xiaoping378/xiaoping378.github.io aria-label=GitHub>
+<i class="fab fa-github"></i>
+</a>
+</li>
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=Slack aria-label=Slack>
+<a class=text-white target=_blank rel=noopener href=https://example.org/slack aria-label=Slack>
+<i class="fab fa-slack"></i>
+</a>
+</li>
+<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title="Developer mailing list" aria-label="Developer mailing list">
+<a class=text-white target=_blank rel=noopener href=https://example.org/mail aria-label="Developer mailing list">
+<i class="fa fa-envelope"></i>
+</a>
+</li>
+</ul>
+</div>
+<div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+<small class=text-white>&copy; 2022 xiaoping378 保留所有权利</small>
+<small class=ml-1><a href=# target=_blank rel=noopener>隐私政策</a></small>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<script src=/js/popper.min.js integrity=sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN crossorigin=anonymous></script>
+<script src=/js/bootstrap.min.js integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin=anonymous></script>
+<script src=/js/tabpane-persist.js></script>
+<script src=/js/deflate.js></script>
+<script src=/js/main.min.e016890ed6b0c42f5af3410eb57ac626a192a868609aee68cefe1e0f84a50b13.js integrity="sha256-4BaJDtawxC9a80EOtXrGJqGSqGhgmu5ozv4eD4SlCxM=" crossorigin=anonymous></script>
+</body>
+</html>

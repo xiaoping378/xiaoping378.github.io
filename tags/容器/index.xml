@@ -614,7 +614,14 @@ Serving HTTP on 0.0.0.0 port 8000 ...
 不需要像以前一样非要把flannel和docker绑在一起了（先启flannel才能启docker）。&lt;/p>
 &lt;p>具体可以看这里
 &lt;a href="https://github.com/containernetworking/cni/blob/master/Documentation/flannel.md">https://github.com/containernetworking/cni/blob/master/Documentation/flannel.md&lt;/a>&lt;/p>
-&lt;p>master侧如果是单核的话，会因资源不足， dns安装失败。&lt;/p></description></item><item><title>Docs: k8s的各组件认知</title><link>https://xiaoping378.github.io/docs/4-cloud/k8s/k8s%E5%90%84%E7%BB%84%E4%BB%B6%E7%9A%84%E8%AE%A4%E7%9F%A5/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/k8s/k8s%E5%90%84%E7%BB%84%E4%BB%B6%E7%9A%84%E8%AE%A4%E7%9F%A5/</guid><description>
+&lt;p>master侧如果是单核的话，会因资源不足， dns安装失败。&lt;/p></description></item><item><title>Docs: k8s的各组件和特性扫盲</title><link>https://xiaoping378.github.io/docs/4-cloud/k8s/k8s%E5%90%84%E7%BB%84%E4%BB%B6%E7%9A%84%E8%AE%A4%E7%9F%A5/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/k8s/k8s%E5%90%84%E7%BB%84%E4%BB%B6%E7%9A%84%E8%AE%A4%E7%9F%A5/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>了解一个工具的特性可以从它的参数入手&lt;/p>
+&lt;/div>
+&lt;h2 id="api-server">api-server&lt;/h2>
+&lt;p>在k8s内发挥的网关和api&lt;/p>
+&lt;p>CSR特性&lt;/p>
+&lt;h2 id="网络">网络&lt;/h2>
 &lt;h3 id="flannel">flannel&lt;/h3>
 &lt;ul>
 &lt;li>
@@ -2261,7 +2268,21 @@ osm_cluster_network_cidr=10.128.0.0/10
 &lt;p>介绍利用openshift-ansible项目安装后的生产环境里的网络情况。&lt;/p>
 &lt;p>待整理。。。&lt;/p></description></item><item><title>Docs: 监控梳理</title><link>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E7%9B%91%E6%8E%A7%E6%A2%B3%E7%90%86/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E7%9B%91%E6%8E%A7%E6%A2%B3%E7%90%86/</guid><description>
 &lt;p>未完搞 ...&lt;/p></description></item><item><title>Docs: 日志分析</title><link>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/openshift/openshift%E5%AE%9E%E8%B7%B5-%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/</guid><description>
-&lt;p>未完搞 ...&lt;/p></description></item><item><title>Docs: TKEStack all-in-one入坑指南</title><link>https://xiaoping378.github.io/docs/4-cloud/k8s/tkestack-allinone/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/k8s/tkestack-allinone/</guid><description>
+&lt;p>未完搞 ...&lt;/p></description></item><item><title>Docs: kubeshere 自研-01</title><link>https://xiaoping378.github.io/docs/4-cloud/k8s/kubesphere-01/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/k8s/kubesphere-01/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>kubesphere 自研环境篇&lt;/p>
+&lt;/div>
+&lt;h2 id="心态">心态&lt;/h2>
+&lt;p>首先调整心态，这是一个新的生态，秉承学习的心态。&lt;/p>
+&lt;h2 id="准备环境">准备环境&lt;/h2>
+&lt;ul>
+&lt;li>clone代码&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">git clone https://github.com/kubesphere/kubesphere.git
+&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>准备开发环境&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a href="https://github.com/kubesphere/community/blob/master/developer-guide/development/quickstart.md">启动快速开发环境&lt;/a>&lt;/p></description></item><item><title>Docs: TKEStack all-in-one入坑指南</title><link>https://xiaoping378.github.io/docs/4-cloud/k8s/tkestack-allinone/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/k8s/tkestack-allinone/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
 &lt;p>本文主要介绍当前最新版本TkeStack 1.8.1 的TKEStack的all-in-one安装、多租户和多集群管理功能解读。&lt;/p>
 &lt;/div>

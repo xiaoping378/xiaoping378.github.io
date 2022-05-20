@@ -81,4 +81,5 @@ ntpdate -u cn.pool.ntp.org
 &lt;/ul></description></item><item><title>Docs: linux基础</title><link>https://xiaoping378.github.io/docs/2-infra/linux/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/2-infra/linux/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
 &lt;p>主要是本地环境搭建、日常使用技巧和linux性能方面的解读.&lt;/p>
-&lt;/div></description></item></channel></rss>
+&lt;/div></description></item><item><title>Docs: 裁剪内核-BootLoader</title><link>https://xiaoping378.github.io/docs/2-infra/linux/kernel/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/2-infra/linux/kernel/</guid><description>
+&lt;p>.TODO&lt;/p></description></item></channel></rss>

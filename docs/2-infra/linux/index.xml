@@ -78,4 +78,5 @@ ntpdate -u cn.pool.ntp.org
 &lt;p>&lt;strong>查询本机的外网IP&lt;/strong>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">curl ipinfo.io
 &lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;/ul></description></item><item><title>Docs: 裁剪内核-BootLoader</title><link>https://xiaoping378.github.io/docs/2-infra/linux/kernel/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/2-infra/linux/kernel/</guid><description>
+&lt;p>.TODO&lt;/p></description></item></channel></rss>
