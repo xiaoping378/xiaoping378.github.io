@@ -90,17 +90,17 @@ kubectl -n kubesphere-system get cm kubesphere-config -o yaml | grep -v "apiVers
 
 ![](/images/kcp-multi-hostclusters.png)
 
-> 以下操作假设本地以具备三个QKE集群，如果不具备的可按照[此处](/docs/4-cloud/kubesphere/kind-multicluster-dev/)搭建`host、host2、member`3个集群
+> 以下操作假设本地已具备三个QKE集群，如果不具备的可按照[此处](/docs/4-cloud/kubesphere/kind-multicluster-dev/)搭建`host、host2、member`3个集群
 
 大致实现逻辑的前提介绍：
 
 1. 三个集群的`jwtSecret`得保持一致
 2. 两个主集群都去`添加`纳管同一个member集群
-3. 利用`etcdctl make-mirror`实现双向同步（需改造，目前社区版仅支持单向同步）
+3. 利用`etcdctl make-mirror`实现双向同步
 
 ### 验证下可行性
 
-实操前先验证下可行性
+实操双活前，先验证下可行性
 
 **实验1：**
 
@@ -139,7 +139,7 @@ xxp3    xxp3@163.com          Active
 ➜  ~ kubectl get federatedusers.types.kubefed.io
 NAME    AGE
 admin   5h33m
-xxp     65m # 这里是个正在删除的动作的资源
+xxp     65m #这里是个正在删除的资源
 xxp3    61m
 ```
 
@@ -149,4 +149,6 @@ xxp3    61m
 
 两个主集群同时工作，一旦出现同名冲突资源，处理起来会非常非常麻烦，当背后的ownerRef关联资源也出现异常时，往往问题点隐藏的更深，修复起来就棘手...
 
-双活，除非具备跨AZ的etcd集群，不然目前的社区方案 make-mirror只支持单向同步，适用用来做灾备方案。
+后来调研发现：目前的社区方案make-mirror只支持单向同步，适用用来做灾备方案。
+
+所以双活，除非具备跨AZ的etcd集群。
