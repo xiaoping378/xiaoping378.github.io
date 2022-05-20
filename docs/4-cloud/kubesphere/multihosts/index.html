@@ -13,11 +13,11 @@
 ">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://xiaoping378.github.io/docs/4-cloud/kubesphere/multihosts/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2022-05-20T21:03:59+08:00"><meta property="og:site_name" content="现代技能栈">
+<meta property="article:modified_time" content="2022-05-20T21:21:18+08:00"><meta property="og:site_name" content="现代技能栈">
 <meta itemprop=name content="论Kubesphere的异地多活方案">
 <meta itemprop=description content="混合容器云管理平台Kubesphere的异地多活方案... 
 ">
-<meta itemprop=dateModified content="2022-05-20T21:03:59+08:00">
+<meta itemprop=dateModified content="2022-05-20T21:21:18+08:00">
 <meta itemprop=wordCount content="182">
 <meta itemprop=keywords content="k8s,"><meta name=twitter:card content="summary">
 <meta name=twitter:title content="论Kubesphere的异地多活方案">
@@ -52,7 +52,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.7be96b374cb7ce076722c2616916aeef.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.c677633ec58ce3a9a9b81b07aac54f38.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -62,7 +62,7 @@
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.7be96b374cb7ce076722c2616916aeef.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.c677633ec58ce3a9a9b81b07aac54f38.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -560,11 +560,11 @@ xxp     65m #这里是个正在删除的资源
 xxp3    61m
 </code></pre><p>这样就会出现，两个主集群：一个要删，一个要同步，member集群上：上演“一会儿消失，一会儿又出现了”的奇观。</p>
 <h3 id=总结>总结</h3>
-<p>两个主集群同时工作，一旦出现同名冲突资源，处理起来会非常非常麻烦，当背后的ownerRef关联资源也出现异常时，往往问题点隐藏的更深，修复起来就棘手...</p>
+<p>两个主集群可以同时工作，一旦出现同名冲突资源，处理起来会非常非常麻烦，当背后的ownerRef关联资源也出现异常时，往往问题点隐藏的更深，修复起来也棘手...</p>
 <p>后来调研发现：目前的社区方案make-mirror只支持单向同步，适用用来做灾备方案。</p>
-<p>所以双活，除非具备跨AZ的etcd集群。</p>
+<p>所以容器云平台的双活，除非具备跨AZ的etcd集群，否则需要花相应的成本来研发支持了。我最开始要考虑的问题答案也就显而易见了：如果实在要多个host集群共存，可以考虑通过行政管理手段，尽量避免同名资源冲突。</p>
 <div class="text-muted mt-5 pt-3 border-top">
-最后修改 May 20, 2022: <a href=https://github.com/xiaoping378/xiaoping378.github.io/commit/f856bc9cad379e45135e0bcf9925c6fe77484772>kubespere 双活 minor (f856bc9)</a>
+最后修改 May 20, 2022: <a href=https://github.com/xiaoping378/xiaoping378.github.io/commit/7b97e35ea216c6b7e9b9b4f36f8e01f87866ccb2>kubespere 双活 minor (7b97e35)</a>
 </div>
 </div>
 </main>
