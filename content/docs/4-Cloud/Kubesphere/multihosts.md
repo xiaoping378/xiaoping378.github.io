@@ -74,7 +74,7 @@ kubectl -n kubesphere-system get cm kubesphere-config -o yaml | grep -v "apiVers
 - 校验成员集群是否安装了ks-apiserver
 - 校验成员集群的`jwtSecret`是否和主集群的一致
 
-> 写稿时，此处有个问题，需要修复，如果kubeconfig使用了`insecure-skip-tls-verify: true`会导致该集群添加失败，经定位主要是kubefed 空指针panic了，后续有时间我会去fix一下。
+> 写稿时，此处有个问题，需要修复，如果kubeconfig使用了`insecure-skip-tls-verify: true`会导致该集群添加失败，经定位主要是kubefed 空指针panic了，后续有时间我会去fix一下，已提[issue](https://github.com/kubesphere/kubesphere/issues/4891)。
 
 校验完必要信息后，就执行实质动作`joinFederation`加入联邦，kubesphere多集群纳管，实质上是先组成联邦集群:
 - 在成员集群创建ns kube-federation-system
