@@ -528,4 +528,75 @@ Casbin -&amp;gt; 其他服务: 权限合规，则跳转到用户请求的其他�
 &lt;h2 id="代码目录结构">代码目录结构&lt;/h2>
 &lt;h2 id="codeowners机制">CODEOWNERS机制&lt;/h2>
 &lt;h2 id="ci-cd机制">CI/CD机制&lt;/h2>
-&lt;h2 id="工具实践-lighthouse">工具实践&lt;code>Lighthouse&lt;/code>&lt;/h2></description></item></channel></rss>
+&lt;h2 id="工具实践-lighthouse">工具实践&lt;code>Lighthouse&lt;/code>&lt;/h2></description></item><item><title>Docs: 搭建kubesphere的开发调试环境</title><link>https://xiaoping378.gitee.io/docs/4-cloud/kubesphere/kcp-dev/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.gitee.io/docs/4-cloud/kubesphere/kcp-dev/</guid><description>
+&lt;h2 id="依赖工具介绍">依赖工具介绍&lt;/h2>
+&lt;ol>
+&lt;li>vscode，个人日常使用vscode开发，标配&lt;code>Remote Development&lt;/code>插件&lt;/li>
+&lt;li>kt-connect，本地开发使用的流量代理工具，可以双向代理，本地可以直接访问pod和svc，也可以转发访问pod的流量到本地，相关&lt;a href="https://github.com/alibaba/kt-connect/blob/master/docs/zh-cn/reference/mechanism.md">原理介绍&lt;/a>。&lt;/li>
+&lt;/ol>
+&lt;h2 id="准备调试环境">准备调试环境&lt;/h2>
+&lt;h3 id="连接集群网络">连接集群网络&lt;/h3>
+&lt;p>使用kt-connect，打通网络，本地可直接访问Kubernetes集群内网&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">sudo ktctl connect --context kind-host --portForwardTimeout &lt;span style="color:#666">300&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>&lt;code>ktctl&lt;/code>采用本地&lt;code>kubectl&lt;/code>工具的集群配置，默认为~/.kube/config文件中配置的集群。&lt;/li>
+&lt;li>如果kubeconfig有多个集群，可以通过&lt;code>--context&lt;/code>指定要连接的具体集群&lt;/li>
+&lt;li>如果本地环境是&lt;code>kind&lt;/code>集群，需要修改kubeconfig中server的127地址为&lt;code>容器IP:6443&lt;/code>&lt;/li>
+&lt;li>如果网络比较差，会遇到错误&lt;code>ERR Exit: pod kt-rectifier-tcxjk failed to start&lt;/code>，可适当增加等待时间&lt;code>portForwardTimeout&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>另外注意的是，kt-connect需要root权限，上条命令会默认读取&lt;code>/root/.kube/config&lt;/code>文件，自行copy或者另通过&lt;code>-c&lt;/code>指定文件&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="clone代码">clone代码&lt;/h3>
+&lt;p>不表.&lt;/p>
+&lt;h3 id="编辑调试的配置文件">编辑调试的配置文件&lt;/h3>
+&lt;p>首先编辑vscode的调试配置文件, 我是如下配置的：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ kubesphere git:&lt;span style="color:#666">(&lt;/span>master&lt;span style="color:#666">)&lt;/span> cat .vscode/launch.json
+&lt;span style="color:#666">{&lt;/span>
+// Use IntelliSense to learn about possible attributes.
+// Hover to view descriptions of existing attributes.
+// For more information, visit: https://go.microsoft.com/fwlink/?linkid&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#666">830387&lt;/span>
+&lt;span style="color:#b44">&amp;#34;version&amp;#34;&lt;/span>: &lt;span style="color:#b44">&amp;#34;0.2.0&amp;#34;&lt;/span>,
+&lt;span style="color:#b44">&amp;#34;configurations&amp;#34;&lt;/span>: &lt;span style="color:#666">[&lt;/span>
+&lt;span style="color:#666">{&lt;/span>
+&lt;span style="color:#b44">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#b44">&amp;#34;ks-apiserver&amp;#34;&lt;/span>,
+&lt;span style="color:#b44">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#b44">&amp;#34;go&amp;#34;&lt;/span>,
+&lt;span style="color:#b44">&amp;#34;request&amp;#34;&lt;/span>: &lt;span style="color:#b44">&amp;#34;launch&amp;#34;&lt;/span>,
+&lt;span style="color:#b44">&amp;#34;mode&amp;#34;&lt;/span>: &lt;span style="color:#b44">&amp;#34;auto&amp;#34;&lt;/span>,
+&lt;span style="color:#b44">&amp;#34;program&amp;#34;&lt;/span>: &lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b68;font-weight:bold">${&lt;/span>&lt;span style="color:#b8860b">workspaceFolder&lt;/span>&lt;span style="color:#b68;font-weight:bold">}&lt;/span>&lt;span style="color:#b44">/cmd/ks-apiserver/apiserver.go&amp;#34;&lt;/span>
+&lt;span style="color:#666">}&lt;/span>,
+&lt;span style="color:#666">{&lt;/span>
+&lt;span style="color:#b44">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#b44">&amp;#34;controller-manager&amp;#34;&lt;/span>,
+&lt;span style="color:#b44">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#b44">&amp;#34;go&amp;#34;&lt;/span>,
+&lt;span style="color:#b44">&amp;#34;request&amp;#34;&lt;/span>: &lt;span style="color:#b44">&amp;#34;launch&amp;#34;&lt;/span>,
+&lt;span style="color:#b44">&amp;#34;mode&amp;#34;&lt;/span>: &lt;span style="color:#b44">&amp;#34;auto&amp;#34;&lt;/span>,
+&lt;span style="color:#b44">&amp;#34;program&amp;#34;&lt;/span>: &lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b68;font-weight:bold">${&lt;/span>&lt;span style="color:#b8860b">workspaceFolder&lt;/span>&lt;span style="color:#b68;font-weight:bold">}&lt;/span>&lt;span style="color:#b44">/cmd/controller-manager/controller-manager.go&amp;#34;&lt;/span>
+&lt;span style="color:#666">}&lt;/span>
+&lt;span style="color:#666">]&lt;/span>
+&lt;span style="color:#666">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="准备调试环境-1">准备调试环境&lt;/h3>
+&lt;p>按F5，启动调试，左上角选择要调试的组件，我这里以controller-manager举例（需要hack的注意点比较多）。&lt;/p>
+&lt;p>过会儿会发现出现错误，错误提示很明显，因缺少配置文件，导致无法启动，通过查看&lt;code>deployment yaml&lt;/code>, 发现后面还会缺失&lt;code>Admission Webhooks&lt;/code>的证书，可如下统一提取到本地：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#080;font-style:italic"># 提取启动的配置文件(调试apiserver的时候也需要这一步，但要把文件放到对应cmd/ks-apiserver目录下)&lt;/span>
+kubectl -n kubesphere-system get cm kubesphere-config -ojsonpath&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#b44">&amp;#39;{.data.kubesphere\.yaml}&amp;#39;&lt;/span> &amp;gt; cmd/controller-manager/kubesphere.yaml
+&lt;span style="color:#080;font-style:italic"># 提取webhook用到的证书&lt;/span>
+mkdir -p /tmp/k8s-webhook-server/serving-certs/
+&lt;span style="color:#a2f">export&lt;/span> &lt;span style="color:#b8860b">controller_pod&lt;/span>&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#b44">`&lt;/span>kubectl -n kubesphere-system get pods -l &lt;span style="color:#b8860b">app&lt;/span>&lt;span style="color:#666">=&lt;/span>ks-controller-manager -o &lt;span style="color:#b8860b">jsonpath&lt;/span>&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#b44">&amp;#39;{.items[0].metadata.name}&amp;#39;&lt;/span>&lt;span style="color:#b44">`&lt;/span>
+kubectl -n kubesphere-system &lt;span style="color:#a2f">exec&lt;/span> -it &lt;span style="color:#b68;font-weight:bold">${&lt;/span>&lt;span style="color:#b8860b">controller_pod&lt;/span>&lt;span style="color:#b68;font-weight:bold">}&lt;/span> -- cat /tmp/k8s-webhook-server/serving-certs/ca.crt &amp;gt; /tmp/k8s-webhook-server/serving-certs/ca.crt
+kubectl -n kubesphere-system &lt;span style="color:#a2f">exec&lt;/span> -it &lt;span style="color:#b68;font-weight:bold">${&lt;/span>&lt;span style="color:#b8860b">controller_pod&lt;/span>&lt;span style="color:#b68;font-weight:bold">}&lt;/span> -- cat /tmp/k8s-webhook-server/serving-certs/tls.crt &amp;gt; /tmp/k8s-webhook-server/serving-certs/tls.crt
+kubectl -n kubesphere-system &lt;span style="color:#a2f">exec&lt;/span> -it &lt;span style="color:#b68;font-weight:bold">${&lt;/span>&lt;span style="color:#b8860b">controller_pod&lt;/span>&lt;span style="color:#b68;font-weight:bold">}&lt;/span> -- cat /tmp/k8s-webhook-server/serving-certs/tls.key &amp;gt; /tmp/k8s-webhook-server/serving-certs/tls.key
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>继续启动，发现还会有缺文件的错误，应该是编译镜像时，内置了些文件，通过查看&lt;code>build/ks-controller-manager/Dockerfile&lt;/code>，发现后面会缺的东西还是比较多的，推荐直接从运行中的pod直接copy到本地：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">sudo mkdir /var/helm-charts/
+sudo chmod -R a+rw /var/helm-charts
+kubectl -n kubesphere-system cp &lt;span style="color:#b68;font-weight:bold">${&lt;/span>&lt;span style="color:#b8860b">controller_pod&lt;/span>&lt;span style="color:#b68;font-weight:bold">}&lt;/span>:/var/helm-charts /var/helm-charts/
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>继续启动，成功 ！&lt;/p>
+&lt;h2 id="开始调试">开始调试&lt;/h2>
+&lt;p>利用ktctl替换集群中的ks-controller-manager的服务为本地服务。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">sudo ktctl exchange ks-controller-manager --namespace kubesphere-system --mode scale --recoverWaitTime &lt;span style="color:#666">300&lt;/span> --expose 8443:8443
+&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>如果本地集群只有一个节点，上述命令会一直pending，可以通过如下命令替代&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">sudo ktctl exchange ks-controller-manager --namespace kubesphere-system --expose 8443:8443
+kubectl -n kubesphere-system scale deployment ks-controller-manager --replicas&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#666">0&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>结束调试，记得还原刚才缩容&lt;code>replicas&lt;/code>的设置。&lt;/p>
+&lt;/blockquote>
+&lt;p>后续就是vscode的正常断点调试或者本地开发验证了，有时间在整理贴图...&lt;/p></description></item></channel></rss>
