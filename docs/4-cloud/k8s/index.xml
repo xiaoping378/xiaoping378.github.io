@@ -649,7 +649,177 @@ update-ca-certificates
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">cp yourdomain.com.crt /etc/pki/ca-trust/source/anchors/reg.yourdomain.com.crt
 update-ca-trust
 &lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;/ol></description></item><item><title>Docs: DEIS 开源PAAS平台实践</title><link>https://xiaoping378.github.io/docs/4-cloud/k8s/deis-%E5%BC%80%E6%BA%90paas%E5%B9%B3%E5%8F%B0%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/k8s/deis-%E5%BC%80%E6%BA%90paas%E5%B9%B3%E5%8F%B0%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93/</guid><description>
+&lt;/ol></description></item><item><title>Docs: k3s实践-01</title><link>https://xiaoping378.github.io/docs/4-cloud/k8s/k3s-%E5%BC%80%E7%AF%87/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/k8s/k3s-%E5%BC%80%E7%AF%87/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>本文主要介绍k3s的安装和核心组件解读。&lt;/p>
+&lt;/div>
+&lt;p>k3s是all-in-one的轻量k8s发行版，把所有k8s组件打包成一个不到100M的二进制文件了。具备如下显著特点：&lt;/p>
+&lt;ul>
+&lt;li>打包成单一二进制&lt;/li>
+&lt;li>默认集成了sqlite3来替代etcd，也可以指定其他数据库：etcd3、mysql、postgres。&lt;/li>
+&lt;li>默认内置Coredns、Metrics Server、Flannel、Traefik ingress、Local-path-provisioner等&lt;/li>
+&lt;li>默认启用了TLS加密通信。&lt;/li>
+&lt;/ul>
+&lt;h2 id="安装">安装&lt;/h2>
+&lt;p>官方提供了一键安装脚本&lt;a href="https://get.k3s.io">install.sh&lt;/a> ，执行&lt;code>curl -sfL https://get.k3s.io | sh -&lt;/code>可一键安装server端。此命令会从&lt;code>https://update.k3s.io/v1-release/channels/stable&lt;/code>取到最新的稳定版安装，可以通过&lt;code>INSTALL_K3S_VERSION&lt;/code>环境变量指定版本，本文将以1.19为例。&lt;/p>
+&lt;p>&lt;strong>启动 k3s server端(master节点).&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">curl -sfL https://get.k3s.io | &lt;span style="color:#b8860b">INSTALL_K3S_VERSION&lt;/span>&lt;span style="color:#666">=&lt;/span>v1.19.16+k3s1 sh -
+&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>由于网络原因，可能会失败，自行想办法&lt;a href="https://github.com/k3s-io/k3s/releases/download/v1.19.16+k3s1/k3s">下载&lt;/a>下来，放置 &lt;code>/usr/local/bin/k3s&lt;/code>，附上执行权限&lt;code>chmod a+x /usr/local/bin/k3s&lt;/code>, 然后上面的命令加上&lt;code>INSTALL_K3S_SKIP_DOWNLOAD=true&lt;/code>再执行一遍即可。&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>安装里log里会输出一些重要信息: &lt;code>kubectl、crictl、卸载脚本、systemd service&lt;/code>&lt;/p>
+&lt;/blockquote>
+&lt;p>不出意外，k3s server会被systemd启动，执行命令查看&lt;code>systemctl status k3s&lt;/code>或者通过软链的kubectl验证是否启动成功：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ kubectl get no
+NAME STATUS ROLES AGE VERSION
+gitlab-server Ready master 6m43s v1.19.16+k3s1
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>(Optional)&lt;/strong> 启动 k3s agent端 (添加worker节点).&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">curl -sfL https://get.k3s.io | &lt;span style="color:#b8860b">K3S_URL&lt;/span>&lt;span style="color:#666">=&lt;/span>https://172.25.11.130:6443 &lt;span style="color:#b8860b">K3S_TOKEN&lt;/span>&lt;span style="color:#666">=&lt;/span>bulabula &lt;span style="color:#b8860b">INSTALL_K3S_VERSION&lt;/span>&lt;span style="color:#666">=&lt;/span>v1.19.16+k3s1 sh -
+&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>&lt;code>K3S_TOKEN&lt;/code>内容需要从server端的&lt;code>/var/lib/rancher/k3s/server/node-token&lt;/code>文件取出&lt;/li>
+&lt;li>&lt;code>K3S_URL&lt;/code>中的IP是master节点的IP。&lt;/li>
+&lt;/ul>
+&lt;h2 id="集群访问">集群访问&lt;/h2>
+&lt;p>默认kubectl通过localhost访问本地集群，所以上文敲kubectl是没问题的，如果要被外部访问或者纳管的话，可以把kubeconfig文件拷走，默认路径是 &lt;code>/etc/rancher/k3s/k3s.yaml&lt;/code>
+。记得修改文件内的server字段，改成外部可访问到的IP。&lt;/p>
+&lt;h2 id="架构说明">架构说明&lt;/h2>
+&lt;p>TODO.&lt;/p></description></item><item><title>Docs: k8s controllers工程化实践</title><link>https://xiaoping378.github.io/docs/4-cloud/k8s/k8s-controlelrs%E5%B7%A5%E7%A8%8B%E5%8C%96%E5%BC%80%E5%8F%91/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/k8s/k8s-controlelrs%E5%B7%A5%E7%A8%8B%E5%8C%96%E5%BC%80%E5%8F%91/</guid><description>
+&lt;h1 id="controllers工程化">controllers工程化&lt;/h1>
+&lt;h2 id="工程化的目标">工程化的目标&lt;/h2>
+&lt;p>controller工程化的定义，建立一个可持续迭代的工程，包括但不限于以下目标。&lt;/p>
+&lt;ul>
+&lt;li>支持多group资源（多个controller）&lt;/li>
+&lt;li>更改CR字段后，可无缝升级（重新生产CR和API）&lt;/li>
+&lt;li>API文档化&lt;/li>
+&lt;li>CR部署初始化&lt;/li>
+&lt;li>ARM多架构编译和镜像构建&lt;/li>
+&lt;li>单元测试覆盖率，golang-ci代码扫描。&lt;/li>
+&lt;li>暴露关键的监控指标和事件日志&lt;/li>
+&lt;li>高可用&lt;/li>
+&lt;li>关注规模性能&lt;/li>
+&lt;li>安全问题
+&lt;ul>
+&lt;li>webhook证书，统一管理&lt;/li>
+&lt;li>组件Token权限&lt;/li>
+&lt;li>CR幂等性&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="创建一个operator">创建一个Operator&lt;/h2>
+&lt;p>利用kubebuilder初始化一个Operator，背后依赖controller-runtime和controller-gen&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">mkdir -p ~/app &lt;span style="color:#666">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#a2f">cd&lt;/span> ~/app
+kubebuilder init --domain cebpaas.io --repo cebpaas.io/appmanager
+&lt;span style="color:#080;font-style:italic"># Writing kustomize manifests for you to edit...&lt;/span>
+&lt;span style="color:#080;font-style:italic"># Writing scaffold for you to edit...&lt;/span>
+&lt;span style="color:#080;font-style:italic"># Get controller runtime:&lt;/span>
+&lt;span style="color:#080;font-style:italic"># $ go get sigs.k8s.io/controller-runtime@v0.11.2&lt;/span>
+&lt;span style="color:#080;font-style:italic"># Update dependencies:&lt;/span>
+&lt;span style="color:#080;font-style:italic"># $ go mod tidy&lt;/span>
+&lt;span style="color:#080;font-style:italic"># Next: define a resource with:&lt;/span>
+&lt;span style="color:#080;font-style:italic"># $ kubebuilder create api&lt;/span>
+&lt;span style="color:#080;font-style:italic">#可选命令, 本处执行的话，可省略下文的“多个controller合并”&lt;/span>
+&lt;span style="color:#080;font-style:italic">#kubebuilder edit --multigroup=true&lt;/span>
+kubebuilder create api --group apps --version v1 --kind Application
+&lt;span style="color:#080;font-style:italic"># Create Resource [y/n]&lt;/span>
+&lt;span style="color:#080;font-style:italic"># y&lt;/span>
+&lt;span style="color:#080;font-style:italic"># Create Controller [y/n]&lt;/span>
+&lt;span style="color:#080;font-style:italic"># y&lt;/span>
+&lt;span style="color:#080;font-style:italic"># Writing kustomize manifests for you to edit...&lt;/span>
+&lt;span style="color:#080;font-style:italic"># Writing scaffold for you to edit...&lt;/span>
+&lt;span style="color:#080;font-style:italic"># api/v1/application_types.go&lt;/span>
+&lt;span style="color:#080;font-style:italic"># controllers/application_controller.go&lt;/span>
+&lt;span style="color:#080;font-style:italic"># Update dependencies:&lt;/span>
+&lt;span style="color:#080;font-style:italic"># $ go mod tidy&lt;/span>
+&lt;span style="color:#080;font-style:italic"># Running make:&lt;/span>
+&lt;span style="color:#080;font-style:italic"># $ make generate&lt;/span>
+&lt;span style="color:#080;font-style:italic"># mkdir -p /root/app/bin&lt;/span>
+&lt;span style="color:#080;font-style:italic"># GOBIN=/root/app/bin go install sigs.k8s.io/controller-tools/cmd/controller-gen@v0.8.0&lt;/span>
+&lt;span style="color:#080;font-style:italic"># /root/app/bin/controller-gen object:headerFile=&amp;#34;hack/boilerplate.go.txt&amp;#34; paths=&amp;#34;./...&amp;#34;&lt;/span>
+&lt;span style="color:#080;font-style:italic"># Next: implement your new API and generate the manifests (e.g. CRDs,CRs) with:&lt;/span>
+&lt;span style="color:#080;font-style:italic"># $ make manifests&lt;/span>
+make manifests
+&lt;span style="color:#080;font-style:italic"># /root/app/bin/controller-gen rbac:roleName=manager-role crd webhook paths=&amp;#34;./...&amp;#34; output:crd:artifacts:config=config/crd/bases&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="多个group-controller合并">多个group controller合并&lt;/h2>
+&lt;p>开启多controller操作，&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#080;font-style:italic"># 开启多controller&lt;/span>
+kubebuilder edit --multigroup&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#a2f">true&lt;/span>
+&lt;span style="color:#080;font-style:italic"># 手动修复之前默认创建的单仓，apps是之前示例中创建的group&lt;/span>
+mkdir apis/apps
+mv api/* apis/apps
+&lt;span style="color:#080;font-style:italic"># After ensuring that all was moved successfully remove the old directory `api/`&lt;/span>
+rm -rf api/
+mkdir controllers/apps
+mv controllers/* controllers/apps/
+&lt;span style="color:#080;font-style:italic"># 修改之前go文件的import错误和package名称（controllers-&amp;gt;apps）&lt;/span>
+&lt;span style="color:#080;font-style:italic"># 修改`controllers/&amp;lt;group&amp;gt;/suite_test.go`文件中的CRDDirectoryPaths路径错误&lt;/span>
+&lt;span style="color:#080;font-style:italic"># CRDDirectoryPaths: []string{filepath.Join(&amp;#34;..&amp;#34;, &amp;#34;..&amp;#34;, &amp;#34;config&amp;#34;, &amp;#34;crd&amp;#34;, &amp;#34;bases&amp;#34;)},&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>如上修改完毕，就可以添加新的group资源了.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">kubebuilder create api --group cronhpacontroller --version v1 --kind Cronhpa
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>最终的目录结构&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">tree -L &lt;span style="color:#666">2&lt;/span>
+.
+├── apis
+│ ├── apps &lt;span style="color:#080;font-style:italic"># 同group多个kind资源，会默认生成在此目录&lt;/span>
+│ └── cronhpacontroller &lt;span style="color:#080;font-style:italic"># 此处为新添加的group&lt;/span>
+├── bin
+│ └── controller-gen
+├── config
+│ ├── crd
+│ ├── default
+│ ├── manager
+│ ├── prometheus
+│ ├── rbac
+│ └── samples
+├── controllers
+│ ├── apps
+│ └── cronhpacontroller
+├── Dockerfile
+├── go.mod
+├── go.sum
+├── hack
+│ └── boilerplate.go.txt
+├── main.go
+├── Makefile
+├── PROJECT
+└── README.md
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="小计">小计&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>controller-runtime架构&lt;/strong>
+&lt;img src="https://xiaoping378.github.io/static/images/controller%E5%B7%A5%E7%A8%8B%E5%8C%96-share-2023-03-14-23-32-21.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>controller-gen&lt;/strong>, 根据go文件里的标记注释，按规则自动生成DeepCopy代码、CR manifest、Webhook、Role等对象。&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>bin/controller-gen -hh&lt;/code> 查看命令可用参数，内置5类生成器。&lt;/li>
+&lt;li>&lt;code>bin/controller-gen crd -ww&lt;/code> 查看各类生成器支持的标记注释。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>code-generator&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>KCP使用了该工具，该工具集成在k8s主仓库中，内置多种生成器(deepcopy、informers、listers、&lt;strong>clientsets&lt;/strong>、&lt;strong>openapi&lt;/strong>等)，相对更底层，需要自己封装实现controller-runtime的功能，官方给出了可参考的示例&lt;code>sample-controller&lt;/code>。&lt;/li>
+&lt;li>ClientSet提供了如k8s内置资源的便捷操作方法，可避免使用DynamicClient去操作非结构化数据结构。&lt;/li>
+&lt;li>client-go支持RESTClient、ClientSet、DynamicClient、DiscoveryClient四种客户端。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Operator开发有多种方案&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>Kubebuilder&lt;/code>(controller-runtime + controller-gen)&lt;/li>
+&lt;li>&lt;code>Code-generator&lt;/code> + sample-controller&lt;/li>
+&lt;li>&lt;code>Operator SDK&lt;/code> 基于kubebuidler扩展了更多的企业级功能，如OLM、OperatorHub和其他技术栈（ansible、helm）的Operator能力。&lt;/li>
+&lt;li>其他&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>目前ACP中，前两种都用到了，推测主要原因是kubebuilder v2版本不支持mutli-group特性。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>kubebuilder自动创建api时，可以选择是否生产controller，如果只选择生成resource，相当于只创建CR注册和安装初始化的内容（生成apis目录下的 _types.go和deepcopy代码）。&lt;/p>
+&lt;/li>
+&lt;/ul></description></item><item><title>Docs: DEIS 开源PAAS平台实践</title><link>https://xiaoping378.github.io/docs/4-cloud/k8s/deis-%E5%BC%80%E6%BA%90paas%E5%B9%B3%E5%8F%B0%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/k8s/deis-%E5%BC%80%E6%BA%90paas%E5%B9%B3%E5%8F%B0%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93/</guid><description>
 &lt;p>DEIS（目前已被微软收购）的workflow是开源的Paas平台，基于kubernetes做了一层面向开发者的CLI和接口，做到了让开发者对容器无感知的情况下快速的开发和部署线上应用。&lt;/p>
 &lt;blockquote>
 &lt;p>workflow是 on top of k8s的，所有组件默认全是跑在pod里的，不像openshift那样对k8s的侵入性很大。&lt;/p>
@@ -759,42 +929,7 @@ Configuration file written to /home/xxp/.deis/client.json
 ➜ ~ deis whoami
 You are admin at http://deis.192.168.31.49.xip.io
 &lt;/code>&lt;/pre>
-&lt;h3 id="部署第一个应用">部署第一个应用&lt;/h3></description></item><item><title>Docs: k3s实践-01</title><link>https://xiaoping378.github.io/docs/4-cloud/k8s/k3s-%E5%BC%80%E7%AF%87/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/k8s/k3s-%E5%BC%80%E7%AF%87/</guid><description>
-&lt;div class="pageinfo pageinfo-primary">
-&lt;p>本文主要介绍k3s的安装和核心组件解读。&lt;/p>
-&lt;/div>
-&lt;p>k3s是all-in-one的轻量k8s发行版，把所有k8s组件打包成一个不到100M的二进制文件了。具备如下显著特点：&lt;/p>
-&lt;ul>
-&lt;li>打包成单一二进制&lt;/li>
-&lt;li>默认集成了sqlite3来替代etcd，也可以指定其他数据库：etcd3、mysql、postgres。&lt;/li>
-&lt;li>默认内置Coredns、Metrics Server、Flannel、Traefik ingress、Local-path-provisioner等&lt;/li>
-&lt;li>默认启用了TLS加密通信。&lt;/li>
-&lt;/ul>
-&lt;h2 id="安装">安装&lt;/h2>
-&lt;p>官方提供了一键安装脚本&lt;a href="https://get.k3s.io">install.sh&lt;/a> ，执行&lt;code>curl -sfL https://get.k3s.io | sh -&lt;/code>可一键安装server端。此命令会从&lt;code>https://update.k3s.io/v1-release/channels/stable&lt;/code>取到最新的稳定版安装，可以通过&lt;code>INSTALL_K3S_VERSION&lt;/code>环境变量指定版本，本文将以1.19为例。&lt;/p>
-&lt;p>&lt;strong>启动 k3s server端(master节点).&lt;/strong>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">curl -sfL https://get.k3s.io | &lt;span style="color:#b8860b">INSTALL_K3S_VERSION&lt;/span>&lt;span style="color:#666">=&lt;/span>v1.19.16+k3s1 sh -
-&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>由于网络原因，可能会失败，自行想办法&lt;a href="https://github.com/k3s-io/k3s/releases/download/v1.19.16+k3s1/k3s">下载&lt;/a>下来，放置 &lt;code>/usr/local/bin/k3s&lt;/code>，附上执行权限&lt;code>chmod a+x /usr/local/bin/k3s&lt;/code>, 然后上面的命令加上&lt;code>INSTALL_K3S_SKIP_DOWNLOAD=true&lt;/code>再执行一遍即可。&lt;/p>
-&lt;/blockquote>
-&lt;blockquote>
-&lt;p>安装里log里会输出一些重要信息: &lt;code>kubectl、crictl、卸载脚本、systemd service&lt;/code>&lt;/p>
-&lt;/blockquote>
-&lt;p>不出意外，k3s server会被systemd启动，执行命令查看&lt;code>systemctl status k3s&lt;/code>或者通过软链的kubectl验证是否启动成功：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ kubectl get no
-NAME STATUS ROLES AGE VERSION
-gitlab-server Ready master 6m43s v1.19.16+k3s1
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>(Optional)&lt;/strong> 启动 k3s agent端 (添加worker节点).&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">curl -sfL https://get.k3s.io | &lt;span style="color:#b8860b">K3S_URL&lt;/span>&lt;span style="color:#666">=&lt;/span>https://172.25.11.130:6443 &lt;span style="color:#b8860b">K3S_TOKEN&lt;/span>&lt;span style="color:#666">=&lt;/span>bulabula &lt;span style="color:#b8860b">INSTALL_K3S_VERSION&lt;/span>&lt;span style="color:#666">=&lt;/span>v1.19.16+k3s1 sh -
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>&lt;code>K3S_TOKEN&lt;/code>内容需要从server端的&lt;code>/var/lib/rancher/k3s/server/node-token&lt;/code>文件取出&lt;/li>
-&lt;li>&lt;code>K3S_URL&lt;/code>中的IP是master节点的IP。&lt;/li>
-&lt;/ul>
-&lt;h2 id="集群访问">集群访问&lt;/h2>
-&lt;p>默认kubectl通过localhost访问本地集群，所以上文敲kubectl是没问题的，如果要被外部访问或者纳管的话，可以把kubeconfig文件拷走，默认路径是 &lt;code>/etc/rancher/k3s/k3s.yaml&lt;/code>
-。记得修改文件内的server字段，改成外部可访问到的IP。&lt;/p>
-&lt;h2 id="架构说明">架构说明&lt;/h2>
-&lt;p>TODO.&lt;/p></description></item><item><title>Docs: kubeshere 自研-01</title><link>https://xiaoping378.github.io/docs/4-cloud/k8s/kubesphere-01/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/k8s/kubesphere-01/</guid><description>
+&lt;h3 id="部署第一个应用">部署第一个应用&lt;/h3></description></item><item><title>Docs: kubeshere 自研-01</title><link>https://xiaoping378.github.io/docs/4-cloud/k8s/kubesphere-01/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/k8s/kubesphere-01/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
 &lt;p>kubesphere 自研环境篇&lt;/p>
 &lt;/div>

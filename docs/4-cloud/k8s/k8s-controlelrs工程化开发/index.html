@@ -3,23 +3,24 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=generator content="Hugo 0.91.2">
-<link rel=alternate type=text/html href=https://xiaoping378.github.io/docs/2-infra/linux/_print/>
-<link rel=alternate type=application/rss+xml href=https://xiaoping378.github.io/docs/2-infra/linux/index.xml>
 <meta name=robots content="index, follow">
 <link rel="shortcut icon" href=/favicons/favicon.ico>
-<title>linux基础 | 现代技能栈</title>
-<meta name=description content="linux基础操作介绍
+<title>k8s controllers工程化实践 | 现代技能栈</title>
+<meta name=description content="k8s controllers工程化实践总结。 
 ">
-<meta property="og:title" content="linux基础">
-<meta property="og:description" content="linux基础操作介绍
+<meta property="og:title" content="k8s controllers工程化实践">
+<meta property="og:description" content="k8s controllers工程化实践总结。 
 ">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://xiaoping378.github.io/docs/2-infra/linux/"><meta property="og:site_name" content="现代技能栈">
-<meta itemprop=name content="linux基础">
-<meta itemprop=description content="linux基础操作介绍
-"><meta name=twitter:card content="summary">
-<meta name=twitter:title content="linux基础">
-<meta name=twitter:description content="linux基础操作介绍
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://xiaoping378.github.io/docs/4-cloud/k8s/k8s-controlelrs%E5%B7%A5%E7%A8%8B%E5%8C%96%E5%BC%80%E5%8F%91/"><meta property="article:section" content="docs">
+<meta property="og:site_name" content="现代技能栈">
+<meta itemprop=name content="k8s controllers工程化实践">
+<meta itemprop=description content="k8s controllers工程化实践总结。 
+">
+<meta itemprop=wordCount content="329">
+<meta itemprop=keywords content="容器,K8S,controller,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="k8s controllers工程化实践">
+<meta name=twitter:description content="k8s controllers工程化实践总结。 
 ">
 <link rel=preload href=/scss/main.min.d2bc7f6ad2027b8d511d38a54c20b15ad4617ecaa1fa8f57365017fe6f7ced3d.css as=style>
 <link href=/scss/main.min.d2bc7f6ad2027b8d511d38a54c20b15ad4617ecaa1fa8f57365017fe6f7ced3d.css rel=stylesheet integrity>
@@ -28,7 +29,7 @@
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-217913492-1','auto'),ga('send','pageview'))</script>
 <script async src=https://www.google-analytics.com/analytics.js></script>
 </head>
-<body class=td-section>
+<body class=td-page>
 <header>
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
 <a class=navbar-brand href=/>
@@ -87,8 +88,8 @@
 <label for=m-docs-1-site-tutorial2-check><a href=/docs/1-site/tutorial2/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-1-site-tutorial2><span>markdown语法</span></a></label>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs-2-infra-li>
-<input type=checkbox id=m-docs-2-infra-check checked>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-2-infra-li>
+<input type=checkbox id=m-docs-2-infra-check>
 <label for=m-docs-2-infra-check><a href=/docs/2-infra/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-2-infra><span>基础知识</span></a></label>
 <ul class="ul-2 foldable">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-2-infra-network-li>
@@ -106,9 +107,9 @@
 <label for=m-docs-2-infra-network-e6-b7-b7-e5-90-88-e4-ba-91sdn-e9-80-89-e5-9e-8b-check><a href=/docs/2-infra/network/%E6%B7%B7%E5%90%88%E4%BA%91sdn%E9%80%89%E5%9E%8B/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-2-infra-network-e6-b7-b7-e5-90-88-e4-ba-91sdn-e9-80-89-e5-9e-8b><span>混合云网络SDN</span></a></label>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs-2-infra-linux-li>
-<input type=checkbox id=m-docs-2-infra-linux-check checked>
-<label for=m-docs-2-infra-linux-check><a href=/docs/2-infra/linux/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__section" id=m-docs-2-infra-linux><span class=td-sidebar-nav-active-item>linux基础</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-2-infra-linux-li>
+<input type=checkbox id=m-docs-2-infra-linux-check>
+<label for=m-docs-2-infra-linux-check><a href=/docs/2-infra/linux/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-2-infra-linux><span>linux基础</span></a></label>
 <ul class="ul-3 foldable">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-2-infra-linux-centos-li>
 <input type=checkbox id=m-docs-2-infra-linux-centos-check>
@@ -165,8 +166,8 @@
 <label for=m-docs-3-devops-golang-monorepo-check><a href=/docs/3-devops/golang-monorepo/ title=Golang单仓monorepo协作的设计与实践 class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-3-devops-golang-monorepo><span>单仓协作管理</span></a></label>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-4-cloud-li>
-<input type=checkbox id=m-docs-4-cloud-check>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs-4-cloud-li>
+<input type=checkbox id=m-docs-4-cloud-check checked>
 <label for=m-docs-4-cloud-check><a href=/docs/4-cloud/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-4-cloud><span>云原生</span></a></label>
 <ul class="ul-2 foldable">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-4-cloud-containers-li>
@@ -199,8 +200,8 @@
 <label for=m-docs-4-cloud-containers-containerd-check><a href=/docs/4-cloud/containers/containerd/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-containers-containerd><span>从docker迁移到containerd</span></a></label>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docs-4-cloud-k8s-li>
-<input type=checkbox id=m-docs-4-cloud-k8s-check>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs-4-cloud-k8s-li>
+<input type=checkbox id=m-docs-4-cloud-k8s-check checked>
 <label for=m-docs-4-cloud-k8s-check><a href=/docs/4-cloud/k8s/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docs-4-cloud-k8s><span>Kubernetes</span></a></label>
 <ul class="ul-3 foldable">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-k8s-e6-ba-90-e7-a0-81-e9-83-a8-e7-bd-b2k8s-li>
@@ -224,9 +225,9 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-k8s-k3s-e5-bc-80-e7-af-87-li>
 <input type=checkbox id=m-docs-4-cloud-k8s-k3s-e5-bc-80-e7-af-87-check>
 <label for=m-docs-4-cloud-k8s-k3s-e5-bc-80-e7-af-87-check><a href=/docs/4-cloud/k8s/k3s-%E5%BC%80%E7%AF%87/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-k8s-k3s-e5-bc-80-e7-af-87><span>k3s实践-01</span></a></label>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-k8s-k8s-controlelrs-e5-b7-a5-e7-a8-8b-e5-8c-96-e5-bc-80-e5-8f-91-li>
-<input type=checkbox id=m-docs-4-cloud-k8s-k8s-controlelrs-e5-b7-a5-e7-a8-8b-e5-8c-96-e5-bc-80-e5-8f-91-check>
-<label for=m-docs-4-cloud-k8s-k8s-controlelrs-e5-b7-a5-e7-a8-8b-e5-8c-96-e5-bc-80-e5-8f-91-check><a href=/docs/4-cloud/k8s/k8s-controlelrs%E5%B7%A5%E7%A8%8B%E5%8C%96%E5%BC%80%E5%8F%91/ title="k8s controllers工程化实践" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-k8s-k8s-controlelrs-e5-b7-a5-e7-a8-8b-e5-8c-96-e5-bc-80-e5-8f-91><span>controllers工程化实践</span></a></label>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-docs-4-cloud-k8s-k8s-controlelrs-e5-b7-a5-e7-a8-8b-e5-8c-96-e5-bc-80-e5-8f-91-li>
+<input type=checkbox id=m-docs-4-cloud-k8s-k8s-controlelrs-e5-b7-a5-e7-a8-8b-e5-8c-96-e5-bc-80-e5-8f-91-check checked>
+<label for=m-docs-4-cloud-k8s-k8s-controlelrs-e5-b7-a5-e7-a8-8b-e5-8c-96-e5-bc-80-e5-8f-91-check><a href=/docs/4-cloud/k8s/k8s-controlelrs%E5%B7%A5%E7%A8%8B%E5%8C%96%E5%BC%80%E5%8F%91/ title="k8s controllers工程化实践" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-k8s-k8s-controlelrs-e5-b7-a5-e7-a8-8b-e5-8c-96-e5-bc-80-e5-8f-91><span class=td-sidebar-nav-active-item>controllers工程化实践</span></a></label>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docs-4-cloud-k8s-deis-e5-bc-80-e6-ba-90paas-e5-b9-b3-e5-8f-b0-e5-ae-9e-e8-b7-b5-e6-80-bb-e7-bb-93-li>
 <input type=checkbox id=m-docs-4-cloud-k8s-deis-e5-bc-80-e6-ba-90paas-e5-b9-b3-e5-8f-b0-e5-ae-9e-e8-b7-b5-e6-80-bb-e7-bb-93-check>
 <label for=m-docs-4-cloud-k8s-deis-e5-bc-80-e6-ba-90paas-e5-b9-b3-e5-8f-b0-e5-ae-9e-e8-b7-b5-e6-80-bb-e7-bb-93-check><a href=/docs/4-cloud/k8s/deis-%E5%BC%80%E6%BA%90paas%E5%B9%B3%E5%8F%B0%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docs-4-cloud-k8s-deis-e5-bc-80-e6-ba-90paas-e5-b9-b3-e5-8f-b0-e5-ae-9e-e8-b7-b5-e6-80-bb-e7-bb-93><span>DEIS 开源PAAS平台实践</span></a></label>
@@ -372,11 +373,19 @@
 </aside>
 <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
-<a href=https://github.com/xiaoping378/xiaoping378.github.io/edit/master///content/docs/2-Infra/Linux/_index.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
-<a href="https://github.com/xiaoping378/xiaoping378.github.io/new/master///content/docs/2-Infra/Linux/_index.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
-<a href="https://github.com/xiaoping378/xiaoping378.github.io/issues/new?title=linux%e5%9f%ba%e7%a1%80" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
-<a id=print href=https://xiaoping378.github.io/docs/2-infra/linux/_print/><i class="fa fa-print fa-fw"></i> 整节打印</a>
+<a href=https://github.com/xiaoping378/xiaoping378.github.io/edit/master///content/docs/4-Cloud/K8S/k8s-controlelrs%e5%b7%a5%e7%a8%8b%e5%8c%96%e5%bc%80%e5%8f%91.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
+<a href="https://github.com/xiaoping378/xiaoping378.github.io/new/master///content/docs/4-Cloud/K8S/k8s-controlelrs%e5%b7%a5%e7%a8%8b%e5%8c%96%e5%bc%80%e5%8f%91.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
+<a href="https://github.com/xiaoping378/xiaoping378.github.io/issues/new?title=k8s%20controllers%e5%b7%a5%e7%a8%8b%e5%8c%96%e5%ae%9e%e8%b7%b5" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
+<a id=print href=https://xiaoping378.github.io/docs/4-cloud/k8s/_print/><i class="fa fa-print fa-fw"></i> 整节打印</a>
 </div>
+<div class=td-toc><nav id=TableOfContents>
+<ul>
+<li><a href=#工程化的目标>工程化的目标</a></li>
+<li><a href=#创建一个operator>创建一个Operator</a></li>
+<li><a href=#多个group-controller合并>多个group controller合并</a></li>
+<li><a href=#小计>小计</a></li>
+</ul>
+</nav></div>
 <div class="taxonomy taxonomy-terms-cloud taxo-tags">
 <h5 class=taxonomy-title>标签</h5>
 <ul class=taxonomy-terms>
@@ -403,45 +412,170 @@
 <a href=https://xiaoping378.github.io/docs/>文档</a>
 </li>
 <li class=breadcrumb-item>
-<a href=https://xiaoping378.github.io/docs/2-infra/>基础知识</a>
+<a href=https://xiaoping378.github.io/docs/4-cloud/>云原生</a>
+</li>
+<li class=breadcrumb-item>
+<a href=https://xiaoping378.github.io/docs/4-cloud/k8s/>Kubernetes</a>
 </li>
 <li class="breadcrumb-item active" aria-current=page>
-<a href=https://xiaoping378.github.io/docs/2-infra/linux/>linux基础</a>
+<a href=https://xiaoping378.github.io/docs/4-cloud/k8s/k8s-controlelrs%E5%B7%A5%E7%A8%8B%E5%8C%96%E5%BC%80%E5%8F%91/>controllers工程化实践</a>
 </li>
 </ol>
 </nav>
 <div class=td-content>
-<h1>linux基础</h1>
-<div class=lead>linux基础操作介绍</div>
+<h1>k8s controllers工程化实践</h1>
+<div class=lead>k8s controllers工程化实践总结。</div>
 <header class=article-meta>
 <div class="taxonomy taxonomy-terms-article taxo-tags">
 <h5 class=taxonomy-title>Tags:</h5>
 <ul class=taxonomy-terms>
-<li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/linux/ data-taxonomy-term=linux><span class=taxonomy-label>linux</span></a></li>
+<li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/%E5%AE%B9%E5%99%A8/ data-taxonomy-term=%E5%AE%B9%E5%99%A8><span class=taxonomy-label>容器</span></a></li>
+<li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/k8s/ data-taxonomy-term=k8s><span class=taxonomy-label>K8S</span></a></li>
+<li><a class=taxonomy-term href=https://xiaoping378.github.io/tags/controller/ data-taxonomy-term=controller><span class=taxonomy-label>controller</span></a></li>
 </ul>
 </div>
 </header>
-<div class="pageinfo pageinfo-primary">
-<p>主要是本地环境搭建、日常使用技巧和linux性能方面的解读.</p>
-</div>
-<div class=section-index>
-<hr class=panel-line>
-<div class=entry>
-<h5>
-<a href=/docs/2-infra/linux/centos/>Centos7 配置记录</a>
-</h5>
-<p>记录centos7的日常操作记录</p>
-</div>
-<div class=entry>
-<h5>
-<a href=/docs/2-infra/linux/kernel/>裁剪内核-BootLoader</a>
-</h5>
-<p>记录定制化自己的linux内核和嵌入式硬件烧录引导的过程</p>
-</div>
-</div>
-<div class="text-muted mt-5 pt-3 border-top">
-最后修改 January 23, 2022: <a href=https://github.com/xiaoping378/xiaoping378.github.io/commit/1588b8be0d338604c7109e6a53d358c8a521c995>迁移陈年老文到新站 (1588b8b)</a>
-</div>
+<h1 id=controllers工程化>controllers工程化</h1>
+<h2 id=工程化的目标>工程化的目标</h2>
+<p>controller工程化的定义，建立一个可持续迭代的工程，包括但不限于以下目标。</p>
+<ul>
+<li>支持多group资源（多个controller）</li>
+<li>更改CR字段后，可无缝升级（重新生产CR和API）</li>
+<li>API文档化</li>
+<li>CR部署初始化</li>
+<li>ARM多架构编译和镜像构建</li>
+<li>单元测试覆盖率，golang-ci代码扫描。</li>
+<li>暴露关键的监控指标和事件日志</li>
+<li>高可用</li>
+<li>关注规模性能</li>
+<li>安全问题
+<ul>
+<li>webhook证书，统一管理</li>
+<li>组件Token权限</li>
+<li>CR幂等性</li>
+</ul>
+</li>
+</ul>
+<h2 id=创建一个operator>创建一个Operator</h2>
+<p>利用kubebuilder初始化一个Operator，背后依赖controller-runtime和controller-gen</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>mkdir -p ~/app <span style=color:#666>&amp;&amp;</span> <span style=color:#a2f>cd</span> ~/app
+
+kubebuilder init --domain cebpaas.io --repo cebpaas.io/appmanager
+<span style=color:#080;font-style:italic># Writing kustomize manifests for you to edit...</span>
+<span style=color:#080;font-style:italic># Writing scaffold for you to edit...</span>
+<span style=color:#080;font-style:italic># Get controller runtime:</span>
+<span style=color:#080;font-style:italic># $ go get sigs.k8s.io/controller-runtime@v0.11.2</span>
+<span style=color:#080;font-style:italic># Update dependencies:</span>
+<span style=color:#080;font-style:italic># $ go mod tidy</span>
+<span style=color:#080;font-style:italic># Next: define a resource with:</span>
+<span style=color:#080;font-style:italic># $ kubebuilder create api</span>
+
+<span style=color:#080;font-style:italic>#可选命令, 本处执行的话，可省略下文的“多个controller合并”</span>
+<span style=color:#080;font-style:italic>#kubebuilder edit --multigroup=true</span>
+
+kubebuilder create api --group apps --version v1 --kind Application
+<span style=color:#080;font-style:italic># Create Resource [y/n]</span>
+<span style=color:#080;font-style:italic># y</span>
+<span style=color:#080;font-style:italic># Create Controller [y/n]</span>
+<span style=color:#080;font-style:italic># y</span>
+<span style=color:#080;font-style:italic># Writing kustomize manifests for you to edit...</span>
+<span style=color:#080;font-style:italic># Writing scaffold for you to edit...</span>
+<span style=color:#080;font-style:italic># api/v1/application_types.go</span>
+<span style=color:#080;font-style:italic># controllers/application_controller.go</span>
+<span style=color:#080;font-style:italic># Update dependencies:</span>
+<span style=color:#080;font-style:italic># $ go mod tidy</span>
+<span style=color:#080;font-style:italic># Running make:</span>
+<span style=color:#080;font-style:italic># $ make generate</span>
+<span style=color:#080;font-style:italic># mkdir -p /root/app/bin</span>
+<span style=color:#080;font-style:italic># GOBIN=/root/app/bin go install sigs.k8s.io/controller-tools/cmd/controller-gen@v0.8.0</span>
+<span style=color:#080;font-style:italic># /root/app/bin/controller-gen object:headerFile=&#34;hack/boilerplate.go.txt&#34; paths=&#34;./...&#34;</span>
+<span style=color:#080;font-style:italic># Next: implement your new API and generate the manifests (e.g. CRDs,CRs) with:</span>
+<span style=color:#080;font-style:italic># $ make manifests</span>
+make manifests
+<span style=color:#080;font-style:italic># /root/app/bin/controller-gen rbac:roleName=manager-role crd webhook paths=&#34;./...&#34; output:crd:artifacts:config=config/crd/bases</span>
+</code></pre></div><h2 id=多个group-controller合并>多个group controller合并</h2>
+<p>开启多controller操作，</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#080;font-style:italic># 开启多controller</span>
+kubebuilder edit --multigroup<span style=color:#666>=</span><span style=color:#a2f>true</span>
+<span style=color:#080;font-style:italic># 手动修复之前默认创建的单仓，apps是之前示例中创建的group</span>
+mkdir apis/apps
+mv api/* apis/apps
+<span style=color:#080;font-style:italic># After ensuring that all was moved successfully remove the old directory `api/`</span>
+rm -rf api/ 
+
+mkdir controllers/apps
+mv controllers/* controllers/apps/
+
+<span style=color:#080;font-style:italic># 修改之前go文件的import错误和package名称（controllers-&gt;apps）</span>
+
+<span style=color:#080;font-style:italic># 修改`controllers/&lt;group&gt;/suite_test.go`文件中的CRDDirectoryPaths路径错误</span>
+<span style=color:#080;font-style:italic># CRDDirectoryPaths: []string{filepath.Join(&#34;..&#34;, &#34;..&#34;, &#34;config&#34;, &#34;crd&#34;, &#34;bases&#34;)},</span>
+</code></pre></div><p>如上修改完毕，就可以添加新的group资源了.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubebuilder create api --group cronhpacontroller  --version v1 --kind Cronhpa
+</code></pre></div><p>最终的目录结构</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>tree -L <span style=color:#666>2</span>  
+.
+├── apis
+│   ├── apps <span style=color:#080;font-style:italic># 同group多个kind资源，会默认生成在此目录</span>
+│   └── cronhpacontroller <span style=color:#080;font-style:italic># 此处为新添加的group</span>
+├── bin
+│   └── controller-gen
+├── config
+│   ├── crd
+│   ├── default
+│   ├── manager
+│   ├── prometheus
+│   ├── rbac
+│   └── samples
+├── controllers
+│   ├── apps
+│   └── cronhpacontroller
+├── Dockerfile
+├── go.mod
+├── go.sum
+├── hack
+│   └── boilerplate.go.txt
+├── main.go
+├── Makefile
+├── PROJECT
+└── README.md
+</code></pre></div><h2 id=小计>小计</h2>
+<ul>
+<li>
+<p><strong>controller-runtime架构</strong>
+<img src=/static/images/controller%E5%B7%A5%E7%A8%8B%E5%8C%96-share-2023-03-14-23-32-21.png alt></p>
+</li>
+<li>
+<p><strong>controller-gen</strong>, 根据go文件里的标记注释，按规则自动生成DeepCopy代码、CR manifest、Webhook、Role等对象。</p>
+<ul>
+<li><code>bin/controller-gen -hh</code> 查看命令可用参数，内置5类生成器。</li>
+<li><code>bin/controller-gen crd -ww</code> 查看各类生成器支持的标记注释。</li>
+</ul>
+</li>
+<li>
+<p><strong>code-generator</strong></p>
+<ul>
+<li>KCP使用了该工具，该工具集成在k8s主仓库中，内置多种生成器(deepcopy、informers、listers、<strong>clientsets</strong>、<strong>openapi</strong>等)，相对更底层，需要自己封装实现controller-runtime的功能，官方给出了可参考的示例<code>sample-controller</code>。</li>
+<li>ClientSet提供了如k8s内置资源的便捷操作方法，可避免使用DynamicClient去操作非结构化数据结构。</li>
+<li>client-go支持RESTClient、ClientSet、DynamicClient、DiscoveryClient四种客户端。</li>
+</ul>
+</li>
+<li>
+<p>Operator开发有多种方案</p>
+<ul>
+<li><code>Kubebuilder</code>(controller-runtime + controller-gen)</li>
+<li><code>Code-generator</code> + sample-controller</li>
+<li><code>Operator SDK</code> 基于kubebuidler扩展了更多的企业级功能，如OLM、OperatorHub和其他技术栈（ansible、helm）的Operator能力。</li>
+<li>其他</li>
+</ul>
+</li>
+<li>
+<p>目前ACP中，前两种都用到了，推测主要原因是kubebuilder v2版本不支持mutli-group特性。</p>
+</li>
+<li>
+<p>kubebuilder自动创建api时，可以选择是否生产controller，如果只选择生成resource，相当于只创建CR注册和安装初始化的内容（生成apis目录下的 _types.go和deepcopy代码）。</p>
+</li>
+</ul>
 </div>
 </main>
 </div>
