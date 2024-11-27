@@ -80,7 +80,7 @@ kubectl -n kubesphere-system get cm kubesphere-config -o yaml | grep -v "apiVers
 - 在成员集群创建ns kube-federation-system
 - 在上面的命名空间中创建serviceAccount [clusterName]-kubesphere, 并绑定最高权限
 - 在主集群的kube-federation-system的命名空间创建`kubefedclusters.core.kubefed.io`，由kubefed stack驱动联邦的建立
-- 加入联邦后，主机群的联邦资源会通过kubefed stack同步过来
+- 加入联邦后，主集群的联邦资源会通过kubefed stack同步过去
 > 上述一顿操作，等效于 `kubefedctl join member-cluster --cluster-context member-cluster  --host-cluster-context host-cluster`
 
 

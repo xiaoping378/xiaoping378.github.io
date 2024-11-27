@@ -127,5 +127,3 @@ Casbin提供了非常灵活的权限校验模型，还提供了丰富的API，�
 
 ## 参考
 > https://casbin.org/docs/zh-CN/tutorials
-
-我的博客即将同步至腾讯云+社区，邀请大家一同入驻：https://cloud.tencent.com/developer/support-plan?invite_code=3ntkskjrcwow8
