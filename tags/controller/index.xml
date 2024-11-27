@@ -1,0 +1,136 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>现代技能栈 – controller</title><link>https://xiaoping378.gitee.io/tags/controller/</link><description>Recent content in controller on 现代技能栈</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://xiaoping378.gitee.io/tags/controller/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: k8s controllers工程化实践</title><link>https://xiaoping378.gitee.io/docs/4-cloud/k8s/k8s-controlelrs%E5%B7%A5%E7%A8%8B%E5%8C%96%E5%BC%80%E5%8F%91/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.gitee.io/docs/4-cloud/k8s/k8s-controlelrs%E5%B7%A5%E7%A8%8B%E5%8C%96%E5%BC%80%E5%8F%91/</guid><description>
+&lt;h1 id="controllers工程化">controllers工程化&lt;/h1>
+&lt;h2 id="工程化的目标">工程化的目标&lt;/h2>
+&lt;p>controller工程化的定义，建立一个可持续迭代的工程，包括但不限于以下目标。&lt;/p>
+&lt;ul>
+&lt;li>支持多group资源（多个controller）&lt;/li>
+&lt;li>更改CR字段后，可无缝升级（重新生产CR和API）&lt;/li>
+&lt;li>API文档化&lt;/li>
+&lt;li>CR部署初始化&lt;/li>
+&lt;li>ARM多架构编译和镜像构建&lt;/li>
+&lt;li>单元测试覆盖率，golang-ci代码扫描。&lt;/li>
+&lt;li>暴露关键的监控指标和事件日志&lt;/li>
+&lt;li>高可用&lt;/li>
+&lt;li>关注规模性能&lt;/li>
+&lt;li>安全问题
+&lt;ul>
+&lt;li>webhook证书，统一管理&lt;/li>
+&lt;li>组件Token权限&lt;/li>
+&lt;li>CR幂等性&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="创建一个operator">创建一个Operator&lt;/h2>
+&lt;p>利用kubebuilder初始化一个Operator，背后依赖controller-runtime和controller-gen&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">mkdir -p ~/app &lt;span style="color:#666">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#a2f">cd&lt;/span> ~/app
+kubebuilder init --domain cebpaas.io --repo cebpaas.io/appmanager
+&lt;span style="color:#080;font-style:italic"># Writing kustomize manifests for you to edit...&lt;/span>
+&lt;span style="color:#080;font-style:italic"># Writing scaffold for you to edit...&lt;/span>
+&lt;span style="color:#080;font-style:italic"># Get controller runtime:&lt;/span>
+&lt;span style="color:#080;font-style:italic"># $ go get sigs.k8s.io/controller-runtime@v0.11.2&lt;/span>
+&lt;span style="color:#080;font-style:italic"># Update dependencies:&lt;/span>
+&lt;span style="color:#080;font-style:italic"># $ go mod tidy&lt;/span>
+&lt;span style="color:#080;font-style:italic"># Next: define a resource with:&lt;/span>
+&lt;span style="color:#080;font-style:italic"># $ kubebuilder create api&lt;/span>
+&lt;span style="color:#080;font-style:italic">#可选命令, 本处执行的话，可省略下文的“多个controller合并”&lt;/span>
+&lt;span style="color:#080;font-style:italic">#kubebuilder edit --multigroup=true&lt;/span>
+kubebuilder create api --group apps --version v1 --kind Application
+&lt;span style="color:#080;font-style:italic"># Create Resource [y/n]&lt;/span>
+&lt;span style="color:#080;font-style:italic"># y&lt;/span>
+&lt;span style="color:#080;font-style:italic"># Create Controller [y/n]&lt;/span>
+&lt;span style="color:#080;font-style:italic"># y&lt;/span>
+&lt;span style="color:#080;font-style:italic"># Writing kustomize manifests for you to edit...&lt;/span>
+&lt;span style="color:#080;font-style:italic"># Writing scaffold for you to edit...&lt;/span>
+&lt;span style="color:#080;font-style:italic"># api/v1/application_types.go&lt;/span>
+&lt;span style="color:#080;font-style:italic"># controllers/application_controller.go&lt;/span>
+&lt;span style="color:#080;font-style:italic"># Update dependencies:&lt;/span>
+&lt;span style="color:#080;font-style:italic"># $ go mod tidy&lt;/span>
+&lt;span style="color:#080;font-style:italic"># Running make:&lt;/span>
+&lt;span style="color:#080;font-style:italic"># $ make generate&lt;/span>
+&lt;span style="color:#080;font-style:italic"># mkdir -p /root/app/bin&lt;/span>
+&lt;span style="color:#080;font-style:italic"># GOBIN=/root/app/bin go install sigs.k8s.io/controller-tools/cmd/controller-gen@v0.8.0&lt;/span>
+&lt;span style="color:#080;font-style:italic"># /root/app/bin/controller-gen object:headerFile=&amp;#34;hack/boilerplate.go.txt&amp;#34; paths=&amp;#34;./...&amp;#34;&lt;/span>
+&lt;span style="color:#080;font-style:italic"># Next: implement your new API and generate the manifests (e.g. CRDs,CRs) with:&lt;/span>
+&lt;span style="color:#080;font-style:italic"># $ make manifests&lt;/span>
+make manifests
+&lt;span style="color:#080;font-style:italic"># /root/app/bin/controller-gen rbac:roleName=manager-role crd webhook paths=&amp;#34;./...&amp;#34; output:crd:artifacts:config=config/crd/bases&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="多个group-controller合并">多个group controller合并&lt;/h2>
+&lt;p>开启多controller操作，&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#080;font-style:italic"># 开启多controller&lt;/span>
+kubebuilder edit --multigroup&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#a2f">true&lt;/span>
+&lt;span style="color:#080;font-style:italic"># 手动修复之前默认创建的单仓，apps是之前示例中创建的group&lt;/span>
+mkdir apis/apps
+mv api/* apis/apps
+&lt;span style="color:#080;font-style:italic"># After ensuring that all was moved successfully remove the old directory `api/`&lt;/span>
+rm -rf api/
+mkdir controllers/apps
+mv controllers/* controllers/apps/
+&lt;span style="color:#080;font-style:italic"># 修改之前go文件的import错误和package名称（controllers-&amp;gt;apps）&lt;/span>
+&lt;span style="color:#080;font-style:italic"># 修改`controllers/&amp;lt;group&amp;gt;/suite_test.go`文件中的CRDDirectoryPaths路径错误&lt;/span>
+&lt;span style="color:#080;font-style:italic"># CRDDirectoryPaths: []string{filepath.Join(&amp;#34;..&amp;#34;, &amp;#34;..&amp;#34;, &amp;#34;config&amp;#34;, &amp;#34;crd&amp;#34;, &amp;#34;bases&amp;#34;)},&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>如上修改完毕，就可以添加新的group资源了.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">kubebuilder create api --group cronhpacontroller --version v1 --kind Cronhpa
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>最终的目录结构&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">tree -L &lt;span style="color:#666">2&lt;/span>
+.
+├── apis
+│ ├── apps &lt;span style="color:#080;font-style:italic"># 同group多个kind资源，会默认生成在此目录&lt;/span>
+│ └── cronhpacontroller &lt;span style="color:#080;font-style:italic"># 此处为新添加的group&lt;/span>
+├── bin
+│ └── controller-gen
+├── config
+│ ├── crd
+│ ├── default
+│ ├── manager
+│ ├── prometheus
+│ ├── rbac
+│ └── samples
+├── controllers
+│ ├── apps
+│ └── cronhpacontroller
+├── Dockerfile
+├── go.mod
+├── go.sum
+├── hack
+│ └── boilerplate.go.txt
+├── main.go
+├── Makefile
+├── PROJECT
+└── README.md
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="小计">小计&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>controller-runtime架构&lt;/strong>
+&lt;img src="https://xiaoping378.gitee.io/static/images/controller%E5%B7%A5%E7%A8%8B%E5%8C%96-share-2023-03-14-23-32-21.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>controller-gen&lt;/strong>, 根据go文件里的标记注释，按规则自动生成DeepCopy代码、CR manifest、Webhook、Role等对象。&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>bin/controller-gen -hh&lt;/code> 查看命令可用参数，内置5类生成器。&lt;/li>
+&lt;li>&lt;code>bin/controller-gen crd -ww&lt;/code> 查看各类生成器支持的标记注释。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>code-generator&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>KCP使用了该工具，该工具集成在k8s主仓库中，内置多种生成器(deepcopy、informers、listers、&lt;strong>clientsets&lt;/strong>、&lt;strong>openapi&lt;/strong>等)，相对更底层，需要自己封装实现controller-runtime的功能，官方给出了可参考的示例&lt;code>sample-controller&lt;/code>。&lt;/li>
+&lt;li>ClientSet提供了如k8s内置资源的便捷操作方法，可避免使用DynamicClient去操作非结构化数据结构。&lt;/li>
+&lt;li>client-go支持RESTClient、ClientSet、DynamicClient、DiscoveryClient四种客户端。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Operator开发有多种方案&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>Kubebuilder&lt;/code>(controller-runtime + controller-gen)&lt;/li>
+&lt;li>&lt;code>Code-generator&lt;/code> + sample-controller&lt;/li>
+&lt;li>&lt;code>Operator SDK&lt;/code> 基于kubebuidler扩展了更多的企业级功能，如OLM、OperatorHub和其他技术栈（ansible、helm）的Operator能力。&lt;/li>
+&lt;li>其他&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>目前ACP中，前两种都用到了，推测主要原因是kubebuilder v2版本不支持mutli-group特性。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>kubebuilder自动创建api时，可以选择是否生产controller，如果只选择生成resource，相当于只创建CR注册和安装初始化的内容（生成apis目录下的 _types.go和deepcopy代码）。&lt;/p>
+&lt;/li>
+&lt;/ul></description></item></channel></rss>
