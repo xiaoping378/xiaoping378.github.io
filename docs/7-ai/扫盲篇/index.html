@@ -16,11 +16,9 @@
 <meta property="og:description" content="AI大模型应用开发-扫盲篇 当下从工程技术角度来看，AI大模型可以分为十个领域：前沿大模型、基准评估、提示思维链、检索增强生成、智能体、代码生成、视觉、声音、图像/视频扩散、微调。 本文旨在扫盲大模型应用开发基础概念，并介绍大模型应用开发的常见模式。
 一、怎样得到一个大模型？  有卡没卡两种玩法，如果只面向应用开发，结合上信息安全的背景，则推荐使用社区开源模型或集成企业内部模型(下节介绍)。
  1. 囤卡自己训练（全流程定制）   核心概念
- AI(artificial intelligence): 由来已久的概念，本文特指的生成式人工智能（gen AI），将机器学习和深度学习的神经网络提升到了一个新的水平。它可以创建新的内容和想法（例如图像和视频）, 也可以使用已知知识来解决新问题。 LLM (Large Language Model): 大型语言模型，是基于大量数据进行预训练得到的超大型深度学习模型，可自主学习（统计归纳），会理解（Token向量化）人类基本的语法、语言和知识。一般用参数的多少来衡量大模型能力。 GPT (Generative Pre-trained Transformer): 生成式预训练 Transformer 模型，是一系列使用 Transformer 架构的神经网络模型，能够回答产出（关联预测）类似人类的文本和内容（图像、音乐等），并以对话方式回答问题。 Transformer 模型: GPT的核心，是一种神经网络架构，它使用了自注意力机制（self-attention）来处理序列数据，并使用了多头自注意力（multi-head self-attention）来提高模型的性能。 Pre-trained (预训练): 在无标注通用数据（如Common Crawl）上训练出基础模型，从已知找规律（优化损失函数）学习语言规律和世界知识，预测产出未知。需从头构建模型，通常需要超万亿token的庞大数据集和数万张高性能GPU（如H100/A100）组成的算力集群。 Fine-tuning (微调): 在预训练模型基础上，用于特定领域数据（如金融客服、辅助编码）调整参数，使模型更适应垂直场景的推理。通常仅需调整少量参数（如使用LoRA技术调整0.1%-1%的参数），显存需求可降低至预训练的10%-20%。 蒸馏: 将大型复杂模型（教师模型）在有限损失的情况下知识转移到更小型、高效模型（学生模型）中, 这样做的好处包括降低计算成本、减少推理时间，同时保持高性能，适合资源受限环境的部署。    实施难点
- 硬件门槛: OpenAI的GPT-4预训练成本约7800万美元，下一代模型的训练成本可能突破10亿美元，甚至向100亿美元迈进。国内有厂商利用算法优化，达到GPT-4同等性能表现的情况下，使大模型训练成本大幅降低，但也需要近600万美元的成本。 数据要求: 需清洗TB级高质量文本，避免噪声干扰。 技术复杂度: 涉及分布式训练、梯度优化等工程难题。    适用场景
-当下大模型训练成本呈现“头部攀升、尾部下降”的极化现象。技术创新（算法优化、工程协同、开源生态）和国产算力替代为降本提供可能，此模式推荐巨头企业或科研机构用于前沿模型研发（如训练行业专属大模型）。
-   2. 下载社区开放模型（主流选择） 上一种方法，需要自己训练、微调得到一个LLM模型，现在介绍直接下载使用开放的大模型。
-  推荐平台">
+ AI(artificial intelligence): 由来已久的概念，本文特指的生成式人工智能（gen AI），将机器学习和深度学习的神经网络提升到了一个新的水平。它可以创建新的内容和想法（例如图像和视频）, 也可以使用已知知识来解决新问题。 LLM (Large Language Model): 大型语言模型，是基于大量数据进行预训练得到的超大型深度学习模型，可自主学习（统计归纳），会理解（Token向量化）人类基本的语法、语言和知识。一般用参数的多少来衡量大模型能力。 GPT (Generative Pre-trained Transformer): 生成式预训练 Transformer 模型，是一系列使用 Transformer 架构的神经网络模型，能够回答产出（关联预测）类似人类的文本和内容（图像、音乐等），并以对话方式回答问题。 Transformer 模型: GPT的核心，是一种神经网络架构，它使用了自注意力机制（self-attention）来处理序列数据，并使用了多头自注意力（multi-head self-attention）来提高模型的性能。 Pre-trained (预训练): 在无标注通用数据（如Common Crawl）上训练出基础模型，从已知找规律（优化损失函数）学习语言规律和世界知识，预测产出未知。需从头构建模型，通常需要超万亿token的庞大数据集和数万张高性能GPU（如H100/A100）组成的算力集群。 Fine-tuning (微调): 在预训练模型基础上，用于特定领域数据（如金融客服、辅助编码）调整参数，使模型更适应垂直场景的推理。通常仅需调整少量参数（如使用LoRA技术调整0.1%-1%的参数），显存需求可降低至预训练的10%-20%。 模型压缩: 模型压缩技术，如量化、剪枝、知识蒸馏等，可以减少模型的参数数量，从而降低显存需求。  知识蒸馏: 将大型复杂模型（教师模型）在有限损失的情况下知识转移到更小型、高效模型（学生模型）中, 这样做的好处包括降低计算成本、减少推理时间，同时保持高性能，适合资源受限环境的部署。 模型量化: 模型量化是指将模型参数从浮点数转换为整数或低精度数据类型，以减少存储和计算开销。     蒸馏提取精华，量化降低细节。
+   实施难点
+ 硬件门槛: OpenAI的GPT-4预训练成本约7800万美元，下一代模型的训练成本可能突破10亿美元，甚至向100亿美元迈进。国内有厂商利用算法优化，达到GPT-4同等性能表现的情况下，使大模型训练成本大幅降低，但也需要近600万美元的成本。 数据要求: 需清洗TB级高质量文本，避免噪声干扰。 技术复杂度: 涉及分布式训练、梯度优化等工程难题。    适用场景">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://xiaoping378.gitee.io/docs/7-ai/%E6%89%AB%E7%9B%B2%E7%AF%87/"><meta property="article:section" content="docs">
 <meta property="og:site_name" content="现代技能栈">
@@ -28,22 +26,18 @@
 <meta itemprop=description content="AI大模型应用开发-扫盲篇 当下从工程技术角度来看，AI大模型可以分为十个领域：前沿大模型、基准评估、提示思维链、检索增强生成、智能体、代码生成、视觉、声音、图像/视频扩散、微调。 本文旨在扫盲大模型应用开发基础概念，并介绍大模型应用开发的常见模式。
 一、怎样得到一个大模型？  有卡没卡两种玩法，如果只面向应用开发，结合上信息安全的背景，则推荐使用社区开源模型或集成企业内部模型(下节介绍)。
  1. 囤卡自己训练（全流程定制）   核心概念
- AI(artificial intelligence): 由来已久的概念，本文特指的生成式人工智能（gen AI），将机器学习和深度学习的神经网络提升到了一个新的水平。它可以创建新的内容和想法（例如图像和视频）, 也可以使用已知知识来解决新问题。 LLM (Large Language Model): 大型语言模型，是基于大量数据进行预训练得到的超大型深度学习模型，可自主学习（统计归纳），会理解（Token向量化）人类基本的语法、语言和知识。一般用参数的多少来衡量大模型能力。 GPT (Generative Pre-trained Transformer): 生成式预训练 Transformer 模型，是一系列使用 Transformer 架构的神经网络模型，能够回答产出（关联预测）类似人类的文本和内容（图像、音乐等），并以对话方式回答问题。 Transformer 模型: GPT的核心，是一种神经网络架构，它使用了自注意力机制（self-attention）来处理序列数据，并使用了多头自注意力（multi-head self-attention）来提高模型的性能。 Pre-trained (预训练): 在无标注通用数据（如Common Crawl）上训练出基础模型，从已知找规律（优化损失函数）学习语言规律和世界知识，预测产出未知。需从头构建模型，通常需要超万亿token的庞大数据集和数万张高性能GPU（如H100/A100）组成的算力集群。 Fine-tuning (微调): 在预训练模型基础上，用于特定领域数据（如金融客服、辅助编码）调整参数，使模型更适应垂直场景的推理。通常仅需调整少量参数（如使用LoRA技术调整0.1%-1%的参数），显存需求可降低至预训练的10%-20%。 蒸馏: 将大型复杂模型（教师模型）在有限损失的情况下知识转移到更小型、高效模型（学生模型）中, 这样做的好处包括降低计算成本、减少推理时间，同时保持高性能，适合资源受限环境的部署。    实施难点
- 硬件门槛: OpenAI的GPT-4预训练成本约7800万美元，下一代模型的训练成本可能突破10亿美元，甚至向100亿美元迈进。国内有厂商利用算法优化，达到GPT-4同等性能表现的情况下，使大模型训练成本大幅降低，但也需要近600万美元的成本。 数据要求: 需清洗TB级高质量文本，避免噪声干扰。 技术复杂度: 涉及分布式训练、梯度优化等工程难题。    适用场景
-当下大模型训练成本呈现“头部攀升、尾部下降”的极化现象。技术创新（算法优化、工程协同、开源生态）和国产算力替代为降本提供可能，此模式推荐巨头企业或科研机构用于前沿模型研发（如训练行业专属大模型）。
-   2. 下载社区开放模型（主流选择） 上一种方法，需要自己训练、微调得到一个LLM模型，现在介绍直接下载使用开放的大模型。
-  推荐平台">
-<meta itemprop=wordCount content="375">
+ AI(artificial intelligence): 由来已久的概念，本文特指的生成式人工智能（gen AI），将机器学习和深度学习的神经网络提升到了一个新的水平。它可以创建新的内容和想法（例如图像和视频）, 也可以使用已知知识来解决新问题。 LLM (Large Language Model): 大型语言模型，是基于大量数据进行预训练得到的超大型深度学习模型，可自主学习（统计归纳），会理解（Token向量化）人类基本的语法、语言和知识。一般用参数的多少来衡量大模型能力。 GPT (Generative Pre-trained Transformer): 生成式预训练 Transformer 模型，是一系列使用 Transformer 架构的神经网络模型，能够回答产出（关联预测）类似人类的文本和内容（图像、音乐等），并以对话方式回答问题。 Transformer 模型: GPT的核心，是一种神经网络架构，它使用了自注意力机制（self-attention）来处理序列数据，并使用了多头自注意力（multi-head self-attention）来提高模型的性能。 Pre-trained (预训练): 在无标注通用数据（如Common Crawl）上训练出基础模型，从已知找规律（优化损失函数）学习语言规律和世界知识，预测产出未知。需从头构建模型，通常需要超万亿token的庞大数据集和数万张高性能GPU（如H100/A100）组成的算力集群。 Fine-tuning (微调): 在预训练模型基础上，用于特定领域数据（如金融客服、辅助编码）调整参数，使模型更适应垂直场景的推理。通常仅需调整少量参数（如使用LoRA技术调整0.1%-1%的参数），显存需求可降低至预训练的10%-20%。 模型压缩: 模型压缩技术，如量化、剪枝、知识蒸馏等，可以减少模型的参数数量，从而降低显存需求。  知识蒸馏: 将大型复杂模型（教师模型）在有限损失的情况下知识转移到更小型、高效模型（学生模型）中, 这样做的好处包括降低计算成本、减少推理时间，同时保持高性能，适合资源受限环境的部署。 模型量化: 模型量化是指将模型参数从浮点数转换为整数或低精度数据类型，以减少存储和计算开销。     蒸馏提取精华，量化降低细节。
+   实施难点
+ 硬件门槛: OpenAI的GPT-4预训练成本约7800万美元，下一代模型的训练成本可能突破10亿美元，甚至向100亿美元迈进。国内有厂商利用算法优化，达到GPT-4同等性能表现的情况下，使大模型训练成本大幅降低，但也需要近600万美元的成本。 数据要求: 需清洗TB级高质量文本，避免噪声干扰。 技术复杂度: 涉及分布式训练、梯度优化等工程难题。    适用场景">
+<meta itemprop=wordCount content="380">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content>
 <meta name=twitter:description content="AI大模型应用开发-扫盲篇 当下从工程技术角度来看，AI大模型可以分为十个领域：前沿大模型、基准评估、提示思维链、检索增强生成、智能体、代码生成、视觉、声音、图像/视频扩散、微调。 本文旨在扫盲大模型应用开发基础概念，并介绍大模型应用开发的常见模式。
 一、怎样得到一个大模型？  有卡没卡两种玩法，如果只面向应用开发，结合上信息安全的背景，则推荐使用社区开源模型或集成企业内部模型(下节介绍)。
  1. 囤卡自己训练（全流程定制）   核心概念
- AI(artificial intelligence): 由来已久的概念，本文特指的生成式人工智能（gen AI），将机器学习和深度学习的神经网络提升到了一个新的水平。它可以创建新的内容和想法（例如图像和视频）, 也可以使用已知知识来解决新问题。 LLM (Large Language Model): 大型语言模型，是基于大量数据进行预训练得到的超大型深度学习模型，可自主学习（统计归纳），会理解（Token向量化）人类基本的语法、语言和知识。一般用参数的多少来衡量大模型能力。 GPT (Generative Pre-trained Transformer): 生成式预训练 Transformer 模型，是一系列使用 Transformer 架构的神经网络模型，能够回答产出（关联预测）类似人类的文本和内容（图像、音乐等），并以对话方式回答问题。 Transformer 模型: GPT的核心，是一种神经网络架构，它使用了自注意力机制（self-attention）来处理序列数据，并使用了多头自注意力（multi-head self-attention）来提高模型的性能。 Pre-trained (预训练): 在无标注通用数据（如Common Crawl）上训练出基础模型，从已知找规律（优化损失函数）学习语言规律和世界知识，预测产出未知。需从头构建模型，通常需要超万亿token的庞大数据集和数万张高性能GPU（如H100/A100）组成的算力集群。 Fine-tuning (微调): 在预训练模型基础上，用于特定领域数据（如金融客服、辅助编码）调整参数，使模型更适应垂直场景的推理。通常仅需调整少量参数（如使用LoRA技术调整0.1%-1%的参数），显存需求可降低至预训练的10%-20%。 蒸馏: 将大型复杂模型（教师模型）在有限损失的情况下知识转移到更小型、高效模型（学生模型）中, 这样做的好处包括降低计算成本、减少推理时间，同时保持高性能，适合资源受限环境的部署。    实施难点
- 硬件门槛: OpenAI的GPT-4预训练成本约7800万美元，下一代模型的训练成本可能突破10亿美元，甚至向100亿美元迈进。国内有厂商利用算法优化，达到GPT-4同等性能表现的情况下，使大模型训练成本大幅降低，但也需要近600万美元的成本。 数据要求: 需清洗TB级高质量文本，避免噪声干扰。 技术复杂度: 涉及分布式训练、梯度优化等工程难题。    适用场景
-当下大模型训练成本呈现“头部攀升、尾部下降”的极化现象。技术创新（算法优化、工程协同、开源生态）和国产算力替代为降本提供可能，此模式推荐巨头企业或科研机构用于前沿模型研发（如训练行业专属大模型）。
-   2. 下载社区开放模型（主流选择） 上一种方法，需要自己训练、微调得到一个LLM模型，现在介绍直接下载使用开放的大模型。
-  推荐平台">
+ AI(artificial intelligence): 由来已久的概念，本文特指的生成式人工智能（gen AI），将机器学习和深度学习的神经网络提升到了一个新的水平。它可以创建新的内容和想法（例如图像和视频）, 也可以使用已知知识来解决新问题。 LLM (Large Language Model): 大型语言模型，是基于大量数据进行预训练得到的超大型深度学习模型，可自主学习（统计归纳），会理解（Token向量化）人类基本的语法、语言和知识。一般用参数的多少来衡量大模型能力。 GPT (Generative Pre-trained Transformer): 生成式预训练 Transformer 模型，是一系列使用 Transformer 架构的神经网络模型，能够回答产出（关联预测）类似人类的文本和内容（图像、音乐等），并以对话方式回答问题。 Transformer 模型: GPT的核心，是一种神经网络架构，它使用了自注意力机制（self-attention）来处理序列数据，并使用了多头自注意力（multi-head self-attention）来提高模型的性能。 Pre-trained (预训练): 在无标注通用数据（如Common Crawl）上训练出基础模型，从已知找规律（优化损失函数）学习语言规律和世界知识，预测产出未知。需从头构建模型，通常需要超万亿token的庞大数据集和数万张高性能GPU（如H100/A100）组成的算力集群。 Fine-tuning (微调): 在预训练模型基础上，用于特定领域数据（如金融客服、辅助编码）调整参数，使模型更适应垂直场景的推理。通常仅需调整少量参数（如使用LoRA技术调整0.1%-1%的参数），显存需求可降低至预训练的10%-20%。 模型压缩: 模型压缩技术，如量化、剪枝、知识蒸馏等，可以减少模型的参数数量，从而降低显存需求。  知识蒸馏: 将大型复杂模型（教师模型）在有限损失的情况下知识转移到更小型、高效模型（学生模型）中, 这样做的好处包括降低计算成本、减少推理时间，同时保持高性能，适合资源受限环境的部署。 模型量化: 模型量化是指将模型参数从浮点数转换为整数或低精度数据类型，以减少存储和计算开销。     蒸馏提取精华，量化降低细节。
+   实施难点
+ 硬件门槛: OpenAI的GPT-4预训练成本约7800万美元，下一代模型的训练成本可能突破10亿美元，甚至向100亿美元迈进。国内有厂商利用算法优化，达到GPT-4同等性能表现的情况下，使大模型训练成本大幅降低，但也需要近600万美元的成本。 数据要求: 需清洗TB级高质量文本，避免噪声干扰。 技术复杂度: 涉及分布式训练、梯度优化等工程难题。    适用场景">
 <link rel=preload href=/scss/main.min.d2bc7f6ad2027b8d511d38a54c20b15ad4617ecaa1fa8f57365017fe6f7ced3d.css as=style>
 <link href=/scss/main.min.d2bc7f6ad2027b8d511d38a54c20b15ad4617ecaa1fa8f57365017fe6f7ced3d.css rel=stylesheet integrity>
 <script src=/js/jquery-3.5.1.min.js integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin=anonymous></script>
@@ -73,7 +67,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.569013d708b0c29fda2d4d0fe2364205.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.95266ca0fc2af3dde2f00e11e8172219.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -83,7 +77,7 @@
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.569013d708b0c29fda2d4d0fe2364205.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.95266ca0fc2af3dde2f00e11e8172219.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -480,8 +474,16 @@
 <li><strong>Transformer 模型</strong>: GPT的核心，是一种神经网络架构，它使用了自注意力机制（self-attention）来处理序列数据，并使用了多头自注意力（multi-head self-attention）来提高模型的性能。</li>
 <li><strong>Pre-trained (预训练)</strong>: 在无标注通用数据（如Common Crawl）上训练出基础模型，从已知找规律（优化损失函数）学习语言规律和世界知识，预测产出未知。需从头构建模型，通常需要超万亿token的庞大数据集和数万张高性能GPU（如H100/A100）组成的算力集群。</li>
 <li><strong>Fine-tuning (微调)</strong>: 在预训练模型基础上，用于特定领域数据（如金融客服、辅助编码）调整参数，使模型更适应垂直场景的推理。通常仅需调整少量参数（如使用LoRA技术调整0.1%-1%的参数），显存需求可降低至预训练的10%-20%。</li>
-<li><strong>蒸馏</strong>: 将大型复杂模型（教师模型）在有限损失的情况下知识转移到更小型、高效模型（学生模型）中, 这样做的好处包括降低计算成本、减少推理时间，同时保持高性能，适合资源受限环境的部署。</li>
+<li><strong>模型压缩</strong>: 模型压缩技术，如量化、剪枝、知识蒸馏等，可以减少模型的参数数量，从而降低显存需求。
+<ul>
+<li><strong>知识蒸馏</strong>: 将大型复杂模型（教师模型）在有限损失的情况下知识转移到更小型、高效模型（学生模型）中, 这样做的好处包括降低计算成本、减少推理时间，同时保持高性能，适合资源受限环境的部署。</li>
+<li><strong>模型量化</strong>: 模型量化是指将模型参数从浮点数转换为整数或低精度数据类型，以减少存储和计算开销。</li>
 </ul>
+</li>
+</ul>
+<blockquote>
+<p>蒸馏提取精华，量化降低细节。</p>
+</blockquote>
 </li>
 <li>
 <p><strong>实施难点</strong></p>
@@ -644,7 +646,7 @@
 <p><strong>本地私有化部署</strong></p>
 <ul>
 <li>
-<p><strong>部署工具推荐(推理引擎的选择)</strong>:</p>
+<p><strong>加速推理的引擎选择</strong>:</p>
 <table>
 <thead>
 <tr>
