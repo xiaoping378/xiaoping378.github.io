@@ -54,7 +54,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.fc99457703d70784c03b4b46448db8d5.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.569013d708b0c29fda2d4d0fe2364205.json data-offline-search-base-href=/ data-offline-search-max-results=10>
 </div>
 </nav>
 </header>
@@ -188,6 +188,7 @@
 <li>8: <a href=#pg-c06818113a7abe60306ad7c0f283489e>贡献指南</a></li>
 <ul>
 </ul>
+<li>9: <a href=#pg-6ac243da36f0c73916669a05cc1d8e84></a></li>
 </ul>
 <div class=content>
 <div class="pageinfo pageinfo-primary">
@@ -6346,6 +6347,435 @@ kubectl label node node0 <span style=color:#b8860b>ca</span><span style=color:#6
 <p>TOOD 待整理</p>
 </div>
 </div>
+<div class=td-content style=page-break-before:always>
+<h1 id=pg-6ac243da36f0c73916669a05cc1d8e84>9 - </h1>
+<h1 id=ai大模型应用开发-扫盲篇>AI大模型应用开发-扫盲篇</h1>
+<p>当下从工程技术角度来看，AI大模型可以分为十个领域：前沿大模型、基准评估、提示思维链、检索增强生成、智能体、代码生成、视觉、声音、图像/视频扩散、微调。
+本文旨在扫盲大模型应用开发基础概念，并介绍大模型应用开发的常见模式。</p>
+<h2 id=一-怎样得到一个大模型>一、怎样得到一个大模型？</h2>
+<blockquote>
+<p>有卡没卡两种玩法，如果只面向应用开发，结合上信息安全的背景，则推荐使用社区开源模型或集成企业内部模型(下节介绍)。</p>
+</blockquote>
+<h3 id=1-囤卡自己训练-全流程定制>1. 囤卡自己训练（全流程定制）</h3>
+<ul>
+<li>
+<p><strong>核心概念</strong></p>
+<ul>
+<li><strong>AI(artificial intelligence)</strong>: 由来已久的概念，本文特指的生成式人工智能（gen AI），将机器学习和深度学习的神经网络提升到了一个新的水平。它可以创建新的内容和想法（例如图像和视频）, 也可以使用已知知识来解决新问题。</li>
+<li><strong>LLM (Large Language Model)</strong>: 大型语言模型，是基于大量数据进行预训练得到的超大型深度学习模型，可自主学习（统计归纳），会理解（Token向量化）人类基本的语法、语言和知识。一般用参数的多少来衡量大模型能力。</li>
+<li><strong>GPT (Generative Pre-trained Transformer)</strong>: 生成式预训练 Transformer 模型，是一系列使用 Transformer 架构的神经网络模型，能够回答产出（关联预测）类似人类的文本和内容（图像、音乐等），并以对话方式回答问题。</li>
+<li><strong>Transformer 模型</strong>: GPT的核心，是一种神经网络架构，它使用了自注意力机制（self-attention）来处理序列数据，并使用了多头自注意力（multi-head self-attention）来提高模型的性能。</li>
+<li><strong>Pre-trained (预训练)</strong>: 在无标注通用数据（如Common Crawl）上训练出基础模型，从已知找规律（优化损失函数）学习语言规律和世界知识，预测产出未知。需从头构建模型，通常需要超万亿token的庞大数据集和数万张高性能GPU（如H100/A100）组成的算力集群。</li>
+<li><strong>Fine-tuning (微调)</strong>: 在预训练模型基础上，用于特定领域数据（如金融客服、辅助编码）调整参数，使模型更适应垂直场景的推理。通常仅需调整少量参数（如使用LoRA技术调整0.1%-1%的参数），显存需求可降低至预训练的10%-20%。</li>
+<li><strong>蒸馏</strong>: 将大型复杂模型（教师模型）在有限损失的情况下知识转移到更小型、高效模型（学生模型）中, 这样做的好处包括降低计算成本、减少推理时间，同时保持高性能，适合资源受限环境的部署。</li>
+</ul>
+</li>
+<li>
+<p><strong>实施难点</strong></p>
+<ul>
+<li><strong>硬件门槛</strong>: OpenAI的GPT-4预训练成本约7800万美元，下一代模型的训练成本可能突破10亿美元，甚至向100亿美元迈进。国内有厂商利用算法优化，达到GPT-4同等性能表现的情况下，使大模型训练成本大幅降低，但也需要近600万美元的成本。</li>
+<li><strong>数据要求</strong>: 需清洗TB级高质量文本，避免噪声干扰。</li>
+<li><strong>技术复杂度</strong>: 涉及分布式训练、梯度优化等工程难题。</li>
+</ul>
+</li>
+<li>
+<p><strong>适用场景</strong><br>
+当下大模型训练成本呈现“头部攀升、尾部下降”的极化现象。技术创新（算法优化、工程协同、开源生态）和国产算力替代为降本提供可能，此模式推荐巨头企业或科研机构用于前沿模型研发（如训练行业专属大模型）。</p>
+</li>
+</ul>
+<hr>
+<h3 id=2-下载社区开放模型-主流选择>2. 下载社区开放模型（主流选择）</h3>
+<p>上一种方法，需要自己训练、微调得到一个LLM模型，现在介绍直接下载使用开放的大模型。</p>
+<ul>
+<li>
+<p><strong>推荐平台</strong></p>
+<p>推荐平台(类似于代码找github，容器镜像找dockerhub的关系),可下载热门模型(和数据集):</p>
+<ul>
+<li><strong>国外平台</strong>: <a href=https://huggingface.co/models>Hugging Face Hub</a>: 提供100万+开源模型，涵盖Qwen2、DeepSeek、LLaMA、Gemma等热门模型。</li>
+<li><strong>国内平台</strong>: <a href=https://www.modelscope.cn/>魔搭ModelScope</a>、智源悟道、讯飞星火。</li>
+</ul>
+</li>
+<li>
+<p><strong>模型类型（可商用）</strong></p>
+<table>
+<thead>
+<tr>
+<th>模型名称</th>
+<th>参数量</th>
+<th>特点</th>
+<th>典型用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LLaMA-3</td>
+<td>8B~70B</td>
+<td>Meta，支持微调</td>
+<td>通用对话、推理</td>
+</tr>
+<tr>
+<td>Mistral-7B</td>
+<td>7B</td>
+<td>法国，性能接近LLaMA-13B</td>
+<td>代码生成、摘要</td>
+</tr>
+<tr>
+<td>Phi-4</td>
+<td>14B</td>
+<td>微软，支持微调</td>
+<td>擅长英语对话</td>
+</tr>
+<tr>
+<td>Qwen-系列</td>
+<td>0.5B~72B</td>
+<td>阿里，大语言模型和大型多模态模型系列</td>
+<td>通用对话、推理</td>
+</tr>
+<tr>
+<td>DeepSeek-v3</td>
+<td>671B</td>
+<td>国内幻方，MoE模型，训练成本降60%</td>
+<td>通用对话、推理</td>
+</tr>
+<tr>
+<td>DeepSeek-R1-蒸馏</td>
+<td>32B~70B</td>
+<td>国内幻方，模型蒸馏，支持微调</td>
+<td>复杂推理、编码、数学</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><strong>对比维度</strong></p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>说明</th>
+<th>示例对比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>参数量</strong></td>
+<td>7B/13B/70B等，参数量越大能力越强，但资源需求更高</td>
+<td>LLaMA-7B（8GB显存） vs LLaMA-70B（需多卡）</td>
+</tr>
+<tr>
+<td><strong>上下文窗口</strong></td>
+<td>单次输入支持的最大Token数</td>
+<td>GPT-4（128K） vs Claude-3（200K）</td>
+</tr>
+<tr>
+<td><strong>多语言支持</strong></td>
+<td>是否支持中文、代码等非英语场景</td>
+<td>Qwen-72B（中文优化） vs CodeLlama</td>
+</tr>
+<tr>
+<td><strong>推理速度</strong></td>
+<td>生成100个Token所需时间，影响用户体验</td>
+<td>Mistral-7B（快） vs LLaMA-13B（较慢）</td>
+</tr>
+<tr>
+<td><strong>CPU推理支持</strong></td>
+<td>没有GPU的要考虑，是否提供量化版本及CPU优化方案</td>
+<td>LLaMA.cpp（CPU优化） vs DeepSeek-MoE（需GPU）</td>
+</tr>
+<tr>
+<td><strong>内存占用</strong></td>
+<td>不同精度（FP16/INT8）消耗不同</td>
+<td>Phi-3（4GB） vs Qwen1.5-4B（8GB）</td>
+</tr>
+<tr>
+<td><strong>许可证</strong></td>
+<td>商用限制（如LLaMA-2可商用，LLaMA-1仅限研究）</td>
+<td>企业选型需重点审查</td>
+</tr>
+<tr>
+<td><strong>多模态支持</strong></td>
+<td>输出格式：图像、文本、音频、视频等</td>
+<td>GPT-4o-mini(多模态) vs deepseek-v3(仅文本)</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<blockquote>
+<p>参数B和Token的关系</p>
+</blockquote>
+<blockquote>
+<p>参数B应该是指模型训练的参数量，比如7B就是70亿参数。Token则是问答处理中的基本单位，通常对应单词或子词(1 Token约为1个汉字或4个字母)。
+参数数量影响模型的学习能力和复杂度，而Token处理涉及输入输出的长度和速度。两者在模型训练和推理阶段都有不同的影响。比如，参数多的模型通常需要更多的计算资源，处理Token的能力更强，生成更准确的文本。但这也可能带来更高的延迟和资源消耗。</p>
+</blockquote>
+<hr>
+<h2 id=二-怎么使用大模型>二、怎么使用大模型</h2>
+<p>前面主要讲了怎么得到大模型（自己训练和下载开源模型），下面介绍怎么使用大模型，技术上简单讲就是调用大模型的API，让大模型（服务）输出结果（文本生成、代码生成、图像生成）。
+可以类比为一种中间件，用户可只关注输入和输出，中间件（大模型）负责推理产出。</p>
+<ul>
+<li>
+<p><strong>在线API调用</strong></p>
+<ul>
+<li><strong>国外厂商</strong>: 典型OpenAI的<code>gpt-4-turbo</code>每千Token约$0.01，延迟低但数据需出境。</li>
+<li><strong>AI集成服务</strong>: 在线集成的模型服务，本文发稿时众代理商均有活动，可领取百万Token免费额度</li>
+<li><strong>国内厂商</strong>: deepseek(性价比极高,每百万Tokens为2元)、智谱AI（符合数据合规要求）、千问、百川。</li>
+</ul>
+</li>
+<li>
+<p><strong>本地私有化部署</strong></p>
+<ul>
+<li>
+<p><strong>部署工具推荐(推理引擎的选择)</strong>:</p>
+<table>
+<thead>
+<tr>
+<th><strong>工具</strong></th>
+<th><strong>优势</strong></th>
+<th><strong>适用场景</strong></th>
+<th><strong>性能基准</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>vLLM</strong></td>
+<td>PagedAttention技术提升吞吐量3倍</td>
+<td>高并发API服务 （CPU/GPU/TPU..）</td>
+<td>70B模型 120 tokens/s (A100)</td>
+</tr>
+<tr>
+<td><strong>llama.cpp</strong></td>
+<td>极致CPU优化，支持苹果Metal加速</td>
+<td>边缘设备部署</td>
+<td>7B模型 45 tokens/s (M2 Ultra)</td>
+</tr>
+<tr>
+<td><strong>Ollama</strong></td>
+<td>一键部署，内置模型库</td>
+<td>快速原型验证</td>
+<td>13B模型 28 tokens/s (i9-13900H)</td>
+</tr>
+<tr>
+<td><strong>TGI</strong></td>
+<td>企业级特性（监控/负载均衡）</td>
+<td>生产环境集群 （不支持CPU）</td>
+<td>支持千级别并发请求</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><strong>硬件推荐指南</strong>:</p>
+<table>
+<thead>
+<tr>
+<th><strong>硬件环境</strong></th>
+<th><strong>推荐模型</strong></th>
+<th><strong>性能指标</strong></th>
+<th><strong>适用场景</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>手机/边缘设备</strong></td>
+<td>Phi-3-mini (3.8B)</td>
+<td>iPhone 15 Pro: 35 tokens/s</td>
+<td>离线对话、实时翻译</td>
+</tr>
+<tr>
+<td><strong>CPU笔记本</strong></td>
+<td>Qwen1.5-4B-Chat-GGUF (量化版)</td>
+<td>i7-12700H: 18 tokens/s</td>
+<td>文档摘要、基础问答</td>
+</tr>
+<tr>
+<td><strong>消费级GPU</strong></td>
+<td>Llama-3-8B-Instruct (4-bit量化)</td>
+<td>RTX 4090: 85 tokens/s</td>
+<td>代码生成、知识库问答</td>
+</tr>
+<tr>
+<td><strong>企业级服务器</strong></td>
+<td>DeepSeek-MoE-16b-chat</td>
+<td>2×A100: 120 tokens/s</td>
+<td>金融分析、复杂推理</td>
+</tr>
+<tr>
+<td><strong>混合部署集群</strong></td>
+<td>Qwen1.5-72B-Chat + vLLM</td>
+<td>8×H100: 240 tokens/s (动态批处理)</td>
+<td>超长文本生成、多轮对话</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>硬件优化技巧</strong>:</p>
+<ul>
+<li>CPU加速：
+<ul>
+<li>内存优化，使用GGUF格式 + mmap技术加载模型</li>
+<li>计算加速，启用BLAS库加速（OpenBLAS/Intel MKL），ARM设备可使用NEON指令集优化</li>
+</ul>
+</li>
+<li>GPU显存压缩：
+<ul>
+<li>量化，将模型参数的精度从浮点数降低到低位表示（FP8,INT4等），使模型在资源有限的设备上更高效地部署（会降低部分模型性能）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>开发模式对比</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>优点</th>
+<th>缺点</th>
+<th>适用阶段</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>在线API调用</td>
+<td>快速集成，无需运维</td>
+<td>依赖网络，数据出内网风险</td>
+<td>原型验证</td>
+</tr>
+<tr>
+<td>本地私有化部署</td>
+<td>数据隐私可控，定制化强</td>
+<td>硬件成本高，需调优</td>
+<td>企业生产环境</td>
+</tr>
+<tr>
+<td>公私混合部署</td>
+<td>平衡成本与安全性</td>
+<td>架构复杂度高</td>
+<td>中大型项目</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<hr>
+<h2 id=四-基于大模型的应用技术>四、基于大模型的应用技术</h2>
+<h3 id=1-提示词工程-prompt-engineering>1. 提示词工程（Prompt Engineering）</h3>
+<ul>
+<li>
+<p><strong>核心原则</strong></p>
+<ul>
+<li><strong>角色定义</strong>: <em>“你是一位资深律师，需用简洁语言解释以下法条...”</em></li>
+<li><strong>结构化指令</strong>: 使用XML/JSON格式明确输入输出规则。</li>
+<li><strong>少样本学习（Few-Shot）</strong>: 提供示例引导模型理解任务。</li>
+</ul>
+</li>
+<li>
+<p><strong>工具推荐</strong></p>
+<ul>
+<li><a href=https://smith.langchain.com/hub>LangChain Hub</a>: 共享高质量Prompt模板</li>
+<li><a href=https://promptperfect.jina.ai>PromptPerfect</a>: 自动优化提示词</li>
+</ul>
+</li>
+</ul>
+<h3 id=2-rag-检索增强生成>2. RAG（检索增强生成）</h3>
+<ul>
+<li>
+<p><strong>技术流程</strong></p>
+<pre tabindex=0><code class=language-mermaid data-lang=mermaid>graph LR
+A[文档切分] --&gt; B[向量化存储]
+B --&gt; C[用户提问检索]
+C --&gt; D[注入Prompt生成答案]
+</code></pre></li>
+<li>
+<p><strong>关键组件</strong></p>
+<ul>
+<li><strong>Embedding模型</strong>: 文本转向量（推荐text-embedding-3-small）</li>
+<li><strong>向量数据库</strong>: Pinecone（云服务）、Chroma（本地轻量级）</li>
+<li><strong>重排序器</strong>: Cohere Rerank、BAAI/bge-reranker-large</li>
+</ul>
+</li>
+<li>
+<p><strong>难题中文分词语义</strong></p>
+<ul>
+<li>混合分词策略：Jieba（词典匹配） + LSTM-CRF模型（实体识别）</li>
+<li>上下文增强：在向量检索后添加语义重排层（使用bge-reranker-base-v1.5）</li>
+</ul>
+</li>
+<li>
+<p><strong>开源框架</strong></p>
+<ul>
+<li><a href=https://www.llamaindex.ai>LlamaIndex</a>: 快速构建RAG流水线</li>
+<li><a href=https://haystack.deepset.ai>Haystack</a>: 支持多模态检索</li>
+</ul>
+</li>
+</ul>
+<h3 id=3-agent-智能体>3. Agent（智能体）</h3>
+<ul>
+<li>
+<p><strong>核心能力</strong></p>
+<ul>
+<li><strong>工具调用</strong>: 联网搜索、执行代码、调用API</li>
+<li><strong>任务分解</strong>: 将复杂问题拆解为子任务（如“规划旅行”→订机票→订酒店）</li>
+<li><strong>自我迭代</strong>: 根据反馈调整策略</li>
+</ul>
+</li>
+<li>
+<p><strong>开发框架</strong></p>
+<ul>
+<li><a href=https://github.com/Significant-Gravitas/AutoGPT>AutoGPT</a>: 自主任务完成</li>
+<li><a href=https://langchain-ai.github.io/langgraph>LangGraph</a>: 构建多Agent协作系统</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id=五-实战案例-企业知识库问答系统>五、实战案例：企业知识库问答系统</h2>
+<h3 id=技术方案>技术方案</h3>
+<pre tabindex=0><code>用户提问 → 向量检索（Milvus） → Rerank排序 → Prompt拼接 → LLaMA-7B生成 → 返回答案
+</code></pre><h3 id=代码片段-python>代码片段（Python）</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#a2f;font-weight:700>from</span> <span style=color:#00f;font-weight:700>llama_index</span> <span style=color:#a2f;font-weight:700>import</span> VectorStoreIndex, SimpleDirectoryReader
+
+<span style=color:#080;font-style:italic># 1. 加载文档</span>
+documents <span style=color:#666>=</span> SimpleDirectoryReader(<span style=color:#b44>&#34;data&#34;</span>)<span style=color:#666>.</span>load_data()
+
+<span style=color:#080;font-style:italic># 2. 构建索引</span>
+index <span style=color:#666>=</span> VectorStoreIndex<span style=color:#666>.</span>from_documents(documents)
+
+<span style=color:#080;font-style:italic># 3. 问答查询</span>
+query_engine <span style=color:#666>=</span> index<span style=color:#666>.</span>as_query_engine()
+response <span style=color:#666>=</span> query_engine<span style=color:#666>.</span>query(<span style=color:#b44>&#34;公司年假政策如何规定？&#34;</span>)
+<span style=color:#a2f>print</span>(response)
+</code></pre></div><hr>
+<h2 id=六-避坑指南>六、避坑指南</h2>
+<ol>
+<li><strong>模型幻觉</strong>
+<ul>
+<li>添加事实性校验层（如调用Wolfram Alpha验证数值结果）</li>
+</ul>
+</li>
+<li><strong>长文本处理</strong>
+<ul>
+<li>采用滑动窗口（Sliding Window）分割超长上下文</li>
+</ul>
+</li>
+<li><strong>安全防护</strong>
+<ul>
+<li>使用NeMo Guardrails过滤敏感词 & 防止Prompt注入</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p>希望通过以上内容，可以帮助大家系统掌握大模型应用开发的全链路要点，从模型获取到技术落地均有实用参考，推荐实践后，再根据兴趣/需求重点拓展跟进文章开头提到的十大热点领域。</p>
+<p>作者：许小平</p>
+</div>
 </main>
 </div>
 </div>
@@ -6391,7 +6821,7 @@ kubectl label node node0 <span style=color:#b8860b>ca</span><span style=color:#6
 </ul>
 </div>
 <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
-<small class=text-white>&copy; 2024 xiaoping378 保留所有权利</small>
+<small class=text-white>&copy; 2025 xiaoping378 保留所有权利</small>
 <small class=ml-1><a href=# target=_blank rel=noopener>隐私政策</a></small>
 </div>
 </div>
