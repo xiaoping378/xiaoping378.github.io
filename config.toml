@@ -2,7 +2,7 @@
 baseURL = "https://xiaoping378.github.io"
 
 # 站点title,会被多语言里的设置覆盖
-# title = "小平栈"
+# title = "现代技能站"
 
 # 是否生成robots文件
 enableRobotsTXT = true
@@ -82,7 +82,7 @@ id = "UA-217913492-1"
 
 [languages]
 [languages.zh-cn]
-title = "现代技能栈"
+title = "现代技能站"
 description = "现代技能栈、devops、云原生、网络、区块链、RPA、IOT"
 languageName = "中文"
 
