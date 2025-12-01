@@ -13,13 +13,12 @@
 - 下载到本地
 ```bash
 git clone https://github.com/xiaoping378/xiaoping378.github.io blog
-# 主题依赖
-cd blog && git submodule update --init --recursive
+cd blog 
 ```
 
 - 准备工具
 
-本站使用hugo的Docsy主题搭建，需要下载[hugo-ext](https://github.com/gohugoio/hugo/releases/download/v0.91.2/hugo_extended_0.91.2_Windows-64bit.zip)版本。自行添加到PATH环境。
+本站使用hugo的Docsy主题搭建，需要下载[hugo-ext](https://github.com/gohugoio/hugo/releases/download/v0.152.2/hugo_extended_withdeploy_0.152.2_windows-amd64.zip)版本。自行添加到PATH环境。
 
 ```bash
 hugo server

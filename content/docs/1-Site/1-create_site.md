@@ -19,17 +19,17 @@ hugo是spf13的开源作品，目前任职于google，对他最早的印象是�
 
 ## 准备环境
 
-安装依赖工具git和hugo（以下版本为当前最新稳定版本）
+安装依赖工具（以下版本为当前202512最新稳定版本）：
 
 - 安装git, 下载[地址](https://github.com/git-for-windows/git/releases/download/v2.52.0.windows.1/Git-2.52.0-64-bit.exe)
-- 注意是安装hugo_extended[Windows环境](https://github.com/gohugoio/hugo/releases/download/v0.152.2/hugo_extended_withdeploy_0.152.2_windows-amd64.zip)的版本。
+- 安装hugo_extended[Windows环境](https://github.com/gohugoio/hugo/releases/download/v0.152.2/hugo_extended_withdeploy_0.152.2_windows-amd64.zip)的版本。
+- 安装Go工具，下载[地址](https://go.dev/dl/go1.24.10.windows-amd64.msi), hugo初始化需要go环境
+- 安装nodejs 22+，下载[地址](https://nodejs.org/dist/v24.11.1/node-v24.11.1-win-x64.zip)，推荐使用fnm管理node多版本。
 
-- 平常markdown产出，如果要编译成静态html，还需要安装nodejs 22+，下载[地址](https://nodejs.org/dist/v24.11.1/node-v24.11.1-win-x64.zip)。
-
-> 可以先不用安装nodejs，后面会介绍如何利用github pages全自动托管静态文件
+> 具体安装过程不表，下篇会介绍如何利用github pages全自动托管静态文件
 
 ## 主题选择
-选用Docsy主题，出自google的开源主题，很多流行项目使用此主题作为官方站点，如k8s、kubeflow、grpc、etcd、Selenium等，详见此。主要功能包含：
+选用[Docsy主题](https://www.docsy.dev/xx/docs/get-started/)，出自google的开源主题，很多流行项目使用此主题作为官方站点，如k8s、kubeflow、grpc、etcd、Selenium等，详见此。主要功能包含：
  - 支持树形目录
  - 国际化
  - 搜索功能
@@ -38,15 +38,14 @@ hugo是spf13的开源作品，目前任职于google，对他最早的印象是�
  - 全站打印
  - 文档版本化
  - 用户反馈等
+ - uml\mermaid渲染
 
-官方提供了快速上手的脚手架，具体操作如下：
+官方提供了快速脚手架，具体操作如下：
 ```bash
-git clone https://github.com/google/docsy-example.git
-``` 
-
-脚手架初始化 
-```bash
-cd docsy-example && git submodule update --init --recursive
+git clone --depth 1 --branch v0.13.0 https://github.com/google/docsy-example.git my-new-site
+cd  my-new-site
+npm install --registry https://registry.npmmirror.com
+hugo server
 ```
 
 本地启动，默认可通过``localhost:1313``访问，官方提供了在线的[预览地址](https://example.docsy.dev/)。 
@@ -56,31 +55,38 @@ hugo server
 ​
 ## 目录结构说明
 
-默认脚手架目录结构如下，只关注``config.toml``文件和``content``目录，就可以满足日常使用。
+默认脚手架目录结构如下，只关注``hugo.yaml``文件和``content``目录，就可以满足日常使用。
 ```bash
-➜  docsy-example git:(master)  tree -L 1
-.
-├── assets # 静态资源
-├── config.toml # 站点的配置文件：主题选择、名称、链接、页面分析、markdown解析引擎...
-├── content # 站点内容：顶层导航，左侧树形章节
-├── CONTRIBUTING.md
-├── deploy.sh
-├── docker-compose.yaml
-├── Dockerfile
-├── layouts # 可覆盖主题的默认布局，添加自定义页面布局
-├── LICENSE
-├── netlify.toml
-├── package.json
-├── README.md
-├── resources
-└── themes # Docsy主题的目录，hugo推荐的存放路径
+➜  my-new-site git:(v0.13.0) ll
+total 195K
+drwxr-xr-x 1 xxp 197609    0 11月 27 20:34 assets # 静态资源目录，如CSS、JavaScript等
+-rw-r--r-- 1 xxp 197609  448 11月 27 20:34 config.yaml  # 站点的hugo高版本兼容文件，可删除
+drwxr-xr-x 1 xxp 197609    0 11月 27 20:34 content # 网站内容目录，包含Markdown格式的文章和页面，以后重点创作的目录
+-rw-r--r-- 1 xxp 197609 1.1K 11月 27 20:34 CONTRIBUTING.md
+-rw-r--r-- 1 xxp 197609  172 11月 27 20:34 docker-compose.yaml
+-rw-r--r-- 1 xxp 197609  100 11月 27 20:34 Dockerfile
+-rw-r--r-- 1 xxp 197609  173 11月 27 20:34 docsy.work
+-rw-r--r-- 1 xxp 197609    0 11月 27 20:34 docsy.work.sum
+-rw-r--r-- 1 xxp 197609   89 11月 27 20:34 go.mod
+-rw-r--r-- 1 xxp 197609  513 11月 27 20:34 go.sum
+-rw-r--r-- 1 xxp 197609 7.7K 11月 27 20:34 hugo.yaml #Hugo的主要配置文件
+-rw-r--r-- 1 xxp 197609 7.5K 11月 27 20:34 hugo-disabled.toml
+drwxr-xr-x 1 xxp 197609    0 11月 27 20:34 layouts
+-rw-r--r-- 1 xxp 197609  12K 11月 27 20:34 LICENSE
+-rw-r--r-- 1 xxp 197609  302 11月 27 20:34 netlify.toml # Netlify部署平台配置文件
+drwxr-xr-x 1 xxp 197609    0 11月 27 20:37 node_modules
+-rw-r--r-- 1 xxp 197609 2.7K 11月 27 20:34 package.json
+-rw-r--r-- 1 xxp 197609  99K 11月 27 20:37 package-lock.json
+drwxr-xr-x 1 xxp 197609    0 11月 27 20:37 public
+-rw-r--r-- 1 xxp 197609 7.3K 11月 27 20:34 README.md
+drwxr-xr-x 1 xxp 197609    0 11月 27 20:35 resources # 动态编译的产物
 ```
 
 ## 重点说明
 
 - 修改主题的页面布局
  
-  - 大部分内容可以通过修改根目录的config.toml的文件来实现
+  - 大部分渲染样式可以通过修改根目录的hugo.yaml的配置文件来实现
   - 不能通过上条实现的，也不建议直接修改themes目录下的内容，copy到在根目录同样的相对路径上再修改，会覆盖默认主题相关的实现。
 
 - docsy主题默认提供了3种版面布局, 分别在content目录下，写markdown文件，不同目录按照各自类型风格渲染。
@@ -98,231 +104,259 @@ hugo server
 
 - 站点内搜索功能依赖编译后的json文件，需要上一步才能使用。
  
-- 关于config.toml配置的解读（最新注释说明，可查看本站的[原件](https://github.com/xiaoping378/xiaoping378.github.io/blob/master/config.toml)）。
-  ```toml
+- 关于hugo.yaml配置的解读（最新注释说明，可查看本站的[原件](https://github.com/xiaoping378/xiaoping378.github.io/blob/master/hugo.yaml)）。
+  ```yaml
   # 站点的访问地址，本地预览时(hugo server)可忽悠
-  baseURL = "https://xiaoping378.github.io"
+  baseURL: "https://xiaoping378.github.io"
 
   # 站点title,会被多语言里的设置覆盖
-  # title = "小平栈"
+  # title: "小平栈"
+
+  # cSpell:ignore goldmark github hugo readingtime docsy subdir lastmod pygments linenos catmullrom norsk gu
+
+  # Language settings
+  contentDir: content
+  defaultContentLanguage: zh-cn
+  defaultContentLanguageInSubdir: false
+  # 国际化翻译中，如果有缺失是否用占位符显示
+  enableMissingTranslationPlaceholders: true
 
   # 是否生成robots文件
-  enableRobotsTXT = true
+  enableRobotsTXT: true
 
-  # 主题选择，支持组合，优先级从左到右.
-  theme = ["docsy"]
+  # 页面上提供类似"最后修改"的git信息
+  enableGitInfo: true
 
-  # 页面上提供类似"最后修改"的信息
-  enableGitInfo = true
+  # 注释掉这行来禁用 Docsy 主题中的分类法功能
+  # disableKinds: [taxonomy]
 
-  # 国际化相关设置
-  # 默认语言的的站点内容路径
-  contentDir = "content"
-  # 默认语言
-  defaultContentLanguage = "zh-cn"
-
-  # 国际化翻译中，如果有缺失是否用占位符显示
-  enableMissingTranslationPlaceholders = true
-
-  # 注释后，可以开启标签分类功能
-  # disableKinds = ["taxonomy", "taxonomyTerm"]
-
-  [params.taxonomy]
-  # set taxonomyCloud = [] to hide taxonomy clouds
-  taxonomyCloud = ["tags"] 
-  # If used, must have same lang as taxonomyCloud
-  taxonomyCloudTitle = ["标签"] 
-  # set taxonomyPageHeader = [] to hide taxonomies on the page headers
-  taxonomyPageHeader = ["tags"] 
-
+  # You can add your own taxonomies
+  taxonomies:
+    tag: tags
+    category: categories
 
   # 代码块高亮配置
-  pygmentsCodeFences = true
-  pygmentsUseClasses = false
+  pygmentsCodeFences: true
+  # 开启后，黑色主题可以消除代码块的白色底色
+  pygmentsUseClasses: false
   # Use the new Chroma Go highlighter in Hugo.
-  pygmentsUseClassic = false
-  #pygmentsOptions = "linenos=table"
+  pygmentsUseClassic: false
+  # pygmentsOptions: "linenos=table"
   # See https://help.farbox.com/pygments.html
-  pygmentsStyle = "emacs"
+  pygmentsStyle: tango
 
   # 配置blog编译产物的路径.
-  [permalinks]
-  blog = "/:section/:year/:month/:day/:slug/"
+  permalinks:
+    blog: /:section/:year/:month/:day/:slug/
 
-  # markdown渲染引擎配置: https://github.com/russross/blackfriday
-  # [blackfriday]
-  # plainIDAnchors = true
-  # hrefTargetBlank = true
-  # angledQuotes = false
-  # latexDashes = true
+  # 图片处理的配置.
+  imaging:
+    resampleFilter: CatmullRom
+    quality: 75
+    anchor: Smart
 
-  # 图片引擎处理: https://github.com/disintegration/imaging
-  [imaging]
-  resampleFilter = "CatmullRom"
-  quality = 75
-  anchor = "smart"
-
-  # [services]
-  # [services.googleAnalytics]
-  # # Comment out the next line to disable GA tracking. Also disables the feature described in [params.ui.feedback].
-  # id = "UA-00000000-0"
-
-  # Language configuration
-
-  [languages]
-  [languages.zh-cn]
-  title = "现代技能栈"
-  description = "小平-所思所为"
-  languageName = "中文"
-
-  # 用于多语言排序，越小越靠上。
-  weight = 1
-
-  # markdown的解析设置，抄的k8s 文档设置...
-  [markup]
-    [markup.goldmark]
-    [markup.goldmark.extensions]
-      definitionList = true
-      table = true
-      typographer = false
-    [markup.goldmark.parser]
-      attribute = true
-      autoHeadingID = true
-      autoHeadingIDType = "blackfriday"
-    [markup.goldmark.renderer]
-      unsafe = true
-    [markup.highlight]
-      codeFences = true
-      guessSyntax = false
-      hl_Lines = ""
-      lineNoStart = 1
-      lineNos = false
-      lineNumbersInTable = true
-      noClasses = true
-      style = "emacs"
-      tabWidth = 4
-    [markup.tableOfContents]
-      endLevel = 3
-      ordered = false
-      startLevel = 2
-
-  # Everything below this are Site Params
-
-  # Comment out if you don't want the "print entire section" link enabled.
-  [outputs]
-  section = ["HTML", "print", "RSS"]
-
-  [params]
-  copyright = "xiaoping378"
-  privacy_policy = "#"
-
-  # First one is picked as the Twitter card image if not set on page.
-  # images = ["images/project-illustration.png"]
-
-  # Menu title if your navbar has a versions selector to access old versions of your site.
-  # This menu appears only if you have at least one [params.versions] set.
-  version_menu = "Releases"
-
-  # Flag used in the "version-banner" partial to decide whether to display a 
-  # banner on every page indicating that this is an archived version of the docs.
-  # Set this flag to "true" if you want to display the banner.
-  archived_version = false
-
-  # The version number for the version of the docs represented in this doc set.
-  # Used in the "version-banner" partial to display a version number for the 
-  # current doc set.
-  version = "0.0"
-
-  # A link to latest version of the docs. Used in the "version-banner" partial to
-  # point people to the main doc site.
-  # url_latest_version = "https://example.com"
-
-  # 方便用户反馈，提交技术文章问题的仓库地址
-  github_repo = "https://github.com/xiaoping378/xiaoping378.github.io"
-  # 技术站点背后的项目issue地址
-  # github_project_repo = "https://github.com/xiaoping378/xiaoping378.github.io"
-
-  # 以下三个是设置远程文档位置的，目前用不上，这里hack一下，不然“编辑此页”的功能会去链接到content/zh-cn下
-  # Specify a value here if your content directory is not in your repo's root directory
-  github_subdir = "/"
-
-  # Uncomment this if you have a newer GitHub repo with "main" as the default branch,
-  # or specify a new value if you want to reference another branch in your GitHub links
-  # github_branch= "main"
-
-  # 支持三种搜索，三选一，禁用google搜索，需要注释掉此处
-  # gcs_engine_id = "d72aa9b2712488cc3"
-
-  # Enable Algolia DocSearch
-  algolia_docsearch = false
-
-  # Enable Lunr.js offline search
-  offlineSearch = false
-
-  # 默认使用的Chroma代码高亮方案，可换成prism方案。
-  prism_syntax_highlighting = false
-
-  # User interface configuration
-  [params.ui]
-  #  是否禁用面包屑导航.
-  breadcrumb_disable = false
-  # 是否禁用底部About链接
-  footer_about_disable = true
-  # 是否展示项目logo，位置必须放置在 assets/icons/logo.svg
-  navbar_logo = true
-  # 在首页，上下滑动页面，顶部导航是否禁用半透明
-  navbar_translucent_over_cover_disable = false
-  # 左侧章节树形目录默认是否处于折叠状态
-  sidebar_menu_compact = true
-  # 左侧章节树形目录上是否不显示搜索框，前提是需要开启搜索功能
-  sidebar_search_disable = false
-
-  # 关闭了google分析，下面功能不会启用
-  [params.ui.feedback]
-  enable = true
-  # The responses that the user sees after clicking "yes" (the page was helpful) or "no" (the page was not helpful).
-  yes = 'Glad to hear it! Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.'
-  no = 'Sorry to hear that. Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.'
-
-  # 在文章上面显示“阅读时长：x分钟”
-  [params.ui.readingtime]
-  enable = false
+  # 国际多语言配置
+  languages:
+    zh-cn:
+      languageName: 中文
+      title: 现代技能栈
+      params:
+        description: 现代技能栈、devops、云原生、网络、区块链、RPA、IOT、AI人工智能
+    # en:
+    #   languageName: English
+    #   title: Goldydocs
+    #   params:
+    #     description: A Docsy example site
+    # cSpell:disable
 
 
-  # 社区community版面要用到的参数
-  [params.links]
-  # End user relevant links. These will show up on left side of footer and in the community page if you have one.
-  [[params.links.user]]
-    name = "个人邮箱 xiaoping378@163.com"
-    url = "mailto:xiaoping378@163.com"
-    icon = "fa fa-envelope"
-    desc = "欢迎邮件交流"
-  [[params.links.user]]
-    name ="微博"
-    url = "https://weibo.com/xiaoping378"
-    icon = "fab fa-weibo"
-    desc = "个人微博，基本不用"
-  [[params.links.user]]
-    name = "知乎"
-    url = "https://www.zhihu.com/people/xiaoping378"
-    icon = "fab fa-zhihu"
-    desc = "知乎专栏"
-  # Developer relevant links. These will show up on right side of footer and in the community page if you have one.
-  [[params.links.developer]]
-    name = "GitHub"
-    url = "https://github.com/xiaoping378/xiaoping378.github.io"
-    icon = "fab fa-github"
-    desc = "文集开源地址!"
-  [[params.links.developer]]
-    name = "Slack"
-    url = "https://example.org/slack"
-    icon = "fab fa-slack"
-    desc = "未开通"
-  [[params.links.developer]]
-    name = "Developer mailing list"
-    url = "https://example.org/mail"
-    icon = "fa fa-envelope"
-    desc = "未开通"
+  # markdown的解析设置，抄的k8s的文档解析设置...
+  markup:
+    goldmark:
+      extensions:
+        definitionList: true
+        table: true
+        typographer: false
+      parser:
+        attribute:
+          block: false
+          title: true
+        autoHeadingID: true
+        autoHeadingIDType: "blackfriday"
+      renderer:
+        unsafe: true
+    highlight:
+      codeFences: true
+      guessSyntax: false
+      hl_inline: false
+      lineAnchors: ''
+      lineNoStart: 1
+      lineNos: false
+      lineNumbersInTable: true
+      noClasses: true
+      style: "emacs"
+      tabWidth: 4
+    tableOfContents:
+      endLevel: 3
+      ordered: false
+      startLevel: 2
+
+  # 此处以下均为站点参数。
+
+  # 如果不需要启用“打印整个章节”链接，可以将其注释掉
+  outputs:
+    section: [HTML, print, RSS]
+
+  params:
+    # uml自动渲染绘图配置
+    plantuml:
+      enable: true
+      theme: default
+      # Set url to plantuml server
+      # default is http://www.plantuml.com/plantuml/svg/
+      svg_image_url: 'https://www.plantuml.com/plantuml/svg/'
+      # By default the plantuml implementation uses <img /> tags to display UML diagrams.
+      # When svg is set to true, diagrams are displayed using <svg /> tags, maintaining functionality like links e.g.
+      # default = false
+      svg: true
+    # mermaid 绘图配置
+    mermaid:
+      theme: neutral
+      flowchart:
+        diagramPadding: 6
+
+    taxonomy:
+      # 如果不想显示分类标签云，可以将 taxonomyCloud: []设置为空数组。
+      taxonomyCloud: [tags, categories]
+
+      # 如果使用，其长度（即元素数量）必须与 taxonomyCloud相同。
+      taxonomyCloudTitle: [标签, 分类]
+
+      # 如果不想在页面标题（或页眉）处显示分类标签，可以将 taxonomyPageHeader设置为空数组 []
+      taxonomyPageHeader: [tags, categories]
+
+    privacy_policy: https://policies.google.com/privacy
+
+    # First one is picked as the Twitter card image if not set on page.
+    # images: [images/project-illustration.png]
+
+    # Menu title if your navbar has a versions selector to access old versions of your site.
+    # This menu appears only if you have at least one [params.versions] set.
+    version_menu: Releases
+
+    # Flag used in the "version-banner" partial to decide whether to display a
+    # banner on every page indicating that this is an archived version of the docs.
+    # Set this flag to "true" if you want to display the banner.
+    archived_version: false
+
+    # The version number for the version of the docs represented in this doc set.
+    # Used in the "version-banner" partial to display a version number for the
+    # current doc set.
+    version: 0.0
+
+    # A link to latest version of the docs. Used in the "version-banner" partial to
+    # point people to the main doc site.
+    url_latest_version: https://example.com
+
+    # Repository configuration (URLs for in-page links to opening issues and suggesting changes)
+    github_repo: https://github.com/xiaoping378/xiaoping378.github.io
+
+    # 这是一个可选的相关项目仓库链接。例如，指向您产品代码所在的兄弟仓库（关联代码库）
+    github_project_repo: https://github.com/google/docsy
+
+    # Specify a value here if your content directory is not in your repo's root directory
+    # github_subdir: ""
+
+    # Uncomment this if your GitHub repo does not have "main" as the default branch,
+    # or specify a new value if you want to reference another branch in your GitHub links
+    github_branch: master
+
+    # Google Custom Search Engine ID. Remove or comment out to disable search.
+    gcs_engine_id: UA-217913492-1
+
+    # Enable Lunr.js offline search
+    offlineSearch: false
+
+    # 使用 Prism 为代码块启用语法高亮和复制按钮功能
+    prism_syntax_highlighting: true
+
+    copyright:
+      authors:
+        作者 xiaoping378 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0) |
+      from_year: 2018
+
+    # User interface configuration
+    ui:
+      # 设置为 true 以禁用面包屑导航.
+      breadcrumb_disable: false
+      # 不想在顶部导航栏中显示logo（/assets/icons/logo.svg），请将此选项设置为 false。
+      navbar_logo: true
+      # 在页面滚动到 block/cover区块（例如首页的封面大图）上方时，顶部导航栏不呈现半透明效果，请将此选项设置为 true
+      navbar_translucent_over_cover_disable: false
+      # 让侧边栏菜单显示默认为折叠状态
+      sidebar_menu_compact: true
+      # 左侧导航显示 “可展开”的小三角
+      sidebar_menu_foldable: true
+      # 在网站中隐藏侧边栏的搜索框
+      sidebar_search_disable: false
+      # 导航栏中启用明暗模式切换菜单
+      showLightDarkModeMenu: true
+
+      # 在每个文档末尾添加一个标题为“反馈”的 H2 章节。用户反馈将作为事件发送到 Google Analytics（谷歌分析）
+      # 此功能依赖于 [services.googleAnalytics] 配置，如果未设置 "services.googleAnalytics.id"，该功能将被禁用
+      # 如果您启用了此功能，但需要偶尔在某个特定页面隐藏“反馈”章节,
+      # 只需在该页面的 Front Matter 中添加 "hide_feedback: true" 即可.
+      feedback:
+        enable: true
+        # 用户点击 “是”（表示此页有帮助）或 “否”（表示此页无帮助）后所看到的回复信息。
+        'yes': >-
+          与君同行!  <a
+          href="https://github.com/xiaoping378/xiaoping378.github.io/issues/new">再接再厉</a>.
+        'no': >-
+          呃(⊙o⊙)…. 还请 <a
+          href="https://github.com/xiaoping378/xiaoping378.github.io/issues/new">告知哪里可以改进</a>.
+
+      # 在每个文档的顶部添加阅读时长估算.
+      # 如果您启用了此功能，但需要偶尔在某个特定页面隐藏阅读时长
+      # 只需在该页面的 Front Matter 中添加 "hide_readingtime: true" 即可
+      readingtime:
+        enable: false
+
+    links:
+      # End user relevant links. These will show up on left side of footer and in the community page if you have one.
+      user:
+        - name: 个人邮箱 xiaoping378@163.com
+          url: mailto:xiaoping378@163.com
+          icon: fa fa-envelope
+          desc: 欢迎邮件交流
+        - name: 微博
+          url: https://weibo.com/xiaoping378
+          icon: fab fa-x-twitter
+          desc: 个人微博，基本不用
+        - name: 知乎
+          url: https://www.zhihu.com/people/xiaoping378
+          icon: fab fa-stack-overflow
+          desc: 知乎专栏
+      # Developer relevant links. These will show up on right side of footer and in the community page if you have one.
+      developer:
+        - name: GitHub
+          url: https://github.com/xiaoping378/xiaoping378.github.io
+          icon: fab fa-github
+          desc: 文集开源地址!
+        - name: Gitee
+          url: https://gitee.com/xiaoping378/xiaoping378
+          icon: fa fa-git
+          desc: 国内码云
+
+  module:
+    # Uncomment the next line to build and serve using local docsy clone declared in the named Hugo workspace:
+    # workspace: docsy.work
+    hugoVersion:
+      extended: true
+      min: 0.146.0
+    imports:
+      - path: github.com/google/docsy
+        disable: false
   ```
 
 ## 总结

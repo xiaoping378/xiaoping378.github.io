@@ -1,0 +1,251 @@
+# 站点的访问地址，本地预览时(hugo server)可忽悠
+baseURL: "https://xiaoping378.github.io"
+
+# 站点title,会被多语言里的设置覆盖
+# title: "小平栈"
+
+# cSpell:ignore goldmark github hugo readingtime docsy subdir lastmod pygments linenos catmullrom norsk gu
+
+# Language settings
+contentDir: content
+defaultContentLanguage: zh-cn
+defaultContentLanguageInSubdir: false
+# 国际化翻译中，如果有缺失是否用占位符显示
+enableMissingTranslationPlaceholders: true
+
+# 是否生成robots文件
+enableRobotsTXT: true
+
+# 页面上提供类似"最后修改"的git信息
+enableGitInfo: true
+
+# 注释掉这行来禁用 Docsy 主题中的分类法功能
+# disableKinds: [taxonomy]
+
+# You can add your own taxonomies
+taxonomies:
+  tag: tags
+  category: categories
+
+# 代码块高亮配置
+pygmentsCodeFences: true
+# 开启后，黑色主题可以替换代码块的白色底色，不是很稳定，会出现乱色
+pygmentsUseClasses: false
+# Use the new Chroma Go highlighter in Hugo.
+pygmentsUseClassic: false
+# pygmentsOptions: "linenos=table"
+# See https://help.farbox.com/pygments.html
+pygmentsStyle: tango
+
+# 配置blog编译产物的路径.
+permalinks:
+  blog: /:section/:year/:month/:day/:slug/
+
+# 图片处理的配置.
+imaging:
+  resampleFilter: CatmullRom
+  quality: 75
+  anchor: Smart
+
+# 国际多语言配置
+languages:
+  zh-cn:
+    languageName: 中文
+    title: 现代技能栈
+    params:
+      description: 现代技能栈、devops、云原生、网络、区块链、RPA、IOT、AI人工智能
+  # en:
+  #   languageName: English
+  #   title: Goldydocs
+  #   params:
+  #     description: A Docsy example site
+  # cSpell:disable
+
+
+# markdown的解析设置，抄的k8s 文档设置...
+markup:
+  goldmark:
+    extensions:
+      definitionList: true
+      table: true
+      typographer: false
+    parser:
+      attribute:
+        block: false
+        title: true
+      autoHeadingID: true
+      autoHeadingIDType: "blackfriday"
+    renderer:
+      unsafe: true
+  highlight:
+    codeFences: true
+    guessSyntax: false
+    hl_inline: false
+    lineAnchors: ''
+    lineNoStart: 1
+    lineNos: false
+    lineNumbersInTable: true
+    noClasses: true
+    style: "emacs"
+    tabWidth: 4
+  tableOfContents:
+    endLevel: 3
+    ordered: false
+    startLevel: 2
+
+# 此处以下均为站点参数。
+
+# 如果不需要启用“打印整个章节”链接，请将其注释掉
+outputs:
+  section: [HTML, print, RSS]
+
+params:
+  # uml自动渲染绘图配置
+  plantuml:
+    enable: true
+    theme: default
+    # Set url to plantuml server
+    # default is http://www.plantuml.com/plantuml/svg/
+    svg_image_url: 'https://www.plantuml.com/plantuml/svg/'
+    # By default the plantuml implementation uses <img /> tags to display UML diagrams.
+    # When svg is set to true, diagrams are displayed using <svg /> tags, maintaining functionality like links e.g.
+    # default = false
+    svg: true
+  # mermaid 绘图配置
+  mermaid:
+    theme: neutral
+    flowchart:
+      diagramPadding: 6
+
+  taxonomy:
+    # 如果不想显示分类标签云，可以将 taxonomyCloud: []设置为空数组。
+    taxonomyCloud: [tags, categories]
+
+    # 如果使用，其长度（即元素数量）必须与 taxonomyCloud相同。
+    taxonomyCloudTitle: [标签, 分类]
+
+    # 如果不想在页面标题（或页眉）处显示分类标签，可以将 taxonomyPageHeader设置为空数组 []
+    taxonomyPageHeader: [tags, categories]
+
+  privacy_policy: https://policies.google.com/privacy
+
+  # First one is picked as the Twitter card image if not set on page.
+  # images: [images/project-illustration.png]
+
+  # Menu title if your navbar has a versions selector to access old versions of your site.
+  # This menu appears only if you have at least one [params.versions] set.
+  version_menu: Releases
+
+  # Flag used in the "version-banner" partial to decide whether to display a
+  # banner on every page indicating that this is an archived version of the docs.
+  # Set this flag to "true" if you want to display the banner.
+  archived_version: false
+
+  # The version number for the version of the docs represented in this doc set.
+  # Used in the "version-banner" partial to display a version number for the
+  # current doc set.
+  version: 0.0
+
+  # A link to latest version of the docs. Used in the "version-banner" partial to
+  # point people to the main doc site.
+  url_latest_version: https://example.com
+
+  # Repository configuration (URLs for in-page links to opening issues and suggesting changes)
+  github_repo: https://github.com/xiaoping378/xiaoping378.github.io
+
+  # 这是一个可选的相关项目仓库链接。例如，指向您产品代码所在的兄弟仓库（关联代码库）
+  github_project_repo: https://github.com/google/docsy
+
+  # Specify a value here if your content directory is not in your repo's root directory
+  # github_subdir: ""
+
+  # Uncomment this if your GitHub repo does not have "main" as the default branch,
+  # or specify a new value if you want to reference another branch in your GitHub links
+  github_branch: master
+
+  # Google Custom Search Engine ID. Remove or comment out to disable search.
+  gcs_engine_id: UA-217913492-1
+
+  # Enable Lunr.js offline search
+  offlineSearch: false
+
+  # 使用 Prism 为代码块启用语法高亮和复制按钮功能
+  prism_syntax_highlighting: true
+
+  copyright:
+    authors:
+      作者 xiaoping378 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0) |
+    from_year: 2018
+
+  # User interface configuration
+  ui:
+    # 设置为 true 以禁用面包屑导航.
+    breadcrumb_disable: false
+    # 不想在顶部导航栏中显示logo（/assets/icons/logo.svg），请将此选项设置为 false。
+    navbar_logo: true
+    # 在页面滚动到 block/cover区块（例如首页的封面大图）上方时，顶部导航栏不呈现半透明效果，请将此选项设置为 true
+    navbar_translucent_over_cover_disable: false
+    # 让侧边栏菜单显示默认为折叠状态
+    sidebar_menu_compact: true
+    # 左侧导航显示 “可展开”的小三角
+    sidebar_menu_foldable: true
+    # 在网站中隐藏侧边栏的搜索框
+    sidebar_search_disable: false
+    # 导航栏中启用明暗模式切换菜单
+    showLightDarkModeMenu: true
+
+    # 在每个文档末尾添加一个标题为“反馈”的 H2 章节。用户反馈将作为事件发送到 Google Analytics（谷歌分析）
+    # 此功能依赖于 [services.googleAnalytics] 配置，如果未设置 "services.googleAnalytics.id"，该功能将被禁用
+    # 如果您启用了此功能，但需要偶尔在某个特定页面隐藏“反馈”章节,
+    # 只需在该页面的 Front Matter 中添加 "hide_feedback: true" 即可.
+    feedback:
+      enable: true
+      # 用户点击 “是”（表示此页有帮助）或 “否”（表示此页无帮助）后所看到的回复信息。
+      'yes': >-
+        与君同行!  <a
+        href="https://github.com/xiaoping378/xiaoping378.github.io/issues/new">再接再厉</a>.
+      'no': >-
+        呃(⊙o⊙)…. 还请 <a
+        href="https://github.com/xiaoping378/xiaoping378.github.io/issues/new">告知哪里可以改进</a>.
+
+    # 在每个文档的顶部添加阅读时长估算.
+    # 如果您启用了此功能，但需要偶尔在某个特定页面隐藏阅读时长
+    # 只需在该页面的 Front Matter 中添加 "hide_readingtime: true" 即可
+    readingtime:
+      enable: false
+
+  links:
+    # End user relevant links. These will show up on left side of footer and in the community page if you have one.
+    user:
+      - name: 个人邮箱 xiaoping378@163.com
+        url: mailto:xiaoping378@163.com
+        icon: fa fa-envelope
+        desc: 欢迎邮件交流
+      - name: 微博
+        url: https://weibo.com/xiaoping378
+        icon: fab fa-x-twitter
+        desc: 个人微博，基本不用
+      - name: 知乎
+        url: https://www.zhihu.com/people/xiaoping378
+        icon: fab fa-stack-overflow
+        desc: 知乎专栏
+    # Developer relevant links. These will show up on right side of footer and in the community page if you have one.
+    developer:
+      - name: GitHub
+        url: https://github.com/xiaoping378/xiaoping378.github.io
+        icon: fab fa-github
+        desc: 文集开源地址!
+      - name: Gitee
+        url: https://gitee.com/xiaoping378/xiaoping378
+        icon: fa fa-git
+        desc: 国内码云
+
+module:
+  # Uncomment the next line to build and serve using local docsy clone declared in the named Hugo workspace:
+  # workspace: docsy.work
+  hugoVersion:
+    extended: true
+    min: 0.146.0
+  imports:
+    - path: github.com/google/docsy
+      disable: false
