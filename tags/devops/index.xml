@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>DevOps on 现代技能栈</title><link>https://xiaoping378.github.io/tags/devops/</link><description>Recent content in DevOps on 现代技能栈</description><generator>Hugo</generator><language>zh-cn</language><atom:link href="https://xiaoping378.github.io/tags/devops/index.xml" rel="self" type="application/rss+xml"/><item><title>自动托管markdown</title><link>https://xiaoping378.github.io/docs/1-site/2-actions_pages/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/1-site/2-actions_pages/</guid><description>&lt;div class="pageinfo pageinfo-primary"&gt;
+&lt;p&gt;利用github actions和pages实现自动更新托管内容，本站点已实现commit md后，&lt;del&gt;自动更新&lt;a href="https://xiaoping378.gitee.io/"&gt;码云page&lt;/a&gt;和&lt;/del&gt;&lt;a href="https://xiaoping378.github.io/"&gt;Github page&lt;/a&gt;页面。&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;h2 id="本站点仓库名字的由来"&gt;本站点仓库名字的由来&lt;a class="td-heading-self-link" href="#%e6%9c%ac%e7%ab%99%e7%82%b9%e4%bb%93%e5%ba%93%e5%90%8d%e5%ad%97%e7%9a%84%e7%94%b1%e6%9d%a5" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;本源码仓之所以起如此长的名字，完全是因为github pages的工作机制决定的，不然会带个小尾巴：&lt;/p&gt;
+&lt;p&gt;如果叫 &lt;em&gt;blog&lt;/em&gt;, github的托管页面的访问地址会是 &lt;em&gt;xiaoping378.github.io/blog&lt;/em&gt;，这也没什么，但会和hugo的&lt;a href="https://xiaoping378.github.io/docs/1-site/add_content/#%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98"&gt;static机制&lt;/a&gt;出现冲突。&lt;/p&gt;
+&lt;p&gt;当然可以自行购买域名，并指向该pages地址，，，后来忘了续费，搞丢了我的域名。&lt;/p&gt;
+&lt;h2 id="什么是pages"&gt;什么是pages&lt;a class="td-heading-self-link" href="#%e4%bb%80%e4%b9%88%e6%98%afpages" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;GitHub Pages 是 GitHub 提供的一项免费静态网站托管服务。简单来说，它能将你的代码仓库直接变成一个可访问的网站，无需自己购买服务器、配置环境，甚至连域名都可以使用 GitHub 提供的免费子域名。&lt;/p&gt;
+&lt;h2 id="快速入门三步走"&gt;快速入门三步走&lt;a class="td-heading-self-link" href="#%e5%bf%ab%e9%80%9f%e5%85%a5%e9%97%a8%e4%b8%89%e6%ad%a5%e8%b5%b0" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;第一步：创建仓库&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;个人/组织网站：创建名为 你的GitHub用户名.github.io 的仓库（例如：xiaoping378.github.io）&lt;/li&gt;
+&lt;li&gt;项目网站：在任何项目仓库中启用 Pages 功能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;第二步：添加内容&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;直接上传 HTML、CSS、JS 文件&lt;/li&gt;
+&lt;li&gt;或使用静态网站生成器（如 Hugo、Jekyll、VuePress 等）生成静态文件&lt;/li&gt;
+&lt;li&gt;配置 GitHub Pages 源（通常为 main 分支的 /root 或 /docs 文件夹）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;第三步：访问你的网站&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;个人站点：https://你的GitHub用户名.github.io&lt;/li&gt;
+&lt;li&gt;项目站点：https://你的GitHub用户名.github.io/项目名&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;与静态网站生成器的完美结合. 正如我们上一篇提到的 Hugo + Docsy 方案，GitHub Pages 与静态网站生成器是绝佳搭档。你只需：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;本地使用 Hugo 预览编写内容&lt;/li&gt;
+&lt;li&gt;配置 GitHub Actions 自动构建&lt;/li&gt;
+&lt;li&gt;推送到 GitHub 后，Actions 会自动将生成的静态文件部署到 Pages&lt;/li&gt;
+&lt;li&gt;几十秒后，更新就会上线！
+这种方式让你专注于内容创作，而不用操心服务器维护和部署流程。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="自动化工作流"&gt;自动化工作流&lt;a class="td-heading-self-link" href="#%e8%87%aa%e5%8a%a8%e5%8c%96%e5%b7%a5%e4%bd%9c%e6%b5%81" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;上节是介绍了pages的快速入门，下面介绍自动化工作流，利用github actions实现自动更新托管内容。&lt;/p&gt;</description></item></channel></rss>

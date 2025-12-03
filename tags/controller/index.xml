@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Controller on 现代技能栈</title><link>https://xiaoping378.github.io/tags/controller/</link><description>Recent content in Controller on 现代技能栈</description><generator>Hugo</generator><language>zh-cn</language><atom:link href="https://xiaoping378.github.io/tags/controller/index.xml" rel="self" type="application/rss+xml"/><item><title>k8s controllers工程化实践</title><link>https://xiaoping378.github.io/docs/4-cloud/k8s/k8s-controlelrs%E5%B7%A5%E7%A8%8B%E5%8C%96%E5%BC%80%E5%8F%91/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/k8s/k8s-controlelrs%E5%B7%A5%E7%A8%8B%E5%8C%96%E5%BC%80%E5%8F%91/</guid><description>&lt;h1 id="controllers工程化"&gt;controllers工程化&lt;a class="td-heading-self-link" href="#controllers%e5%b7%a5%e7%a8%8b%e5%8c%96" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;h2 id="工程化的目标"&gt;工程化的目标&lt;a class="td-heading-self-link" href="#%e5%b7%a5%e7%a8%8b%e5%8c%96%e7%9a%84%e7%9b%ae%e6%a0%87" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;controller工程化的定义，建立一个可持续迭代的工程，包括但不限于以下目标。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持多group资源（多个controller）&lt;/li&gt;
+&lt;li&gt;更改CR字段后，可无缝升级（重新生产CR和API）&lt;/li&gt;
+&lt;li&gt;API文档化&lt;/li&gt;
+&lt;li&gt;CR部署初始化&lt;/li&gt;
+&lt;li&gt;ARM多架构编译和镜像构建&lt;/li&gt;
+&lt;li&gt;单元测试覆盖率，golang-ci代码扫描。&lt;/li&gt;
+&lt;li&gt;暴露关键的监控指标和事件日志&lt;/li&gt;
+&lt;li&gt;高可用&lt;/li&gt;
+&lt;li&gt;关注规模性能&lt;/li&gt;
+&lt;li&gt;安全问题
+&lt;ul&gt;
+&lt;li&gt;webhook证书，统一管理&lt;/li&gt;
+&lt;li&gt;组件Token权限&lt;/li&gt;
+&lt;li&gt;CR幂等性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="创建一个operator"&gt;创建一个Operator&lt;a class="td-heading-self-link" href="#%e5%88%9b%e5%bb%ba%e4%b8%80%e4%b8%aaoperator" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;利用kubebuilder初始化一个Operator，背后依赖controller-runtime和controller-gen&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mkdir -p ~/app &lt;span style="color:#666"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style="color:#a2f"&gt;cd&lt;/span&gt; ~/app
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubebuilder init --domain cebpaas.io --repo cebpaas.io/appmanager
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# Writing kustomize manifests for you to edit...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# Writing scaffold for you to edit...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# Get controller runtime:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# $ go get sigs.k8s.io/controller-runtime@v0.11.2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# Update dependencies:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# $ go mod tidy&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# Next: define a resource with:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# $ kubebuilder create api&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;#可选命令, 本处执行的话，可省略下文的“多个controller合并”&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;#kubebuilder edit --multigroup=true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubebuilder create api --group apps --version v1 --kind Application
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# Create Resource [y/n]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# y&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# Create Controller [y/n]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# y&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# Writing kustomize manifests for you to edit...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# Writing scaffold for you to edit...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# api/v1/application_types.go&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# controllers/application_controller.go&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# Update dependencies:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# $ go mod tidy&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# Running make:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# $ make generate&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# mkdir -p /root/app/bin&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# GOBIN=/root/app/bin go install sigs.k8s.io/controller-tools/cmd/controller-gen@v0.8.0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# /root/app/bin/controller-gen object:headerFile=&amp;#34;hack/boilerplate.go.txt&amp;#34; paths=&amp;#34;./...&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# Next: implement your new API and generate the manifests (e.g. CRDs,CRs) with:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# $ make manifests&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;make manifests
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# /root/app/bin/controller-gen rbac:roleName=manager-role crd webhook paths=&amp;#34;./...&amp;#34; output:crd:artifacts:config=config/crd/bases&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="多个group-controller合并"&gt;多个group controller合并&lt;a class="td-heading-self-link" href="#%e5%a4%9a%e4%b8%aagroup-controller%e5%90%88%e5%b9%b6" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;开启多controller操作，&lt;/p&gt;</description></item></channel></rss>

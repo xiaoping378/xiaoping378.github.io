@@ -1,903 +1,344 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>现代技能栈 – 区块链</title><link>https://xiaoping378.github.io/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/</link><description>Recent content in 区块链 on 现代技能栈</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Thu, 05 Jan 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://xiaoping378.github.io/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: 什么是以太坊</title><link>https://xiaoping378.github.io/docs/5-blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A-%E5%9F%BA%E7%A1%800/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/5-blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A-%E5%9F%BA%E7%A1%800/</guid><description>
-&lt;h3 id="目录">目录&lt;/h3>
-&lt;ol>
-&lt;li>什么是以太坊&lt;/li>
-&lt;li>应用场景&lt;/li>
-&lt;li>趋势展望&lt;/li>
-&lt;/ol>
-&lt;h3 id="内容">内容&lt;/h3>
-&lt;p>1.什么是以太坊&lt;/p>
-&lt;p>以太坊是一个全新开放的区块链平台，它允许任何人在平台中建立和使用通过区块链技术运行的去中心化应用。&lt;/p>
-&lt;p>1.1. 从名字说起&lt;/p>
-&lt;p>以太坊 == ethereum，&lt;/p>
-&lt;p>Ether，物理学里面有个以太，绝对静止的存在于空间的那种物质，尚未证明是否真实存在，在某领域里，它被称为虚空，空间…是一种能承载万物的东西，是一种目前还难以解释和观察的东西。&lt;/p>
-&lt;p>至于这个“坊”字，也不知道是谁先翻译叫起来的，反正现在大家都这么叫。&lt;/p>
-&lt;p>1.2 从功能说起&lt;/p>
-&lt;p>&lt;a href="https://www.ethereum.org/ether">以太&lt;/a>是区块链网络里很重要的元素 -- 燃料 -- 以太币，为计算付费。&lt;/p>
-&lt;pre>&lt;code>1. 开发人员发布Dapp
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>区块链 on 现代技能栈</title><link>https://xiaoping378.github.io/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/</link><description>Recent content in 区块链 on 现代技能栈</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Sun, 23 Jan 2022 20:36:47 +0800</lastBuildDate><atom:link href="https://xiaoping378.github.io/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/index.xml" rel="self" type="application/rss+xml"/><item><title>什么是以太坊</title><link>https://xiaoping378.github.io/docs/5-blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A-%E5%9F%BA%E7%A1%800/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/5-blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A-%E5%9F%BA%E7%A1%800/</guid><description>&lt;h3 id="目录"&gt;目录&lt;a class="td-heading-self-link" href="#%e7%9b%ae%e5%bd%95" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;什么是以太坊&lt;/li&gt;
+&lt;li&gt;应用场景&lt;/li&gt;
+&lt;li&gt;趋势展望&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="内容"&gt;内容&lt;a class="td-heading-self-link" href="#%e5%86%85%e5%ae%b9" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;1.什么是以太坊&lt;/p&gt;
+&lt;p&gt;以太坊是一个全新开放的区块链平台，它允许任何人在平台中建立和使用通过区块链技术运行的去中心化应用。&lt;/p&gt;
+&lt;p&gt;1.1. 从名字说起&lt;/p&gt;
+&lt;p&gt;以太坊 == ethereum，&lt;/p&gt;
+&lt;p&gt;Ether，物理学里面有个以太，绝对静止的存在于空间的那种物质，尚未证明是否真实存在，在某领域里，它被称为虚空，空间…是一种能承载万物的东西，是一种目前还难以解释和观察的东西。&lt;/p&gt;
+&lt;p&gt;至于这个“坊”字，也不知道是谁先翻译叫起来的，反正现在大家都这么叫。&lt;/p&gt;
+&lt;p&gt;1.2 从功能说起&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.ethereum.org/ether"&gt;以太&lt;/a&gt;是区块链网络里很重要的元素 -- 燃料 -- 以太币，为计算付费。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. 开发人员发布Dapp
 2. 用户和Dapp交互
 3. 挖矿得到报酬（维持网络稳定的）
 4. 金融交易
-&lt;/code>&lt;/pre>
-&lt;p>1.3 从产出&lt;/p>
-&lt;ul>
-&lt;li>2014年9月份预售阶段发了6千万以太币，（募集到 31,531 个比特币）&lt;/li>
-&lt;li>其中20%用于以太基金的运作，主要是给开发人员发工资。&lt;/li>
-&lt;li>挖矿，大概每15秒左右出一个块，作为报酬，出块的人可以得到5个以太&lt;/li>
-&lt;li>打包叔块的人会得到2-3个以太&lt;/li>
-&lt;/ul>
-&lt;p>自从&lt;a href="https://blog.ethereum.org/2017/10/12/byzantium-hf-announcement/">Byzantium update&lt;/a>升级后，现在挖矿和挖到叔块的人会分别得到3和0.625-2.625个以太。&lt;/p>
-&lt;p>1.4 FAQ&lt;/p>
-&lt;p>1.4.1 以太比会无限发行么？&lt;/p>
-&lt;p>不会， 当时预售的时候规定，每年的发行量是1800万上限（被挖到），计划在17年底，会切换共识算法从POW到&lt;a href="https://blog.ethereum.org/2015/08/01/introducing-casper-friendly-ghost/">Casper&lt;/a>上，之后出块效率更高，需要的挖矿补贴更少, 具体发行多少，现在还未定。&lt;/p>
-&lt;p>1.4.2 以太币和比特币的对比？&lt;/p>
-&lt;p>如果后者，以太币是不可能实现的，在整个数字生态是互补关系，Ether应被视为“加密燃料”，其目的是为计算付费，而不是用作或被视为货币，资产，份额或其他任何东西。&lt;/p>
-&lt;p>&lt;img src="https://www.ethereum.org/images/bitcoin-and-ethereum-sitting-on-a-tree@2x.png" alt="">&lt;/p>
-&lt;p>技术层面的对比&lt;/p>
-&lt;p>&lt;img src="https://xiaoping378.github.io/BTC-ETH.png" alt="">&lt;/p>
-&lt;p>1.2 账户&lt;/p>
-&lt;p>以太坊有两种类型的账户：&lt;/p>
-&lt;ul>
-&lt;li>外部账户（由私钥控制的）&lt;/li>
-&lt;li>合约账户（由合约代码控制）。&lt;/li>
-&lt;/ul>
-&lt;p>另种账户都可以发起交易，后者被动发送。&lt;/p>
-&lt;p>外部所有的账户没有代码，人们可以通过创建和签名一笔交易从一个外部账户发送消息。每当合约账户收到一条消息，合约内部的代码就会被激活，允许它对内部存储进行读取和写入，和发送其它消息或者创建合约。&lt;/p>
-&lt;p>UTXOs的好处有：
-更加私密（用户要是每笔交易都换一个地址，那么就很难找到其中两个地址的相关性）；潜在的可扩展性。&lt;/p>
-&lt;p>账户的好处：
-节省大量空间（每笔交易只有一个输入、一个输出、一个签名）；更大的可替代性；简单（编码简单，不需要更为复杂脚本）；&lt;/p>
-&lt;p>1.3 以太坊虚拟机EVM&lt;/p>
-&lt;p>1.4 挖矿&lt;/p>
-&lt;p>1.5 网络&lt;/p>
-&lt;p>目前有主链和测试链之分，测试网已经运行到3代了&lt;/p>
-&lt;p>测试链的区别：&lt;/p>
-&lt;p>&lt;img src="https://xiaoping378.github.io/ethereum-tesnet.png" alt="">&lt;/p>
-&lt;p>主链：&lt;/p>
-&lt;p>&lt;img src="https://xiaoping378.github.io/ethereum-mainnet.png" alt="">&lt;/p>
-&lt;ol>
-&lt;li>应用场景&lt;/li>
-&lt;/ol>
-&lt;ul>
-&lt;li>
-&lt;p>金融服务:主要是降低交易成本,减少跨组织交易风险等。该领域的区块链应用将最快
-成熟起来,银行和金融交易机构将是主力推动者。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>征信和权属管理:这是大型社交平台和保险公司都梦寐以求的,目前还缺乏足够的数据
-来源、可靠的平台支持和有效的数据分析和管理。该领域创业的门槛极高,需要自上而
-下的推动。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>资源共享:airbnb 为代表的公司将欢迎这类应用,极大降低管理成本。这个领域创业门
-槛低,主题集中,会受到投资热捧。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>投资管理:无论公募还是私募基金,都可以应用区块链技术降低管理成本和管控风险。
-虽然有 DAO 这样的试水,谨慎认为该领域的需求&lt;a href="http://www.8btc.com/thedao-expolit-analysis">还未成熟&lt;/a>。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>物联网与供应链:物联网是很适合的一个领域,短期内会有大量应用出现,特别是租
-赁、物流等特定场景。但物联网自身的发展局限将导致短期内较难出现规模应用。&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;ol start="3">
-&lt;li>趋势展望&lt;/li>
-&lt;/ol>
-&lt;p>&lt;img src="https://xiaoping378.github.io/ethereum-future.png" alt="">&lt;/p>
-&lt;p>一个是 技术领域也存在着周期律。这个周期目前看是7-8 年左右。或许正如人有“七年之
-痒”,技术也存在着七年这道坎,到了这道坎,要么自身突破迈过去,要么往往就被新的技术
-所取代。如果从比特币网络上线(2009 年1月)算起,到今年正是在坎上。因此,现在正是
-相关技术进行突破的好时机。&lt;/p>
-&lt;p>为何恰好是7年? 7年按照产品周期来看基本是2-3个产品周期,所谓事不过三,经过2-3
-个产品周期也差不多该有个结论了。&lt;/p>
-&lt;p>另外,最早出现的未必是先驱,也可能是先烈。创新固然很好,但过早播撒的种子,没有合
-适的土壤,往往也难长大。技术创新与科研创新很不同的一点便是,技术创新必须立足于需
-求,过早过晚都会错失良机。科研创新则要越早越好,最好像二十世纪那批物理巨匠们一
-样,让后人吃了一百多年的老本。&lt;/p>
-&lt;p>最后,事物的发展往往是延续的、长期的。 新生事物大都不是凭空蹦出来的,往往是解决了
-前辈未能解决的问题,或是出现了之前未曾出现过的场景。而且很多时候,新生事物会在历
-史的舞台下面进行长期的演化,只要是往提高生产力的正确方向,迟早会出现在舞台上的一
-天。&lt;/p>
-&lt;p>&lt;img src="https://xiaoping378.github.io/ethereum-giveup.png" alt="">
-&lt;/br>&lt;/br>&lt;/br>&lt;/br>&lt;/br>&lt;/br>&lt;/br>&lt;/br>&lt;/br>&lt;/br>&lt;/br>&lt;/br>&lt;/br>&lt;/p>
-&lt;h1 id="qa">QA ?&lt;/h1></description></item><item><title>Docs: 搭建以太坊私链网络</title><link>https://xiaoping378.github.io/docs/5-blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A-%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA%E5%88%9D%E6%AD%A5%E5%AE%9E%E8%B7%B5/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/5-blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A-%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA%E5%88%9D%E6%AD%A5%E5%AE%9E%E8%B7%B5/</guid><description>
-&lt;p>大量过时文章充斥于网络，本文基于官方go-tehereum 1.6.7版本整理而出，在geth1.6之后引入了一个&lt;strong>puppeth&lt;/strong>工具，它就是用来初始一个私链创世块配置的。&lt;/p>
-&lt;h3 id="准备工具环境">准备工具环境&lt;/h3>
-&lt;p>下载&lt;code>go-ethereum代码&lt;/code>（go的开发环境准备，不在此文范围）&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#080;font-style:italic"># 下载源码&lt;/span>
-go get github.com/ethereum/go-ethereum
-&lt;span style="color:#a2f">cd&lt;/span> &lt;span style="color:#b8860b">$GOPATH&lt;/span>/src/github.com/ethereum/go-ethereum
-&lt;span style="color:#080;font-style:italic"># 编译1.6.7版本的代码&lt;/span>
-git checkout -b v1.6.7 v1.6.7
-make all
-&lt;span style="color:#080;font-style:italic"># 安装&lt;/span>
-sudo ln -s &lt;span style="color:#b8860b">$PWD&lt;/span>/build/bin/* /usr/local/bin/
-&lt;span style="color:#080;font-style:italic"># 检查是否安装OK&lt;/span>
-geth version
-Geth
-Version: 1.6.7-stable
-Git Commit: ab5646c532292b51e319f290afccf6a44f874372
-Architecture: amd64
-Protocol Versions: &lt;span style="color:#666">[&lt;/span>&lt;span style="color:#666">63&lt;/span> 62&lt;span style="color:#666">]&lt;/span>
-Network Id: &lt;span style="color:#666">1&lt;/span>
-Go Version: go1.8.3
-Operating System: linux
-&lt;span style="color:#b8860b">GOPATH&lt;/span>&lt;span style="color:#666">=&lt;/span>/home/xxp/go
-&lt;span style="color:#b8860b">GOROOT&lt;/span>&lt;span style="color:#666">=&lt;/span>/home/xxp/Software/go
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="生成私链创世块的配置">生成私链创世块的配置&lt;/h3>
-&lt;ol>
-&lt;li>创建账户&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#080;font-style:italic"># 创建testnet目录&lt;/span>
-➜ mkdir testnet &lt;span style="color:#666">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#a2f">cd&lt;/span> testnet
-&lt;span style="color:#080;font-style:italic"># 创建3个普通账户，密码自定&lt;/span>
-➜ geth --datadir node0 account new
-&lt;span style="color:#080;font-style:italic"># 把密码记录到文件里，后面会频繁输入&lt;/span>
-➜ &lt;span style="color:#a2f">echo&lt;/span> node0 &amp;gt; node0/password
-➜ geth --datadir node1 account new
-➜ &lt;span style="color:#a2f">echo&lt;/span> node1 &amp;gt; node1/password
-➜ geth --datadir node2 account new
-➜ &lt;span style="color:#a2f">echo&lt;/span> node2 &amp;gt; node2/password
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>如上打印的一串16进制的字符串就代表账户的userID（理解成网络中的IP地址），后面puppeth需要用到。&lt;/p>
-&lt;ol start="2">
-&lt;li>生成genesis文件&lt;/li>
-&lt;/ol>
-&lt;p>genesis文件定义了私链的第一个块生成，直接看操作吧(省略了些输出)&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ testnet puppeth
-Please specify a network name to administer &lt;span style="color:#666">(&lt;/span>no spaces, please&lt;span style="color:#666">)&lt;/span>
-&amp;gt; testnet
-Sweet, you can &lt;span style="color:#a2f">set&lt;/span> this via --network&lt;span style="color:#666">=&lt;/span>testnet next time!
-INFO &lt;span style="color:#666">[&lt;/span>08-21|23:04:14&lt;span style="color:#666">]&lt;/span> Administering Ethereum network &lt;span style="color:#b8860b">name&lt;/span>&lt;span style="color:#666">=&lt;/span>testnet
-WARN &lt;span style="color:#666">[&lt;/span>08-21|23:04:14&lt;span style="color:#666">]&lt;/span> No previous configurations found &lt;span style="color:#b8860b">path&lt;/span>&lt;span style="color:#666">=&lt;/span>/home/xxp/.puppeth/testnet
-What would you like to &lt;span style="color:#a2f;font-weight:bold">do&lt;/span>? &lt;span style="color:#666">(&lt;/span>&lt;span style="color:#b8860b">default&lt;/span> &lt;span style="color:#666">=&lt;/span> stats&lt;span style="color:#666">)&lt;/span>
-1. Show network stats
-2. Configure new genesis
-3. Track new remote server
-4. Deploy network components
-&amp;gt; &lt;span style="color:#666">2&lt;/span>
-Which consensus engine to use? &lt;span style="color:#666">(&lt;/span>&lt;span style="color:#b8860b">default&lt;/span> &lt;span style="color:#666">=&lt;/span> clique&lt;span style="color:#666">)&lt;/span>
-1. Ethash - proof-of-work
-2. Clique - proof-of-authority
-&amp;gt; &lt;span style="color:#666">2&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 设置5秒出一个块&lt;/span>
-How many seconds should blocks take? &lt;span style="color:#666">(&lt;/span>&lt;span style="color:#b8860b">default&lt;/span> &lt;span style="color:#666">=&lt;/span> 15&lt;span style="color:#666">)&lt;/span>
-&amp;gt; &lt;span style="color:#666">5&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 输入有签名权限的账户&lt;/span>
-Which accounts are allowed to seal? &lt;span style="color:#666">(&lt;/span>mandatory at least one&lt;span style="color:#666">)&lt;/span>
-&amp;gt; 0x799a8f7796d1d20b8198a587caaf545cdde5de13
-&amp;gt; 0x1458eac314d8fc922029095fae20483f55726017
-&amp;gt; 0x3ca60eb49314d867ab75a3c7b3a5aa61c3d6ef71
-&amp;gt; 0x
-&lt;span style="color:#080;font-style:italic"># 输入有预留余额的账户&lt;/span>
-Which accounts should be pre-funded? &lt;span style="color:#666">(&lt;/span>advisable at least one&lt;span style="color:#666">)&lt;/span>
-&amp;gt; 0x799a8f7796d1d20b8198a587caaf545cdde5de13
-&amp;gt; 0x1458eac314d8fc922029095fae20483f55726017
-&amp;gt; 0x3ca60eb49314d867ab75a3c7b3a5aa61c3d6ef71
-&amp;gt; 0x
-Specify your chain/network ID &lt;span style="color:#a2f;font-weight:bold">if&lt;/span> you want an explicit one &lt;span style="color:#666">(&lt;/span>&lt;span style="color:#b8860b">default&lt;/span> &lt;span style="color:#666">=&lt;/span> random&lt;span style="color:#666">)&lt;/span>
-&amp;gt; &lt;span style="color:#666">378&lt;/span>
-Anything fun to embed into the genesis block? &lt;span style="color:#666">(&lt;/span>max &lt;span style="color:#666">32&lt;/span> bytes&lt;span style="color:#666">)&lt;/span>
-&amp;gt;
-What would you like to &lt;span style="color:#a2f;font-weight:bold">do&lt;/span>? &lt;span style="color:#666">(&lt;/span>&lt;span style="color:#b8860b">default&lt;/span> &lt;span style="color:#666">=&lt;/span> stats&lt;span style="color:#666">)&lt;/span>
-1. Show network stats
-2. Save existing genesis
-3. Track new remote server
-4. Deploy network components
-&amp;gt; &lt;span style="color:#666">2&lt;/span>
-Which file to save the genesis into? &lt;span style="color:#666">(&lt;/span>&lt;span style="color:#b8860b">default&lt;/span> &lt;span style="color:#666">=&lt;/span> testnet.json&lt;span style="color:#666">)&lt;/span>
-&amp;gt; genesis.json
-INFO &lt;span style="color:#666">[&lt;/span>08-21|23:05:36&lt;span style="color:#666">]&lt;/span> Exported existing genesis block
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>最后会在当前目录生成genesis.json文件。&lt;/p>
-&lt;h3 id="启动私链网络">启动私链网络&lt;/h3>
-&lt;p>这里通过单机不同端口模拟多节点，&lt;/p>
-&lt;ul>
-&lt;li>默认geth一启动就会发出discovery，以发现其他节点，源码里内置了几个初始节点，可以通过--bootnode参数重置。如果真要不同节点互组网络的话，还需要主要时间同步，&lt;/li>
-&lt;li>还可以通过--nodiscover参数，停掉自动发现，并利用admin.addPeer()或者static-node功能组成网络。&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#080;font-style:italic"># 启动节点0, 关闭自动发现（防止不希望的节点进入）&lt;/span>
-geth --datadir node0 init genesis.json
-geth --datadir node0 --port &lt;span style="color:#666">30000&lt;/span> --nodiscover --unlock &lt;span style="color:#b44">&amp;#39;0&amp;#39;&lt;/span> --password ./node0/password console
-&lt;span style="color:#080;font-style:italic"># 不加console的话，可以通过geth attach ipc:node0/geth.ipc来访问&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 启动节点1，另起一个终端，通过不同端口模拟&lt;/span>
-geth --datadir node1 init genesis.json
-geth --datadir node1 --port &lt;span style="color:#666">30001&lt;/span> --nodiscover --unlock &lt;span style="color:#b44">&amp;#39;0&amp;#39;&lt;/span> --password ./node1/password console
-&lt;span style="color:#080;font-style:italic"># 启动节点2，genesis.json里已经指定networkID,启动时无需指定了&lt;/span>
-geth --datadir node2 init genesis.json
-geth --datadir node2 --port &lt;span style="color:#666">30002&lt;/span> --nodiscover --unlock &lt;span style="color:#b44">&amp;#39;0&amp;#39;&lt;/span> --password ./node2/password console
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>目前启动了三个节点，但都默认关闭了发现功能，需要手动添加peer节点。&lt;/p>
-&lt;p>在每个console输入&lt;code>admin.nodeInfo.enode&lt;/code>， 把输出记录下来到&lt;code>static-nodes.json&lt;/code>文件，我这里情况如下：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ testnet cat node0/static-nodes.json
-&lt;span style="color:#666">[&lt;/span>
-&lt;span style="color:#b44">&amp;#34;enode://2ffb53ede7de8dabf8f12343a7b2aba6b09263a53d8db5b4669309c5913f72969ce469cf09299f13e9d6cba8a98e18ad43811439326d7152f21d2e03ddc6be17@[::]:30000?discport=0&amp;#34;&lt;/span>,
-&lt;span style="color:#b44">&amp;#34;enode://910d1bfcd763bb5157bc62f8b121eb21fb305d17e4e4437c0b094d3d6f2d72f1964b80eb8fa2cf6cd7d4cc2d44cfc1ed9b74275ea7fd42ab89b4d089023fb7d5@[::]:30001?discport=0&amp;#34;&lt;/span>,
-&lt;span style="color:#b44">&amp;#34;enode://acab97a2a287b740b5efc3af465ba7330b3d4948b05e26818822d1aee659ec1b8f54ee9501576dc08ea4021d7ede01431691a27310a7dcbda2437bcd3b9c451d@[::]:30002?discport=0&amp;#34;&lt;/span>
-&lt;span style="color:#666">]&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>把static-nodes.json文件放入各自(node0/,node1/, node2/)的&lt;code>admin.datadir&lt;/code>目录下，并&lt;code>Ctrl+D&lt;/code>终止掉console，并重新执行&lt;code>geth --datadir &amp;lt;dir&amp;gt; --prot &amp;lt;port&amp;gt; --nodiscover console&lt;/code>，如果觉得这样麻烦的话，或者以后动态添加节点时候，可考虑在每个节点的console里输入&lt;code>admin.addPeer(&amp;quot;nodeInfo_encode&amp;quot;)&lt;/code>来完成。&lt;/p>
-&lt;p>然后在console中可以如下验证，是否互相发现组成以太坊私链网络了&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#080;font-style:italic"># 这样可看到其他节点的明细&lt;/span>
-&amp;gt; admin.peers
-&lt;span style="color:#666">[{&lt;/span>
-caps: &lt;span style="color:#666">[&lt;/span>&lt;span style="color:#b44">&amp;#34;eth/63&amp;#34;&lt;/span>&lt;span style="color:#666">]&lt;/span>,
-id: &lt;span style="color:#b44">&amp;#34;910d1bfcd763bb5157bc62f8b121eb21fb305d17e4e4437c0b094d3d6f2d72f1964b80eb8fa2cf6cd7d4cc2d44cfc1ed9b74275ea7fd42ab89b4d089023fb7d5&amp;#34;&lt;/span>,
-name: &lt;span style="color:#b44">&amp;#34;Geth/v1.6.7-stable-ab5646c5/linux-amd64/go1.8.3&amp;#34;&lt;/span>,
-network: &lt;span style="color:#666">{&lt;/span>
-localAddress: &lt;span style="color:#b44">&amp;#34;[::1]:43928&amp;#34;&lt;/span>,
-remoteAddress: &lt;span style="color:#b44">&amp;#34;[::1]:30001&amp;#34;&lt;/span>
-&lt;span style="color:#666">}&lt;/span>,
-protocols: &lt;span style="color:#666">{&lt;/span>
-eth: &lt;span style="color:#666">{&lt;/span>
-difficulty: 1,
-head: &lt;span style="color:#b44">&amp;#34;0xa43519868915a64d3798abf1867b7bc769d1239442c69ff1eca8e3dfcd13209b&amp;#34;&lt;/span>,
-version: &lt;span style="color:#666">63&lt;/span>
-&lt;span style="color:#666">}&lt;/span>
-&lt;span style="color:#666">}&lt;/span>
-&lt;span style="color:#666">}&lt;/span>, &lt;span style="color:#666">{&lt;/span>
-caps: &lt;span style="color:#666">[&lt;/span>&lt;span style="color:#b44">&amp;#34;eth/63&amp;#34;&lt;/span>&lt;span style="color:#666">]&lt;/span>,
-id: &lt;span style="color:#b44">&amp;#34;acab97a2a287b740b5efc3af465ba7330b3d4948b05e26818822d1aee659ec1b8f54ee9501576dc08ea4021d7ede01431691a27310a7dcbda2437bcd3b9c451d&amp;#34;&lt;/span>,
-name: &lt;span style="color:#b44">&amp;#34;Geth/v1.6.7-stable-ab5646c5/linux-amd64/go1.8.3&amp;#34;&lt;/span>,
-network: &lt;span style="color:#666">{&lt;/span>
-localAddress: &lt;span style="color:#b44">&amp;#34;[::1]:60310&amp;#34;&lt;/span>,
-remoteAddress: &lt;span style="color:#b44">&amp;#34;[::1]:30002&amp;#34;&lt;/span>
-&lt;span style="color:#666">}&lt;/span>,
-protocols: &lt;span style="color:#666">{&lt;/span>
-eth: &lt;span style="color:#666">{&lt;/span>
-difficulty: 1,
-head: &lt;span style="color:#b44">&amp;#34;0xa43519868915a64d3798abf1867b7bc769d1239442c69ff1eca8e3dfcd13209b&amp;#34;&lt;/span>,
-version: &lt;span style="color:#666">63&lt;/span>
-&lt;span style="color:#666">}&lt;/span>
-&lt;span style="color:#666">}&lt;/span>
-&lt;span style="color:#666">}]&lt;/span>
-&amp;gt;
-&lt;span style="color:#080;font-style:italic"># 可看到此节点发现了另外两个节点&lt;/span>
-&amp;gt; net.peerCount
-&lt;span style="color:#666">2&lt;/span>
-&amp;gt;
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>目前整个testnet的目录结构如下&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ tree
-.
-├── genesis.json
-├── node0
-│   ├── geth
-│   │   ├── chaindata
-│   │   │   ├── 000002.ldb
-| | | ├── ...
-│   │   ├── lightchaindata
-│   │   │   ├── 000001.log
-│   │   │   ├── ...
-│   │   ├── LOCK
-│   │   └── nodekey
-│   ├── geth.ipc
-│   ├── &lt;span style="color:#a2f">history&lt;/span>
-│   ├── keystore
-│   │   └── UTC--2017-08-21T15-03-25.499242705Z--799a8f7796d1d20b8198a587caaf545cdde5de13
-│   └── static-nodes.json
-├── node1
-│   ├── geth
-│   │   ├── chaindata
-│   │   │   ├── 000002.ldb
-│   │   │   ├── ...
-│   │   │   └── MANIFEST-000007
-│   │   ├── lightchaindata
-│   │   │   ├── ...
-│   │   │   └── MANIFEST-000000
-│   │   ├── LOCK
-│   │   └── nodekey
-│   ├── geth.ipc
-│   ├── &lt;span style="color:#a2f">history&lt;/span>
-│   ├── keystore
-│   │   └── UTC--2017-08-21T15-03-35.020270645Z--1458eac314d8fc922029095fae20483f55726017
-│   └── static-nodes.json
-└── node2
-├── geth
-│   ├── chaindata
-│   │   ├── 000002.ldb
-│   │   ├── ...
-│   │   └── MANIFEST-000007
-│   ├── lightchaindata
-│   │   ├── ...
-│   │   └── MANIFEST-000000
-│   ├── LOCK
-│   └── nodekey
-├── geth.ipc
-├── &lt;span style="color:#a2f">history&lt;/span>
-├── keystore
-│   └── UTC--2017-08-21T15-03-46.899273318Z--3ca60eb49314d867ab75a3c7b3a5aa61c3d6ef71
-└── static-nodes.json
-&lt;span style="color:#666">15&lt;/span> directories, &lt;span style="color:#666">56&lt;/span> files
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="开始挖矿">开始挖矿&lt;/h3>
-&lt;p>在每个节点的console输入如下，启动挖矿（共识记账）：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#080;font-style:italic"># 这一步可以不需要，因为我们geth启动的时候，已经传入unlock参数了，因为console里执行unlock是有过期时间机制的，私网直接来。。。。&lt;/span>
-&amp;gt; personal.unlockAccount&lt;span style="color:#666">(&lt;/span>eth.coinbase&lt;span style="color:#666">)&lt;/span>
-Unlock account 0x799a8f7796d1d20b8198a587caaf545cdde5de13
-Passphrase:
-&lt;span style="color:#a2f">true&lt;/span>
-&amp;gt;
-&lt;span style="color:#080;font-style:italic"># 这一个很重要，为后面的eth设置了默认账户&lt;/span>
-&amp;gt; eth.defaultAccount &lt;span style="color:#666">=&lt;/span> eth.coinbase
-&lt;span style="color:#b44">&amp;#34;0x799a8f7796d1d20b8198a587caaf545cdde5de13&amp;#34;&lt;/span>
-&amp;gt;
-&amp;gt; miner.start&lt;span style="color:#666">()&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="通过钱包交易">通过钱包交易&lt;/h3>
-&lt;p>通过&lt;a href="https://github.com/ethereum/mist/releases">mist&lt;/a>钱包界面，来查看基本信息和进行交易，不过之前需要在console开启RPC，　node0的console里如下&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&amp;gt; admin.startRPC&lt;span style="color:#666">(&lt;/span>&lt;span style="color:#b44">&amp;#34;127.0.0.1&amp;#34;&lt;/span>, 8545, &lt;span style="color:#b44">&amp;#34;*&amp;#34;&lt;/span>, &lt;span style="color:#b44">&amp;#34;eth,net,web3,admin,personal&amp;#34;&lt;/span>&lt;span style="color:#666">)&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动的mist钱包&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">mist --node geth --node-datadir ./node0 --rpc http://localhost:8545
-&lt;span style="color:#080;font-style:italic"># 不启动rpc的话，也可以如下直接通过ipc通信&lt;/span>
-&lt;span style="color:#080;font-style:italic"># mist --rpc ./node0/geth.ipc --node-networkid 378 --node-datadir ./node0&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://xiaoping378.github.io/ethereum-mist.png" alt="mist界面">&lt;/p>
-&lt;p>需要去node1上通过&lt;code>eth.accounts[0]&lt;/code>拿到账号信息,填入红框，点击发送交易，输入密码即可&lt;/p>
-&lt;p>&lt;img src="https://xiaoping378.github.io/ethereum-transcation.png" alt="">&lt;/p>
-&lt;p>另外也可以通过console命令行来完成上面操作：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&amp;gt;
-&amp;gt; var &lt;span style="color:#b8860b">sender&lt;/span> &lt;span style="color:#666">=&lt;/span> eth.accounts&lt;span style="color:#666">[&lt;/span>0&lt;span style="color:#666">]&lt;/span>
-undefined
-&amp;gt; var &lt;span style="color:#b8860b">receiver&lt;/span> &lt;span style="color:#666">=&lt;/span> &lt;span style="color:#b44">&amp;#34;0x1458eac314d8fc922029095fae20483f55726017&amp;#34;&lt;/span>
-undefined
-&amp;gt; var &lt;span style="color:#b8860b">amount&lt;/span> &lt;span style="color:#666">=&lt;/span> web3.toWei&lt;span style="color:#666">(&lt;/span>10, &lt;span style="color:#b44">&amp;#34;ether&amp;#34;&lt;/span>&lt;span style="color:#666">)&lt;/span>
-undefined
-&amp;gt; personal.unlockAccount&lt;span style="color:#666">(&lt;/span>eth.accounts&lt;span style="color:#666">[&lt;/span>0&lt;span style="color:#666">])&lt;/span>
-Unlock account 0x799a8f7796d1d20b8198a587caaf545cdde5de13
-Passphrase:
-&lt;span style="color:#a2f">true&lt;/span>
-&amp;gt; eth.sendTransaction&lt;span style="color:#666">({&lt;/span>from:sender, to:receiver, value: amount&lt;span style="color:#666">})&lt;/span>
-&lt;span style="color:#b44">&amp;#34;0x97ca1f5fa27df083e14b2ffb82c2a60744aeae0f1a7b5e735ca4d0c05c16f7b6&amp;#34;&lt;/span>
-&amp;gt;
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="写个合约">写个合约&lt;/h3>
-&lt;p>通过mist界面点击的“开发”-&amp;gt;&amp;quot;Open Remix IDE&amp;quot;, 会自动打开IDE工具，并且默认集成了一个投票的合约，合约内容不表&lt;/p>
-&lt;p>“create”按钮后面输入 &lt;code>10&lt;/code> -&amp;gt; 点击, 这时候需要输入密码解锁，因为需要支付一定的gas费用。&lt;/p>
-&lt;p>&lt;img src="https://xiaoping378.github.io/ethereum-contract-ballot.png" alt="">&lt;/p>
-&lt;ul>
-&lt;li>这个合约就是个投票程序&lt;/li>
-&lt;li>第一个部署的默认是主席身份，拥有指定别人投票的权利，因为我这里的mist是连接的node0，所以&lt;/li>
-&lt;li>合约初始化（也就是界面点击“create”时），需要输入&amp;quot;投案&amp;quot;个数&lt;/li>
-&lt;/ul>
-&lt;p>在每个节点的的console里，通过&lt;code>eth.contract(ABI).at(Address);&lt;/code>拿到合约对象，&lt;/p>
-&lt;ul>
-&lt;li>其中node0的节点需要用&lt;code>giveRightToVote&lt;/code>给其他账户授权投票权限&lt;/li>
-&lt;li>ABI的信息，就是remix里Interface框对应的信息&lt;/li>
-&lt;li>合约地址通过&lt;code>Copy address&lt;/code>得到&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">
-&amp;gt; var &lt;span style="color:#b8860b">b&lt;/span> &lt;span style="color:#666">=&lt;/span> eth.contract&lt;span style="color:#666">([{&lt;/span>&lt;span style="color:#b44">&amp;#34;constant&amp;#34;&lt;/span>:false,&lt;span style="color:#b44">&amp;#34;inputs&amp;#34;&lt;/span>:&lt;span style="color:#666">[{&lt;/span>&lt;span style="color:#b44">&amp;#34;name&amp;#34;&lt;/span>:&lt;span style="color:#b44">&amp;#34;to&amp;#34;&lt;/span>,&lt;span style="color:#b44">&amp;#34;type&amp;#34;&lt;/span>:&lt;span style="color:#b44">&amp;#34;address&amp;#34;&lt;/span>&lt;span style="color:#666">}]&lt;/span>,&lt;span style="color:#b44">&amp;#34;name&amp;#34;&lt;/span>:&lt;span style="color:#b44">&amp;#34;delegate&amp;#34;&lt;/span>,&lt;span style="color:#b44">&amp;#34;outputs&amp;#34;&lt;/span>:&lt;span style="color:#666">[]&lt;/span>,&lt;span style="color:#b44">&amp;#34;payable&amp;#34;&lt;/span>:false,&lt;span style="color:#b44">&amp;#34;type&amp;#34;&lt;/span>:&lt;span style="color:#b44">&amp;#34;function&amp;#34;&lt;/span>&lt;span style="color:#666">}&lt;/span>,&lt;span style="color:#666">{&lt;/span>&lt;span style="color:#b44">&amp;#34;constant&amp;#34;&lt;/span>:true,&lt;span style="color:#b44">&amp;#34;inputs&amp;#34;&lt;/span>:&lt;span style="color:#666">[]&lt;/span>,&lt;span style="color:#b44">&amp;#34;name&amp;#34;&lt;/span>:&lt;span style="color:#b44">&amp;#34;winningProposal&amp;#34;&lt;/span>,&lt;span style="color:#b44">&amp;#34;outputs&amp;#34;&lt;/span>:&lt;span style="color:#666">[{&lt;/span>&lt;span style="color:#b44">&amp;#34;name&amp;#34;&lt;/span>:&lt;span style="color:#b44">&amp;#34;_winningProposal&amp;#34;&lt;/span>,&lt;span style="color:#b44">&amp;#34;type&amp;#34;&lt;/span>:&lt;span style="color:#b44">&amp;#34;uint8&amp;#34;&lt;/span>&lt;span style="color:#666">}]&lt;/span>,&lt;span style="color:#b44">&amp;#34;payable&amp;#34;&lt;/span>:false,&lt;span style="color:#b44">&amp;#34;type&amp;#34;&lt;/span>:&lt;span style="color:#b44">&amp;#34;function&amp;#34;&lt;/span>&lt;span style="color:#666">}&lt;/span>,&lt;span style="color:#666">{&lt;/span>&lt;span style="color:#b44">&amp;#34;constant&amp;#34;&lt;/span>:false,&lt;span style="color:#b44">&amp;#34;inputs&amp;#34;&lt;/span>:&lt;span style="color:#666">[{&lt;/span>&lt;span style="color:#b44">&amp;#34;name&amp;#34;&lt;/span>:&lt;span style="color:#b44">&amp;#34;voter&amp;#34;&lt;/span>,&lt;span style="color:#b44">&amp;#34;type&amp;#34;&lt;/span>:&lt;span style="color:#b44">&amp;#34;address&amp;#34;&lt;/span>&lt;span style="color:#666">}]&lt;/span>,&lt;span style="color:#b44">&amp;#34;name&amp;#34;&lt;/span>:&lt;span style="color:#b44">&amp;#34;giveRightToVote&amp;#34;&lt;/span>,&lt;span style="color:#b44">&amp;#34;outputs&amp;#34;&lt;/span>:&lt;span style="color:#666">[]&lt;/span>,&lt;span style="color:#b44">&amp;#34;payable&amp;#34;&lt;/span>:false,&lt;span style="color:#b44">&amp;#34;type&amp;#34;&lt;/span>:&lt;span style="color:#b44">&amp;#34;function&amp;#34;&lt;/span>&lt;span style="color:#666">}&lt;/span>,&lt;span style="color:#666">{&lt;/span>&lt;span style="color:#b44">&amp;#34;constant&amp;#34;&lt;/span>:false,&lt;span style="color:#b44">&amp;#34;inputs&amp;#34;&lt;/span>:&lt;span style="color:#666">[{&lt;/span>&lt;span style="color:#b44">&amp;#34;name&amp;#34;&lt;/span>:&lt;span style="color:#b44">&amp;#34;proposal&amp;#34;&lt;/span>,&lt;span style="color:#b44">&amp;#34;type&amp;#34;&lt;/span>:&lt;span style="color:#b44">&amp;#34;uint8&amp;#34;&lt;/span>&lt;span style="color:#666">}]&lt;/span>,&lt;span style="color:#b44">&amp;#34;name&amp;#34;&lt;/span>:&lt;span style="color:#b44">&amp;#34;vote&amp;#34;&lt;/span>,&lt;span style="color:#b44">&amp;#34;outputs&amp;#34;&lt;/span>:&lt;span style="color:#666">[]&lt;/span>,&lt;span style="color:#b44">&amp;#34;payable&amp;#34;&lt;/span>:false,&lt;span style="color:#b44">&amp;#34;type&amp;#34;&lt;/span>:&lt;span style="color:#b44">&amp;#34;function&amp;#34;&lt;/span>&lt;span style="color:#666">}&lt;/span>,&lt;span style="color:#666">{&lt;/span>&lt;span style="color:#b44">&amp;#34;inputs&amp;#34;&lt;/span>:&lt;span style="color:#666">[{&lt;/span>&lt;span style="color:#b44">&amp;#34;name&amp;#34;&lt;/span>:&lt;span style="color:#b44">&amp;#34;_numProposals&amp;#34;&lt;/span>,&lt;span style="color:#b44">&amp;#34;type&amp;#34;&lt;/span>:&lt;span style="color:#b44">&amp;#34;uint8&amp;#34;&lt;/span>&lt;span style="color:#666">}]&lt;/span>,&lt;span style="color:#b44">&amp;#34;payable&amp;#34;&lt;/span>:false,&lt;span style="color:#b44">&amp;#34;type&amp;#34;&lt;/span>:&lt;span style="color:#b44">&amp;#34;constructor&amp;#34;&lt;/span>&lt;span style="color:#666">}])&lt;/span>.at&lt;span style="color:#666">(&lt;/span>&lt;span style="color:#b44">&amp;#39;0xc825238a3348f0a679924796fcf1b1b64a8c1706&amp;#39;&lt;/span>&lt;span style="color:#666">)&lt;/span>
-undefined
-&amp;gt; b.vote&lt;span style="color:#666">(&lt;/span>9&lt;span style="color:#666">)&lt;/span>
-&lt;span style="color:#b44">&amp;#34;0x1646e6547606a8ad0e183f1c9145eff08bbdfd860961d6c7d7367f5b70779cbd&amp;#34;&lt;/span>
-&amp;gt;
-&amp;gt; b.giveRightToVote&lt;span style="color:#666">(&lt;/span>&lt;span style="color:#b44">&amp;#39;0x1458eac314d8fc922029095fae20483f55726017&amp;#39;&lt;/span>&lt;span style="color:#666">)&lt;/span>
-&lt;span style="color:#b44">&amp;#34;0x2759928ad03a2ed5bc4b9c54531eb83e25c4a468e71682f67b160ad3328c8173&amp;#34;&lt;/span>
-&amp;gt;
-&amp;gt; b.giveRightToVote&lt;span style="color:#666">(&lt;/span>&lt;span style="color:#b44">&amp;#39;0x3ca60eb49314d867ab75a3c7b3a5aa61c3d6ef71&amp;#39;&lt;/span>&lt;span style="color:#666">)&lt;/span>
-&lt;span style="color:#b44">&amp;#34;0x46f756e613499f836e392011c8f6d7c23d378fd5a656bae775ecda8bf286c5b6&amp;#34;&lt;/span>
-&amp;gt; b.winningProposal&lt;span style="color:#666">()&lt;/span>
-&lt;span style="color:#666">9&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中值得注意的是b.vote(&lt;number>) 其中的number不能超过create后传入初始参数10， 其实通过&lt;code>Web3 deploy&lt;/code>框的信息也可以直接部署合约。&lt;/p></description></item><item><title>Docs: 以太坊的truffle box开发实战</title><link>https://xiaoping378.github.io/docs/5-blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A-truffle-box%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/5-blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A-truffle-box%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/</guid><description>
-&lt;p>整个过程主要演示chrome扩展 METAMASK， OpenZepplin库和truffle框架的使用。&lt;/p>
-&lt;h3 id="搭建私连网络">搭建私连网络&lt;/h3>
-&lt;p>主要参考之前的&lt;a href="../%E4%BB%A5%E5%A4%AA%E5%9D%8A-%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA%E5%88%9D%E6%AD%A5%E5%AE%9E%E8%B7%B5">以太坊-私有链搭建初步实践&lt;/a>， 这里只用单节点的网络。&lt;/p>
-&lt;p>还是先准备账户：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">mkdir node0
-&lt;span style="color:#080;font-style:italic"># 会在node0/keystore目录里生成一个keyfile json文件&lt;/span>
-geth --datadir node0 account new
-&lt;span style="color:#080;font-style:italic">#利用puppeth生成genesis.json的过程不表，参考上边的链接&lt;/span>
-geth --datadir node0 init genesis.json
-&lt;span style="color:#080;font-style:italic"># 把刚才的账号的密码写入node0/password文件&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 启动私链，顺便开启console&lt;/span>
-&lt;span style="color:#a2f">echo&lt;/span> node0 &amp;gt; node0/password
-geth --datadir node0 --port &lt;span style="color:#666">30000&lt;/span> --nodiscover --unlock &lt;span style="color:#b44">&amp;#39;0&amp;#39;&lt;/span> --password ./node0/password --mine --rpc --rpccorsdomain &lt;span style="color:#b44">&amp;#34;*&amp;#34;&lt;/span> --rpcapi &lt;span style="color:#b44">&amp;#34;eth,net,web3,admin,personal&amp;#34;&lt;/span> console
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>我们把这个账号的json文件导入到chorme插件metamask里，便于后面调试和演示&lt;/p>
-&lt;p>&lt;img src="https://xiaoping378.github.io/ethereum-new-account.png" alt="">&lt;/p>
-&lt;p>ubuntu系统上的chrome插件会有窗口消失的bug，在URL栏里打开&lt;code>chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/popup.html&lt;/code>&lt;/p>
-&lt;h3 id="truflle初始化项目">truflle初始化项目&lt;/h3>
-&lt;p>需要下载truffle命令号&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">npm install -g truffle
-mkdir token &lt;span style="color:#666">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#a2f">cd&lt;/span> token
-&lt;span style="color:#080;font-style:italic"># 利用trulle下载token代笔示例&lt;/span>
-truffle unbox tutorialtoken
-npm intall zeppelin-solidity
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>如上必要的依赖框架和库已经下载到了本地， 接下来就创建自己的代币合约&lt;/p>
-&lt;p>在contract目录创建TutorialToken.sol文件，内容如下：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-js" data-lang="js">pragma solidity &lt;span style="color:#666">^&lt;/span>&lt;span style="color:#666">0.4&lt;/span>.&lt;span style="color:#666">11&lt;/span>;
-&lt;span style="color:#a2f;font-weight:bold">import&lt;/span> &lt;span style="color:#b44">&amp;#39;zeppelin-solidity/contracts/token/StandardToken.sol&amp;#39;&lt;/span>;
-&lt;span style="color:#080;font-style:italic">/**
-&lt;/span>&lt;span style="color:#080;font-style:italic"> * @title SimpleToken
-&lt;/span>&lt;span style="color:#080;font-style:italic"> * @dev Very simple ERC20 Token example, where all tokens are pre-assigned to the creator.
-&lt;/span>&lt;span style="color:#080;font-style:italic"> * Note they can later distribute these tokens as they wish using `transfer` and other
-&lt;/span>&lt;span style="color:#080;font-style:italic"> * `StandardToken` functions.
-&lt;/span>&lt;span style="color:#080;font-style:italic"> */&lt;/span>
-contract TutorialToken is StandardToken {
-string &lt;span style="color:#a2f;font-weight:bold">public&lt;/span> name &lt;span style="color:#666">=&lt;/span> &lt;span style="color:#b44">&amp;#34;TutorialToken&amp;#34;&lt;/span>;
-string &lt;span style="color:#a2f;font-weight:bold">public&lt;/span> symbol &lt;span style="color:#666">=&lt;/span> &lt;span style="color:#b44">&amp;#34;SIM&amp;#34;&lt;/span>;
-uint256 &lt;span style="color:#a2f;font-weight:bold">public&lt;/span> decimals &lt;span style="color:#666">=&lt;/span> &lt;span style="color:#666">18&lt;/span>;
-uint256 &lt;span style="color:#a2f;font-weight:bold">public&lt;/span> INITIAL_SUPPLY &lt;span style="color:#666">=&lt;/span> &lt;span style="color:#666">10000&lt;/span>;
-&lt;span style="color:#080;font-style:italic">/**
-&lt;/span>&lt;span style="color:#080;font-style:italic"> * @dev Contructor that gives msg.sender all of existing tokens.
-&lt;/span>&lt;span style="color:#080;font-style:italic"> */&lt;/span>
-&lt;span style="color:#a2f;font-weight:bold">function&lt;/span> TutorialToken() {
-totalSupply &lt;span style="color:#666">=&lt;/span> INITIAL_SUPPLY;
-balances[msg.sender] &lt;span style="color:#666">=&lt;/span> INITIAL_SUPPLY;
-}
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>在以太坊里几乎所有操作都是当做交易来看的，部署合约就是一种交易，交易就要花钱(gas消耗)，所以truffle做的是增量部署（少消耗gas），现在在&lt;code>migrations&lt;/code>目录添加新的部署文件&lt;code>2_deploy_contracts.js&lt;/code>。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-js" data-lang="js">&lt;span style="color:#a2f;font-weight:bold">var&lt;/span> TutorialToken &lt;span style="color:#666">=&lt;/span> artifacts.require(&lt;span style="color:#b44">&amp;#34;./TutorialToken.sol&amp;#34;&lt;/span>);
-module.exports &lt;span style="color:#666">=&lt;/span> &lt;span style="color:#a2f;font-weight:bold">function&lt;/span>(deployer) {
-deployer.deploy(TutorialToken);
-};
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>一切准备就绪，编译，部署开始：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#080;font-style:italic"># 编译&lt;/span>
-➜ truffle compile
-Compiling ./contracts/Migrations.sol...
-Compiling ./contracts/TutorialToken.sol...
-Compiling zeppelin-solidity/contracts/math/SafeMath.sol...
-Compiling zeppelin-solidity/contracts/token/BasicToken.sol...
-Compiling zeppelin-solidity/contracts/token/ERC20.sol...
-Compiling zeppelin-solidity/contracts/token/ERC20Basic.sol...
-Compiling zeppelin-solidity/contracts/token/StandardToken.sol...
-Writing artifacts to ./build/contracts
-&lt;span style="color:#080;font-style:italic"># 根据truffle.js的配置进行部署&lt;/span>
-➜ truffle migrate
-Using network &lt;span style="color:#b44">&amp;#39;development&amp;#39;&lt;/span>.
-Running migration: 1_initial_migration.js
-Deploying Migrations...
-... 0x65ccd2d6a4f4248466dd7887da7a2ac35d18c7ab0ec826cb25580bc785a2c3b8
-Migrations: 0xc64569558f90302f4b3884929ac5540c645674dc
-Saving successful migration to network...
-... 0xf9043ca886d352f05a05642047f63eed11d9b328fb815becc68baffc4d953d60
-Saving artifacts...
-Running migration: 2_deploy_contracts.js
-Deploying TutorialToken...
-... 0x19350625474c36316046b103e671eaad45834a60c17a5b9c64cf96316754560f
-TutorialToken: 0x7f469dc1ec17c3b7c52a3ad74611cb4b7e6807e1
-Saving successful migration to network...
-... 0xe57ba56dd5f1b18d410577def8bc7089f7de56e8d8718c3098430995d4b81353
-Saving artifacts...
-&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: fomo3d-上线部署要点</title><link>https://xiaoping378.github.io/docs/5-blockchain/fomo3d-%E4%B8%8A%E7%BA%BF%E9%83%A8%E7%BD%B2%E8%A6%81%E7%82%B9/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/5-blockchain/fomo3d-%E4%B8%8A%E7%BA%BF%E9%83%A8%E7%BD%B2%E8%A6%81%E7%82%B9/</guid><description>
-&lt;p>fomo3d游戏一出，国内疯狂clone上线，这里谈下我上线的思路和部署方法（纯手动的^_^，落伍了）&lt;/p>
-&lt;p>通过&lt;a href="https://etherscan.io/address/0xa62142888aba8370742be823c1782d17a0389da1#code">原版合约地址&lt;/a>，可以一层一层的拔下所有涉及到的合约代码。&lt;/p>
-&lt;p>目前据我统计共有8个合约，其中有两个闭源合约：&lt;/p>
-&lt;ul>
-&lt;li>F3DexternalSettingsInterface&lt;/li>
-&lt;li>JIincInterfaceForForwarder&lt;/li>
-&lt;/ul>
-&lt;p>闭源合约不可怕，看明白什么功能，自己hack掉是不影响游戏本身的。&lt;/p>
-&lt;pre>&lt;code>提前预警，合约的内容细节还是要自己研究的，没时间写太细，
-&lt;/code>&lt;/pre>
-&lt;p>其实这个游戏本身只需要2个合约就可以跑起来，且没实质影响，只是单纯改变了部分利益分配方式。&lt;/p>
-&lt;p>下面说明，我尽可能少改动原版的情况下，部署上线合约，移除p3d修改后的原版合约代码&lt;a href="https://github.com/ChungkueiBlock/fomo3d/tree/master/sols">在这里&lt;/a>&lt;/p>
-&lt;h2 id="部署前的准备">部署前的准备&lt;/h2>
-&lt;p>我一般使用&lt;a href="https://remix.ethereum.org/#optimize=true&amp;amp;version=soljson-v0.4.24">在线remix&lt;/a>工具部署合约在自己的私链上调试，私链建议如下启动（一键解万忧的方式，推荐创世块采用&lt;a href="https://github.com/ChungkueiBlock/tools/tree/master/privateEth">POA共识&lt;/a>-不消耗CPU），这样可以使用remix的debug功能&lt;/p>
-&lt;pre tabindex="0">&lt;code>geth \
---datadir ./node0\
---ws\
---wsaddr 0.0.0.0\
---wsapi &amp;quot;eth,net,web3,admin,personal,txpool,miner,clique,debug&amp;quot;\
---wsport 8546\
---wsorigins &amp;quot;*&amp;quot;\
---rpc\
---rpcapi &amp;quot;eth,net,web3,admin,personal,txpool,miner,clique,debug&amp;quot;\
---rpccorsdomain &amp;quot;*&amp;quot;\
---rpcaddr 0.0.0.0\
---rpcport 8545\
---rpcvhosts &amp;quot;*&amp;quot;\
---mine\
---etherbase 0xdbeb69c655b666b3e17b8061df7ea4cc2399df11\
---unlock 0xdbeb69c655b666b3e17b8061df7ea4cc2399df11\
---password ./password\
---nodiscover\
---maxpeers '50'\
---networkid 378\
---targetgaslimit 471238800\
-&amp;amp;
-&lt;/code>&lt;/pre>&lt;h2 id="部署合约">部署合约&lt;/h2>
-&lt;p>按先后顺序如下部署&lt;/p>
-&lt;ol>
-&lt;li>&lt;a href="https://github.com/ChungkueiBlock/sols/blob/master/fomo3d/Hourglass.sol">p3d合约&lt;/a>&lt;/li>
-&lt;/ol>
-&lt;p>真心不推荐部署带有p3d合约的游戏，这样项目方就可以吃掉本来要流到这里25%左右的流水资金了&lt;/p>
-&lt;p>我对p3d的合约内容还没有很深的研究，只知道它&lt;/p>
-&lt;ul>
-&lt;li>是一个自带“交易所”、发行总量为0的Token，&lt;/li>
-&lt;li>通过Eth买入会自动增发，卖出会销毁&lt;/li>
-&lt;li>买入和卖出都会扣掉10%的费用给仍持有Token的人&lt;/li>
-&lt;li>每买一次都会使Token升值&lt;/li>
-&lt;li>每卖一次会使Token降价&lt;/li>
-&lt;/ul>
-&lt;p>这个合约不需要改动，贴源码，编译后部署截图如下，点击红色记录下来部署后的合约地址&lt;/p>
-&lt;p>&lt;img src="https://xiaoping378.github.io/p3d%E9%83%A8%E7%BD%B2.jpg" alt="p3d">&lt;/p>
-&lt;ol>
-&lt;li>部署divies合约&lt;/li>
-&lt;/ol>
-&lt;p>这个合约专门往p3d持有者发分红的。&lt;/p>
-&lt;p>把刚才记录的p3d合约地址，替换到&lt;code>HourglassInterface&lt;/code>后面的地址。如上贴源码，编译后部署&lt;code>Divies&lt;/code>合约，&lt;/p>
-&lt;p>记录下divies的地址，并替换fomo3dlong.sol里的&lt;code>DiviesInterface&lt;/code>地址&lt;/p>
-&lt;ol start="3">
-&lt;li>&lt;del>部署JIincForwarder合约&lt;/del>&lt;/li>
-&lt;/ol>
-&lt;p>这个合约是管理流向社区2%的资金的，被fomo3dlong里调用，
-这里需要hack，因为其中涉及到一个闭源的合约，既然知道它是管理2%资金流向的，那直接在fomo3dLong的合约如下hack&lt;/p>
-&lt;ul>
-&lt;li>把定义&lt;code>Jekyll_Island_Inc&lt;/code>的地方，直接定义成一个普通地址 &lt;code>address reward = 0xxxxxxx;&lt;/code>&lt;/li>
-&lt;li>把调用Jekyll_Island_Inc的地方， 写成&lt;code>reward.transfer(_com);&lt;/code>， 注意有两个地方调用（都要换），一个是游戏进行时调用，一个是本轮结束后调用&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript"> &lt;span style="color:#080;font-style:italic">// // community rewards
-&lt;/span>&lt;span style="color:#080;font-style:italic">&lt;/span> &lt;span style="color:#080;font-style:italic">// if (!address(Jekyll_Island_Inc).call.value(_com)(bytes4(keccak256(&amp;#34;deposit()&amp;#34;))))
-&lt;/span>&lt;span style="color:#080;font-style:italic">&lt;/span> &lt;span style="color:#080;font-style:italic">// {
-&lt;/span>&lt;span style="color:#080;font-style:italic">&lt;/span> &lt;span style="color:#080;font-style:italic">// // This ensures Team Just cannot influence the outcome of FoMo3D with
-&lt;/span>&lt;span style="color:#080;font-style:italic">&lt;/span> &lt;span style="color:#080;font-style:italic">// // bank migrations by breaking outgoing transactions.
-&lt;/span>&lt;span style="color:#080;font-style:italic">&lt;/span> &lt;span style="color:#080;font-style:italic">// // Something we would never do. But that&amp;#39;s not the point.
-&lt;/span>&lt;span style="color:#080;font-style:italic">&lt;/span> &lt;span style="color:#080;font-style:italic">// // We spent 2000$ in eth re-deploying just to patch this, we hold the
-&lt;/span>&lt;span style="color:#080;font-style:italic">&lt;/span> &lt;span style="color:#080;font-style:italic">// // highest belief that everything we create should be trustless.
-&lt;/span>&lt;span style="color:#080;font-style:italic">&lt;/span> &lt;span style="color:#080;font-style:italic">// // Team JUST, The name you shouldn&amp;#39;t have to trust.
-&lt;/span>&lt;span style="color:#080;font-style:italic">&lt;/span> &lt;span style="color:#080;font-style:italic">// _p3d = _p3d.add(_com);
-&lt;/span>&lt;span style="color:#080;font-style:italic">&lt;/span> &lt;span style="color:#080;font-style:italic">// _com = 0;
-&lt;/span>&lt;span style="color:#080;font-style:italic">&lt;/span> &lt;span style="color:#080;font-style:italic">// }
-&lt;/span>&lt;span style="color:#080;font-style:italic">&lt;/span>
-reward.transfer(_com);
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>所以不需要部署这个合约，你只要想办法把流到这里的ETH，流到平台方就可以了。（流到开发者，我觉得也是可以的，哈哈～）&lt;/p>
-&lt;ol start="4">
-&lt;li>部署Team合约&lt;/li>
-&lt;/ol>
-&lt;p>这个合约利用多签技术限制了影响团队的操作，需要改的地方就是把这些地址全部换成自己的，&lt;/p>
-&lt;p>把下面这些地址，改成你自己的地址，最好把&lt;code>deployer&lt;/code>地址写成你用来部署合约的那个地址，后面调用playbook合约的&lt;code>addGame&lt;/code>需要这里的权限&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">address inventor &lt;span style="color:#666">=&lt;/span> &lt;span style="color:#666">0x18E90Fc6F70344f53EBd4f6070bf6Aa23e2D748C&lt;/span>;
-address mantso &lt;span style="color:#666">=&lt;/span> &lt;span style="color:#666">0x8b4DA1827932D71759687f925D17F81Fc94e3A9D&lt;/span>;
-address justo &lt;span style="color:#666">=&lt;/span> &lt;span style="color:#666">0x8e0d985f3Ec1857BEc39B76aAabDEa6B31B67d53&lt;/span>;
-address sumpunk &lt;span style="color:#666">=&lt;/span> &lt;span style="color:#666">0x7ac74Fcc1a71b106F12c55ee8F802C9F672Ce40C&lt;/span>;
-address deployer &lt;span style="color:#666">=&lt;/span> &lt;span style="color:#666">0xF39e044e1AB204460e06E87c6dca2c6319fC69E3&lt;/span>;
-admins_[inventor] &lt;span style="color:#666">=&lt;/span> Admin(&lt;span style="color:#a2f;font-weight:bold">true&lt;/span>, &lt;span style="color:#a2f;font-weight:bold">true&lt;/span>, &lt;span style="color:#b44">&amp;#34;inventor&amp;#34;&lt;/span>);
-admins_[mantso] &lt;span style="color:#666">=&lt;/span> Admin(&lt;span style="color:#a2f;font-weight:bold">true&lt;/span>, &lt;span style="color:#a2f;font-weight:bold">true&lt;/span>, &lt;span style="color:#b44">&amp;#34;mantso&amp;#34;&lt;/span>);
-admins_[justo] &lt;span style="color:#666">=&lt;/span> Admin(&lt;span style="color:#a2f;font-weight:bold">true&lt;/span>, &lt;span style="color:#a2f;font-weight:bold">true&lt;/span>, &lt;span style="color:#b44">&amp;#34;justo&amp;#34;&lt;/span>);
-admins_[sumpunk] &lt;span style="color:#666">=&lt;/span> Admin(&lt;span style="color:#a2f;font-weight:bold">true&lt;/span>, &lt;span style="color:#a2f;font-weight:bold">true&lt;/span>, &lt;span style="color:#b44">&amp;#34;sumpunk&amp;#34;&lt;/span>);
-admins_[deployer] &lt;span style="color:#666">=&lt;/span> Admin(&lt;span style="color:#a2f;font-weight:bold">true&lt;/span>, &lt;span style="color:#a2f;font-weight:bold">true&lt;/span>, &lt;span style="color:#b44">&amp;#34;deployer&amp;#34;&lt;/span>);
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>改完后，如上贴源码，编译后部署&lt;code>TeamJust&lt;/code>合约，记录地址，替换playbook合约的&lt;code>TeamJustInterface&lt;/code>地址&lt;/p>
-&lt;ol start="5">
-&lt;li>部署playerBook合约&lt;/li>
-&lt;/ol>
-&lt;p>很有意思的合约，这里就是上面说的整个游戏其实只需要两个合约中的一个。
-不解读细节了，直接改吧&lt;/p>
-&lt;p>你会发现这里怎么还有个&lt;code>JIincForwarderInterface&lt;/code>地址，第三步不是说不部署这个了么 ？&lt;/p>
-&lt;p>这里的主要是收取别人注册名字开启邀请返佣机制时需要支付的那0.01ETH的&lt;/p>
-&lt;p>知道了这个，就跟第3步一样加个reward收款地址吧，细节不标&lt;/p>
-&lt;p>如上贴源码，编译后部署&lt;code>PlayBook&lt;/code>合约，记录下地址， 替换fomo3d合约里的&lt;code>PlayerBookInterface&lt;/code>地址。&lt;/p>
-&lt;ol start="6">
-&lt;li>部署fomo3dLong合约&lt;/li>
-&lt;/ol>
-&lt;p>这个是另一个核心合约之一，这里也有个闭源合约，用来初始化控制时间的参数&lt;/p>
-&lt;p>直接注释掉，然后如下改动&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">uint256 &lt;span style="color:#a2f;font-weight:bold">private&lt;/span> rndExtra_ &lt;span style="color:#666">=&lt;/span> &lt;span style="color:#666">30&lt;/span>; &lt;span style="color:#080;font-style:italic">// 和rndInit一起控制第一轮游戏开始的初始时间的，单位是秒
-&lt;/span>&lt;span style="color:#080;font-style:italic">&lt;/span>uint256 &lt;span style="color:#a2f;font-weight:bold">private&lt;/span> rndGap_ &lt;span style="color:#666">=&lt;/span> &lt;span style="color:#666">30&lt;/span>; &lt;span style="color:#080;font-style:italic">// 和rndInit一起控制下轮游戏开始的初始时间的，单位是秒
-&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>还有两个改动点就是&lt;code>activate&lt;/code>和&lt;code>setOtherFomo&lt;/code>里加上自己的deployer地址，&lt;/p>
-&lt;p>额外把setOtherFomo里的往另一个游戏池子里输血的功能改到，因为我们没有其他的游戏，如第三步一样，换个收款码吧&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">otherF3D_.transfer(_long);
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>部署吧！！！&lt;/p>
-&lt;p>最后部署这一步，很有可能遇到&lt;code>errored: oversized data&lt;/code>的错误，刷新remix页面即可。&lt;/p>
-&lt;h2 id="合约设置">合约设置&lt;/h2>
-&lt;p>先setOtherFomo,然后再设置playbook里的addgame，最后activate即可。&lt;/p>
-&lt;h2 id="页面">页面&lt;/h2>
-&lt;p>页面直接Ctrl+s下载原版界面，把最后的fomo3dLong的合约地址替换下，另外那个后台API，其实没什么，自己试下就知道了，然后就可以上线了。。。&lt;/p>
-&lt;p>&lt;img src="https://xiaoping378.github.io/fomo3d%E4%B8%8A%E7%BA%BF.png" alt="fomo3d上线">&lt;/p>
-&lt;h1 id="感受">感受&lt;/h1>
-&lt;ul>
-&lt;li>合约debug难如上青天&lt;/li>
-&lt;li>要替换一大堆合约里的地址，除了Interface类的要替成依赖的合约地址，其他的全可以写成你自己地址（即使都一样的也OK）就可以。&lt;/li>
-&lt;/ul>
-&lt;p>目前我们搞出来的定制版有：&lt;/p>
-&lt;ul>
-&lt;li>多级返佣模式， 可自定义级数&lt;/li>
-&lt;li>空投fix版&lt;/li>
-&lt;li>去除战队版&lt;/li>
-&lt;li>移除p3d版本&lt;/li>
-&lt;li>原版&lt;/li>
-&lt;/ul></description></item><item><title>Docs: fomo3d-钱都去哪儿了</title><link>https://xiaoping378.github.io/docs/5-blockchain/fomo3d-%E9%92%B1%E9%83%BD%E5%8E%BB%E5%93%AA%E5%84%BF%E4%BA%86/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/5-blockchain/fomo3d-%E9%92%B1%E9%83%BD%E5%8E%BB%E5%93%AA%E5%84%BF%E4%BA%86/</guid><description>
-&lt;p>fomo3d里有战队系统、邀请分佣机制、持key分红、空投系统、持p3d分红等玩法, 相信通过之前各类媒体的解读都有所了解。&lt;/p>
-&lt;p>下面通过分析合约代码，以讲解ETH数据流向的方式串下所有流程，让大家明明白白的知道自己的ETH都去了哪里。&lt;/p>
-&lt;p>以10ETH充币到fomod3d合约举例，分三种情况&lt;/p>
-&lt;ul>
-&lt;li>早期用户（游戏刚启动时的激进者）&lt;/li>
-&lt;li>中期用户（为了赚分红、返佣的用户）&lt;/li>
-&lt;li>晚期用户（为了赢48%大奖的人）&lt;/li>
-&lt;/ul>
-&lt;h2 id="早期">早期&lt;/h2>
-&lt;p>当合约被激活后，开发者做了一个很“仇富”的举动，每个地址在合约收到100ETH之前，只能购买1ETH的keys，防止被资本大鳄收割本轮后面入场的玩家。这里有个小hack的点，就是提前多准备些小号，多个地址去投，也可以做到比别人便宜多的价格买到keys。&lt;/p>
-&lt;p>这个阶段以买入10ETH举例，你只会买到等同于1ETH价值的keys，其余9个ETH会直接进入你的收益里，
-演示如下：&lt;/p>
-&lt;p>&lt;img src="https://xiaoping378.github.io/ethLimiter2.png" alt="ethLimiter2">&lt;/p>
-&lt;p>下面是实现此功能的代码&lt;/p>
-&lt;p>&lt;img src="https://xiaoping378.github.io/ethLimiter.png" alt="ethLimiter">&lt;/p>
-&lt;p>代码里的规则(不限阶段)梳理：&lt;/p>
-&lt;ul>
-&lt;li>提款功能可以无限次提，不影响本轮接下来的分红收益，你的收益来自于你持有keys的分红。&lt;/li>
-&lt;li>最低可以支付1e-09个Ether，当购买的Key数量大于或者等于1个时，倒计时会加30秒。&lt;/li>
-&lt;li>当支付的eth不小于0.1时，会送一次“彩票”，买key支付的金额越大，中奖的奖金也越大，最大可中“彩票池”里额度的75%，直译过来这个功能叫空投。&lt;/li>
-&lt;/ul>
-&lt;h2 id="中期">中期&lt;/h2>
-&lt;p>所有阶段的用户如果是直接打开的官网，充币买keys时会触发合约的这个接口，&lt;/p>
-&lt;p>&lt;img src="https://xiaoping378.github.io/buyXaddr.png" alt="buyXaddr">&lt;/p>
-&lt;p>其中_affcode是值邀请人的地址，_team是指用户所有购买key所选的战队，默认的2是指蛇队。&lt;/p>
-&lt;p>如果是从别人的邀请进入的官网，要看邀请人给你发的是哪个链接，有三种形式的链接：&lt;/p>
-&lt;p>&lt;img src="https://xiaoping378.github.io/affiliate.png" alt="affiliate">,&lt;/p>
-&lt;p>从上到下，分别会走&lt;code>buyXaddr&lt;/code>、&lt;code>buyXid&lt;/code>、&lt;code>buyXname&lt;/code>的接口，比如我给人发了&lt;a href="http://exitscam.me/xxp">exitscam.me/xxp&lt;/a>的邀请链接，被邀的人买keys时会触发如下接口：&lt;/p>
-&lt;p>&lt;img src="https://xiaoping378.github.io/affiliate2.png" alt="affiliate2">&lt;/p>
-&lt;p>这其中我个人会收到他买key总额度的10%佣金，这里还有个隐藏的点：&lt;/p>
-&lt;pre>&lt;code>如果用户是直接从官网进入买key的，那同样会有10%佣金的产生，只不过是流向p3d的持有者。
-&lt;/code>&lt;/pre>
-&lt;h2 id="晚期">晚期&lt;/h2>
-&lt;p>当有人买key时，都会选择一个战队，默认会被勾选蛇队的，当买到keys数量不小于1个时，会使所选战队成为本轮的潜在获胜队。&lt;/p>
-&lt;p>说了这么多废话，回归正体，你的10ETH到底去了哪里？？？&lt;/p>
-&lt;p>如果支付10ETH时，选的是蛇队，你10个ETH里的5.6个会被持keys的人均分，1个看情况是给p3d的人还是给邀请你的人，还有1个必定会分给持有p3d的人，另外2个会进入大池子，其中0.2个会分给社区贡献人，0.1个会给TeamJust的另一个游戏合约，还有0.1个会流到“彩票池”里。&lt;/p>
-&lt;p>这里面根据你选的战队不通，分配比例不一样，具体看下的代码，执行这些ETH分配的是走&lt;code>distributeExternal&lt;/code>，&lt;code>distributeInternal&lt;/code> 出去的。&lt;/p>
-&lt;p>后面的PotSpit是本轮游戏结束后，如何分配大池子里的金额。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#080;font-style:italic">// Team allocation structures
-&lt;/span>&lt;span style="color:#080;font-style:italic">// 0 = whales
-&lt;/span>&lt;span style="color:#080;font-style:italic">// 1 = bears
-&lt;/span>&lt;span style="color:#080;font-style:italic">// 2 = sneks
-&lt;/span>&lt;span style="color:#080;font-style:italic">// 3 = bulls
-&lt;/span>&lt;span style="color:#080;font-style:italic">&lt;/span>
-&lt;span style="color:#080;font-style:italic">// Team allocation percentages
-&lt;/span>&lt;span style="color:#080;font-style:italic">// (F3D, P3D) + (Pot , Referrals, Community)
-&lt;/span>&lt;span style="color:#080;font-style:italic">// Referrals / Community rewards are mathematically designed to come from the winner&amp;#39;s share of the pot.
-&lt;/span>&lt;span style="color:#080;font-style:italic">&lt;/span>fees_[&lt;span style="color:#666">0&lt;/span>] &lt;span style="color:#666">=&lt;/span> F3Ddatasets.TeamFee(&lt;span style="color:#666">30&lt;/span>,&lt;span style="color:#666">6&lt;/span>); &lt;span style="color:#080;font-style:italic">//50% to pot, 10% to aff, 2% to com, 1% to pot swap, 1% to air drop pot
-&lt;/span>&lt;span style="color:#080;font-style:italic">&lt;/span>fees_[&lt;span style="color:#666">1&lt;/span>] &lt;span style="color:#666">=&lt;/span> F3Ddatasets.TeamFee(&lt;span style="color:#666">43&lt;/span>,&lt;span style="color:#666">0&lt;/span>); &lt;span style="color:#080;font-style:italic">//43% to pot, 10% to aff, 2% to com, 1% to pot swap, 1% to air drop pot
-&lt;/span>&lt;span style="color:#080;font-style:italic">&lt;/span>fees_[&lt;span style="color:#666">2&lt;/span>] &lt;span style="color:#666">=&lt;/span> F3Ddatasets.TeamFee(&lt;span style="color:#666">56&lt;/span>,&lt;span style="color:#666">10&lt;/span>); &lt;span style="color:#080;font-style:italic">//20% to pot, 10% to aff, 2% to com, 1% to pot swap, 1% to air drop pot
-&lt;/span>&lt;span style="color:#080;font-style:italic">&lt;/span>fees_[&lt;span style="color:#666">3&lt;/span>] &lt;span style="color:#666">=&lt;/span> F3Ddatasets.TeamFee(&lt;span style="color:#666">43&lt;/span>,&lt;span style="color:#666">8&lt;/span>); &lt;span style="color:#080;font-style:italic">//35% to pot, 10% to aff, 2% to com, 1% to pot swap, 1% to air drop pot
-&lt;/span>&lt;span style="color:#080;font-style:italic">&lt;/span>
-&lt;span style="color:#080;font-style:italic">// how to split up the final pot based on which team was picked
-&lt;/span>&lt;span style="color:#080;font-style:italic">// (F3D, P3D)
-&lt;/span>&lt;span style="color:#080;font-style:italic">&lt;/span>potSplit_[&lt;span style="color:#666">0&lt;/span>] &lt;span style="color:#666">=&lt;/span> F3Ddatasets.PotSplit(&lt;span style="color:#666">15&lt;/span>,&lt;span style="color:#666">10&lt;/span>); &lt;span style="color:#080;font-style:italic">//48% to winner, 25% to next round, 2% to com
-&lt;/span>&lt;span style="color:#080;font-style:italic">&lt;/span>potSplit_[&lt;span style="color:#666">1&lt;/span>] &lt;span style="color:#666">=&lt;/span> F3Ddatasets.PotSplit(&lt;span style="color:#666">25&lt;/span>,&lt;span style="color:#666">0&lt;/span>); &lt;span style="color:#080;font-style:italic">//48% to winner, 25% to next round, 2% to com
-&lt;/span>&lt;span style="color:#080;font-style:italic">&lt;/span>potSplit_[&lt;span style="color:#666">2&lt;/span>] &lt;span style="color:#666">=&lt;/span> F3Ddatasets.PotSplit(&lt;span style="color:#666">20&lt;/span>,&lt;span style="color:#666">20&lt;/span>); &lt;span style="color:#080;font-style:italic">//48% to winner, 10% to next round, 2% to com
-&lt;/span>&lt;span style="color:#080;font-style:italic">&lt;/span>potSplit_[&lt;span style="color:#666">3&lt;/span>] &lt;span style="color:#666">=&lt;/span> F3Ddatasets.PotSplit(&lt;span style="color:#666">30&lt;/span>,&lt;span style="color:#666">10&lt;/span>); &lt;span style="color:#080;font-style:italic">//48% to winner, 10% to next round, 2% to com
-&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>还有很多细节要分享，碍于时间有限，不过我会持续更新这里的&lt;/p>
-&lt;h2 id="感想">感想&lt;/h2>
-&lt;ul>
-&lt;li>持有p3d的人和早期进入的才是最大的受益者&lt;/li>
-&lt;li>后期进入的人只有通过拉人赚佣金的方式回本了&lt;/li>
-&lt;li>这轮游戏应该是结束不了的： 总有人赔了，要拉人进来捞本，被拉的人周而复始。。。&lt;/li>
-&lt;li>结束只有两个可能： 1. 合约有重大漏洞，资金被盗 2. 当大池子里48%的收益足以对整个以太网络发动51%攻击。。。&lt;/li>
-&lt;li>矿工在背后偷着乐&lt;/li>
-&lt;li>你们谁知道TeamJust的下个游戏的合约地址么？ 我知道！！！&lt;/li>
-&lt;/ul>
-&lt;p>如果你也找到了，可以加我微信&lt;code>yiyemeishui&lt;/code>， 加好友时请输入TeamJust的下个游戏合约地址，我们一起来票大的。。。&lt;/p></description></item><item><title>Docs: 解读cosmos-sdk系列(1)</title><link>https://xiaoping378.github.io/docs/5-blockchain/cosmos_sdk_1/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/5-blockchain/cosmos_sdk_1/</guid><description>
-&lt;p>通过本系列，可以了解tendermint共识和cosmos-sdk架构的设计思想，并学习到如何通过Cosmos-SDK来快速开发自己的区块链应用。&lt;/p>
-&lt;p>cosmos团队把区块链分成了三层&lt;/p>
-&lt;ul>
-&lt;li>网络层 - p2p负责广播交易&lt;/li>
-&lt;li>共识层 - 对哪些交易打包进块形成共识&lt;/li>
-&lt;li>应用层 - 执行交易，负责交易结果落盘（状态一致）&lt;/li>
-&lt;/ul>
-&lt;blockquote>
-&lt;p>这里的应用层可能会有误解，并非是Dapp层，对于SDK底层的Tendermint来说，除p2p网络和打包块共识外，其他都算是应用部分，
-拿实现比特币公链的例子来讲，应用部分就是维护账户的UTXO数据库，如果对比以太的话，keystore账户和EVM虚机部分就是应用范畴，所以SDK内置了账户、质押、治理、权限等应用模块，可以帮助我们简单地实现底层链的开发。&lt;/p>
-&lt;/blockquote>
-&lt;p>可以把这几层简单理解成各节点通过同步交易集（块）日志，实现数据（状态）一致性。数据库的主从模式不也是同步binlog日志，各自执行（replay，回放）日志后，实现数据（状态）最终落盘，区块节点本身同步块的时候，默认就是去下载交易日志，把执行结果按照逻辑链的形式写入本地leveldb的，然后才能对外提供各类RPC服务。&lt;/p>
-&lt;h2 id="tendermint共识">tendermint共识&lt;/h2>
-&lt;p>为后续更好的利用cosmos-sdk，要先了解下Tendermint。&lt;/p>
-&lt;p>Tendermint Core 提供了网络和共识层功能，而应用层要通过ABCI协议和Core互通消息msg，简单讲tendermint负责起一个replication engine进程，而应用层要运行一个state macheine进程，进程间通过ABCI消息来通信。&lt;/p>
-&lt;p>ABCI协议的消息体用protobuf定义在&lt;a href="https://github.com/tendermint/tendermint/blob/master/abci/types/types.proto">这里&lt;/a>，app侧可以响应的request如下：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-golang" data-lang="golang">message Request {
-oneof value {
-RequestEcho echo = &lt;span style="color:#666">2&lt;/span>;
-RequestFlush flush = &lt;span style="color:#666">3&lt;/span>;
-RequestInfo info = &lt;span style="color:#666">4&lt;/span>;
-RequestSetOption set_option = &lt;span style="color:#666">5&lt;/span>;
-RequestInitChain init_chain = &lt;span style="color:#666">6&lt;/span>;
-RequestQuery query = &lt;span style="color:#666">7&lt;/span>;
-RequestBeginBlock begin_block = &lt;span style="color:#666">8&lt;/span>;
-RequestCheckTx check_tx = &lt;span style="color:#666">9&lt;/span>;
-RequestDeliverTx deliver_tx = &lt;span style="color:#666">19&lt;/span>;
-RequestEndBlock end_block = &lt;span style="color:#666">11&lt;/span>;
-RequestCommit commit = &lt;span style="color:#666">12&lt;/span>;
-}
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>ABCI的设计主要有以下几个特点：&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>消息协议&lt;/p>
-&lt;ul>
-&lt;li>成对出现的消息: &lt;code>request&lt;/code>/&lt;code>reponse&lt;/code>&lt;/li>
-&lt;li>tendermint发起Request， app来响应&lt;/li>
-&lt;li>使用protobuf定义&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>
-&lt;p>server/client&lt;/p>
-&lt;ul>
-&lt;li>tendermint运行client&lt;/li>
-&lt;li>app侧运行server端&lt;/li>
-&lt;li>可以由TSP（支持checkTx和DeliverTx消息的异步处理）、grpc两种方式实现&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>
-&lt;p>区块相关&lt;/p>
-&lt;ul>
-&lt;li>abci是面向连接的&lt;/li>
-&lt;li>tendermint会创建三个socket连接来和app通信，分别是&lt;code>Mempool&lt;/code>, &lt;code>Cosensus&lt;/code>, &lt;code>Query&lt;/code>连接
-&lt;ul>
-&lt;li>
-&lt;p>&lt;code>Mempool连接&lt;/code>: 钱包客户端发起交易，会首先进入钱包后台连接的节点的local mempool，该节点通过发送&lt;code>checkTx&lt;/code>消息来通知app，去检验交易签名是否有效等等，如果OK节点则会p2p广播该交易到其他节点的mempool里。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;code>Cosensus连接&lt;/code>: 出块节点从mempool的交易集里选出一个块提案（proposer），之后会经过3阶段提交（pre-vote, pre-commit， commit）处理，这个块才能说达成共识（上链了），，只有块被commited了，app侧才会更新状态，比如改变某地址余额等等。app更新状态的时候，是通过Core发送&lt;code>BeginBlock&lt;/code>， &lt;code>DeliverTx ...&lt;/code>， &lt;code>EndBlock&lt;/code>, &lt;code>Commit&lt;/code>消息给app侧来完成的，任何写入操作都是通过此连接完成的。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;code>Query连接&lt;/code>： 主要负责一些和共识无关的查询操作，比如块信息，地址余额等等，主要用到&lt;code>Info&lt;/code>, &lt;code>SetOption&lt;/code>, &lt;code>Query&lt;/code>消息&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;p>整个abci的信息流大致如下：
-&lt;img src="https://xiaoping378.github.io/abci.png" alt="abci">&lt;/p>
-&lt;p>关于Tendermint和app间数据流的更多细节见下：&lt;/p>
-&lt;p>&lt;img src="https://xiaoping378.github.io/tm-transaction-flow.png" alt="dataFlow">&lt;/p>
-&lt;p>&lt;a href="https://github.com/mobfoundry/hackatom/blob/master/tminfo.pdf">高清图地址&lt;/a>&lt;/p>
-&lt;h2 id="总结">总结&lt;/h2>
-&lt;p>可以理解成，Tendermint主要负责在BFT环境下同步app间的块交易日志，无论任何交易类型，只要交易块的执行结果是确定性的（唯一性），Tendermint就可以为我们形成区块的共识。&lt;/p>
-&lt;pre>&lt;code>比如说，一个交易的内容在合约里创建一个真随机数，这种交易，tendermint是无法为我们形成共识的，因为多个节点的执行结果是不一样的， 因为这个结果是要在下个区块头的，这样就无法对下个区块形成共识了，所有节点都认为对方在恶意“搞分叉”了。
-&lt;/code>&lt;/pre>
-&lt;p>目前基于tendermint的项目有很多：&lt;/p>
-&lt;p>我个人看到好的是&lt;code>BigchainDB&lt;/code>和超级账本&lt;code>Burrow&lt;/code>项目，更多可以看&lt;a href="https://tendermint.com/ecosystem">这里&lt;/a>&lt;/p>
-&lt;p>后续源码介绍，如何基于tendermint创建一个区块链&lt;/p></description></item><item><title>Docs: farbic-搭建高并发交易网络</title><link>https://xiaoping378.github.io/docs/5-blockchain/farbic-%E5%8C%BA%E5%9D%97%E9%93%BE%E7%BD%91%E7%BB%9C%E6%90%AD%E5%BB%BA/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/5-blockchain/farbic-%E5%8C%BA%E5%9D%97%E9%93%BE%E7%BD%91%E7%BB%9C%E6%90%AD%E5%BB%BA/</guid><description>
-&lt;p>针对每秒数千笔交易的场景，默认的CCVC（并发控制版本检查）会导致交易失败率的上升，其实不需要对基础网络本身做特殊设置，从合约代码入手可以解决，参考官方例子&lt;a href="https://github.com/hyperledger/fabric-samples">farbic-samples&lt;/a>.&lt;/p>
-&lt;h3 id="下载项目">下载项目&lt;/h3>
-&lt;p>基于目前最新的v1.0.3版本来说&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">git clone https://github.com/hyperledger/fabric-samples.git
-&lt;span style="color:#a2f">cd&lt;/span> fabric-samples/first-network
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>未完...&lt;/p></description></item><item><title>Docs: fabric-示例集群化操作</title><link>https://xiaoping378.github.io/docs/5-blockchain/frabic-%E7%A4%BA%E4%BE%8B%E9%9B%86%E7%BE%A4%E5%8C%96%E6%93%8D%E4%BD%9C/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/5-blockchain/frabic-%E7%A4%BA%E4%BE%8B%E9%9B%86%E7%BE%A4%E5%8C%96%E6%93%8D%E4%BD%9C/</guid><description>
-&lt;p>fabric给出的cc样例都是跑在docker-compose上，这里介绍利用已有的docker-compose.yaml如何集群化运行。&lt;/p>
-&lt;h3 id="准备样例cc">准备样例CC&lt;/h3>
-&lt;p>以官方&lt;code>fabric-samples&lt;/code>项目里的balance-transfer为例，准备拆分运行在4个虚机里。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">git clone https://github.com/hyperledger/fabric-samples.git
-&lt;span style="color:#a2f">cd&lt;/span> fabric-samples/balance-transfer
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>本CC的示例，主要由3个部分组成:&lt;/p>
-&lt;ul>
-&lt;li>2 CAs&lt;/li>
-&lt;li>1 SOLO orderer&lt;/li>
-&lt;li>4 peers (2 peers per Org)&lt;/li>
-&lt;/ul>
-&lt;p>其中&lt;code>artifacts&lt;/code>目录里放置了：&lt;/p>
-&lt;ul>
-&lt;li>由 &lt;strong>cryptogen&lt;/strong> 工具生成的证书信息，后面运行时需要挂载到各自的peer节点里&lt;/li>
-&lt;li>由 &lt;strong>configtxgen&lt;/strong> 工具生成的初始块 &lt;code>genesis.block&lt;/code> 和 channel配置信息&lt;code>mychannell.tx&lt;/code>&lt;/li>
-&lt;/ul>
-&lt;h3 id="准备集群">准备集群&lt;/h3>
-&lt;p>根据上面的情况，下面准备四个虚机来集群化操作, 虚机规划信息如下：&lt;/p>
-&lt;ul>
-&lt;li>air13, 192.168.10.78, 运行ca1，ca2, 这是我的本机&lt;/li>
-&lt;li>node0, 192.168.10.110, 运行orderer&lt;/li>
-&lt;li>node1, 192.168.10.114, 运行org1的peer0、peer1&lt;/li>
-&lt;li>node2, 192.168.10.115, 运行org2的peer0、peer1&lt;/li>
-&lt;/ul>
-&lt;p>每个虚机都预先安装docker和docker-compose&lt;/p>
-&lt;p>修改&lt;code>artifacts/docker-compose.yaml&lt;/code>文件，在每个service下添加如下信息：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#008000;font-weight:bold">extra_hosts&lt;/span>:&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>- &lt;span style="color:#b44">&amp;#34;ca.org1.example.com:192.168.10.78&amp;#34;&lt;/span>&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>- &lt;span style="color:#b44">&amp;#34;ca.org2.example.com:192.168.10.78&amp;#34;&lt;/span>&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>- &lt;span style="color:#b44">&amp;#34;orderer.example.com:192.168.10.110&amp;#34;&lt;/span>&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>- &lt;span style="color:#b44">&amp;#34;peer0.org1.example.com:192.168.10.114&amp;#34;&lt;/span>&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>- &lt;span style="color:#b44">&amp;#34;peer1.org1.example.com:192.168.10.114&amp;#34;&lt;/span>&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>- &lt;span style="color:#b44">&amp;#34;peer0.org2.example.com:192.168.10.115&amp;#34;&lt;/span>&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>- &lt;span style="color:#b44">&amp;#34;peer1.org2.example.com:192.168.10.115&amp;#34;&lt;/span>&lt;span style="color:#bbb">
-&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>此举的作用是在每个容器的&lt;code>/etc/hosts&lt;/code>文件里，添加上面的映射，最终docker-compose.yaml文件放置&lt;a href="https://gist.github.com/xiaoping378/8ba8e796552e27277073e56cfd7b281a">gist&lt;/a>上了.&lt;/p>
-&lt;p>最后一步，因为此CC样例运行时，需要挂载本地目录里一些提前生成好的证书，我们还需要把这么需要挂载的东西，同步到每个虚机里，如下操作：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">rsync -az balance-transfer root@192.168.10.110:~/
-rsync -az balance-transfer root@192.168.10.114:~/
-rsync -az balance-transfer root@192.168.10.115:~/
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="集群化运行">集群化运行&lt;/h3>
-&lt;p>ssh进入虚机，按照规划启动各自的服务&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#080;font-style:italic"># 进入air13虚机&lt;/span>
-&lt;span style="color:#a2f">cd&lt;/span> balance-transfer/artifacts/
-docker-compose up --no-deps ca.org1.example.com ca.org2.example.com
-&lt;span style="color:#080;font-style:italic"># ssh进入node0虚机&lt;/span>
-&lt;span style="color:#a2f">cd&lt;/span> balance-transfer/artifacts/
-docker-compose up --no-deps orderer.example.com
-&lt;span style="color:#080;font-style:italic"># ssh进入node1虚机&lt;/span>
-&lt;span style="color:#a2f">cd&lt;/span> balance-transfer/artifacts/
-docker-compose up --no-deps peer0.org1.example.com peer1.org1.example.com
-&lt;span style="color:#080;font-style:italic"># ssh进入node2虚机&lt;/span>
-&lt;span style="color:#a2f">cd&lt;/span> balance-transfer/artifacts/
-docker-compose up --no-deps peer0.org2.example.com peer1.org2.example.com
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>如上fabric的区块链网络已经集群化运行了&lt;/p>
-&lt;h3 id="运行app并测试cc">运行APP并测试CC&lt;/h3>
-&lt;p>在虚机air13上运行我们的前端APP，并测试在网络集群化后的的CC，&lt;/p>
-&lt;p>此外由于此APP样例的特殊性，还需要修改其他的地方&lt;/p>
-&lt;ul>
-&lt;li>config.json文件里的orderer地址改为&lt;code>&amp;quot;grpcs://192.168.10.110:7050&amp;quot;&lt;/code>&lt;/li>
-&lt;li>app/network-config.json里指定地址的地方需要改成&lt;a href="https://gist.github.com/xiaoping378/a599e3bb3080135b2548c1242ca8cc80">这样&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>进入balance-transfer目录，如下执行：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ npm isntall
-$ &lt;span style="color:#b8860b">PORT&lt;/span>&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#666">4000&lt;/span> node app
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>这样前端APP就运行起来了，接下来利用测试脚本&lt;code>testAPIs.sh&lt;/code>测试下我们的CC,运行前，还需要修改下脚本里的peer地址，修改后的文件在&lt;a href="https://gist.github.com/xiaoping378/dbfd8801b7b125b0d7add7fce7d4e854">这里&lt;/a>&lt;/p>
-&lt;p>运行脚本：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">./testAPIs.sh
-POST request Enroll on Org1 ...
-&lt;span style="color:#666">{&lt;/span>&lt;span style="color:#b44">&amp;#34;success&amp;#34;&lt;/span>:true,&lt;span style="color:#b44">&amp;#34;secret&amp;#34;&lt;/span>:&lt;span style="color:#b44">&amp;#34;DbzvtdmATgve&amp;#34;&lt;/span>,&lt;span style="color:#b44">&amp;#34;message&amp;#34;&lt;/span>:&lt;span style="color:#b44">&amp;#34;Jim2 enrolled Successfully&amp;#34;&lt;/span>,&lt;span style="color:#b44">&amp;#34;token&amp;#34;&lt;/span>:&lt;span style="color:#b44">&amp;#34;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MDE4NzQ5MjUsInVzZXJuYW1lIjoiSmltMiIsIm9yZ05hbWUiOiJvcmcxIiwiaWF0IjoxNTAxODM4OTI1fQ.LUmfEstviquaD5k5oBMd9KUFaKF1s6ZMY8iO67dKiH0&amp;#34;&lt;/span>&lt;span style="color:#666">}&lt;/span>
-。
-。
-。
-GET query Installed chaincodes
-&lt;span style="color:#666">[&lt;/span>&lt;span style="color:#b44">&amp;#34;name: mycc, version: v0, path: github.com/example_cc&amp;#34;&lt;/span>&lt;span style="color:#666">]&lt;/span>
-GET query Instantiated chaincodes
-&lt;span style="color:#666">[&lt;/span>&lt;span style="color:#b44">&amp;#34;name: mycc, version: v0, path: github.com/example_cc&amp;#34;&lt;/span>&lt;span style="color:#666">]&lt;/span>
-GET query Channels
-&lt;span style="color:#666">{&lt;/span>&lt;span style="color:#b44">&amp;#34;channels&amp;#34;&lt;/span>:&lt;span style="color:#666">[{&lt;/span>&lt;span style="color:#b44">&amp;#34;channel_id&amp;#34;&lt;/span>:&lt;span style="color:#b44">&amp;#34;mychannel&amp;#34;&lt;/span>&lt;span style="color:#666">}]}&lt;/span>
-Total execution &lt;span style="color:#a2f">time&lt;/span> : &lt;span style="color:#666">13&lt;/span> secs ...
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>本样例修改后的完整地址在&lt;a href="https://github.com/xiaoping378/fabric-samples">这里&lt;/a>&lt;/p>
-&lt;h3 id="总结">总结&lt;/h3>
-&lt;p>目前集群化后网络里的peers ledger和orderer的数据还是存储在容器里，是否要考虑挂载出来，不然容器挂了再启动后，数据是否会乱了，后续研究下。&lt;/p>
-&lt;p>后续还会继续搞下CA，MSP和动态添加节点以及合约迭代升级等问题。&lt;/p></description></item><item><title>Docs: farbic-区块链的生产集群化</title><link>https://xiaoping378.github.io/docs/5-blockchain/farbic%E5%8C%BA%E5%9D%97%E9%93%BE%E7%9A%84%E9%9B%86%E7%BE%A4%E5%8C%96-kubernetes%E5%AE%9E%E6%88%98/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/5-blockchain/farbic%E5%8C%BA%E5%9D%97%E9%93%BE%E7%9A%84%E9%9B%86%E7%BE%A4%E5%8C%96-kubernetes%E5%AE%9E%E6%88%98/</guid><description>
-&lt;p>默认社区的demo是基于docker-compose给出的，达到了“一键部署”的效果，但生产上考虑多节点的情况，还需要费些手脚，这里考虑用kompose结合k8s来做这件事。&lt;/p>
-&lt;h3 id="k8s集群-1-7的初始化">k8s集群 1.7的初始化&lt;/h3>
-&lt;p>每个节点都要安装docker的步骤，此处略过不表，这里主要介绍利用kubeadm初始化k8s集群，这里不考虑k8s集群本身的高可用，以前有文章专门介绍过。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">apt-get update &lt;span style="color:#666">&amp;amp;&amp;amp;&lt;/span> apt-get install -y apt-transport-https
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
-cat &lt;span style="color:#b44">&amp;lt;&amp;lt;EOF &amp;gt;/etc/apt/sources.list.d/kubernetes.list
-&lt;/span>&lt;span style="color:#b44">deb http://apt.kubernetes.io/ kubernetes-xenial main
-&lt;/span>&lt;span style="color:#b44">EOF&lt;/span>
-apt-get update
-apt-get install -y kubelet kubeadm
-&lt;span style="color:#080;font-style:italic"># 默认会自动安装这些包 ebtables kubeadm kubectl kubelet kubernetes-cni socat&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果你本机是centos的话，可以用如下命令安装&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">cat &lt;span style="color:#b44">&amp;lt;&amp;lt;EOF &amp;gt; /etc/yum.repos.d/kubernetes.repo
-&lt;/span>&lt;span style="color:#b44">[kubernetes]
-&lt;/span>&lt;span style="color:#b44">name=Kubernetes
-&lt;/span>&lt;span style="color:#b44">baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
-&lt;/span>&lt;span style="color:#b44">enabled=1
-&lt;/span>&lt;span style="color:#b44">gpgcheck=1
-&lt;/span>&lt;span style="color:#b44">repo_gpgcheck=1
-&lt;/span>&lt;span style="color:#b44">gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
-&lt;/span>&lt;span style="color:#b44"> https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
-&lt;/span>&lt;span style="color:#b44">EOF&lt;/span>
-setenforce &lt;span style="color:#666">0&lt;/span>
-yum install -y kubelet kubeadm
-systemctl &lt;span style="color:#a2f">enable&lt;/span> kubelet &lt;span style="color:#666">&amp;amp;&amp;amp;&lt;/span> systemctl start kubelet
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>上面的命令，需要翻墙才能跑通，没条件的可以去&lt;a href="https://github.com/kubernetes/release">release项目&lt;/a>自己编译deb包或者rpm包，如下运行&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">git clone https://github.com/kubernetes/release.git &lt;span style="color:#666">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#a2f">cd&lt;/span> release
-&lt;span style="color:#080;font-style:italic"># debian系如下&lt;/span>
-docker build --tag&lt;span style="color:#666">=&lt;/span>debian-packager debian
-docker run --volume&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#a2f;font-weight:bold">$(&lt;/span>&lt;span style="color:#a2f">pwd&lt;/span>&lt;span style="color:#a2f;font-weight:bold">)&lt;/span>&lt;span style="color:#b44">/debian:/src&amp;#34;&lt;/span> debian-packager
-&lt;span style="color:#080;font-style:italic"># docker run -e &amp;#34;HTTPS_PROXY=127.0.0.1:8118&amp;#34; --net=host --volume=&amp;#34;$(pwd)/debian:/src&amp;#34; debian-packager&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 默认debs包在目录debian/bin/stable/xenial下&lt;/span>
-&lt;span style="color:#080;font-style:italic"># centos系的如下&lt;/span>
-&lt;span style="color:#a2f">cd&lt;/span> rpm
-./docker-build.sh
-&lt;span style="color:#080;font-style:italic">#默认rpm包在目录output/x86_64/下&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>必要依赖搞到手后，就可以简单的利用kubeadm启动集群了
-在master节点上如下执行初始化，此过程会启动 etcd，controller-manager，scheduler，api-server组件&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">kubeadm init --kubernetes-version stable-1.7 --pod-network-cidr&lt;span style="color:#666">=&lt;/span>10.244.0.0/16
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>在其他节点上执行join操作
-现在必须要加上&lt;code>--node-name&lt;/code>参数，不然报错误，这是个&lt;a href="https://github.com/kubernetes/kubeadm/issues/347">bug&lt;/a>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">kubeadm join --token 4cc663.c4d99a546c9f3974 192.168.10.78:6443 --node-name node-0
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>默认还需要启动pod network，我默认用的flannel。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
-kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel-rbac.yml
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>另外默认master节点是不会被调度容器的，如下可放开限制&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">kubectl taint nodes --all node-role.kubernetes.io/master-
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>默认我们得到如下的集群状态&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ ~ kubectl get no
-NAME STATUS AGE VERSION
-air13 Ready 2h v1.7.2
-node-0 Ready 17m v1.7.2
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="准备fabric的k8ss所需yaml文件">准备fabric的k8ss所需yaml文件&lt;/h3>
-&lt;p>这里需要用到下载我改过的kompose工具，默认官方的对hostpath的处理，需要引入PV，PVC，虽然这样无可厚非，但对与现阶段的我增加了不必要的复杂度，就动手加了个&lt;code>--hostpaths&lt;/code>的选项，&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#080;font-style:italic"># 下载我改过的工具项目-kompose&lt;/span>
-git clone https://github.com/xiaoping378/kompose
-&lt;span style="color:#a2f">cd&lt;/span> kompose &lt;span style="color:#666">&amp;amp;&amp;amp;&lt;/span> make
-&lt;span style="color:#080;font-style:italic"># 如上会编译出kompose来，自己搞到$PATH里&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>这里以&lt;a href="https://github.com/hyperledger/fabric-samples.git">fabric-samples项目&lt;/a>里的balance-transfer为例，演示一个完整的CC运行在k8s上。&lt;/p>
-&lt;p>下载fabric-samles项目，&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">git clone https://github.com/hyperledger/fabric-samples.git
-&lt;span style="color:#a2f">cd&lt;/span> fabric-samples/balance-transfer
-kompose convert -f artifacts/docker-compose.yaml -d --hostpaths
-&lt;span style="color:#080;font-style:italic"># 如上会在当前目录出现批量的deployment和service yaml文件，这里需要针对hostpath的volumes稍作修改&lt;/span>
-sed -i &lt;span style="color:#b44">&amp;#39;s/.\/channel/\/root\/balance-transfer\/artifacts\/channel/&amp;#39;&lt;/span> *-deployment.yaml
-&lt;span style="color:#080;font-style:italic">#如上改成绝对路径，另外还需要保证各节点都要有channel目录&lt;/span>
-rsync -avz balance-transfer root@node-0:~/
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>因为ca, peer, orderer都需要从本地读取证书相关的信息，所以要把各节点利用&lt;code>nodeSelector&lt;/code>特性绑定到指定的节点上，这一点以后得改掉，利用env来动态生成（待验证）&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#080;font-style:italic">#比如让要在特定节点调度特定容器，需要如下操作&lt;/span>
-kubectl label node node0 &lt;span style="color:#b8860b">ca&lt;/span>&lt;span style="color:#666">=&lt;/span>ture
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>还要在对应的deployment文件做如下操作&lt;/p>
-&lt;p>&lt;img src="https://xiaoping378.github.io/nodeSelector.png" alt="nodeSelector">&lt;/p>
-&lt;p>-- 未完待续。。。&lt;/p></description></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;1.3 从产出&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;2014年9月份预售阶段发了6千万以太币，（募集到 31,531 个比特币）&lt;/li&gt;
+&lt;li&gt;其中20%用于以太基金的运作，主要是给开发人员发工资。&lt;/li&gt;
+&lt;li&gt;挖矿，大概每15秒左右出一个块，作为报酬，出块的人可以得到5个以太&lt;/li&gt;
+&lt;li&gt;打包叔块的人会得到2-3个以太&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;自从&lt;a href="https://blog.ethereum.org/2017/10/12/byzantium-hf-announcement/"&gt;Byzantium update&lt;/a&gt;升级后，现在挖矿和挖到叔块的人会分别得到3和0.625-2.625个以太。&lt;/p&gt;
+&lt;p&gt;1.4 FAQ&lt;/p&gt;
+&lt;p&gt;1.4.1 以太比会无限发行么？&lt;/p&gt;
+&lt;p&gt;不会， 当时预售的时候规定，每年的发行量是1800万上限（被挖到），计划在17年底，会切换共识算法从POW到&lt;a href="https://blog.ethereum.org/2015/08/01/introducing-casper-friendly-ghost/"&gt;Casper&lt;/a&gt;上，之后出块效率更高，需要的挖矿补贴更少, 具体发行多少，现在还未定。&lt;/p&gt;
+&lt;p&gt;1.4.2 以太币和比特币的对比？&lt;/p&gt;
+&lt;p&gt;如果后者，以太币是不可能实现的，在整个数字生态是互补关系，Ether应被视为“加密燃料”，其目的是为计算付费，而不是用作或被视为货币，资产，份额或其他任何东西。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://www.ethereum.org/images/bitcoin-and-ethereum-sitting-on-a-tree@2x.png" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;技术层面的对比&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://xiaoping378.github.io/BTC-ETH.png" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;1.2 账户&lt;/p&gt;
+&lt;p&gt;以太坊有两种类型的账户：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;外部账户（由私钥控制的）&lt;/li&gt;
+&lt;li&gt;合约账户（由合约代码控制）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;另种账户都可以发起交易，后者被动发送。&lt;/p&gt;
+&lt;p&gt;外部所有的账户没有代码，人们可以通过创建和签名一笔交易从一个外部账户发送消息。每当合约账户收到一条消息，合约内部的代码就会被激活，允许它对内部存储进行读取和写入，和发送其它消息或者创建合约。&lt;/p&gt;
+&lt;p&gt;UTXOs的好处有：
+更加私密（用户要是每笔交易都换一个地址，那么就很难找到其中两个地址的相关性）；潜在的可扩展性。&lt;/p&gt;
+&lt;p&gt;账户的好处：
+节省大量空间（每笔交易只有一个输入、一个输出、一个签名）；更大的可替代性；简单（编码简单，不需要更为复杂脚本）；&lt;/p&gt;
+&lt;p&gt;1.3 以太坊虚拟机EVM&lt;/p&gt;</description></item><item><title>搭建以太坊私链网络</title><link>https://xiaoping378.github.io/docs/5-blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A-%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA%E5%88%9D%E6%AD%A5%E5%AE%9E%E8%B7%B5/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/5-blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A-%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA%E5%88%9D%E6%AD%A5%E5%AE%9E%E8%B7%B5/</guid><description>&lt;p&gt;大量过时文章充斥于网络，本文基于官方go-tehereum 1.6.7版本整理而出，在geth1.6之后引入了一个&lt;strong&gt;puppeth&lt;/strong&gt;工具，它就是用来初始一个私链创世块配置的。&lt;/p&gt;
+&lt;h3 id="准备工具环境"&gt;准备工具环境&lt;a class="td-heading-self-link" href="#%e5%87%86%e5%a4%87%e5%b7%a5%e5%85%b7%e7%8e%af%e5%a2%83" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;下载&lt;code&gt;go-ethereum代码&lt;/code&gt;（go的开发环境准备，不在此文范围）&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# 下载源码&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;go get github.com/ethereum/go-ethereum
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a2f"&gt;cd&lt;/span&gt; &lt;span style="color:#b8860b"&gt;$GOPATH&lt;/span&gt;/src/github.com/ethereum/go-ethereum
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# 编译1.6.7版本的代码&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git checkout -b v1.6.7 v1.6.7
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;make all
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# 安装&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo ln -s &lt;span style="color:#b8860b"&gt;$PWD&lt;/span&gt;/build/bin/* /usr/local/bin/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# 检查是否安装OK&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;geth version
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Geth
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Version: 1.6.7-stable
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Git Commit: ab5646c532292b51e319f290afccf6a44f874372
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Architecture: amd64
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Protocol Versions: &lt;span style="color:#666"&gt;[&lt;/span&gt;&lt;span style="color:#666"&gt;63&lt;/span&gt; 62&lt;span style="color:#666"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Network Id: &lt;span style="color:#666"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Go Version: go1.8.3
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Operating System: linux
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#b8860b"&gt;GOPATH&lt;/span&gt;&lt;span style="color:#666"&gt;=&lt;/span&gt;/home/xxp/go
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#b8860b"&gt;GOROOT&lt;/span&gt;&lt;span style="color:#666"&gt;=&lt;/span&gt;/home/xxp/Software/go
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="生成私链创世块的配置"&gt;生成私链创世块的配置&lt;a class="td-heading-self-link" href="#%e7%94%9f%e6%88%90%e7%a7%81%e9%93%be%e5%88%9b%e4%b8%96%e5%9d%97%e7%9a%84%e9%85%8d%e7%bd%ae" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;创建账户&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# 创建testnet目录&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;➜ mkdir testnet &lt;span style="color:#666"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style="color:#a2f"&gt;cd&lt;/span&gt; testnet
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# 创建3个普通账户，密码自定&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;➜ geth --datadir node0 account new
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# 把密码记录到文件里，后面会频繁输入&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;➜ &lt;span style="color:#a2f"&gt;echo&lt;/span&gt; node0 &amp;gt; node0/password
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;➜ geth --datadir node1 account new
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;➜ &lt;span style="color:#a2f"&gt;echo&lt;/span&gt; node1 &amp;gt; node1/password
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;➜ geth --datadir node2 account new
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;➜ &lt;span style="color:#a2f"&gt;echo&lt;/span&gt; node2 &amp;gt; node2/password
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如上打印的一串16进制的字符串就代表账户的userID（理解成网络中的IP地址），后面puppeth需要用到。&lt;/p&gt;</description></item><item><title>以太坊的truffle box开发实战</title><link>https://xiaoping378.github.io/docs/5-blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A-truffle-box%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/5-blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A-truffle-box%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/</guid><description>&lt;p&gt;整个过程主要演示chrome扩展 METAMASK， OpenZepplin库和truffle框架的使用。&lt;/p&gt;
+&lt;h3 id="搭建私连网络"&gt;搭建私连网络&lt;a class="td-heading-self-link" href="#%e6%90%ad%e5%bb%ba%e7%a7%81%e8%bf%9e%e7%bd%91%e7%bb%9c" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;主要参考之前的&lt;a href="../%E4%BB%A5%E5%A4%AA%E5%9D%8A-%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA%E5%88%9D%E6%AD%A5%E5%AE%9E%E8%B7%B5"&gt;以太坊-私有链搭建初步实践&lt;/a&gt;， 这里只用单节点的网络。&lt;/p&gt;
+&lt;p&gt;还是先准备账户：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mkdir node0
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# 会在node0/keystore目录里生成一个keyfile json文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;geth --datadir node0 account new
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;#利用puppeth生成genesis.json的过程不表，参考上边的链接&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;geth --datadir node0 init genesis.json
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# 把刚才的账号的密码写入node0/password文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# 启动私链，顺便开启console&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a2f"&gt;echo&lt;/span&gt; node0 &amp;gt; node0/password
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;geth --datadir node0 --port &lt;span style="color:#666"&gt;30000&lt;/span&gt; --nodiscover --unlock &lt;span style="color:#b44"&gt;&amp;#39;0&amp;#39;&lt;/span&gt; --password ./node0/password --mine --rpc --rpccorsdomain &lt;span style="color:#b44"&gt;&amp;#34;*&amp;#34;&lt;/span&gt; --rpcapi &lt;span style="color:#b44"&gt;&amp;#34;eth,net,web3,admin,personal&amp;#34;&lt;/span&gt; console
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们把这个账号的json文件导入到chorme插件metamask里，便于后面调试和演示&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://xiaoping378.github.io/ethereum-new-account.png" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;ubuntu系统上的chrome插件会有窗口消失的bug，在URL栏里打开&lt;code&gt;chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/popup.html&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id="truflle初始化项目"&gt;truflle初始化项目&lt;a class="td-heading-self-link" href="#truflle%e5%88%9d%e5%a7%8b%e5%8c%96%e9%a1%b9%e7%9b%ae" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;需要下载truffle命令号&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;npm install -g truffle
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mkdir token &lt;span style="color:#666"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style="color:#a2f"&gt;cd&lt;/span&gt; token
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# 利用trulle下载token代笔示例&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;truffle unbox tutorialtoken
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;npm intall zeppelin-solidity
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如上必要的依赖框架和库已经下载到了本地， 接下来就创建自己的代币合约&lt;/p&gt;</description></item><item><title>fomo3d-上线部署要点</title><link>https://xiaoping378.github.io/docs/5-blockchain/fomo3d-%E4%B8%8A%E7%BA%BF%E9%83%A8%E7%BD%B2%E8%A6%81%E7%82%B9/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/5-blockchain/fomo3d-%E4%B8%8A%E7%BA%BF%E9%83%A8%E7%BD%B2%E8%A6%81%E7%82%B9/</guid><description>&lt;p&gt;fomo3d游戏一出，国内疯狂clone上线，这里谈下我上线的思路和部署方法（纯手动的^_^，落伍了）&lt;/p&gt;
+&lt;p&gt;通过&lt;a href="https://etherscan.io/address/0xa62142888aba8370742be823c1782d17a0389da1#code"&gt;原版合约地址&lt;/a&gt;，可以一层一层的拔下所有涉及到的合约代码。&lt;/p&gt;
+&lt;p&gt;目前据我统计共有8个合约，其中有两个闭源合约：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;F3DexternalSettingsInterface&lt;/li&gt;
+&lt;li&gt;JIincInterfaceForForwarder&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;闭源合约不可怕，看明白什么功能，自己hack掉是不影响游戏本身的。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;提前预警，合约的内容细节还是要自己研究的，没时间写太细，
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;其实这个游戏本身只需要2个合约就可以跑起来，且没实质影响，只是单纯改变了部分利益分配方式。&lt;/p&gt;
+&lt;p&gt;下面说明，我尽可能少改动原版的情况下，部署上线合约，移除p3d修改后的原版合约代码&lt;a href="https://github.com/ChungkueiBlock/fomo3d/tree/master/sols"&gt;在这里&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="部署前的准备"&gt;部署前的准备&lt;a class="td-heading-self-link" href="#%e9%83%a8%e7%bd%b2%e5%89%8d%e7%9a%84%e5%87%86%e5%a4%87" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;我一般使用&lt;a href="https://remix.ethereum.org/#optimize=true&amp;amp;version=soljson-v0.4.24"&gt;在线remix&lt;/a&gt;工具部署合约在自己的私链上调试，私链建议如下启动（一键解万忧的方式，推荐创世块采用&lt;a href="https://github.com/ChungkueiBlock/tools/tree/master/privateEth"&gt;POA共识&lt;/a&gt;-不消耗CPU），这样可以使用remix的debug功能&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;geth \
+ --datadir ./node0\
+ --ws\
+ --wsaddr 0.0.0.0\
+ --wsapi &amp;#34;eth,net,web3,admin,personal,txpool,miner,clique,debug&amp;#34;\
+ --wsport 8546\
+ --wsorigins &amp;#34;*&amp;#34;\
+ --rpc\
+ --rpcapi &amp;#34;eth,net,web3,admin,personal,txpool,miner,clique,debug&amp;#34;\
+ --rpccorsdomain &amp;#34;*&amp;#34;\
+ --rpcaddr 0.0.0.0\
+ --rpcport 8545\
+ --rpcvhosts &amp;#34;*&amp;#34;\
+ --mine\
+ --etherbase 0xdbeb69c655b666b3e17b8061df7ea4cc2399df11\
+ --unlock 0xdbeb69c655b666b3e17b8061df7ea4cc2399df11\
+ --password ./password\
+ --nodiscover\
+ --maxpeers &amp;#39;50&amp;#39;\
+ --networkid 378\
+ --targetgaslimit 471238800\
+ &amp;amp;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="部署合约"&gt;部署合约&lt;a class="td-heading-self-link" href="#%e9%83%a8%e7%bd%b2%e5%90%88%e7%ba%a6" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;按先后顺序如下部署&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://github.com/ChungkueiBlock/sols/blob/master/fomo3d/Hourglass.sol"&gt;p3d合约&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;真心不推荐部署带有p3d合约的游戏，这样项目方就可以吃掉本来要流到这里25%左右的流水资金了&lt;/p&gt;
+&lt;p&gt;我对p3d的合约内容还没有很深的研究，只知道它&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;是一个自带“交易所”、发行总量为0的Token，&lt;/li&gt;
+&lt;li&gt;通过Eth买入会自动增发，卖出会销毁&lt;/li&gt;
+&lt;li&gt;买入和卖出都会扣掉10%的费用给仍持有Token的人&lt;/li&gt;
+&lt;li&gt;每买一次都会使Token升值&lt;/li&gt;
+&lt;li&gt;每卖一次会使Token降价&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这个合约不需要改动，贴源码，编译后部署截图如下，点击红色记录下来部署后的合约地址&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://xiaoping378.github.io/p3d%E9%83%A8%E7%BD%B2.jpg" alt="p3d"&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;部署divies合约&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这个合约专门往p3d持有者发分红的。&lt;/p&gt;
+&lt;p&gt;把刚才记录的p3d合约地址，替换到&lt;code&gt;HourglassInterface&lt;/code&gt;后面的地址。如上贴源码，编译后部署&lt;code&gt;Divies&lt;/code&gt;合约，&lt;/p&gt;
+&lt;p&gt;记录下divies的地址，并替换fomo3dlong.sol里的&lt;code&gt;DiviesInterface&lt;/code&gt;地址&lt;/p&gt;</description></item><item><title>fomo3d-钱都去哪儿了</title><link>https://xiaoping378.github.io/docs/5-blockchain/fomo3d-%E9%92%B1%E9%83%BD%E5%8E%BB%E5%93%AA%E5%84%BF%E4%BA%86/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/5-blockchain/fomo3d-%E9%92%B1%E9%83%BD%E5%8E%BB%E5%93%AA%E5%84%BF%E4%BA%86/</guid><description>&lt;p&gt;fomo3d里有战队系统、邀请分佣机制、持key分红、空投系统、持p3d分红等玩法, 相信通过之前各类媒体的解读都有所了解。&lt;/p&gt;
+&lt;p&gt;下面通过分析合约代码，以讲解ETH数据流向的方式串下所有流程，让大家明明白白的知道自己的ETH都去了哪里。&lt;/p&gt;
+&lt;p&gt;以10ETH充币到fomod3d合约举例，分三种情况&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;早期用户（游戏刚启动时的激进者）&lt;/li&gt;
+&lt;li&gt;中期用户（为了赚分红、返佣的用户）&lt;/li&gt;
+&lt;li&gt;晚期用户（为了赢48%大奖的人）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="早期"&gt;早期&lt;a class="td-heading-self-link" href="#%e6%97%a9%e6%9c%9f" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;当合约被激活后，开发者做了一个很“仇富”的举动，每个地址在合约收到100ETH之前，只能购买1ETH的keys，防止被资本大鳄收割本轮后面入场的玩家。这里有个小hack的点，就是提前多准备些小号，多个地址去投，也可以做到比别人便宜多的价格买到keys。&lt;/p&gt;
+&lt;p&gt;这个阶段以买入10ETH举例，你只会买到等同于1ETH价值的keys，其余9个ETH会直接进入你的收益里，
+演示如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://xiaoping378.github.io/ethLimiter2.png" alt="ethLimiter2"&gt;&lt;/p&gt;
+&lt;p&gt;下面是实现此功能的代码&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://xiaoping378.github.io/ethLimiter.png" alt="ethLimiter"&gt;&lt;/p&gt;
+&lt;p&gt;代码里的规则(不限阶段)梳理：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;提款功能可以无限次提，不影响本轮接下来的分红收益，你的收益来自于你持有keys的分红。&lt;/li&gt;
+&lt;li&gt;最低可以支付1e-09个Ether，当购买的Key数量大于或者等于1个时，倒计时会加30秒。&lt;/li&gt;
+&lt;li&gt;当支付的eth不小于0.1时，会送一次“彩票”，买key支付的金额越大，中奖的奖金也越大，最大可中“彩票池”里额度的75%，直译过来这个功能叫空投。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="中期"&gt;中期&lt;a class="td-heading-self-link" href="#%e4%b8%ad%e6%9c%9f" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;所有阶段的用户如果是直接打开的官网，充币买keys时会触发合约的这个接口，&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://xiaoping378.github.io/buyXaddr.png" alt="buyXaddr"&gt;&lt;/p&gt;
+&lt;p&gt;其中_affcode是值邀请人的地址，_team是指用户所有购买key所选的战队，默认的2是指蛇队。&lt;/p&gt;
+&lt;p&gt;如果是从别人的邀请进入的官网，要看邀请人给你发的是哪个链接，有三种形式的链接：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://xiaoping378.github.io/affiliate.png" alt="affiliate"&gt;,&lt;/p&gt;
+&lt;p&gt;从上到下，分别会走&lt;code&gt;buyXaddr&lt;/code&gt;、&lt;code&gt;buyXid&lt;/code&gt;、&lt;code&gt;buyXname&lt;/code&gt;的接口，比如我给人发了&lt;a href="http://exitscam.me/xxp"&gt;exitscam.me/xxp&lt;/a&gt;的邀请链接，被邀的人买keys时会触发如下接口：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://xiaoping378.github.io/affiliate2.png" alt="affiliate2"&gt;&lt;/p&gt;
+&lt;p&gt;这其中我个人会收到他买key总额度的10%佣金，这里还有个隐藏的点：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;如果用户是直接从官网进入买key的，那同样会有10%佣金的产生，只不过是流向p3d的持有者。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id="晚期"&gt;晚期&lt;a class="td-heading-self-link" href="#%e6%99%9a%e6%9c%9f" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;当有人买key时，都会选择一个战队，默认会被勾选蛇队的，当买到keys数量不小于1个时，会使所选战队成为本轮的潜在获胜队。&lt;/p&gt;
+&lt;p&gt;说了这么多废话，回归正体，你的10ETH到底去了哪里？？？&lt;/p&gt;
+&lt;p&gt;如果支付10ETH时，选的是蛇队，你10个ETH里的5.6个会被持keys的人均分，1个看情况是给p3d的人还是给邀请你的人，还有1个必定会分给持有p3d的人，另外2个会进入大池子，其中0.2个会分给社区贡献人，0.1个会给TeamJust的另一个游戏合约，还有0.1个会流到“彩票池”里。&lt;/p&gt;
+&lt;p&gt;这里面根据你选的战队不通，分配比例不一样，具体看下的代码，执行这些ETH分配的是走&lt;code&gt;distributeExternal&lt;/code&gt;，&lt;code&gt;distributeInternal&lt;/code&gt; 出去的。&lt;/p&gt;
+&lt;p&gt;后面的PotSpit是本轮游戏结束后，如何分配大池子里的金额。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;// Team allocation structures
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;// 0 = whales
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;// 1 = bears
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;// 2 = sneks
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;// 3 = bulls
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;// Team allocation percentages
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;// (F3D, P3D) + (Pot , Referrals, Community)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;// Referrals / Community rewards are mathematically designed to come from the winner&amp;#39;s share of the pot.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;&lt;/span&gt;fees_[&lt;span style="color:#666"&gt;0&lt;/span&gt;] &lt;span style="color:#666"&gt;=&lt;/span&gt; F3Ddatasets.TeamFee(&lt;span style="color:#666"&gt;30&lt;/span&gt;,&lt;span style="color:#666"&gt;6&lt;/span&gt;); &lt;span style="color:#080;font-style:italic"&gt;//50% to pot, 10% to aff, 2% to com, 1% to pot swap, 1% to air drop pot
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;&lt;/span&gt;fees_[&lt;span style="color:#666"&gt;1&lt;/span&gt;] &lt;span style="color:#666"&gt;=&lt;/span&gt; F3Ddatasets.TeamFee(&lt;span style="color:#666"&gt;43&lt;/span&gt;,&lt;span style="color:#666"&gt;0&lt;/span&gt;); &lt;span style="color:#080;font-style:italic"&gt;//43% to pot, 10% to aff, 2% to com, 1% to pot swap, 1% to air drop pot
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;&lt;/span&gt;fees_[&lt;span style="color:#666"&gt;2&lt;/span&gt;] &lt;span style="color:#666"&gt;=&lt;/span&gt; F3Ddatasets.TeamFee(&lt;span style="color:#666"&gt;56&lt;/span&gt;,&lt;span style="color:#666"&gt;10&lt;/span&gt;); &lt;span style="color:#080;font-style:italic"&gt;//20% to pot, 10% to aff, 2% to com, 1% to pot swap, 1% to air drop pot
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;&lt;/span&gt;fees_[&lt;span style="color:#666"&gt;3&lt;/span&gt;] &lt;span style="color:#666"&gt;=&lt;/span&gt; F3Ddatasets.TeamFee(&lt;span style="color:#666"&gt;43&lt;/span&gt;,&lt;span style="color:#666"&gt;8&lt;/span&gt;); &lt;span style="color:#080;font-style:italic"&gt;//35% to pot, 10% to aff, 2% to com, 1% to pot swap, 1% to air drop pot
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;// how to split up the final pot based on which team was picked
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;// (F3D, P3D)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;&lt;/span&gt;potSplit_[&lt;span style="color:#666"&gt;0&lt;/span&gt;] &lt;span style="color:#666"&gt;=&lt;/span&gt; F3Ddatasets.PotSplit(&lt;span style="color:#666"&gt;15&lt;/span&gt;,&lt;span style="color:#666"&gt;10&lt;/span&gt;); &lt;span style="color:#080;font-style:italic"&gt;//48% to winner, 25% to next round, 2% to com
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;&lt;/span&gt;potSplit_[&lt;span style="color:#666"&gt;1&lt;/span&gt;] &lt;span style="color:#666"&gt;=&lt;/span&gt; F3Ddatasets.PotSplit(&lt;span style="color:#666"&gt;25&lt;/span&gt;,&lt;span style="color:#666"&gt;0&lt;/span&gt;); &lt;span style="color:#080;font-style:italic"&gt;//48% to winner, 25% to next round, 2% to com
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;&lt;/span&gt;potSplit_[&lt;span style="color:#666"&gt;2&lt;/span&gt;] &lt;span style="color:#666"&gt;=&lt;/span&gt; F3Ddatasets.PotSplit(&lt;span style="color:#666"&gt;20&lt;/span&gt;,&lt;span style="color:#666"&gt;20&lt;/span&gt;); &lt;span style="color:#080;font-style:italic"&gt;//48% to winner, 10% to next round, 2% to com
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;&lt;/span&gt;potSplit_[&lt;span style="color:#666"&gt;3&lt;/span&gt;] &lt;span style="color:#666"&gt;=&lt;/span&gt; F3Ddatasets.PotSplit(&lt;span style="color:#666"&gt;30&lt;/span&gt;,&lt;span style="color:#666"&gt;10&lt;/span&gt;); &lt;span style="color:#080;font-style:italic"&gt;//48% to winner, 10% to next round, 2% to com
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;还有很多细节要分享，碍于时间有限，不过我会持续更新这里的&lt;/p&gt;</description></item><item><title>解读cosmos-sdk系列(1)</title><link>https://xiaoping378.github.io/docs/5-blockchain/cosmos_sdk_1/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/5-blockchain/cosmos_sdk_1/</guid><description>&lt;p&gt;通过本系列，可以了解tendermint共识和cosmos-sdk架构的设计思想，并学习到如何通过Cosmos-SDK来快速开发自己的区块链应用。&lt;/p&gt;
+&lt;p&gt;cosmos团队把区块链分成了三层&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;网络层 - p2p负责广播交易&lt;/li&gt;
+&lt;li&gt;共识层 - 对哪些交易打包进块形成共识&lt;/li&gt;
+&lt;li&gt;应用层 - 执行交易，负责交易结果落盘（状态一致）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这里的应用层可能会有误解，并非是Dapp层，对于SDK底层的Tendermint来说，除p2p网络和打包块共识外，其他都算是应用部分，
+拿实现比特币公链的例子来讲，应用部分就是维护账户的UTXO数据库，如果对比以太的话，keystore账户和EVM虚机部分就是应用范畴，所以SDK内置了账户、质押、治理、权限等应用模块，可以帮助我们简单地实现底层链的开发。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;可以把这几层简单理解成各节点通过同步交易集（块）日志，实现数据（状态）一致性。数据库的主从模式不也是同步binlog日志，各自执行（replay，回放）日志后，实现数据（状态）最终落盘，区块节点本身同步块的时候，默认就是去下载交易日志，把执行结果按照逻辑链的形式写入本地leveldb的，然后才能对外提供各类RPC服务。&lt;/p&gt;
+&lt;h2 id="tendermint共识"&gt;tendermint共识&lt;a class="td-heading-self-link" href="#tendermint%e5%85%b1%e8%af%86" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;为后续更好的利用cosmos-sdk，要先了解下Tendermint。&lt;/p&gt;
+&lt;p&gt;Tendermint Core 提供了网络和共识层功能，而应用层要通过ABCI协议和Core互通消息msg，简单讲tendermint负责起一个replication engine进程，而应用层要运行一个state macheine进程，进程间通过ABCI消息来通信。&lt;/p&gt;
+&lt;p&gt;ABCI协议的消息体用protobuf定义在&lt;a href="https://github.com/tendermint/tendermint/blob/master/abci/types/types.proto"&gt;这里&lt;/a&gt;，app侧可以响应的request如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-golang" data-lang="golang"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;message&lt;span style="color:#bbb"&gt; &lt;/span&gt;Request&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;oneof&lt;span style="color:#bbb"&gt; &lt;/span&gt;value&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;RequestEcho&lt;span style="color:#bbb"&gt; &lt;/span&gt;echo&lt;span style="color:#bbb"&gt; &lt;/span&gt;=&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#666"&gt;2&lt;/span&gt;;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;RequestFlush&lt;span style="color:#bbb"&gt; &lt;/span&gt;flush&lt;span style="color:#bbb"&gt; &lt;/span&gt;=&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#666"&gt;3&lt;/span&gt;;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;RequestInfo&lt;span style="color:#bbb"&gt; &lt;/span&gt;info&lt;span style="color:#bbb"&gt; &lt;/span&gt;=&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#666"&gt;4&lt;/span&gt;;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;RequestSetOption&lt;span style="color:#bbb"&gt; &lt;/span&gt;set_option&lt;span style="color:#bbb"&gt; &lt;/span&gt;=&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#666"&gt;5&lt;/span&gt;;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;RequestInitChain&lt;span style="color:#bbb"&gt; &lt;/span&gt;init_chain&lt;span style="color:#bbb"&gt; &lt;/span&gt;=&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#666"&gt;6&lt;/span&gt;;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;RequestQuery&lt;span style="color:#bbb"&gt; &lt;/span&gt;query&lt;span style="color:#bbb"&gt; &lt;/span&gt;=&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#666"&gt;7&lt;/span&gt;;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;RequestBeginBlock&lt;span style="color:#bbb"&gt; &lt;/span&gt;begin_block&lt;span style="color:#bbb"&gt; &lt;/span&gt;=&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#666"&gt;8&lt;/span&gt;;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;RequestCheckTx&lt;span style="color:#bbb"&gt; &lt;/span&gt;check_tx&lt;span style="color:#bbb"&gt; &lt;/span&gt;=&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#666"&gt;9&lt;/span&gt;;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;RequestDeliverTx&lt;span style="color:#bbb"&gt; &lt;/span&gt;deliver_tx&lt;span style="color:#bbb"&gt; &lt;/span&gt;=&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#666"&gt;19&lt;/span&gt;;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;RequestEndBlock&lt;span style="color:#bbb"&gt; &lt;/span&gt;end_block&lt;span style="color:#bbb"&gt; &lt;/span&gt;=&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#666"&gt;11&lt;/span&gt;;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;RequestCommit&lt;span style="color:#bbb"&gt; &lt;/span&gt;commit&lt;span style="color:#bbb"&gt; &lt;/span&gt;=&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#666"&gt;12&lt;/span&gt;;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;}&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;ABCI的设计主要有以下几个特点：&lt;/p&gt;</description></item><item><title>farbic-搭建高并发交易网络</title><link>https://xiaoping378.github.io/docs/5-blockchain/farbic-%E5%8C%BA%E5%9D%97%E9%93%BE%E7%BD%91%E7%BB%9C%E6%90%AD%E5%BB%BA/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/5-blockchain/farbic-%E5%8C%BA%E5%9D%97%E9%93%BE%E7%BD%91%E7%BB%9C%E6%90%AD%E5%BB%BA/</guid><description>&lt;p&gt;针对每秒数千笔交易的场景，默认的CCVC（并发控制版本检查）会导致交易失败率的上升，其实不需要对基础网络本身做特殊设置，从合约代码入手可以解决，参考官方例子&lt;a href="https://github.com/hyperledger/fabric-samples"&gt;farbic-samples&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id="下载项目"&gt;下载项目&lt;a class="td-heading-self-link" href="#%e4%b8%8b%e8%bd%bd%e9%a1%b9%e7%9b%ae" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;基于目前最新的v1.0.3版本来说&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git clone https://github.com/hyperledger/fabric-samples.git
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a2f"&gt;cd&lt;/span&gt; fabric-samples/first-network
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;未完...&lt;/p&gt;</description></item><item><title>fabric-示例集群化操作</title><link>https://xiaoping378.github.io/docs/5-blockchain/frabic-%E7%A4%BA%E4%BE%8B%E9%9B%86%E7%BE%A4%E5%8C%96%E6%93%8D%E4%BD%9C/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/5-blockchain/frabic-%E7%A4%BA%E4%BE%8B%E9%9B%86%E7%BE%A4%E5%8C%96%E6%93%8D%E4%BD%9C/</guid><description>&lt;p&gt;fabric给出的cc样例都是跑在docker-compose上，这里介绍利用已有的docker-compose.yaml如何集群化运行。&lt;/p&gt;
+&lt;h3 id="准备样例cc"&gt;准备样例CC&lt;a class="td-heading-self-link" href="#%e5%87%86%e5%a4%87%e6%a0%b7%e4%be%8bcc" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;以官方&lt;code&gt;fabric-samples&lt;/code&gt;项目里的balance-transfer为例，准备拆分运行在4个虚机里。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git clone https://github.com/hyperledger/fabric-samples.git
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a2f"&gt;cd&lt;/span&gt; fabric-samples/balance-transfer
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;本CC的示例，主要由3个部分组成:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;2 CAs&lt;/li&gt;
+&lt;li&gt;1 SOLO orderer&lt;/li&gt;
+&lt;li&gt;4 peers (2 peers per Org)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;其中&lt;code&gt;artifacts&lt;/code&gt;目录里放置了：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;由 &lt;strong&gt;cryptogen&lt;/strong&gt; 工具生成的证书信息，后面运行时需要挂载到各自的peer节点里&lt;/li&gt;
+&lt;li&gt;由 &lt;strong&gt;configtxgen&lt;/strong&gt; 工具生成的初始块 &lt;code&gt;genesis.block&lt;/code&gt; 和 channel配置信息&lt;code&gt;mychannell.tx&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="准备集群"&gt;准备集群&lt;a class="td-heading-self-link" href="#%e5%87%86%e5%a4%87%e9%9b%86%e7%be%a4" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;根据上面的情况，下面准备四个虚机来集群化操作, 虚机规划信息如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;air13, 192.168.10.78, 运行ca1，ca2, 这是我的本机&lt;/li&gt;
+&lt;li&gt;node0, 192.168.10.110, 运行orderer&lt;/li&gt;
+&lt;li&gt;node1, 192.168.10.114, 运行org1的peer0、peer1&lt;/li&gt;
+&lt;li&gt;node2, 192.168.10.115, 运行org2的peer0、peer1&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;每个虚机都预先安装docker和docker-compose&lt;/p&gt;
+&lt;p&gt;修改&lt;code&gt;artifacts/docker-compose.yaml&lt;/code&gt;文件，在每个service下添加如下信息：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#008000;font-weight:bold"&gt;extra_hosts&lt;/span&gt;:&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;- &lt;span style="color:#b44"&gt;&amp;#34;ca.org1.example.com:192.168.10.78&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;- &lt;span style="color:#b44"&gt;&amp;#34;ca.org2.example.com:192.168.10.78&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;- &lt;span style="color:#b44"&gt;&amp;#34;orderer.example.com:192.168.10.110&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;- &lt;span style="color:#b44"&gt;&amp;#34;peer0.org1.example.com:192.168.10.114&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;- &lt;span style="color:#b44"&gt;&amp;#34;peer1.org1.example.com:192.168.10.114&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;- &lt;span style="color:#b44"&gt;&amp;#34;peer0.org2.example.com:192.168.10.115&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;- &lt;span style="color:#b44"&gt;&amp;#34;peer1.org2.example.com:192.168.10.115&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;此举的作用是在每个容器的&lt;code&gt;/etc/hosts&lt;/code&gt;文件里，添加上面的映射，最终docker-compose.yaml文件放置&lt;a href="https://gist.github.com/xiaoping378/8ba8e796552e27277073e56cfd7b281a"&gt;gist&lt;/a&gt;上了.&lt;/p&gt;
+&lt;p&gt;最后一步，因为此CC样例运行时，需要挂载本地目录里一些提前生成好的证书，我们还需要把这么需要挂载的东西，同步到每个虚机里，如下操作：&lt;/p&gt;</description></item><item><title>farbic-区块链的生产集群化</title><link>https://xiaoping378.github.io/docs/5-blockchain/farbic%E5%8C%BA%E5%9D%97%E9%93%BE%E7%9A%84%E9%9B%86%E7%BE%A4%E5%8C%96-kubernetes%E5%AE%9E%E6%88%98/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/5-blockchain/farbic%E5%8C%BA%E5%9D%97%E9%93%BE%E7%9A%84%E9%9B%86%E7%BE%A4%E5%8C%96-kubernetes%E5%AE%9E%E6%88%98/</guid><description>&lt;p&gt;默认社区的demo是基于docker-compose给出的，达到了“一键部署”的效果，但生产上考虑多节点的情况，还需要费些手脚，这里考虑用kompose结合k8s来做这件事。&lt;/p&gt;
+&lt;h3 id="k8s集群-1-7的初始化"&gt;k8s集群 1.7的初始化&lt;a class="td-heading-self-link" href="#k8s%e9%9b%86%e7%be%a4-1-7%e7%9a%84%e5%88%9d%e5%a7%8b%e5%8c%96" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;每个节点都要安装docker的步骤，此处略过不表，这里主要介绍利用kubeadm初始化k8s集群，这里不考虑k8s集群本身的高可用，以前有文章专门介绍过。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;apt-get update &lt;span style="color:#666"&gt;&amp;amp;&amp;amp;&lt;/span&gt; apt-get install -y apt-transport-https
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cat &lt;span style="color:#b44"&gt;&amp;lt;&amp;lt;EOF &amp;gt;/etc/apt/sources.list.d/kubernetes.list
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#b44"&gt;deb http://apt.kubernetes.io/ kubernetes-xenial main
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#b44"&gt;EOF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;apt-get update
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;apt-get install -y kubelet kubeadm
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# 默认会自动安装这些包 ebtables kubeadm kubectl kubelet kubernetes-cni socat&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果你本机是centos的话，可以用如下命令安装&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cat &lt;span style="color:#b44"&gt;&amp;lt;&amp;lt;EOF &amp;gt; /etc/yum.repos.d/kubernetes.repo
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#b44"&gt;[kubernetes]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#b44"&gt;name=Kubernetes
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#b44"&gt;baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#b44"&gt;enabled=1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#b44"&gt;gpgcheck=1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#b44"&gt;repo_gpgcheck=1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#b44"&gt;gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#b44"&gt; https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#b44"&gt;EOF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;setenforce &lt;span style="color:#666"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;yum install -y kubelet kubeadm
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;systemctl &lt;span style="color:#a2f"&gt;enable&lt;/span&gt; kubelet &lt;span style="color:#666"&gt;&amp;amp;&amp;amp;&lt;/span&gt; systemctl start kubelet
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上面的命令，需要翻墙才能跑通，没条件的可以去&lt;a href="https://github.com/kubernetes/release"&gt;release项目&lt;/a&gt;自己编译deb包或者rpm包，如下运行&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git clone https://github.com/kubernetes/release.git &lt;span style="color:#666"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style="color:#a2f"&gt;cd&lt;/span&gt; release
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# debian系如下&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker build --tag&lt;span style="color:#666"&gt;=&lt;/span&gt;debian-packager debian
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker run --volume&lt;span style="color:#666"&gt;=&lt;/span&gt;&lt;span style="color:#b44"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#a2f;font-weight:bold"&gt;$(&lt;/span&gt;&lt;span style="color:#a2f"&gt;pwd&lt;/span&gt;&lt;span style="color:#a2f;font-weight:bold"&gt;)&lt;/span&gt;&lt;span style="color:#b44"&gt;/debian:/src&amp;#34;&lt;/span&gt; debian-packager
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# docker run -e &amp;#34;HTTPS_PROXY=127.0.0.1:8118&amp;#34; --net=host --volume=&amp;#34;$(pwd)/debian:/src&amp;#34; debian-packager&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# 默认debs包在目录debian/bin/stable/xenial下&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# centos系的如下&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a2f"&gt;cd&lt;/span&gt; rpm
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;./docker-build.sh
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;#默认rpm包在目录output/x86_64/下&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;必要依赖搞到手后，就可以简单的利用kubeadm启动集群了
+在master节点上如下执行初始化，此过程会启动 etcd，controller-manager，scheduler，api-server组件&lt;/p&gt;</description></item></channel></rss>

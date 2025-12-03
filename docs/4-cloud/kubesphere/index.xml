@@ -1,245 +1,145 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>现代技能栈 – Kubersphere</title><link>https://xiaoping378.github.io/docs/4-cloud/kubesphere/</link><description>Recent content in Kubersphere on 现代技能栈</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://xiaoping378.github.io/docs/4-cloud/kubesphere/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: 使用kind本地启动多集群</title><link>https://xiaoping378.github.io/docs/4-cloud/kubesphere/kind-multicluster-dev/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/kubesphere/kind-multicluster-dev/</guid><description>
-&lt;div class="pageinfo pageinfo-primary">
-&lt;p>我本地4c/8G的小本儿，跑了两个集群，组建了多集群环境，还行，能玩动...&lt;/p>
-&lt;/div>
-&lt;h2 id="环境篇">环境篇&lt;/h2>
-&lt;ol>
-&lt;li>
-&lt;p>kind&lt;a href="https://kind.sigs.k8s.io/docs/user/quick-start/">安装&lt;/a>&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>镜像准备&lt;/p>
-&lt;p>视网络情况，可以把依赖镜像&lt;code>kindest/node&lt;/code>提起pull到本地&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>docker的data-root目录&lt;/p>
-&lt;p>尽量不要放到/var目录下，kind起的集群容器会占用比较大的空间&lt;/p>
-&lt;/li>
-&lt;/ol>
-&lt;h2 id="实操">实操&lt;/h2>
-&lt;ol>
-&lt;li>创建集群&lt;/li>
-&lt;/ol>
-&lt;p>执行完如下命令后，docker ps可以看到本地启动了两个容器，一个容器对应一个集群。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">kind create cluster --image kindest/node:v1.19.16 --name host
-kind create cluster --image kindest/node:v1.19.16 --name member
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>kubectl config use-context [kind-host | kind-member]&lt;/code>，可以切换kubecl执行的上下文&lt;/p>
-&lt;ol start="2">
-&lt;li>安装kubesphere&lt;/li>
-&lt;/ol>
-&lt;p>分别在两个集群各自安装ks组件&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#080;font-style:italic"># 集群1安装&lt;/span>
-kubectl config use-context kind-host
-kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3.2.1/kubesphere-installer.yaml
-kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3.2.1/cluster-configuration.yaml
-&lt;span style="color:#080;font-style:italic"># 集群2安装&lt;/span>
-kubectl config use-context kind-member
-kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3.2.1/kubesphere-installer.yaml
-kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3.2.1/cluster-configuration.yaml
-&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
-&lt;li>纳管集群&lt;/li>
-&lt;/ol>
-&lt;p>可以在上面的初始化阶段直接改好主和成员集群的关系，这里参考&lt;a href="https://kubesphere.com.cn/docs/multicluster-management/enable-multicluster/direct-connection/">官文&lt;/a>即可&lt;/p>
-&lt;p>host集群的UI地址，可以通过&lt;code>host容器IP:30880&lt;/code>来访问，主集群的容器ip，可以如下获取：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">docker inspect --format &lt;span style="color:#b44">&amp;#39;{{ .NetworkSettings.Networks.kind.IPAddress }}&amp;#39;&lt;/span> host-control-plane
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>实操&lt;code>添加&lt;/code>集群时，需要member集群的kubeconfig，可以用如下命令获取到&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">kind get kubeconfig --name member
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>记得把kubeconfig中的&lt;code>server&lt;/code>地址中改成&lt;code>member容器ip:6443&lt;/code>，这样host集群才能访问到member集群&lt;/p>
-&lt;h2 id="总结">总结&lt;/h2>
-&lt;p>验证功能、测试开发，挺方便的，可以视本地资源紧张情况停掉监控的ns。&lt;/p>
-&lt;p>现在kind启动的集群默认使用了containerd的runtime，若想进一步调试查看集群内的情况，可以内部集成的&lt;code>crictl&lt;/code>代替熟悉的docker工具。&lt;/p></description></item><item><title>Docs: 论Kubesphere的异地多活方案</title><link>https://xiaoping378.github.io/docs/4-cloud/kubesphere/multihosts/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/kubesphere/multihosts/</guid><description>
-&lt;div class="pageinfo pageinfo-primary">
-&lt;p>遇到这样一个场景，在同一套环境中需要存在多个host控制面集群...bulabula... 因此想探索下kubesphere的异地多活混合容器云管理方案&lt;/p>
-&lt;/div>
-&lt;h2 id="集群角色介绍">集群角色介绍&lt;/h2>
-&lt;p>一个兼容原生的k8s集群，可通过&lt;code>ks-installer&lt;/code>来初始化完成安装，成为一个QKE集群。QKE集群分为多种角色，默认是none角色（standalone模式），开启多集群功能时，可以设置为host或者member角色。&lt;/p>
-&lt;p>&lt;img src="https://xiaoping378.github.io/images/kcp-%E5%A4%9A%E9%9B%86%E7%BE%A4.png" alt="多集群">&lt;/p>
-&lt;ul>
-&lt;li>none角色，是最小化安装的默认模式，会安装必要的ks-apiserver, ks-controller-manager, ks-console和其他组件
-&lt;ul>
-&lt;li>ks-apiserver, kcp的API网关，包含审计、认证、权限校验等功能&lt;/li>
-&lt;li>ks-controller, 各类自定义crd的控制器和平台管理逻辑的实现&lt;/li>
-&lt;li>ks-console, 前端界面UI&lt;/li>
-&lt;li>ks-installer, 初始化安装和变更QKE集群的工具，由shell-operator触发ansible-playbooks来工作。&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>member角色，承载工作负载的业务集群，和none模式的组件安装情况一致&lt;/li>
-&lt;li>host角色，整个混合云管理平台的控制面，会在none的基础上，再额外安装tower，kubefed-controller-manager， kubefed-admission-webhook等组件
-&lt;ul>
-&lt;li>tower，代理业务集群通信的server端，常用于不能直连member集群api-server的情况&lt;/li>
-&lt;li>kubefed-controller-manager，社区的&lt;a href="https://github.com/kubernetes-sigs/kubefed">kubefed&lt;/a>联邦资源的控制器&lt;/li>
-&lt;li>kubefed-admission-webhook， 社区的kubefed联邦资源的动态准入校验器&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;h2 id="多集群管理原理">多集群管理原理&lt;/h2>
-&lt;p>上段提到QKE有3种角色，可通过修改&lt;code>cc&lt;/code>配置文件的&lt;code>clusterRole&lt;/code>来使能, ks-installer监听到配置变化的事件，会初始化对应集群角色的功能。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">kubectl edit cc ks-installer -n kubesphere-system
-&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>角色不要改来改去，会出现莫名问题，主要是背后ansible维护的逻辑有疏漏，没闭环&lt;/p>
-&lt;/blockquote>
-&lt;h3 id="host集群">host集群&lt;/h3>
-&lt;p>host角色的主集群会被创建25种联邦资源类型Kind，如下命令可查看，还会额外安装kubefed stack组件。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ kubectl get FederatedTypeConfig -A
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>此外api-server被重启后，会根据配置内容的变化，做两件事，注册多集群相关的路由和缓存同步部分联邦资源。&lt;/p>
-&lt;ul>
-&lt;li>添加url里包含&lt;code>clusters/{cluster}&lt;/code>路径的agent路由和转发的功能，要访问业务集群的信息，这样可以直接转发过去。&lt;/li>
-&lt;li>cacheSync，缓存同步联邦资源，这里是个同步的操作。&lt;/li>
-&lt;/ul>
-&lt;blockquote>
-&lt;p>当开启多集群后，如果某个member出现异常导致不可通信，那host的api-server此时遇到故障要重启，会卡在cacheSync这一步，导致无法启动，进而整个平台无法访问。&lt;/p>
-&lt;/blockquote>
-&lt;p>controller-manager被重启后，同样会根据配置的变化，把部分资源类型自动转化成联邦资源的逻辑，也就是说，在host集群创建的这部分资源会自动同步到所有成员集群，实际的多集群同步靠kubefed-controller-manager来执行。以下资源会被自动创建联邦资源下发：&lt;/p>
-&lt;ul>
-&lt;li>users.iam.kubesphere.io -&amp;gt; federatedusers.types.kubefed.io&lt;/li>
-&lt;li>workspacetemplates.tenant.kubesphere.io -&amp;gt; federatedworkspaces.types.kubefed.io&lt;/li>
-&lt;li>workspaceroles.iam.kubesphere.io -&amp;gt; federatedworkspaceroles.types.kubefed.io&lt;/li>
-&lt;li>workspacerolebindings.iam.kubesphere.io -&amp;gt; federatedworkspacerolebindings.types.kubefed.io&lt;/li>
-&lt;/ul>
-&lt;p>此外还会启动cluster、group和一些globalRole*相关资源的控制器逻辑，同上也会通过kubefed自动下发到所有集群，&lt;code>clusters.cluster.kubesphere.io&lt;/code>资源除外。&lt;/p>
-&lt;blockquote>
-&lt;p>如果以上资源包含了&lt;code>kubefed.io/managed: false&lt;/code>标签，kubefed就不会再做下发同步，而host集群下发完以上资源后，都会自动加上该标签，防止进入死循环&lt;/p>
-&lt;/blockquote>
-&lt;h3 id="member集群">member集群&lt;/h3>
-&lt;p>修改为member集群时，需要cc中的&lt;strong>jwtSecret&lt;/strong>与host集群的保持一致(若该值为空的话，ks-installer默认会随机生成)，提取host集群的该值时，需要去cm里找，如下：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">kubectl -n kubesphere-system get cm kubesphere-config -o yaml | grep -v &lt;span style="color:#b44">&amp;#34;apiVersion&amp;#34;&lt;/span> | grep jwtSecret
-&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>jwtSecret要保持一致，主要是为了在host集群&lt;strong>签发&lt;/strong>的用户token，在用户访问业务集群时token&lt;strong>校验&lt;/strong>能通过。&lt;/p>
-&lt;/blockquote>
-&lt;h3 id="添加集群">添加集群&lt;/h3>
-&lt;p>本文只关注&lt;code>直接连接&lt;/code>这种情况，当填好成员集群的kubeconfig信息，点击&lt;code>添加&lt;/code>集群后,会做如下校验：&lt;/p>
-&lt;ul>
-&lt;li>通过kubeconfig信息先校验下是否会添加已存在的重复集群&lt;/li>
-&lt;li>校验成员集群的网络连通性&lt;/li>
-&lt;li>校验成员集群是否安装了ks-apiserver&lt;/li>
-&lt;li>校验成员集群的&lt;code>jwtSecret&lt;/code>是否和主集群的一致&lt;/li>
-&lt;/ul>
-&lt;blockquote>
-&lt;p>写稿时，此处有个问题，需要修复，如果kubeconfig使用了&lt;code>insecure-skip-tls-verify: true&lt;/code>会导致该集群添加失败，经定位主要是kubefed 空指针panic了，后续有时间我会去fix一下，已提&lt;a href="https://github.com/kubesphere/kubesphere/issues/4891">issue&lt;/a>。&lt;/p>
-&lt;/blockquote>
-&lt;p>校验完必要信息后，就执行实质动作&lt;code>joinFederation&lt;/code>加入联邦，kubesphere多集群纳管，实质上是先组成联邦集群:&lt;/p>
-&lt;ul>
-&lt;li>在成员集群创建ns kube-federation-system&lt;/li>
-&lt;li>在上面的命名空间中创建serviceAccount [clusterName]-kubesphere, 并绑定最高权限&lt;/li>
-&lt;li>在主集群的kube-federation-system的命名空间创建&lt;code>kubefedclusters.core.kubefed.io&lt;/code>，由kubefed stack驱动联邦的建立&lt;/li>
-&lt;li>加入联邦后，主机群的联邦资源会通过kubefed stack同步过来&lt;/li>
-&lt;/ul>
-&lt;blockquote>
-&lt;p>上述一顿操作，等效于 &lt;code>kubefedctl join member-cluster --cluster-context member-cluster --host-cluster-context host-cluster&lt;/code>&lt;/p>
-&lt;/blockquote>
-&lt;h2 id="异地多活方案设计">异地多活方案设计&lt;/h2>
-&lt;p>异地多活的方案主要是多个主集群能同时存在，且保证数据双向同步，经过上面的原理分析，可知多个主集群是可以同时存在的，也就是一个成员集群可以和多个主集群组成联邦。整体方案示意图设计如下：&lt;/p>
-&lt;p>&lt;img src="https://xiaoping378.github.io/images/kcp-multi-hostclusters.png" alt="">&lt;/p>
-&lt;blockquote>
-&lt;p>以下操作假设本地已具备三个QKE集群，如果不具备的可按照&lt;a href="https://xiaoping378.github.io/docs/4-cloud/kubesphere/kind-multicluster-dev/">此处&lt;/a>快速搭建&lt;code>host、host2、member&lt;/code>3个集群&lt;/p>
-&lt;/blockquote>
-&lt;p>大致实现逻辑的前提介绍：&lt;/p>
-&lt;ol>
-&lt;li>三个集群的&lt;code>jwtSecret&lt;/code>得保持一致&lt;/li>
-&lt;li>两个主集群都去&lt;code>添加&lt;/code>纳管同一个member集群&lt;/li>
-&lt;li>利用&lt;code>etcdctl make-mirror&lt;/code>实现双向同步&lt;/li>
-&lt;/ol>
-&lt;h3 id="验证下可行性">验证下可行性&lt;/h3>
-&lt;p>实操双活前，先验证下可行性&lt;/p>
-&lt;p>&lt;strong>实验1：&lt;/strong>&lt;/p>
-&lt;p>在两边创建一个同名用户，用户所有信息一致，可以添加成功，然后再修改一边的用户信息，使两边不一致&lt;/p>
-&lt;p>可以看到member集群的用户xxp，一直会被两边不断的更新...&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">root@member-control-plane:/# kubectl get user xxp -w
-NAME EMAIL STATUS
-xxp xxp@163.com Active
-xxp xxp-2@163.com Active
-xxp xxp@163.com Active
-xxp xxp-2@163.com Active
-... 周而复始 ...
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>这个实验，即使在创建用户时，页面表单上两边信息填的都一样，也会出现互相刷新覆盖的情况，因为yaml里的uid和time信息不一致&lt;/p>
-&lt;p>&lt;strong>实验2：&lt;/strong>&lt;/p>
-&lt;p>在两边添加一个同名用户，但两边用户信息（用户角色）不一致，可以创建成功，但后创建者的kube-federa会同步失败, 到这里还能接受，毕竟有冲突直接就同步失败了&lt;/p>
-&lt;p>但member集群上该用户的关联角色会出现上文的情况，被两边的主集群持续反复地修改...&lt;/p>
-&lt;p>&lt;strong>实验3：&lt;/strong>&lt;/p>
-&lt;p>在一侧的主集群上尝试修复冲突资源，即删除有冲突的用户资源，可以删除成功，但对应的联邦资源会出现删失败的情况&lt;/p>
-&lt;pre tabindex="0">&lt;code>➜ ~ kubectl get users.iam.kubesphere.io
-NAME EMAIL STATUS
-admin admin@kubesphere.io Active
-xxp3 xxp3@163.com Active
-➜ ~
-➜ ~ kubectl get federatedusers.types.kubefed.io
-NAME AGE
-admin 5h33m
-xxp 65m #这里是个删不掉的资源，fed controller会重复做失败尝试
-xxp3 61m
-&lt;/code>&lt;/pre>&lt;p>这样就会出现，两个主集群：一个要删，一个要同步，member集群上：持续上演“一会儿消失，一会儿又出现了”的奇观。&lt;/p>
-&lt;h3 id="总结">总结&lt;/h3>
-&lt;p>两个主集群可以同时工作，一旦出现同名冲突资源，处理起来会非常麻烦，尤其是背后的Dependent附属资源出现冲突时，往往问题点隐藏的更深，修复起来也棘手...&lt;/p>
-&lt;p>后来调研也发现：目前的社区方案make-mirror只支持单向同步，适合用来做灾备方案。&lt;/p>
-&lt;p>所以容器云平台的双活，除非具备跨AZ的etcd集群，否则需要二次开发改造类make-mirror方案来支持了。我最开始要考虑的问题答案也就显而易见了：如果要多个host集群共存，必须考虑通过行政管理手段，来尽量避免同名资源冲突。&lt;/p></description></item><item><title>Docs: 搭建kubesphere的开发调试环境</title><link>https://xiaoping378.github.io/docs/4-cloud/kubesphere/kcp-dev/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/kubesphere/kcp-dev/</guid><description>
-&lt;h2 id="依赖工具介绍">依赖工具介绍&lt;/h2>
-&lt;ol>
-&lt;li>vscode，个人日常使用vscode开发，标配&lt;code>Remote Development&lt;/code>插件&lt;/li>
-&lt;li>kt-connect，本地开发使用的流量代理工具，可以双向代理，本地可以直接访问pod和svc，也可以转发访问pod的流量到本地，相关&lt;a href="https://github.com/alibaba/kt-connect/blob/master/docs/zh-cn/reference/mechanism.md">原理介绍&lt;/a>。&lt;/li>
-&lt;/ol>
-&lt;h2 id="准备调试环境">准备调试环境&lt;/h2>
-&lt;h3 id="连接集群网络">连接集群网络&lt;/h3>
-&lt;p>使用kt-connect，打通网络，本地可直接访问Kubernetes集群内网&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">sudo ktctl connect --context kind-host --portForwardTimeout &lt;span style="color:#666">300&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>&lt;code>ktctl&lt;/code>采用本地&lt;code>kubectl&lt;/code>工具的集群配置，默认为~/.kube/config文件中配置的集群。&lt;/li>
-&lt;li>如果kubeconfig有多个集群，可以通过&lt;code>--context&lt;/code>指定要连接的具体集群&lt;/li>
-&lt;li>如果本地环境是&lt;code>kind&lt;/code>集群，需要修改kubeconfig中server的127地址为&lt;code>容器IP:6443&lt;/code>&lt;/li>
-&lt;li>如果网络比较差，会遇到错误&lt;code>ERR Exit: pod kt-rectifier-tcxjk failed to start&lt;/code>，可适当增加等待时间&lt;code>portForwardTimeout&lt;/code>&lt;/li>
-&lt;/ul>
-&lt;blockquote>
-&lt;p>另外注意的是，kt-connect需要root权限，上条命令会默认读取&lt;code>/root/.kube/config&lt;/code>文件，自行copy或者另通过&lt;code>-c&lt;/code>指定文件&lt;/p>
-&lt;/blockquote>
-&lt;h3 id="clone代码">clone代码&lt;/h3>
-&lt;p>不表.&lt;/p>
-&lt;h3 id="编辑调试的配置文件">编辑调试的配置文件&lt;/h3>
-&lt;p>首先编辑vscode的调试配置文件, 我是如下配置的：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ kubesphere git:&lt;span style="color:#666">(&lt;/span>master&lt;span style="color:#666">)&lt;/span> cat .vscode/launch.json
-&lt;span style="color:#666">{&lt;/span>
-// Use IntelliSense to learn about possible attributes.
-// Hover to view descriptions of existing attributes.
-// For more information, visit: https://go.microsoft.com/fwlink/?linkid&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#666">830387&lt;/span>
-&lt;span style="color:#b44">&amp;#34;version&amp;#34;&lt;/span>: &lt;span style="color:#b44">&amp;#34;0.2.0&amp;#34;&lt;/span>,
-&lt;span style="color:#b44">&amp;#34;configurations&amp;#34;&lt;/span>: &lt;span style="color:#666">[&lt;/span>
-&lt;span style="color:#666">{&lt;/span>
-&lt;span style="color:#b44">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#b44">&amp;#34;ks-apiserver&amp;#34;&lt;/span>,
-&lt;span style="color:#b44">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#b44">&amp;#34;go&amp;#34;&lt;/span>,
-&lt;span style="color:#b44">&amp;#34;request&amp;#34;&lt;/span>: &lt;span style="color:#b44">&amp;#34;launch&amp;#34;&lt;/span>,
-&lt;span style="color:#b44">&amp;#34;mode&amp;#34;&lt;/span>: &lt;span style="color:#b44">&amp;#34;auto&amp;#34;&lt;/span>,
-&lt;span style="color:#b44">&amp;#34;program&amp;#34;&lt;/span>: &lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b68;font-weight:bold">${&lt;/span>&lt;span style="color:#b8860b">workspaceFolder&lt;/span>&lt;span style="color:#b68;font-weight:bold">}&lt;/span>&lt;span style="color:#b44">/cmd/ks-apiserver/apiserver.go&amp;#34;&lt;/span>
-&lt;span style="color:#666">}&lt;/span>,
-&lt;span style="color:#666">{&lt;/span>
-&lt;span style="color:#b44">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#b44">&amp;#34;controller-manager&amp;#34;&lt;/span>,
-&lt;span style="color:#b44">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#b44">&amp;#34;go&amp;#34;&lt;/span>,
-&lt;span style="color:#b44">&amp;#34;request&amp;#34;&lt;/span>: &lt;span style="color:#b44">&amp;#34;launch&amp;#34;&lt;/span>,
-&lt;span style="color:#b44">&amp;#34;mode&amp;#34;&lt;/span>: &lt;span style="color:#b44">&amp;#34;auto&amp;#34;&lt;/span>,
-&lt;span style="color:#b44">&amp;#34;program&amp;#34;&lt;/span>: &lt;span style="color:#b44">&amp;#34;&lt;/span>&lt;span style="color:#b68;font-weight:bold">${&lt;/span>&lt;span style="color:#b8860b">workspaceFolder&lt;/span>&lt;span style="color:#b68;font-weight:bold">}&lt;/span>&lt;span style="color:#b44">/cmd/controller-manager/controller-manager.go&amp;#34;&lt;/span>
-&lt;span style="color:#666">}&lt;/span>
-&lt;span style="color:#666">]&lt;/span>
-&lt;span style="color:#666">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="准备调试环境-1">准备调试环境&lt;/h3>
-&lt;p>按F5，启动调试，左上角选择要调试的组件，我这里以controller-manager举例（需要hack的注意点比较多）。&lt;/p>
-&lt;p>过会儿会发现出现错误，错误提示很明显，因缺少配置文件，导致无法启动，通过查看&lt;code>deployment yaml&lt;/code>, 发现后面还会缺失&lt;code>Admission Webhooks&lt;/code>的证书，可如下统一提取到本地：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#080;font-style:italic"># 提取启动的配置文件(调试apiserver的时候也需要这一步，但要把文件放到对应cmd/ks-apiserver目录下)&lt;/span>
-kubectl -n kubesphere-system get cm kubesphere-config -ojsonpath&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#b44">&amp;#39;{.data.kubesphere\.yaml}&amp;#39;&lt;/span> &amp;gt; cmd/controller-manager/kubesphere.yaml
-&lt;span style="color:#080;font-style:italic"># 提取webhook用到的证书&lt;/span>
-mkdir -p /tmp/k8s-webhook-server/serving-certs/
-&lt;span style="color:#a2f">export&lt;/span> &lt;span style="color:#b8860b">controller_pod&lt;/span>&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#b44">`&lt;/span>kubectl -n kubesphere-system get pods -l &lt;span style="color:#b8860b">app&lt;/span>&lt;span style="color:#666">=&lt;/span>ks-controller-manager -o &lt;span style="color:#b8860b">jsonpath&lt;/span>&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#b44">&amp;#39;{.items[0].metadata.name}&amp;#39;&lt;/span>&lt;span style="color:#b44">`&lt;/span>
-kubectl -n kubesphere-system &lt;span style="color:#a2f">exec&lt;/span> -it &lt;span style="color:#b68;font-weight:bold">${&lt;/span>&lt;span style="color:#b8860b">controller_pod&lt;/span>&lt;span style="color:#b68;font-weight:bold">}&lt;/span> -- cat /tmp/k8s-webhook-server/serving-certs/ca.crt &amp;gt; /tmp/k8s-webhook-server/serving-certs/ca.crt
-kubectl -n kubesphere-system &lt;span style="color:#a2f">exec&lt;/span> -it &lt;span style="color:#b68;font-weight:bold">${&lt;/span>&lt;span style="color:#b8860b">controller_pod&lt;/span>&lt;span style="color:#b68;font-weight:bold">}&lt;/span> -- cat /tmp/k8s-webhook-server/serving-certs/tls.crt &amp;gt; /tmp/k8s-webhook-server/serving-certs/tls.crt
-kubectl -n kubesphere-system &lt;span style="color:#a2f">exec&lt;/span> -it &lt;span style="color:#b68;font-weight:bold">${&lt;/span>&lt;span style="color:#b8860b">controller_pod&lt;/span>&lt;span style="color:#b68;font-weight:bold">}&lt;/span> -- cat /tmp/k8s-webhook-server/serving-certs/tls.key &amp;gt; /tmp/k8s-webhook-server/serving-certs/tls.key
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>继续启动，发现还会有缺文件的错误，应该是编译镜像时，内置了些文件，通过查看&lt;code>build/ks-controller-manager/Dockerfile&lt;/code>，发现后面会缺的东西还是比较多的，推荐直接从运行中的pod直接copy到本地：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">sudo mkdir /var/helm-charts/
-sudo chmod -R a+rw /var/helm-charts
-kubectl -n kubesphere-system cp &lt;span style="color:#b68;font-weight:bold">${&lt;/span>&lt;span style="color:#b8860b">controller_pod&lt;/span>&lt;span style="color:#b68;font-weight:bold">}&lt;/span>:/var/helm-charts /var/helm-charts/
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>继续启动，成功 ！&lt;/p>
-&lt;h2 id="开始调试">开始调试&lt;/h2>
-&lt;p>利用ktctl替换集群中的ks-controller-manager的服务为本地服务。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">sudo ktctl exchange ks-controller-manager --namespace kubesphere-system --mode scale --recoverWaitTime &lt;span style="color:#666">300&lt;/span> --expose 8443:8443
-&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>如果本地集群只有一个节点，上述命令会一直pending，可以通过如下命令替代&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">sudo ktctl exchange ks-controller-manager --namespace kubesphere-system --expose 8443:8443
-kubectl -n kubesphere-system scale deployment ks-controller-manager --replicas&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#666">0&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>结束调试，记得还原刚才缩容&lt;code>replicas&lt;/code>的设置。&lt;/p>
-&lt;/blockquote>
-&lt;p>后续就是vscode的正常断点调试或者本地开发验证了，有时间在整理贴图...&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Kubersphere on 现代技能栈</title><link>https://xiaoping378.github.io/docs/4-cloud/kubesphere/</link><description>Recent content in Kubersphere on 现代技能栈</description><generator>Hugo</generator><language>zh-cn</language><atom:link href="https://xiaoping378.github.io/docs/4-cloud/kubesphere/index.xml" rel="self" type="application/rss+xml"/><item><title>使用kind本地启动多集群</title><link>https://xiaoping378.github.io/docs/4-cloud/kubesphere/kind-multicluster-dev/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/kubesphere/kind-multicluster-dev/</guid><description>&lt;div class="pageinfo pageinfo-primary"&gt;
+&lt;p&gt;我本地4c/8G的小本儿，跑了两个集群，组建了多集群环境，还行，能玩动...&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;h2 id="环境篇"&gt;环境篇&lt;a class="td-heading-self-link" href="#%e7%8e%af%e5%a2%83%e7%af%87" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;kind&lt;a href="https://kind.sigs.k8s.io/docs/user/quick-start/"&gt;安装&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;镜像准备&lt;/p&gt;
+&lt;p&gt;视网络情况，可以把依赖镜像&lt;code&gt;kindest/node&lt;/code&gt;提起pull到本地&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;docker的data-root目录&lt;/p&gt;
+&lt;p&gt;尽量不要放到/var目录下，kind起的集群容器会占用比较大的空间&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实操"&gt;实操&lt;a class="td-heading-self-link" href="#%e5%ae%9e%e6%93%8d" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;创建集群&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;执行完如下命令后，docker ps可以看到本地启动了两个容器，一个容器对应一个集群。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kind create cluster --image kindest/node:v1.19.16 --name host
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kind create cluster --image kindest/node:v1.19.16 --name member
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;kubectl config use-context [kind-host | kind-member]&lt;/code&gt;，可以切换kubecl执行的上下文&lt;/p&gt;
+&lt;ol start="2"&gt;
+&lt;li&gt;安装kubesphere&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;分别在两个集群各自安装ks组件&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# 集群1安装&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl config use-context kind-host
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3.2.1/kubesphere-installer.yaml 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3.2.1/cluster-configuration.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#080;font-style:italic"&gt;# 集群2安装&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl config use-context kind-member
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3.2.1/kubesphere-installer.yaml 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3.2.1/cluster-configuration.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start="3"&gt;
+&lt;li&gt;纳管集群&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;可以在上面的初始化阶段直接改好主和成员集群的关系，这里参考&lt;a href="https://kubesphere.com.cn/docs/multicluster-management/enable-multicluster/direct-connection/"&gt;官文&lt;/a&gt;即可&lt;/p&gt;</description></item><item><title>论Kubesphere的异地多活方案</title><link>https://xiaoping378.github.io/docs/4-cloud/kubesphere/multihosts/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/kubesphere/multihosts/</guid><description>&lt;div class="pageinfo pageinfo-primary"&gt;
+&lt;p&gt;遇到这样一个场景，在同一套环境中需要存在多个host控制面集群...bulabula... 因此想探索下kubesphere的异地多活混合容器云管理方案&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;h2 id="集群角色介绍"&gt;集群角色介绍&lt;a class="td-heading-self-link" href="#%e9%9b%86%e7%be%a4%e8%a7%92%e8%89%b2%e4%bb%8b%e7%bb%8d" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;一个兼容原生的k8s集群，可通过&lt;code&gt;ks-installer&lt;/code&gt;来初始化完成安装，成为一个QKE集群。QKE集群分为多种角色，默认是none角色（standalone模式），开启多集群功能时，可以设置为host或者member角色。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://xiaoping378.github.io/images/kcp-%E5%A4%9A%E9%9B%86%E7%BE%A4.png" alt="多集群"&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;none角色，是最小化安装的默认模式，会安装必要的ks-apiserver, ks-controller-manager, ks-console和其他组件
+&lt;ul&gt;
+&lt;li&gt;ks-apiserver, kcp的API网关，包含审计、认证、权限校验等功能&lt;/li&gt;
+&lt;li&gt;ks-controller, 各类自定义crd的控制器和平台管理逻辑的实现&lt;/li&gt;
+&lt;li&gt;ks-console, 前端界面UI&lt;/li&gt;
+&lt;li&gt;ks-installer, 初始化安装和变更QKE集群的工具，由shell-operator触发ansible-playbooks来工作。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;member角色，承载工作负载的业务集群，和none模式的组件安装情况一致&lt;/li&gt;
+&lt;li&gt;host角色，整个混合云管理平台的控制面，会在none的基础上，再额外安装tower，kubefed-controller-manager， kubefed-admission-webhook等组件
+&lt;ul&gt;
+&lt;li&gt;tower，代理业务集群通信的server端，常用于不能直连member集群api-server的情况&lt;/li&gt;
+&lt;li&gt;kubefed-controller-manager，社区的&lt;a href="https://github.com/kubernetes-sigs/kubefed"&gt;kubefed&lt;/a&gt;联邦资源的控制器&lt;/li&gt;
+&lt;li&gt;kubefed-admission-webhook， 社区的kubefed联邦资源的动态准入校验器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="多集群管理原理"&gt;多集群管理原理&lt;a class="td-heading-self-link" href="#%e5%a4%9a%e9%9b%86%e7%be%a4%e7%ae%a1%e7%90%86%e5%8e%9f%e7%90%86" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;上段提到QKE有3种角色，可通过修改&lt;code&gt;cc&lt;/code&gt;配置文件的&lt;code&gt;clusterRole&lt;/code&gt;来使能, ks-installer监听到配置变化的事件，会初始化对应集群角色的功能。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl edit cc ks-installer -n kubesphere-system
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;角色不要改来改去，会出现莫名问题，主要是背后ansible维护的逻辑有疏漏，没闭环&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id="host集群"&gt;host集群&lt;a class="td-heading-self-link" href="#host%e9%9b%86%e7%be%a4" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;host角色的主集群会被创建25种联邦资源类型Kind，如下命令可查看，还会额外安装kubefed stack组件。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;➜ kubectl get FederatedTypeConfig -A
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;此外api-server被重启后，会根据配置内容的变化，做两件事，注册多集群相关的路由和缓存同步部分联邦资源。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;添加url里包含&lt;code&gt;clusters/{cluster}&lt;/code&gt;路径的agent路由和转发的功能，要访问业务集群的信息，这样可以直接转发过去。&lt;/li&gt;
+&lt;li&gt;cacheSync，缓存同步联邦资源，这里是个同步的操作。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;当开启多集群后，如果某个member出现异常导致不可通信，那host的api-server此时遇到故障要重启，会卡在cacheSync这一步，导致无法启动，进而整个平台无法访问。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;controller-manager被重启后，同样会根据配置的变化，把部分资源类型自动转化成联邦资源的逻辑，也就是说，在host集群创建的这部分资源会自动同步到所有成员集群，实际的多集群同步靠kubefed-controller-manager来执行。以下资源会被自动创建联邦资源下发：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;users.iam.kubesphere.io -&amp;gt; federatedusers.types.kubefed.io&lt;/li&gt;
+&lt;li&gt;workspacetemplates.tenant.kubesphere.io -&amp;gt; federatedworkspaces.types.kubefed.io&lt;/li&gt;
+&lt;li&gt;workspaceroles.iam.kubesphere.io -&amp;gt; federatedworkspaceroles.types.kubefed.io&lt;/li&gt;
+&lt;li&gt;workspacerolebindings.iam.kubesphere.io -&amp;gt; federatedworkspacerolebindings.types.kubefed.io&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;此外还会启动cluster、group和一些globalRole*相关资源的控制器逻辑，同上也会通过kubefed自动下发到所有集群，&lt;code&gt;clusters.cluster.kubesphere.io&lt;/code&gt;资源除外。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果以上资源包含了&lt;code&gt;kubefed.io/managed: false&lt;/code&gt;标签，kubefed就不会再做下发同步，而host集群下发完以上资源后，都会自动加上该标签，防止进入死循环&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id="member集群"&gt;member集群&lt;a class="td-heading-self-link" href="#member%e9%9b%86%e7%be%a4" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;修改为member集群时，需要cc中的&lt;strong&gt;jwtSecret&lt;/strong&gt;与host集群的保持一致(若该值为空的话，ks-installer默认会随机生成)，提取host集群的该值时，需要去cm里找，如下：&lt;/p&gt;</description></item><item><title>搭建kubesphere的开发调试环境</title><link>https://xiaoping378.github.io/docs/4-cloud/kubesphere/kcp-dev/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/kubesphere/kcp-dev/</guid><description>&lt;h2 id="依赖工具介绍"&gt;依赖工具介绍&lt;a class="td-heading-self-link" href="#%e4%be%9d%e8%b5%96%e5%b7%a5%e5%85%b7%e4%bb%8b%e7%bb%8d" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;vscode，个人日常使用vscode开发，标配&lt;code&gt;Remote Development&lt;/code&gt;插件&lt;/li&gt;
+&lt;li&gt;kt-connect，本地开发使用的流量代理工具，可以双向代理，本地可以直接访问pod和svc，也可以转发访问pod的流量到本地，相关&lt;a href="https://github.com/alibaba/kt-connect/blob/master/docs/zh-cn/reference/mechanism.md"&gt;原理介绍&lt;/a&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="准备调试环境"&gt;准备调试环境&lt;a class="td-heading-self-link" href="#%e5%87%86%e5%a4%87%e8%b0%83%e8%af%95%e7%8e%af%e5%a2%83" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id="连接集群网络"&gt;连接集群网络&lt;a class="td-heading-self-link" href="#%e8%bf%9e%e6%8e%a5%e9%9b%86%e7%be%a4%e7%bd%91%e7%bb%9c" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;使用kt-connect，打通网络，本地可直接访问Kubernetes集群内网&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo ktctl connect --context kind-host --portForwardTimeout &lt;span style="color:#666"&gt;300&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ktctl&lt;/code&gt;采用本地&lt;code&gt;kubectl&lt;/code&gt;工具的集群配置，默认为~/.kube/config文件中配置的集群。&lt;/li&gt;
+&lt;li&gt;如果kubeconfig有多个集群，可以通过&lt;code&gt;--context&lt;/code&gt;指定要连接的具体集群&lt;/li&gt;
+&lt;li&gt;如果本地环境是&lt;code&gt;kind&lt;/code&gt;集群，需要修改kubeconfig中server的127地址为&lt;code&gt;容器IP:6443&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;如果网络比较差，会遇到错误&lt;code&gt;ERR Exit: pod kt-rectifier-tcxjk failed to start&lt;/code&gt;，可适当增加等待时间&lt;code&gt;portForwardTimeout&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;另外注意的是，kt-connect需要root权限，上条命令会默认读取&lt;code&gt;/root/.kube/config&lt;/code&gt;文件，自行copy或者另通过&lt;code&gt;-c&lt;/code&gt;指定文件&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id="clone代码"&gt;clone代码&lt;a class="td-heading-self-link" href="#clone%e4%bb%a3%e7%a0%81" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;不表.&lt;/p&gt;
+&lt;h3 id="编辑调试的配置文件"&gt;编辑调试的配置文件&lt;a class="td-heading-self-link" href="#%e7%bc%96%e8%be%91%e8%b0%83%e8%af%95%e7%9a%84%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;首先编辑vscode的调试配置文件, 我是如下配置的：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;➜ kubesphere git:&lt;span style="color:#666"&gt;(&lt;/span&gt;master&lt;span style="color:#666"&gt;)&lt;/span&gt; cat .vscode/launch.json
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#666"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; // Use IntelliSense to learn about possible attributes.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; // Hover to view descriptions of existing attributes.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; // For more information, visit: https://go.microsoft.com/fwlink/?linkid&lt;span style="color:#666"&gt;=&lt;/span&gt;&lt;span style="color:#666"&gt;830387&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#b44"&gt;&amp;#34;version&amp;#34;&lt;/span&gt;: &lt;span style="color:#b44"&gt;&amp;#34;0.2.0&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#b44"&gt;&amp;#34;configurations&amp;#34;&lt;/span&gt;: &lt;span style="color:#666"&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#666"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#b44"&gt;&amp;#34;name&amp;#34;&lt;/span&gt;: &lt;span style="color:#b44"&gt;&amp;#34;ks-apiserver&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#b44"&gt;&amp;#34;type&amp;#34;&lt;/span&gt;: &lt;span style="color:#b44"&gt;&amp;#34;go&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#b44"&gt;&amp;#34;request&amp;#34;&lt;/span&gt;: &lt;span style="color:#b44"&gt;&amp;#34;launch&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#b44"&gt;&amp;#34;mode&amp;#34;&lt;/span&gt;: &lt;span style="color:#b44"&gt;&amp;#34;auto&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#b44"&gt;&amp;#34;program&amp;#34;&lt;/span&gt;: &lt;span style="color:#b44"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#b68;font-weight:bold"&gt;${&lt;/span&gt;&lt;span style="color:#b8860b"&gt;workspaceFolder&lt;/span&gt;&lt;span style="color:#b68;font-weight:bold"&gt;}&lt;/span&gt;&lt;span style="color:#b44"&gt;/cmd/ks-apiserver/apiserver.go&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#666"&gt;}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#666"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#b44"&gt;&amp;#34;name&amp;#34;&lt;/span&gt;: &lt;span style="color:#b44"&gt;&amp;#34;controller-manager&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#b44"&gt;&amp;#34;type&amp;#34;&lt;/span&gt;: &lt;span style="color:#b44"&gt;&amp;#34;go&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#b44"&gt;&amp;#34;request&amp;#34;&lt;/span&gt;: &lt;span style="color:#b44"&gt;&amp;#34;launch&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#b44"&gt;&amp;#34;mode&amp;#34;&lt;/span&gt;: &lt;span style="color:#b44"&gt;&amp;#34;auto&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#b44"&gt;&amp;#34;program&amp;#34;&lt;/span&gt;: &lt;span style="color:#b44"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#b68;font-weight:bold"&gt;${&lt;/span&gt;&lt;span style="color:#b8860b"&gt;workspaceFolder&lt;/span&gt;&lt;span style="color:#b68;font-weight:bold"&gt;}&lt;/span&gt;&lt;span style="color:#b44"&gt;/cmd/controller-manager/controller-manager.go&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#666"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#666"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#666"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="准备调试环境-1"&gt;准备调试环境&lt;a class="td-heading-self-link" href="#%e5%87%86%e5%a4%87%e8%b0%83%e8%af%95%e7%8e%af%e5%a2%83-1" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;按F5，启动调试，左上角选择要调试的组件，我这里以controller-manager举例（需要hack的注意点比较多）。&lt;/p&gt;</description></item></channel></rss>
