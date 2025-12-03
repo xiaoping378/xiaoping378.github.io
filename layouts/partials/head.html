@@ -9,6 +9,10 @@
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#000000">
 
+{{ if .Site.Params.baidu_site -}}
+<meta name="baidu-site-verification" content="codeva-UXNJOXhG6C" />
+{{ end -}}
+
 {{/* Styles to set canvas colors and avoid transitions */ -}}
 <style>
   {{/* Set system colors as default */ -}}
