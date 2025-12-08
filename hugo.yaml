@@ -168,7 +168,8 @@ params:
 
   # Enable Lunr.js offline search
   offlineSearch: false
-  # 开启百度统计, 需要在layouts/partials/head.html中替换自己的统计代码
+  # 开启百度统计和检索索引能力, 需要在layouts/partials/head.html中替换自己的统计代码
+  # 检索不生效，当下存在301跳转，百度站长工具会拒绝索引
   baidu_site: true
 
   # 使用 Prism 为代码块启用语法高亮和复制按钮功能

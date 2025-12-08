@@ -1,7 +1,7 @@
 
 ---
-title: "文集"
-linkTitle: "文档"
+title: "现代技能栈"
+linkTitle: "技能栈"
 weight: 20
 menu:
   main:

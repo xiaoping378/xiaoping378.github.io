@@ -13,3 +13,7 @@ Add styles or override variables from the theme here.
 
 // // 禁止使用google字体，使用系统字体
 // $td-enable-google-fonts: false;
+// 中文字体设置
+$font-family-sans-serif: "Microsoft YaHei", "微软雅黑", "PingFang SC", "Hiragino Sans GB", "Helvetica Neue", Arial, sans-serif !default;
+$font-family-base: $font-family-sans-serif !default;
+$font-family-heading: "Microsoft YaHei", "微软雅黑", "PingFang SC", "Hiragino Sans GB", "Helvetica Neue", Arial, sans-serif !default;
