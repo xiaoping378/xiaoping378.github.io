@@ -3,7 +3,7 @@ title: "该主题的Markdown特色语法"
 date: 2017-01-05
 weight: 4
 description: >
-  docsy主题中Markdown的常见语法样例展示.
+  docsy主题中特色的语法和Markdown中常见语法样例展示.
 ---
 
 {{% pageinfo %}}
