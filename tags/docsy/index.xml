@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docsy on 现代技能栈</title><link>https://xiaoping378.github.io/tags/docsy/</link><description>Recent content in Docsy on 现代技能栈</description><generator>Hugo</generator><language>zh-cn</language><atom:link href="https://xiaoping378.github.io/tags/docsy/index.xml" rel="self" type="application/rss+xml"/><item><title>站点搭建方法</title><link>https://xiaoping378.github.io/docs/1-site/1-create_site/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/1-site/1-create_site/</guid><description>&lt;div class="pageinfo pageinfo-primary"&gt;
+&lt;p&gt;主要涉及到hugo和docsy主题的使用。&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;h2 id="hugo工具介绍"&gt;hugo工具介绍&lt;a class="td-heading-self-link" href="#hugo%e5%b7%a5%e5%85%b7%e4%bb%8b%e7%bb%8d" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;hugo是spf13的开源作品，目前任职于google，对他最早的印象是使用他的vim-spf13配置，后来又接触到他的cobra、plfag、viper... 为golang的生态完善做了很大贡献，致敬!&lt;/p&gt;
+&lt;p&gt;书归正传，hugo是基于golang开发的世界上最快的网站构建框架，本文介绍如何基于它构建技术类文档库，也可作为内部wiki或开源书籍使用。之所以没选择gitbook，发现CLI版本已于2018年停止维护了。&lt;/p&gt;
+&lt;h2 id="准备环境"&gt;准备环境&lt;a class="td-heading-self-link" href="#%e5%87%86%e5%a4%87%e7%8e%af%e5%a2%83" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;安装依赖工具（以下版本为当前202512最新稳定版本）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;安装git, 下载&lt;a href="https://github.com/git-for-windows/git/releases/download/v2.52.0.windows.1/Git-2.52.0-64-bit.exe"&gt;地址&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;安装hugo_extended&lt;a href="https://github.com/gohugoio/hugo/releases/download/v0.152.2/hugo_extended_withdeploy_0.152.2_windows-amd64.zip"&gt;Windows环境&lt;/a&gt;的版本。&lt;/li&gt;
+&lt;li&gt;安装Go工具，下载&lt;a href="https://go.dev/dl/go1.24.10.windows-amd64.msi"&gt;地址&lt;/a&gt;, hugo初始化需要go环境&lt;/li&gt;
+&lt;li&gt;安装nodejs 22+，下载&lt;a href="https://nodejs.org/dist/v24.11.1/node-v24.11.1-win-x64.zip"&gt;地址&lt;/a&gt;，推荐使用fnm管理node多版本。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;具体安装过程不表，下篇会介绍如何利用github pages全自动托管静态文件&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="主题选择"&gt;主题选择&lt;a class="td-heading-self-link" href="#%e4%b8%bb%e9%a2%98%e9%80%89%e6%8b%a9" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;选用&lt;a href="https://www.docsy.dev/xx/docs/get-started/"&gt;Docsy主题&lt;/a&gt;，出自google的开源主题，很多流行项目使用此主题作为官方站点，如k8s、kubeflow、grpc、etcd、Selenium等，详见此。主要功能包含：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持树形目录&lt;/li&gt;
+&lt;li&gt;国际化&lt;/li&gt;
+&lt;li&gt;搜索功能&lt;/li&gt;
+&lt;li&gt;移动端自适应适配&lt;/li&gt;
+&lt;li&gt;标签分类&lt;/li&gt;
+&lt;li&gt;全站打印&lt;/li&gt;
+&lt;li&gt;文档版本化&lt;/li&gt;
+&lt;li&gt;用户反馈等&lt;/li&gt;
+&lt;li&gt;uml\mermaid渲染&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;官方提供了快速脚手架，具体操作如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git clone --depth &lt;span style="color:#666"&gt;1&lt;/span&gt; --branch v0.13.0 https://github.com/google/docsy-example.git my-new-site
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a2f"&gt;cd&lt;/span&gt; my-new-site
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;npm install --registry https://registry.npmmirror.com
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hugo server
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;本地启动，默认可通过&lt;code&gt;localhost:1313&lt;/code&gt;访问，官方提供了在线的&lt;a href="https://example.docsy.dev/"&gt;预览地址&lt;/a&gt;。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hugo server
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id="目录结构说明"&gt;目录结构说明&lt;a class="td-heading-self-link" href="#%e7%9b%ae%e5%bd%95%e7%bb%93%e6%9e%84%e8%af%b4%e6%98%8e" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;默认脚手架目录结构如下，只关注&lt;code&gt;hugo.yaml&lt;/code&gt;文件和&lt;code&gt;content&lt;/code&gt;目录，就可以满足日常使用。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;➜ my-new-site git:&lt;span style="color:#666"&gt;(&lt;/span&gt;v0.13.0&lt;span style="color:#666"&gt;)&lt;/span&gt; ll
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;total 195K
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;drwxr-xr-x &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; &lt;span style="color:#666"&gt;0&lt;/span&gt; 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 assets &lt;span style="color:#080;font-style:italic"&gt;# 静态资源目录，如CSS、JavaScript等&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; &lt;span style="color:#666"&gt;448&lt;/span&gt; 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 config.yaml &lt;span style="color:#080;font-style:italic"&gt;# 站点的hugo高版本兼容文件，可删除&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;drwxr-xr-x &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; &lt;span style="color:#666"&gt;0&lt;/span&gt; 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 content &lt;span style="color:#080;font-style:italic"&gt;# 网站内容目录，包含Markdown格式的文章和页面，以后重点创作的目录&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; 1.1K 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 CONTRIBUTING.md
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; &lt;span style="color:#666"&gt;172&lt;/span&gt; 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 docker-compose.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; &lt;span style="color:#666"&gt;100&lt;/span&gt; 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 Dockerfile
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; &lt;span style="color:#666"&gt;173&lt;/span&gt; 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 docsy.work
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; &lt;span style="color:#666"&gt;0&lt;/span&gt; 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 docsy.work.sum
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; &lt;span style="color:#666"&gt;89&lt;/span&gt; 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 go.mod
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; &lt;span style="color:#666"&gt;513&lt;/span&gt; 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 go.sum
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; 7.7K 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 hugo.yaml &lt;span style="color:#080;font-style:italic"&gt;#Hugo的主要配置文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; 7.5K 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 hugo-disabled.toml
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;drwxr-xr-x &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; &lt;span style="color:#666"&gt;0&lt;/span&gt; 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 layouts
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; 12K 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 LICENSE
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; &lt;span style="color:#666"&gt;302&lt;/span&gt; 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 netlify.toml &lt;span style="color:#080;font-style:italic"&gt;# Netlify部署平台配置文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;drwxr-xr-x &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; &lt;span style="color:#666"&gt;0&lt;/span&gt; 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:37 node_modules
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; 2.7K 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 package.json
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; 99K 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:37 package-lock.json
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;drwxr-xr-x &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; &lt;span style="color:#666"&gt;0&lt;/span&gt; 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:37 public
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; 7.3K 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 README.md
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;drwxr-xr-x &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; &lt;span style="color:#666"&gt;0&lt;/span&gt; 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:35 resources &lt;span style="color:#080;font-style:italic"&gt;# 动态编译的产物&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="重点说明"&gt;重点说明&lt;a class="td-heading-self-link" href="#%e9%87%8d%e7%82%b9%e8%af%b4%e6%98%8e" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;修改主题的页面布局&lt;/p&gt;</description></item></channel></rss>

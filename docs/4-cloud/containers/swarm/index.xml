@@ -1,279 +1,95 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>现代技能栈 – Swarm篇</title><link>https://xiaoping378.github.io/docs/4-cloud/containers/swarm/</link><description>Recent content in Swarm篇 on 现代技能栈</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://xiaoping378.github.io/docs/4-cloud/containers/swarm/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: 构建生产环境级的docker Swarm集群-1</title><link>https://xiaoping378.github.io/docs/4-cloud/containers/swarm/docker-swarm/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/containers/swarm/docker-swarm/</guid><description>
-&lt;p>此文档适用于低于1.12版本的docker，之后swarm已内置于docker-engine里。&lt;/p>
-&lt;ol>
-&lt;li>硬件需求&lt;/li>
-&lt;/ol>
-&lt;p>至少5台PC服务器, 分别如下作用&lt;/p>
-&lt;ul>
-&lt;li>manager0&lt;/li>
-&lt;li>manager1&lt;/li>
-&lt;li>consul0&lt;/li>
-&lt;li>node0&lt;/li>
-&lt;li>node1&lt;/li>
-&lt;/ul>
-&lt;ol start="2">
-&lt;li>每台PC上安装docker-engine&lt;/li>
-&lt;/ol>
-&lt;p>一台一台的ssh上去执行，或者使用ansible批量部署工具。&lt;/p>
-&lt;p>安装docker-engine&lt;/p>
-&lt;pre tabindex="0">&lt;code>curl -sSL https://get.docker.com/ | sh
-&lt;/code>&lt;/pre>&lt;p>启动之，并使之监听2375端口&lt;/p>
-&lt;pre tabindex="0">&lt;code>sudo docker daemon -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock
-&lt;/code>&lt;/pre>&lt;p>亦可修改配置，使之永久生效&lt;/p>
-&lt;pre tabindex="0">&lt;code>mkdir /etc/systemd/system/docker.service.d
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Swarm篇 on 现代技能栈</title><link>https://xiaoping378.github.io/docs/4-cloud/containers/swarm/</link><description>Recent content in Swarm篇 on 现代技能栈</description><generator>Hugo</generator><language>zh-cn</language><atom:link href="https://xiaoping378.github.io/docs/4-cloud/containers/swarm/index.xml" rel="self" type="application/rss+xml"/><item><title>构建生产环境级的docker Swarm集群-1</title><link>https://xiaoping378.github.io/docs/4-cloud/containers/swarm/docker-swarm/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/containers/swarm/docker-swarm/</guid><description>&lt;p&gt;此文档适用于低于1.12版本的docker，之后swarm已内置于docker-engine里。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;硬件需求&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;至少5台PC服务器, 分别如下作用&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;manager0&lt;/li&gt;
+&lt;li&gt;manager1&lt;/li&gt;
+&lt;li&gt;consul0&lt;/li&gt;
+&lt;li&gt;node0&lt;/li&gt;
+&lt;li&gt;node1&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start="2"&gt;
+&lt;li&gt;每台PC上安装docker-engine&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;一台一台的ssh上去执行，或者使用ansible批量部署工具。&lt;/p&gt;
+&lt;p&gt;安装docker-engine&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;curl -sSL https://get.docker.com/ | sh
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;启动之，并使之监听2375端口&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;sudo docker daemon -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;亦可修改配置，使之永久生效&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;mkdir /etc/systemd/system/docker.service.d
 cat &amp;lt;&amp;lt;EOF &amp;gt;&amp;gt;/etc/systemd/system/docker.service.d/docker.conf
 [Service]
-ExecStart=
-ExecStart=/usr/bin/docker daemon -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --dns 180.76.76.76 --insecure-registry registry.cecf.com -g /home/Docker/docker
+ ExecStart=
+ ExecStart=/usr/bin/docker daemon -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --dns 180.76.76.76 --insecure-registry registry.cecf.com -g /home/Docker/docker
 EOF
-&lt;/code>&lt;/pre>&lt;ol start="3">
-&lt;li>启动discovery后台&lt;/li>
-&lt;/ol>
-&lt;p>在consul0上启动consul服务，manager用其来认证node连接并存储node状态， 理应建立discovery的高可用，这里简化之&lt;/p>
-&lt;pre tabindex="0">&lt;code>docker run -d -p 8500:8500 --name=consul progrium/consul -server -bootstrap
-&lt;/code>&lt;/pre>&lt;ol start="4">
-&lt;li>创建Swarm集群&lt;/li>
-&lt;/ol>
-&lt;p>在manager0上创建the primary manager， 自行替换manager0_ip和consul0_ip的真实IP地址。&lt;/p>
-&lt;pre tabindex="0">&lt;code>docker run -d -p 4000:4000 swarm manage -H :4000 --replication --advertise &amp;lt;manager0_ip&amp;gt;:4000 consul://&amp;lt;consul0_ip&amp;gt;:8500
-&lt;/code>&lt;/pre>&lt;p>在manager1上启动replica manger&lt;/p>
-&lt;pre tabindex="0">&lt;code>docker run -d -p 4000:4000 swarm manage -H :4000 --replication --advertise &amp;lt;manager1_ip&amp;gt;:4000 consul://&amp;lt;consul0_ip&amp;gt;:8500
-&lt;/code>&lt;/pre>&lt;p>--replication&lt;/p>
-&lt;ol start="5">
-&lt;li>在node上执行加入集群操作&lt;/li>
-&lt;/ol>
-&lt;p>分别在node0和node1上执行加入集群操作&lt;/p>
-&lt;pre tabindex="0">&lt;code>docker run -d swarm join --advertise=&amp;lt;node_ip&amp;gt;:2375 consul://&amp;lt;consul0_ip&amp;gt;:8500
-&lt;/code>&lt;/pre>&lt;ol start="6">
-&lt;li>在manger0上查看集群状态&lt;/li>
-&lt;/ol>
-&lt;pre tabindex="0">&lt;code>docker -H :4000 info
-&lt;/code>&lt;/pre></description></item><item><title>Docs: 构建生产环境级的docker Swarm集群-2</title><link>https://xiaoping378.github.io/docs/4-cloud/containers/swarm/docker-swarm2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/containers/swarm/docker-swarm2/</guid><description>
-&lt;p>此文档适用于不低于1.12版本的docker，因为swarm已内置于docker-engine里。&lt;/p>
-&lt;ol>
-&lt;li>硬件需求&lt;/li>
-&lt;/ol>
-&lt;p>这里以5台PC服务器为例, 分别如下作用&lt;/p>
-&lt;ul>
-&lt;li>manager0&lt;/li>
-&lt;li>manager1&lt;/li>
-&lt;li>node0&lt;/li>
-&lt;li>node1&lt;/li>
-&lt;li>node2&lt;/li>
-&lt;/ul>
-&lt;ol start="2">
-&lt;li>每台PC上安装docker-engine&lt;/li>
-&lt;/ol>
-&lt;p>一台一台的ssh上去执行，或者使用ansible批量部署工具。&lt;/p>
-&lt;p>安装docker-engine&lt;/p>
-&lt;pre tabindex="0">&lt;code>curl -sSL https://get.docker.com/ | sh
-&lt;/code>&lt;/pre>&lt;p>启动之，并使之监听2375端口&lt;/p>
-&lt;pre tabindex="0">&lt;code>sudo docker daemon -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock
-&lt;/code>&lt;/pre>&lt;p>亦可修改配置，使之永久生效&lt;/p>
-&lt;pre tabindex="0">&lt;code>mkdir /etc/systemd/system/docker.service.d
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start="3"&gt;
+&lt;li&gt;启动discovery后台&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;在consul0上启动consul服务，manager用其来认证node连接并存储node状态， 理应建立discovery的高可用，这里简化之&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;docker run -d -p 8500:8500 --name=consul progrium/consul -server -bootstrap
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start="4"&gt;
+&lt;li&gt;创建Swarm集群&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;在manager0上创建the primary manager， 自行替换manager0_ip和consul0_ip的真实IP地址。&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;docker run -d -p 4000:4000 swarm manage -H :4000 --replication --advertise &amp;lt;manager0_ip&amp;gt;:4000 consul://&amp;lt;consul0_ip&amp;gt;:8500
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在manager1上启动replica manger&lt;/p&gt;</description></item><item><title>构建生产环境级的docker Swarm集群-2</title><link>https://xiaoping378.github.io/docs/4-cloud/containers/swarm/docker-swarm2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/containers/swarm/docker-swarm2/</guid><description>&lt;p&gt;此文档适用于不低于1.12版本的docker，因为swarm已内置于docker-engine里。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;硬件需求&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这里以5台PC服务器为例, 分别如下作用&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;manager0&lt;/li&gt;
+&lt;li&gt;manager1&lt;/li&gt;
+&lt;li&gt;node0&lt;/li&gt;
+&lt;li&gt;node1&lt;/li&gt;
+&lt;li&gt;node2&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start="2"&gt;
+&lt;li&gt;每台PC上安装docker-engine&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;一台一台的ssh上去执行，或者使用ansible批量部署工具。&lt;/p&gt;
+&lt;p&gt;安装docker-engine&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;curl -sSL https://get.docker.com/ | sh
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;启动之，并使之监听2375端口&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;sudo docker daemon -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;亦可修改配置，使之永久生效&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;mkdir /etc/systemd/system/docker.service.d
 cat &amp;lt;&amp;lt;EOF &amp;gt;&amp;gt;/etc/systemd/system/docker.service.d/docker.conf
 [Service]
-ExecStart=
-ExecStart=/usr/bin/docker daemon -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --dns 180.76.76.76 --insecure-registry registry.cecf.com -g /home/Docker/docker
+ ExecStart=
+ ExecStart=/usr/bin/docker daemon -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --dns 180.76.76.76 --insecure-registry registry.cecf.com -g /home/Docker/docker
 EOF
-&lt;/code>&lt;/pre>&lt;p>如果开启了防火墙，需要开启如下端口&lt;/p>
-&lt;ul>
-&lt;li>&lt;strong>TCP port 2377&lt;/strong> for cluster management communications&lt;/li>
-&lt;li>&lt;strong>TCP&lt;/strong> and &lt;strong>UDP port 7946&lt;/strong> for communication among nodes&lt;/li>
-&lt;li>&lt;strong>TCP&lt;/strong> and &lt;strong>UDP port 4789&lt;/strong> for overlay network traffic&lt;/li>
-&lt;/ul>
-&lt;ol start="3">
-&lt;li>创建swarm&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">docker swarm init --advertise-addr &amp;lt;MANAGER-IP&amp;gt;
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>我的实例里如下：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#666">[&lt;/span>root@manager0 ~&lt;span style="color:#666">]&lt;/span>&lt;span style="color:#080;font-style:italic"># docker swarm init --advertise-addr 10.42.0.243&lt;/span>
-Swarm initialized: current node &lt;span style="color:#666">(&lt;/span>e5eqi0lue90uidzsfddeqwfl8&lt;span style="color:#666">)&lt;/span> is now a manager.
-To add a worker to this swarm, run the following command:
-docker swarm join &lt;span style="color:#b62;font-weight:bold">\
-&lt;/span>&lt;span style="color:#b62;font-weight:bold">&lt;/span> --token SWMTKN-1-3iskhw3lsc9pkdtijj1d23lg9tp7duj18f477i5ywgezry7zlt-dfwjbsjleoajcdj13psu702s6 &lt;span style="color:#b62;font-weight:bold">\
-&lt;/span>&lt;span style="color:#b62;font-weight:bold">&lt;/span> 10.42.0.243:2377
-To add a manager to this swarm, run &lt;span style="color:#b44">&amp;#39;docker swarm join-token manager&amp;#39;&lt;/span> and follow the instructions.
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用 &lt;code>--advertise-addr&lt;/code> 来声明manager0的IP，其他的nodes必须可以和此IP互通，
-一旦完整初始化，此node即是manger又是worker node.&lt;/p>
-&lt;p>通过&lt;code>docker info&lt;/code>来查看&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ docker info
-Containers: 2
-Running: 0
-Paused: 0
-Stopped: 2
-...snip...
-Swarm: active
-NodeID: e5eqi0lue90uidzsfddeqwfl8
-Is Manager: true
-Managers: 1
-Nodes: 1
-...snip...
-&lt;/code>&lt;/pre>&lt;p>通过&lt;code>docker node ls&lt;/code>来查看集群的node信息&lt;/p>
-&lt;pre tabindex="0">&lt;code>[root@manager0 ~]# docker node ls
-ID HOSTNAME STATUS AVAILABILITY MANAGER STATUS
-e5eqi0lue90uidzsfddeqwfl8 * manager0 Ready Active Leader
-&lt;/code>&lt;/pre>&lt;p>这里的&lt;code>*&lt;/code>来指明docker client正在链接在这个node上。&lt;/p>
-&lt;ol start="4">
-&lt;li>加入swarm集群&lt;/li>
-&lt;/ol>
-&lt;p>执行在manager0上产生&lt;code>docker swarm init&lt;/code>产生的结果即可&lt;/p>
-&lt;p>如果当时没记录下来，还可以在manager上补看
-想把node以worker身份加入，在manager0上执行下面的命令来补看。&lt;/p>
-&lt;pre tabindex="0">&lt;code>docker swarm join-token worker
-&lt;/code>&lt;/pre>&lt;p>想把node以manager身份加入，在manager0上执行下面的命令来来补看。&lt;/p>
-&lt;pre tabindex="0">&lt;code>docker swarm join-token manager
-&lt;/code>&lt;/pre>&lt;p>为了manager的高可用，我这里需要在manager1上执行&lt;/p>
-&lt;pre tabindex="0">&lt;code>docker swarm join \
---token SWMTKN-1-3iskhw3lsc9pkdtijj1d23lg9tp7duj18f477i5ywgezry7zlt-86dk7l9usp1yh4uc3rjchf2hu \
-10.42.0.243:2377
-&lt;/code>&lt;/pre>&lt;p>我这里就是依次在node0-2上执行&lt;/p>
-&lt;pre tabindex="0">&lt;code>docker swarm join \
---token SWMTKN-1-3iskhw3lsc9pkdtijj1d23lg9tp7duj18f477i5ywgezry7zlt-dfwjbsjleoajcdj13psu702s6 \
-10.42.0.243:2377
-&lt;/code>&lt;/pre>&lt;p>这样node就会加入之前我们创建的swarm集群里。&lt;/p>
-&lt;p>再通过&lt;code>docker node ls&lt;/code>来查看现在的集群情况， swarm的集群里是以node为实例的&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#666">[&lt;/span>root@manager0 ~&lt;span style="color:#666">]&lt;/span>&lt;span style="color:#080;font-style:italic"># docker node ls&lt;/span>
-ID HOSTNAME STATUS AVAILABILITY MANAGER STATUS
-0tr5fu8ebi27cp2ot210t67fx manager1 Ready Active Reachable
-46irkik4idjk8rjy7pqjb84x0 node1 Ready Active
-79hlu1m7x9p4cc4npa4xjuax3 node0 Ready Active
-9535h8ow82s8mzuw5kud2mwl3 consul0 Ready Active
-e5eqi0lue90uidzsfddeqwfl8 * manager0 Ready Active Leader
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>这里MANAFER标明各node的身份，空即为worker身份。&lt;/p>
-&lt;ol start="5">
-&lt;li>部署服务&lt;/li>
-&lt;/ol>
-&lt;pre tabindex="0">&lt;code>Usage: docker service COMMAND
-Manage Docker services
-Options:
---help Print usage
-Commands:
-create Create a new service
-inspect Display detailed information on one or more services
-ps List the tasks of a service
-ls List services
-rm Remove one or more services
-scale Scale one or multiple services
-update Update a service
-&lt;/code>&lt;/pre>&lt;p>部署示例如下：&lt;/p>
-&lt;pre tabindex="0">&lt;code>docker service create --replicas 2 --name helloworld alpine ping 300.cn
-&lt;/code>&lt;/pre>&lt;p>&lt;code>docker service ls&lt;/code>罗列swarm集群的所有services
-&lt;code>docker service ps helloworld&lt;/code>查看service部署到了哪个node上
-&lt;code>docker service inspect helloworld&lt;/code> 查看service 资源、状态等具体信息
-&lt;code>docker servcie scale helloworld=5&lt;/code>来扩容service的个数
-&lt;code>docker service rm helloworld&lt;/code> 来删除service
-&lt;code>docker service update&lt;/code> 来实现更新service的各项属性，包括滚动升级等。&lt;/p>
-&lt;p>可更新的属性包含如下：&lt;/p>
-&lt;pre tabindex="0">&lt;code>Usage: docker service update [OPTIONS] SERVICE
-Update a service
-Options:
---args string Service command args
---constraint-add value Add or update placement constraints (default [])
---constraint-rm value Remove a constraint (default [])
---container-label-add value Add or update container labels (default [])
---container-label-rm value Remove a container label by its key (default [])
---endpoint-mode string Endpoint mode (vip or dnsrr)
---env-add value Add or update environment variables (default [])
---env-rm value Remove an environment variable (default [])
---help Print usage
---image string Service image tag
---label-add value Add or update service labels (default [])
---label-rm value Remove a label by its key (default [])
---limit-cpu value Limit CPUs (default 0.000)
---limit-memory value Limit Memory (default 0 B)
---log-driver string Logging driver for service
---log-opt value Logging driver options (default [])
---mount-add value Add or update a mount on a service
---mount-rm value Remove a mount by its target path (default [])
---name string Service name
---publish-add value Add or update a published port (default [])
---publish-rm value Remove a published port by its target port (default [])
---replicas value Number of tasks (default none)
---reserve-cpu value Reserve CPUs (default 0.000)
---reserve-memory value Reserve Memory (default 0 B)
---restart-condition string Restart when condition is met (none, on-failure, or any)
---restart-delay value Delay between restart attempts (default none)
---restart-max-attempts value Maximum number of restarts before giving up (default none)
---restart-window value Window used to evaluate the restart policy (default none)
---stop-grace-period value Time to wait before force killing a container (default none)
---update-delay duration Delay between updates
---update-failure-action string Action on update failure (pause|continue) (default &amp;quot;pause&amp;quot;)
---update-parallelism uint Maximum number of tasks updated simultaneously (0 to update all at once) (default 1)
--u, --user string Username or UID
---with-registry-auth Send registry authentication details to swarm agents
--w, --workdir string Working directory inside the container
-&lt;/code>&lt;/pre></description></item><item><title>Docs: 构建生产环境级的docker Swarm集群-3</title><link>https://xiaoping378.github.io/docs/4-cloud/containers/swarm/docker-sarm3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/containers/swarm/docker-sarm3/</guid><description>
-&lt;p>如前文所述，默认已经搭建好环境，基于docker1.12版本。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#666">[&lt;/span>root@manager0 ~&lt;span style="color:#666">]&lt;/span>&lt;span style="color:#080;font-style:italic"># docker node ls&lt;/span>
-ID HOSTNAME STATUS AVAILABILITY MANAGER STATUS
-0bbmd3r7aphs374qaea4zcieo node2 Ready Active
-3qmxzyauc0bz4kjqvld9uogz5 manager1 Ready Active Reachable
-5ewbdtvaopj4ltwqx0a4i65nt * manager0 Ready Drain Leader
-5oxxpgk69fnwe5w210kovrqi9 node1 Ready Active
-7s1ilay2wkjgt09bp2z0743m7 node0 Ready Active
-&lt;/code>&lt;/pre>&lt;/div>&lt;ol>
-&lt;li>创建第一个服务，以redis为例
-swarm里容器间通信需要使用overlay模式，所以需要提前建立一个&lt;/li>
-&lt;/ol>
-&lt;pre tabindex="0">&lt;code>docker network create -d overlay --subnet 10.254.0.0/16 --gateway 10.254.0.1 mynet1
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果开启了防火墙，需要开启如下端口&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;TCP port 2377&lt;/strong&gt; for cluster management communications&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;TCP&lt;/strong&gt; and &lt;strong&gt;UDP port 7946&lt;/strong&gt; for communication among nodes&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;TCP&lt;/strong&gt; and &lt;strong&gt;UDP port 4789&lt;/strong&gt; for overlay network traffic&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start="3"&gt;
+&lt;li&gt;创建swarm&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker swarm init --advertise-addr &amp;lt;MANAGER-IP&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我的实例里如下：&lt;/p&gt;</description></item><item><title>构建生产环境级的docker Swarm集群-3</title><link>https://xiaoping378.github.io/docs/4-cloud/containers/swarm/docker-sarm3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/containers/swarm/docker-sarm3/</guid><description>&lt;p&gt;如前文所述，默认已经搭建好环境，基于docker1.12版本。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#666"&gt;[&lt;/span&gt;root@manager0 ~&lt;span style="color:#666"&gt;]&lt;/span&gt;&lt;span style="color:#080;font-style:italic"&gt;# docker node ls&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ID HOSTNAME STATUS AVAILABILITY MANAGER STATUS
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;0bbmd3r7aphs374qaea4zcieo node2 Ready Active
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;3qmxzyauc0bz4kjqvld9uogz5 manager1 Ready Active Reachable
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;5ewbdtvaopj4ltwqx0a4i65nt * manager0 Ready Drain Leader
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;5oxxpgk69fnwe5w210kovrqi9 node1 Ready Active
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;7s1ilay2wkjgt09bp2z0743m7 node0 Ready Active
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol&gt;
+&lt;li&gt;创建第一个服务，以redis为例
+swarm里容器间通信需要使用overlay模式，所以需要提前建立一个&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;docker network create -d overlay --subnet 10.254.0.0/16 --gateway 10.254.0.1 mynet1
 docker service create --name redis --network mynet1 redis
-&lt;/code>&lt;/pre>&lt;ol start="2">
-&lt;li>在manager上查看服务部署情况&lt;/li>
-&lt;/ol>
-&lt;pre tabindex="0">&lt;code>[root@manager0 ~]# docker service ps redis
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start="2"&gt;
+&lt;li&gt;在manager上查看服务部署情况&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;[root@manager0 ~]# docker service ps redis
 ID NAME IMAGE NODE DESIRED STATE CURRENT STATE ERROR
 9avksjfqr2gxm413dfrezrmgr redis.1 redis node1 Running Running 17 seconds ago
-&lt;/code>&lt;/pre>&lt;p>实例里，同样可以去node1上用&lt;code>docker ps&lt;/code>查看&lt;/p>
-&lt;p>以上只是最基本的集群创建服务的用法，从中可见，swarm的的调度基本单元是task, 没有pod的概念，一个task可以简单理解成一个docker run的结果。目前swarm里也不支持compose。&lt;/p>
-&lt;p>docker官方称，以后会支持vm、pod的调度单元，具体日期未知。&lt;/p>
-&lt;ol start="3">
-&lt;li>服务调度策略&lt;/li>
-&lt;/ol>
-&lt;p>使用&lt;code>docker service create&lt;/code>创建服务， 这其中选择再哪个节点部署，docker 提供了三种调度策略；&lt;/p>
-&lt;ul>
-&lt;li>spread: 默认策略，尽量均匀分布，找容器数少的结点调度&lt;/li>
-&lt;li>binpack: 和spread相反，尽量把一个结点占满再用其他结点&lt;/li>
-&lt;li>random: 随机&lt;/li>
-&lt;/ul>
-&lt;ol start="4">
-&lt;li>服务的高可用和load-balance&lt;/li>
-&lt;/ol>
-&lt;p>通过&lt;code>--replicas&lt;/code>参数可以设置服务容器的数量，已达到高可用状态；&lt;/p>
-&lt;pre tabindex="0">&lt;code>#创建多副本
-docker service update --replicas 4 redis
-#查看副本部署情况
-[root@manager0 ~]# docker service ps redis
-ID NAME IMAGE NODE DESIRED STATE CURRENT STATE ERROR
-9avksjfqr2gxm413dfrezrmgr redis.1 redis node1 Running Running 13 minutes ago
-0olv1sfz6d79wdnorw7jgoyri redis.2 redis manager1 Running Running about a minute ago
-f3n6deesjlkxu4k48lzabieus redis.3 redis node2 Running Preparing 3 minutes ago
-80bzarvkiytpv1690sla6unt2 redis.4 redis node0 Running Running about a minute ago
-#验证多可用， 总共4个副本，docker内置的DNS服务会默认使用round-robin调度策略来解析主机。
-root@9ed77b4b4432:/data# redis-cli -h redis
-redis:6379&amp;gt; set user 1
-OK
-redis:6379&amp;gt; exit
-root@9ed77b4b4432:/data# redis-cli -h redis
-redis:6379&amp;gt; get user
-(nil)
-redis:6379&amp;gt; set user 2
-OK
-redis:6379&amp;gt; exit
-root@9ed77b4b4432:/data# redis-cli -h redis
-redis:6379&amp;gt; get user
-(nil)
-redis:6379&amp;gt; set user 3
-OK
-redis:6379&amp;gt; exit
-root@9ed77b4b4432:/data# redis-cli -h redis
-redis:6379&amp;gt; get user
-(nil)
-redis:6379&amp;gt; set user 4
-OK
-redis:6379&amp;gt; exit
-root@9ed77b4b4432:/data# redis-cli -h redis
-redis:6379&amp;gt; get user
-&amp;quot;1&amp;quot;
-redis:6379&amp;gt;
-&lt;/code>&lt;/pre></description></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;实例里，同样可以去node1上用&lt;code&gt;docker ps&lt;/code&gt;查看&lt;/p&gt;</description></item></channel></rss>

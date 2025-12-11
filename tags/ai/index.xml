@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AI on 现代技能栈</title><link>https://xiaoping378.github.io/tags/ai/</link><description>Recent content in AI on 现代技能栈</description><generator>Hugo</generator><language>zh-cn</language><atom:link href="https://xiaoping378.github.io/tags/ai/index.xml" rel="self" type="application/rss+xml"/><item><title>AI大模型应用开发-扫盲篇</title><link>https://xiaoping378.github.io/docs/7-ai/%E6%89%AB%E7%9B%B2%E7%AF%87/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/7-ai/%E6%89%AB%E7%9B%B2%E7%AF%87/</guid><description>&lt;!-- # AI大模型应用开发-扫盲篇 --&gt;
+&lt;p&gt;当下从工程技术角度来看，AI大模型可以分为十个领域：前沿大模型、基准评估、提示思维链、检索增强生成、智能体、代码生成、视觉、声音、图像/视频扩散、微调。
+本文旨在扫盲大模型应用开发基础概念，并介绍大模型应用开发的常见模式。&lt;/p&gt;
+&lt;h2 id="一-怎样得到一个大模型"&gt;一、怎样得到一个大模型？&lt;a class="td-heading-self-link" href="#%e4%b8%80-%e6%80%8e%e6%a0%b7%e5%be%97%e5%88%b0%e4%b8%80%e4%b8%aa%e5%a4%a7%e6%a8%a1%e5%9e%8b" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;有卡没卡两种玩法，如果只面向应用开发，结合上信息安全的背景，则推荐使用社区开源模型或集成企业内部模型(下节介绍)。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id="1-囤卡自己训练-全流程定制"&gt;1. 囤卡自己训练（全流程定制）&lt;a class="td-heading-self-link" href="#1-%e5%9b%a4%e5%8d%a1%e8%87%aa%e5%b7%b1%e8%ae%ad%e7%bb%83-%e5%85%a8%e6%b5%81%e7%a8%8b%e5%ae%9a%e5%88%b6" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;核心概念&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;AI(artificial intelligence)&lt;/strong&gt;: 由来已久的概念，本文特指的生成式人工智能（gen AI），将机器学习和深度学习的神经网络提升到了一个新的水平。它可以创建新的内容和想法（例如图像和视频）, 也可以使用已知知识来解决新问题。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;LLM (Large Language Model)&lt;/strong&gt;: 大型语言模型，是基于大量数据进行预训练得到的超大型深度学习模型，可自主学习（统计归纳），会理解（Token向量化）人类基本的语法、语言和知识。一般用参数的多少来衡量大模型能力。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GPT (Generative Pre-trained Transformer)&lt;/strong&gt;: 生成式预训练 Transformer 模型，是一系列使用 Transformer 架构的神经网络模型，能够回答产出（关联预测）类似人类的文本和内容（图像、音乐等），并以对话方式回答问题。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Transformer 模型&lt;/strong&gt;: GPT的核心，是一种神经网络架构，它使用了自注意力机制（self-attention）来处理序列数据，并使用了多头自注意力（multi-head self-attention）来提高模型的性能。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Pre-trained (预训练)&lt;/strong&gt;: 在无标注通用数据（如Common Crawl）上训练出基础模型，从已知找规律（优化损失函数）学习语言规律和世界知识，预测产出未知。需从头构建模型，通常需要超万亿token的庞大数据集和数万张高性能GPU（如H100/A100）组成的算力集群。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Fine-tuning (微调)&lt;/strong&gt;: 在预训练模型基础上，用于特定领域数据（如金融客服、辅助编码）调整参数，使模型更适应垂直场景的推理。通常仅需调整少量参数（如使用LoRA技术调整0.1%-1%的参数），显存需求可降低至预训练的10%-20%。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;模型压缩&lt;/strong&gt;: 模型压缩技术，如量化、剪枝、知识蒸馏等，可以减少模型的参数数量，从而降低显存需求。
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;知识蒸馏&lt;/strong&gt;: 将大型复杂模型（教师模型）在有限损失的情况下知识转移到更小型、高效模型（学生模型）中, 这样做的好处包括降低计算成本、减少推理时间，同时保持高性能，适合资源受限环境的部署。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;模型量化&lt;/strong&gt;: 模型量化是指将模型参数从浮点数转换为整数或低精度数据类型，以减少存储和计算开销。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- - **模型稀疏**: 也叫剪枝，模型稀疏是指通过删除或减少模型中一些低权重或参数来减少模型的大小和计算量。 --&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;蒸馏提取精华，量化降低细节。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;实施难点&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;硬件门槛&lt;/strong&gt;: OpenAI的GPT-4预训练成本约7800万美元，下一代模型的训练成本可能突破10亿美元，甚至向100亿美元迈进。国内有厂商利用算法优化，达到GPT-4同等性能表现的情况下，使大模型训练成本大幅降低，但也需要近600万美元的成本。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据要求&lt;/strong&gt;: 需清洗TB级高质量文本，避免噪声干扰。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;技术复杂度&lt;/strong&gt;: 涉及分布式训练、梯度优化等工程难题。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;适用场景&lt;/strong&gt;&lt;br&gt;
+当下大模型训练成本呈现“头部攀升、尾部下降”的极化现象。技术创新（算法优化、工程协同、开源生态）和国产算力替代为降本提供可能，此模式推荐巨头企业或科研机构用于前沿模型研发（如训练行业专属大模型）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="2-下载社区开放模型-主流选择"&gt;2. 下载社区开放模型（主流选择）&lt;a class="td-heading-self-link" href="#2-%e4%b8%8b%e8%bd%bd%e7%a4%be%e5%8c%ba%e5%bc%80%e6%94%be%e6%a8%a1%e5%9e%8b-%e4%b8%bb%e6%b5%81%e9%80%89%e6%8b%a9" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;上一种方法，需要自己训练、微调得到一个LLM模型，现在介绍直接下载使用开放的大模型。&lt;/p&gt;</description></item><item><title>AI人工智能</title><link>https://xiaoping378.github.io/docs/7-ai/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/7-ai/</guid><description>&lt;div class="pageinfo pageinfo-primary"&gt;
+&lt;p&gt;介绍如何开发企业级AI大模型应用。&lt;/p&gt;
+
+&lt;/div&gt;</description></item><item><title>MaaS服务-强悍的gpustack介绍</title><link>https://xiaoping378.github.io/docs/7-ai/10-maas-gpustack/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/7-ai/10-maas-gpustack/</guid><description>&lt;h1 id="maas服务-强悍的gpustack介绍"&gt;MaaS服务-强悍的gpustack介绍&lt;a class="td-heading-self-link" href="#maas%e6%9c%8d%e5%8a%a1-%e5%bc%ba%e6%82%8d%e7%9a%84gpustack%e4%bb%8b%e7%bb%8d" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;快速搭建私有MaaS平台并提供生产级的模型服务&lt;/p&gt;
+&lt;pre class="mermaid"&gt;sequenceDiagram
+ autonumber
+ Docsy user-&amp;gt;&amp;gt;Discussion board: Ask question
+ Discussion board-&amp;gt;&amp;gt;Community member: read question
+ loop Different strategies
+ Community member-&amp;gt;&amp;gt;Test instance: Investigate issue raised
+ end
+ Note right of Community member: After hours of investigation:
+ Test instance--&amp;gt;&amp;gt;Community member: Come up with solution
+ Community member--&amp;gt;&amp;gt;Discussion board: Propose solution
+ Discussion board--&amp;gt;&amp;gt;Docsy user: check proposed solution
+ Docsy user-&amp;gt;&amp;gt;Discussion board: Mark question as resolved
+ Docsy user-&amp;gt;&amp;gt;Docsy user: Being happy&lt;/pre&gt;
+&lt;p&gt;快速搭建私有MaaS平台并提供生产级的模型服务&lt;/p&gt;</description></item><item><title>Agent智能体开发平台-BiSheng</title><link>https://xiaoping378.github.io/docs/7-ai/20-agent-bisheng/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/7-ai/20-agent-bisheng/</guid><description/></item></channel></rss>
