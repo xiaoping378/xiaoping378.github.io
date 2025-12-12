@@ -1,5 +1,5 @@
 ---
-tags: ["Dev"]
+tags: ["Dev","Java"]
 title: "Go转Java万字总结, 要跨越哪些思维鸿沟"
 linkTitle: "Go转Java万字总结, 要跨越哪些思维鸿沟"
 weight: 31
