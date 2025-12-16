@@ -2,7 +2,7 @@
 tags: ["Ops","SQL"]
 title: "TiDB初体验"
 linkTitle: "TiDB初体验"
-weight: 11
+weight: 21
 date: 2022-02-03
 description: >
   TiDB 初体验安装介绍

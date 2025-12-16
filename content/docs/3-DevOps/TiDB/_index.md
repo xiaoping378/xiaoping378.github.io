@@ -1,7 +1,7 @@
 ---
 title: "TiDB分布式数据库"
 linkTitle: "TiDB分布式数据库"
-weight: 10
+weight: 20
 date: 2022-02-03
 description: >
   TiDB分布式数据库的介绍和深度探索
