@@ -21,9 +21,9 @@ description: >
 这样的话，无法在编辑器中预览md了，有两种玩法如下：
 
 - 可以使用一个临时目录，把图片和md文件放到同一目录，编写完毕后，再把图片和md文件放置上述合适的目录位置上。
-- 日常一直启用`hugo server`编写文章，放弃编辑器中预览md，后面还会有别的坑....
+- 日常一直启用`hugo server`编写文章，放弃编辑器中预览md（后面还会有别的坑....）
 
-推荐后者，本人日常使用VSCode编写md，和代码开发同款，这里推荐安装`mushan.vscode-paste-image`扩展，再额外如下配置：
+推荐后者，额外配合扩展插件，本人日常使用VSCode编写md，和代码开发同款，这里推荐安装`mushan.vscode-paste-image`扩展，再额外如下配置：
 ```json
     "pasteImage.namePrefix": "${currentFileNameWithoutExt}-",
     "pasteImage.path": "${projectRoot}/static/images/",
@@ -31,7 +31,7 @@ description: >
     "pasteImage.insertPattern": "${imageSyntaxPrefix}/images/${imageFileName}${imageSyntaxSuffix}"
 ```
 
-日常编写文章，`Alt+A`截图，`Ctrl+Alt+A`粘贴到md文件，和hugo的配合，完美...
+日常编写文章，`Alt+A`截图，`Ctrl+Alt+A`粘贴到md文件，和在hugo中预览，完美...
 
 ### SEO优化关注点
 日常文章编写，如下部分要精准描述，Google搜索引擎推荐使用`description`的meta标签告诉它页面内容的，Docsy主题会自动把红框部分填充到`layouts/partials/head.html`中。
