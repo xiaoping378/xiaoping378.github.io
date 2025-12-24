@@ -1,312 +1,152 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>现代技能栈 – hugo</title><link>https://xiaoping378.github.io/tags/hugo/</link><description>Recent content in hugo on 现代技能栈</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://xiaoping378.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: 站点搭建方法</title><link>https://xiaoping378.github.io/docs/1-site/create_site/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/1-site/create_site/</guid><description>
-&lt;div class="pageinfo pageinfo-primary">
-&lt;p>主要涉及到hugo和docsy主题的使用。&lt;/p>
-&lt;/div>
-&lt;h2 id="hugo介绍">hugo介绍&lt;/h2>
-&lt;p>hugo是spf13的开源作品，目前任职于google，对他最早的印象是使用他的vim-spf13配置，后来又接触到他的cobra、plfag、viper... 为golang的生态完善做了很大贡献，致敬!&lt;/p>
-&lt;p>书归正传，hugo是基于golang开发的世界上最快的网站构建框架，本文介绍如何基于它构建技术类文档库，也可作为内部wiki或开源书籍使用。之所以没选择gitbook，发现CLI版本已于2018年停止维护了。&lt;/p>
-&lt;h2 id="准备环境">准备环境&lt;/h2>
-&lt;p>安装git和hugo&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>具体过程此处不表。注意是安装hugo_extended的版本。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>如果要编译成html，部署到webserver上，还需要安装nodejs 12+。&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h2 id="主题选择">主题选择&lt;/h2>
-&lt;p>选用Docsy主题，出自google的开源主题，很多流行项目使用此主题作为官方站点，有k8s、kubeflow、grpc、etcd、Selenium等，详见此。主要功能包含：&lt;/p>
-&lt;ul>
-&lt;li>支持树形目录&lt;/li>
-&lt;li>国际化&lt;/li>
-&lt;li>搜索功能&lt;/li>
-&lt;li>移动端自适应适配&lt;/li>
-&lt;li>标签分类&lt;/li>
-&lt;li>全站打印&lt;/li>
-&lt;li>文档版本化&lt;/li>
-&lt;li>用户反馈等&lt;/li>
-&lt;/ul>
-&lt;p>官方提供了快速上手的脚手架，具体操作如下：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">git clone https://github.com/google/docsy-example.git
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>脚手架初始化&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#a2f">cd&lt;/span> docsy-example &lt;span style="color:#666">&amp;amp;&amp;amp;&lt;/span> git submodule update --init --recursive
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>本地启动，默认可通过&lt;code>localhost:1313&lt;/code>访问，官方提供了在线的&lt;a href="https://example.docsy.dev/">预览地址&lt;/a>。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">hugo server
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>​&lt;/p>
-&lt;h2 id="目录结构说明">目录结构说明&lt;/h2>
-&lt;p>默认脚手架目录结构如下，只关注&lt;code>config.toml&lt;/code>文件和&lt;code>content&lt;/code>目录，就可以满足日常使用。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ docsy-example git:&lt;span style="color:#666">(&lt;/span>master&lt;span style="color:#666">)&lt;/span> tree -L &lt;span style="color:#666">1&lt;/span>
-.
-├── assets &lt;span style="color:#080;font-style:italic"># 静态资源&lt;/span>
-├── config.toml &lt;span style="color:#080;font-style:italic"># 站点的配置文件：主题选择、名称、链接、页面分析、markdown解析引擎...&lt;/span>
-├── content &lt;span style="color:#080;font-style:italic"># 站点内容：顶层导航，左侧树形章节&lt;/span>
-├── CONTRIBUTING.md
-├── deploy.sh
-├── docker-compose.yaml
-├── Dockerfile
-├── layouts &lt;span style="color:#080;font-style:italic"># 可覆盖主题的默认布局，添加自定义页面布局&lt;/span>
-├── LICENSE
-├── netlify.toml
-├── package.json
-├── README.md
-├── resources
-└── themes &lt;span style="color:#080;font-style:italic"># Docsy主题的目录，hugo推荐的存放路径&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="重点说明">重点说明&lt;/h2>
-&lt;ul>
-&lt;li>
-&lt;p>修改主题的页面布局&lt;/p>
-&lt;ul>
-&lt;li>大部分内容可以通过修改根目录的config.toml的文件来实现&lt;/li>
-&lt;li>不能通过上条实现的，也不建议直接修改themes目录下的内容，copy到在根目录同样的相对路径上再修改，会覆盖默认主题相关的实现。&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>
-&lt;p>docsy主题默认提供了3种版面布局, 分别在content目录下，写markdown文件，不同目录按照各自类型风格渲染。&lt;/p>
-&lt;ul>
-&lt;li>docs技术文档类的布局&lt;/li>
-&lt;li>blog博客类的布局&lt;/li>
-&lt;li>community社区相关介绍的布局&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>
-&lt;p>docs的目录章节可以任意分级，目录下的_index.md或者_index.html为该章、节的首页描述。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>根目录运行如下命令可编译最终html，可能会提示&lt;code>POSTCSS&lt;/code>编译失败，需要根目录运行&lt;code>npm install&lt;/code>安装依赖。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">rm -rf public/ &lt;span style="color:#666">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#b8860b">HUGO_ENV&lt;/span>&lt;span style="color:#666">=&lt;/span>&lt;span style="color:#b44">&amp;#34;production&amp;#34;&lt;/span> hugo --gc &lt;span style="color:#666">||&lt;/span> &lt;span style="color:#a2f">exit&lt;/span> &lt;span style="color:#666">1&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>
-&lt;p>站点内搜索功能依赖编译后的json文件，需要上一步才能使用。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>关于config.toml配置的解读（最新注释说明，可查看本站的&lt;a href="https://github.com/xiaoping378/xiaoping378.github.io/blob/master/config.toml">原件&lt;/a>）。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-toml" data-lang="toml">&lt;span style="color:#080;font-style:italic"># 站点的访问地址，本地预览时(hugo server)可忽悠&lt;/span>
-baseURL = &lt;span style="color:#b44">&amp;#34;https://xiaoping378.github.io&amp;#34;&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 站点title,会被多语言里的设置覆盖&lt;/span>
-&lt;span style="color:#080;font-style:italic"># title = &amp;#34;小平栈&amp;#34;&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 是否生成robots文件&lt;/span>
-enableRobotsTXT = &lt;span style="color:#a2f;font-weight:bold">true&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 主题选择，支持组合，优先级从左到右.&lt;/span>
-theme = [&lt;span style="color:#b44">&amp;#34;docsy&amp;#34;&lt;/span>]
-&lt;span style="color:#080;font-style:italic"># 页面上提供类似&amp;#34;最后修改&amp;#34;的信息&lt;/span>
-enableGitInfo = &lt;span style="color:#a2f;font-weight:bold">true&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 国际化相关设置&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 默认语言的的站点内容路径&lt;/span>
-contentDir = &lt;span style="color:#b44">&amp;#34;content&amp;#34;&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 默认语言&lt;/span>
-defaultContentLanguage = &lt;span style="color:#b44">&amp;#34;zh-cn&amp;#34;&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 国际化翻译中，如果有缺失是否用占位符显示&lt;/span>
-enableMissingTranslationPlaceholders = &lt;span style="color:#a2f;font-weight:bold">true&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 注释后，可以开启标签分类功能&lt;/span>
-&lt;span style="color:#080;font-style:italic"># disableKinds = [&amp;#34;taxonomy&amp;#34;, &amp;#34;taxonomyTerm&amp;#34;]&lt;/span>
-[params.taxonomy]
-&lt;span style="color:#080;font-style:italic"># set taxonomyCloud = [] to hide taxonomy clouds&lt;/span>
-taxonomyCloud = [&lt;span style="color:#b44">&amp;#34;tags&amp;#34;&lt;/span>]
-&lt;span style="color:#080;font-style:italic"># If used, must have same lang as taxonomyCloud&lt;/span>
-taxonomyCloudTitle = [&lt;span style="color:#b44">&amp;#34;标签&amp;#34;&lt;/span>]
-&lt;span style="color:#080;font-style:italic"># set taxonomyPageHeader = [] to hide taxonomies on the page headers&lt;/span>
-taxonomyPageHeader = [&lt;span style="color:#b44">&amp;#34;tags&amp;#34;&lt;/span>]
-&lt;span style="color:#080;font-style:italic"># 代码块高亮配置&lt;/span>
-pygmentsCodeFences = &lt;span style="color:#a2f;font-weight:bold">true&lt;/span>
-pygmentsUseClasses = &lt;span style="color:#a2f;font-weight:bold">false&lt;/span>
-&lt;span style="color:#080;font-style:italic"># Use the new Chroma Go highlighter in Hugo.&lt;/span>
-pygmentsUseClassic = &lt;span style="color:#a2f;font-weight:bold">false&lt;/span>
-&lt;span style="color:#080;font-style:italic">#pygmentsOptions = &amp;#34;linenos=table&amp;#34;&lt;/span>
-&lt;span style="color:#080;font-style:italic"># See https://help.farbox.com/pygments.html&lt;/span>
-pygmentsStyle = &lt;span style="color:#b44">&amp;#34;emacs&amp;#34;&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 配置blog编译产物的路径.&lt;/span>
-[permalinks]
-blog = &lt;span style="color:#b44">&amp;#34;/:section/:year/:month/:day/:slug/&amp;#34;&lt;/span>
-&lt;span style="color:#080;font-style:italic"># markdown渲染引擎配置: https://github.com/russross/blackfriday&lt;/span>
-&lt;span style="color:#080;font-style:italic"># [blackfriday]&lt;/span>
-&lt;span style="color:#080;font-style:italic"># plainIDAnchors = true&lt;/span>
-&lt;span style="color:#080;font-style:italic"># hrefTargetBlank = true&lt;/span>
-&lt;span style="color:#080;font-style:italic"># angledQuotes = false&lt;/span>
-&lt;span style="color:#080;font-style:italic"># latexDashes = true&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 图片引擎处理: https://github.com/disintegration/imaging&lt;/span>
-[imaging]
-resampleFilter = &lt;span style="color:#b44">&amp;#34;CatmullRom&amp;#34;&lt;/span>
-quality = &lt;span style="color:#666">75&lt;/span>
-anchor = &lt;span style="color:#b44">&amp;#34;smart&amp;#34;&lt;/span>
-&lt;span style="color:#080;font-style:italic"># [services]&lt;/span>
-&lt;span style="color:#080;font-style:italic"># [services.googleAnalytics]&lt;/span>
-&lt;span style="color:#080;font-style:italic"># # Comment out the next line to disable GA tracking. Also disables the feature described in [params.ui.feedback].&lt;/span>
-&lt;span style="color:#080;font-style:italic"># id = &amp;#34;UA-00000000-0&amp;#34;&lt;/span>
-&lt;span style="color:#080;font-style:italic"># Language configuration&lt;/span>
-[languages]
-[languages.zh-cn]
-title = &lt;span style="color:#b44">&amp;#34;现代技能栈&amp;#34;&lt;/span>
-description = &lt;span style="color:#b44">&amp;#34;小平-所思所为&amp;#34;&lt;/span>
-languageName = &lt;span style="color:#b44">&amp;#34;中文&amp;#34;&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 用于多语言排序，越小越靠上。&lt;/span>
-weight = &lt;span style="color:#666">1&lt;/span>
-&lt;span style="color:#080;font-style:italic"># markdown的解析设置，抄的k8s 文档设置...&lt;/span>
-[markup]
-[markup.goldmark]
-[markup.goldmark.extensions]
-definitionList = &lt;span style="color:#a2f;font-weight:bold">true&lt;/span>
-table = &lt;span style="color:#a2f;font-weight:bold">true&lt;/span>
-typographer = &lt;span style="color:#a2f;font-weight:bold">false&lt;/span>
-[markup.goldmark.parser]
-attribute = &lt;span style="color:#a2f;font-weight:bold">true&lt;/span>
-autoHeadingID = &lt;span style="color:#a2f;font-weight:bold">true&lt;/span>
-autoHeadingIDType = &lt;span style="color:#b44">&amp;#34;blackfriday&amp;#34;&lt;/span>
-[markup.goldmark.renderer]
-unsafe = &lt;span style="color:#a2f;font-weight:bold">true&lt;/span>
-[markup.highlight]
-codeFences = &lt;span style="color:#a2f;font-weight:bold">true&lt;/span>
-guessSyntax = &lt;span style="color:#a2f;font-weight:bold">false&lt;/span>
-hl_Lines = &lt;span style="color:#b44">&amp;#34;&amp;#34;&lt;/span>
-lineNoStart = &lt;span style="color:#666">1&lt;/span>
-lineNos = &lt;span style="color:#a2f;font-weight:bold">false&lt;/span>
-lineNumbersInTable = &lt;span style="color:#a2f;font-weight:bold">true&lt;/span>
-noClasses = &lt;span style="color:#a2f;font-weight:bold">true&lt;/span>
-style = &lt;span style="color:#b44">&amp;#34;emacs&amp;#34;&lt;/span>
-tabWidth = &lt;span style="color:#666">4&lt;/span>
-[markup.tableOfContents]
-endLevel = &lt;span style="color:#666">3&lt;/span>
-ordered = &lt;span style="color:#a2f;font-weight:bold">false&lt;/span>
-startLevel = &lt;span style="color:#666">2&lt;/span>
-&lt;span style="color:#080;font-style:italic"># Everything below this are Site Params&lt;/span>
-&lt;span style="color:#080;font-style:italic"># Comment out if you don&amp;#39;t want the &amp;#34;print entire section&amp;#34; link enabled.&lt;/span>
-[outputs]
-section = [&lt;span style="color:#b44">&amp;#34;HTML&amp;#34;&lt;/span>, &lt;span style="color:#b44">&amp;#34;print&amp;#34;&lt;/span>, &lt;span style="color:#b44">&amp;#34;RSS&amp;#34;&lt;/span>]
-[params]
-copyright = &lt;span style="color:#b44">&amp;#34;xiaoping378&amp;#34;&lt;/span>
-privacy_policy = &lt;span style="color:#b44">&amp;#34;#&amp;#34;&lt;/span>
-&lt;span style="color:#080;font-style:italic"># First one is picked as the Twitter card image if not set on page.&lt;/span>
-&lt;span style="color:#080;font-style:italic"># images = [&amp;#34;images/project-illustration.png&amp;#34;]&lt;/span>
-&lt;span style="color:#080;font-style:italic"># Menu title if your navbar has a versions selector to access old versions of your site.&lt;/span>
-&lt;span style="color:#080;font-style:italic"># This menu appears only if you have at least one [params.versions] set.&lt;/span>
-version_menu = &lt;span style="color:#b44">&amp;#34;Releases&amp;#34;&lt;/span>
-&lt;span style="color:#080;font-style:italic"># Flag used in the &amp;#34;version-banner&amp;#34; partial to decide whether to display a &lt;/span>
-&lt;span style="color:#080;font-style:italic"># banner on every page indicating that this is an archived version of the docs.&lt;/span>
-&lt;span style="color:#080;font-style:italic"># Set this flag to &amp;#34;true&amp;#34; if you want to display the banner.&lt;/span>
-archived_version = &lt;span style="color:#a2f;font-weight:bold">false&lt;/span>
-&lt;span style="color:#080;font-style:italic"># The version number for the version of the docs represented in this doc set.&lt;/span>
-&lt;span style="color:#080;font-style:italic"># Used in the &amp;#34;version-banner&amp;#34; partial to display a version number for the &lt;/span>
-&lt;span style="color:#080;font-style:italic"># current doc set.&lt;/span>
-version = &lt;span style="color:#b44">&amp;#34;0.0&amp;#34;&lt;/span>
-&lt;span style="color:#080;font-style:italic"># A link to latest version of the docs. Used in the &amp;#34;version-banner&amp;#34; partial to&lt;/span>
-&lt;span style="color:#080;font-style:italic"># point people to the main doc site.&lt;/span>
-&lt;span style="color:#080;font-style:italic"># url_latest_version = &amp;#34;https://example.com&amp;#34;&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 方便用户反馈，提交技术文章问题的仓库地址&lt;/span>
-github_repo = &lt;span style="color:#b44">&amp;#34;https://github.com/xiaoping378/xiaoping378.github.io&amp;#34;&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 技术站点背后的项目issue地址&lt;/span>
-&lt;span style="color:#080;font-style:italic"># github_project_repo = &amp;#34;https://github.com/xiaoping378/xiaoping378.github.io&amp;#34;&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 以下三个是设置远程文档位置的，目前用不上，这里hack一下，不然“编辑此页”的功能会去链接到content/zh-cn下&lt;/span>
-&lt;span style="color:#080;font-style:italic"># Specify a value here if your content directory is not in your repo&amp;#39;s root directory&lt;/span>
-github_subdir = &lt;span style="color:#b44">&amp;#34;/&amp;#34;&lt;/span>
-&lt;span style="color:#080;font-style:italic"># Uncomment this if you have a newer GitHub repo with &amp;#34;main&amp;#34; as the default branch,&lt;/span>
-&lt;span style="color:#080;font-style:italic"># or specify a new value if you want to reference another branch in your GitHub links&lt;/span>
-&lt;span style="color:#080;font-style:italic"># github_branch= &amp;#34;main&amp;#34;&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 支持三种搜索，三选一，禁用google搜索，需要注释掉此处&lt;/span>
-&lt;span style="color:#080;font-style:italic"># gcs_engine_id = &amp;#34;d72aa9b2712488cc3&amp;#34;&lt;/span>
-&lt;span style="color:#080;font-style:italic"># Enable Algolia DocSearch&lt;/span>
-algolia_docsearch = &lt;span style="color:#a2f;font-weight:bold">false&lt;/span>
-&lt;span style="color:#080;font-style:italic"># Enable Lunr.js offline search&lt;/span>
-offlineSearch = &lt;span style="color:#a2f;font-weight:bold">false&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 默认使用的Chroma代码高亮方案，可换成prism方案。&lt;/span>
-prism_syntax_highlighting = &lt;span style="color:#a2f;font-weight:bold">false&lt;/span>
-&lt;span style="color:#080;font-style:italic"># User interface configuration&lt;/span>
-[params.ui]
-&lt;span style="color:#080;font-style:italic"># 是否禁用面包屑导航.&lt;/span>
-breadcrumb_disable = &lt;span style="color:#a2f;font-weight:bold">false&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 是否禁用底部About链接&lt;/span>
-footer_about_disable = &lt;span style="color:#a2f;font-weight:bold">true&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 是否展示项目logo，位置必须放置在 assets/icons/logo.svg&lt;/span>
-navbar_logo = &lt;span style="color:#a2f;font-weight:bold">true&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 在首页，上下滑动页面，顶部导航是否禁用半透明&lt;/span>
-navbar_translucent_over_cover_disable = &lt;span style="color:#a2f;font-weight:bold">false&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 左侧章节树形目录默认是否处于折叠状态&lt;/span>
-sidebar_menu_compact = &lt;span style="color:#a2f;font-weight:bold">true&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 左侧章节树形目录上是否不显示搜索框，前提是需要开启搜索功能&lt;/span>
-sidebar_search_disable = &lt;span style="color:#a2f;font-weight:bold">false&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 关闭了google分析，下面功能不会启用&lt;/span>
-[params.ui.feedback]
-enable = &lt;span style="color:#a2f;font-weight:bold">true&lt;/span>
-&lt;span style="color:#080;font-style:italic"># The responses that the user sees after clicking &amp;#34;yes&amp;#34; (the page was helpful) or &amp;#34;no&amp;#34; (the page was not helpful).&lt;/span>
-yes = &lt;span style="color:#b44">&amp;#39;Glad to hear it! Please &amp;lt;a href=&amp;#34;https://github.com/USERNAME/REPOSITORY/issues/new&amp;#34;&amp;gt;tell us how we can improve&amp;lt;/a&amp;gt;.&amp;#39;&lt;/span>
-no = &lt;span style="color:#b44">&amp;#39;Sorry to hear that. Please &amp;lt;a href=&amp;#34;https://github.com/USERNAME/REPOSITORY/issues/new&amp;#34;&amp;gt;tell us how we can improve&amp;lt;/a&amp;gt;.&amp;#39;&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 在文章上面显示“阅读时长：x分钟”&lt;/span>
-[params.ui.readingtime]
-enable = &lt;span style="color:#a2f;font-weight:bold">false&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 社区community版面要用到的参数&lt;/span>
-[params.links]
-&lt;span style="color:#080;font-style:italic"># End user relevant links. These will show up on left side of footer and in the community page if you have one.&lt;/span>
-[[params.links.user]]
-name = &lt;span style="color:#b44">&amp;#34;个人邮箱 xiaoping378@163.com&amp;#34;&lt;/span>
-url = &lt;span style="color:#b44">&amp;#34;mailto:xiaoping378@163.com&amp;#34;&lt;/span>
-icon = &lt;span style="color:#b44">&amp;#34;fa fa-envelope&amp;#34;&lt;/span>
-desc = &lt;span style="color:#b44">&amp;#34;欢迎邮件交流&amp;#34;&lt;/span>
-[[params.links.user]]
-name =&lt;span style="color:#b44">&amp;#34;微博&amp;#34;&lt;/span>
-url = &lt;span style="color:#b44">&amp;#34;https://weibo.com/xiaoping378&amp;#34;&lt;/span>
-icon = &lt;span style="color:#b44">&amp;#34;fab fa-weibo&amp;#34;&lt;/span>
-desc = &lt;span style="color:#b44">&amp;#34;个人微博，基本不用&amp;#34;&lt;/span>
-[[params.links.user]]
-name = &lt;span style="color:#b44">&amp;#34;知乎&amp;#34;&lt;/span>
-url = &lt;span style="color:#b44">&amp;#34;https://www.zhihu.com/people/xiaoping378&amp;#34;&lt;/span>
-icon = &lt;span style="color:#b44">&amp;#34;fab fa-zhihu&amp;#34;&lt;/span>
-desc = &lt;span style="color:#b44">&amp;#34;知乎专栏&amp;#34;&lt;/span>
-&lt;span style="color:#080;font-style:italic"># Developer relevant links. These will show up on right side of footer and in the community page if you have one.&lt;/span>
-[[params.links.developer]]
-name = &lt;span style="color:#b44">&amp;#34;GitHub&amp;#34;&lt;/span>
-url = &lt;span style="color:#b44">&amp;#34;https://github.com/xiaoping378/xiaoping378.github.io&amp;#34;&lt;/span>
-icon = &lt;span style="color:#b44">&amp;#34;fab fa-github&amp;#34;&lt;/span>
-desc = &lt;span style="color:#b44">&amp;#34;文集开源地址!&amp;#34;&lt;/span>
-[[params.links.developer]]
-name = &lt;span style="color:#b44">&amp;#34;Slack&amp;#34;&lt;/span>
-url = &lt;span style="color:#b44">&amp;#34;https://example.org/slack&amp;#34;&lt;/span>
-icon = &lt;span style="color:#b44">&amp;#34;fab fa-slack&amp;#34;&lt;/span>
-desc = &lt;span style="color:#b44">&amp;#34;未开通&amp;#34;&lt;/span>
-[[params.links.developer]]
-name = &lt;span style="color:#b44">&amp;#34;Developer mailing list&amp;#34;&lt;/span>
-url = &lt;span style="color:#b44">&amp;#34;https://example.org/mail&amp;#34;&lt;/span>
-icon = &lt;span style="color:#b44">&amp;#34;fa fa-envelope&amp;#34;&lt;/span>
-desc = &lt;span style="color:#b44">&amp;#34;未开通&amp;#34;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;/ul>
-&lt;h2 id="总结">总结&lt;/h2>
-&lt;p>不定期更新此文，待进一步优化，，，&lt;/p>
-&lt;p>如果自己搭建嫌麻烦，可直接Copy本站，编写自己的内容即可，搭建本站时，也遇到了Docsy国际化方面的问题，已提交官方&lt;a href="https://github.com/google/docsy/pull/826">PR&lt;/a>修复。&lt;/p>
-&lt;p>&lt;a href="../actions_pages">下文&lt;/a>介绍使用github的actions和pages自动托管站点。&lt;/p></description></item><item><title>Docs: 自动托管markdown</title><link>https://xiaoping378.github.io/docs/1-site/actions_pages/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/1-site/actions_pages/</guid><description>
-&lt;div class="pageinfo pageinfo-primary">
-&lt;p>利用github actions和pages实现自动更新托管内容，本站点已实现commit md后，自动更新&lt;a href="https://xiaoping378.gitee.io/">码云page&lt;/a>和&lt;a href="https://xiaoping378.github.io/">Github page&lt;/a>页面。&lt;/p>
-&lt;/div>
-&lt;h2 id="项目仓库的名字由来">项目仓库的名字由来&lt;/h2>
-&lt;p>本源码仓之所以起如此长的名字，完全是因为github pages的不成熟，不然会带个小尾巴：&lt;/p>
-&lt;p>如果叫 &lt;em>blog&lt;/em>, github的托管页面的访问地址会是 &lt;em>xiaoping378.github.io/blog&lt;/em>，这也没什么，但会和hugo的&lt;a href="https://xiaoping378.github.io/docs/1-site/add_content/#%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98">static机制&lt;/a>出现冲突。&lt;/p></description></item><item><title>Docs: 编写文章注意项</title><link>https://xiaoping378.github.io/docs/1-site/add_content/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/1-site/add_content/</guid><description>
-&lt;div class="pageinfo pageinfo-primary">
-&lt;p>本章节主要描述日常编写文章的注意事项和docsy主题内的使用技巧。&lt;/p>
-&lt;/div>
-&lt;h2 id="编写markdown">编写markdown&lt;/h2>
-&lt;h3 id="图片路径问题">图片路径问题&lt;/h3>
-&lt;p>习惯md文件中的图片路径写成&lt;code>![](/images/file.png)&lt;/code> ，但hugo中图片实际要存放到&lt;code>/static/images/&lt;/code>路径下，hugo会自动渲染到站点的根路径&lt;code>/&lt;/code>上。&lt;/p>
-&lt;p>这样的话，无法在编辑器中预览md了，有两种玩法如下：&lt;/p>
-&lt;ul>
-&lt;li>可以使用一个临时目录，把图片和md文件放到同一目录，编写完毕后，再把图片和md文件放置上述合适的目录位置上。&lt;/li>
-&lt;li>日常一直启用&lt;code>hugo server&lt;/code>编写文章，放弃编辑器中预览md，后面还会有别的坑....&lt;/li>
-&lt;/ul>
-&lt;p>推荐后者，本人日常使用VSCode编写md，和代码开发同款，这里推荐安装&lt;code>mushan.vscode-paste-image&lt;/code>扩展，再额外如下配置：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json"> &lt;span style="color:#b44">&amp;#34;pasteImage.namePrefix&amp;#34;&lt;/span>&lt;span style="">:&lt;/span> &lt;span style="color:#b44">&amp;#34;${currentFileNameWithoutExt}-&amp;#34;&lt;/span>&lt;span style="">,&lt;/span>
-&lt;span style="color:#b44">&amp;#34;pasteImage.path&amp;#34;&lt;/span>&lt;span style="">:&lt;/span> &lt;span style="color:#b44">&amp;#34;${projectRoot}/static/images/&amp;#34;&lt;/span>&lt;span style="">,&lt;/span>
-&lt;span style="color:#b44">&amp;#34;pasteImage.basePath&amp;#34;&lt;/span>&lt;span style="">:&lt;/span> &lt;span style="color:#b44">&amp;#34;${projectRoot}&amp;#34;&lt;/span>&lt;span style="">,&lt;/span>
-&lt;span style="color:#b44">&amp;#34;pasteImage.insertPattern&amp;#34;&lt;/span>&lt;span style="">:&lt;/span> &lt;span style="color:#b44">&amp;#34;${imageSyntaxPrefix}/images/${imageFileName}${imageSyntaxSuffix}&amp;#34;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>日常编写文章，&lt;code>Alt+A&lt;/code>截图，&lt;code>Ctrl+Alt+A&lt;/code>粘贴到md文件，和hugo的配合，完美...&lt;/p>
-&lt;h3 id="seo优化关注点">SEO优化关注点&lt;/h3>
-&lt;p>日常文章编写，如下部分要精准描述，Google搜索引擎推荐使用&lt;code>description&lt;/code>的meta标签告诉它页面内容的，Docsy主题会自动把红框部分填充到&lt;code>layouts/partials/head.html&lt;/code>中。&lt;/p>
-&lt;p>&lt;img src="https://xiaoping378.github.io/images/add_content-2022-01-25-09-38-48.png" alt="">&lt;/p>
-&lt;p>hugo解析编译后，html页面会如下呈现：&lt;/p>
-&lt;p>&lt;img src="https://xiaoping378.github.io/images/add_content-2022-01-25-09-37-12.png" alt="">&lt;/p>
-&lt;h3 id="日常编写注意事项">日常编写注意事项&lt;/h3>
-&lt;h4 id="md文件中相互引用内容的路径要记得对应到站点html的路径上">md文件中相互引用内容的路径要记得对应到站点html的路径上&lt;/h4>
-&lt;p>比如此处引用&lt;code>自动托管markdown&lt;/code>文章，按照md习惯写,虽然编辑器上可以正常打开，但hugo渲染后的页面是404的。&lt;/p>
-&lt;ul>
-&lt;li>&lt;code>[引用](./actions_pages.md)&lt;/code> 需要改成 &lt;code>[引用](../actions_pages)&lt;/code>&lt;/li>
-&lt;li>&lt;code>[引用](/content/docs/1-site/actions_pages.md)&lt;/code> 需要改成 &lt;code>[引用](/docs/1-site/actions_pages)&lt;/code>&lt;/li>
-&lt;/ul>
-&lt;p>不定时更新注意事项。日常编写，建议本机启用&lt;code>hugo server&lt;/code>实时预览，&lt;/p>
-&lt;h4 id="文章weight的使用">文章weight的使用&lt;/h4>
-&lt;p>文章开头的&lt;code>weight&lt;/code>部分决定了目录中的排序，推荐新开的系列文章，从两位数开始递增，比如&lt;code>30&lt;/code>, 以后老系列有更新的时候，免去批量修改调整排序的麻烦。&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hugo on 现代技能栈</title><link>https://xiaoping378.github.io/tags/hugo/</link><description>Recent content in Hugo on 现代技能栈</description><generator>Hugo</generator><language>zh-cn</language><atom:link href="https://xiaoping378.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml"/><item><title>站点搭建方法</title><link>https://xiaoping378.github.io/docs/1-site/1-create_site/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/1-site/1-create_site/</guid><description>&lt;div class="pageinfo pageinfo-primary"&gt;
+&lt;p&gt;主要涉及到hugo和docsy主题的使用。&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;h2 id="hugo工具介绍"&gt;hugo工具介绍&lt;a class="td-heading-self-link" href="#hugo%e5%b7%a5%e5%85%b7%e4%bb%8b%e7%bb%8d" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;hugo是spf13的开源作品，目前任职于google，对他最早的印象是使用他的vim-spf13配置，后来又接触到他的cobra、plfag、viper... 为golang的生态完善做了很大贡献，致敬!&lt;/p&gt;
+&lt;p&gt;书归正传，hugo是基于golang开发的世界上最快的网站构建框架，本文介绍如何基于它构建技术类文档库，也可作为内部wiki或开源书籍使用。之所以没选择gitbook，发现CLI版本已于2018年停止维护了。&lt;/p&gt;
+&lt;h2 id="准备环境"&gt;准备环境&lt;a class="td-heading-self-link" href="#%e5%87%86%e5%a4%87%e7%8e%af%e5%a2%83" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;安装依赖工具（以下版本为当前202512最新稳定版本）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;安装git, 下载&lt;a href="https://github.com/git-for-windows/git/releases/download/v2.52.0.windows.1/Git-2.52.0-64-bit.exe"&gt;地址&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;安装hugo_extended&lt;a href="https://github.com/gohugoio/hugo/releases/download/v0.152.2/hugo_extended_withdeploy_0.152.2_windows-amd64.zip"&gt;Windows环境&lt;/a&gt;的版本。&lt;/li&gt;
+&lt;li&gt;安装Go工具，下载&lt;a href="https://go.dev/dl/go1.24.10.windows-amd64.msi"&gt;地址&lt;/a&gt;, hugo初始化需要go环境&lt;/li&gt;
+&lt;li&gt;安装nodejs 22+，下载&lt;a href="https://nodejs.org/dist/v24.11.1/node-v24.11.1-win-x64.zip"&gt;地址&lt;/a&gt;，推荐使用fnm管理node多版本。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;具体安装过程不表，下篇会介绍如何利用github pages全自动托管静态文件&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="主题选择"&gt;主题选择&lt;a class="td-heading-self-link" href="#%e4%b8%bb%e9%a2%98%e9%80%89%e6%8b%a9" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;选用&lt;a href="https://www.docsy.dev/xx/docs/get-started/"&gt;Docsy主题&lt;/a&gt;，出自google的开源主题，很多流行项目使用此主题作为官方站点，如k8s、kubeflow、grpc、etcd、Selenium等，详见此。主要功能包含：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持树形目录&lt;/li&gt;
+&lt;li&gt;国际化&lt;/li&gt;
+&lt;li&gt;搜索功能&lt;/li&gt;
+&lt;li&gt;移动端自适应适配&lt;/li&gt;
+&lt;li&gt;标签分类&lt;/li&gt;
+&lt;li&gt;全站打印&lt;/li&gt;
+&lt;li&gt;文档版本化&lt;/li&gt;
+&lt;li&gt;用户反馈等&lt;/li&gt;
+&lt;li&gt;uml\mermaid渲染&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;官方提供了快速脚手架，具体操作如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git clone --depth &lt;span style="color:#666"&gt;1&lt;/span&gt; --branch v0.13.0 https://github.com/google/docsy-example.git my-new-site
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a2f"&gt;cd&lt;/span&gt; my-new-site
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;npm install --registry https://registry.npmmirror.com
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hugo server
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;本地启动，默认可通过&lt;code&gt;localhost:1313&lt;/code&gt;访问，官方提供了在线的&lt;a href="https://example.docsy.dev/"&gt;预览地址&lt;/a&gt;。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hugo server
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id="目录结构说明"&gt;目录结构说明&lt;a class="td-heading-self-link" href="#%e7%9b%ae%e5%bd%95%e7%bb%93%e6%9e%84%e8%af%b4%e6%98%8e" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;默认脚手架目录结构如下，只关注&lt;code&gt;hugo.yaml&lt;/code&gt;文件和&lt;code&gt;content&lt;/code&gt;目录，就可以满足日常使用。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;➜ my-new-site git:&lt;span style="color:#666"&gt;(&lt;/span&gt;v0.13.0&lt;span style="color:#666"&gt;)&lt;/span&gt; ll
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;total 195K
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;drwxr-xr-x &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; &lt;span style="color:#666"&gt;0&lt;/span&gt; 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 assets &lt;span style="color:#080;font-style:italic"&gt;# 静态资源目录，如CSS、JavaScript等&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; &lt;span style="color:#666"&gt;448&lt;/span&gt; 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 config.yaml &lt;span style="color:#080;font-style:italic"&gt;# 站点的hugo高版本兼容文件，可删除&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;drwxr-xr-x &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; &lt;span style="color:#666"&gt;0&lt;/span&gt; 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 content &lt;span style="color:#080;font-style:italic"&gt;# 网站内容目录，包含Markdown格式的文章和页面，以后重点创作的目录&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; 1.1K 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 CONTRIBUTING.md
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; &lt;span style="color:#666"&gt;172&lt;/span&gt; 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 docker-compose.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; &lt;span style="color:#666"&gt;100&lt;/span&gt; 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 Dockerfile
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; &lt;span style="color:#666"&gt;173&lt;/span&gt; 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 docsy.work
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; &lt;span style="color:#666"&gt;0&lt;/span&gt; 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 docsy.work.sum
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; &lt;span style="color:#666"&gt;89&lt;/span&gt; 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 go.mod
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; &lt;span style="color:#666"&gt;513&lt;/span&gt; 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 go.sum
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; 7.7K 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 hugo.yaml &lt;span style="color:#080;font-style:italic"&gt;#Hugo的主要配置文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; 7.5K 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 hugo-disabled.toml
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;drwxr-xr-x &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; &lt;span style="color:#666"&gt;0&lt;/span&gt; 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 layouts
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; 12K 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 LICENSE
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; &lt;span style="color:#666"&gt;302&lt;/span&gt; 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 netlify.toml &lt;span style="color:#080;font-style:italic"&gt;# Netlify部署平台配置文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;drwxr-xr-x &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; &lt;span style="color:#666"&gt;0&lt;/span&gt; 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:37 node_modules
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; 2.7K 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 package.json
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; 99K 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:37 package-lock.json
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;drwxr-xr-x &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; &lt;span style="color:#666"&gt;0&lt;/span&gt; 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:37 public
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; 7.3K 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:34 README.md
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;drwxr-xr-x &lt;span style="color:#666"&gt;1&lt;/span&gt; xxp &lt;span style="color:#666"&gt;197609&lt;/span&gt; &lt;span style="color:#666"&gt;0&lt;/span&gt; 11月 &lt;span style="color:#666"&gt;27&lt;/span&gt; 20:35 resources &lt;span style="color:#080;font-style:italic"&gt;# 动态编译的产物&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="重点说明"&gt;重点说明&lt;a class="td-heading-self-link" href="#%e9%87%8d%e7%82%b9%e8%af%b4%e6%98%8e" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;修改主题的页面布局&lt;/p&gt;</description></item><item><title>自动托管markdown</title><link>https://xiaoping378.github.io/docs/1-site/2-actions_pages/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/1-site/2-actions_pages/</guid><description>&lt;div class="pageinfo pageinfo-primary"&gt;
+&lt;p&gt;利用github actions和pages实现自动更新托管内容，本站点已实现commit md后，&lt;del&gt;自动更新&lt;a href="https://xiaoping378.gitee.io/"&gt;码云page&lt;/a&gt;和&lt;/del&gt;&lt;a href="https://xiaoping378.github.io/"&gt;Github page&lt;/a&gt;页面。&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;h2 id="本站点仓库名字的由来"&gt;本站点仓库名字的由来&lt;a class="td-heading-self-link" href="#%e6%9c%ac%e7%ab%99%e7%82%b9%e4%bb%93%e5%ba%93%e5%90%8d%e5%ad%97%e7%9a%84%e7%94%b1%e6%9d%a5" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;本源码仓之所以起如此长的名字，完全是因为github pages的工作机制决定的，不然会带个小尾巴：&lt;/p&gt;
+&lt;p&gt;如果叫 &lt;em&gt;blog&lt;/em&gt;, github的托管页面的访问地址会是 &lt;em&gt;xiaoping378.github.io/blog&lt;/em&gt;，这也没什么，但会和hugo的&lt;a href="https://xiaoping378.github.io/docs/1-site/add_content/#%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98"&gt;static机制&lt;/a&gt;出现冲突。&lt;/p&gt;
+&lt;p&gt;当然可以自行购买域名，并指向该pages地址，，，后来忘了续费，搞丢了我的域名。&lt;/p&gt;
+&lt;h2 id="什么是pages"&gt;什么是pages&lt;a class="td-heading-self-link" href="#%e4%bb%80%e4%b9%88%e6%98%afpages" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;GitHub Pages 是 GitHub 提供的一项免费静态网站托管服务。简单来说，它能将你的代码仓库直接变成一个可访问的网站，无需自己购买服务器、配置环境，甚至连域名都可以使用 GitHub 提供的免费子域名。&lt;/p&gt;
+&lt;h2 id="快速入门三步走"&gt;快速入门三步走&lt;a class="td-heading-self-link" href="#%e5%bf%ab%e9%80%9f%e5%85%a5%e9%97%a8%e4%b8%89%e6%ad%a5%e8%b5%b0" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;第一步：创建仓库&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;个人/组织网站：创建名为 你的GitHub用户名.github.io 的仓库（例如：xiaoping378.github.io）&lt;/li&gt;
+&lt;li&gt;项目网站：在任何项目仓库中启用 Pages 功能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;第二步：添加内容&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;直接上传 HTML、CSS、JS 文件&lt;/li&gt;
+&lt;li&gt;或使用静态网站生成器（如 Hugo、Jekyll、VuePress 等）生成静态文件&lt;/li&gt;
+&lt;li&gt;配置 GitHub Pages 源（通常为 main 分支的 /root 或 /docs 文件夹）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;第三步：访问你的网站&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;个人站点：https://你的GitHub用户名.github.io&lt;/li&gt;
+&lt;li&gt;项目站点：https://你的GitHub用户名.github.io/项目名&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;与静态网站生成器的完美结合. 正如我们上一篇提到的 Hugo + Docsy 方案，GitHub Pages 与静态网站生成器是绝佳搭档。你只需：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;本地使用 Hugo 预览编写内容&lt;/li&gt;
+&lt;li&gt;配置 GitHub Actions 自动构建&lt;/li&gt;
+&lt;li&gt;推送到 GitHub 后，Actions 会自动将生成的静态文件部署到 Pages&lt;/li&gt;
+&lt;li&gt;几十秒后，更新就会上线！
+这种方式让你专注于内容创作，而不用操心服务器维护和部署流程。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="自动化工作流"&gt;自动化工作流&lt;a class="td-heading-self-link" href="#%e8%87%aa%e5%8a%a8%e5%8c%96%e5%b7%a5%e4%bd%9c%e6%b5%81" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;上节是介绍了pages的快速入门，下面介绍自动化工作流，利用github actions实现自动更新托管内容。&lt;/p&gt;</description></item><item><title>编写文章技巧</title><link>https://xiaoping378.github.io/docs/1-site/3-add_content/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/1-site/3-add_content/</guid><description>&lt;div class="pageinfo pageinfo-primary"&gt;
+&lt;p&gt;本章节主要描述日常编写文章的注意事项和docsy主题内的使用技巧。&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;h2 id="编写markdown"&gt;编写markdown&lt;a class="td-heading-self-link" href="#%e7%bc%96%e5%86%99markdown" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id="图片路径问题"&gt;图片路径问题&lt;a class="td-heading-self-link" href="#%e5%9b%be%e7%89%87%e8%b7%af%e5%be%84%e9%97%ae%e9%a2%98" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;习惯md文件中的图片路径写成&lt;code&gt;![](/images/file.png)&lt;/code&gt; ，但hugo中图片实际要存放到&lt;code&gt;/static/images/&lt;/code&gt;路径下，hugo会自动渲染到站点的根路径&lt;code&gt;/&lt;/code&gt;上。&lt;/p&gt;
+&lt;p&gt;这样的话，无法在编辑器中预览md了，有两种玩法如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可以使用一个临时目录，把图片和md文件放到同一目录，编写完毕后，再把图片和md文件放置上述合适的目录位置上。&lt;/li&gt;
+&lt;li&gt;日常一直启用&lt;code&gt;hugo server&lt;/code&gt;编写文章，放弃编辑器中预览md（后面还会有别的坑....）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;推荐后者，额外配合扩展插件，本人日常使用VSCode编写md，和代码开发同款，这里推荐安装&lt;code&gt;mushan.vscode-paste-image&lt;/code&gt;扩展，再额外如下配置：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#b44"&gt;&amp;#34;pasteImage.namePrefix&amp;#34;&lt;/span&gt;&lt;span style=""&gt;:&lt;/span&gt; &lt;span style="color:#b44"&gt;&amp;#34;${currentFileNameWithoutExt}-&amp;#34;&lt;/span&gt;&lt;span style=""&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#b44"&gt;&amp;#34;pasteImage.path&amp;#34;&lt;/span&gt;&lt;span style=""&gt;:&lt;/span&gt; &lt;span style="color:#b44"&gt;&amp;#34;${projectRoot}/static/images/&amp;#34;&lt;/span&gt;&lt;span style=""&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#b44"&gt;&amp;#34;pasteImage.basePath&amp;#34;&lt;/span&gt;&lt;span style=""&gt;:&lt;/span&gt; &lt;span style="color:#b44"&gt;&amp;#34;${projectRoot}&amp;#34;&lt;/span&gt;&lt;span style=""&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#b44"&gt;&amp;#34;pasteImage.insertPattern&amp;#34;&lt;/span&gt;&lt;span style=""&gt;:&lt;/span&gt; &lt;span style="color:#b44"&gt;&amp;#34;${imageSyntaxPrefix}/images/${imageFileName}${imageSyntaxSuffix}&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;日常编写文章，&lt;code&gt;Alt+A&lt;/code&gt;截图，&lt;code&gt;Ctrl+Alt+A&lt;/code&gt;粘贴到md文件，和在hugo中预览，完美...&lt;/p&gt;
+&lt;h3 id="seo优化关注点"&gt;SEO优化关注点&lt;a class="td-heading-self-link" href="#seo%e4%bc%98%e5%8c%96%e5%85%b3%e6%b3%a8%e7%82%b9" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;日常文章编写，如下部分要精准描述，Google搜索引擎推荐使用&lt;code&gt;description&lt;/code&gt;的meta标签告诉它页面内容的，Docsy主题会自动把红框部分填充到&lt;code&gt;layouts/partials/head.html&lt;/code&gt;中。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://xiaoping378.github.io/images/add_content-2022-01-25-09-38-48.png" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;hugo解析编译后，html页面会如下呈现：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://xiaoping378.github.io/images/add_content-2022-01-25-09-37-12.png" alt=""&gt;&lt;/p&gt;
+&lt;h3 id="文档日常编写注意事项"&gt;&lt;code&gt;文档&lt;/code&gt;日常编写注意事项&lt;a class="td-heading-self-link" href="#%e6%96%87%e6%a1%a3%e6%97%a5%e5%b8%b8%e7%bc%96%e5%86%99%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;h4 id="md文件中相互引用内容的路径要记得对应到站点html的路径上"&gt;md文件中相互引用内容的路径要记得对应到站点html的路径上&lt;a class="td-heading-self-link" href="#md%e6%96%87%e4%bb%b6%e4%b8%ad%e7%9b%b8%e4%ba%92%e5%bc%95%e7%94%a8%e5%86%85%e5%ae%b9%e7%9a%84%e8%b7%af%e5%be%84%e8%a6%81%e8%ae%b0%e5%be%97%e5%af%b9%e5%ba%94%e5%88%b0%e7%ab%99%e7%82%b9html%e7%9a%84%e8%b7%af%e5%be%84%e4%b8%8a" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;比如此处引用&lt;code&gt;自动托管markdown&lt;/code&gt;文章，按照md习惯写,虽然编辑器上可以正常打开，但hugo渲染后的页面是404的。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;[引用](./actions_pages.md)&lt;/code&gt; 需要改成 &lt;code&gt;[引用](../actions_pages)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[引用](/content/docs/1-site/actions_pages.md)&lt;/code&gt; 需要改成 &lt;code&gt;[引用](/docs/1-site/actions_pages)&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;不定时更新注意事项。日常编写，建议本机启用&lt;code&gt;hugo server&lt;/code&gt;实时预览，&lt;/p&gt;
+&lt;h4 id="文章weight的使用"&gt;文章weight的使用&lt;a class="td-heading-self-link" href="#%e6%96%87%e7%ab%a0weight%e7%9a%84%e4%bd%bf%e7%94%a8" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;文章开头的&lt;code&gt;weight&lt;/code&gt;部分决定了目录中的排序，推荐新开的系列文章，从两位数开始递增，比如&lt;code&gt;30&lt;/code&gt;, 以后老系列有更新的时候，免去批量修改调整排序的麻烦。&lt;/p&gt;
+&lt;h3 id="blog编写注意事项"&gt;&lt;code&gt;blog&lt;/code&gt;编写注意事项&lt;a class="td-heading-self-link" href="#blog%e7%bc%96%e5%86%99%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;blog&lt;/code&gt;的目录结构，&lt;code&gt;blog&lt;/code&gt;目录下，每篇博客推荐在一个独立目录下，都是以&lt;code&gt;index.md&lt;/code&gt;为入口文件&lt;/li&gt;
+&lt;li&gt;也可以以单md文件呈现，但不支持嵌入图片&lt;/li&gt;
+&lt;/ol&gt;</description></item></channel></rss>
