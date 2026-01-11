@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>随感随想 on 现代技能栈</title><link>https://xiaoping378.github.io/blog/hot-point/</link><description>Recent content in 随感随想 on 现代技能栈</description><generator>Hugo</generator><language>zh-cn</language><atom:link href="https://xiaoping378.github.io/blog/hot-point/index.xml" rel="self" type="application/rss+xml"/><item><title>老祖宗的面子工程与现代软件工程</title><link>https://xiaoping378.github.io/blog/2026/01/11/%E8%80%81%E7%A5%96%E5%AE%97%E7%9A%84%E9%9D%A2%E5%AD%90%E5%B7%A5%E7%A8%8B%E4%B8%8E%E7%8E%B0%E4%BB%A3%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/</link><pubDate>Sun, 11 Jan 2026 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/blog/2026/01/11/%E8%80%81%E7%A5%96%E5%AE%97%E7%9A%84%E9%9D%A2%E5%AD%90%E5%B7%A5%E7%A8%8B%E4%B8%8E%E7%8E%B0%E4%BB%A3%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/</guid><description>&lt;h1 id="老祖宗的面子工程与现代软件工程"&gt;老祖宗的面子工程与现代软件工程&lt;a class="td-heading-self-link" href="#%e8%80%81%e7%a5%96%e5%ae%97%e7%9a%84%e9%9d%a2%e5%ad%90%e5%b7%a5%e7%a8%8b%e4%b8%8e%e7%8e%b0%e4%bb%a3%e8%bd%af%e4%bb%b6%e5%b7%a5%e7%a8%8b" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;hr&gt;
+&lt;p&gt;一提“面子工程”，不少人会先想到形式主义，但老祖宗留下的“面子智慧”，其实藏着不少正向逻辑——比如传统礼仪的规范流程、古建筑的规制章法、文书典籍的规整体例，这些看似“讲排场”的“面子”，本质是为了建立秩序、传递信息、达成共识。把这份智慧用到现代软件工程里，重新定义“面子工程”为“让沟通载体标准化、可视化、场景化”的实用手段，就能打破跨角色认知壁垒，让协作更顺畅，最终让产品、研发、测试、运维等各环节伙伴都能更好地实现自身价值。这种“有用的面子工程”核心逻辑古今相通：用专业又好懂的外在呈现，把核心信息讲透彻，让不同背景的人快速抓重点，同时让每个人的专业能力和贡献都被看见。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;老祖宗早就懂，“面子”是沟通的敲门砖——古人见面向来讲究礼仪分寸，不同场合的着装、话术有明确规范，就是为了快速建立身份认知、减少沟通摩擦。这和现代软件工程的沟通困境不谋而合：全流程中沟通难的核心问题就两个：一是大家&lt;strong&gt;语言体系不一样&lt;/strong&gt;，二是&lt;strong&gt;信息不对等&lt;/strong&gt;。产品经理关注业务价值与用户体验，研发同学聚焦技术可行性与稳定性，测试人员紧盯质量风险，运维则看重系统运维成本与稳定性——每个人的核心诉求不同，若只靠口头沟通或冗长文字传递信息，很容易出现理解偏差。而传承老祖宗正向“面子智慧”的&lt;strong&gt;正向的面子工程&lt;/strong&gt;，正是通过标准化可视化工具、场景化呈现方式，为所有人搭建起统一的&lt;strong&gt;沟通语言&lt;/strong&gt;，从根源上降低沟通成本。&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;核心价值：古今相通的“共识搭建术”——把抽象需求具象化，快速对齐各方认知&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;老祖宗做大事前，常会画“蓝图”、定“章程”，这就是古代版的“需求可视化”。放到现在软件工程里，这里的“面子”，就是结构清晰的需求文档、直观的用户旅程地图，或是需求优先级矩阵。比如产品经理不用只说“优化注册流程”这种模糊表述，而是通过用户旅程地图，清晰呈现用户从进入页面到完成注册的全流程、核心痛点与情绪变化，再用优先级矩阵明确“简化表单字段”“优化验证逻辑”等具体任务的先后顺序。这样一来，研发、测试同学能快速get到需求背后的业务意义，产品经理的规划思路也能直观体现，既避免了后续因需求模糊导致的返工，也让大家提前明确工作方向，提升参与感——就像古人靠“章程”统一众人行动，现代靠可视化需求统一团队认知。&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;核心价值：传承“规制智慧”——助力跨团队协同，沉淀可复用的技术知识&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;老祖宗的“营造法式”“匠作规范”，是工匠群体的“技术沟通手册”，靠统一的规制让不同工匠协作造殿宇、修水利。研发团队输出的架构图、接口定义文档、数据库ER图等，就是现代软件工程的“匠作规范”，也是典型的“有用的面子工程”——它们不是多余形式，而是把抽象的技术逻辑转化为直观易懂的图形。比如一张清晰的微服务架构图，能帮前端同学明确接口调用关系，让测试同学精准锁定测试重点，也能让运维同学提前规划部署方案；规范的代码注释与开发文档，还能降低团队内部知识传递成本，帮新成员快速融入。这种“面子”不仅能提升研发协作效率，还能让研发同学的技术思考与架构设计能力被看见，同时让测试、运维同学提前参与技术方案讨论，凸显其前置风险把控的价值。&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;核心价值：借鉴“案牍规范”——清晰呈现问题与进度，提升协作效率与决策精准度&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;古代官府办案讲究“案牍分明”，每份卷宗都要清晰记录案情、证据、进度，方便同僚协同、上级决策——这就是老祖宗的“进度与问题可视化”智慧。测试同学反馈bug、团队跟进项目进度，正需要这份智慧。测试同学反馈bug时，若只说“某个页面有问题”，研发同学得花大量时间重现问题；但用标准化bug报告模板，附上清晰的操作步骤截图、异常现象录屏与影响范围说明，研发同学就能快速定位问题根源——这就是测试阶段“面子工程”的价值。此外，项目进度看板、燃尽图等可视化工具，能实时展示任务状态（待办/进行中/已完成）、负责人与阻塞点，让项目经理、产品经理及各执行角色随时掌握项目进度，及时协调资源解决问题。这种透明化呈现，不仅能加快bug修复效率，还能凸显测试同学的严谨性与运维同学的部署规划能力，让项目决策更精准，保障交付目标顺利达成。&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;核心价值：延续“传帮带”传统——保障系统稳定运行，推动团队持续迭代进步&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;老祖宗靠“手札”“心法”传承技艺，靠“复盘纪事”总结经验，让技艺不断精进。运维同学输出的部署架构图、监控面板、故障处理手册等，就是现代的“技术手札”，能帮团队快速响应线上问题——比如一张清晰的部署架构图，可助力研发同学快速定位线上故障的模块范围，监控面板的可视化数据也能凸显运维同学的风险预警能力。而迭代复盘时的冲刺回顾图、绩效指标看板，就是现代的“复盘纪事”，能直观展示本迭代周期的成果、问题与改进方向，让产品、研发、测试、运维每个人的贡献都被量化，同时明确后续优化重点。这种“面子”不仅能保障系统长期稳定运行，还能让每个人的价值被清晰感知，增强团队凝聚力，推动团队持续改进，延续老祖宗“传帮带”“常复盘”的进步智慧。&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;关键区分：正向“面子工程”≠形式主义，古今都重“里子”与“面子”双到位&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;老祖宗的正向“面子”从不是空架子：礼仪背后是尊重与秩序，规制背后是技艺与安全，案牍背后是效率与责任。这和现代正向“面子工程”的逻辑一致，两者与形式主义的核心区别，在于是否服务于实际目标：正向“面子工程”是为了提升沟通效率、凸显价值贡献，形式主义则是脱离实际的无用功。比如古代若只讲礼仪不办实事、现代为追求文档美观而忽略核心信息，都是要规避的“坏面子工程”。真正有用的“面子”，必然是“里子”与“面子”兼具：“面子”是直观专业的呈现形式，“里子”是清晰的核心信息与明确的目标导向，古今智慧一脉相承。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;老祖宗的“面子智慧”，本质是一套成熟的沟通与协作方法论。把这份智慧转化为现代软件工程的正向“面子工程”，就是掌握了高效沟通的方法与价值呈现的技巧。它通过标准化、可视化载体统一沟通语言，解决信息不对等问题；通过场景化呈现让各角色专业价值被看见，提升成就感与参与感。最终，这种融合古今智慧的“面子工程”，不仅能让项目推进更顺畅，还能实现产品、研发、测试、运维等所有伙伴的价值协同提升，成为软件工程高质量推进的实用助力。&lt;/p&gt;</description></item><item><title>我天！Go消失在前十，Java也滑到老四了</title><link>https://xiaoping378.github.io/blog/2025/12/11/%E6%88%91%E5%A4%A9go%E6%B6%88%E5%A4%B1%E5%9C%A8%E5%89%8D%E5%8D%81java%E4%B9%9F%E6%BB%91%E5%88%B0%E8%80%81%E5%9B%9B%E4%BA%86/</link><pubDate>Thu, 11 Dec 2025 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/blog/2025/12/11/%E6%88%91%E5%A4%A9go%E6%B6%88%E5%A4%B1%E5%9C%A8%E5%89%8D%E5%8D%81java%E4%B9%9F%E6%BB%91%E5%88%B0%E8%80%81%E5%9B%9B%E4%BA%86/</guid><description>&lt;h2 id="top15语言排行"&gt;Top15语言排行&lt;a class="td-heading-self-link" href="#top15%e8%af%ad%e8%a8%80%e6%8e%92%e8%a1%8c" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;下图是2025.12月的编程语言排行榜，&lt;strong&gt;人工智能的到来，已经造成了二十年未有之大变局呀&lt;/strong&gt;。
+&lt;img src="https://xiaoping378.github.io/blog/2025/12/11/%E6%88%91%E5%A4%A9go%E6%B6%88%E5%A4%B1%E5%9C%A8%E5%89%8D%E5%8D%81java%E4%B9%9F%E6%BB%91%E5%88%B0%E8%80%81%E5%9B%9B%E4%BA%86/all-top15-rank.png" alt="alt text"&gt;&lt;/p&gt;
+&lt;h3 id="java-的持续下滑"&gt;Java 的持续下滑&lt;a class="td-heading-self-link" href="#java-%e7%9a%84%e6%8c%81%e7%bb%ad%e4%b8%8b%e6%bb%91" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Java自从2001年登顶后，终于滑到老四了，这是二十多年来的最低排行了，延续了Java份额近年来被其他语言侵蚀的趋势。虽然它仍是企业级和安卓开发的中坚力量，但其主导地位（占比份额）确实在减弱，和整个互联网行业的走势何其相似。不过大伙儿倒不用担心饭碗问题，没看delphi和Fortan还活跃着呢&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://xiaoping378.github.io/blog/2025/12/11/%E6%88%91%E5%A4%A9go%E6%B6%88%E5%A4%B1%E5%9C%A8%E5%89%8D%E5%8D%81java%E4%B9%9F%E6%BB%91%E5%88%B0%E8%80%81%E5%9B%9B%E4%BA%86/2025-12-java-tobie.png" alt="alt text"&gt;&lt;/p&gt;
+&lt;h3 id="go-的-消失"&gt;Go 的“消失”&lt;a class="td-heading-self-link" href="#go-%e7%9a%84-%e6%b6%88%e5%a4%b1" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;未进前十! 在榜单前十名中，完全没有看到 Go 语言的身影。甚至低于第10名R语言的1.96%。&lt;/p&gt;
+&lt;p&gt;Go已成为云原生、微服务、分布式系统基础设施领域的事实标准语言（Docker, Kubernetes, etcd, Prometheus等核心云原生工具均用Go编写）。在这个极其关键但相对专业和底层的赛道里，Go是绝对的统治者。但TIOBE指数基于全球搜索引擎流量，更偏向于反映广泛学习、讨论和使用的广度。Go在基础设施层的“隐形冠军”地位，意味着它被大量用于构建系统，但直接使用它编写业务应用的人数，相比Python、Java、C#等还是少。&lt;/p&gt;
+&lt;p&gt;这说明Go虽成功定义了一个新时代的基础设施层，但还是没大规模渗透到更广泛的应用开发层呀，我辈Goper仍需努力啊。&lt;/p&gt;
+&lt;h3 id="榜单其他看点"&gt;榜单其他看点&lt;a class="td-heading-self-link" href="#%e6%a6%9c%e5%8d%95%e5%85%b6%e4%bb%96%e7%9c%8b%e7%82%b9" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Python 的统治力：以23.64%​ 的份额稳居第一，几乎是第二名C语言的两倍多，其领先地位极为稳固。&lt;/p&gt;
+&lt;p&gt;Python高达23.64%​ 的份额，算是人工智能、机器学习、数据科学和自动化成为过去几年乃至未来最核心发展方向的直接证明了。Python庞大的科学生态（NumPy, Pandas）和AI框架（TensorFlow, PyTorch）使其成为这些领域的“普通话”。&lt;/p&gt;
+&lt;p&gt;另外，企业正在无脑开展“数据驱动”和“AI赋能”的转型。无论是做应用开发、金融分析还是生物信息，学习和使用Python来处理数据、调用模型都成为了必备技能。已从一个编程语言演变为新时代的基础工具。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;C 语言的强势回归：从第4名跃升至第2名，份额增长超过1个百分点，是前五名中上升势头最猛的语言。&lt;/p&gt;
+&lt;p&gt;C语言跃居第二，份额增长，应该是行业面临算力瓶颈、追求极致性能和能效的体现。在AI推理、边缘计算、物联网、汽车电子、操作系统、新兴硬件（如RISC-V）驱动等领域，当摩尔定律放缓，软件优化必须更贴近硬件。同时，在AI推理部署、嵌入式AI、高性能网络设备等关键领域，C仍是不可替代的基石。这说明，硬件和基础软件的创新正迎来新一轮热潮。&lt;/p&gt;
+&lt;p&gt;外加全球纷纷选择制造业护国的战略，这个表现也算理所当然了。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;C# 的显著增长：份额大幅上涨+2.39%，是前十名中增幅最大的语言，显示其强劲活力。&lt;/p&gt;
+&lt;p&gt;这直接归功于微软的全面转型成功。.NET Core/.NET 5+​ 的跨平台、高性能特性，加上微软云（Azure）的深度集成，使其成为企业，特别是原有Windows生态企业进行云原生现代化改造的黄金路径。估计国内游戏开发（Unity引擎）的持续火爆也贡献了力量。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Perl 的意外飙升：从第26名暴升至第9名，份额增长1.33%，是最大的“黑马”。&lt;/p&gt;
+&lt;p&gt;Perl（第9名！）和R语言的排名飙升是“工具属性”的胜利。它们在特定领域（Perl在生物信息、系统管理、文本处理；R在统计学、生物统计、学术研究）有着成熟的库和即用脚本。当这些领域因AI、生物科技等产业发展而数据处理任务激增时，这些“老牌利器”的需求就快速反弹。&lt;/p&gt;
+&lt;p&gt;在专业垂直领域，&lt;strong&gt;解决具体问题的最佳工具&lt;/strong&gt;​ 往往比最流行的通用语言更重要。这也反映了特定行业（如生物信息学）的繁荣。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="总结"&gt;总结&lt;a class="td-heading-self-link" href="#%e6%80%bb%e7%bb%93" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;figure class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 410px"&gt;
+&lt;img class="card-img-top" src="https://xiaoping378.github.io/blog/2025/12/11/%E6%88%91%E5%A4%A9go%E6%B6%88%E5%A4%B1%E5%9C%A8%E5%89%8D%E5%8D%81java%E4%B9%9F%E6%BB%91%E5%88%B0%E8%80%81%E5%9B%9B%E4%BA%86/future_hu_a2472823b38358ff.png" width="400" height="400"&gt;
+&lt;figcaption class="card-body px-0 pt-2 pb-0"&gt;
+&lt;p class="card-text"&gt;
+
+
+未来架构指引
+&lt;small class="text-body-secondary"&gt;&lt;br/&gt;来源：xiaoping378 / CC-BY-CA&lt;/small&gt;
+&lt;/p&gt;
+&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;这张榜单是近年来行业发展的一张完美的“压力分布图”：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;顶层（AI/数据）​ 被Python统治，代表未来热门方向。&lt;/li&gt;
+&lt;li&gt;底层（硬件/系统）​ 由C/C++把持，代表对性能的永恒追求。&lt;/li&gt;
+&lt;li&gt;中间层（企业应用）​ 正从Java一家独大，向C#、Go等多元化栈演变，代表企业上云和技术架构的深刻变革。&lt;/li&gt;
+&lt;li&gt;垂直领域​ 则因特定产业（如生物科技）的爆发，让Perl、R等工具语言重获新生。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;我们不应该只看到简单的排名游戏，而应看到AI革命、硬件创新、企业上云、垂直行业深化这四大技术浪潮，在编程语言生态上投射出的清晰影像。做好后续项目架构规划和未来投资，才是关键。&lt;/p&gt;</description></item><item><title>解读SRE行业2025调查报告</title><link>https://xiaoping378.github.io/blog/2025/12/09/%E8%A7%A3%E8%AF%BBsre%E8%A1%8C%E4%B8%9A2025%E8%B0%83%E6%9F%A5%E6%8A%A5%E5%91%8A/</link><pubDate>Tue, 09 Dec 2025 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/blog/2025/12/09/%E8%A7%A3%E8%AF%BBsre%E8%A1%8C%E4%B8%9A2025%E8%B0%83%E6%9F%A5%E6%8A%A5%E5%91%8A/</guid><description>&lt;h2 id="报告统计源说明"&gt;报告统计源说明&lt;a class="td-heading-self-link" href="#%e6%8a%a5%e5%91%8a%e7%bb%9f%e8%ae%a1%e6%ba%90%e8%af%b4%e6%98%8e" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;报告所依据的SRE调查，是从2024年7月开始，花了6周的时间，收到来自全球各地、涵盖各类可靠性岗位及职级的301份&lt;strong&gt;有效&lt;/strong&gt;回复。&lt;/p&gt;
+&lt;p&gt;调查者大部分源自美欧中，国内有墙的情况下，还能有这等占比，其实中国占比很高了。&lt;/p&gt;
+&lt;figure class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 1110px"&gt;
+&lt;img class="card-img-top" src="https://xiaoping378.github.io/blog/2025/12/09/%E8%A7%A3%E8%AF%BBsre%E8%A1%8C%E4%B8%9A2025%E8%B0%83%E6%9F%A5%E6%8A%A5%E5%91%8A/global-site_hu_c4c9d9ea18c8cb4e.png" width="1100" height="600"&gt;
+&lt;figcaption class="card-body px-0 pt-2 pb-0"&gt;
+&lt;p class="card-text"&gt;
+
+
+全球地域分布情况
+&lt;small class="text-body-secondary"&gt;&lt;br/&gt;来源：The SRE Report 2025, Catchpoint&lt;/small&gt;
+&lt;/p&gt;
+&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;其中企业分类性质的占比如下：
+&lt;figure class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 410px"&gt;
+&lt;img class="card-img-top" src="https://xiaoping378.github.io/blog/2025/12/09/%E8%A7%A3%E8%AF%BBsre%E8%A1%8C%E4%B8%9A2025%E8%B0%83%E6%9F%A5%E6%8A%A5%E5%91%8A/qiye-zhanbi_hu_8a01ec102ac4ec90.png" width="400" height="400"&gt;
+&lt;figcaption class="card-body px-0 pt-2 pb-0"&gt;
+&lt;p class="card-text"&gt;
+
+
+企业类型占比
+&lt;small class="text-body-secondary"&gt;&lt;br/&gt;来源：The SRE Report 2025, Catchpoint&lt;/small&gt;
+&lt;/p&gt;
+&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;40%，技术平台或“即服务”提供商，(钉钉或者Salesforce这类)&lt;/li&gt;
+&lt;li&gt;19%，其他（制造业、医疗等）&lt;/li&gt;
+&lt;li&gt;17%，金融服务&lt;/li&gt;
+&lt;li&gt;11%，零售/电子商务&lt;/li&gt;
+&lt;li&gt;11%，大型集团：跨多个领域运营&lt;/li&gt;
+&lt;li&gt;10%，高等教育&lt;/li&gt;
+&lt;li&gt;7%，政府&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;公司规模占比，上千人的公司占比超过51%。
+&lt;figure class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 1110px"&gt;
+&lt;img class="card-img-top" src="https://xiaoping378.github.io/blog/2025/12/09/%E8%A7%A3%E8%AF%BBsre%E8%A1%8C%E4%B8%9A2025%E8%B0%83%E6%9F%A5%E6%8A%A5%E5%91%8A/qiye-guimo_hu_4b257a56c08acd32.png" width="1100" height="250"&gt;
+&lt;figcaption class="card-body px-0 pt-2 pb-0"&gt;
+&lt;p class="card-text"&gt;
+
+
+企业规模占比
+&lt;small class="text-body-secondary"&gt;&lt;br/&gt;来源：The SRE Report 2025, Catchpoint&lt;/small&gt;
+&lt;/p&gt;
+&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id="趋势观点"&gt;趋势观点&lt;a class="td-heading-self-link" href="#%e8%b6%8b%e5%8a%bf%e8%a7%82%e7%82%b9" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;报告揭示了几个核心趋势，我结合自身经历用大白话来解释一下&lt;/p&gt;
+&lt;h3 id="慢即宕机-slow-is-the-new-down"&gt;慢即宕机（Slow is the New Down）&lt;a class="td-heading-self-link" href="#%e6%85%a2%e5%8d%b3%e5%ae%95%e6%9c%ba-slow-is-the-new-down" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;这个观点讲的是，一个服务响应很慢和完全宕机的危害一样大。想象一下，在网购时页面转圈十几秒才加载出来，你很可能就直接关掉走人了。所以，性能好坏直接关系到用户体验和业务收入。&lt;/p&gt;
+&lt;p&gt;性能优化，首屏响应之类的词汇，其实在国内也早有相应的需求讨论，这里将其上升到了&lt;code&gt;宕机&lt;/code&gt;的危害程度，调查中也有53%的人认可这一说法，另一个有意思的是，44%人认为还应该把这一指标作为SLO目标。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;SLO目标&lt;/strong&gt;：SLO（Service Level Objective，服务水平目标）​ 简单来说，就是你为一项服务设定的、可量化的可靠性目标。它不再是以往被动运维的底线保障思维，如保障系统可用性几个9的承诺，而是一个具体、可测量的指标，用于明确回答：“对用户而言，这个服务怎样才算是‘真好用’”
+例如，一个视频流服务的SLO可以是：“99.9%的用户请求应在1秒内得到成功响应。”
+类似的还有，首页网页加载时间小与200ms&lt;/p&gt;</description></item><item><title>IT技术人员在人工智能时代如何自救</title><link>https://xiaoping378.github.io/blog/2025/12/08/it%E6%8A%80%E6%9C%AF%E4%BA%BA%E5%91%98%E5%9C%A8%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%97%B6%E4%BB%A3%E5%A6%82%E4%BD%95%E8%87%AA%E6%95%91/</link><pubDate>Mon, 08 Dec 2025 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/blog/2025/12/08/it%E6%8A%80%E6%9C%AF%E4%BA%BA%E5%91%98%E5%9C%A8%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%97%B6%E4%BB%A3%E5%A6%82%E4%BD%95%E8%87%AA%E6%95%91/</guid><description>&lt;h2 id="背景"&gt;背景&lt;a class="td-heading-self-link" href="#%e8%83%8c%e6%99%af" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;在大模型人工智能技术深刻改变软件工程领域的当下，可以初步总结为，初级人员入场门槛高了，高级人员的经验优势弱化了，岗位角色职责模糊了。面对这种趋势，我们的应对思路需要更务实，更聚焦于“人”究竟能守住和创造什么独特价值。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在当前这个“充满不确定性”的时代，企业不愿投资软件IT。存量的更多需求，在老板看来，有了AI的加持，也不需要更多人员，“似乎”人月神话失效了。
+但AI如何安全可控的融入现有软件工程体系，仍在探索中，这是一个令人兴奋的过程，目前看不会是成为“昙花一现”的工具，是能够普世的。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="关于初级门槛抬高"&gt;关于初级门槛抬高&lt;a class="td-heading-self-link" href="#%e5%85%b3%e4%ba%8e%e5%88%9d%e7%ba%a7%e9%97%a8%e6%a7%9b%e6%8a%ac%e9%ab%98" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;新人不能再靠“听话照做”入场。过去，新人通过完成明确的、重复性的任务来学习和证明自己，比如写一个简单的接口，执行一组测试用例。但现在，这类任务AI完成得更快。这迫使新人的成长路径必须改变。关键在于，必须从一开始就培养“定义问题”和“判断结果”的能力，而不仅仅是“执行操作”。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;对开发新人而言，重点不再是背熟API，而是拿到一个模糊需求后，能利用AI工具快速探索多种实现方案，并能说出每种方案在性能、可维护性、成本上的权衡。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;对测试新人来说，核心不是会写更多用例，而是要能设计出那些AI容易忽略的、涉及复杂业务场景交互和极端用户体验的“刁钻”场景，去考验AI生成的用例是否可靠。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;对所有人，深入理解业务变得空前重要。因为只有懂了业务，你给AI的指令和对你产出的判断，才不会流于表面，才能发现逻辑深处的矛盾。新人需要主动把自己浸泡在业务会议、用户反馈和产品数据里，哪怕一开始听不懂。&lt;/p&gt;
+&lt;h2 id="关于高级经验优势弱化"&gt;关于高级经验优势弱化&lt;a class="td-heading-self-link" href="#%e5%85%b3%e4%ba%8e%e9%ab%98%e7%ba%a7%e7%bb%8f%e9%aa%8c%e4%bc%98%e5%8a%bf%e5%bc%b1%e5%8c%96" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;资深者的价值必须从“知道答案”升级为“在复杂情境中做出更优决策”。我们过去引以为傲的“我遇到过”“我知道怎么解决”，其知识部分正被AI快速吸收。但经验中真正难以被编码的部分，是其背后的上下文、权衡的智慧和承担的责任。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;一个资深架构师，AI能给出十种技术选型方案。但他的价值在于，能基于对团队技能、历史债务、未来业务方向、老板的耐心和预算的全盘理解，选择（甚至组合出）第十一种最可行的路径，并能为这个选择可能的风险准备预案。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;一个运维专家，AI能预测故障。但他的价值在于，当多个预警同时发生、信息矛盾时，能凭借对系统“脾气”的直觉，判断哪里是真正要害，并能在压力下协调各方，执行一个可能不完美但能最快止血的恢复方案。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这种“在混沌中导航”的能力，建立在大量试错（探知AI能力边界）、人际关系和感性认知之上，是AI目前无法习得的。因此，资深人员需要有意识地总结和输出自己的“决策模型”和“权衡框架”，而不仅仅是解决方案本身，这将成为你新的专业壁垒。&lt;/p&gt;
+&lt;h2 id="关于岗位职责模糊"&gt;关于岗位职责模糊&lt;a class="td-heading-self-link" href="#%e5%85%b3%e4%ba%8e%e5%b2%97%e4%bd%8d%e8%81%8c%e8%b4%a3%e6%a8%a1%e7%b3%8a" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;在边界溶解时，要重新锚定自己的“内核”，并主动拓展影响范围。当工具让跨界协作变得异常容易时，固守原来的职责范围会让自己边缘化。正确的姿态是：以自己不可替代的核心能力为“根”，主动向关联领域生长“枝蔓”。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;对于产品经理，核心不是写文档，而是持续探索和定义“什么是有价值的事”。现在，你可以用AI快速生成原型甚至部分代码，那么你的工作重心就更应前移：深入用户场景，定义AI能力的边界，思考模型可能带来的偏见和风险，并协调设计、开发、法务一起解决。你的角色更像一个“产品创造者”而不仅是“需求翻译者”。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;对于测试人员，核心不是找bug，而是作为产品质量和风险的“最终守门人”。你需要利用AI完成海量常规检查，从而将精力投向更深处：设计评估AI输出结果可信度的体系，关注安全、性能、伦理等非功能需求，并从用户体验的完整性出发进行测试。你的工作正在与安全、运维、产品体验深度交融。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这种模糊化，本质上是要求每个人都更具“全局思维”。一个开发需要理解自己写的模块对运维的意味；一个运维需要知道某个部署对业务指标的影响。理解你上下游的工作，并用你的专业能力为他们赋能，将成为新的常态。&lt;/p&gt;
+&lt;h2 id="在价值重构中定位新坐标"&gt;在价值重构中定位新坐标&lt;a class="td-heading-self-link" href="#%e5%9c%a8%e4%bb%b7%e5%80%bc%e9%87%8d%e6%9e%84%e4%b8%ad%e5%ae%9a%e4%bd%8d%e6%96%b0%e5%9d%90%e6%a0%87" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;自救与规划发展的核心，在于认识到：AI处理的是“已知”模式，而人的价值将愈发体现在应对“未知”情境。​ 我们的自救之路，就是不断将自己推向那些需要深度理解、复杂判断、人际协调和承担责任的领域。具体来说：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;主动成为“人机协同”的枢纽：不排斥AI，而是研究如何最高效安全地使用它，并把节省下来的时间，投入到更需要人类智慧的思考、沟通和创新中去。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如何高效安全的使用AI，本身就是一个话题了，后面单开一个专题。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;打造“解决问题”的元能力：无论岗位如何变化，&lt;code&gt;定义问题&lt;/code&gt;、&lt;code&gt;拆解问题&lt;/code&gt;、&lt;code&gt;整合资源&lt;/code&gt;、&lt;code&gt;推动解决&lt;/code&gt;这一核心能力永不过时。刻意训练自己解决模糊、开放、跨域的问题。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;建立你的“人性化”护城河：对用户的共情、对团队的信任构建、对商业本质的洞察、对伦理风险的审慎，这些高度人性化的特质，是技术无法模拟的，也是你长期价值的基石。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这场变革并非要取代我们，而是逼迫我们放弃那些重复的、机械的“操作工”角色，去成为真正的“思考者”和“负责人”。&lt;/p&gt;</description></item></channel></rss>

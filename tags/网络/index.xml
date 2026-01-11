@@ -1,134 +1,67 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>现代技能栈 – 网络</title><link>https://xiaoping378.github.io/tags/%E7%BD%91%E7%BB%9C/</link><description>Recent content in 网络 on 现代技能栈</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://xiaoping378.github.io/tags/%E7%BD%91%E7%BB%9C/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: 内网机穿透开发</title><link>https://xiaoping378.github.io/docs/2-infra/network/frp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/2-infra/network/frp/</guid><description>
-&lt;div class="pageinfo pageinfo-primary">
-&lt;p>充分利用外网开隧道代理到本地服务，演示或者内网开发的利器，自己具备公网服务器的可以使用frp，不具备的可以使用ngrok。&lt;/p>
-&lt;/div>
-&lt;h2 id="frp介绍">FRP介绍&lt;/h2>
-&lt;p>frp 是国人开源的一种快速反向代理，可将 NAT 或防火墙后面的本地服务器暴露到互联网上。目前，它支持暴露 TCP 和 UDP，以及 HTTP 和 HTTPS 协议，也可以通过域名将请求转发到内部服务。&lt;/p>
-&lt;p>&lt;img src="https://xiaoping378.github.io/images/frp-2022-03-06-20-21-49.png" alt="">&lt;/p>
-&lt;h2 id="安装">安装&lt;/h2>
-&lt;p>二进制下载&lt;a href="https://github.com/fatedier/frp/releases">地址&lt;/a>, 解压后内容如下：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ frp_0.39.1_linux_amd64 tree
-.
-├── frpc
-├── frpc_full.ini
-├── frpc.ini
-├── frps
-├── frps_full.ini
-├── frps.ini
-├── LICENSE
-└── systemd
-├── frpc.service
-├── frpc@.service
-├── frps.service
-└── frps@.service
-&lt;span style="color:#666">1&lt;/span> directory, &lt;span style="color:#666">11&lt;/span> files
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>可将其中的 frpc 拷贝到内网服务所在的机器上，将 frps 拷贝到具有公网 IP 的机器上，放置在任意目录。&lt;/p>
-&lt;p>后续使用思路：&lt;/p>
-&lt;ul>
-&lt;li>编写配置文件，先通过 ./frps -c ./frps.ini 启动服务端，&lt;/li>
-&lt;li>再通过 ./frpc -c ./frpc.ini 启动客户端。&lt;/li>
-&lt;li>如果需要在后台长期运行，可使用压缩包内写好的的systemd服务&lt;/li>
-&lt;/ul>
-&lt;h2 id="代理ssh">代理ssh&lt;/h2>
-&lt;p>本人日常开发使用vsocde，众所周知，其&lt;a href="https://code.visualstudio.com/docs/remote/ssh">remote SSH开发&lt;/a>的特性非常惊艳，可以提供本地开发的体验，背后需要通过ssh连接到远端服务器，高配云主机价格不菲，公司电脑长期荒废中，，，，遂有了此想法，只购买一个低配的云主机用来代理到内网的公司电脑（已安装linux）上，然后利用vscode实现内网穿透开发。&lt;/p>
-&lt;h3 id="服务端">服务端&lt;/h3>
-&lt;p>外网云主机用作服务端的配置：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ ~ cat /etc/frp/frps.ini
-&lt;span style="color:#080;font-style:italic"># common为服务端基础配置&lt;/span>
-&lt;span style="color:#666">[&lt;/span>common&lt;span style="color:#666">]&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 服务端监听的端口，用于和内网客户端建立通信，来接受需要代理服务的配置。&lt;/span>
-&lt;span style="color:#b8860b">bind_port&lt;/span> &lt;span style="color:#666">=&lt;/span> &lt;span style="color:#666">7380&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 服务端与客户端建立连接的Token，两边保持一致即可&lt;/span>
-&lt;span style="color:#b8860b">token&lt;/span> &lt;span style="color:#666">=&lt;/span> PassWord
-&lt;span style="color:#080;font-style:italic"># 日志级别，默认的info，会打印很多被外网恶扫的连接信息&lt;/span>
-&lt;span style="color:#b8860b">log_level&lt;/span> &lt;span style="color:#666">=&lt;/span> warn
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">frps -c /etc/frp/frps.ini
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="客户端">客户端&lt;/h3>
-&lt;p>内网本地linux上，编写客户端配置：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#080;font-style:italic"># common为客户端基础配置&lt;/span>
-&lt;span style="color:#666">[&lt;/span>common&lt;span style="color:#666">]&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 上例服务端运行的外网IP&lt;/span>
-&lt;span style="color:#b8860b">server_addr&lt;/span> &lt;span style="color:#666">=&lt;/span> 39.*.*.*
-&lt;span style="color:#b8860b">server_port&lt;/span> &lt;span style="color:#666">=&lt;/span> &lt;span style="color:#666">7380&lt;/span>
-&lt;span style="color:#b8860b">token&lt;/span> &lt;span style="color:#666">=&lt;/span> PassWord
-&lt;span style="color:#080;font-style:italic"># 需要代理的服务配置，可以根绝自身情况开启多个代理服务如web、 后端api等。&lt;/span>
-&lt;span style="color:#666">[&lt;/span>ssh&lt;span style="color:#666">]&lt;/span>
-&lt;span style="color:#a2f">type&lt;/span> &lt;span style="color:#666">=&lt;/span> tcp
-&lt;span style="color:#080;font-style:italic"># 本地服务信息&lt;/span>
-&lt;span style="color:#b8860b">local_ip&lt;/span> &lt;span style="color:#666">=&lt;/span> 127.0.0.1
-&lt;span style="color:#b8860b">local_port&lt;/span> &lt;span style="color:#666">=&lt;/span> &lt;span style="color:#666">22&lt;/span>
-&lt;span style="color:#080;font-style:italic"># 配置服务端代理端口， remote 2222 -&amp;gt; local 22&lt;/span>
-&lt;span style="color:#b8860b">remote_port&lt;/span> &lt;span style="color:#666">=&lt;/span> &lt;span style="color:#666">2222&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">frpc -c ./frpc.ini
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>如上设置运行，可在任意机器上，通过 &lt;code>ssh -p 2222 root@39.*.*.*&lt;/code> 登录内网机器。&lt;/p>
-&lt;h3 id="vscode连接">vscode连接&lt;/h3>
-&lt;p>安装正常步骤添加远端SSH机器，即可。
-&lt;img src="https://xiaoping378.github.io/images/frp-2022-03-06-21-22-51.png" alt="">&lt;/p>
-&lt;h2 id="frp总结">FRP总结&lt;/h2>
-&lt;p>frp还有很多其他安全、UI、负载均衡等方面的配置，可根据自身环境选择，服务端和客户端选项更全面的配置&lt;a href="https://gofrp.org/docs/reference/">见此&lt;/a>&lt;/p>
-&lt;p>总体上使用frp代理简单的服务，配置上可以很简单，但要配置稍复杂的场景，目前的设计感觉有些缺陷，让人容易犯迷糊，比如设计多种端口字段，来开启某特性。&lt;/p>
-&lt;h2 id="ngrok">ngrok&lt;/h2>
-&lt;p>针对个人免费的SaaS服务，需要注册账号，下载客户端，利用分配的token，发起链接，即可通过外网访问本地服务，具体操作步骤如下：&lt;/p>
-&lt;ol>
-&lt;li>进入ngrok官网（https://ngrok.com/），注册ngrok账号并下载ngrok；&lt;/li>
-&lt;li>根据官网给定的授权码，运行如下授权命令，会保存到在本地HOME目录&lt;/li>
-&lt;/ol>
-&lt;pre tabindex="0">&lt;code>ngrok authtoken 2689y3MT2qsAois0MG****
-&lt;/code>&lt;/pre>&lt;ol start="3">
-&lt;li>发起本地服务1080端口的代理&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">ngrok http &lt;span style="color:#666">1080&lt;/span> &amp;amp;
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>如上执行，可通过红色框访问本地1080端口服务，如果是要代理SSH的话，需要执行&lt;code>ngrok tcp 22 &amp;amp;&lt;/code>。
-&lt;img src="https://xiaoping378.github.io/images/frp-2022-03-09-21-51-39.png" alt="">&lt;/p>
-&lt;p>值得注意的是，每次运行命令都会重新生成新的域名地址，要想固定域名的话，需要付费。&lt;/p>
-&lt;h2 id="总结">总结&lt;/h2>
-&lt;p>目前个人使用的方式，是利用frp建立ssh隧道，日常vscode远程开发，需要访问临时启动的服务的时候，利用ngrok随手启动即可访问到。&lt;/p></description></item><item><title>Docs: docker网络</title><link>https://xiaoping378.github.io/docs/4-cloud/containers/docker-network/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/containers/docker-network/</guid><description>
-&lt;p>自去年就开始推动公司业务使用docker了， 至今也一年多了，但对docker网络的认知一直一知半解。。。&lt;/p>
-&lt;p>主要是太忙，加上线上业务也没出过关于网络吞吐性能方面的问题，就没太大动力去搞明白， 现在闲下来了，搞之！&lt;/p>
-&lt;h3 id="环境声明">环境声明&lt;/h3>
-&lt;ul>
-&lt;li>以下内容只针对OS: Ubuntu16.04 docker: 1.10.3的环境， 写本文时docker最新的release版本是1.11.2，还有什么CoreOS，Unikernel 之类的（表示都没玩过）。&lt;/li>
-&lt;/ul>
-&lt;blockquote>
-&lt;p>docker更新迭代速度太快了，公司业务只用到基本功能，所以没动力跟进它的更新了
-各种新时代下的产物频出啊， CoreOS为linux的发行版， 没需求，好遗憾.&lt;/p>
-&lt;/blockquote>
-&lt;h3 id="docker的网络模式">docker的网络模式&lt;/h3>
-&lt;p>一开始安装完docker， 它就会默认创建3个网络， 使用__docker network ls__查看&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ blog git:&lt;span style="color:#666">(&lt;/span>master&lt;span style="color:#666">)&lt;/span> docker network ls
-NETWORK ID NAME DRIVER
-46416a43fbc6 bridge bridge
-45398901e9f0 none null
-9440a8140e68 host host
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>当启动一个容器时， 默认使用bridge模式， 可以通过 --net 指定其它模式。&lt;/p>
-&lt;p>下面先简要说明下各自的概念&lt;/p>
-&lt;ul>
-&lt;li>bridge 模式&lt;/li>
-&lt;/ul>
-&lt;p>容器间之所以能通信，就靠宿主机上的docker0了， docker0就是bridge模式下默认创建的虚拟设备名称&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">➜ blog git:&lt;span style="color:#666">(&lt;/span>master&lt;span style="color:#666">)&lt;/span> ✗ ifconfig docker0
-docker0 Link encap:Ethernet HWaddr 02:42:49:56:7c:3b
-inet addr:172.17.0.1 Bcast:0.0.0.0 Mask:255.255.0.0
-inet6 addr: fe80::42:49ff:fe56:7c3b/64 Scope:Link
-UP BROADCAST RUNNING MULTICAST MTU:1500 Metric:1
-RX packets:78103 errors:0 dropped:0 overruns:0 frame:0
-TX packets:47578 errors:0 dropped:0 overruns:0 carrier:0
-collisions:0 txqueuelen:0
-RX bytes:17485434 &lt;span style="color:#666">(&lt;/span>17.4 MB&lt;span style="color:#666">)&lt;/span> TX bytes:82163889 &lt;span style="color:#666">(&lt;/span>82.1 MB&lt;span style="color:#666">)&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>ifocnfig可以看到很多信息， mac地址，IP等这些也可以通过参数指定成别的。&lt;/p>
-&lt;ul>
-&lt;li>none模式&lt;/li>
-&lt;/ul>
-&lt;p>none网络模式下的容器里是缺少网络接口的，例如eth0等，但会有一个lo设备。&lt;/p>
-&lt;p>没用过也没见过这样的业务场景， 不做过多说明&lt;/p>
-&lt;ul>
-&lt;li>host模式&lt;/li>
-&lt;/ul>
-&lt;p>容器直接操作宿主机的网络栈， 无疑是性能最好的网络模式， 可以认为是无带宽损耗的。&lt;/p>
-&lt;h3 id="细说bridge模式">细说bridge模式&lt;/h3>
-&lt;p>这也是我们线上正在在用的网络模式。&lt;/p>
-&lt;p>bridge模式主要利用了iptables的Masquerading和DNAT功能。&lt;/p>
-&lt;p>未完。。。&lt;/p></description></item><item><title>Docs: 网络TCP/IP协议栈</title><link>https://xiaoping378.github.io/docs/2-infra/network/tcpip/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/2-infra/network/tcpip/</guid><description>
-&lt;p>.TODO&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>网络 on 现代技能栈</title><link>https://xiaoping378.github.io/tags/%E7%BD%91%E7%BB%9C/</link><description>Recent content in 网络 on 现代技能栈</description><generator>Hugo</generator><language>zh-cn</language><atom:link href="https://xiaoping378.github.io/tags/%E7%BD%91%E7%BB%9C/index.xml" rel="self" type="application/rss+xml"/><item><title>内网机穿透开发</title><link>https://xiaoping378.github.io/docs/2-infra/network/frp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/2-infra/network/frp/</guid><description>&lt;div class="pageinfo pageinfo-primary"&gt;
+&lt;p&gt;充分利用外网开隧道代理到本地服务，演示或者内网开发的利器，自己具备公网服务器的可以使用frp，不具备的可以使用ngrok。&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;h2 id="frp介绍"&gt;FRP介绍&lt;a class="td-heading-self-link" href="#frp%e4%bb%8b%e7%bb%8d" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;frp 是国人开源的一种快速反向代理，可将 NAT 或防火墙后面的本地服务器暴露到互联网上。目前，它支持暴露 TCP 和 UDP，以及 HTTP 和 HTTPS 协议，也可以通过域名将请求转发到内部服务。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://xiaoping378.github.io/images/frp-2022-03-06-20-21-49.png" alt=""&gt;&lt;/p&gt;
+&lt;h2 id="安装"&gt;安装&lt;a class="td-heading-self-link" href="#%e5%ae%89%e8%a3%85" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;二进制下载&lt;a href="https://github.com/fatedier/frp/releases"&gt;地址&lt;/a&gt;, 解压后内容如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;➜ frp_0.39.1_linux_amd64 tree
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── frpc
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── frpc_full.ini
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── frpc.ini
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── frps
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── frps_full.ini
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── frps.ini
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── LICENSE
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;└── systemd
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ├── frpc.service
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ├── frpc@.service
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ├── frps.service
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; └── frps@.service
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#666"&gt;1&lt;/span&gt; directory, &lt;span style="color:#666"&gt;11&lt;/span&gt; files
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;可将其中的 frpc 拷贝到内网服务所在的机器上，将 frps 拷贝到具有公网 IP 的机器上，放置在任意目录。&lt;/p&gt;
+&lt;p&gt;后续使用思路：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;编写配置文件，先通过 ./frps -c ./frps.ini 启动服务端，&lt;/li&gt;
+&lt;li&gt;再通过 ./frpc -c ./frpc.ini 启动客户端。&lt;/li&gt;
+&lt;li&gt;如果需要在后台长期运行，可使用压缩包内写好的的systemd服务&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="代理ssh"&gt;代理ssh&lt;a class="td-heading-self-link" href="#%e4%bb%a3%e7%90%86ssh" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;本人日常开发使用vsocde，众所周知，其&lt;a href="https://code.visualstudio.com/docs/remote/ssh"&gt;remote SSH开发&lt;/a&gt;的特性非常惊艳，可以提供本地开发的体验，背后需要通过ssh连接到远端服务器，高配云主机价格不菲，公司电脑长期荒废中，，，，遂有了此想法，只购买一个低配的云主机用来代理到内网的公司电脑（已安装linux）上，然后利用vscode实现内网穿透开发。&lt;/p&gt;</description></item><item><title>docker网络</title><link>https://xiaoping378.github.io/docs/4-cloud/containers/docker-network/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/4-cloud/containers/docker-network/</guid><description>&lt;p&gt;自去年就开始推动公司业务使用docker了， 至今也一年多了，但对docker网络的认知一直一知半解。。。&lt;/p&gt;
+&lt;p&gt;主要是太忙，加上线上业务也没出过关于网络吞吐性能方面的问题，就没太大动力去搞明白， 现在闲下来了，搞之！&lt;/p&gt;
+&lt;h3 id="环境声明"&gt;环境声明&lt;a class="td-heading-self-link" href="#%e7%8e%af%e5%a2%83%e5%a3%b0%e6%98%8e" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;以下内容只针对OS: Ubuntu16.04 docker: 1.10.3的环境， 写本文时docker最新的release版本是1.11.2，还有什么CoreOS，Unikernel 之类的（表示都没玩过）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;docker更新迭代速度太快了，公司业务只用到基本功能，所以没动力跟进它的更新了
+各种新时代下的产物频出啊， CoreOS为linux的发行版， 没需求，好遗憾.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id="docker的网络模式"&gt;docker的网络模式&lt;a class="td-heading-self-link" href="#docker%e7%9a%84%e7%bd%91%e7%bb%9c%e6%a8%a1%e5%bc%8f" aria-label="Heading self-link"&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;一开始安装完docker， 它就会默认创建3个网络， 使用__docker network ls__查看&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;➜ blog git:&lt;span style="color:#666"&gt;(&lt;/span&gt;master&lt;span style="color:#666"&gt;)&lt;/span&gt; docker network ls
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;NETWORK ID NAME DRIVER
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;46416a43fbc6 bridge bridge 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;45398901e9f0 none null 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;9440a8140e68 host host
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;当启动一个容器时， 默认使用bridge模式， 可以通过 --net 指定其它模式。&lt;/p&gt;
+&lt;p&gt;下面先简要说明下各自的概念&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;bridge 模式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;容器间之所以能通信，就靠宿主机上的docker0了， docker0就是bridge模式下默认创建的虚拟设备名称&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;➜ blog git:&lt;span style="color:#666"&gt;(&lt;/span&gt;master&lt;span style="color:#666"&gt;)&lt;/span&gt; ✗ ifconfig docker0
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker0 Link encap:Ethernet HWaddr 02:42:49:56:7c:3b 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; inet addr:172.17.0.1 Bcast:0.0.0.0 Mask:255.255.0.0
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; inet6 addr: fe80::42:49ff:fe56:7c3b/64 Scope:Link
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; UP BROADCAST RUNNING MULTICAST MTU:1500 Metric:1
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; RX packets:78103 errors:0 dropped:0 overruns:0 frame:0
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; TX packets:47578 errors:0 dropped:0 overruns:0 carrier:0
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; collisions:0 txqueuelen:0
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; RX bytes:17485434 &lt;span style="color:#666"&gt;(&lt;/span&gt;17.4 MB&lt;span style="color:#666"&gt;)&lt;/span&gt; TX bytes:82163889 &lt;span style="color:#666"&gt;(&lt;/span&gt;82.1 MB&lt;span style="color:#666"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;ifocnfig可以看到很多信息， mac地址，IP等这些也可以通过参数指定成别的。&lt;/p&gt;</description></item><item><title>网络TCP/IP协议栈</title><link>https://xiaoping378.github.io/docs/2-infra/network/tcpip/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/2-infra/network/tcpip/</guid><description>&lt;p&gt;.TODO&lt;/p&gt;</description></item></channel></rss>

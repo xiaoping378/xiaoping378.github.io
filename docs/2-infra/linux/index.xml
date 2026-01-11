@@ -1,82 +1,45 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>现代技能栈 – linux基础</title><link>https://xiaoping378.github.io/docs/2-infra/linux/</link><description>Recent content in linux基础 on 现代技能栈</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Thu, 05 Jan 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://xiaoping378.github.io/docs/2-infra/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Centos7 配置记录</title><link>https://xiaoping378.github.io/docs/2-infra/linux/centos/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/2-infra/linux/centos/</guid><description>
-&lt;ul>
-&lt;li>&lt;strong>sshd&lt;/strong> 禁用DNS反向解析和GSSAPI认证，以完成快速登陆&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">sudo sed -i &lt;span style="color:#b44">&amp;#39;s/#UseDNS yes/UseDNS no/g&amp;#39;&lt;/span> /etc/ssh/sshd_config
-sudo sed -i &lt;span style="color:#b44">&amp;#39;s/GSSAPIAuthentication yes/GSSAPIAuthentication no/g&amp;#39;&lt;/span> /etc/ssh/sshd_config
-sudo systemctl restart sshd
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>&lt;strong>添加本地dvd源&lt;/strong>&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">mkdir -p /media/dvd &lt;span style="color:#666">&amp;amp;&amp;amp;&lt;/span> mount -t auto /dev/cdrom /media/dvd
-cat &lt;span style="color:#b44">&amp;lt;&amp;lt;EOF &amp;gt;/etc/yum.repos.d/CentOS-Base.repo
-&lt;/span>&lt;span style="color:#b44">[c7-dvd]
-&lt;/span>&lt;span style="color:#b44">name=Centos-7
-&lt;/span>&lt;span style="color:#b44">baseurl=file:///media/dvd
-&lt;/span>&lt;span style="color:#b44">enabled=1
-&lt;/span>&lt;span style="color:#b44">gpgcheck=1
-&lt;/span>&lt;span style="color:#b44">gpgkey=file:///media/dvd/RPM-GPG-KEY-CentOS-7
-&lt;/span>&lt;span style="color:#b44">EOF&lt;/span>
-yum clean all
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>
-&lt;p>&lt;strong>安装docker&lt;/strong>&lt;/p>
-&lt;ol>
-&lt;li>添加yum源&lt;/li>
-&lt;/ol>
-&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">sudo tee /etc/yum.repos.d/docker.repo &lt;span style="color:#b44">&amp;lt;&amp;lt;-&amp;#39;EOF&amp;#39;
-&lt;/span>&lt;span style="color:#b44">[dockerrepo]
-&lt;/span>&lt;span style="color:#b44">name=Docker Repository
-&lt;/span>&lt;span style="color:#b44">baseurl=https://yum.dockerproject.org/repo/main/centos/7/
-&lt;/span>&lt;span style="color:#b44">enabled=1
-&lt;/span>&lt;span style="color:#b44">gpgcheck=1
-&lt;/span>&lt;span style="color:#b44">gpgkey=https://yum.dockerproject.org/gpg
-&lt;/span>&lt;span style="color:#b44">EOF&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
-&lt;li>安装docker-engine&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">sudo yum install -y docker
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者下载离线rpm包（供网络环境差的环境使用）&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash"> sudo yum install docker --downloadonly --downloaddir&lt;span style="color:#666">=&lt;/span>./
-sudo yum localinstall ./*.rpm
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;del>3. 修改必要的docker daemon配置参数&lt;/del> 现在不需要了，主要是devicemapper需要改下&lt;/p>
-&lt;pre tabindex="0">&lt;code>sudo mkdir /etc/systemd/system/docker.service.d
-sudo cat &amp;lt;&amp;lt;EOF &amp;gt;&amp;gt;/etc/systemd/system/docker.service.d/docker.conf
-[Service]
-ExecStart=
-ExecStart=/usr/bin/docker daemon -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --dns 180.76.76.76 --insecure-registry registry.cecf.com -g /home/Docker/docker -s overlay --selinux-enabled=false
-EOF
-&lt;/code>&lt;/pre>&lt;ol start="4">
-&lt;li>启动docker&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash"> sudo systemctl &lt;span style="color:#a2f">enable&lt;/span> docker
-sudo systemctl start docker
-&lt;span style="color:#080;font-style:italic"># 普通用户放进docker组里，快速CLI&lt;/span>
-sudo usermod -aG docker &lt;span style="color:#666">[&lt;/span>your_username&lt;span style="color:#666">]&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>
-&lt;p>&lt;strong>firewalld&lt;/strong>&lt;/p>
-&lt;ul>
-&lt;li>目前docker与firewalld存在兼容性问题&lt;/li>
-&lt;li>先选择关闭firewalld吧&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;strong>安装ntp&lt;/strong>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">yum install -y ntp
-systemctl start ntpd
-systemctl &lt;span style="color:#a2f">enable&lt;/span> ntpd
-ntpdate -u cn.pool.ntp.org
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>
-&lt;p>&lt;strong>必要组件&lt;/strong>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">yum install net-tools bind-utils tcpdump lsof
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>
-&lt;p>&lt;strong>查询本机的外网IP&lt;/strong>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">curl ipinfo.io
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;/ul></description></item><item><title>Docs: 裁剪内核-BootLoader</title><link>https://xiaoping378.github.io/docs/2-infra/linux/kernel/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/2-infra/linux/kernel/</guid><description>
-&lt;p>.TODO&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>linux基础 on 现代技能栈</title><link>https://xiaoping378.github.io/docs/2-infra/linux/</link><description>Recent content in linux基础 on 现代技能栈</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Fri, 20 May 2022 10:43:31 +0800</lastBuildDate><atom:link href="https://xiaoping378.github.io/docs/2-infra/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>Centos7 配置记录</title><link>https://xiaoping378.github.io/docs/2-infra/linux/centos/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/2-infra/linux/centos/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;sshd&lt;/strong&gt; 禁用DNS反向解析和GSSAPI认证，以完成快速登陆&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo sed -i &lt;span style="color:#b44"&gt;&amp;#39;s/#UseDNS yes/UseDNS no/g&amp;#39;&lt;/span&gt; /etc/ssh/sshd_config
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo sed -i &lt;span style="color:#b44"&gt;&amp;#39;s/GSSAPIAuthentication yes/GSSAPIAuthentication no/g&amp;#39;&lt;/span&gt; /etc/ssh/sshd_config
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo systemctl restart sshd
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;添加本地dvd源&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mkdir -p /media/dvd &lt;span style="color:#666"&gt;&amp;amp;&amp;amp;&lt;/span&gt; mount -t auto /dev/cdrom /media/dvd
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cat &lt;span style="color:#b44"&gt;&amp;lt;&amp;lt;EOF &amp;gt;/etc/yum.repos.d/CentOS-Base.repo
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#b44"&gt;[c7-dvd]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#b44"&gt;name=Centos-7
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#b44"&gt;baseurl=file:///media/dvd
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#b44"&gt;enabled=1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#b44"&gt;gpgcheck=1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#b44"&gt;gpgkey=file:///media/dvd/RPM-GPG-KEY-CentOS-7
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#b44"&gt;EOF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;yum clean all
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;安装docker&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;添加yum源&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo tee /etc/yum.repos.d/docker.repo &lt;span style="color:#b44"&gt;&amp;lt;&amp;lt;-&amp;#39;EOF&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#b44"&gt;[dockerrepo]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#b44"&gt;name=Docker Repository
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#b44"&gt;baseurl=https://yum.dockerproject.org/repo/main/centos/7/
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#b44"&gt;enabled=1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#b44"&gt;gpgcheck=1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#b44"&gt;gpgkey=https://yum.dockerproject.org/gpg
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#b44"&gt;EOF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start="2"&gt;
+&lt;li&gt;安装docker-engine&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo yum install -y docker
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;或者下载离线rpm包（供网络环境差的环境使用）&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; sudo yum install docker --downloadonly --downloaddir&lt;span style="color:#666"&gt;=&lt;/span&gt;./
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; sudo yum localinstall ./*.rpm
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;del&gt;3. 修改必要的docker daemon配置参数&lt;/del&gt; 现在不需要了，主要是devicemapper需要改下&lt;/p&gt;</description></item><item><title>裁剪内核-BootLoader</title><link>https://xiaoping378.github.io/docs/2-infra/linux/kernel/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xiaoping378.github.io/docs/2-infra/linux/kernel/</guid><description>&lt;p&gt;.TODO&lt;/p&gt;</description></item></channel></rss>
